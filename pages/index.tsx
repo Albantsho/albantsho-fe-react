@@ -8,6 +8,7 @@ import { Suspense } from "react";
 const WhyAlbantsho = dynamic(
   () => import("components/Home/WhyAlbantsho/WhyAlbantsho")
 );
+const Monitors = dynamic(() => import("components/Home/Monitors/Monitors"));
 
 const Home: NextPage = () => {
   return (
@@ -20,6 +21,7 @@ const Home: NextPage = () => {
       <Brands />
       <Suspense fallback={null}>
         <WhyAlbantsho />
+        <Monitors />
       </Suspense>
     </>
   );
