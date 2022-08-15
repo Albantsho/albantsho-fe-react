@@ -16,7 +16,7 @@ const DesktopNav = () => {
   return (
     <AppBar position="static" elevation={0} color="transparent">
       <Toolbar
-        className="py-10 max-w-screen-2xl mx-auto w-full"
+        className="py-10 max-w-screen-2xl mx-auto w-full px-5 sm:px-10"
         component="nav"
       >
         <Link href="/" passHref>

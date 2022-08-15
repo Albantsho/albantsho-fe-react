@@ -22,7 +22,7 @@ const MobileNav = () => {
 
   return (
     <AppBar position="static" elevation={0} color="transparent">
-      <Toolbar className="py-4 max-w-screen-2xl text-white justify-between mx-auto w-full">
+      <Toolbar className="py-4 max-w-screen-2xl text-white justify-between mx-auto w-full px-5 sm:px-10">
         <Link href="/" className="max-w-[120px] cursor-pointer">
           <Logo />
         </Link>

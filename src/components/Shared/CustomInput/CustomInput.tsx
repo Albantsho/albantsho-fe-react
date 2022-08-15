@@ -1,9 +1,6 @@
 import {
   inputAdornmentClasses,
-  outlinedInputClasses,
-  OutlinedTextFieldProps,
-  TextField,
-  type TextFieldProps,
+  outlinedInputClasses, TextField, type OutlinedTextFieldProps
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { forwardRef } from "react";
@@ -13,6 +10,7 @@ const RootInput = forwardRef<HTMLInputElement, OutlinedTextFieldProps>(
     return <TextField {...props} size={size ? size : "small"} ref={ref} />;
   }
 );
+RootInput.displayName = "RootInput";
 
 const CustomInput = styled(RootInput)`
   .${outlinedInputClasses.root} {

@@ -1,4 +1,8 @@
-import { createTheme, responsiveFontSizes } from "@mui/material";
+import {
+  createTheme,
+  responsiveFontSizes,
+  type TypographyVariant,
+} from "@mui/material";
 import type { ColorPartial } from "@mui/material/styles/createPalette";
 
 declare module "@mui/material/styles" {
@@ -63,7 +67,7 @@ let theme = createTheme({
       500: "#9A7EC7",
       700: "#7953B5",
       900: "#573195",
-      main: "#9A7EC7",
+      main: "#7953B5",
       dark: "#573195",
     },
     secondary: {
@@ -72,7 +76,8 @@ let theme = createTheme({
       500: "#FDDC6A",
       700: "#FDD038",
       900: "#DBB01E",
-      main: "#FDDC6A",
+      main: "#FDD038",
+      dark: "#DBB01E",
     },
     success: {
       50: "#E5FCF2",
@@ -128,6 +133,11 @@ let theme = createTheme({
       fontWeight: 700,
       lineHeight: 2,
     },
+    h6: {
+      fontSize: 20,
+      fontWeight: 400,
+      lineHeight: 1.5,
+    },
     body1: {
       fontSize: 16,
       lineHeight: 1.5,
@@ -146,7 +156,6 @@ let theme = createTheme({
     button: {
       textTransform: "none",
       fontWeight: 400,
-      fontSize: 16,
       lineHeight: 1.5,
     },
   },
@@ -162,6 +171,23 @@ let theme = createTheme({
   },
 });
 
-theme = responsiveFontSizes(theme);
+theme = responsiveFontSizes(theme, {
+  variants: [
+    "display",
+    "body1",
+    "body2",
+    "button",
+    "caption",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "overline",
+    "subtitle1",
+    "subtitle2",
+  ] as TypographyVariant[],
+});
 
 export default theme;

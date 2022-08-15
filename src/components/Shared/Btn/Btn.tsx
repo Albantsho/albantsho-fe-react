@@ -1,5 +1,5 @@
+import { Button, buttonClasses, type ButtonProps } from "@mui/material";
 import { styled } from "@mui/system";
-import { Button, type ButtonProps, buttonClasses } from "@mui/material";
 import { forwardRef } from "react";
 
 const ButtonRoot = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -15,6 +15,7 @@ const ButtonRoot = forwardRef<HTMLButtonElement, ButtonProps>(
     </Button>
   )
 );
+ButtonRoot.displayName = "ButtonRoot";
 
 const Btn = styled(ButtonRoot)`
   color: #fff;
