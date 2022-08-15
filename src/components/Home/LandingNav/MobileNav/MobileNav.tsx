@@ -12,9 +12,9 @@ import {
   Toolbar,
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import MenuIcon from "assets/icons/menu.svg";
-import Search from "assets/icons/search.svg";
-import Logo from "assets/logo.svg";
+import MenuIcon from "@assets/icons/menu.svg";
+import Search from "@assets/icons/search.svg";
+import Logo from "@assets/logo.svg";
 import useMobileNav from "./useMobileNav";
 
 const MobileNav = () => {
@@ -22,9 +22,9 @@ const MobileNav = () => {
 
   return (
     <AppBar position="static" elevation={0} color="transparent">
-      <Toolbar className="py-4 max-w-screen-2xl text-white justify-between mx-auto w-full px-5 sm:px-10">
-        <Link href="/" className="max-w-[120px] cursor-pointer">
-          <Logo />
+      <Toolbar className="py-4 px-0 justify-between">
+        <Link href="/" className="cursor-pointer">
+          <Logo className="h-[30px] w-[120px]" />
         </Link>
         <IconButton
           onClick={handleToggleDrawer(true)}

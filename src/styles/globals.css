@@ -32,6 +32,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Roboto", sans-serif !important;
+  overflow-x: hidden;
 }
 
 img {
@@ -72,4 +73,13 @@ ul {
   border-width: 0;
   border-style: solid;
   border-color: theme("borderColor.DEFAULT", currentColor);
+}
+
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }

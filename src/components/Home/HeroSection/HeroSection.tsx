@@ -1,6 +1,5 @@
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
-import Background from "assets/images/hero-section-bg.png";
 import DesktopNav from "../LandingNav/DesktopNav/DesktopNav";
 import MobileNav from "../LandingNav/MobileNav/MobileNav";
 
@@ -9,14 +8,14 @@ const HeroSection = () => {
 
   return (
     <Box
-      className="flex flex-col min-h-[770px] bg-cover bg-left"
+      className="bg-cover bg-left full-width"
       component="section"
       id="hero-section"
-      sx={{ backgroundImage: `url(${Background.src})` }}
+      sx={{ backgroundImage: `url('/assets/images/hero-section-bg.png')` }}
     >
-      {mdScreen ? <DesktopNav /> : <MobileNav />}
-      <div className="flex items-center flex-1 max-w-screen-2xl mx-auto w-full px-5 sm:px-10">
-        <div className="flex items-center max-w-screen-xl w-full justify-between gap-20">
+      <div className="flex flex-col min-h-[770px] max-w-screen-2xl mx-auto w-full px-5 sm:px-10">
+        {mdScreen ? <DesktopNav /> : <MobileNav />}
+        <div className="flex flex-1 items-center max-w-screen-xl w-full justify-between gap-20">
           <div className="text-white max-w-[450px]">
             <Typography
               variant="display"
@@ -64,6 +63,7 @@ const HeroSection = () => {
               title="Black Onion"
               desc="One platform sets out to enable better stories one script at a time."
               rate={4}
+              image="/assets/images/julie.png"
             />
           </div>
         </div>
