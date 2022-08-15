@@ -3,6 +3,7 @@ import ScriptCard from "@shared/ScriptCard/ScriptCard";
 import DesktopNav from "../LandingNav/DesktopNav/DesktopNav";
 import MobileNav from "../LandingNav/MobileNav/MobileNav";
 import { useSpring, animated } from "react-spring";
+import Bg from "./assets/bg.png";
 
 const HeroSection = () => {
   const mdScreen = useMediaQuery("(min-width: 1280px)");
@@ -24,12 +25,12 @@ const HeroSection = () => {
 
   return (
     <Box
-      className="bg-cover bg-left full-width"
+      className="bg-cover bg-left px-5 sm:px-10"
       component="section"
       id="hero-section"
-      sx={{ backgroundImage: `url('/assets/images/hero-section-bg.png')` }}
+      sx={{ backgroundImage: `url('${Bg.src}')` }}
     >
-      <div className="flex flex-col min-h-[770px] max-w-screen-2xl mx-auto w-full px-5 sm:px-10">
+      <div className="flex flex-col min-h-[770px] max-w-screen-2xl mx-auto w-full">
         <animated.div style={navAnim}>
           {!mdScreen ? <MobileNav /> : <DesktopNav />}
         </animated.div>

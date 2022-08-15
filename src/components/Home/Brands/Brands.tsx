@@ -1,5 +1,6 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useSpring, animated, useChain, useSpringRef } from "react-spring";
+import BrandsImg from "./assets/brands.png";
 
 const Brands = () => {
   const fadeUpRef = useSpringRef();
@@ -22,31 +23,34 @@ const Brands = () => {
   useChain([fadeUpRef, newsTickerRef], [0, 0.5]);
 
   return (
-    <section id="brands-section" className="bg-secondary-50 py-4 full-width">
+    <section id="brands-section" className="bg-secondary-50 py-4 px-5 sm:px-10">
       <animated.div style={fadeUpAnim} className="max-w-screen-2xl mx-auto">
         <Typography
           className="text-center"
           variant="h4"
           fontFamily="Space Grotesk"
-          color="primary.main"
+          color="primary.500"
           gutterBottom
         >
           Brands
         </Typography>
-        <div className="flex max-w-[990px] overflow-hidden mx-auto">
+        <Box
+          sx={{ maxWidth: 990, img: { maxWidth: "none", height: "auto" } }}
+          className="flex overflow-hidden mx-auto"
+        >
           <animated.img
             style={newsTickerAnim}
-            src="/assets/images/brands.png"
+            src={BrandsImg.src}
             alt="brands"
             className="pr-14"
           />
           <animated.img
             style={newsTickerAnim}
-            src="/assets/images/brands.png"
+            src={BrandsImg.src}
             alt="brands"
             className="pr-14"
           />
-        </div>
+        </Box>
       </animated.div>
     </section>
   );

@@ -7,8 +7,8 @@ import {
   Toolbar,
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import Search from "@assets/icons/search.svg";
-import UserIcon from "@assets/icons/user.svg";
+import Search from "../assets/search.svg";
+import UserIcon from "../assets/user.svg";
 import Logo from "@assets/logo.svg";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ const DesktopNav = () => {
       <Toolbar className="py-10 px-0" component="nav">
         <Link href="/" passHref>
           <a className="cursor-pointer mr-12">
-            <Logo className="w-[120px] h-[30px]" />
+            <Logo width="120" height="30" />
           </a>
         </Link>
         <CustomInput
@@ -63,7 +63,7 @@ const DesktopNav = () => {
         </div>
         <div className="flex gap-10 text-white">
           <IconButton color="inherit">
-            <UserIcon className="w-[32px] h-[32px]" />
+            <UserIcon width="32" height="32" />
           </IconButton>
           <Button className="rounded-lg" color="inherit" variant="outlined">
             Sign In

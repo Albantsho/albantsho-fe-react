@@ -12,8 +12,8 @@ import {
   Toolbar,
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import MenuIcon from "@assets/icons/menu.svg";
-import Search from "@assets/icons/search.svg";
+import MenuIcon from "../assets/menu.svg";
+import Search from "../assets/search.svg";
 import Logo from "@assets/logo.svg";
 import useMobileNav from "./useMobileNav";
 
@@ -22,16 +22,16 @@ const MobileNav = () => {
 
   return (
     <AppBar position="static" elevation={0} color="transparent">
-      <Toolbar className="py-4 px-0 justify-between">
+      <Toolbar className="py-4 px-0 justify-between text-white">
         <Link href="/" className="cursor-pointer">
-          <Logo className="h-[30px] w-[120px]" />
+          <Logo width="120" height="30" />
         </Link>
         <IconButton
           onClick={handleToggleDrawer(true)}
           color="inherit"
           sx={{ path: { fill: "#fff" } }}
         >
-          <MenuIcon className="w-[40px] h-[40px]" />
+          <MenuIcon width="40" height="40" />
         </IconButton>
         <Drawer anchor="top" open={open} onClose={handleToggleDrawer(false)}>
           <List>

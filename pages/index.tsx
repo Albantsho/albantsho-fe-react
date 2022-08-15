@@ -1,7 +1,13 @@
 import Brands from "components/Home/Brands/Brands";
 import HeroSection from "components/Home/HeroSection/HeroSection";
 import type { NextPage } from "next";
+import dynamic from "next/dynamic";
 import Head from "next/head";
+import { Suspense } from "react";
+
+const WhyAlbantsho = dynamic(
+  () => import("components/Home/WhyAlbantsho/WhyAlbantsho")
+);
 
 const Home: NextPage = () => {
   return (
@@ -10,10 +16,11 @@ const Home: NextPage = () => {
         <title>Albantsho</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="max-w-screen-2xl mx-auto">
-        <HeroSection />
-        <Brands />
-      </div>
+      <HeroSection />
+      <Brands />
+      <Suspense fallback={null}>
+        <WhyAlbantsho />
+      </Suspense>
     </>
   );
 };
