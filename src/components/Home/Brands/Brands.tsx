@@ -23,8 +23,12 @@ const Brands = () => {
   useChain([fadeUpRef, newsTickerRef], [0, 0.5]);
 
   return (
-    <section id="brands-section" className="bg-secondary-50 py-4 px-5 sm:px-10">
-      <animated.div style={fadeUpAnim} className="max-w-screen-2xl mx-auto">
+    <animated.section
+      style={fadeUpAnim}
+      id="brands-section"
+      className="bg-secondary-50 py-4 px-5 sm:px-10"
+    >
+      <div className="max-w-screen-2xl mx-auto">
         <Typography
           className="text-center"
           variant="h4"
@@ -51,8 +55,8 @@ const Brands = () => {
             className="pr-14"
           />
         </Box>
-      </animated.div>
-    </section>
+      </div>
+    </animated.section>
   );
 };
 

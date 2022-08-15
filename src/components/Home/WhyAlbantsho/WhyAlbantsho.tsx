@@ -40,7 +40,11 @@ const features = [
 
 const WhyAlbantsho = () => {
   return (
-    <section id="why-albantsho" className="py-24 px-5 sm:px-10">
+    <section
+      id="why-albantsho"
+      className="py-24 px-5 sm:px-10"
+      data-aos="fade-up"
+    >
       <div className="max-w-screen-2xl mx-auto">
         <Typography
           variant="h4"
