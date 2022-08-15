@@ -14,7 +14,7 @@ const RootInput = forwardRef<HTMLInputElement, OutlinedTextFieldProps>(
   }
 );
 
-const Input = styled(RootInput)`
+const CustomInput = styled(RootInput)`
   .${outlinedInputClasses.root} {
     color: ${({ theme }) => theme.palette.neutral[700]};
 
@@ -81,4 +81,4 @@ const Input = styled(RootInput)`
   }
 `;
 
-export default Input;
+export default CustomInput;

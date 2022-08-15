@@ -101,47 +101,53 @@ let theme = createTheme({
     display: {
       fontSize: 64,
       fontWeight: 700,
-      lineHeight: 72,
+      lineHeight: 4.5,
     },
     h1: {
       fontSize: 56,
       fontWeight: 700,
-      lineHeight: 64,
+      lineHeight: 4,
     },
     h2: {
       fontSize: 48,
       fontWeight: 700,
-      lineHeight: 56,
+      lineHeight: 3.5,
     },
     h3: {
       fontSize: 40,
       fontWeight: 700,
-      lineHeight: 48,
+      lineHeight: 3,
     },
     h4: {
       fontSize: 32,
       fontWeight: 700,
-      lineHeight: 40,
+      lineHeight: 2.5,
     },
     h5: {
       fontSize: 24,
       fontWeight: 700,
-      lineHeight: 32,
+      lineHeight: 2,
     },
     body1: {
       fontSize: 16,
-      lineHeight: 24,
+      lineHeight: 1.5,
       fontWeight: 400,
     },
     body2: {
       fontSize: 14,
-      lineHeight: 24,
+      lineHeight: 1.5,
       fontWeight: 400,
     },
     caption: {
       fontSize: 12,
-      lineHeight: 16,
+      lineHeight: 1,
       fontWeight: 400,
+    },
+    button: {
+      textTransform: "none",
+      fontWeight: 400,
+      fontSize: 16,
+      lineHeight: 1.5,
     },
   },
   breakpoints: {

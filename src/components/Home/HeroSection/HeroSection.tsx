@@ -1,8 +1,11 @@
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import Background from "assets/images/hero-section-bg.png";
-import LandingNav from "../Nav/LandingNav";
+import DesktopNav from "../LandingNav/DesktopNav/DesktopNav";
+import MobileNav from "../LandingNav/MobileNav/MobileNav";
 
 const HeroSection = () => {
+  const mdScreen = useMediaQuery("(min-width: 1280px)");
+
   return (
     <Box
       className="min-h-[770px] bg-cover bg-right"
@@ -10,7 +13,7 @@ const HeroSection = () => {
       id="hero-section"
       sx={{ backgroundImage: `url(${Background.src})` }}
     >
-      <LandingNav />
+      {mdScreen ? <DesktopNav /> : <MobileNav />}
     </Box>
   );
 };
