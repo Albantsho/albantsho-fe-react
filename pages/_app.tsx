@@ -5,6 +5,9 @@ import { AppProps } from "next/app";
 import theme from "styles/themes/theme";
 import createEmotionCache from "utils/create-emotion-cache";
 import "styles/globals.css";
+import { useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -14,6 +17,11 @@ interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
+  
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
