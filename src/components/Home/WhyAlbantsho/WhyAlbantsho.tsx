@@ -48,9 +48,8 @@ const WhyAlbantsho = () => {
       <div className="max-w-screen-2xl mx-auto">
         <Typography
           variant="h4"
-          fontFamily="Space Grotesk"
           color="primary.main"
-          className="text-center"
+          className="text-center grotesk"
           gutterBottom
         >
           Why Albantsho?
@@ -104,11 +103,7 @@ const WhyAlbantsho = () => {
                   <Icon className="mb-6" sx={{ width: 72, height: 72 }}>
                     {icon}
                   </Icon>
-                  <Typography
-                    variant="h5"
-                    fontWeight={500}
-                    fontFamily="Space Grotesk"
-                  >
+                  <Typography variant="h5" fontWeight={500} className="grotesk">
                     {title}
                   </Typography>
                   <Typography>{desc}</Typography>
@@ -116,7 +111,7 @@ const WhyAlbantsho = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className="flex gap-6 text-white justify-center mt-10">
+          <div className="flex gap-6 justify-center mt-10">
             <IconButton
               className="why-albantsho__prev-btn"
               color="inherit"

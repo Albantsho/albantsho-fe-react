@@ -9,6 +9,9 @@ const WhyAlbantsho = dynamic(
   () => import("components/Home/WhyAlbantsho/WhyAlbantsho")
 );
 const Monitors = dynamic(() => import("components/Home/Monitors/Monitors"));
+const Testimonials = dynamic(
+  () => import("components/Home/Testimonials/Testimonials")
+);
 
 const Home: NextPage = () => {
   return (
@@ -22,6 +25,7 @@ const Home: NextPage = () => {
       <Suspense fallback={null}>
         <WhyAlbantsho />
         <Monitors />
+        <Testimonials />
       </Suspense>
     </>
   );

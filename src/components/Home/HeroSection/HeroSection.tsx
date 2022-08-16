@@ -39,13 +39,12 @@ const HeroSection = () => {
             <Typography
               variant="display"
               component="h1"
-              fontFamily="Space Grotesk"
-              className="leading-none"
+              className="leading-none grotesk"
               gutterBottom
             >
               Reach your great story
             </Typography>
-            <Typography variant="h6" paragraph gutterBottom>
+            <Typography variant="h6" paragraph gutterBottom fontWeight={400}>
               Write better screenplays and be discovered by top producers to
               bring them to life.
             </Typography>

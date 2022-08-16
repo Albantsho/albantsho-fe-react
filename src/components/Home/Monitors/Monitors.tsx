@@ -8,7 +8,7 @@ import YellowArrowIcon from "@assets/Icons/yellow-arrow.svg";
 
 const Monitors = () => {
   return (
-    <section id="preview-monitors" className="my-12 px-5 sm:px-10">
+    <section id="preview-monitors" className="mt-12 px-5 sm:px-10">
       <div>
         <Icon
           sx={{ fontSize: "min(15vw, 100px)" }}

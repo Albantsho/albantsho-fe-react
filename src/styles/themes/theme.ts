@@ -135,7 +135,7 @@ let theme = createTheme({
     },
     h6: {
       fontSize: 20,
-      fontWeight: 400,
+      fontWeight: 700,
       lineHeight: 1.5,
     },
     body1: {

@@ -30,9 +30,8 @@ const Brands = () => {
     >
       <div className="max-w-screen-2xl mx-auto">
         <Typography
-          className="text-center"
+          className="text-center grotesk"
           variant="h4"
-          fontFamily="Space Grotesk"
           color="primary.500"
           gutterBottom
         >

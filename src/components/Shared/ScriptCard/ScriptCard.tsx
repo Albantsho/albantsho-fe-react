@@ -33,11 +33,7 @@ const ScriptCard = (props: IProps) => {
             <Chip key={i} label={genre} sx={{ borderRadius: 1 }} />
           ))}
         </div>
-        <Typography
-          variant="h5"
-          color="primary.main"
-          fontFamily="Space Grotesk"
-        >
+        <Typography variant="h5" color="primary.main" className="grotesk">
           {title}
         </Typography>
         <Typography>{desc}</Typography>
