@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const HeroSection = () => {
   return (
@@ -9,8 +9,12 @@ const HeroSection = () => {
         backgroundImage: "url('/assets/images/julie.jpg')",
         minHeight: { xs: 375, md: 620 },
       }}
-      className="bg-cover"
-    ></Box>
+      className="bg-cover bg-left grid place-content-center"
+    >
+      <Typography variant="h1" color="#fff" className="futura font-medium">
+        About Us
+      </Typography>
+    </Box>
   );
 };
 
