@@ -28,7 +28,7 @@ const TrendingStories = () => {
             script={{
               desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.  saeperecusandae perspiciatis doloribus, nisi quibusdam!",
               genres: ["Lorem"],
-              image: "/assets/images/julie.png",
+              image: "/assets/images/julie.jpg",
               rate: 4,
               title: "Lorem Ipsum",
               price: 100,

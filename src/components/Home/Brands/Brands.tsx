@@ -1,15 +1,12 @@
 import { Box, Typography } from "@mui/material";
-import { useSpring, animated, useChain, useSpringRef } from "react-spring";
+import { animated, useSpring } from "react-spring";
 import BrandsImg from "./assets/brands.png";
 
 const Brands = () => {
-  const fadeUpRef = useSpringRef();
   const fadeUpAnim = useSpring({
     from: { y: 100, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    ref: fadeUpRef,
   });
-  const newsTickerRef = useSpringRef();
   const newsTickerAnim = useSpring({
     loop: true,
     from: { translateX: "0%" },
@@ -17,18 +14,15 @@ const Brands = () => {
     config: {
       duration: 20000,
     },
-    ref: newsTickerRef,
   });
-
-  useChain([fadeUpRef, newsTickerRef], [0, 0.5]);
 
   return (
     <animated.section
       style={fadeUpAnim}
       id="brands-section"
-      className="bg-secondary-50 py-4 px-5 sm:px-10"
+      className="bg-secondary-50 py-4"
     >
-      <div className="max-w-screen-2xl mx-auto">
+      <div className="max-w-screen-2xl px-5 sm:px-10 mx-auto">
         <Typography
           className="text-center grotesk"
           variant="h4"

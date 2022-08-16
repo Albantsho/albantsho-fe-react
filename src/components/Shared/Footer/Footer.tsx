@@ -39,7 +39,7 @@ const Footer = () => {
         </div>
         <Box
           gridTemplateColumns={{ sm: "repeat(2, auto)", lg: "repeat(4, auto)" }}
-          className="grid gap-10 mt-16 sm:mt-24 sm:justify-evenly"
+          className="grid gap-10 mt-16 sm:mt-24 sm:justify-evenly lg:justify-between"
         >
           <div className="flex flex-col items-center sm:items-start gap-2">
             <Link href="/" passHref>
@@ -67,9 +67,11 @@ const Footer = () => {
             </Button>
           </div>
           <div className="flex flex-col gap-1">
-            <Button color="inherit" size="large" className="sm:justify-start">
-              About Us
-            </Button>
+            <Link passHref href="/about-us">
+              <Button color="inherit" size="large" className="sm:justify-start">
+                About Us
+              </Button>
+            </Link>
             <Button color="inherit" size="large" className="sm:justify-start">
               Script Writing
             </Button>

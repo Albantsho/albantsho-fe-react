@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useMobileNav = () => {
+const useLandingNav = () => {
   const [open, setOpen] = useState(false);
 
   const handleToggleDrawer = (open: boolean) => () => {
@@ -13,4 +13,4 @@ const useMobileNav = () => {
   };
 };
 
-export default useMobileNav;
+export default useLandingNav;
