@@ -5,8 +5,11 @@ import MobileNav from "../LandingNav/MobileNav/MobileNav";
 import { useSpring, animated } from "react-spring";
 import Bg from "./assets/bg.png";
 
+const AnimatedScriptCard = animated(ScriptCard);
+
 const HeroSection = () => {
-  const mdScreen = useMediaQuery("(min-width: 1280px)");
+  const lgScreen = useMediaQuery("(min-width: 1024px)");
+  const xlScreen = useMediaQuery("(min-width: 1280px)");
 
   const navAnim = useSpring({
     from: { y: -100, opacity: 0 },
@@ -32,7 +35,7 @@ const HeroSection = () => {
     >
       <div className="flex flex-col min-h-[770px] max-w-screen-2xl mx-auto w-full">
         <animated.div style={navAnim}>
-          {!mdScreen ? <MobileNav /> : <DesktopNav />}
+          {!xlScreen ? <MobileNav /> : <DesktopNav />}
         </animated.div>
         <div className="flex flex-1 items-center max-w-screen-xl w-full justify-between gap-20">
           <animated.div style={titleAnim} className="text-white max-w-[450px]">
@@ -70,11 +73,10 @@ const HeroSection = () => {
               Join the tribe
             </Button>
           </animated.div>
-          <animated.div
-            style={cardAnim}
-            className="max-w-[395px] w-full hidden lg:block"
-          >
-            <ScriptCard
+          {lgScreen && (
+            <AnimatedScriptCard
+              className="max-w-[395px] w-full"
+              style={cardAnim}
               sx={{
                 boxShadow: "0px 35px 60px 0px #0000004D",
               }}
@@ -87,7 +89,7 @@ const HeroSection = () => {
                 reviewed: true,
               }}
             />
-          </animated.div>
+          )}
         </div>
       </div>
     </Box>

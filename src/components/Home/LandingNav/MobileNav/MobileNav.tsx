@@ -43,7 +43,7 @@ const MobileNav = () => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Icon sx={{ path: { fill: "primary.700" } }}>
+                      <Icon sx={{ path: { fill: "primary.main" } }}>
                         <Search />
                       </Icon>
                     </InputAdornment>

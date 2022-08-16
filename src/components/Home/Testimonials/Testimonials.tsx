@@ -49,7 +49,7 @@ const Testimonials = () => {
         </Icon>
         <Typography
           variant="h4"
-          color="primary.700"
+          color="primary.main"
           className="grotesk mt-2.5 leading-none"
         >
           <span className="md:hidden">Testimonials about us</span>
@@ -96,7 +96,7 @@ const Testimonials = () => {
                 <div className="mt-6 sm:mt-8">
                   <Typography
                     variant="h6"
-                    color="primary.700"
+                    color="primary.main"
                     className="leading-none"
                     component="p"
                   >

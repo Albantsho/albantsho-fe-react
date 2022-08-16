@@ -12,6 +12,9 @@ const Monitors = dynamic(() => import("components/Home/Monitors/Monitors"));
 const Testimonials = dynamic(
   () => import("components/Home/Testimonials/Testimonials")
 );
+const TrendingStories = dynamic(
+  () => import("components/Home/TrendingStories/TrendingStories")
+);
 
 const Home: NextPage = () => {
   return (
@@ -26,6 +29,7 @@ const Home: NextPage = () => {
         <WhyAlbantsho />
         <Monitors />
         <Testimonials />
+        <TrendingStories />
       </Suspense>
     </>
   );
