@@ -15,6 +15,7 @@ const Testimonials = dynamic(
 const TrendingStories = dynamic(
   () => import("components/Home/TrendingStories/TrendingStories")
 );
+const Footer = dynamic(() => import("@shared/Footer/Footer"));
 
 const Home: NextPage = () => {
   return (
@@ -30,6 +31,7 @@ const Home: NextPage = () => {
         <Monitors />
         <Testimonials />
         <TrendingStories />
+        <Footer />
       </Suspense>
     </>
   );

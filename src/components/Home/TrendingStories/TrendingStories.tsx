@@ -5,7 +5,7 @@ const TrendingStories = () => {
   return (
     <section
       id="trending-stories"
-      className="px-5 sm:px-10 max-w-screen-2xl mx-auto mt-12 md:mt-28"
+      className="px-5 sm:px-10 max-w-screen-2xl mx-auto mt-12 md:mt-28 mb-12 md:mb-32"
     >
       <Typography
         data-aos="fade-down"
