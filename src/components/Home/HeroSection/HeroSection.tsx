@@ -77,14 +77,15 @@ const HeroSection = () => {
             <ScriptCard
               sx={{
                 boxShadow: "0px 35px 60px 0px #0000004D",
-                border: "3px solid",
-                borderColor: "primary.main",
               }}
-              genres={["Feature film"]}
-              title="Black Onion"
-              desc="One platform sets out to enable better stories one script at a time."
-              rate={4}
-              image="/assets/images/julie.png"
+              script={{
+                genres: ["Feature film"],
+                title: "Black Onion",
+                desc: "One platform sets out to enable better stories one script at a time.",
+                rate: 4,
+                image: "/assets/images/julie.png",
+                reviewed: true,
+              }}
             />
           </animated.div>
         </div>

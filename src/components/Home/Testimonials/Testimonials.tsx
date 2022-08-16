@@ -1,12 +1,13 @@
+import GreenArrow from "@assets/Icons/green-arrow.svg";
+import NextIcon from "@assets/icons/next-btn.svg";
+import PrevIcon from "@assets/icons/prev-btn.svg";
 import { Box, Icon, IconButton, Typography } from "@mui/material";
+import { Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper";
 import TestimonialsIcon from "./assets/testimony.svg";
-import NextIcon from "@assets/icons/next-btn.svg";
-import PrevIcon from "@assets/icons/prev-btn.svg";
 
 const testimonies = [
   {
@@ -37,9 +38,10 @@ const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="mt-20 px-5 sm:px-10"
-      data-aos="flip-up"
-      data-aos-anchor-placement="center-bottom"
+      className="mt-20 md:mt-0 px-5 sm:px-10 max-w-screen-2xl mx-auto"
+      data-aos="flip-left"
+      data-aos-delay="100"
+      data-aos-duration="1000"
     >
       <div className="flex items-center gap-x-3 md:gap6 justify-center flex-wrap text-center">
         <Icon sx={{ fontSize: "min(20vw, 80px)" }}>
@@ -54,70 +56,79 @@ const Testimonials = () => {
           <span className="hidden md:inline">What our users are saying</span>
         </Typography>
       </div>
-      <Box
-        className="py-12 mt-12 px-6 md:px-12 max-w-screen-sm mx-auto"
-        sx={{
-          backgroundImage:
-            "linear-gradient(101.41deg, #F9F1FD 1.57%, #F0E2F9 100%)",
-          borderRadius: 5,
-        }}
-      >
-        <Swiper
-          spaceBetween={50}
-          modules={[Pagination, Navigation]}
-          pagination={{
-            clickable: true,
-            el: ".testimonials-swiper__pagination",
-            bulletActiveClass: "w-3 h-3",
-            bulletClass:
-              "w-2 h-2 rounded-full inline-block bg-white border border-primary-700 transition-all cursor-pointer",
-            renderBullet(_index, className) {
-              return `<span class="${className}"></span>`;
-            },
-          }}
-          navigation={{
-            prevEl: ".testimonials-swiper__prev-btn",
-            nextEl: ".testimonials-swiper__next-btn",
-            disabledClass: "Mui-disabled",
+      <div className="flex">
+        <div className="hidden md:flex justify-center self-end flex-1">
+          <Icon sx={{ fontSize: "min(7vw, 70px)" }}>
+            <GreenArrow />
+          </Icon>
+        </div>
+        <Box
+          className="py-12 mt-12 px-6 md:px-12 max-w-screen-sm mx-auto grid grow-[2]"
+          sx={{
+            backgroundImage:
+              "linear-gradient(101.41deg, #F9F1FD 1.57%, #F0E2F9 100%)",
+            borderRadius: 5,
           }}
         >
-          {testimonies.map(({ testimony, author }, i) => (
-            <SwiperSlide key={i}>
-              <Typography color="neutral.400">{testimony}</Typography>
-              <div className="mt-6 sm:mt-8">
-                <Typography
-                  variant="h6"
-                  color="primary.700"
-                  className="leading-none"
-                  component="p"
-                >
-                  {author}
-                </Typography>
-                <Typography variant="body2" color="neutral.600">
-                  Script writer
-                </Typography>
-              </div>
-            </SwiperSlide>
-          ))}
-          <div className="hidden sm:flex gap-6 justify-center absolute right-0 bottom-0 z-50">
-            <IconButton
-              className="testimonials-swiper__prev-btn"
-              color="inherit"
-              sx={{ "&.Mui-disabled": { opacity: 0.4 } }}
-            >
-              <PrevIcon width="40" height="40" />
-            </IconButton>
-            <IconButton
-              className="testimonials-swiper__next-btn"
-              color="inherit"
-              sx={{ "&.Mui-disabled": { opacity: 0.4 } }}
-            >
-              <NextIcon width="40" height="40" />
-            </IconButton>
-          </div>
-        </Swiper>
-        <div className="testimonials-swiper__pagination flex gap-4 justify-center mt-8" />
-      </Box>
+          <Swiper
+            className="w-full max-w-full max-h-screen min-h-0 min-w-0"
+            spaceBetween={50}
+            modules={[Pagination, Navigation]}
+            pagination={{
+              clickable: true,
+              el: ".testimonials-swiper__pagination",
+              bulletActiveClass: "w-3 h-3",
+              bulletClass:
+                "w-2 h-2 rounded-full inline-block bg-white border border-primary-700 transition-all cursor-pointer",
+              renderBullet(_index, className) {
+                return `<span class="${className}"></span>`;
+              },
+            }}
+            navigation={{
+              prevEl: ".testimonials-swiper__prev-btn",
+              nextEl: ".testimonials-swiper__next-btn",
+              disabledClass: "Mui-disabled",
+            }}
+          >
+            {testimonies.map(({ testimony, author }, i) => (
+              <SwiperSlide key={i} className="grid">
+                <Typography color="neutral.400">{testimony}</Typography>
+                <div className="mt-6 sm:mt-8">
+                  <Typography
+                    variant="h6"
+                    color="primary.700"
+                    className="leading-none"
+                    component="p"
+                  >
+                    {author}
+                  </Typography>
+                  <Typography variant="body2" color="neutral.600">
+                    Script writer
+                  </Typography>
+                </div>
+              </SwiperSlide>
+            ))}
+            <div className="hidden sm:flex gap-6 justify-center absolute right-0 bottom-0 z-50">
+              <IconButton
+                className="testimonials-swiper__prev-btn"
+                color="inherit"
+                sx={{ "&.Mui-disabled": { opacity: 0.4 } }}
+              >
+                <PrevIcon width="40" height="40" />
+              </IconButton>
+              <IconButton
+                className="testimonials-swiper__next-btn"
+                color="inherit"
+                sx={{ "&.Mui-disabled": { opacity: 0.4 } }}
+              >
+                <NextIcon width="40" height="40" />
+              </IconButton>
+            </div>
+          </Swiper>
+          <div className="testimonials-swiper__pagination flex gap-4 justify-center mt-8" />
+        </Box>
+        <div className="flex-1"></div>
+      </div>
     </section>
   );
 };
