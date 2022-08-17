@@ -77,7 +77,7 @@ const Testimonials = () => {
             pagination={{
               clickable: true,
               el: ".testimonials-swiper__pagination",
-              bulletActiveClass: "w-3 h-3",
+              bulletActiveClass: "!w-3 !h-3",
               bulletClass:
                 "w-2 h-2 rounded-full inline-block bg-white border border-primary-700 transition-all cursor-pointer",
               renderBullet(_index, className) {
