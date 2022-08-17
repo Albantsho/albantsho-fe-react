@@ -17,7 +17,7 @@ const Monitors = () => {
         >
           <GreenArrowIcon />
         </Icon>
-        <div className="flex items-center justify-center max-w-screen-lg mx-auto">
+        <div className="flex items-center justify-center max-w-screen-md mx-auto">
           <Icon
             sx={{ fontSize: "min(10vw, 100px)" }}
             className="self-start md:hidden"
