@@ -39,13 +39,13 @@ const Brands = () => {
             style={newsTickerAnim}
             src={BrandsImg.src}
             alt="brands"
-            className="pr-14"
+            className="pr-9"
           />
           <animated.img
             style={newsTickerAnim}
             src={BrandsImg.src}
             alt="brands"
-            className="pr-14"
+            className="pr-9"
           />
         </Box>
       </div>
