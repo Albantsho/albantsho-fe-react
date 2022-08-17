@@ -1,6 +1,10 @@
 import { Box, Typography } from "@mui/material";
 
-const HeroSection = () => {
+interface IProps {
+  title: string;
+}
+
+const HeroSection = ({ title }: IProps) => {
   return (
     <Box
       component="section"
@@ -12,7 +16,7 @@ const HeroSection = () => {
       className="bg-cover bg-left grid place-content-center"
     >
       <Typography variant="h1" color="#fff" className="futura font-medium">
-        FAQs
+        {title}
       </Typography>
     </Box>
   );
