@@ -10,12 +10,18 @@
 @font-face {
   font-family: "Futura";
   font-weight: 400;
-  src: url("../assets/fonts/FuturaPT-Medium.woff2") format("opentype");
+  src: url("../assets/fonts/FuturaPT-Book.woff2") format("opentype");
 }
 
 @font-face {
   font-family: "Futura";
   font-weight: 500;
+  src: url("../assets/fonts/FuturaPT-Medium.woff2") format("opentype");
+}
+
+@font-face {
+  font-family: "Futura";
+  font-weight: 600;
   src: url("../assets/fonts/FuturaPT-Heavy.woff2") format("opentype");
 }
 
@@ -78,4 +84,8 @@ ul {
 
 .futura {
   font-family: "Futura", "Helvetica", "Arial", "sans-serif";
+}
+
+.material-icons {
+  line-height: 1;
 }
