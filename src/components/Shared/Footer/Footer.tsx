@@ -6,7 +6,7 @@ import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary-main px-5 sm:px-10 py-20">
+    <footer className="bg-primary-main px-5 sm:px-10 py-20 relative z-50">
       <div className="max-w-screen-2xl mx-auto text-white">
         <div className="max-w-[400px] mx-auto">
           <Typography

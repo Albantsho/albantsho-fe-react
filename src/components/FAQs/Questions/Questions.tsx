@@ -13,10 +13,12 @@ import LandingVerifiedImg from "./assets/landing-verified.png";
 import LandingProfileMenuImg from "./assets/landing-profile-menu.png";
 import SigninImg from "./assets/signin.png";
 import SigninBtnImg from "./assets/signin-btn.png";
+import StarArrowBg from "@shared/StarArrowBg/StarArrowBg";
 
 const Questions = () => {
   return (
-    <div className="max-w-screen-lg mx-auto px-5 sm:px-10 space-y-2">
+    <div className="max-w-screen-lg mx-auto px-5 sm:px-10 space-y-2 pt-5 pb-12 relative">
+      <StarArrowBg />
       <FAQAccordion question="What is Albantsho?">
         <Typography paragraph>
           Albantsho is a platform that enables screenwriters to put together

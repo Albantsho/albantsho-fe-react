@@ -11,9 +11,7 @@ const FAQs: NextPageWithLayout = () => {
         <title>Albantsho || FAQ’s</title>
       </Head>
       <HeroSection title="FAQ’s" />
-      <div className="pt-5 pb-12">
-        <Questions />
-      </div>
+      <Questions />
     </>
   );
 };
