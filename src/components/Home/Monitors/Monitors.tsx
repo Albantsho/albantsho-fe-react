@@ -2,9 +2,9 @@ import { Box, Icon } from "@mui/material";
 import Image from "next/image";
 import LeftMonitorImg from "./assets/left-monitor.png";
 import RightMonitorImg from "./assets/right-monitor.png";
-import GreenArrowIcon from "@assets/Icons/green-arrow.svg";
-import PurpleArrowIcon from "@assets/Icons/purple-arrow.svg";
-import YellowArrowIcon from "@assets/Icons/yellow-arrow.svg";
+import GreenArrowIcon from "@assets/icons/green-arrow.svg";
+import PurpleArrowIcon from "@assets/icons/purple-arrow.svg";
+import YellowArrowIcon from "@assets/icons/yellow-arrow.svg";
 
 const Monitors = () => {
   return (

@@ -1,6 +1,6 @@
-import StarIcon from "@assets/Icons/star.svg";
-import GreenArrow from "@assets/Icons/green-arrow.svg";
-import YellowArrow from "@assets/Icons/yellow-arrow.svg";
+import StarIcon from "@assets/icons/star.svg";
+import GreenArrow from "@assets/icons/green-arrow.svg";
+import YellowArrow from "@assets/icons/yellow-arrow.svg";
 import { Icon } from "@mui/material";
 
 const StarArrowBg = () => {

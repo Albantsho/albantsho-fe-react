@@ -56,12 +56,16 @@ const Footer = () => {
             </Typography>
           </div>
           <div className="flex flex-col gap-1">
-            <Button color="inherit" size="large" className="sm:justify-start">
-              FAQs
-            </Button>
-            <Button color="inherit" size="large" className="sm:justify-start">
-              Privacy Policy
-            </Button>
+            <Link passHref href="/FAQs">
+              <Button color="inherit" size="large" className="sm:justify-start">
+                FAQs
+              </Button>
+            </Link>
+            <Link passHref href="/privacy-policy">
+              <Button color="inherit" size="large" className="sm:justify-start">
+                Privacy Policy
+              </Button>
+            </Link>
             <Button color="inherit" size="large" className="sm:justify-start">
               Terms and Conditions
             </Button>

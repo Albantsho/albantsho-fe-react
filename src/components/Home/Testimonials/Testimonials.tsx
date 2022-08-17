@@ -1,4 +1,4 @@
-import GreenArrow from "@assets/Icons/green-arrow.svg";
+import GreenArrow from "@assets/icons/green-arrow.svg";
 import NextIcon from "@assets/icons/next-btn.svg";
 import PrevIcon from "@assets/icons/prev-btn.svg";
 import { Box, Icon, IconButton, Typography } from "@mui/material";
