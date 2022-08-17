@@ -13,7 +13,7 @@ const TrendingStories = () => {
         className="grotesk text-center mb-4 md:mb-8"
         color="primary.main"
       >
-        Trending in Story Base
+        Albantsho Story Base
       </Typography>
       <Box
         className="grid gap-3 md:gap-12"
