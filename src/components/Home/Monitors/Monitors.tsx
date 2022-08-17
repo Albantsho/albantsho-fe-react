@@ -29,7 +29,7 @@ const Monitors = () => {
             <Image src={LeftMonitorImg} alt="Left preview monitor" />
           </div>
           <Box
-            sx={{ translate: "-25px" }}
+            sx={{ translate: "-5%" }}
             data-aos="fade-left"
             data-aos-anchor-placement="center-bottom"
           >
@@ -43,13 +43,12 @@ const Monitors = () => {
             <YellowArrowIcon />
           </Icon>
         </div>
-        <div className="hidden md:flex justify-between max-w-screen-2xl ml-auto items-center">
+        <div className="hidden md:flex justify-between max-w-screen-xl mx-auto items-center">
           <Icon sx={{ fontSize: "min(20vw, 130px)" }} data-aos="zoom-in-right">
             <PurpleArrowIcon />
           </Icon>
           <Icon
             sx={{ fontSize: "min(20vw, 130px)" }}
-            className="-mr-10"
             data-aos="zoom-in-left"
           >
             <YellowArrowIcon />
