@@ -21,7 +21,7 @@ const Footer = () => {
             Get the latest news, explainers, script reviews, story spotlights,
             and more, delivered freshly in your inbox.
           </Typography>
-          <div className="flex gap-5 flex-wrap justify-center mt-5">
+          {/* <div className="flex gap-5 flex-wrap justify-center mt-5">
             <CustomInput
               className="max-w-[260px] w-full"
               variant="outlined"
@@ -35,7 +35,7 @@ const Footer = () => {
             <Button color="inherit" variant="outlined" size="large">
               Subscribe
             </Button>
-          </div>
+          </div> */}
         </div>
         <Box
           gridTemplateColumns={{ sm: "repeat(2, auto)", lg: "repeat(4, auto)" }}
@@ -66,9 +66,11 @@ const Footer = () => {
                 Privacy Policy
               </Button>
             </Link>
-            <Button color="inherit" size="large" className="sm:justify-start">
-              Terms and Conditions
-            </Button>
+            <Link passHref href="/terms-and-conditions">
+              <Button color="inherit" size="large" className="sm:justify-start">
+                Terms and Conditions
+              </Button>
+            </Link>
           </div>
           <div className="flex flex-col gap-1">
             <Link passHref href="/about-us">
@@ -76,12 +78,16 @@ const Footer = () => {
                 About Us
               </Button>
             </Link>
-            <Button color="inherit" size="large" className="sm:justify-start">
-              Script Writing
-            </Button>
-            <Button color="inherit" size="large" className="sm:justify-start">
-              Marketplace
-            </Button>
+            <Link href="/script-writing" passHref>
+              <Button color="inherit" size="large" className="sm:justify-start">
+                Script Writing
+              </Button>
+            </Link>
+            <Link href="/marketplace" passHref>
+              <Button color="inherit" size="large" className="sm:justify-start">
+                Marketplace
+              </Button>
+            </Link>
           </div>
           <div>
             <Typography

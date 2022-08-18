@@ -18,9 +18,9 @@ import useNav from "./useNav";
 
 const links = [
   { title: "About Us", href: "/about-us" },
-  { title: "Marketplace", href: "#" },
-  { title: "Education", href: "#" },
-  { title: "iDraft", href: "#" },
+  { title: "Marketplace", href: "/marketplace" },
+  { title: "Education", href: "/education" },
+  { title: "iDraft", href: "/iDraft" },
 ];
 
 const Nav = () => {
@@ -49,7 +49,9 @@ const Nav = () => {
                 </Link>
               ))}
             </div>
-            <Btn size="large">Sign In</Btn>
+            <Link href="/login" passHref>
+              <Btn size="large">Sign In</Btn>
+            </Link>
           </>
         ) : (
           <>
@@ -76,9 +78,11 @@ const Nav = () => {
                   </ListItem>
                 ))}
                 <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary="Sign In" />
-                  </ListItemButton>
+                  <Link href="/login" passHref>
+                    <ListItemButton>
+                      <ListItemText primary="Sign In" />
+                    </ListItemButton>
+                  </Link>
                 </ListItem>
               </List>
             </Drawer>

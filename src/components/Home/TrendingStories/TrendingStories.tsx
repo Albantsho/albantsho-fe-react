@@ -10,7 +10,7 @@ const TrendingStories = () => {
       <Typography
         data-aos="fade-down"
         variant="h4"
-        className="grotesk text-center mb-4 md:mb-8"
+        className="grotesk text-center mb-4 md:mb-8 leading-normal"
         color="primary.main"
       >
         Albantsho Story Base
