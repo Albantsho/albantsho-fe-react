@@ -1,7 +1,7 @@
 import MenuIcon from "@assets/icons/menu.svg";
-import Logo from "@assets/logo.svg";
 import {
   AppBar,
+  type AppBarProps,
   Button,
   Drawer,
   IconButton,
@@ -13,6 +13,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import Logo from "@shared/Logo/Logo";
 import Link from "next/link";
 import useNav from "./useNav";
 
@@ -23,21 +24,22 @@ const links = [
   { title: "iDraft", href: "/iDraft" },
 ];
 
-const Nav = () => {
+const Nav = ({ position, elevation, color, ...otherProps }: AppBarProps) => {
   const isLgScreen = useMediaQuery("(min-width: 1024px)");
   const { handleToggleDrawer, open } = useNav();
 
   return (
-    <AppBar position="absolute" elevation={0} color="transparent">
+    <AppBar
+      position={position ?? "absolute"}
+      elevation={elevation ?? 0}
+      color={color ?? "transparent"}
+      {...otherProps}
+    >
       <Toolbar
-        className="py-7 px-5 sm:px-10 max-w-screen-2xl mx-auto w-full justify-between"
+        className="py-2 sm:py-7 px-5 sm:px-10 max-w-screen-2xl mx-auto w-full justify-between"
         component="nav"
       >
-        <Link href="/" passHref>
-          <a>
-            <Logo width="120" height="30" />
-          </a>
-        </Link>
+        <Logo />
         {isLgScreen ? (
           <>
             <div className="flex gap-12 text-white mx-10 flex-1 justify-center">
