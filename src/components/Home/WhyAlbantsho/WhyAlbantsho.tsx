@@ -1,6 +1,6 @@
 import NextIcon from "@assets/icons/next-btn.svg";
 import PrevIcon from "@assets/icons/prev-btn.svg";
-import { Box, Icon, IconButton, Typography } from "@mui/material";
+import { Box, Icon, IconButton, SvgIcon, Typography } from "@mui/material";
 import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -117,14 +117,22 @@ const WhyAlbantsho = () => {
               color="inherit"
               sx={{ "&.Mui-disabled": { opacity: 0.2 } }}
             >
-              <PrevIcon width="61" height="61" />
+              <SvgIcon
+                inheritViewBox
+                component={PrevIcon}
+                sx={{ fontSize: 61 }}
+              />
             </IconButton>
             <IconButton
               className="why-albantsho__next-btn"
               color="inherit"
               sx={{ "&.Mui-disabled": { opacity: 0.2 } }}
             >
-              <NextIcon width="61" height="61" />
+              <SvgIcon
+                inheritViewBox
+                component={NextIcon}
+                sx={{ fontSize: 61 }}
+              />
             </IconButton>
           </div>
         </Box>

@@ -15,21 +15,16 @@ const links = [
   { title: "iDraft", href: "/iDraft" },
 ];
 
-const Nav = ({ position, elevation, color, ...otherProps }: AppBarProps) => {
+const Nav = ({ color = "transparent", ...props }: AppBarProps) => {
   const isLgScreen = useMediaQuery("(min-width: 1024px)");
 
   return (
-    <AppBar
-      position={position ?? "absolute"}
-      elevation={elevation ?? 0}
-      color={color ?? "transparent"}
-      {...otherProps}
-    >
+    <AppBar position="absolute" elevation={0} color={color} {...props}>
       <Toolbar
         className="py-2 sm:py-7 px-5 sm:px-10 max-w-screen-2xl mx-auto w-full justify-between"
         component="nav"
       >
-        <Logo />
+        <Logo sx={{ "svg path": { color: "red" } }} />
         {isLgScreen ? (
           <DesktopNav links={links} />
         ) : (

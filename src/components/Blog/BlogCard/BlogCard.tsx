@@ -20,14 +20,15 @@ interface IProps {
 const BlogCard = ({ post }: IProps) => {
   return (
     <Card
-      className="rounded md:rounded-lg"
-      sx={{ boxShadow: " 0px 2px 7px rgba(117, 88, 162, 0.1)" }}
+      className="rounded-lg"
+      sx={{ boxShadow: " 0px 2px 7px rgba(117, 88, 162, 0.15)" }}
     >
       <CardMedia loading="lazy" component="img" src={post.image} />
       <CardHeader
         className="pb-0"
         title={post.title}
         titleTypographyProps={{
+          color: "primary.main",
           variant: "h4",
           className: "leading-normal futura font-medium",
         }}
@@ -36,7 +37,7 @@ const BlogCard = ({ post }: IProps) => {
         <Typography color="gray.400">{post.desc}</Typography>
       </CardContent>
       <CardActions className="px-4 pb-4">
-        <Link href="#" passHref>
+        <Link href="/blog/test" passHref>
           <MuiLink>Read more</MuiLink>
         </Link>
       </CardActions>

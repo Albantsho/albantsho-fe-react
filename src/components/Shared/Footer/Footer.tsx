@@ -1,13 +1,12 @@
-import Logo from "@assets/logo.svg";
 import { Box, Button, IconButton, Typography } from "@mui/material";
-import CustomInput from "@shared/CustomInput/CustomInput";
+import Logo from "@shared/Logo/Logo";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary-main px-5 sm:px-10 py-20 relative z-50">
-      <div className="max-w-screen-2xl mx-auto text-white">
+    <footer className="bg-primary-main py-20 relative z-50">
+      <div className="max-w-screen-2xl mx-auto text-white px-5 sm:px-10">
         <div className="max-w-[400px] mx-auto">
           <Typography
             variant="h4"
@@ -42,11 +41,7 @@ const Footer = () => {
           className="grid gap-10 mt-16 sm:mt-24 sm:justify-evenly lg:justify-between"
         >
           <div className="flex flex-col items-center sm:items-start gap-2">
-            <Link href="/" passHref>
-              <a>
-                <Logo width="120" height="32" />
-              </a>
-            </Link>
+            <Logo />
             <Typography
               variant="caption"
               className="text-center sm:text-left leading-normal"

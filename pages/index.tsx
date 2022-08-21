@@ -1,6 +1,6 @@
-import Brands from "components/Landing/Brands/Brands";
-import HeroSection from "components/Landing/HeroSection/HeroSection";
-import LandingNav from "components/Landing/LandingNav/LandingNav";
+import Brands from "components/Home/Brands/Brands";
+import HeroSection from "components/Home/HeroSection/HeroSection";
+import LandingNav from "components/Home/LandingNav/LandingNav";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -8,17 +8,17 @@ import { Suspense } from "react";
 import { animated, useSpring } from "react-spring";
 
 const WhyAlbantsho = dynamic(
-  () => import("components/Landing/WhyAlbantsho/WhyAlbantsho")
+  () => import("components/Home/WhyAlbantsho/WhyAlbantsho")
 );
-const Monitors = dynamic(() => import("components/Landing/Monitors/Monitors"));
+const Monitors = dynamic(() => import("components/Home/Monitors/Monitors"));
 const Testimonials = dynamic(
-  () => import("components/Landing/Testimonials/Testimonials")
+  () => import("components/Home/Testimonials/Testimonials")
 );
 const TrendingStories = dynamic(
-  () => import("components/Landing/TrendingStories/TrendingStories")
+  () => import("components/Home/TrendingStories/TrendingStories")
 );
 const Footer = dynamic(() => import("@shared/Footer/Footer"));
-const FAQs = dynamic(() => import("components/Landing/FAQs/FAQs"));
+const FAQs = dynamic(() => import("components/Home/FAQs/FAQs"));
 
 const Home: NextPage = () => {
   const navAnim = useSpring({

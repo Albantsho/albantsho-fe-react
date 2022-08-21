@@ -1,7 +1,7 @@
 import GreenArrow from "@assets/icons/green-arrow.svg";
 import NextIcon from "@assets/icons/next-btn.svg";
 import PrevIcon from "@assets/icons/prev-btn.svg";
-import { Box, Icon, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, SvgIcon, Typography } from "@mui/material";
 import { Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -44,13 +44,11 @@ const Testimonials = () => {
       data-aos-duration="1000"
     >
       <div className="flex items-center gap-x-3 md:gap6 justify-center flex-wrap text-center">
-        <Icon sx={{ fontSize: "min(20vw, 80px)" }}>
-          <TestimonialsIcon />
-        </Icon>
+        <TestimonialsIcon width="80" />
         <Typography
           variant="h4"
           color="primary.main"
-          className="grotesk mt-2.5 leading-none"
+          className="grotesk leading-none"
         >
           <span className="md:hidden">Testimonials about us</span>
           <span className="hidden md:inline">What our users are saying</span>
@@ -58,9 +56,11 @@ const Testimonials = () => {
       </div>
       <div className="flex">
         <div className="hidden md:flex justify-center self-end flex-1">
-          <Icon sx={{ fontSize: "min(7vw, 70px)" }}>
-            <GreenArrow />
-          </Icon>
+          <SvgIcon
+            inheritViewBox
+            component={GreenArrow}
+            sx={{ fontSize: "min(7vw, 70px)" }}
+          />
         </div>
         <Box
           className="py-12 mt-12 px-6 md:px-12 max-w-screen-sm mx-auto grid grow-[2]"
@@ -114,14 +114,22 @@ const Testimonials = () => {
                 color="inherit"
                 sx={{ "&.Mui-disabled": { opacity: 0.4 } }}
               >
-                <PrevIcon width="40" height="40" />
+                <SvgIcon
+                  inheritViewBox
+                  component={PrevIcon}
+                  sx={{ fontSize: 40 }}
+                />
               </IconButton>
               <IconButton
                 className="testimonials-swiper__next-btn"
                 color="inherit"
                 sx={{ "&.Mui-disabled": { opacity: 0.4 } }}
               >
-                <NextIcon width="40" height="40" />
+                <SvgIcon
+                  inheritViewBox
+                  component={NextIcon}
+                  sx={{ fontSize: 40 }}
+                />
               </IconButton>
             </div>
           </Swiper>

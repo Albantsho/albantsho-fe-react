@@ -1,5 +1,5 @@
 import StarIcon from "@assets/icons/star.svg";
-import { Icon } from "@mui/material";
+import { SvgIcon } from "@mui/material";
 import GeneralLayout from "@shared/Layouts/GeneralLayout/GeneralLayout";
 import AboutUsImage from "components/AboutUs/AboutUsImage/AboutUsImage";
 import GetInTouch from "components/AboutUs/GetInTouch/GetInTouch";
@@ -14,24 +14,24 @@ const AboutUs: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || About Us</title>
       </Head>
-      <div>
-        <div className="max-w-screen-lg mx-auto">
+      <div className="relative">
+        <div className="max-w-screen-lg px-5 sm:px-10 mx-auto">
           <AboutUsImage />
           <OurStory />
           <OurVision />
         </div>
-        <Icon
-          className="absolute bottom-0 left-full"
+        <SvgIcon
+          component={StarIcon}
+          inheritViewBox
+          className="absolute bottom-0 right-1 text-transparent"
           sx={{
             width: { xs: 140, xl: 429 },
             height: { xs: 140, xl: 429 },
-            translate: { xs: "-60% 90%", xl: "-50% 50%" },
+            translate: { xs: "55% 90%", xl: "90% 45%" },
           }}
-        >
-          <StarIcon />
-        </Icon>
-        <GetInTouch />
+        />
       </div>
+      <GetInTouch />
     </>
   );
 };

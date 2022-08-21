@@ -1,13 +1,18 @@
 import LogoSvg from "@assets/logo.svg";
-import { Box, type BoxProps } from "@mui/material";
+import { SvgIcon, type SvgIconProps } from "@mui/material";
 import Link from "next/link";
 
-const Logo = (props: BoxProps) => {
+const Logo = ({ sx, ...props }: SvgIconProps) => {
   return (
     <Link href="/" passHref>
-      <Box component="a" {...props}>
-        <LogoSvg width="120" height="30" />
-      </Box>
+      <a>
+        <SvgIcon
+          component={LogoSvg}
+          inheritViewBox
+          sx={{ width: 120, height: 30, ...sx }}
+          {...props}
+        />
+      </a>
     </Link>
   );
 };

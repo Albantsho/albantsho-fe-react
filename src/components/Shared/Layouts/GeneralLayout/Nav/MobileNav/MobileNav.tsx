@@ -5,6 +5,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  SvgIcon,
 } from "@mui/material";
 import MenuIcon from "@assets/icons/menu.svg";
 import Link from "next/link";
@@ -22,9 +23,9 @@ const MobileNav = ({ links }: IProps) => {
       <IconButton
         onClick={handleToggleDrawer(true)}
         color="inherit"
-        sx={{ path: { fill: "#fff" } }}
+        className="text-white"
       >
-        <MenuIcon width="40" height="40" />
+        <SvgIcon component={MenuIcon} sx={{fontSize: 40}} />
       </IconButton>
       <Drawer anchor="top" open={open} onClose={handleToggleDrawer(false)}>
         <List>

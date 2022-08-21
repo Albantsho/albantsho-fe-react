@@ -1,4 +1,4 @@
-import { Button, IconButton, InputAdornment } from "@mui/material";
+import { Button, IconButton, InputAdornment, SvgIcon } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -21,8 +21,8 @@ const DesktopNav = ({ links }: IProps) => {
             notchedOutline: "!border-white",
           },
           startAdornment: (
-            <InputAdornment position="start">
-              <AiOutlineSearch />
+            <InputAdornment position="start" sx={{ fontSize: 14.5 }}>
+              <AiOutlineSearch className="text-white" />
             </InputAdornment>
           ),
         }}
@@ -38,7 +38,7 @@ const DesktopNav = ({ links }: IProps) => {
       </div>
       <div className="flex gap-10 text-white">
         <IconButton color="inherit">
-          <UserIcon width="32" height="32" />
+          <SvgIcon component={UserIcon} inheritViewBox sx={{ fontSize: 32 }} />
         </IconButton>
         <Button className="rounded-lg" color="inherit" variant="outlined">
           Sign In

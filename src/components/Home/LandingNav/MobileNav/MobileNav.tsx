@@ -7,6 +7,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  SvgIcon,
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import useMobileNav from "@shared/Layouts/GeneralLayout/Nav/MobileNav/useMobileNav";
@@ -25,9 +26,9 @@ const MobileNav = ({ links }: IProps) => {
       <IconButton
         onClick={handleToggleDrawer(true)}
         color="inherit"
-        sx={{ path: { fill: "#fff" } }}
+        className="text-white"
       >
-        <MenuIcon width="40" height="40" />
+        <SvgIcon component={MenuIcon} inheritViewBox sx={{ fontSize: 40 }} />
       </IconButton>
       <Drawer anchor="top" open={open} onClose={handleToggleDrawer(false)}>
         <List>
@@ -39,7 +40,7 @@ const MobileNav = ({ links }: IProps) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <AiOutlineSearch />
+                    <AiOutlineSearch className="text-primary-main" />
                   </InputAdornment>
                 ),
               }}

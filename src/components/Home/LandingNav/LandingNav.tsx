@@ -20,7 +20,7 @@ const LandingNav = () => {
         component="nav"
       >
         <Logo className="mr-12"/>
-        {xlScreen ? <DesktopNav links={links} /> : <MobileNav links={links} />}
+        {/* {xlScreen ? <DesktopNav links={links} /> : <MobileNav links={links} />} */}
       </Toolbar>
     </AppBar>
   );
