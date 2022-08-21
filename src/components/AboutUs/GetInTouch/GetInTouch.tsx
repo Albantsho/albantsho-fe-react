@@ -1,11 +1,14 @@
 import { IconButton, TextField, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const GetInTouch = () => {
   return (
-    <section id="get-in-touch" className="mt-24 mb-20 max-w-screen-md mx-auto">
+    <section
+      id="get-in-touch"
+      className="mt-24 mb-20 max-w-screen-md px-5 sm:px-10 mx-auto"
+    >
       <Typography
         variant="h3"
         className="futura font-medium text-center leading-normal"

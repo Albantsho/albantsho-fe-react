@@ -1,7 +1,7 @@
 import GreenArrow from "@assets/icons/green-arrow.svg";
 import StarIcon from "@assets/icons/star.svg";
 import YellowArrow from "@assets/icons/yellow-arrow.svg";
-import { Icon, SvgIcon } from "@mui/material";
+import { SvgIcon } from "@mui/material";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import HeroSection from "./HeroSection/HeroSection";
@@ -43,7 +43,7 @@ const GeneralLayout = ({ children, title, hideBg }: IProps) => {
               />
             </div>
           )}
-          <div>{children}</div>
+          {children}
           {!hideBg && (
             <div className="flex-1 relative hidden xl:block overflow-hidden">
               <SvgIcon

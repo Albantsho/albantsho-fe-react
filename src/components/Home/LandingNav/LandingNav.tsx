@@ -1,7 +1,5 @@
 import { AppBar, Toolbar, useMediaQuery } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
-import DesktopNav from "./DesktopNav/DesktopNav";
-import MobileNav from "./MobileNav/MobileNav";
 
 const links = [
   { title: "Story Base", href: "#" },

@@ -8,7 +8,7 @@ const BlogList = () => {
         className="grid gap-4 md:gap-8 py-7 md:py-14"
         gridTemplateColumns={{
           sm: "repeat(auto-fill, minmax(280px, auto))",
-          lg: "repeat(auto-fill, minmax(350px, auto))",
+          md: "repeat(auto-fill, minmax(350px, auto))",
         }}
       >
         {Array.from(new Array(6)).map((_, i) => (

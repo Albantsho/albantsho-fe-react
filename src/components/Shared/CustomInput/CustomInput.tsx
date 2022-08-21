@@ -2,7 +2,7 @@ import {
   inputAdornmentClasses,
   outlinedInputClasses,
   TextField,
-  type OutlinedTextFieldProps,
+  type OutlinedTextFieldProps
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { forwardRef } from "react";

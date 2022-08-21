@@ -7,7 +7,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  SvgIcon,
+  SvgIcon
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import useMobileNav from "@shared/Layouts/GeneralLayout/Nav/MobileNav/useMobileNav";

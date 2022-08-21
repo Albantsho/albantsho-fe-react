@@ -14,24 +14,26 @@ const AboutUs: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || About Us</title>
       </Head>
-      <div className="relative">
-        <div className="max-w-screen-lg px-5 sm:px-10 mx-auto">
-          <AboutUsImage />
-          <OurStory />
-          <OurVision />
+      <div>
+        <div className="relative">
+          <div className="max-w-screen-lg px-5 sm:px-10 mx-auto">
+            <AboutUsImage />
+            <OurStory />
+            <OurVision />
+          </div>
+          <SvgIcon
+            component={StarIcon}
+            inheritViewBox
+            className="absolute bottom-0 right-1 text-transparent"
+            sx={{
+              width: { xs: 140, xl: 429 },
+              height: { xs: 140, xl: 429 },
+              translate: { xs: "55% 90%", xl: "90% 45%" },
+            }}
+          />
         </div>
-        <SvgIcon
-          component={StarIcon}
-          inheritViewBox
-          className="absolute bottom-0 right-1 text-transparent"
-          sx={{
-            width: { xs: 140, xl: 429 },
-            height: { xs: 140, xl: 429 },
-            translate: { xs: "55% 90%", xl: "90% 45%" },
-          }}
-        />
+        <GetInTouch />
       </div>
-      <GetInTouch />
     </>
   );
 };

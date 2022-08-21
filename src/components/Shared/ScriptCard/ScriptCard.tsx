@@ -7,7 +7,7 @@ import {
   Icon,
   Rating,
   Typography,
-  type CardProps,
+  type CardProps
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import ReviewedIcon from "./assets/reviewed.svg";
