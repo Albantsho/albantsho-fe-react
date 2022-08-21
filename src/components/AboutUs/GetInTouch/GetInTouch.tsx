@@ -7,7 +7,7 @@ const GetInTouch = () => {
   return (
     <section
       id="get-in-touch"
-      className="mt-24 mb-20 max-w-screen-md px-5 sm:px-10 mx-auto"
+      className="mt-24 mb-20 max-w-screen-md mx-auto"
     >
       <Typography
         variant="h3"

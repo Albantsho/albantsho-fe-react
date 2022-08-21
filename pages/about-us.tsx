@@ -14,9 +14,9 @@ const AboutUs: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || About Us</title>
       </Head>
-      <div>
+      <div className="px-5 sm:px-10">
         <div className="relative">
-          <div className="max-w-screen-lg px-5 sm:px-10 mx-auto">
+          <div className="max-w-screen-lg mx-auto">
             <AboutUsImage />
             <OurStory />
             <OurVision />
@@ -28,7 +28,7 @@ const AboutUs: NextPageWithLayout = () => {
             sx={{
               width: { xs: 140, xl: 429 },
               height: { xs: 140, xl: 429 },
-              translate: { xs: "55% 90%", xl: "90% 45%" },
+              translate: { xs: "55% 90%", xl: "100% 45%" },
             }}
           />
         </div>
