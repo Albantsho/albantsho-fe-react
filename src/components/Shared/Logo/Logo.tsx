@@ -7,8 +7,8 @@ const Logo = ({ sx, ...props }: SvgIconProps) => {
     <Link href="/" passHref>
       <a>
         <SvgIcon
-          component={LogoSvg}
           inheritViewBox
+          component={LogoSvg}
           sx={{ width: 120, height: 30, ...sx }}
           {...props}
         />

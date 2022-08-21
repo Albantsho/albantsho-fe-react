@@ -41,7 +41,7 @@ const Footer = () => {
           className="grid gap-10 mt-16 sm:mt-24 sm:justify-evenly lg:justify-between"
         >
           <div className="flex flex-col items-center sm:items-start gap-2">
-            <Logo />
+            <Logo className="text-white" />
             <Typography
               variant="caption"
               className="text-center sm:text-left leading-normal"
