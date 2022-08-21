@@ -4,9 +4,10 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  Link,
+  Link as MuiLink,
   Typography,
 } from "@mui/material";
+import Link from "next/link";
 
 interface IProps {
   post: {
@@ -18,14 +19,26 @@ interface IProps {
 
 const BlogCard = ({ post }: IProps) => {
   return (
-    <Card>
+    <Card
+      className="rounded md:rounded-lg"
+      sx={{ boxShadow: " 0px 2px 7px rgba(117, 88, 162, 0.1)" }}
+    >
       <CardMedia loading="lazy" component="img" src={post.image} />
-      <CardHeader title={post.title} />
-      <CardContent>
+      <CardHeader
+        className="pb-0"
+        title={post.title}
+        titleTypographyProps={{
+          variant: "h4",
+          className: "leading-normal futura font-medium",
+        }}
+      />
+      <CardContent className="pt-0">
         <Typography color="gray.400">{post.desc}</Typography>
       </CardContent>
-      <CardActions>
-        <Link>Read more</Link>
+      <CardActions className="px-4 pb-4">
+        <Link href="#" passHref>
+          <MuiLink>Read more</MuiLink>
+        </Link>
       </CardActions>
     </Card>
   );

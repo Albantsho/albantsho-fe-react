@@ -1,7 +1,5 @@
 import { Typography } from "@mui/material";
-import HeroSection from "@shared/HeroSection/HeroSection";
-import Layout from "@shared/Layouts/Layout";
-import StarArrowBg from "@shared/StarArrowBg/StarArrowBg";
+import GeneralLayout from "@shared/Layouts/GeneralLayout/GeneralLayout";
 import Head from "next/head";
 import { NextPageWithLayout } from "./_app";
 
@@ -11,9 +9,7 @@ const PrivacyPolicy: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Privacy Policy</title>
       </Head>
-      <HeroSection title="Privacy Policy" />
       <div className="max-w-screen-lg px-5 sm:px-10 mx-auto py-14 relative">
-        <StarArrowBg />
         <Typography paragraph>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
           dolorem, corporis laboriosam voluptatibus unde quia eveniet eaque
@@ -57,6 +53,8 @@ const PrivacyPolicy: NextPageWithLayout = () => {
   );
 };
 
-PrivacyPolicy.getLayout = (page) => <Layout>{page}</Layout>;
+PrivacyPolicy.getLayout = (page) => (
+  <GeneralLayout title="Privacy Policy">{page}</GeneralLayout>
+);
 
 export default PrivacyPolicy;

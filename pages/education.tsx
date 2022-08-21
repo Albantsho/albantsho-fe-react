@@ -1,5 +1,4 @@
-import HeroSection from "@shared/HeroSection/HeroSection";
-import Layout from "@shared/Layouts/Layout";
+import GeneralLayout from "@shared/Layouts/GeneralLayout/GeneralLayout";
 import Head from "next/head";
 import { NextPageWithLayout } from "./_app";
 
@@ -9,11 +8,12 @@ const Education: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Education</title>
       </Head>
-      <HeroSection title="Under Construction" />
     </>
   );
 };
 
-Education.getLayout = (page) => <Layout>{page}</Layout>;
+Education.getLayout = (page) => (
+  <GeneralLayout title="Under Construction">{page}</GeneralLayout>
+);
 
 export default Education;

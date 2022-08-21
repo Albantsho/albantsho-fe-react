@@ -1,5 +1,4 @@
-import HeroSection from "@shared/HeroSection/HeroSection";
-import Layout from "@shared/Layouts/Layout";
+import GeneralLayout from "@shared/Layouts/GeneralLayout/GeneralLayout";
 import Questions from "components/FAQs/Questions/Questions";
 import Head from "next/head";
 import { NextPageWithLayout } from "./_app";
@@ -10,12 +9,13 @@ const FAQs: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || FAQ’s</title>
       </Head>
-      <HeroSection title="FAQ’s" />
       <Questions />
     </>
   );
 };
 
-FAQs.getLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
+FAQs.getLayout = (page: React.ReactElement) => (
+  <GeneralLayout title="FAQ’s">{page}</GeneralLayout>
+);
 
 export default FAQs;

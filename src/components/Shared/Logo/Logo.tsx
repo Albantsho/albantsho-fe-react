@@ -1,24 +1,11 @@
 import LogoSvg from "@assets/logo.svg";
-import { Box, useTheme } from "@mui/material";
+import { Box, type BoxProps } from "@mui/material";
 import Link from "next/link";
 
-interface IProps {
-  color?: "primary";
-}
-
-const Logo = ({ color }: IProps) => {
-  const { palette } = useTheme();
-
+const Logo = (props: BoxProps) => {
   return (
     <Link href="/" passHref>
-      <Box
-        component="a"
-        sx={{
-          "svg > path": {
-            fill: color === "primary" ? palette.primary.main : "#fff",
-          },
-        }}
-      >
+      <Box component="a" {...props}>
         <LogoSvg width="120" height="30" />
       </Box>
     </Link>

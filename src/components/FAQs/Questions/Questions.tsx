@@ -1,24 +1,22 @@
-import { Typography, Link } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import Image from "next/image";
 import FAQAccordion from "../FAQAccordion/FAQAccordion";
-import LandingImg from "./assets/landing.png";
-import LandingSignInImg from "./assets/landing-signin.png";
-import SinginSingupImg from "./assets/signin-signup.png";
-import SignupImg from "./assets/signup.png";
-import GetStartedBtnImg from "./assets/get-started-btn.png";
 import EmailVerificationImg from "./assets/email-verification.png";
-import VerifyEmailImg from "./assets/verify-email.png";
-import VerifyBtnImg from "./assets/verify-btn.png";
-import LandingVerifiedImg from "./assets/landing-verified.png";
+import GetStartedBtnImg from "./assets/get-started-btn.png";
 import LandingProfileMenuImg from "./assets/landing-profile-menu.png";
-import SigninImg from "./assets/signin.png";
+import LandingSignInImg from "./assets/landing-signin.png";
+import LandingVerifiedImg from "./assets/landing-verified.png";
+import LandingImg from "./assets/landing.png";
 import SigninBtnImg from "./assets/signin-btn.png";
-import StarArrowBg from "@shared/StarArrowBg/StarArrowBg";
+import SinginSingupImg from "./assets/signin-signup.png";
+import SigninImg from "./assets/signin.png";
+import SignupImg from "./assets/signup.png";
+import VerifyBtnImg from "./assets/verify-btn.png";
+import VerifyEmailImg from "./assets/verify-email.png";
 
 const Questions = () => {
   return (
-    <div className="max-w-screen-lg mx-auto px-5 sm:px-10 space-y-2 pt-5 pb-12 relative">
-      <StarArrowBg />
+    <div className="max-w-screen-lg px-5 sm:px-10 mx-auto space-y-2 pt-5 pb-12">
       <FAQAccordion question="What is Albantsho?">
         <Typography paragraph>
           Albantsho is a platform that enables screenwriters to put together

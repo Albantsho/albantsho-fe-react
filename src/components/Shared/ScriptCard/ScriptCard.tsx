@@ -77,7 +77,6 @@ const ScriptCard = (props: IProps) => {
               <>
                 <span className="text-neutral-300">Price:</span>
                 <span className="text-primary-main text-lg font-semibold">
-                  {" "}
                   ${script.price}
                 </span>
               </>

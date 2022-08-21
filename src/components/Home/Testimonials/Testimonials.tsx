@@ -127,7 +127,7 @@ const Testimonials = () => {
           </Swiper>
           <div className="testimonials-swiper__pagination flex gap-4 justify-center mt-8 min-h-[15px]" />
         </Box>
-        <div className="flex-1"></div>
+        <div className="flex-1" />
       </div>
     </section>
   );

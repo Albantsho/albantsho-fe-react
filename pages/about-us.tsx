@@ -1,13 +1,12 @@
+import StarIcon from "@assets/icons/star.svg";
 import { Icon } from "@mui/material";
-import Layout from "@shared/Layouts/Layout";
+import GeneralLayout from "@shared/Layouts/GeneralLayout/GeneralLayout";
 import AboutUsImage from "components/AboutUs/AboutUsImage/AboutUsImage";
 import GetInTouch from "components/AboutUs/GetInTouch/GetInTouch";
 import OurStory from "components/AboutUs/OurStory/OurStory";
 import OurVision from "components/AboutUs/OurVision/OurVision";
 import Head from "next/head";
 import type { NextPageWithLayout } from "./_app";
-import StarIcon from "@assets/icons/star.svg";
-import HeroSection from "@shared/HeroSection/HeroSection";
 
 const AboutUs: NextPageWithLayout = () => {
   return (
@@ -15,9 +14,8 @@ const AboutUs: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || About Us</title>
       </Head>
-      <HeroSection title="About Us" />
-      <div className="relative">
-        <div className="max-w-screen-lg mx-auto px-5 sm:px-10">
+      <div>
+        <div className="max-w-screen-lg mx-auto">
           <AboutUsImage />
           <OurStory />
           <OurVision />
@@ -32,12 +30,16 @@ const AboutUs: NextPageWithLayout = () => {
         >
           <StarIcon />
         </Icon>
+        <GetInTouch />
       </div>
-      <GetInTouch />
     </>
   );
 };
 
-AboutUs.getLayout = (page: React.ReactElement) => <Layout>{page}</Layout>;
+AboutUs.getLayout = (page: React.ReactElement) => (
+  <GeneralLayout title="About Us" hideBg>
+    {page}
+  </GeneralLayout>
+);
 
 export default AboutUs;

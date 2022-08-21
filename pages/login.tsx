@@ -1,5 +1,4 @@
-import HeroSection from "@shared/HeroSection/HeroSection";
-import Layout from "@shared/Layouts/Layout";
+import GeneralLayout from "@shared/Layouts/GeneralLayout/GeneralLayout";
 import Head from "next/head";
 import { NextPageWithLayout } from "./_app";
 
@@ -9,11 +8,12 @@ const Login: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Login</title>
       </Head>
-      <HeroSection title="Under Construction" />
     </>
   );
 };
 
-Login.getLayout = (page) => <Layout>{page}</Layout>;
+Login.getLayout = (page) => (
+  <GeneralLayout title="Under Construction">{page}</GeneralLayout>
+);
 
 export default Login;
