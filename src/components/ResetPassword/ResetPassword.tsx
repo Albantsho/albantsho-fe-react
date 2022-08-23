@@ -3,15 +3,15 @@ import {
   Button,
   InputAdornment,
   SvgIcon,
-  Typography,
+  Typography
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 
+import Btn from "@shared/Btn/Btn";
+import Logo from "@shared/Logo/Logo";
+import Link from "next/link";
 import iconPassword from "./assets/icon-password.svg";
 import iconShow from "./assets/icon-show.svg";
-import Btn from "@shared/Btn/Btn";
-import Link from "next/link";
-import Logo from "@shared/Logo/Logo";
 
 const ResetPassword = () => {
   return (

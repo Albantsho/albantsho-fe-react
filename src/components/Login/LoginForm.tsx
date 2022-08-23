@@ -1,21 +1,17 @@
 import {
-  InputAdornment,
-  SvgIcon,
-  Typography,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
   Box,
-  Button,
+  Button, Checkbox, FormControlLabel, FormGroup, InputAdornment,
+  SvgIcon,
+  Typography
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 
+import Btn from "@shared/Btn/Btn";
+import Logo from "@shared/Logo/Logo";
+import Link from "next/link";
 import iconEmail from "./assets/icon-email.svg";
 import iconPassword from "./assets/icon-password.svg";
 import iconShow from "./assets/icon-show.svg";
-import Btn from "@shared/Btn/Btn";
-import Link from "next/link";
-import Logo from "@shared/Logo/Logo";
 
 const LoginForm = () => {
   return (

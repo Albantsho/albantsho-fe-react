@@ -1,8 +1,7 @@
 import Image from "next/image";
-import React from "react";
 
-import iDraftSmall from "./assets/i-draft-small.jpg"
-import iDraftLg from "./assets/i-draft-lg.jpg"
+import iDraftLg from "./assets/i-draft-lg.jpg";
+import iDraftSmall from "./assets/i-draft-small.jpg";
 
 
 const ImageSection = () => {

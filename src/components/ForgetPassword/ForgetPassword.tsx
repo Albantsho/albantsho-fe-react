@@ -1,9 +1,7 @@
 import {
-  SvgIcon,
-  Typography,
-  InputAdornment,
   Box,
-  Button,
+  Button, InputAdornment, SvgIcon,
+  Typography
 } from "@mui/material";
 
 import Link from "next/link";
@@ -13,8 +11,8 @@ import iconEmail from "./assets/icon-email.svg";
 
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import Image from "next/image";
 import Logo from "@shared/Logo/Logo";
+import Image from "next/image";
 
 const ForgetPassword = () => {
   return (

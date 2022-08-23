@@ -5,9 +5,9 @@ import Link from "next/link";
 import bell from "./assets/bell.png";
 
 import Btn from "@shared/Btn/Btn";
-import Image from "next/image";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Logo from "@shared/Logo/Logo";
+import Image from "next/image";
 
 const VerifyEmail = () => {
   return (

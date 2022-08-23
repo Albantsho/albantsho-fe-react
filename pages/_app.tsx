@@ -1,14 +1,14 @@
 import { CacheProvider, type EmotionCache } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
-import { AppProps } from "next/app";
-import theme from "styles/themes/theme";
-import createEmotionCache from "utils/create-emotion-cache";
-import "styles/globals.css";
-import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import type { NextPage } from "next";
+import { AppProps } from "next/app";
+import { useEffect } from "react";
+import "styles/globals.css";
+import theme from "styles/themes/theme";
+import createEmotionCache from "utils/create-emotion-cache";
 
 const clientSideEmotionCache = createEmotionCache();
 
