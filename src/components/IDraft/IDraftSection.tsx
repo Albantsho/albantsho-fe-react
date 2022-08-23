@@ -1,8 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
 
 import vector from "./assets/vector.png";
+
+import drSam from "./assets/dr-sam.jpg";
 
 const IDraftSection = () => {
   return (
@@ -106,7 +108,7 @@ const IDraftSection = () => {
         <Box
           className="flex flex-col gap-6 justify-center items-center w-full mt-6"
           sx={{
-            backgroundImage: "url(./assets/flash.png)",
+            backgroundImage: { drSam },
             objectFit: "contain",
           }}
         >
@@ -126,8 +128,39 @@ const IDraftSection = () => {
         </Box>
       </Box>
 
-      <Box>
-        
+      <Box className="py-4 px-12 bg-purple-700">
+        <Typography
+          variant="h5"
+          className="text-white text-center"
+          gutterBottom
+        >
+          SPEAKERS/MENTORS
+        </Typography>
+
+        <Card sx={{ display: "flex" }}>
+          <CardMedia
+            component="img"
+            image="./assets/dr-sam.jpg"
+            alt="Live from space album cover"
+          />
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <CardContent sx={{ flex: "1 0 auto" }}>
+              <Typography className="text-primary-700" variant="h5">
+                DR SAMANTHA-ISAAC IWOWO
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                component="p"
+              >
+                Dr. Iwowo is a Senior Lecturer at Bournemouth University,
+                Director, Researcher, and Screenwriter with over 50 published
+                screenplays, including the award-winning Oloibiri (2015), which
+                premiered at the Cannes film festival.
+              </Typography>
+            </CardContent>
+          </Box>
+        </Card>
       </Box>
     </main>
   );

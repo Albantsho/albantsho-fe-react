@@ -17,8 +17,8 @@ const Signup: NextPageWithLayout = () => {
         <title>Albantsho || Sign Up</title>
       </Head>
      
-        {/* <SignupForm /> */}
-        <VerifyEmail />
+        <SignupForm />
+        {/* <VerifyEmail /> */}
         {/* <ForgetPassword /> */}
         {/* <CheckEmail /> */}
         {/* <ResetPassword /> */}
