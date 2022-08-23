@@ -16,30 +16,29 @@ import Link from "next/link";
 
 const LoginForm = () => {
   return (
-    <div className="flex flex-col px-8 py-16">
+    <div className="flex flex-col px-8 py-16 lg:px-28">
       <Typography
         variant="h3"
         color="primary.main"
-        className="futura font-medium leading-10"
-        mb={1}
+        className="futura font-medium leading-normal"
       >
         Welcome
       </Typography>
-      <Typography color="grey.700" className="leading-6 text-sm">
+      <Typography color="grey.700">
         It’s nice to have you back, Sign back in to write or find the perfect
         script for you.
       </Typography>
-
       <div className="w-full mt-3 flex flex-col">
         <Typography
-        htmlFor="email"
+          variant="h6"
+          htmlFor="email"
           component="label"
           className="text-purple-700 leading-5 font-medium mb-1 futura"
         >
           Email address
         </Typography>
         <CustomInput
-        id="email"
+          id="email"
           variant="outlined"
           size="medium"
           InputProps={{
@@ -56,17 +55,17 @@ const LoginForm = () => {
           placeholder="Email"
         />
       </div>
-
       <div className="w-full mt-3 flex flex-col">
         <Typography
-        htmlFor="password"
+          variant="h6"
+          htmlFor="password"
           component="label"
           className="text-purple-700 leading-5 font-medium mb-1 futura"
         >
           Password
         </Typography>
         <CustomInput
-        id="password"
+          id="password"
           variant="outlined"
           size="medium"
           InputProps={{
@@ -88,7 +87,6 @@ const LoginForm = () => {
           placeholder="Password"
         />
       </div>
-
       <div className="flex justify-between items-center">
         <div className="mt-3 flex items-center">
           <FormGroup>
@@ -106,13 +104,11 @@ const LoginForm = () => {
           </Typography>
         </div>
       </div>
-
       <div className="justify-center flex mt-10">
-        <Btn size="large" className="py-3 px-6 font-normal montserrat">
+        <Btn size="large" className="py-3 px-6 font-normal montserrat lg:py-6 lg:px-14">
           Get Started
         </Btn>
       </div>
-
       <div className="flex justify-center mt-7">
         <Typography className="text-grey-400 leading-5 font-medium mb-1 futura">
           Don’t have an account yet?

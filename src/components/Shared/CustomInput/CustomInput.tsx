@@ -46,14 +46,9 @@ const CustomInput = styled(RootInput)`
       }
     }
 
-    &.${outlinedInputClasses.sizeSmall} {
-      .${outlinedInputClasses.notchedOutline} {
-        border-width: 1px;
-      }
-    }
 
     .${outlinedInputClasses.notchedOutline} {
-      border: 3px solid ${({ theme }) => theme.palette.tinted[100]};
+      border: 1px solid ${({ theme }) => theme.palette.tinted[100]};
       border-radius: 8px;
     }
 

@@ -1,14 +1,14 @@
 import ImageAuth from "./ImageSection/ImageAuth";
 
-interface IProps{
-    children: React.ReactNode;
+interface IProps {
+  children: React.ReactNode;
 }
 
-const AuthenticationLayout = ({children}:IProps) => {
+const AuthenticationLayout = ({ children }: IProps) => {
   return (
-    <main className="container max-w-screen-2xl mx-auto flex flex-col md:flex-row min-h-screen">
+    <main className="flex flex-col lg:flex-row min-h-screen">
       <ImageAuth />
-      {children}
+      <div className="flex-[2]">{children}</div>
     </main>
   );
 };
