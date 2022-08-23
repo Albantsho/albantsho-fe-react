@@ -43,11 +43,11 @@ const VerifyEmail = () => {
 
       <div className="w-full mt-3 flex justify-between items-center">
         <Typography className=" leading-5 font-normal text-xs mb-1 futura">
-          <Link href="#">
-            <a href="#" className="text-warning-500">
+
+            <span className="text-warning-500">
               20:00
-            </a>
-          </Link>
+            </span>
+
         </Typography>
 
         <Typography className="leading-5 font-normal text-xs mb-1 futura">

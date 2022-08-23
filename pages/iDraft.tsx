@@ -1,4 +1,5 @@
-import GeneralLayout from "@shared/Layouts/GeneralLayout/GeneralLayout";
+import IDrafyLayout from "@shared/Layouts/IDraftLayout/IDrafyLayout";
+import IDraftSection from "components/IDraft/IDraftSection";
 import Head from "next/head";
 import { NextPageWithLayout } from "./_app";
 
@@ -8,12 +9,11 @@ const IDraft: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || iDraft</title>
       </Head>
+      <IDraftSection />
     </>
   );
 };
 
-IDraft.getLayout = (page) => (
-  <GeneralLayout title="Under Construction">{page}</GeneralLayout>
-);
+IDraft.getLayout = (page) => <IDrafyLayout>{page}</IDrafyLayout>;
 
 export default IDraft;
