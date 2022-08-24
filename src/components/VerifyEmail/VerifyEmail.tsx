@@ -2,7 +2,6 @@ import { Typography } from "@mui/material";
 import Link from "next/link";
 import bell from "./assets/bell.png";
 import Btn from "@shared/Btn/Btn";
-import Image from "next/image";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import NavbarAuthenticationSignin from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthenticationSignin/NavbarAuthenticationSignin";
 

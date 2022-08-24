@@ -1,3 +1,4 @@
+import MenuIcon from "@assets/icons/menu.svg";
 import {
   Drawer,
   IconButton,
@@ -5,9 +6,8 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  SvgIcon,
+  SvgIcon
 } from "@mui/material";
-import MenuIcon from "@assets/icons/menu.svg";
 import Link from "next/link";
 import useMobileNav from "./useMobileNav";
 

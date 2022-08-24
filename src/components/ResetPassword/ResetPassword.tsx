@@ -1,7 +1,7 @@
 import {
   InputAdornment,
   SvgIcon,
-  Typography,
+  Typography
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import iconPassword from "./assets/icon-password.svg";

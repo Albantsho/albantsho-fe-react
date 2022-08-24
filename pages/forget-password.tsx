@@ -1,8 +1,8 @@
 import Head from "next/head";
 
-import { NextPageWithLayout } from "./_app";
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
 import ForgetPassword from "components/ForgetPassword/ForgetPassword";
+import { NextPageWithLayout } from "./_app";
 
 const ForgetPasswordPage: NextPageWithLayout = () => {
   return (

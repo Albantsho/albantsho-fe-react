@@ -1,9 +1,7 @@
 import {
-  SvgIcon,
-  Typography,
-  InputAdornment,
   Box,
-  Button,
+  Button, InputAdornment, SvgIcon,
+  Typography
 } from "@mui/material";
 
 import Link from "next/link";
