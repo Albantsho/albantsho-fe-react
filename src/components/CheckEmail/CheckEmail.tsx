@@ -48,7 +48,7 @@ const CheckEmail = () => {
           </Btn>
         </div>
 
-        <div className="text-center mt-14 lg:hidden">
+        <div className="mt-14 lg:hidden">
           <Typography className="text-grey-400 mb-1 futura">
             Already have an account?
             <Link href="/">

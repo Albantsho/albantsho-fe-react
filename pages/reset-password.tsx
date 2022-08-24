@@ -11,7 +11,6 @@ const ResetPasswordPage: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Verify Email</title>
       </Head>
-      
       <ResetPassword />
     </>
   );

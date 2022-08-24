@@ -10,7 +10,6 @@ const ResetPasswordConfirmation: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Complete Password</title>
       </Head>
-
       <ResetCompleted />
     </>
   );

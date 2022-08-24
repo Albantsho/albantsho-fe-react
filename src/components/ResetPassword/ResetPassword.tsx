@@ -1,8 +1,4 @@
-import {
-  InputAdornment,
-  SvgIcon,
-  Typography
-} from "@mui/material";
+import { InputAdornment, SvgIcon, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import iconPassword from "./assets/icon-password.svg";
 import iconShow from "./assets/icon-show.svg";
@@ -25,7 +21,7 @@ const ResetPassword = () => {
         </Typography>
         <Typography
           variant="body2"
-          className="text-[#484848] lg:text-center md:max-w-[430px]"
+          className="text-[#484848] lg:text-primary-main lg:text-center md:max-w-[430px]"
         >
           Your new password must be different from all other previously used
           passwords.

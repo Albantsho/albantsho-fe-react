@@ -10,7 +10,7 @@ const VerifyEmail = () => {
   return (
     <div className="px-8 py-12 lg:px-24  mx-auto">
       <NavbarAuthenticationSignin />
-      <div className="lg:py-32 grid place-content-center  mx-auto ">
+      <div className="lg:py-32 grid place-content-center mx-auto">
         <div className="flex items-center lg:flex-col">
           <Typography
             variant="h5"
@@ -28,7 +28,7 @@ const VerifyEmail = () => {
           Hi Jane, kindly input the 6 digit code that was sent to your mail to
           verify your email address.
         </Typography>
-        <div className="flex gap-3 mt-7 mb-4 justify-center flex-wrap">
+        <div className="flex gap-3 mt-7 mb-4 justify-center flex-wrap lg:flex-nowrap">
           {Array.from(new Array(6)).map((_, i) => (
             <CustomInput
               className=""

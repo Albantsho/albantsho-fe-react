@@ -11,7 +11,6 @@ const CheckEmailPage: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Check Email</title>
       </Head>
-      
       <CheckEmail />
     </>
   );

@@ -98,9 +98,9 @@ const SigninForm = () => {
                 label="Remember me"
               />
             </FormGroup>
-            <Typography className="text-grey-600 leading-5 font-medium mb-1 futura">
-              <Link href="/forget-password">
-                <a>Forgot Password?</a>
+            <Typography className="leading-5 font-medium mb-1 futura">
+              <Link href="/forget-password" passHref>
+                <a className="text-blue-400">Forgot Password?</a>
               </Link>
             </Typography>
           </div>
