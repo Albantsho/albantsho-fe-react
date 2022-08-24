@@ -4,7 +4,7 @@ import { NextPageWithLayout } from "./_app";
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
 import ResetCompleted from "components/ResetCompleted/ResetCompleted";
 
-const CompletedPasswordPage: NextPageWithLayout = () => {
+const ResetPasswordConfirmation: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -16,8 +16,8 @@ const CompletedPasswordPage: NextPageWithLayout = () => {
   );
 };
 
-CompletedPasswordPage.getLayout = (page) => (
+ResetPasswordConfirmation.getLayout = (page) => (
   <AuthenticationLayout>{page}</AuthenticationLayout>
 );
 
-export default CompletedPasswordPage;
+export default ResetPasswordConfirmation;

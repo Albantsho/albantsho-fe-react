@@ -1,26 +1,14 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import Logo from "@shared/Logo/Logo";
+import NavbarAuthenticationSignin from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthenticationSignin/NavbarAuthenticationSignin";
 import Image from "next/image";
-import Link from "next/link";
-
 import success from "./assets/success.png";
 
 const ResetCompleted = () => {
   return (
     <div className="px-8 py-12 lg:px-24  mx-auto">
-      <Box className="hidden mb-40 lg:flex justify-between">
-        <Logo />
-        <div className="space-x-4">
-          <span>Already have an account?</span>
-          <Link href="/signup" passHref>
-            <Button variant="outlined" size="large">
-              SIGN IN
-            </Button>
-          </Link>
-        </div>
-      </Box>
-      <div className="text-center flex flex-col items-center">
+      <NavbarAuthenticationSignin />
+      <div className="lg:py-28 text-center flex flex-col items-center">
         <div>
           <div className="lg:order-1 w-8 h-8 lg:w-16 lg:h-16">
             <Image src={success} alt="success" />

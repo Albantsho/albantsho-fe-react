@@ -7,29 +7,17 @@ import {
 } from "@mui/material";
 
 import Link from "next/link";
-
 import forget from "./assets/forget.png";
 import iconEmail from "./assets/icon-email.svg";
-
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Image from "next/image";
-import Logo from "@shared/Logo/Logo";
+import NavbarAuthenticationSignin from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthenticationSignin/NavbarAuthenticationSignin";
 
 const ForgetPassword = () => {
   return (
     <div className="px-8 py-12 lg:px-24 flex flex-col">
-      <Box className="hidden lg:flex justify-between">
-        <Logo />
-        <div className="space-x-4">
-          <span>Already have an account?</span>
-          <Link href="/signin" passHref>
-            <Button variant="outlined" size="large">
-              SIGN IN
-            </Button>
-          </Link>
-        </div>
-      </Box>
+      <NavbarAuthenticationSignin />
       <div className="lg:py-28 flex-1 flex justify-center flex-col lg:items-center">
         <div className="flex lg:flex-col items-center">
           <Typography
@@ -41,7 +29,7 @@ const ForgetPassword = () => {
             Trouble Logging in?
           </Typography>
           <div className="w-12 h-12 lg:w-24 lg:h-20 lg:order-1">
-            <Image src={forget} alt="forget"  />
+            <Image src={forget} alt="forget" />
           </div>
         </div>
         <Typography className="leading-normal lg:text-center text-sm max-w-[430px]  text-[#484848]">

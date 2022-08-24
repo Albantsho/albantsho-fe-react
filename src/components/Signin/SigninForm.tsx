@@ -15,34 +15,15 @@ import iconPassword from "./assets/icon-password.svg";
 import iconShow from "./assets/icon-show.svg";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
-import Logo from "@shared/Logo/Logo";
+import TitleSigninForm from "./TitleSigninForm/TitleSigninForm";
+import NavbarAuthenticationSignup from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthenticationSignup/NavbarAuthenticationSignup";
 
-const LoginForm = () => {
+const SigninForm = () => {
   return (
     <div className="px-8 py-12 lg:px-24  mx-auto">
-      <Box className="hidden lg:flex justify-between">
-        <Logo />
-        <div className="space-x-4">
-          <span>Don’t have an account yet?</span>
-          <Link href="/signup" passHref>
-            <Button variant="outlined" size="large">
-              SIGN UP
-            </Button>
-          </Link>
-        </div>
-      </Box>
+      <NavbarAuthenticationSignup />
       <div className="lg:py-28">
-        <Typography
-          variant="h3"
-          color="primary.main"
-          className="futura font-medium leading-normal"
-        >
-          Welcome
-        </Typography>
-        <Typography className="max-w-[430px] mb-12" color="grey.700">
-          It’s nice to have you back, Sign back in to write or find the perfect
-          script for you.
-        </Typography>
+        <TitleSigninForm />
         <div className="w-full mt-3 flex flex-col">
           <Typography
             variant="h6"
@@ -107,17 +88,22 @@ const LoginForm = () => {
           />
         </div>
         <div className="flex justify-between items-center">
-          <div className="mt-3 flex items-center">
+          <div className="mt-3 w-full flex items-center justify-between flex-wrap">
             <FormGroup>
               <FormControlLabel
                 control={
-                  <Checkbox size="medium" defaultChecked color="success" />
+                  <Checkbox
+                  size="medium"
+                  style={{
+                    transform: "scale(1.2)",
+                  }}
+                  defaultChecked
+                  color="success"
+                />
                 }
                 label="Remember me"
               />
             </FormGroup>
-          </div>
-          <div>
             <Typography className="text-grey-600 leading-5 font-medium mb-1 futura">
               <Link href="/forget-password">
                 <a>Forgot Password?</a>
@@ -146,4 +132,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SigninForm;

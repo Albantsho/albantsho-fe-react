@@ -1,33 +1,20 @@
 import {
-  Box,
-  Button,
   InputAdornment,
   SvgIcon,
   Typography,
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
-
 import iconPassword from "./assets/icon-password.svg";
 import iconShow from "./assets/icon-show.svg";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
-import Logo from "@shared/Logo/Logo";
+import NavbarAuthenticationSignin from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthenticationSignin/NavbarAuthenticationSignin";
 
 const ResetPassword = () => {
   return (
     <div className="px-8 py-12 pb-16 lg:px-24  mx-auto">
-      <Box className="hidden mb-40 lg:flex justify-between">
-        <Logo />
-        <div className="space-x-4">
-          <span>Already have an account?</span>
-          <Link href="/signup" passHref>
-            <Button variant="outlined" size="large">
-              SIGN IN
-            </Button>
-          </Link>
-        </div>
-      </Box>
-      <div className="flex flex-col lg:items-center">
+      <NavbarAuthenticationSignin />
+      <div className="lg:py-36 flex flex-col lg:items-center">
         <Typography
           variant="h3"
           color="primary.main"
@@ -49,7 +36,7 @@ const ResetPassword = () => {
             variant="h6"
             htmlFor="verifyPassword"
             component="label"
-            className="text-purple-700 leading-5 font-normal mb-2 futura"
+            className="text-purple-700 font-normal mb-2 futura"
           >
             New password
           </Typography>
@@ -86,7 +73,7 @@ const ResetPassword = () => {
             variant="h6"
             htmlFor="password"
             component="label"
-            className="text-purple-700 leading-5 font-normal mb-2 futura"
+            className="text-purple-700 font-normal mb-2 futura"
           >
             Verify password
           </Typography>
@@ -109,8 +96,11 @@ const ResetPassword = () => {
           />
         </div>
 
-        <div className="justify-center flex mt-10">
-        <Btn size="large" className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10">
+        <div className="justify-center flex mt-10 lg:mt-24">
+          <Btn
+            size="large"
+            className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"
+          >
             Reset Password
           </Btn>
         </div>
