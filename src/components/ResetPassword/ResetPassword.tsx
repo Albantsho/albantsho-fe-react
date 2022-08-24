@@ -18,14 +18,14 @@ const ResetPassword = () => {
         <Typography
           variant="h3"
           color="primary.main"
-          className="futura font-medium leading-10"
+          className="futura font-medium leading-normal"
           mb={1}
         >
           Create New Password
         </Typography>
         <Typography
           variant="body2"
-          className="text-[#484848] lg:text-center leading-normal md:max-w-[430px]"
+          className="text-[#484848] lg:text-center md:max-w-[430px]"
         >
           Your new password must be different from all other previously used
           passwords.
@@ -105,7 +105,7 @@ const ResetPassword = () => {
           </Btn>
         </div>
 
-        <div className="flex justify-center mt-7 lg:hidden">
+        <div className="text-center mt-7 lg:hidden">
           <Typography className="text-grey-400 mb-1 futura">
             Don’t have an account yet?
             <Link href="/signup">

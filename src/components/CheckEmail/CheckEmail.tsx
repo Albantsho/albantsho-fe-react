@@ -22,20 +22,20 @@ const CheckEmail = () => {
         </div>
       </Box>
       <div className="lg:py-28 flex-1 flex justify-center flex-col lg:items-center">
-        <div className="flex lg:flex-col items-center">
+        <div className="flex lg:flex-col gap-8 items-center">
           <Typography
             variant="h4"
             color="primary.main"
-            className="futura font-medium lg:order-2 leading-10 mr-5"
+            className="futura font-medium lg:order-2 leading-10"
             mb={1}
           >
             Check Your Mail
           </Typography>
-          <div className="lg:order-1 w-8 h-8 lg:w-16 lg:h-16">
+          <div className="lg:order-1 w-9 lg:w-32 h-full">
             <Image src={check} alt="check" />
           </div>
         </div>
-        <Typography className="leading-6 lg:w-full lg:text-center w-2/3 text-sm  text-primary-700">
+        <Typography className="lg:w-full lg:text-center w-2/3 text-primary-700">
           Follow the link in your mail to reset your password
         </Typography>
 
@@ -48,7 +48,7 @@ const CheckEmail = () => {
           </Btn>
         </div>
 
-        <div className="flex mt-14 lg:hidden">
+        <div className="text-center mt-14 lg:hidden">
           <Typography className="text-grey-400 mb-1 futura">
             Already have an account?
             <Link href="/">

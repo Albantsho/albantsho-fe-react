@@ -113,7 +113,7 @@ const SigninForm = () => {
             Sign In
           </Btn>
         </div>
-        <div className="flex justify-center mt-7 lg:hidden">
+        <div className="text-center mt-7 lg:hidden">
           <Typography className="text-grey-400 mb-1 futura">
             Don’t have an account yet?
             <Link href="/signup">

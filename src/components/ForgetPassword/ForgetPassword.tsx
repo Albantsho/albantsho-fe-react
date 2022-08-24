@@ -17,7 +17,7 @@ const ForgetPassword = () => {
     <div className="px-8 py-12 lg:px-24 flex flex-col">
       <NavbarAuthenticationSignin />
       <div className="lg:py-28 flex-1 flex justify-center flex-col lg:items-center">
-        <div className="flex lg:flex-col items-center">
+        <div className="flex lg:flex-col lg:gap-10 items-center">
           <Typography
             variant="h4"
             color="primary.main"
@@ -26,16 +26,16 @@ const ForgetPassword = () => {
           >
             Trouble Logging in?
           </Typography>
-          <div className="w-12 h-12 lg:w-24 lg:h-20 lg:order-1">
+          <div className="w-16 h-full lg:w-36 lg:h-20 lg:order-1">
             <Image src={forget} alt="forget" />
           </div>
         </div>
-        <Typography className="leading-normal lg:text-center text-sm max-w-[430px]  text-[#484848]">
+        <Typography className="mt-2 lg:mt-3 lg:text-center  max-w-[430px]  text-[#484848]">
           Enter your email and we’ll send you a link to help you get back into
           your account
         </Typography>
 
-        <div className="w-full mt-3 flex flex-col">
+        <div className="w-full mt-6 flex flex-col">
           <Typography
             variant="h6"
             htmlFor="email"
@@ -72,7 +72,7 @@ const ForgetPassword = () => {
           </Btn>
         </div>
 
-        <div className="flex lg:hidden justify-center mt-7">
+        <div className="text-center lg:hidden mt-4">
           <Typography className="text-grey-400 mb-1 futura">
             Already have an account?
             <Link href="/">

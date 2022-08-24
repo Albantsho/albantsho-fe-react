@@ -6,7 +6,7 @@ const TitleSigninForm = () => {
       <Typography
         variant="h3"
         color="primary.main"
-        className="futura font-medium leading-normal"
+        className="futura font-medium leading-normal lg:mb-4"
       >
         Welcome
       </Typography>

@@ -151,9 +151,47 @@ const SignupForm = () => {
             size="medium"
             className="text-purple-700"
           >
-            <MenuItem sx={{marginBottom:2}} value="Writer">I’m a writer</MenuItem>
+            <MenuItem sx={{ marginBottom: 2 }} value="Writer">
+              I’m a writer
+            </MenuItem>
             <MenuItem value="Producer">I’m a producer</MenuItem>
           </CustomInput>
+        </div>
+
+        <div className="w-full mt-3 lg:mt-7 flex flex-col">
+          <Typography
+            variant="h6"
+            htmlFor="Company"
+            component="label"
+            className="text-purple-700 leading-normal font-normal mb-2 futura"
+          >
+            What production company are you affiliated with?
+          </Typography>
+          <CustomInput
+            id="Company"
+            variant="outlined"
+            size="medium"
+            className="text-purple-700"
+            placeholder="Company"
+          />
+        </div>
+
+        <div className="w-full mt-3 lg:mt-7 flex flex-col">
+          <Typography
+            variant="h6"
+            htmlFor="portfolio"
+            component="label"
+            className="text-purple-700 leading-normal font-normal mb-2 futura"
+          >
+            Portfolio link
+          </Typography>
+          <CustomInput
+            id="portfolio"
+            variant="outlined"
+            size="medium"
+            className="text-purple-700"
+            placeholder="Link to your best work"
+          />
         </div>
 
         <div className="w-full mt-3 lg:mt-7 flex items-center md:items-start">
@@ -191,7 +229,7 @@ const SignupForm = () => {
         </div>
 
         <div className="flex justify-center mt-3 lg:mt-7 lg:hidden">
-          <Typography className="text-grey-400 leading-5 font-normal mb-2 futura">
+          <Typography className="text-grey-400 text-center mb-2 futura">
             Already have an account?
             <Link href="/signin">
               <a className="text-success-500 ml-2">Sign in</a>

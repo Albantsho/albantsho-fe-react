@@ -10,7 +10,7 @@ const ResetCompleted = () => {
       <NavbarAuthenticationSignin />
       <div className="lg:py-28 text-center flex flex-col items-center">
         <div>
-          <div className="lg:order-1 w-8 h-8 lg:w-16 lg:h-16">
+          <div className="lg:order-1 w-14 h-14 lg:w-24 lg:h-full">
             <Image src={success} alt="success" />
           </div>
         </div>
