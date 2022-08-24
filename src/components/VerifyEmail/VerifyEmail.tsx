@@ -4,6 +4,7 @@ import bell from "./assets/bell.png";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import NavbarAuthenticationSignin from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthenticationSignin/NavbarAuthenticationSignin";
+import Image from "next/image";
 
 const VerifyEmail = () => {
   return (

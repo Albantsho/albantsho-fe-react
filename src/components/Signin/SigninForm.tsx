@@ -1,21 +1,16 @@
 import {
-  Box,
-  Button, Checkbox, FormControlLabel, FormGroup, InputAdornment,
+  Checkbox, FormControlLabel, FormGroup, InputAdornment,
   SvgIcon,
   Typography
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
-
 import Btn from "@shared/Btn/Btn";
-import Logo from "@shared/Logo/Logo";
+import NavbarAuthenticationSignup from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthenticationSignup/NavbarAuthenticationSignup";
 import Link from "next/link";
 import iconEmail from "./assets/icon-email.svg";
 import iconPassword from "./assets/icon-password.svg";
 import iconShow from "./assets/icon-show.svg";
-import Btn from "@shared/Btn/Btn";
-import Link from "next/link";
 import TitleSigninForm from "./TitleSigninForm/TitleSigninForm";
-import NavbarAuthenticationSignup from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthenticationSignup/NavbarAuthenticationSignup";
 
 const SigninForm = () => {
   return (
