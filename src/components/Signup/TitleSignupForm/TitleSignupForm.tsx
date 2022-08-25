@@ -3,7 +3,7 @@ import React from "react";
 
 const TitleSignupForm = () => {
   return (
-    <>
+    <div className="lg:mt-28 px-8 mt-16 lg:px-24  mx-auto">
       <Typography
         variant="h3"
         color="primary.main"
@@ -20,7 +20,7 @@ const TitleSignupForm = () => {
         Let’s get you all set up so you can start writing and trading script on
         our platform.
       </Typography>
-    </>
+    </div>
   );
 };
 

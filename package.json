@@ -13,6 +13,7 @@
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/base": "^5.0.0-alpha.92",
+    "@mui/lab": "^5.0.0-alpha.96",
     "@mui/material": "^5.10.0",
     "aos": "^2.3.4",
     "next": "12.2.5",

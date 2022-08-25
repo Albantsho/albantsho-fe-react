@@ -14,16 +14,10 @@ import iconPassword from "./assets/icon-password.svg";
 import iconShow from "./assets/icon-show.svg";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
-import TitleSignupForm from "./TitleSignupForm/TitleSignupForm";
-import NavbarAuthenticationSignin from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthenticationSignin/NavbarAuthenticationSignin";
 
 const SignupForm = () => {
   return (
-    <div className="px-8 py-12 lg:px-24  mx-auto">
-      <NavbarAuthenticationSignin />
-
-      <div className="lg:py-28 pb-24">
-        <TitleSignupForm />
+    <div className="px-8 py-6 lg:py-12 lg:px-24  mx-auto">
         <div className="w-full mt-7 flex flex-col">
           <Typography
             variant="h6"
@@ -236,7 +230,7 @@ const SignupForm = () => {
             </Link>
           </Typography>
         </div>
-      </div>
+
     </div>
   );
 };

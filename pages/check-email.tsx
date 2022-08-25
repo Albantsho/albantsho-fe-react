@@ -4,6 +4,7 @@ import CheckEmail from "components/CheckEmail/CheckEmail";
 
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
 import { NextPageWithLayout } from "./_app";
+import NavbarAuthentication from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthentication";
 
 const CheckEmailPage: NextPageWithLayout = () => {
   return (
@@ -11,6 +12,11 @@ const CheckEmailPage: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Check Email</title>
       </Head>
+      <NavbarAuthentication
+        text="Already have an account?"
+        link="signin"
+        buttonText="SIGN IN"
+      />
       <CheckEmail />
     </>
   );

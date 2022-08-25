@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 
 const TitleSigninForm = () => {
   return (
-    <>
+    <div className="lg:mt-28 mt-16 px-8  lg:mb-12  lg:px-24  mx-auto">
       <Typography
         variant="h3"
         color="primary.main"
@@ -10,11 +10,11 @@ const TitleSigninForm = () => {
       >
         Welcome
       </Typography>
-      <Typography className="max-w-[430px] mb-12" color="grey.700">
+      <Typography className="max-w-[430px]" color="grey.700">
         It’s nice to have you back, Sign back in to write or find the perfect
         script for you.
       </Typography>
-    </>
+    </div>
   );
 };
 

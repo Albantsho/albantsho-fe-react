@@ -3,13 +3,12 @@ import Link from "next/link";
 import bell from "./assets/bell.png";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import NavbarAuthenticationSignin from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthenticationSignin/NavbarAuthenticationSignin";
 import Image from "next/image";
 
 const VerifyEmail = () => {
   return (
     <div className="px-8 py-12 lg:px-24  mx-auto">
-      <NavbarAuthenticationSignin />
+
       <div className="lg:py-32 grid place-content-center mx-auto">
         <div className="flex items-center lg:flex-col">
           <Typography
