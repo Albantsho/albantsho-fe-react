@@ -4,7 +4,7 @@ import React from "react";
 
 const IDraftTAC = () => {
   return (
-    <div className="lg:px-44  pt-8 lg:pt-14 px-4 pb-20">
+    <div className="lg:px-44  pt-8 lg:pt-14 px-5 sm:px-10 pb-20">
       <Typography variant="body2" color="grey.500" paragraph>
         By applying to this workshop (i.e. The idraft Workshop), you as an
         applicant writer agree and confirm that:
@@ -78,7 +78,7 @@ const IDraftTAC = () => {
       </Typography>
 
       <div className="flex justify-center mt-16 lg:mt-14 lg:justify-start" >
-        <Btn size="large" >I agree</Btn>
+        <Btn className="lg:py-6 lg:px-8 py-3 px-6" size="large" >I agree</Btn>
       </div>
     </div>
   );

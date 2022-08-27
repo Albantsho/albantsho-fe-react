@@ -10,10 +10,10 @@ import { BiChevronDown } from "react-icons/bi";
 
 const MainDetailsMarketScript = () => {
   return (
-    <div className="px-5 py-10 md:w-1/2 mx-auto">
+    <div className="px-5 md:px-10 py-10  md:w-1/2 mx-auto">
       <Accordion
         sx={{ "&.MuiAccordion-root": { border: "none" } }}
-        className="border-none mb-20"
+        className="border-none mb-20 rounded-sm overflow-hidden"
       >
         <AccordionSummary
           className="bg-primary-700"

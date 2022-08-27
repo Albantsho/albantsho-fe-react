@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import MentorInfo from "./MentorInfo/MentorInfo";
 
 import drSam from "./assets/dr-sam.jpg";
@@ -7,6 +7,9 @@ import funmi from "./assets/funmi.jpg";
 import lauren from "./assets/lauren.jpg";
 import yinka from "./assets/yinka.jpg";
 import Stars from "./Stars/Stars";
+import more from "./assets/more.png";
+import mentors from "./assets/mentors.png";
+import Image from "next/image";
 
 const mentorInfo = [
   {
@@ -25,51 +28,51 @@ const mentorInfo = [
   },
   {
     id: 3,
+    image: yinka,
+    name: "Lauren O'Connor",
+    description:
+      "Yinka Ogun is an award-winning screenwriter of the Netflix Original, Oloture, and creator of multiple award-winning TV shows.  He is the current president of the screenwriters’ guild of Nigeria.",
+  },
+  {
+    id: 4,
     image: funmi,
     name: "YINKA OGUN",
     description:
       "Yinka Ogun is an award-winning screenwriter of the Netflix Original, Oloture, and creator of multiple award-winning TV shows.  He is the current president of the screenwriters’ guild of Nigeria.",
   },
   {
-    id: 4,
+    id: 5,
     image: lauren,
     name: "FUNMI ODUSHOLA",
     description:
       "Funmi Odushola is a Market researcher, New producer developer, and route-to-market expert with a vast West African portfolio. In addition, she is a data collector that broadly impacts new market investments.",
   },
-  {
-    id: 5,
-    image: yinka,
-    name: "Lauren O'Connor",
-    description:
-      "Yinka Ogun is an award-winning screenwriter of the Netflix Original, Oloture, and creator of multiple award-winning TV shows.  He is the current president of the screenwriters’ guild of Nigeria.",
-  },
 ];
 
 const MentorInfoList = () => {
   return (
-    <Box className="py-4 px-4 xl:px-32 bg-primary-700 relative">
-      <Typography variant="h5" className="text-white text-center" gutterBottom>
-        SPEAKERS/MENTORS
-      </Typography>
-
-      <div className="absolute top-[10%] xl:left-7 hidden xl:block " >
-        <Stars  />
+    <div className="py-4 px-5 sm:px-10 xl:px-32 bg-primary-700 relative">
+      <div className="lg:my-28 my-12">
+        <Image src={mentors} alt="mentors" />
       </div>
 
-      <div  className="absolute top-[25%] xl:right-24 hidden xl:block " >
-        <Stars isSmall="isSmall"  />
+      <div className="absolute top-[20%] xl:left-7 hidden xl:block ">
+        <Stars />
       </div>
 
-      <div className="absolute bottom-[20%] xl:right-7 hidden xl:block " >
-        <Stars  />
+      <div className="absolute top-[30%] xl:right-24 hidden xl:block ">
+        <Stars isSmall="isSmall" />
       </div>
 
-      <div  className="absolute bottom-[30%] xl:left-24 hidden xl:block " >
-        <Stars isSmall="isSmall"  />
+      <div className="absolute bottom-[20%] xl:right-7 hidden xl:block ">
+        <Stars />
       </div>
 
-      <div className="flex flex-col p-8 md:px-28 xl:px-48 bg-white rounded-2xl gap-10">
+      <div className="absolute bottom-[30%] xl:left-24 hidden xl:block ">
+        <Stars isSmall="isSmall" />
+      </div>
+
+      <div className="flex flex-col p-8 md:py-12 xl:py-24 md:px-28 xl:px-48 bg-white rounded-2xl gap-8">
         {mentorInfo.map((mentor) => {
           return (
             <MentorInfo
@@ -81,11 +84,11 @@ const MentorInfoList = () => {
           );
         })}
 
-        <Typography variant="h4" color="primary.700">
-          AND MORE...
-        </Typography>
+        <div className="my-10 md:my-16">
+          <Image src={more} alt="more" />
+        </div>
       </div>
-    </Box>
+    </div>
   );
 };
 

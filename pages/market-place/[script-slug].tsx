@@ -14,7 +14,7 @@ const MarketPlace = () => {
       </Head>
       <Nav color="inherit" position="static" />
       <ScriptInfo />
-      <div className="flex flex-col md:flex-row mt-7 mb-4 px-5 py-6 md:px-16 gap-10 md:gap-4">
+      <div className="flex flex-col md:flex-row mt-7 mb-4 py-6 gap-10 mx-auto px-5 md:px-10">
         <MarketScriptChips />
         <MarketScriptAccordion />
       </div>

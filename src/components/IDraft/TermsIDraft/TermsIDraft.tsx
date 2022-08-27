@@ -25,7 +25,7 @@ const brands = [
 
 const TermsIDraft = () => {
   return (
-    <Box className=" mx-auto  justify-center   gap-8 pt-12 pb-16">
+    <div className=" mx-auto  justify-center   gap-8 pt-12 pb-16">
       <Typography variant="h6" className="font-semibold text-center">
         TERMS AND CONDITIONS APPLY
       </Typography>
@@ -40,7 +40,7 @@ const TermsIDraft = () => {
           SPONSORED BY
         </Typography>
 
-        <div className="max-w-lg mt-8 px-10 lg:px-32 lg:min-w-[800px]  flex flex-wrap gap-8 justify-center items-center pb-12 lg:pb-24">
+        <div className="max-w-lg mt-8 lg:mt-16 px-10 lg:px-32 lg:min-w-[800px]  flex flex-wrap gap-8 justify-center items-center pb-12 lg:pb-24">
           {brands.map((brand, index) => {
             return (
               <div key={index}>
@@ -50,7 +50,7 @@ const TermsIDraft = () => {
           })}
         </div>
       </div>
-    </Box>
+    </div>
   );
 };
 

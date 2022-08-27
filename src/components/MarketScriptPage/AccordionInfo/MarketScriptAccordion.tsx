@@ -4,11 +4,18 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import { BiChevronDown } from "react-icons/bi";
 import { Chip, ListItem } from "@mui/material";
+import lock from "./assets/lock.png";
+import Image from "next/image";
+import Btn from "@shared/Btn/Btn";
 
 export default function MarketScriptAccordion() {
   return (
-    <div className="md:w-1/2">
-      <Accordion elevation={0} sx={{ "&:before": { display: "none" } }}>
+    <div className=" flex-1">
+      <Accordion
+        className="space-y-2 md:space-y-4 rounded-sm overflow-hidden"
+        elevation={0}
+        sx={{ "&:before": { display: "none" } }}
+      >
         <AccordionSummary
           className="bg-[#F7F5F8]"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
@@ -33,7 +40,11 @@ export default function MarketScriptAccordion() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion elevation={0} sx={{ "&:before": { display: "none" } }}>
+      <Accordion
+        className="space-y-2 md:space-y-4 rounded-sm overflow-hidden"
+        elevation={0}
+        sx={{ "&:before": { display: "none" } }}
+      >
         <AccordionSummary
           className="bg-[#F7F5F8]"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
@@ -51,6 +62,31 @@ export default function MarketScriptAccordion() {
         <AccordionDetails
           sx={{ "&.MuiAccordionDetails-root": { paddingX: 0 } }}
         >
+          <div className="flex gap-5 p-12">
+            <div>
+              <Image src={lock} alt="lock"  />
+            </div>
+            <div className="flex flex-col w-2/3">
+              <Typography
+                color="primary.700"
+                variant="h4"
+                className="futura leading-normal"
+              >
+                oops!
+              </Typography>
+              <Typography variant="body1" mb={2} className="text-tinted-500">
+                You’re unable to view this content because you’re not
+                subscribed.
+              </Typography>
+              <Btn
+                size="large"
+                sx={{ padding: { xs: "6px 12px", md: "12px 24px" } }}
+                className="mr-auto"
+              >
+                View plans
+              </Btn>
+            </div>
+          </div>
           <Typography variant="body2" className="text-[#484848]">
             Lorem ipsum dolor sit amet, consectetur adipisci ngeelit. Malesu
             fermentum ipsum tincidunt seda arcu. Hac arcu ac amet mi. Enim id
@@ -58,7 +94,11 @@ export default function MarketScriptAccordion() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion elevation={0} sx={{ "&:before": { display: "none" } }}>
+      <Accordion
+        className="space-y-2 md:space-y-4 rounded-sm overflow-hidden"
+        elevation={0}
+        sx={{ "&:before": { display: "none" } }}
+      >
         <AccordionSummary
           className="bg-[#F7F5F8]"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
@@ -83,7 +123,11 @@ export default function MarketScriptAccordion() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion elevation={0} sx={{ "&:before": { display: "none" } }}>
+      <Accordion
+       className="space-y-2 md:space-y-4 rounded-sm overflow-hidden"
+        elevation={0}
+        sx={{ "&:before": { display: "none" } }}
+      >
         <AccordionSummary
           className="bg-[#F7F5F8]"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
@@ -108,7 +152,11 @@ export default function MarketScriptAccordion() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion elevation={0} sx={{ "&:before": { display: "none" } }}>
+      <Accordion
+       className="space-y-2 md:space-y-4 rounded-sm overflow-hidden"
+        elevation={0}
+        sx={{ "&:before": { display: "none" } }}
+      >
         <AccordionSummary
           className="bg-[#F7F5F8]"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
@@ -145,7 +193,11 @@ export default function MarketScriptAccordion() {
           </ListItem>
         </AccordionDetails>
       </Accordion>
-      <Accordion elevation={0} sx={{ "&:before": { display: "none" } }}>
+      <Accordion
+        className="space-y-2 md:space-y-4 rounded-sm overflow-hidden"
+        elevation={0}
+        sx={{ "&:before": { display: "none" } }}
+      >
         <AccordionSummary
           className="bg-[#F7F5F8]"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
@@ -170,7 +222,11 @@ export default function MarketScriptAccordion() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion elevation={0} sx={{ "&:before": { display: "none" } }}>
+      <Accordion
+        className="space-y-2 md:space-y-4 rounded-sm overflow-hidden"
+        elevation={0}
+        sx={{ "&:before": { display: "none" } }}
+      >
         <AccordionSummary
           className="bg-[#F7F5F8]"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}

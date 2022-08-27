@@ -5,20 +5,20 @@ import vector from "./assets/vector.png";
 const DescriptionIDraft = () => {
   return (
 
-      <Box className="pt-14 px-4 pb-14 flex flex-col items-center lg:flex-row lg:px-44 justify-between bg-[#e5e5e5]">
-        <div className="max-w-[190px] mb-10 lg:w-1/2 mx-auto">
+      <div className="pt-14 px-5 sm:px-10 pb-14 flex flex-col items-center lg:flex-row lg:px-44 justify-between bg-[#e5e5e5]">
+        <div className="xl:ml-4 mb-10 lg:w-1/2 mx-auto">
           <Image src={vector} alt="tv-show" layout="fixed" />
         </div>
-        <Box className="lg:w-1/2 w-full">
+        <div className="lg:w-1/2 w-full">
           <Typography
             variant="h5"
             color="grey.900"
-            className="font-semibold w-3/5 lg:w-full mb-4"
+            className="font-semibold w-3/5 sm:w-4/5 lg:w-full mb-4 leading-normal"
           >
             iDraft Screenwriting Workshop
           </Typography>
           <Typography
-            variant="subtitle2"
+            variant="subtitle1"
             color="grey.500"
           >
             Albantsho presents an intensive 8-week screenwriting workshop where
@@ -33,8 +33,8 @@ const DescriptionIDraft = () => {
             refinement of their unique stories which is then immediately
             acquired by our partnering producers.
           </Typography>
-        </Box>
-      </Box>
+        </div>
+      </div>
 
   );
 };

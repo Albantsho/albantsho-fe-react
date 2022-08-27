@@ -1,10 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const ElgibilityIDraft = () => {
   return (
-    <div className="px-4 py-24 bg-[#181025] lg:px-44 justify-between gap-7 pt-16 pb-20">
-      <Box className="md:w-3/4">
-        <Typography variant="h5" className="font-semibold text-white pb-8">
+    <div className="px-5 sm:px-10 py-24 bg-[#181025] lg:px-44 justify-between gap-7 pt-16 pb-20">
+      <div className="md:w-3/4">
+        <Typography variant="h5" className="font-semibold leading-normal text-white pb-8">
           ELIGIBILITY
         </Typography>
         <Typography variant="subtitle1" className=" text-white">
@@ -42,13 +42,13 @@ const ElgibilityIDraft = () => {
           </li>
         </ul>
 
-        <Box className="px-9 py-5 bg-error-500 rounded-lg">
+        <div className="px-9 py-5 bg-error-500 rounded-lg">
           <Typography variant="caption" className="text-white">
             Notice: Please note that Albantsho does not accept short-forms,
             documentaries and other forms of the script at this time.
           </Typography>
-        </Box>
-      </Box>
+        </div>
+      </div>
     </div>
   );
 };

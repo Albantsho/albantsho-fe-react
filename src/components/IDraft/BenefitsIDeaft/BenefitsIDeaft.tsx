@@ -24,7 +24,7 @@ const benefitsList = [
 
 const BenefitsIDeaft = () => {
   return (
-    <div className="py-16 lg:py-32 mb-10">
+    <div className="py-16 sm:px-6 px-2 lg:py-32 mb-10">
       <Typography
         variant="h4"
         className="font-semibold text-center mb-6 lg:mb-16"
@@ -33,9 +33,9 @@ const BenefitsIDeaft = () => {
         BENEFITS
       </Typography>
 
-      <div className="flex lg:items-center lg:justify-center" >
-        <Timeline  className="md:max-w-md lg:ml-80  py-4 ">
-          {benefitsList.map((item) => {
+      <div className="flex lg:items-center lg:justify-center">
+        <Timeline className="md:max-w-md lg:ml-80  py-4 ">
+          {benefitsList.map((item, index) => {
             return (
               <TimelineItem className="h-28 before:hidden" key={item.number}>
                 <TimelineSeparator>
@@ -45,15 +45,17 @@ const BenefitsIDeaft = () => {
                   >
                     {item.number}
                   </TimelineOppositeContent>
-                  <TimelineConnector
-                    sx={{
-                      backgroundColor: "primary.700",
-                      borderRadius: 1,
-                      transform: "translateY(8px)",
-                      marginBottom: 2,
-                    }}
-                    className="w-[2px]"
-                  />
+                  {index < benefitsList.length - 1 && (
+                    <TimelineConnector
+                      sx={{
+                        backgroundColor: "primary.700",
+                        borderRadius: 1,
+                        transform: "translateY(8px)",
+                        marginBottom: 2,
+                      }}
+                      className={` w-[2px]`}
+                    />
+                  )}
                 </TimelineSeparator>
                 <TimelineContent className="font-semibold" color="grey.900">
                   {item.description}

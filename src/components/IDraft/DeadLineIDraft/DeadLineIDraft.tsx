@@ -5,15 +5,15 @@ import flash from "./assets/flash.png";
 
 const DeadLineIDraft = () => {
   return (
-    <Box className="flex flex-col items-center py-16">
-      <Box className="bg-primary-700 py-12 px-12 text-white flex flex-col items-center rounded-full">
-        <span className="mb-3 text-2xl">DEADLINE</span>
-        <Typography variant="body1" className="font-semibold text-center">
-          15TH <br /> MARCH <br /> 2022
+    <div className="flex flex-col items-center py-16">
+      <div className="bg-primary-700 w-56 h-56 lg:w-80 lg:h-80 text-white flex flex-col justify-center items-center rounded-full">
+        <span className="mb-2 text-2xl">DEADLINE</span>
+        <Typography variant="h6" className="font-semibold px-24 md:px-0 text-center leading-normal">
+          15TH  MARCH <br /> 2022
         </Typography>
-      </Box>
+      </div>
 
-      <Box className="flex relative flex-col w-full gap-6 justify-center items-center mt-6 md:mt-36">
+      <div className="flex relative flex-col w-full gap-6 justify-center items-center mt-6 md:mt-36">
         <div className="absolute left-0 lg:left-16 top-0 bottom-0 -z-10">
           <Image src={flash} alt="flash" />
         </div>
@@ -22,17 +22,17 @@ const DeadLineIDraft = () => {
             <Image src={flash} alt="flash" />
           </div>
         </Box>
-        <Typography variant="h5" className="font-semibold">
+        <Typography variant="h5" className="font-semibold mt-8 md:mt-2">
           APPLICATION IS FREE
         </Typography>
         <Btn
           size="large"
-          sx={{ paddingY: { xs: 2, md: 3 }, paddingX: { xs: 3, md: 4 } }}
+          sx={{ paddingY: { xs: "12px", md: 3 }, paddingX: { xs: 3, md: 4 } }}
         >
           Apply now
         </Btn>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

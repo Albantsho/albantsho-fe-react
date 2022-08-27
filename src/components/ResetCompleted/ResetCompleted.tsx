@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
-import success from "./assets/success.png";
+import success from "@assets/images/success.png";
 
 const ResetCompleted = () => {
   return (
