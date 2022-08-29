@@ -1,5 +1,5 @@
 import { SvgIcon } from "@mui/material";
-import StarIcon from "@assets/Icons/star.svg";
+import StarIcon from "@assets/icons/star.svg";
 
 interface IProps {
   isSmall?: string;
