@@ -55,11 +55,11 @@ const ScriptCard = (props: IProps) => {
           defaultValue={script.rate}
           className="sm:hidden mt-4"
         />
-        <div className="flex justify-between mt-2 mb-1">
+        <div className="flex justify-between mt-1 sm:mt-4 mb-2 gap-2">
           <Typography
             variant="h4"
             color="primary.main"
-            className="futura font-normal leading-normal"
+            className="futura font-normal leading-tight"
           >
             {script.title}
           </Typography>

@@ -5,29 +5,25 @@ import commentImage from "./assets/comment-image.png";
 
 const HeadingIDraft = () => {
   return (
-    <div className="flex lg:px-44 justify-between gap-7 pt-16 px-5 sm:px-10 pb-20">
-      <div className="lg:w-1/2">
+    <div className="flex max-w-screen-lg mx-auto justify-between gap-5 w-full px-5 sm:px-10 py-16 lg:py-28 items-center">
+      <div className="max-w-[607px]">
         <Typography
           variant="h5"
           color="grey.900"
-          className=" w-4/6 lg:w-full leading-normal font-semibold"
+          className="max-w-xs md:max-w-md lg:w-full leading-normal font-semibold"
         >
           WE ARE A PLATFORM ENABLING
-        <span className="text-purple-700">{" "}AFRICAN STORIES</span> ONE SCRIPT AT
-          A TIME
+          <span className="text-purple-700"> AFRICAN STORIES</span> ONE SCRIPT
+          AT A TIME
         </Typography>
-        <div className="mt-12">
-          <Btn size="large">
+        <div className="md:mt-8 mt-6">
+          <Btn size="large" className="py-4 px-6 ">
             Apply now
           </Btn>
         </div>
       </div>
       <div className="hidden lg:block">
-        <Image
-          src={commentImage}
-          objectFit="cover"
-          alt="commentImage"
-        />
+        <Image src={commentImage} objectFit="cover" alt="commentImage" />
       </div>
     </div>
   );

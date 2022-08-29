@@ -5,19 +5,19 @@ import { BsArrowLeftShort } from "react-icons/bs";
 const SearchDashboard = () => {
   return (
     <div className="flex justify-start items-center mt-8">
-      <div className=" flex gap-5 flex-1 lg:w-1/2">
-        <span className="w-12 h-12  flex justify-center items-center  rounded-full bg-white">
-          <BsArrowLeftShort className="text-3xl text-primary-700 " />
+      <div className="flex gap-4 flex-1 w-full">
+        <span className="w-10 h-10  flex justify-center items-center  rounded-full bg-white">
+          <BsArrowLeftShort className="text-3xl text-primary-700" />
         </span>
-        <div className="flex items-center bg-white py-2 px-5 rounded-md gap-2 flex-1">
-          <BiSearch className="text-[#484848] text-3xl" />
+        <div className="flex items-center bg-white py-2 px-5 rounded-md gap-2 w-full md:w-auto">
+          <BiSearch className="text-gray-400   text-xl" />
           <input
             placeholder="search"
-            className=" outline-none border-none flex-1"
+            className=" outline-none border-none flex-1 placeholder:text-gray-400 text-primary-700 w-full"
           />
         </div>
       </div>
-      <div className="hidden lg:w-1/2 lg:flex justify-end">
+      <div className="hidden  md:block md:justify-center xl:flex-end">
         <Btn className=" ml-auto  py-3 px-6" size="large">
           List New Script
         </Btn>

@@ -1,8 +1,14 @@
+import { Box } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
 
 const MarketPlaceProducts = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-5 sm:px-10 py-8 lg:px-32 lg:py-16">
+    <Box
+      className="grid gap-10 px-5 sm:px-10 py-7 md:py-11"
+      gridTemplateColumns={{
+        sm: "repeat(auto-fill, minmax(300px, auto))",
+      }}
+    >
       {Array.from(new Array(6)).map((_, i) => (
         <ScriptCard
           data-aos="fade-up"
@@ -18,9 +24,8 @@ const MarketPlaceProducts = () => {
           }}
         />
       ))}
-    </div>
+    </Box>
   );
 };
 
 export default MarketPlaceProducts;
-

@@ -1,21 +1,35 @@
-import { Box, Tab, Tabs } from "@mui/material";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { useState } from "react";
 
 const TabsMarketPlace = () => {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
   return (
-    <Box className="pt-12  w-full ">
+    <div className="md:border-t border-b md:pl-4 border-gray-400 md:mt-8 w-full ">
       <Tabs
-        sx={{ borderBottom: 1, borderTop: 1, borderColor: "#D9D9D9" }}
+        value={value}
+        onChange={handleChange}
         variant="scrollable"
+        scrollButtons="auto"
         allowScrollButtonsMobile
-        indicatorColor="secondary"
-        className="lg:px-32"
+        sx={{
+          ".MuiTabs-scrollButtons.Mui-disabled": {
+            opacity: 0.3,
+          },
+        }}
+        className="-mb-[1px] md:ml-7"
       >
-        <Tab className="futura text-neutral-300 text-2xl" label="Explore" />
-        <Tab className="futura text-neutral-300 text-2xl" label="Top Rated" />
-        <Tab className="futura text-neutral-300 text-2xl" label="Featured" />
-        <Tab className="futura text-neutral-300 text-2xl" label="Trending" />
+        <Tab className="md:text-xl md:mr-2" label="Explore" />
+        <Tab className="md:text-xl md:mr-2" label="Top rated" />
+        <Tab className="md:text-xl md:mr-2" label="Featured" />
+        <Tab className="md:text-xl md:mr-2" label="Trending" />
       </Tabs>
-    </Box>
+    </div>
   );
 };
 

@@ -2,6 +2,7 @@ import success from "@assets/images/success.png";
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
+import Link from "next/link";
 
 const SubscriptionSuccess = () => {
   return (
@@ -24,13 +25,19 @@ const SubscriptionSuccess = () => {
       >
         Transaction ID: 1234567890AVGED
       </Typography>
-      <Typography variant="body2" sx={{marginBottom:{xs:2,md:2.5}}} className="text-[#484848]">
+      <Typography
+        variant="body2"
+        sx={{ marginBottom: { xs: 2, md: 2.5 } }}
+        className="text-[#484848]"
+      >
         Subscription activated! you now have unlimited access to all scripts on
         the platform!
       </Typography>
-      <Btn size="large" className="py-3 px-6">
-        Back to marketplace
-      </Btn>
+      <Link href="/market-place" passHref>
+        <Btn size="large" className="py-3 px-6">
+          Back to marketplace
+        </Btn>
+      </Link>
     </div>
   );
 };

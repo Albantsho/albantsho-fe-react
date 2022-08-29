@@ -1,6 +1,4 @@
-import { Typography } from "@mui/material";
 import MentorInfo from "./MentorInfo/MentorInfo";
-
 import drSam from "./assets/dr-sam.jpg";
 import femi from "./assets/femi.jpg";
 import funmi from "./assets/funmi.jpg";
@@ -51,24 +49,25 @@ const mentorInfo = [
 
 const MentorInfoList = () => {
   return (
-    <div className="py-4 px-5 sm:px-10 xl:px-32 bg-primary-700 relative">
-      <div className="lg:my-28 my-12">
+    <div className="py-4 px-5 sm:px-10 xl:px-32 bg-primary-700">
+    <div className="max-w-screen-xl mx-auto relative">
+    <div className="lg:my-24 my-12">
         <Image src={mentors} alt="mentors" />
       </div>
 
-      <div className="absolute top-[20%] xl:left-7 hidden xl:block ">
+      <div className="absolute top-[20%] xl:-left-[100px] hidden xl:block ">
         <Stars />
       </div>
 
-      <div className="absolute top-[30%] xl:right-24 hidden xl:block ">
+      <div className="absolute top-[30%] xl:-right-8 hidden xl:block ">
         <Stars isSmall="isSmall" />
       </div>
 
-      <div className="absolute bottom-[20%] xl:right-7 hidden xl:block ">
+      <div className="absolute bottom-[20%] xl:-right-[100px] hidden xl:block ">
         <Stars />
       </div>
 
-      <div className="absolute bottom-[30%] xl:left-24 hidden xl:block ">
+      <div className="absolute bottom-[30%] xl:-left-8 hidden xl:block ">
         <Stars isSmall="isSmall" />
       </div>
 
@@ -84,10 +83,11 @@ const MentorInfoList = () => {
           );
         })}
 
-        <div className="my-10 md:my-16">
+        <div className="my-10 md:my-14">
           <Image src={more} alt="more" />
         </div>
       </div>
+    </div>
     </div>
   );
 };

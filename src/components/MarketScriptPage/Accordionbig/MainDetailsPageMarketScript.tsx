@@ -2,7 +2,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Rating,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -10,16 +9,17 @@ import { BiChevronDown } from "react-icons/bi";
 
 const MainDetailsMarketScript = () => {
   return (
-    <div className="px-5 md:px-10 py-10  md:w-1/2 mx-auto">
+    <div className="px-5 sm:px-10 py-10  md:w-1/2 mx-auto max-w-screen-md">
       <Accordion
         sx={{ "&.MuiAccordion-root": { border: "none" } }}
-        className="border-none mb-20 rounded-sm overflow-hidden"
+        className="border-none mb-20  overflow-hidden"
       >
         <AccordionSummary
           className="bg-primary-700"
           expandIcon={<BiChevronDown className="w-8 h-8 text-[#F7F5F8]" />}
           aria-controls="logline-content"
           id="logline-header"
+          sx={{ "&.MuiAccordionSummary-root": { borderRadius: "4px" } }}
         >
           <Typography
             sx={{
@@ -38,11 +38,15 @@ const MainDetailsMarketScript = () => {
         <AccordionDetails
           sx={{ "&.MuiAccordionDetails-root": { width: "55%" } }}
         >
-          <Typography variant="overline" color="primary.700">
+          <Typography
+            sx={{ marginTop: { xs: 3, sm: 4, md: 5, xl: 7 } }}
+            variant="body2"
+            color="primary.700"
+          >
             THE LONGMAN OF LONG BEACH Written by Micheal
           </Typography>
           <br />
-          <Typography variant="overline" className="text-[#484848]">
+          <Typography variant="body1" className="text-gray-600 leading-relaxed">
             KRISTEN BELL speaks directly into the CAMERA. KRISTEN BELL You can’t
             begin to describe it. It’s just so... it’s... CUT TO: ADAM SCOTT
             speaks directly into the CAMERA. ADAM SCOTT I mean... CUT TO: KEVIN
@@ -60,14 +64,6 @@ const MainDetailsMarketScript = () => {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <div className="py-8 px-28 bg-primary-700 rounded-md flex flex-col justify-center items-center gap-5">
-        <Typography color="white" variant="subtitle2" className="text-center">
-          How would you rate this script?
-        </Typography>
-        <div className="bg-primary-500/20 rounded-md p-2">
-          <Rating name="text-feedback" value={4}  precision={0.5} />
-        </div>
-      </div>
     </div>
   );
 };

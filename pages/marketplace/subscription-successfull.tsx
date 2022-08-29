@@ -3,6 +3,8 @@ import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import SubscriptionSuccess from "components/SubscriptionSuccess/SubscriptionSuccess";
 import Head from "next/head";
 
+
+
 const subscriptionSuccessfull = () => {
   return (
     <>

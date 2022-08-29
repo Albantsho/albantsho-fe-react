@@ -1,4 +1,7 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
+import HeadReviews from "components/Reviews/HeadReviews/HeadReviews";
+import ListScriptsInReviews from "components/Reviews/ListScriptsInReviews/ListScriptsInReviews";
+import SelectInput from "components/Reviews/SelectInput/SelectInput";
 import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
 
@@ -8,11 +11,9 @@ const Reviews: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Reviews </title>
       </Head>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam eos at
-        cum a quibusdam sit doloremque odit expedita sint? Dolor repellat cum
-        deserunt ducimus. Tenetur doloremque sunt neque reiciendis non?
-      </p>
+      <HeadReviews />
+      <SelectInput />
+      <ListScriptsInReviews />
     </>
   );
 };

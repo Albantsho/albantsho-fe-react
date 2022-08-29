@@ -6,7 +6,7 @@ interface IProps {
 
 const AuthenticationLayout = ({ children }: IProps) => {
   return (
-    <main className="flex flex-col lg:flex-row min-h-screen">
+    <main className="flex flex-col lg:flex-row min-h-screen max-w-screen-2xl mx-auto">
       <ImageAuth />
       <div className="flex-[2]">{children}</div>
     </main>
