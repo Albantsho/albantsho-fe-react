@@ -11,20 +11,25 @@ import projects from "../assets/projects.png";
 import reviews from "../assets/reviews.png";
 import listnings from "../assets/listnings.png";
 import Image from "next/image";
-
 import { FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const drawerWidth = 344;
+const listRoutes = [
+  { route: "/projects", title: "Projects", icon: projects },
+  { route: "/listings", title: "Listings", icon: listnings },
+  { route: "/reviews", title: "Reviews", icon: reviews },
+];
+
+const drawerWidth = 340;
 
 const ListDashboardBigSize = () => {
   const { route } = useRouter();
   console.log(route);
   return (
-    <div className="w-[344px] min-h-screen hidden lg:block">
+    <div className="min-h-screen hidden  gap-2  lg:block">
       <Drawer
         sx={{
           width: drawerWidth,
@@ -34,11 +39,9 @@ const ListDashboardBigSize = () => {
             backgroundColor: "#573195",
             padding: "38px 20px",
             color: "#fff",
-          
           },
           position: "relative",
           backgroundColor: "#573195",
-         
         }}
         variant="permanent"
         anchor="left"
@@ -46,11 +49,7 @@ const ListDashboardBigSize = () => {
         <Logo color="primary" className="text-white ml-3 mb-5" />
 
         <List className="space-y-4">
-          {[
-            { route: "/projects", title: "Projects", icon: projects },
-            { route: "/listings", title: "Listings", icon: listnings },
-            { route: "/reviews", title: "Reviews", icon: reviews },
-          ].map((item) => (
+          {listRoutes.map((item) => (
             <Link
               key={item.title}
               className="text-white"
@@ -69,6 +68,7 @@ const ListDashboardBigSize = () => {
                 } rounded-sm`}
               >
                 <ListItemButton
+                  disableRipple={true}
                   sx={{
                     "&:hover": {
                       backgroundColor: "#6842A5",

@@ -23,24 +23,20 @@ const brands = [
   nineBrand,
 ];
 
-const TermsIDraft = () => {
+const Sponsers = () => {
   return (
-    <div className=" mx-auto  justify-center   gap-8 pt-12 pb-16">
-      <Typography variant="h6" className="font-semibold text-center">
-        TERMS AND CONDITIONS APPLY
-      </Typography>
-
-      <div className="mx-auto  rounded-2xl bg-[#F9F5FF]">
+    <div className=" mx-auto  justify-center px-5 sm:px-10   sm:pt-12 pb-16">
+      <div className="mx-auto  rounded-2xl bg-[#F9F5FF] max-w-[950px]">
         <Typography
           variant="h6"
           color="grey.900"
           mt={20}
-          className="font-semibold text-center pt-10 lg:pt-16"
+          className="font-semibold text-center pt-11  lg:pt-16"
         >
           SPONSORED BY
         </Typography>
 
-        <div className="max-w-lg mt-8 lg:mt-16 px-10 lg:px-32 lg:min-w-[800px]  flex flex-wrap gap-8 justify-center items-center pb-12 lg:pb-24">
+        <div className="mt-8 lg:mt-16 px-10 md:px-32 lg:px-44 w-full  flex flex-wrap gap-8 justify-center items-center pb-12 lg:pb-24">
           {brands.map((brand, index) => {
             return (
               <div key={index}>
@@ -54,4 +50,4 @@ const TermsIDraft = () => {
   );
 };
 
-export default TermsIDraft;
+export default Sponsers;

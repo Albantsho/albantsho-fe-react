@@ -2,9 +2,12 @@ import { Typography } from "@mui/material";
 
 const ElgibilityIDraft = () => {
   return (
-    <div className="px-5 sm:px-10 py-24 bg-[#181025] lg:px-44 justify-between gap-7 pt-16 pb-20">
-      <div className="md:w-3/4">
-        <Typography variant="h5" className="font-semibold leading-normal text-white pb-8">
+    <div className="px-5 sm:px-10 py-24 bg-[#181025]  pt-16 pb-20">
+      <div className="md:max-w-screen-lg mx-auto">
+        <Typography
+          variant="h5"
+          className="font-semibold leading-normal text-white pb-8"
+        >
           ELIGIBILITY
         </Typography>
         <Typography variant="subtitle1" className=" text-white">
@@ -14,7 +17,7 @@ const ElgibilityIDraft = () => {
           writer:
         </Typography>
 
-        <ul className="flex flex-col gap-6 px-11 pt-10 pb-20">
+        <ul className="flex flex-col gap-6 sm:px-8 pl-6  pt-10 pb-20">
           <li className="list-disc text-secondary-500">
             <Typography variant="subtitle1" className="text-white">
               Is based in Africa;
