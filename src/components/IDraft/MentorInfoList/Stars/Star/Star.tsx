@@ -5,14 +5,17 @@ interface IProps {
   isSmall?: string;
 }
 
-const Stars = ({ isSmall }: IProps) => {
+const Star = ({ isSmall }: IProps) => {
   return (
     <SvgIcon
       fontSize="large"
       sx={[
         isSmall
-          ? { width: 65, height: 65 }
-          : { width: { xs: 88, md: 200 }, height: { xs: 88, md: 200 } },
+          ? {
+              width: { xs: 70, sm: 85, md: 65 },
+              height: { xs: 70, sm: 85, md: 65 },
+            }
+          : { width: { md: 100, lg: 200 }, height: { md: 100, lg: 200 } },
       ]}
       className="text-transparent"
       component={StarIcon}
@@ -21,4 +24,4 @@ const Stars = ({ isSmall }: IProps) => {
   );
 };
 
-export default Stars;
+export default Star;

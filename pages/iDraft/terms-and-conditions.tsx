@@ -4,7 +4,7 @@ import IDraftTAC from "components/IDraftTAC/IDraftTAC";
 import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
 
-const iDraftTermsAndConditions: NextPageWithLayout = () => {
+const IDraftTermsAndConditions: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -16,8 +16,8 @@ const iDraftTermsAndConditions: NextPageWithLayout = () => {
   );
 };
 
-iDraftTermsAndConditions.getLayout = (page) => (
+IDraftTermsAndConditions.getLayout = (page) => (
   <IDraftLayout>{page}</IDraftLayout>
 );
 
-export default iDraftTermsAndConditions;
+export default IDraftTermsAndConditions;

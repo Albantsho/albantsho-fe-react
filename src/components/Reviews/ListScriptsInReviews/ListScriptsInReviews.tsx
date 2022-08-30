@@ -1,5 +1,6 @@
 import { Button, Divider, Typography } from "@mui/material";
 import Image from "next/image";
+import React from "react";
 import projectArchive from "./assets/project-archive.png";
 
 const listScripts = [
@@ -9,7 +10,7 @@ const listScripts = [
     title: "The Long man of Long Beach",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    status: "reviewed",
+    status: "In Review",
   },
   {
     id: 2,
@@ -17,7 +18,7 @@ const listScripts = [
     title: "The Long man of Long Beach",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    status: "noReviewed",
+    status: "Reviewed",
   },
   {
     id: 3,
@@ -25,7 +26,7 @@ const listScripts = [
     title: "The Long man of Long Beach",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    status: "reviewed",
+    status: "Reviewed",
   },
   {
     id: 4,
@@ -34,7 +35,7 @@ const listScripts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
 
-    status: "noReviewed",
+    status: "Reviewed",
   },
   {
     id: 5,
@@ -43,36 +44,45 @@ const listScripts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
 
-    status: "reviewed",
+    status: "Reviewed",
   },
 ];
 
 const ListScriptsInReviews = () => {
   return (
-    <div className="mt-4 bg-white rounded-md md:px-12 shadow-sm px-3 py-5">
-      <div className="mb-5 flex">
+    <div className="mt-4 bg-white rounded-md md:px-3 lg:px-6 xl:px-12 shadow-sm  py-5">
+      <div className="mb-5 flex px-3 md:min-w-[290px]">
         <Typography
           variant="body1"
-          className="futura w-1/2 text-primary-700 font-medium "
+          className="futura flex-1 text-primary-700 font-medium "
         >
           Script
         </Typography>
         <Typography
           variant="body1"
-          className="futura w-1/2 ml-auto sm:mr-auto text-primary-700 font-medium "
+          className="futura sm:mr-auto md:flex-1 text-primary-700 font-medium "
         >
           Status
         </Typography>
       </div>
 
       <Divider sx={{ marginBottom: 4 }} />
-      <div className="flex flex-col  gap-5 md:gap-10">
+      <div className="flex flex-col ">
         {listScripts.map((script) => {
           return (
-            <div key={script.id}>
-              <div className="flex mb-7 flex-col sm:flex-row md:items-center ">
-                <div className="flex  sm:flex-1 gap-3 mb-3 md:gap-5 mr-2 flex-wrap sm:flex-nowrap">
-                  <div className=" flex-shrink-0 my-auto">
+            <div
+              key={script.id}
+              className={` ${
+                script.status === "Reviewed" && "bg-tinted-50/60 md:bg-white"
+              } md:pb-6 pt-4 pb-5`}
+            >
+              <div
+                className={`${
+                  script.status === "Reviewed" && "pb-20"
+                } flex px-3  justify-between relative  md:pb-6 lg:pb-10`}
+              >
+                <div className="flex  flex-1 md:gap-5 mr-2 flex-wrap sm:flex-nowrap gap-2 lg:min-w-[280px]  items-center">
+                  <div className=" flex-shrink-0">
                     <Image
                       className="rounded-md w-full h-full"
                       loading="lazy"
@@ -93,33 +103,42 @@ const ListScriptsInReviews = () => {
                   </div>
                 </div>
 
-                <div className="space-y-2 sm:space-y-0 flex flex-col sm:flex-row items-center sm:flex-1 gap-2">
+                <div className="flex gap-4 md:flex-1 items-center">
                   <div
                     className={`${
-                      script.status === "reviewed"
+                      script.status === "Reviewed"
                         ? "text-success-500 bg-success-300/20"
                         : "text-warning-500 bg-warning-300/20"
-                    } my-auto py-3 px-4   rounded-sm text-center w-full sm:w-auto`}
+                    } my-auto py-3 px-4 text-sm  rounded-sm text-center w-full sm:w-auto mr-auto max-w-[100px]`}
                   >
                     <span>{script.status}</span>
                   </div>
-                  {script.status === "reviewed" && (
-                    <div className="my-auto md:ml-auto w-full md:w-auto sm:ml-auto">
-                      <Button
-                        variant="text"
-                        sx={{
-                          paddingY: 1.5,
-                          paddingX: 2,
-                          border: "1px solid #7953B5",
-                          borderRadius: 1.5,
-                          width: "100%",
-                        }}
-                      >
-                        See review
-                      </Button>
-                    </div>
+                  {script.status === "Reviewed" && (
+                    <Button
+                      variant="text"
+                      sx={{
+                        paddingY: 1.5,
+                        paddingX: 2,
+                        border: "1px solid #7953B5",
+                        borderRadius: 1.5,
+                        display: { xs: "none", md: "block" },
+                      }}
+                    >
+                      See review
+                    </Button>
                   )}
                 </div>
+                {script.status === "Reviewed" && (
+                  <Button
+                    variant="text"
+                    sx={{
+                      border: "1px solid #7953B5",
+                    }}
+                    className="block md:hidden rounded-lg absolute bottom-4 bg-white left-3"
+                  >
+                    See review
+                  </Button>
+                )}
               </div>
               <Divider className="hidden md:flex" />
             </div>

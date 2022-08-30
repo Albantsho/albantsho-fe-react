@@ -77,7 +77,7 @@ const IDraftTAC = () => {
         continue to apply.
       </Typography>
 
-      <div className="flex justify-center mt-16 lg:mt-14 lg:justify-start" >
+      <div className="flex justify-center mt-16 lg:mt-14 sm:justify-start" >
         <Btn className="lg:py-6 lg:px-8 py-3 px-6" size="large" >I agree</Btn>
       </div>
     </div>

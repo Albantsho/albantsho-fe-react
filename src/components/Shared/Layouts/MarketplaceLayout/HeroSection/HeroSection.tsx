@@ -20,7 +20,7 @@ const HeroSection = ({ description }: IProps) => {
       <Typography
         variant="h4"
         color="#fff"
-        className="futura font-medium max-w-[349px] mx-auto mt-8 md:mt-12 sm:max-w-lg text-center mb-4 leading-10"
+        className="futura font-medium max-w-[349px] mx-auto mt-10 md:mt-12 sm:max-w-lg text-center mb-6 leading-10"
         gutterBottom
       >
         {description}

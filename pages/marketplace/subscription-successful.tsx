@@ -5,7 +5,7 @@ import Head from "next/head";
 
 
 
-const subscriptionSuccessfull = () => {
+const subscriptionSuccessful = () => {
   return (
     <>
       <Head>
@@ -18,4 +18,4 @@ const subscriptionSuccessfull = () => {
   );
 };
 
-export default subscriptionSuccessfull;
+export default subscriptionSuccessful;

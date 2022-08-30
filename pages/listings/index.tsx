@@ -1,22 +1,21 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
+import SearchDashboard from "@shared/Layouts/DashboardLayout/SearchDashboard/SearchDashboard";
+import RoutingButton from "components/Listings/RoutingButton/RoutingButton";
 import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
 
-const listings: NextPageWithLayout = () => {
+const Listings: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Projects </title>
+        <title>Albantsho || Listings </title>
       </Head>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam eos at
-        cum a quibusdam sit doloremque odit expedita sint? Dolor repellat cum
-        deserunt ducimus. Tenetur doloremque sunt neque reiciendis non?
-      </p>
+      <RoutingButton />
+      <SearchDashboard />
     </>
   );
 };
 
-listings.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+Listings.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
-export default listings;
+export default Listings;

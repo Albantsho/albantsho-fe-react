@@ -12,7 +12,7 @@ const MainDetailsMarketScript = () => {
     <div className="px-5 sm:px-10 py-10  md:max-w-3xl mx-auto max-w-screen-md">
       <Accordion
         sx={{ "&.MuiAccordion-root": { border: "none" } }}
-        className="border-none mb-20  overflow-hidden"
+        className="border-none mb-20  overflow-hidden shadow-none"
       >
         <AccordionSummary
           className="bg-primary-700"
@@ -36,7 +36,8 @@ const MainDetailsMarketScript = () => {
           </Typography>
         </AccordionSummary>
         <AccordionDetails
-          sx={{ "&.MuiAccordionDetails-root": { width: "55%" } }}
+        className="px-5 sm:px-10 bg-tinted-50/60"
+
         >
           <Typography
             sx={{ marginTop: { xs: 3, sm: 4, md: 5, xl: 7 } }}

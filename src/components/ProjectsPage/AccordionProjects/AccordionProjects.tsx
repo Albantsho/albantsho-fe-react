@@ -84,13 +84,13 @@ const AccordionProjects = () => {
                   marginBottom: "-10px",
                 },
               }}
-              className="rounded-lg px-3 lg:px-6 md:px-2 pt-4 pb-6 py-7 "
+              className="rounded-lg px-3  lg:px-6  pt-4 pb-6 py-7 "
               expandIcon={
                 <BiChevronDown className="text-3xl text-primary-700 " />
               }
             >
               <div className="flex flex-col sm:flex-row gap-2">
-                <div className="py-1 flex justify-center items-center w-[72px] h-[72px] flex-grow flex-shrink-0 bg-primary-50 rounded-sm mr-3 lg:mr-5 xl:mr-12">
+                <div className="py-1 flex justify-center items-center w-[72px] h-[72px] flex-grow flex-shrink-0 bg-tinted-50/60 rounded-sm mr-3 lg:mr-5 xl:mr-12">
                   <Image
                     layout="fixed"
                     loading="lazy"
@@ -110,7 +110,7 @@ const AccordionProjects = () => {
                   </Typography>
                 </div>
               </div>
-              <span className="hidden py-2 px-4 rounded-md mx-auto bg-slate-100 text-neutral-800 lg:flex my-auto">
+              <span className="hidden py-2 px-4 rounded-md mx-auto bg-tinted-50/60 text-neutral-800 lg:flex my-auto">
                 {accordion.type}
               </span>
               <div className="ml-auto my-auto xl:mr-9 lg:mr-7   mr-3">
@@ -126,7 +126,7 @@ const AccordionProjects = () => {
                   return (
                     <div
                       key={detail.title}
-                      className="bg-primary-dark w-28 h-32 rounded-sm p-3 md:p-5 flex flex-col gap-2 md:gap-3 justify-center items-center"
+                      className="bg-primary-dark w-28 h-32 rounded-md lg:rounded-lg p-3 md:p-5 flex flex-col gap-2 md:gap-3 justify-center items-center "
                     >
                       <div className="px-5 py-3 bg-purple-500/10 rounded-sm border border-purple-500/10">
                         <Image

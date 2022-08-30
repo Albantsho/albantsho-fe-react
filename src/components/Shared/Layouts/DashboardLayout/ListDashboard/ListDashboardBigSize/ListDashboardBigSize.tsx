@@ -39,10 +39,12 @@ const ListDashboardBigSize = () => {
             backgroundColor: "#573195",
             padding: "38px 20px",
             color: "#fff",
-            position: "static",
+            position: "sticky",
+            top: 0,
             display: { xs: "none", lg: "block" },
           },
-          position: "static",
+          position: "sticky",
+          top: 0,
           backgroundColor: "#573195",
           display: { xs: "none", lg: "block" },
         }}
@@ -88,7 +90,7 @@ const ListDashboardBigSize = () => {
           ))}
         </List>
       </Drawer>
-      <div className="flex fixed right-auto left-auto justify-start bottom-14  ml-12 gap-6 text-white">
+      <div className="fixed hidden lg:flex right-auto left-auto justify-start bottom-14  ml-12 gap-6 text-white">
         <span className="w-9 h-9 flex justify-center items-center border border-white rounded-full">
           <FaTwitter />
         </span>

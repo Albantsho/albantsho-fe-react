@@ -7,8 +7,9 @@ const ImageAuth = () => {
       sx={{
         backgroundImage: `url('${Bg.src}') , linear-gradient(133.77deg, #8F65D1 5.34%, #573195 70.87%);`,
         minHeight: 500,
+        maxWidth: { lg: 620 },
       }}
-      className="bg-cover flex-1 xl:max-w-[620px] xl:ml-auto"
+      className="bg-cover flex-1"
     />
   );
 };

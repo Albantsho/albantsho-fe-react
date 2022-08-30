@@ -9,7 +9,7 @@ import ModalProject from "components/ProjectsPage/ModalProject/ModalProject";
 import ListScriptsPage from "components/ArchivesPage/ListScriptsPage/ListScriptsPage";
 import ModalArchive from "components/ArchivesPage/ModalArchive/ModalArchive";
 import { useState } from "react";
-import { Button } from "@mui/material";
+import {  Fab } from "@mui/material";
 
 const Projects: NextPageWithLayout = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -28,32 +28,26 @@ const Projects: NextPageWithLayout = () => {
         {query.type === "scripts" && (
           <>
             <AccordionProjects />
-            <ModalProject open={open} setOpen={setOpen} />
-            <Button
-              onClick={handleOpen}
-              className="bg-primary-700 hover:bg-primary-700 block md:hidden fixed right-10 bottom-6 text-white text-3xl rounded-2xl w-14 h-14"
-            >
-              +
-            </Button>
           </>
         )}
 
         {query.type === "archives" && (
           <>
             <ListScriptsPage setOpenArchive={setOpenArchive} />
-            <ModalProject open={open} setOpen={setOpen} />
             <ModalArchive
               openArchive={openArchive}
               setOpenArchive={setOpenArchive}
             />
-            <Button
-              onClick={handleOpen}
-              className="bg-primary-700 hover:bg-primary-700 block md:hidden fixed right-10 bottom-6 text-white text-3xl rounded-2xl w-14 h-14"
-            >
-              +
-            </Button>
           </>
         )}
+        <ModalProject open={open} setOpen={setOpen} />
+        <Fab
+        color="primary"
+          onClick={handleOpen}
+          className=" block md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
+        >
+          +
+        </Fab>
       </main>
     </>
   );

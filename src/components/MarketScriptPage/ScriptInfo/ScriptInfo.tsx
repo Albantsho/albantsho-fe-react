@@ -1,11 +1,9 @@
 import { Chip, Icon, Modal, Rating, Typography } from "@mui/material";
 import ReviewedIcon from "./assets/reviewed.svg";
-
 import Image from "next/image";
-import cancell from "./assets/cancell.png";
+import cancel from "./assets/cancel.png";
 import success from "@assets/images/success.png";
 import beauty from "./assets/beauty.jpg";
-
 import { useState } from "react";
 import PlaceBid from "./PlaceBid/PlaceBid";
 
@@ -24,14 +22,18 @@ const ScriptInfo = () => {
       </div>
       <div className="flex-shrink w-full">
         <div className="flex mb-3 md:mb-5 items-center gap-6 sm:gap-10 md:gap-14">
-          <Chip label="Feature film" className="bg-tinted-50/30 text-neutral-800" sx={{ borderRadius: 1 }} />
+          <Chip
+            label="Feature film"
+            className="bg-tinted-50/60 text-neutral-800"
+            sx={{ borderRadius: 1 }}
+          />
           <Rating readOnly defaultValue={4} />
         </div>
         <div className="flex gap-8 items-center">
           <Typography
             variant="h5"
             color="primary.700"
-            className="font-medium leading-normal futora"
+            className="font-medium leading-normal futura"
           >
             The Long Man Of Long Beach
           </Typography>
@@ -50,7 +52,7 @@ const ScriptInfo = () => {
               onClick={handleClose}
               className="absolute top-5 right-5 cursor-pointer"
             >
-              <Image src={cancell} alt="cancell" />
+              <Image src={cancel} alt="cancel" />
             </div>
             <div>
               <Image src={success} alt="success" />

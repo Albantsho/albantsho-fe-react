@@ -4,10 +4,10 @@ import femi from "./assets/femi.jpg";
 import funmi from "./assets/funmi.jpg";
 import lauren from "./assets/lauren.jpg";
 import yinka from "./assets/yinka.jpg";
-import Stars from "./Stars/Stars";
 import more from "./assets/more.png";
 import mentors from "./assets/mentors.png";
 import Image from "next/image";
+import ListStars from "./Stars/ListStar/ListStars";
 
 const mentorInfo = [
   {
@@ -54,23 +54,7 @@ const MentorInfoList = () => {
         <div className="lg:my-24 my-12">
           <Image src={mentors} alt="mentors" />
         </div>
-
-        <div className="absolute top-[11%] xl:top-[20%] -left-[100px]  hidden lg:block ">
-          <Stars />
-        </div>
-
-        <div className="absolute top-[23%] xl:top-[30%] -right-8 hidden lg:block ">
-          <Stars isSmall="isSmall" />
-        </div>
-
-        <div className="absolute bottom-[32%]  xl:bottom-[20%] -right-[100px] hidden lg:block ">
-          <Stars />
-        </div>
-
-        <div className="absolute bottom-[42%] xl:bottom-[30%] -left-8 hidden lg:block ">
-          <Stars isSmall="isSmall" />
-        </div>
-
+        <ListStars />
         <div className="flex flex-col p-8 md:py-12 xl:py-24 md:px-28 xl:px-48 bg-white rounded-2xl gap-8">
           {mentorInfo.map((mentor) => {
             return (

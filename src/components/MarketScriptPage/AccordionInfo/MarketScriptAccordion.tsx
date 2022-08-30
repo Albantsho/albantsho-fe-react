@@ -18,7 +18,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50/30"
+          className="bg-tinted-50/60"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="logline-content"
           id="logline-header"
@@ -48,7 +48,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50/30"
+          className="bg-tinted-50/60"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="synopsis-content"
           id="synopsis-header"
@@ -65,7 +65,7 @@ export default function MarketScriptAccordion() {
         <AccordionDetails
           sx={{ "&.MuiAccordionDetails-root": { paddingX: 0 } }}
         >
-          <div className="flex gap-5 sm:p-12 items-center flex-col sm:flex-row">
+          <div className="flex gap-5 sm:p-12 items-center flex-col mb-3 sm:flex-row">
             <div className="max-w-[106px] flex-shrink-0">
               <Image src={lock} alt="lock" />
             </div>
@@ -105,7 +105,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50/30"
+          className="bg-tinted-50/60"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="story-content"
           id="story-header"
@@ -135,7 +135,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50/30"
+          className="bg-tinted-50/60"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="nav-personal-content"
           id="nav-personal-header"
@@ -165,7 +165,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50/30"
+          className="bg-tinted-50/60"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="panel3a-content"
           id="panel3a-header"
@@ -182,19 +182,19 @@ export default function MarketScriptAccordion() {
         <AccordionDetails
           sx={{ "&.MuiAccordionDetails-root": { paddingX: 0 } }}
         >
-          <ListItem className="flex gap-3" alignItems="center">
+          <ListItem className="flex gap-3 flex-wrap" alignItems="center">
             <Chip
-              className="text-primary-700 text-sm bg-tinted-50/30 py-4 px-4"
+              className="text-primary-700 text-sm bg-tinted-50/60 py-4 px-4"
               size="medium"
               label="Love"
             />
             <Chip
-              className="text-primary-700 text-sm bg-tinted-50/30 py-4 px-4"
+              className="text-primary-700 text-sm bg-tinted-50/60 py-4 px-4"
               size="medium"
               label="Fantasy"
             />
             <Chip
-              className="text-primary-700 text-sm bg-tinted-50/30 py-4 px-4"
+              className="text-primary-700 text-sm bg-tinted-50/60 py-4 px-4"
               size="medium"
               label="Patriotism"
             />
@@ -207,7 +207,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50/30"
+          className="bg-tinted-50/60"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="panel3a-content"
           id="act-header"
@@ -237,7 +237,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50/30"
+          className="bg-tinted-50/60"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="insperation-content"
           id="insperation-header"

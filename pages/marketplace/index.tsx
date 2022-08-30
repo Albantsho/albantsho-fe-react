@@ -14,11 +14,11 @@ const marketPlace: NextPageWithLayout = () => {
         <title>Albantsho || Market Place</title>
       </Head>
 
-      <div className=" flex flex-col justify-start w-full">
+    
         <TabsMarketPlace />
         <MarketPlaceProducts />
         <PaginationMarketList />
-      </div>
+
     </>
   );
 };

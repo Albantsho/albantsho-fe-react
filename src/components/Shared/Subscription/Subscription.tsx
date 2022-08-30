@@ -3,8 +3,9 @@ import Btn from "@shared/Btn/Btn";
 import ReviewedIcon from "./assets/reviewed.svg";
 interface IProps {
   plans: string[];
+  type?: string;
   title: string;
-  description?: string;
+  description: string;
   button: string;
   changeColor: string;
   isShowIcon: boolean;
@@ -17,14 +18,18 @@ const Subscription = ({
   button,
   changeColor,
   isShowIcon,
+  type,
 }: IProps) => {
   console.log(changeColor);
 
   return (
     <div className="bg-white shadow-md px-8 py-10 max-w-[478px] mx-auto rounded-lg">
+      <Typography variant="h6" className={`${changeColor} futura leading-normal`}>
+        {type}
+      </Typography>
       <Typography
         variant="h3"
-        className={`${changeColor} futura font-semibold`}
+        className={`${changeColor} futura font-semibold leading-normal`}
       >
         {title}
       </Typography>
