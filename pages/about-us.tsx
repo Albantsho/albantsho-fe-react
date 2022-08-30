@@ -14,7 +14,7 @@ const AboutUs: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || About Us</title>
       </Head>
-      <div className="px-5 sm:px-10">
+      <div className="px-5 sm:px-10 overflow-hidden">
         <div className="relative">
           <div className="max-w-screen-lg mx-auto">
             <AboutUsImage />
@@ -26,8 +26,7 @@ const AboutUs: NextPageWithLayout = () => {
             inheritViewBox
             className="absolute bottom-0 right-1 text-transparent"
             sx={{
-              width: { xs: 140, xl: 429 },
-              height: { xs: 140, xl: 429 },
+              fontSize: { xs: 140, xl: 429 },
               translate: { xs: "55% 90%", xl: "100% 45%" },
             }}
           />

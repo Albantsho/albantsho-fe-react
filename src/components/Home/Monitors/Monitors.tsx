@@ -8,7 +8,10 @@ import RightMonitorImg from "./assets/right-monitor.png";
 
 const Monitors = () => {
   return (
-    <section id="preview-monitors" className="mt-12 px-5 sm:px-10">
+    <section
+      id="preview-monitors"
+      className="mt-12 px-5 sm:px-10 overflow-hidden"
+    >
       <div>
         <span data-aos="zoom-out-down" className="flex justify-center mb-10">
           <SvgIcon
