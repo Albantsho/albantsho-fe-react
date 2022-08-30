@@ -18,7 +18,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50"
+          className="bg-tinted-50/30"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="logline-content"
           id="logline-header"
@@ -48,7 +48,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50"
+          className="bg-tinted-50/30"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="synopsis-content"
           id="synopsis-header"
@@ -105,7 +105,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50"
+          className="bg-tinted-50/30"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="story-content"
           id="story-header"
@@ -135,7 +135,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50"
+          className="bg-tinted-50/30"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="nav-personal-content"
           id="nav-personal-header"
@@ -165,7 +165,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50"
+          className="bg-tinted-50/30"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="panel3a-content"
           id="panel3a-header"
@@ -184,19 +184,19 @@ export default function MarketScriptAccordion() {
         >
           <ListItem className="flex gap-3" alignItems="center">
             <Chip
-              className="text-primary-700"
+              className="text-primary-700 text-sm bg-tinted-50/30 py-4 px-4"
               size="medium"
-              label="High Concept"
+              label="Love"
             />
             <Chip
-              className="text-primary-700"
+              className="text-primary-700 text-sm bg-tinted-50/30 py-4 px-4"
               size="medium"
-              label="High Concept"
+              label="Fantasy"
             />
             <Chip
-              className="text-primary-700"
+              className="text-primary-700 text-sm bg-tinted-50/30 py-4 px-4"
               size="medium"
-              label="High Concept"
+              label="Patriotism"
             />
           </ListItem>
         </AccordionDetails>
@@ -207,7 +207,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50"
+          className="bg-tinted-50/30"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="panel3a-content"
           id="act-header"
@@ -237,7 +237,7 @@ export default function MarketScriptAccordion() {
         sx={{ "&:before": { display: "none" } }}
       >
         <AccordionSummary
-          className="bg-tinted-50"
+          className="bg-tinted-50/30"
           expandIcon={<BiChevronDown className="w-8 h-8 text-primary-700" />}
           aria-controls="insperation-content"
           id="insperation-header"

@@ -27,9 +27,9 @@ const drawerWidth = 340;
 
 const ListDashboardBigSize = () => {
   const { route } = useRouter();
-  console.log(route);
+
   return (
-    <div className="min-h-screen hidden  gap-2  lg:block">
+    <div className="min-h-screen relative bg-primary-900">
       <Drawer
         sx={{
           width: drawerWidth,
@@ -39,16 +39,19 @@ const ListDashboardBigSize = () => {
             backgroundColor: "#573195",
             padding: "38px 20px",
             color: "#fff",
+            position: "static",
+            display: { xs: "none", lg: "block" },
           },
-          position: "relative",
+          position: "static",
           backgroundColor: "#573195",
+          display: { xs: "none", lg: "block" },
         }}
         variant="permanent"
         anchor="left"
       >
         <Logo color="primary" className="text-white ml-3 mb-5" />
 
-        <List className="space-y-4">
+        <List className="space-y-4 h-full">
           {listRoutes.map((item) => (
             <Link
               key={item.title}
@@ -84,18 +87,18 @@ const ListDashboardBigSize = () => {
             </Link>
           ))}
         </List>
-        <div className="flex absolute justify-start bottom-14 left-0 right-0 pl-12 gap-6">
-          <span className="w-9 h-9 flex justify-center items-center border border-white rounded-full">
-            <FaTwitter />
-          </span>
-          <span className="w-9 h-9 flex justify-center items-center border border-white rounded-full">
-            <FaFacebook />
-          </span>
-          <span className="w-9 h-9 flex justify-center items-center border border-white rounded-full">
-            <FaInstagram />
-          </span>
-        </div>
       </Drawer>
+      <div className="flex fixed right-auto left-auto justify-start bottom-14  ml-12 gap-6 text-white">
+        <span className="w-9 h-9 flex justify-center items-center border border-white rounded-full">
+          <FaTwitter />
+        </span>
+        <span className="w-9 h-9 flex justify-center items-center border border-white rounded-full">
+          <FaFacebook />
+        </span>
+        <span className="w-9 h-9 flex justify-center items-center border border-white rounded-full">
+          <FaInstagram />
+        </span>
+      </div>
     </div>
   );
 };

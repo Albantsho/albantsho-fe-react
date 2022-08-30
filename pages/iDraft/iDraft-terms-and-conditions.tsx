@@ -1,8 +1,8 @@
-import IDrafyLayout from "@shared/Layouts/IDraftLayout/IDrafyLayout";
+import IDraftLayout from "@shared/Layouts/IDraftLayout/IDrafyLayout";
 import HeadingIDraftTAC from "components/IDraftTAC/HeadingIDraftTAC/HeadingIDraftTAC";
 import IDraftTAC from "components/IDraftTAC/IDraftTAC";
 import Head from "next/head";
-import { NextPageWithLayout } from "./_app";
+import { NextPageWithLayout } from "../_app";
 
 const iDraftTermsAndConditions: NextPageWithLayout = () => {
   return (
@@ -17,7 +17,7 @@ const iDraftTermsAndConditions: NextPageWithLayout = () => {
 };
 
 iDraftTermsAndConditions.getLayout = (page) => (
-  <IDrafyLayout>{page}</IDrafyLayout>
+  <IDraftLayout>{page}</IDraftLayout>
 );
 
 export default iDraftTermsAndConditions;

@@ -2,24 +2,18 @@ import { Pagination } from "@mui/material";
 
 const PaginationMarketList = () => {
   return (
-    <div className="max-w-xl mx-auto p-4 sm:px-6 bg-white rounded-md shadow-md mb-6 sm:mb-14 m-3 sm:mt-7">
+    <div className="max-w-xl mx-auto  px-5 sm:px-10   mb-6 sm:mb-14 m-3 sm:mt-7 ">
       <Pagination
+
         sx={{
-          "& .Mui-selected": {
-            backgroundColor: "white",
+          "& .MuiPaginationItem-root.Mui-selected": {
+            backgroundColor: "#fff !important",
             border: "1px solid #7953B5",
             borderRadius: "100%",
             color: "#7953B5",
           },
-          "& :hover": { backgroundColor: "white" },
-          span: {
-            "&.MuiTouchRipple-root": {
-              backgroundColor: "white",
-              zIndex: "-10",
-            },
-          },
         }}
-        className=""
+        className="bg-white shadow-md w-auto rounded-md p-4"
         count={10}
         size="large"
       />
@@ -28,3 +22,4 @@ const PaginationMarketList = () => {
 };
 
 export default PaginationMarketList;
+

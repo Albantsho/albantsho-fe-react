@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import IDrafyLayout from "@shared/Layouts/IDraftLayout/IDrafyLayout";
+import IDraftLayout from "@shared/Layouts/IDraftLayout/IDrafyLayout";
 import BenefitsIDeaft from "components/IDraft/BenefitsIDeaft/BenefitsIDeaft";
 import DeadLineIDraft from "components/IDraft/DeadLineIDraft/DeadLineIDraft";
 import DescriptionIDraft from "components/IDraft/DescriptionIDraft/DescriptionIDraft";
@@ -8,7 +8,8 @@ import HeadingIDraft from "components/IDraft/HeadingIDraft/HeadingIDraft";
 import MentorInfoList from "components/IDraft/MentorInfoList/MentorInfoList";
 import Sponsers from "components/IDraft/Sponsers/Sponsers";
 import Head from "next/head";
-import { NextPageWithLayout } from "./_app";
+import Link from "next/link";
+import { NextPageWithLayout } from "../_app";
 
 const IDraft: NextPageWithLayout = () => {
   return (
@@ -21,15 +22,23 @@ const IDraft: NextPageWithLayout = () => {
       <BenefitsIDeaft />
       <ElgibilityIDraft />
       <DeadLineIDraft />
-      <Typography variant="h6" className="font-semibold leading-normal text-center px-5">
-        TERMS AND CONDITIONS APPLY
-      </Typography>
+      <Link href="/iDraft/iDraft-terms-and-conditions">
+        <a className="text-gray-900">
+          <Typography
+            variant="h6"
+            className="font-semibold leading-normal text-center px-5"
+          >
+            TERMS AND CONDITIONS APPLY
+          </Typography>
+        </a>
+      </Link>
+      ;
       <Sponsers />
       <MentorInfoList />
     </>
   );
 };
 
-IDraft.getLayout = (page) => <IDrafyLayout>{page}</IDrafyLayout>;
+IDraft.getLayout = (page) => <IDraftLayout>{page}</IDraftLayout>;
 
 export default IDraft;

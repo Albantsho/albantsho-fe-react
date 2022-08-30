@@ -7,10 +7,10 @@ interface IProps {
   children: React.ReactNode;
 }
 
-const IDrafyLayout = ({ children }: IProps) => {
+const IDraftLayout = ({ children }: IProps) => {
   return (
     <main className="flex flex-col">
-      <Nav color="inherit" position="static"  />
+      <Nav color="inherit" position="static" />
       <ImageSection />
       {children}
       <Footer />
@@ -18,4 +18,4 @@ const IDrafyLayout = ({ children }: IProps) => {
   );
 };
 
-export default IDrafyLayout;
+export default IDraftLayout;

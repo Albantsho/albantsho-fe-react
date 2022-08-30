@@ -22,9 +22,9 @@ const ScriptInfo = () => {
           alt="beauty"
         />
       </div>
-      <div className=" flex-shrink">
+      <div className="flex-shrink w-full">
         <div className="flex mb-3 md:mb-5 items-center gap-6 sm:gap-10 md:gap-14">
-          <Chip label="Feature film" className="bg-gray-100 text-neutral-800" sx={{ borderRadius: 1 }} />
+          <Chip label="Feature film" className="bg-tinted-50/30 text-neutral-800" sx={{ borderRadius: 1 }} />
           <Rating readOnly defaultValue={4} />
         </div>
         <div className="flex gap-8 items-center">

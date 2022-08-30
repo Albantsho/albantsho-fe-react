@@ -44,7 +44,7 @@ const ModalProject = ({ open, setOpen }: IProps) => {
           />
           <span className="text-blue-600">What’s a tagline?</span>
         </div>
-        <div className="space-x-3 mt-8 md:ml-auto">
+        <div className=" mt-8 md:ml-auto flex flex-wrap gap-3">
           <Btn size="large" className="py-4 px-5  text-white bg-primary-700">
             Create Script
           </Btn>

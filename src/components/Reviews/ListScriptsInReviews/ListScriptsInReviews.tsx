@@ -9,7 +9,7 @@ const listScripts = [
     title: "The Long man of Long Beach",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    status: "reviewd",
+    status: "reviewed",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const listScripts = [
     title: "The Long man of Long Beach",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    status: "noReviewd",
+    status: "noReviewed",
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const listScripts = [
     title: "The Long man of Long Beach",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    status: "reviewd",
+    status: "reviewed",
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ const listScripts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
 
-    status: "noReviewd",
+    status: "noReviewed",
   },
   {
     id: 5,
@@ -43,7 +43,7 @@ const listScripts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
 
-    status: "reviewd",
+    status: "reviewed",
   },
 ];
 
@@ -71,41 +71,39 @@ const ListScriptsInReviews = () => {
           return (
             <div key={script.id}>
               <div className="flex mb-7 flex-col sm:flex-row md:items-center ">
-                <div className="flex flex-col sm:w-1/2 gap-3 mb-3 sm:flex-row">
-                  <div className="flex md:gap-5 gap-2 mr-2">
-                    <div className=" flex-shrink-0 relative">
-                      <Image
-                        className="rounded-md w-full h-full"
-                        loading="lazy"
-                        src={script.image}
-                        alt={script.title}
-                      />
-                    </div>
-                    <div className="md:max-w-[256px]">
-                      <Typography
-                        variant="body1"
-                        className="futura font-semibold text-primary-700"
-                      >
-                        {script.title}
-                      </Typography>
-                      <Typography variant="caption" className="text-stone-800">
-                        {script.description}
-                      </Typography>
-                    </div>
+                <div className="flex  sm:flex-1 gap-3 mb-3 md:gap-5 mr-2 flex-wrap sm:flex-nowrap">
+                  <div className=" flex-shrink-0 my-auto">
+                    <Image
+                      className="rounded-md w-full h-full"
+                      loading="lazy"
+                      src={script.image}
+                      alt={script.title}
+                    />
+                  </div>
+                  <div className="max-w-[256px]">
+                    <Typography
+                      variant="body1"
+                      className="futura font-semibold text-primary-700"
+                    >
+                      {script.title}
+                    </Typography>
+                    <Typography variant="caption" className="text-stone-800">
+                      {script.description}
+                    </Typography>
                   </div>
                 </div>
 
-                <div className="space-y-2 flex flex-col sm:flex-row items-center sm:w-1/2 gap-2">
+                <div className="space-y-2 sm:space-y-0 flex flex-col sm:flex-row items-center sm:flex-1 gap-2">
                   <div
                     className={`${
-                      script.status === "reviewd"
+                      script.status === "reviewed"
                         ? "text-success-500 bg-success-300/20"
                         : "text-warning-500 bg-warning-300/20"
-                    } my-auto py-2 px-4  rounded-sm text-center w-full sm:w-auto`}
+                    } my-auto py-3 px-4   rounded-sm text-center w-full sm:w-auto`}
                   >
                     <span>{script.status}</span>
                   </div>
-                  {script.status === "reviewd" && (
+                  {script.status === "reviewed" && (
                     <div className="my-auto md:ml-auto w-full md:w-auto sm:ml-auto">
                       <Button
                         variant="text"

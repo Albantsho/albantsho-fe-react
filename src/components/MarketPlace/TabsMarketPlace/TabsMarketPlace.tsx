@@ -10,7 +10,7 @@ const TabsMarketPlace = () => {
   };
 
   return (
-    <div className="md:border-t border-b md:pl-4 border-gray-400 md:mt-8 w-full ">
+    <div className="md:border-t border-b md:pl-4  border-gray-400 md:mt-8 w-full ">
       <Tabs
         value={value}
         onChange={handleChange}
@@ -22,12 +22,12 @@ const TabsMarketPlace = () => {
             opacity: 0.3,
           },
         }}
-        className="-mb-[1px] md:ml-7"
+        className="-mb-[1px] md:ml-7 max-w-screen-2xl 2xl:mx-auto "
       >
-        <Tab className="md:text-xl md:mr-2" label="Explore" />
-        <Tab className="md:text-xl md:mr-2" label="Top rated" />
-        <Tab className="md:text-xl md:mr-2" label="Featured" />
-        <Tab className="md:text-xl md:mr-2" label="Trending" />
+        <Tab className="md:text-xl md:mr-2 2xl:ml-8" label="Explore" />
+        <Tab className="md:text-xl md:mr-2 2xl:ml-8" label="Top rated" />
+        <Tab className="md:text-xl md:mr-2 2xl:ml-8" label="Featured" />
+        <Tab className="md:text-xl md:mr-2 2xl:ml-8" label="Trending" />
       </Tabs>
     </div>
   );

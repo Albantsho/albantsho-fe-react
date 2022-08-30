@@ -16,7 +16,6 @@ const Projects: NextPageWithLayout = () => {
   const [openArchive, setOpenArchive] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
   const { query } = useRouter();
-  console.log(query);
 
   return (
     <>

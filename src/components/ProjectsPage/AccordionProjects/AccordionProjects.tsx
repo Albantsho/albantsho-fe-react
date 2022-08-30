@@ -67,8 +67,6 @@ const listAccordions = [
   },
 ];
 
-
-
 const AccordionProjects = () => {
   return (
     <div className="mt-4 md:mt-6">
@@ -80,9 +78,15 @@ const AccordionProjects = () => {
             className="shadow-sm mb-4 md:mb-5 rounded-md"
           >
             <AccordionSummary
-              className="rounded-lg px-3 lg:px-6 md:px-2 pt-4 pb-6 py-7"
+              sx={{
+                "&.MuiAccordionSummary-root": {
+                  backgroundColor: "#fff",
+                  marginBottom: "-10px",
+                },
+              }}
+              className="rounded-lg px-3 lg:px-6 md:px-2 pt-4 pb-6 py-7 "
               expandIcon={
-                <BiChevronDown className="text-3xl text-primary-700" />
+                <BiChevronDown className="text-3xl text-primary-700 " />
               }
             >
               <div className="flex flex-col sm:flex-row gap-2">
@@ -113,7 +117,10 @@ const AccordionProjects = () => {
                 <IoIosMore className=" text-3xl mt-1 text-primary-700 " />
               </div>
             </AccordionSummary>
-            <AccordionDetails className="bg-primary-900/95 rounded-md">
+            <AccordionDetails
+
+              className=" rounded-md pt-3 md:pt-5 bg-primary-dark/95"
+            >
               <div className="flex p-3 md:px-12 justify-center sm:justify-start md:py-5 gap-2 md:gap-8 flex-wrap">
                 {accordion.accordionContent.map((detail) => {
                   return (

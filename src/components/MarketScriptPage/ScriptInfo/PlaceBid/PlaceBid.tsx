@@ -10,7 +10,7 @@ interface IProps {
 const PlaceBid = ({ setOpen }: IProps) => {
   const handleOpen = () => setOpen(true);
   return (
-    <div className="flex gap-6 mt-4 sm:mt-10 md:gap-6 md:p-8 flex-col">
+    <div className="flex gap-6 mt-4 rounded-md py-3 px-5 sm:py-4 sm:px-6 lg:py-6 lg:px-8 xl:px-12 xl:py-8 sm:mt-10 md:gap-6 md:p-8 flex-col bg-tinted-50/30 flex-1 w-full">
       <div className="flex flex-col">
         <Typography variant="button">Price</Typography>
         <div className="space-x-2 flex items-center">
@@ -22,7 +22,7 @@ const PlaceBid = ({ setOpen }: IProps) => {
       </div>
       <div className="flex sm:flex-col gap-6 -mt-1 xl:mt-0 md:flex-row flex-wrap">
         <CustomInput
-          className="flex-1 min-w-[200px] max-w-xs sm:max-w-full"
+          className="flex-1 min-w-[190px] sm:min-w-[210px] max-w-xs sm:max-w-full"
           variant="outlined"
           size="small"
           placeholder="Enter Bid"

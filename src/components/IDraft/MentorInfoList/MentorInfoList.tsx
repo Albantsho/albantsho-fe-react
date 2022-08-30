@@ -50,44 +50,44 @@ const mentorInfo = [
 const MentorInfoList = () => {
   return (
     <div className="py-4 px-5 sm:px-10 xl:px-32 bg-primary-700">
-    <div className="max-w-screen-xl mx-auto relative">
-    <div className="lg:my-24 my-12">
-        <Image src={mentors} alt="mentors" />
-      </div>
+      <div className="max-w-screen-xl mx-auto relative">
+        <div className="lg:my-24 my-12">
+          <Image src={mentors} alt="mentors" />
+        </div>
 
-      <div className="absolute top-[20%] xl:-left-[100px] hidden xl:block ">
-        <Stars />
-      </div>
+        <div className="absolute top-[11%] xl:top-[20%] -left-[100px]  hidden lg:block ">
+          <Stars />
+        </div>
 
-      <div className="absolute top-[30%] xl:-right-8 hidden xl:block ">
-        <Stars isSmall="isSmall" />
-      </div>
+        <div className="absolute top-[23%] xl:top-[30%] -right-8 hidden lg:block ">
+          <Stars isSmall="isSmall" />
+        </div>
 
-      <div className="absolute bottom-[20%] xl:-right-[100px] hidden xl:block ">
-        <Stars />
-      </div>
+        <div className="absolute bottom-[32%]  xl:bottom-[20%] -right-[100px] hidden lg:block ">
+          <Stars />
+        </div>
 
-      <div className="absolute bottom-[30%] xl:-left-8 hidden xl:block ">
-        <Stars isSmall="isSmall" />
-      </div>
+        <div className="absolute bottom-[42%] xl:bottom-[30%] -left-8 hidden lg:block ">
+          <Stars isSmall="isSmall" />
+        </div>
 
-      <div className="flex flex-col p-8 md:py-12 xl:py-24 md:px-28 xl:px-48 bg-white rounded-2xl gap-8">
-        {mentorInfo.map((mentor) => {
-          return (
-            <MentorInfo
-              key={mentor.id}
-              name={mentor.name}
-              image={mentor.image}
-              description={mentor.description}
-            />
-          );
-        })}
+        <div className="flex flex-col p-8 md:py-12 xl:py-24 md:px-28 xl:px-48 bg-white rounded-2xl gap-8">
+          {mentorInfo.map((mentor) => {
+            return (
+              <MentorInfo
+                key={mentor.id}
+                name={mentor.name}
+                image={mentor.image}
+                description={mentor.description}
+              />
+            );
+          })}
 
-        <div className="my-10 md:my-14">
-          <Image src={more} alt="more" />
+          <div className="my-10 md:my-14">
+            <Image src={more} alt="more" />
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };

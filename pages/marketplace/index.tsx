@@ -1,4 +1,5 @@
 import GeneralLayout from "@shared/Layouts/GeneralLayout/GeneralLayout";
+import MarketplaceLayout from "@shared/Layouts/MarketplaceLayout/MarketplaceLayout";
 import MarketPlaceProducts from "components/MarketPlace/MarketList/MarketPlaceProducts";
 import PaginationMarketList from "components/MarketPlace/PaginationMarketList/PaginationMarketList";
 import TabsMarketPlace from "components/MarketPlace/TabsMarketPlace/TabsMarketPlace";
@@ -13,7 +14,7 @@ const marketPlace: NextPageWithLayout = () => {
         <title>Albantsho || Market Place</title>
       </Head>
 
-      <div className="max-w-screen-2xl 2xl:mx-auto flex flex-col justify-start w-full">
+      <div className=" flex flex-col justify-start w-full">
         <TabsMarketPlace />
         <MarketPlaceProducts />
         <PaginationMarketList />
@@ -23,13 +24,13 @@ const marketPlace: NextPageWithLayout = () => {
 };
 
 marketPlace.getLayout = (page) => (
-  <GeneralLayout
-    title={`"To make a great film you need three
+  <MarketplaceLayout
+    description={`"To make a great film you need three
 things: the script, the script and the script.
 - Alfred Hitchcock`}
   >
     {page}
-  </GeneralLayout>
+  </MarketplaceLayout>
 );
 
 export default marketPlace;

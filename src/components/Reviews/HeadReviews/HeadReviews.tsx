@@ -5,7 +5,7 @@ import award from "./assets/awrd.png";
 
 const HeadReviews = () => {
   return (
-    <div className="bg-white mt-4 md:mt-16 rounded-md px-5 pt-7  md:pt-14  flex flex-col sm:flex-row  gap-3 sm:gap-6 xl:gap-8">
+    <div className="bg-white mt-4 md:mt-16 rounded-md px-5 pt-7 pb-6 sm:pb-9 lg:pb-12 xl:pb-16  md:pt-14  flex flex-col sm:flex-row  gap-3 sm:gap-6 xl:gap-8">
       <div className="flex-shrink-0" >
         <Image src={award} alt="award" />
       </div>

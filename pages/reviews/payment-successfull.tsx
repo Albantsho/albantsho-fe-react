@@ -1,9 +1,9 @@
 import React from 'react'
 
-const paymentSuccessfull = () => {
+const PaymentSuccessful = () => {
   return (
-    <div>paymentSuccessfull</div>
+    <div>paymentSuccessful</div>
   )
 }
 
-export default paymentSuccessfull
+export default PaymentSuccessful
