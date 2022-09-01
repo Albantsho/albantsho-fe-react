@@ -50,8 +50,8 @@ const listScripts = [
 
 const ListScriptsInReviews = () => {
   return (
-    <div className="mt-4 bg-white rounded-md md:px-3 lg:px-6 xl:px-12 shadow-sm  py-5">
-      <div className="mb-5 flex px-3 md:min-w-[290px]">
+    <div className="mt-4 bg-white rounded-md md:px-3 lg:px-6 xl:px-12 shadow-sm  pt-5">
+      <div className="mb-5 flex px-3 md:min-w-[290px] sm:gap-3 xl:gap-10">
         <Typography
           variant="body1"
           className="futura flex-1 text-primary-700 font-medium "
@@ -60,37 +60,46 @@ const ListScriptsInReviews = () => {
         </Typography>
         <Typography
           variant="body1"
-          className="futura sm:mr-auto md:flex-1 text-primary-700 font-medium "
+          className="futura md:mr-auto md:flex-1 text-primary-700 font-medium mr-6"
         >
           Status
         </Typography>
       </div>
 
       <Divider sx={{ marginBottom: 4 }} />
-      <div className="flex flex-col ">
+      <div className="flex flex-col">
         {listScripts.map((script) => {
           return (
             <div
               key={script.id}
-              className={` ${
-                script.status === "Reviewed" && "bg-tinted-50/60 md:bg-white"
-              } md:pb-6 pt-4 pb-5`}
+              className={`md:pb-6 pt-4 pb-5`}
             >
               <div
                 className={`${
-                  script.status === "Reviewed" && "pb-20"
-                } flex px-3  justify-between relative  md:pb-6 lg:pb-10`}
+                  script.status === "Reviewed" && "pb-[70px] md:pb-10"
+                } flex px-3  justify-between relative sm:gap-4 pb-6 md:pb-10 xl:gap-10`}
               >
-                <div className="flex  flex-1 md:gap-5 mr-2 flex-wrap sm:flex-nowrap gap-2 lg:min-w-[280px]  items-center">
-                  <div className=" flex-shrink-0">
-                    <Image
-                      className="rounded-md w-full h-full"
-                      loading="lazy"
-                      src={script.image}
-                      alt={script.title}
-                    />
+                <div className="flex  flex-1 md:gap-5 flex-wrap sm:flex-nowrap gap-2 lg:min-w-[280px]  items-center">
+                  <div className="flex justify-between sm:justify-start  w-full sm:w-auto">
+                    <div className="flex-shrink-0 w-[72px] h-[72px]">
+                      <Image
+                        className="rounded-md w-full h-full"
+                        loading="lazy"
+                        src={script.image}
+                        alt={script.title}
+                      />
+                    </div>
+                    <div
+                      className={`${
+                        script.status === "Reviewed"
+                          ? "text-success-500 bg-success-300/20"
+                          : "text-warning-500 bg-warning-300/20"
+                      } my-auto py-4 px-4 text-sm  rounded-sm text-center w-full sm:w-auto sm:hidden max-w-[100px]`}
+                    >
+                      <span>{script.status}</span>
+                    </div>
                   </div>
-                  <div className="max-w-[256px]">
+                  <div className="">
                     <Typography
                       variant="body1"
                       className="futura font-semibold text-primary-700"
@@ -103,13 +112,13 @@ const ListScriptsInReviews = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-4 md:flex-1 items-center">
+                <div className="flex gap-0 md:flex-1 items-start 2xl:justify-start 2xl:gap-6 mr-6 md:mr-0">
                   <div
                     className={`${
                       script.status === "Reviewed"
                         ? "text-success-500 bg-success-300/20"
                         : "text-warning-500 bg-warning-300/20"
-                    } my-auto py-3 px-4 text-sm  rounded-sm text-center w-full sm:w-auto mr-auto max-w-[100px]`}
+                    }  py-4 px-4 text-sm hidden sm:block  rounded-sm text-center w-full sm:w-auto mr-auto 2xl:mr-0 max-w-[100px]`}
                   >
                     <span>{script.status}</span>
                   </div>
@@ -117,7 +126,7 @@ const ListScriptsInReviews = () => {
                     <Button
                       variant="text"
                       sx={{
-                        paddingY: 1.5,
+                        paddingY: 1.8,
                         paddingX: 2,
                         border: "1px solid #7953B5",
                         borderRadius: 1.5,
@@ -134,7 +143,7 @@ const ListScriptsInReviews = () => {
                     sx={{
                       border: "1px solid #7953B5",
                     }}
-                    className="block md:hidden rounded-lg absolute bottom-4 bg-white left-3"
+                    className="block md:hidden rounded-lg py-3 px-4 absolute bottom-4 sm:bottom-0 bg-white left-3"
                   >
                     See review
                   </Button>

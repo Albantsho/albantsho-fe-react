@@ -1,10 +1,8 @@
-import { Modal, Typography } from "@mui/material";
+import { IconButton, Modal, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import Image from "next/image";
+import CustomInput from "@shared/CustomInput/CustomInput";
 import { Dispatch, SetStateAction } from "react";
-import cancell from "./assets/cancell.png";
-import onArchive from "./assets/on-archive.png";
-
+import { AiFillInfoCircle, AiOutlineClose } from "react-icons/ai";
 interface IProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -14,35 +12,40 @@ const ModalProject = ({ open, setOpen }: IProps) => {
   const handleClose = () => setOpen(false);
   return (
     <Modal className="px-5" open={open} onClose={handleClose}>
-      <div className="px-6 relative bg-white w-full mt-12 max-w-xl mx-auto flex flex-col py-16 rounded-lg">
-        <div
-          onClick={handleClose}
-          className="absolute top-5 right-5 cursor-pointer"
-        >
-          <Image src={cancell} alt="cancell" />
-        </div>
+      <div className="px-6 relative bg-white w-full mt-12 max-w-lg mx-auto flex flex-col py-16 rounded-lg">
+        <IconButton onClick={handleClose} className="absolute top-5 right-5">
+          <AiOutlineClose className="text-error-500" />
+        </IconButton>
         <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-          <label className="futura font-medium">
+          <label htmlFor="title-script" className="futura font-medium">
             Script Title<span className="text-error-700">*</span>
           </label>
-          <input
-            type="text"
-            className="border border-gray-300 rounded-md outline-none py-3 px-4 w-full bg-white"
+          <CustomInput
+            fullWidth
+            id="title-script"
+            variant="outlined"
+            size="medium"
           />
-          <span className="text-blue-600">
+          <span className="text-blue-600 flex items-center gap-2">
+            <AiFillInfoCircle className="text-xl" />
             note: ways to create killer titles
           </span>
         </div>
         <div className="flex items-start flex-col justify-start gap-2">
-          <label className="futura font-medium">
+          <label htmlFor="tagline" className="futura font-medium">
             Tagline
             <span className="text-error-700">*</span>
           </label>
-          <input
-            type="text"
-            className="border border-gray-300 rounded-md outline-none py-3 px-4 w-full bg-white"
+          <CustomInput
+            fullWidth
+            id="tagline"
+            variant="outlined"
+            size="medium"
           />
-          <span className="text-blue-600">What’s a tagline?</span>
+          <span className="text-blue-600 flex items-center gap-2">
+            <AiFillInfoCircle className="text-xl" />
+            What’s a tagline?
+          </span>
         </div>
         <div className=" mt-8 md:ml-auto flex flex-wrap gap-3">
           <Btn size="large" className="py-4 px-5  text-white bg-primary-700">
@@ -62,3 +65,13 @@ const ModalProject = ({ open, setOpen }: IProps) => {
 };
 
 export default ModalProject;
+
+{
+  /* <label className="futura font-medium">
+Script Title<span className="text-error-700">*</span>
+</label>
+<input
+type="text"
+className="border border-gray-300 rounded-md outline-none py-3 px-4 w-full bg-white"
+/> */
+}

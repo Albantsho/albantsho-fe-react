@@ -1,33 +1,38 @@
+import { IconButton } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-
 import { useRouter } from "next/router";
-import { BiSearch } from "react-icons/bi";
+import { Dispatch, SetStateAction } from "react";
+import { RiSearch2Line } from "react-icons/ri";
 import { BsArrowLeftShort } from "react-icons/bs";
 
-const SearchDashboard = () => {
+interface IProps {
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const SearchDashboard = ({ setOpen }: IProps) => {
   const { back } = useRouter();
-  console.log(back);
+  const handleOpen = () => setOpen(true);
 
   return (
     <div className="flex justify-start items-center mt-8">
       <div className="flex gap-4 flex-1 w-full">
-        <span
+        <IconButton
           onClick={back}
-          className="w-10 h-10 flex justify-center items-center  rounded-full bg-white cursor-pointer"
+          className="bg-white"
         >
           <BsArrowLeftShort className="text-3xl text-primary-700" />
-        </span>
+        </IconButton>
 
         <div className="flex items-center bg-white py-2 px-5 rounded-md gap-2 flex-1 md:flex-grow-0 md:min-w-[350px] md:w-auto">
-          <BiSearch className="text-neutral-800 md:text-2xl md:mr-1   text-xl" />
+          <RiSearch2Line className="text-gray-400 md:text-2xl md:mr-1   text-xl" />
           <input
-            placeholder="search"
-            className=" outline-none border-none  placeholder:text-neutral-800 md:text-base text-primary-700 w-full md:w-auto"
+            placeholder="Search"
+            className=" outline-none border-none  placeholder:text-gray-400 md:text-base text-gray-600 w-full md:w-auto"
           />
         </div>
       </div>
       <div className="hidden  md:block md:justify-center xl:flex-end">
-        <Btn className=" ml-auto  py-3 px-6" size="large">
+        <Btn onClick={handleOpen} className=" ml-auto  py-3 px-6" size="large">
           List New Script
         </Btn>
       </div>

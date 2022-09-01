@@ -23,7 +23,7 @@ const Subscription = ({
   console.log(changeColor);
 
   return (
-    <div className="bg-white shadow-md px-8 py-10 max-w-[478px] mx-auto rounded-lg">
+    <div className="bg-white shadow-md px-8 py-10 max-w-[390px] mx-auto rounded-lg">
       <Typography variant="h6" className={`${changeColor} futura leading-normal`}>
         {type}
       </Typography>

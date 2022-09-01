@@ -19,44 +19,49 @@ const routes = [
 
 const ListDashboardMobile = () => {
   const [value, setValue] = useState(0);
-  const { route } = useRouter();
+  const { route, push } = useRouter();
   return (
     <div className=" lg:hidden">
       <BottomNavigation
         showLabels
         value={value}
-        className="bg-primary-900 w-full flex justify-evenly text-white"
+        className="bg-primary-900 w-full h-full flex justify-evenly text-white"
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
       >
         {routes.map((item) => {
           return (
-            <Link
+            // <Link
+
+            //   // className="text-white border-b-4 border-b-warning-500"
+            //   href={`${item.route}`}
+            //   passHref
+            // >
+            <BottomNavigationAction
               key={item.title}
-              className="text-white border-b-4 border-b-warning-500"
-              href={`${item.route}`}
-              passHref
-            >
-              <BottomNavigationAction
-                showLabel
-                disableRipple={true}
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "#6842A5",
-                  },
-                  "&.MuiButtonBase-root": {
-                    "&:focus": { borderBottom: "4px solid #FDDC6A" },
-                  },
-                }}
-                className={`${
-                  route === item.route &&
-                  " border-b-4 border-b-secondary-500 bg-primary-700"
-                } text-white`}
-                label={item.title}
-                icon={<Image loading="lazy" src={item.icon} alt={item.title} />}
-              />
-            </Link>
+              onClick={() => push(`${item.route}`)}
+              showLabel
+              disableRipple={true}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#6842A5",
+                },
+
+                "&.MuiButtonBase-root": {
+                  color: "white",
+                },
+                gap: 0.5,
+                py: 1,
+                "&.Mui-selected": { borderBottom: "4px solid #FDDC6A" },
+              }}
+              className={`${
+                route === item.route && " bg-primary-700"
+              }`}
+              label={item.title}
+              icon={<Image loading="lazy" src={item.icon} alt={item.title} />}
+            />
+            // </Link>
           );
         })}
       </BottomNavigation>

@@ -1,7 +1,7 @@
 import { Button, Divider, Typography } from "@mui/material";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
 import projectArchive from "./assets/project-archive.png";
+import { IoIosMore } from "react-icons/io";
 
 const listScripts = [
   {
@@ -11,6 +11,7 @@ const listScripts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
     type: "Tv Pilot",
+    bids: 4,
   },
   {
     id: 2,
@@ -19,6 +20,7 @@ const listScripts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
     type: "Tv Pilot",
+    bids: 2,
   },
   {
     id: 3,
@@ -27,6 +29,7 @@ const listScripts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
     type: "Tv Pilot",
+    bids: 1,
   },
   {
     id: 4,
@@ -35,6 +38,7 @@ const listScripts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
     type: "Tv Pilot",
+    bids: 0,
   },
   {
     id: 5,
@@ -43,15 +47,11 @@ const listScripts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
     type: "Tv Pilot",
+    bids: 3,
   },
 ];
 
-interface IProps {
-  setOpenArchive: Dispatch<SetStateAction<boolean>>;
-}
-
-const ListScriptsPage = ({ setOpenArchive }: IProps) => {
-  const handleOpen = () => setOpenArchive(true);
+const OpeningLists = () => {
   return (
     <div className="mt-4 bg-white rounded-md shadow-sm px-3 py-5">
       <div className="mb-5 flex border-b pb-5 sm:pb-6 gap-2 sm:gap-4 md:gap-8 xl:gap-10 2xl:gap-14">
@@ -67,23 +67,29 @@ const ListScriptsPage = ({ setOpenArchive }: IProps) => {
         >
           Script Type
         </Typography>
+        <Typography
+          variant="body1"
+          className="futura mr-10 md:mr-16  block  text-primary-700 font-medium "
+        >
+          Bids
+        </Typography>
       </div>
 
       <div className="flex flex-col  gap-5 md:gap-10">
         {listScripts.map((script, index) => {
           return (
             <div key={script.id} className="sm:px-4 md:px-6 xl:px-10 2xl:px-12">
-              <div className="flex mb-7 flex-col  sm:flex-row gap-4 sm:gap-4 md:gap-8 xl:gap-10 2xl:gap-14">
-                <div className="flex flex-1 sm:gap-5 lg:gap-0 items-center flex-wrap sm:flex-nowrap gap-2">
-                  <div className="flex-shrink-0 w-[80px] h-[80px] mx-auto ">
+              <div className="flex mb-7 gap-3 sm:gap-4 md:gap-8 xl:gap-10 2xl:gap-14">
+                <div className="flex flex-1 min-w-[210px] sm:gap-5 flex-wrap item-center gap-2">
+                  <div className="flex-shrink-0 w-[110px] h-[80px]">
                     <Image
-                      className="rounded-md "
+                      className="rounded-md w-full h-full bg-red-500"
                       loading="lazy"
                       src={script.image}
                       alt={script.title}
                     />
                   </div>
-                  <div className="flex-grow">
+                  <div className="max-w-[220px]">
                     <Typography
                       variant="body1"
                       className="futura font-semibold text-primary-700"
@@ -96,23 +102,15 @@ const ListScriptsPage = ({ setOpenArchive }: IProps) => {
                   </div>
                 </div>
 
-                <div className="flex-1 flex justify-between items-center sm:flex-grow-0  2xl:justify-start 2xl:gap-20 md:flex-grow">
-                  <div className=" py-2 px-4   hidden md:block bg-slate-100 rounded-sm  text-neutral-800">
-                    <span>{script.type}</span>
-                  </div>
-                  <Button
-                    onClick={handleOpen}
-                    variant="text"
-                    sx={{
-                      paddingY: 1.5,
-                      paddingX: 2,
-                      border: "1px solid #7953B5",
-                      borderRadius: 1.5,
-                    }}
-                    className=" mr:auto"
-                  >
-                    Unarchive
-                  </Button>
+                <div className=" py-2 px-4   hidden md:block bg-slate-100 rounded-sm  text-neutral-800">
+                  <span>{script.type}</span>
+                </div>
+
+                <div className="md:flex-1 flex flex-wrap justify-between items-center gap-8 md:gap-16">
+                  <span className="w-8 h-8   border border-success-500 rounded-full flex justify-center items-center text-success-500">
+                    {script.bids}
+                  </span>
+                  <IoIosMore className="text-2xl text-primary-700 cursor-pointer right-0 top-1/3" />
                 </div>
               </div>
               {index < listScripts.length - 1 && (
@@ -126,4 +124,4 @@ const ListScriptsPage = ({ setOpenArchive }: IProps) => {
   );
 };
 
-export default ListScriptsPage;
+export default OpeningLists;

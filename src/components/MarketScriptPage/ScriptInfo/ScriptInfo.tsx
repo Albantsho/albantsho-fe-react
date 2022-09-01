@@ -1,11 +1,18 @@
-import { Chip, Icon, Modal, Rating, Typography } from "@mui/material";
+import {
+  Chip,
+  Icon,
+  IconButton,
+  Modal,
+  Rating,
+  Typography,
+} from "@mui/material";
 import ReviewedIcon from "./assets/reviewed.svg";
 import Image from "next/image";
-import cancel from "./assets/cancel.png";
 import success from "@assets/images/success.png";
 import beauty from "./assets/beauty.jpg";
 import { useState } from "react";
 import PlaceBid from "./PlaceBid/PlaceBid";
+import { AiOutlineClose } from "react-icons/ai";
 
 const ScriptInfo = () => {
   const [open, setOpen] = useState(false);
@@ -48,12 +55,12 @@ const ScriptInfo = () => {
         <PlaceBid setOpen={setOpen} />
         <Modal className="px-5" open={open} onClose={handleClose}>
           <div className="px-6 relative bg-white w-full mt-44 max-w-xl mx-auto flex flex-col items-center py-16 rounded-lg">
-            <div
+            <IconButton
               onClick={handleClose}
-              className="absolute top-5 right-5 cursor-pointer"
+              className="absolute top-5 right-5"
             >
-              <Image src={cancel} alt="cancel" />
-            </div>
+              <AiOutlineClose className="text-error-500" />
+            </IconButton>
             <div>
               <Image src={success} alt="success" />
             </div>

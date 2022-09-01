@@ -4,12 +4,12 @@ import RoutingButton from "components/ProjectsPage/RoutingButton/RoutingButton";
 import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
 import { useRouter } from "next/router";
-import AccordionProjects from "components/ProjectsPage/AccordionProjects/AccordionProjects";
+import AccordionProjectsList from "components/ProjectsPage/AccordionProjects/AccordionProjectsList";
 import ModalProject from "components/ProjectsPage/ModalProject/ModalProject";
 import ListScriptsPage from "components/ArchivesPage/ListScriptsPage/ListScriptsPage";
 import ModalArchive from "components/ArchivesPage/ModalArchive/ModalArchive";
 import { useState } from "react";
-import {  Fab } from "@mui/material";
+import { Fab } from "@mui/material";
 
 const Projects: NextPageWithLayout = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -24,13 +24,8 @@ const Projects: NextPageWithLayout = () => {
       </Head>
       <main>
         <RoutingButton />
-        <SearchDashboard />
-        {query.type === "scripts" && (
-          <>
-            <AccordionProjects />
-          </>
-        )}
-
+        <SearchDashboard setOpen={setOpen} />
+        {(!query.type || query.type === "scripts") && <AccordionProjectsList />}
         {query.type === "archives" && (
           <>
             <ListScriptsPage setOpenArchive={setOpenArchive} />
@@ -42,7 +37,7 @@ const Projects: NextPageWithLayout = () => {
         )}
         <ModalProject open={open} setOpen={setOpen} />
         <Fab
-        color="primary"
+          color="primary"
           onClick={handleOpen}
           className=" block md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
         >
