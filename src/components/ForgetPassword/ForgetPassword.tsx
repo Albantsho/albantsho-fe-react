@@ -67,7 +67,7 @@ const ForgetPassword = () => {
       <div className="text-center lg:hidden mt-4">
         <Typography className="text-grey-400 mb-1 futura">
           Already have an account?
-          <Link href="/">
+          <Link href="/signin">
             <a className="text-success-500 ml-2">Sign in</a>
           </Link>
         </Typography>

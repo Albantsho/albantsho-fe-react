@@ -15,12 +15,19 @@ import addScriptIcon from "./assets/add-script-icon.png";
 import addTitleIcon from "./assets/add-title-icon.png";
 import Image from "next/image";
 import { useState } from "react";
+import CustomButtonScripts from "./CustomButtonScripts/CustomButtonScripts";
 
 interface IProps {
   title: string;
   storyAbout: string;
   type: string;
 }
+
+const buttonsProjects = [
+  { title: "ABSTRACT", image: addAbstractIcon, link: "/abstract" },
+  { title: "TITLE", image: addTitleIcon, link: "/abstract" },
+  { title: "SCRIPT", image: addScriptIcon, link: "/script_page" },
+];
 
 const AccordionProject = ({ title, storyAbout, type }: IProps) => {
   const [expanded, setExpanded] = useState(false);
@@ -47,7 +54,7 @@ const AccordionProject = ({ title, storyAbout, type }: IProps) => {
         className="rounded-lg px-3  lg:px-6  pt-4"
       >
         <div className="flex flex-col sm:flex-row flex-1  md:items-center  gap-x-4 gap-y-3 sm:gap-y-0 md:gap-5">
-          <div className="flex justify-center w-[72px] h-[72px] items-center  bg-tinted-50/80 rounded-sm">
+          <div className="flex justify-center w-[72px] h-[72px] items-center  bg-tinted-100/60 rounded-sm">
             <Image loading="lazy" src={accordionIcon} alt={title} />
           </div>
           <div className="sm:max-w-[280px] md:max-w-[300px] lg::max-w-[340px]  flex-1">
@@ -63,10 +70,10 @@ const AccordionProject = ({ title, storyAbout, type }: IProps) => {
           </div>
           <Chip
             label={type}
-            className="hidden rounded-md mx-auto 2xl:ml-0 lg:mr-auto  py-5 px-5 bg-tinted-50/80 text-neutral-800 md:flex"
+            className="hidden rounded-md mx-auto 2xl:ml-0 lg:mr-auto  py-5 px-5 bg-tinted-100/60 text-neutral-800 md:flex"
           />
         </div>
-       <div className="flex ml-auto  gap-4 items-center">
+        <div className="flex ml-auto  gap-4 items-center">
           <IconButton>
             <IoIosMore className=" text-3xl text-primary-700" />
           </IconButton>
@@ -82,26 +89,16 @@ const AccordionProject = ({ title, storyAbout, type }: IProps) => {
       </AccordionSummary>
       <AccordionDetails className=" rounded-md pt-3 md:pt-5 bg-primary-dark/95">
         <div className="flex p-3 pt-5 md:px-12 justify-center sm:justify-start md:pb-5 md:pt-7 gap-2 md:gap-8 flex-wrap">
-          <div className="bg-primary-dark w-28 h-32 rounded-md lg:rounded-lg p-3 md:p-5 flex flex-col gap-2 md:gap-3 justify-center items-center ">
-            <div className="px-5 py-3 bg-purple-500/10 rounded-sm border border-purple-500/10">
-              <Image layout="fixed" src={addAbstractIcon} alt="add-Abstract" />
-            </div>
-            <span className="text-white">ABSTRACT</span>
-          </div>
-
-          <div className="bg-primary-dark w-28 h-32 rounded-md lg:rounded-lg p-3 md:p-5 flex flex-col gap-2 md:gap-3 justify-center items-center ">
-            <div className="px-5 py-3 bg-purple-500/10 rounded-sm border border-purple-500/10">
-              <Image layout="fixed" src={addTitleIcon} alt="add-title" />
-            </div>
-            <span className="text-white">TITLE</span>
-          </div>
-
-          <div className="bg-primary-dark w-28 h-32 rounded-md lg:rounded-lg p-3 md:p-5 flex flex-col gap-2 md:gap-3 justify-center items-center ">
-            <div className="px-5 py-3 bg-purple-500/10 rounded-sm border border-purple-500/10">
-              <Image layout="fixed" src={addScriptIcon} alt="add-SCRIPT" />
-            </div>
-            <span className="text-white">SCRIPT</span>
-          </div>
+          {buttonsProjects.map((button) => {
+            return (
+              <CustomButtonScripts
+                key={button.title}
+                title={button.title}
+                image={button.image}
+                link={button.link}
+              />
+            );
+          })}
         </div>
       </AccordionDetails>
     </Accordion>

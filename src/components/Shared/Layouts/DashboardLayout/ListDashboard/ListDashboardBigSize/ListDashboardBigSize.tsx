@@ -1,5 +1,6 @@
 import {
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -9,17 +10,17 @@ import {
 import Logo from "@shared/Logo/Logo";
 import projects from "../assets/projects.png";
 import reviews from "../assets/reviews.png";
-import listnings from "../assets/listnings.png";
+import listings from "../assets/listings.png";
 import Image from "next/image";
-import { FaFacebook } from "react-icons/fa";
+import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
+import { AiFillInstagram } from "react-icons/ai";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 const listRoutes = [
   { route: "/projects", title: "Projects", icon: projects },
-  { route: "/listings", title: "Listings", icon: listnings },
+  { route: "/listings", title: "Listings", icon: listings },
   { route: "/reviews", title: "Reviews", icon: reviews },
 ];
 
@@ -90,16 +91,49 @@ const ListDashboardBigSize = () => {
           ))}
         </List>
       </Drawer>
-      <div className="fixed hidden lg:flex right-auto left-auto justify-start bottom-14  ml-12 gap-6 text-white">
-        <span className="w-9 h-9 flex justify-center items-center border border-white rounded-full">
-          <FaTwitter />
-        </span>
-        <span className="w-9 h-9 flex justify-center items-center border border-white rounded-full">
-          <FaFacebook />
-        </span>
-        <span className="w-9 h-9 flex justify-center items-center border border-white rounded-full">
-          <FaInstagram />
-        </span>
+      <div className="fixed hidden lg:flex right-auto gap-6 left-auto justify-start  bottom-14  ml-12">
+        <IconButton
+          href="https://www.twitter.com/albantsho"
+          target="_blank"
+          sx={{
+            "&.MuiButtonBase-root": {
+              border: "1px solid #fff",
+              borderRadius: "100%",
+              width:"32px",
+              height:"32px"
+            },
+          }}
+        >
+          <FaTwitter className="text-white" />
+        </IconButton>
+        <IconButton
+          href="https://www.facebook.com/albantsho"
+          target="_blank"
+          sx={{
+            "&.MuiButtonBase-root": {
+              border: "1px solid #fff",
+              borderRadius: "100%",
+              width:"32px",
+              height:"32px"
+            },
+          }}
+        >
+          <FaFacebookF className="text-white p-[2px]" />
+        </IconButton>
+        <IconButton
+          href="https://www.instagram.com/albantsho/"
+          target="_blank"
+          sx={{
+            "&.MuiButtonBase-root": {
+              border: "1px solid #fff",
+              borderRadius: "100%",
+              width:"32px",
+              height:"32px"
+            },
+          }}
+        >
+          <AiFillInstagram className="text-white" />
+        </IconButton>
       </div>
     </div>
   );

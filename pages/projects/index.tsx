@@ -4,10 +4,10 @@ import RoutingButton from "components/ProjectsPage/RoutingButton/RoutingButton";
 import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
 import { useRouter } from "next/router";
-import AccordionProjectsList from "components/ProjectsPage/AccordionProjects/AccordionProjectsList";
+import AccordionProjectsList from "components/ProjectsPage/ScriptsRoute/AccordionProjects/AccordionProjectsList";
 import ModalProject from "components/ProjectsPage/ModalProject/ModalProject";
-import ListScriptsPage from "components/ArchivesPage/ListScriptsPage/ListScriptsPage";
-import ModalArchive from "components/ArchivesPage/ModalArchive/ModalArchive";
+import ListScriptsPage from "components/ProjectsPage/ArchiveRoute/ListArchiveScripts";
+import ModalArchive from "components/ProjectsPage/ArchiveRoute/ModalArchive/ModalArchive";
 import { useState } from "react";
 import { Fab } from "@mui/material";
 

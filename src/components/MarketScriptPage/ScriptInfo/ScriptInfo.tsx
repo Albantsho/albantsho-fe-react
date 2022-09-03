@@ -1,22 +1,18 @@
 import {
   Chip,
   Icon,
-  IconButton,
-  Modal,
   Rating,
   Typography,
 } from "@mui/material";
 import ReviewedIcon from "./assets/reviewed.svg";
 import Image from "next/image";
-import success from "@assets/images/success.png";
 import beauty from "./assets/beauty.jpg";
 import { useState } from "react";
 import PlaceBid from "./PlaceBid/PlaceBid";
-import { AiOutlineClose } from "react-icons/ai";
+import ModalBidSuccessful from "../ModalBidSuccessful/ModalBidSuccessful";
 
 const ScriptInfo = () => {
   const [open, setOpen] = useState(false);
-  const handleClose = () => setOpen(false);
   return (
     <div className="flex flex-col px-6 py-6 sm:px-11 gap-10 md:flex-row max-w-screen-2xl mx-auto">
       <div className="md:w-1/2 lg:w-2/5 flex-shrink-0">
@@ -28,7 +24,7 @@ const ScriptInfo = () => {
         />
       </div>
       <div className="flex-shrink w-full">
-        <div className="flex mb-3 md:mb-5 items-center gap-6 sm:gap-10 md:gap-14">
+        <div className="flex mb-3 md:mb-5 items-center flex-wrap gap-6 sm:gap-10 md:gap-14">
           <Chip
             label="Feature film"
             className="bg-tinted-50/60 text-neutral-800"
@@ -53,26 +49,7 @@ const ScriptInfo = () => {
           Story about a man who lived on long beach
         </Typography>
         <PlaceBid setOpen={setOpen} />
-        <Modal className="px-5" open={open} onClose={handleClose}>
-          <div className="px-6 relative bg-white w-full mt-44 max-w-xl mx-auto flex flex-col items-center py-16 rounded-lg">
-            <IconButton
-              onClick={handleClose}
-              className="absolute top-5 right-5"
-            >
-              <AiOutlineClose className="text-error-500" />
-            </IconButton>
-            <div>
-              <Image src={success} alt="success" />
-            </div>
-            <Typography color="primary.700" mt={1} variant="h5">
-              Bid Successful
-            </Typography>
-            <Typography className="text-center text-[#484848]">
-              You have successfully placed a bid on this script. Check your
-              dashboard to monitor your bids
-            </Typography>
-          </div>
-        </Modal>
+        <ModalBidSuccessful open={open} setOpen={setOpen} />
       </div>
     </div>
   );

@@ -26,11 +26,13 @@ const MobileNavDashboard = ({ links, isTransparent }: IProps) => {
   return (
     <>
       <Logo className={isTransparent ? "text-white" : "text-primary-main"} />
-      <Badge badgeContent={1} color="error" className="ml-auto mr-7 mt-1">
-        <div>
-          <Image src={alert} alt="alert" />
-        </div>
-      </Badge>
+      <IconButton className="ml-auto mr-7 mt-1">
+        <Badge badgeContent={1} color="error">
+          <div>
+            <Image src={alert} alt="alert" />
+          </div>
+        </Badge>
+      </IconButton>
       <IconButton
         onClick={handleToggleDrawer(true)}
         color="inherit"

@@ -36,7 +36,7 @@ const CheckEmail = () => {
       <div className="mt-14 lg:hidden">
         <Typography className="text-grey-400 mb-1 futura">
           Already have an account?
-          <Link href="/">
+          <Link href="/signin">
             <a className="text-success-500 ml-2">Sign in</a>
           </Link>
         </Typography>

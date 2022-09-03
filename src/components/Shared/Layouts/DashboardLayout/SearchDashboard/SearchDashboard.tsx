@@ -32,7 +32,7 @@ const SearchDashboard = ({ setOpen }: IProps) => {
         </div>
       </div>
       <div className="hidden  md:block md:justify-center xl:flex-end">
-        <Btn onClick={handleOpen} className=" ml-auto  py-3 px-6" size="large">
+        <Btn onClick={handleOpen} className="ml-auto  py-3 px-6" size="large">
           List New Script
         </Btn>
       </div>

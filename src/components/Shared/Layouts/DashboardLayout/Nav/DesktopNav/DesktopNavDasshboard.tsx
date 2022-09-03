@@ -1,4 +1,4 @@
-import { Badge, Typography } from "@mui/material";
+import { Badge, IconButton, Typography } from "@mui/material";
 import Image from "next/image";
 import wallet from "./assets/wallet.png";
 import { IoIosMore } from "react-icons/io";
@@ -25,11 +25,13 @@ const DesktopNavDashboard = () => {
           </div>
         </div>
         <div className="flex items-center">
-          <Badge badgeContent={1} color="error" className="ml-auto mr-12 mt-1">
-            <div>
-              <Image src={alert} alt="alert" />
-            </div>
-          </Badge>
+          <IconButton className="ml-auto mr-12 mt-1">
+            <Badge badgeContent={1} color="error">
+              <div>
+                <Image src={alert} alt="alert" />
+              </div>
+            </Badge>
+          </IconButton>
 
           <Typography
             variant="body1"

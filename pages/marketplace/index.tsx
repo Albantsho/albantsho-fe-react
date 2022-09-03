@@ -13,8 +13,6 @@ const marketPlace: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Market Place</title>
       </Head>
-
-    
         <TabsMarketPlace />
         <MarketPlaceProducts />
         <PaginationMarketList />

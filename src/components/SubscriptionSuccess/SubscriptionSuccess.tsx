@@ -21,7 +21,7 @@ const SubscriptionSuccess = () => {
         variant="h5"
         color="primary.700"
         mb={0.5}
-        className="futura font-medium"
+        className="futura font-medium leading-normal"
       >
         Transaction ID: 1234567890AVGED
       </Typography>
@@ -33,7 +33,7 @@ const SubscriptionSuccess = () => {
         Subscription activated! you now have unlimited access to all scripts on
         the platform!
       </Typography>
-      <Link href="/market-place" passHref>
+      <Link href="/marketplace" passHref>
         <Btn size="large" className="py-3 px-6">
           Back to marketplace
         </Btn>

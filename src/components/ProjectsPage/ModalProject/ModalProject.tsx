@@ -1,4 +1,4 @@
-import { IconButton, Modal, Typography } from "@mui/material";
+import { IconButton, Modal } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { Dispatch, SetStateAction } from "react";

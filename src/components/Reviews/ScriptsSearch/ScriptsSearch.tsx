@@ -1,24 +1,19 @@
-import { FiChevronDown } from "react-icons/fi";
 import { AiOutlineSearch } from "react-icons/ai";
-
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
-import CustomInput from "@shared/CustomInput/CustomInput";
+
 import {
   Autocomplete,
   createFilterOptions,
-  Divider,
   InputAdornment,
+  ListItem,
+  ListItemButton,
+  ListItemText,
   SvgIcon,
   TextField,
   Typography,
 } from "@mui/material";
-
-interface IProps {
-  setOpenSearch: Dispatch<SetStateAction<boolean>>;
-}
-
 interface FilmOptionType {
   inputValue?: string;
   title: string;
@@ -40,9 +35,9 @@ const filterOptions = createFilterOptions({
   stringify: (option: FilmOptionType) => option.title,
 });
 
-const ScriptsSearch = ({ setOpenSearch }: IProps) => {
+const ScriptsSearch = () => {
   return (
-    <div className="bg-white -mt-4 mx-auto relative min-h-screen md:items-center rounded-md px-5 pt-7 pb-6 sm:pb-9 lg:pb-12 xl:pb-16  md:pt-14  flex flex-col ">
+    <div className="bg-white -mt-4 mx-auto relative md:items-center rounded-md px-5 pt-7 pb-6 sm:pb-9 lg:pb-12 xl:pb-16  md:pt-14  flex flex-col min-h-screen">
       <div className="md:min-w-[580px]">
         <label className="futura  font-medium mb-2 block ">
           Select Script<span className="text-error-500 my-auto">*</span>
@@ -57,19 +52,23 @@ const ScriptsSearch = ({ setOpenSearch }: IProps) => {
           options={results}
           getOptionLabel={(option) => option.title}
           renderOption={(props, option) => (
-            <li
+            <ListItem
               {...props}
-              className="border-b border-gray-300 mt-3 mx-2 sm:mx-6 md:mx-10"
+              className={`border-b border-gray-200 px-2 sm:px-4 md:px-6`}
+              sx={{ "&:last-child": { border: 0 } }}
             >
-              <Typography
-                variant="h6"
-                color="primary.700"
-                className="mb-2 md:mb-4 futura font-medium"
-                gutterBottom
-              >
-                {option.title}
-              </Typography>
-            </li>
+              <ListItemButton>
+                <ListItemText
+                  primary={option.title}
+                  primaryTypographyProps={{
+                    color: (theme) => theme.palette.primary.main,
+                    fontSize: 20,
+                    fontWeight: 500,
+                    fontFamily: "futura",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
           )}
           filterOptions={filterOptions}
           renderInput={({ InputProps, ...params }) => (
@@ -92,11 +91,9 @@ const ScriptsSearch = ({ setOpenSearch }: IProps) => {
         />
       </div>
 
-      <div className="flex-1  mt-10 md:min-w-[540px] absolute left-3 bottom-[25%] md:bottom-[20%] md:left-10">
-        <Link href="/reviews/reviews-plans" passHref>
-          <Btn onClick={() => setOpenSearch(false)} size="large">
-            Next
-          </Btn>
+      <div className="flex-1  mt-10 md:min-w-[540px] md:bottom-[20%] md:left-10">
+        <Link href="/abstract" passHref>
+          <Btn size="large">Next</Btn>
         </Link>
       </div>
     </div>
@@ -104,6 +101,15 @@ const ScriptsSearch = ({ setOpenSearch }: IProps) => {
 };
 
 export default ScriptsSearch;
+
+{
+  /* <Typography
+variant="h6"
+color="primary.700"
+className="mb-2 md:mb-4 futura font-medium"
+gutterBottom
+></Typography> */
+}
 
 // InputProps={{
 //   startAdornment: (

@@ -1,5 +1,12 @@
-import { Typography } from "@mui/material";
-import Subscription from "@shared/Subscription/Subscription";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Icon,
+  Typography,
+} from "@mui/material";
+import Btn from "@shared/Btn/Btn";
+import ReviewedIcon from "@assets/icons/reviewed.svg";
 
 const plans = [
   "Synopsis",
@@ -16,7 +23,7 @@ const SubscriptionPlans = () => {
         <Typography
           variant="h4"
           color="primary.700"
-          className="text-center font-semibold futura px-5"
+          className="text-center font-semibold futura px-5 leading-normal"
         >
           Subscription Plan
         </Typography>
@@ -28,14 +35,48 @@ const SubscriptionPlans = () => {
           indepth information on all scripts you view.
         </Typography>
       </div>
-      <Subscription
-        changeColor="text-primary-700"
-        plans={plans}
-        title="$300"
-        description="Here’s what you get when you subcribe;"
-        button="Subscribe"
-        isShowIcon={true}
-      />
+      <Card
+     
+        sx={{ maxWidth: { xs: 388, md: 478 } }}
+        className="bg-gray-100 shadow-md shadow-slate-300 px-8 py-10 mx-auto  mb-10 lg:mb-28"
+      >
+        <CardContent>
+          <Typography
+            variant="h3"
+            className={`text-primary-700 futura font-semibold leading-normal`}
+          >
+            $300
+          </Typography>
+          <Typography variant="body1" color="" className="font-medium mb-8">
+            Here’s what you get when you subcribe;
+          </Typography>
+          <div>
+            {plans.map((plan) => {
+              return (
+                <div
+                  key={plan}
+                  className="flex mb-4 md:mb-5 items-center gap-3"
+                >
+                  <Icon fontSize="large">
+                    <ReviewedIcon />
+                  </Icon>
+                  <Typography
+                    variant="body1"
+                    className="font-medium text-[#484848]"
+                  >
+                    {plan}
+                  </Typography>
+                </div>
+              );
+            })}
+          </div>
+        </CardContent>
+        <CardActions>
+          <Btn size="large" className="mt-4 py-2 md:mt-5 w-full text-center">
+            Subscribe
+          </Btn>
+        </CardActions>
+      </Card>
     </div>
   );
 };

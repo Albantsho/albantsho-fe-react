@@ -8,7 +8,7 @@ const Subscription = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Subscription Successfull </title>
+        <title>Albantsho || Subscription </title>
       </Head>
       <Nav color="inherit" position="static" />
       <SubscriptionPlans />

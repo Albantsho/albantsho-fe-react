@@ -32,9 +32,7 @@ export default function MarketScriptAccordion() {
             LOGLINE
           </Typography>
         </AccordionSummary>
-        <AccordionDetails
-          sx={{ "&.MuiAccordionDetails-root": { paddingX: 0 } }}
-        >
+        <AccordionDetails>
           <Typography variant="body2" className="text-[#484848]">
             Lorem ipsum dolor sit amet, consectetur adipisci ngeelit. Malesu
             fermentum ipsum tincidunt seda arcu. Hac arcu ac amet mi. Enim id
@@ -62,9 +60,7 @@ export default function MarketScriptAccordion() {
             SYNOPSIS
           </Typography>
         </AccordionSummary>
-        <AccordionDetails
-          sx={{ "&.MuiAccordionDetails-root": { paddingX: 0 } }}
-        >
+        <AccordionDetails>
           <div className="flex gap-5 sm:p-12 items-center flex-col mb-3 sm:flex-row">
             <div className="max-w-[106px] flex-shrink-0">
               <Image src={lock} alt="lock" />
@@ -119,9 +115,7 @@ export default function MarketScriptAccordion() {
             STORY WORLD
           </Typography>
         </AccordionSummary>
-        <AccordionDetails
-          sx={{ "&.MuiAccordionDetails-root": { paddingX: 0 } }}
-        >
+        <AccordionDetails>
           <Typography variant="body2" className="text-[#484848]">
             Lorem ipsum dolor sit amet, consectetur adipisci ngeelit. Malesu
             fermentum ipsum tincidunt seda arcu. Hac arcu ac amet mi. Enim id
@@ -149,9 +143,7 @@ export default function MarketScriptAccordion() {
             MOTIVATION & PERSONAL NOTE
           </Typography>
         </AccordionSummary>
-        <AccordionDetails
-          sx={{ "&.MuiAccordionDetails-root": { paddingX: 0 } }}
-        >
+        <AccordionDetails>
           <Typography variant="body2" className="text-[#484848]">
             Lorem ipsum dolor sit amet, consectetur adipisci ngeelit. Malesu
             fermentum ipsum tincidunt seda arcu. Hac arcu ac amet mi. Enim id
@@ -179,26 +171,24 @@ export default function MarketScriptAccordion() {
             THEME
           </Typography>
         </AccordionSummary>
-        <AccordionDetails
-          sx={{ "&.MuiAccordionDetails-root": { paddingX: 0 } }}
-        >
-          <ListItem className="flex gap-3 flex-wrap" alignItems="center">
+        <AccordionDetails>
+          <div className="flex gap-3 flex-wrap">
             <Chip
-              className="text-primary-700 text-sm bg-tinted-50/60 py-4 px-4"
+              className="text-primary-700 text-sm rounded-3xl bg-tinted-50/60 py-5 px-4"
               size="medium"
               label="Love"
             />
             <Chip
-              className="text-primary-700 text-sm bg-tinted-50/60 py-4 px-4"
+              className="text-primary-700 text-sm rounded-3xl bg-tinted-50/60 py-5 px-4"
               size="medium"
               label="Fantasy"
             />
             <Chip
-              className="text-primary-700 text-sm bg-tinted-50/60 py-4 px-4"
+              className="text-primary-700 text-sm rounded-3xl bg-tinted-50/60 py-5 px-4"
               size="medium"
               label="Patriotism"
             />
-          </ListItem>
+          </div>
         </AccordionDetails>
       </Accordion>
       <Accordion
@@ -221,9 +211,7 @@ export default function MarketScriptAccordion() {
             ACT STRUCTURE
           </Typography>
         </AccordionSummary>
-        <AccordionDetails
-          sx={{ "&.MuiAccordionDetails-root": { paddingX: 0 } }}
-        >
+        <AccordionDetails>
           <Typography variant="body2" className="text-[#484848]">
             Lorem ipsum dolor sit amet, consectetur adipisci ngeelit. Malesu
             fermentum ipsum tincidunt seda arcu. Hac arcu ac amet mi. Enim id
@@ -251,9 +239,7 @@ export default function MarketScriptAccordion() {
             INSPIRATION
           </Typography>
         </AccordionSummary>
-        <AccordionDetails
-          sx={{ "&.MuiAccordionDetails-root": { paddingX: 0 } }}
-        >
+        <AccordionDetails>
           <Typography variant="body2" className="text-[#484848]">
             Lorem ipsum dolor sit amet, consectetur adipisci ngeelit. Malesu
             fermentum ipsum tincidunt seda arcu. Hac arcu ac amet mi. Enim id
