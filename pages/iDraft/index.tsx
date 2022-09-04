@@ -1,15 +1,15 @@
-import { Typography } from "@mui/material";
-import IDraftLayout from "@shared/Layouts/IDraftLayout/IDrafyLayout";
-import BenefitsIDeaft from "components/IDraft/BenefitsIDeaft/BenefitsIDeaft";
-import DeadLineIDraft from "components/IDraft/DeadLineIDraft/DeadLineIDraft";
-import DescriptionIDraft from "components/IDraft/DescriptionIDraft/DescriptionIDraft";
-import ElgibilityIDraft from "components/IDraft/ElgibilityIDraft/ElgibilityIDraft";
-import HeadingIDraft from "components/IDraft/HeadingIDraft/HeadingIDraft";
-import MentorInfoList from "components/IDraft/MentorInfoList/MentorInfoList";
-import Sponsers from "components/IDraft/Sponsers/Sponsers";
 import Head from "next/head";
 import Link from "next/link";
 import { NextPageWithLayout } from "../_app";
+import { Typography } from "@mui/material";
+import HeadingIDraft from "components/IDraft/Index/HeadingIDraft/HeadingIDraft";
+import DescriptionIDraft from "components/IDraft/Index/DescriptionIDraft/DescriptionIDraft";
+import BenefitsIDraft from "components/IDraft/Index/BenefitsIDraft/BenefitsIDraft";
+import ElgibilityIDraft from "components/IDraft/Index/ElgibilityIDraft/ElgibilityIDraft";
+import DeadLineIDraft from "components/IDraft/Index/DeadLineIDraft/DeadLineIDraft";
+import Sponsers from "components/IDraft/Index/Sponsers/Sponsers";
+import MentorInfoList from "components/IDraft/Index/MentorInfoList/MentorInfoList";
+import IDraftLayout from "@shared/Layouts/IDraftLayout/IDrafyLayout";
 
 const IDraft: NextPageWithLayout = () => {
   return (
@@ -19,7 +19,7 @@ const IDraft: NextPageWithLayout = () => {
       </Head>
       <HeadingIDraft />
       <DescriptionIDraft />
-      <BenefitsIDeaft />
+      <BenefitsIDraft />
       <ElgibilityIDraft />
       <DeadLineIDraft />
       <Link href="/iDraft/iDraft-terms-and-conditions">

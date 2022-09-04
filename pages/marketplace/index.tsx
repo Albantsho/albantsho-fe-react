@@ -1,8 +1,8 @@
-import GeneralLayout from "@shared/Layouts/GeneralLayout/GeneralLayout";
 import MarketplaceLayout from "@shared/Layouts/MarketplaceLayout/MarketplaceLayout";
-import MarketPlaceProducts from "components/MarketPlace/MarketList/MarketPlaceProducts";
-import PaginationMarketList from "components/MarketPlace/PaginationMarketList/PaginationMarketList";
-import TabsMarketPlace from "components/MarketPlace/TabsMarketPlace/TabsMarketPlace";
+import MarketplaceProducts from "components/Marketplace/Index/MarketList/MarketplaceProducts";
+import PaginationMarketList from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
+import TabsMarketplace from "components/Marketplace/Index/TabsMarketplace/TabsMarketplace";
+
 import Head from "next/head";
 import React from "react";
 import { NextPageWithLayout } from "../_app";
@@ -13,10 +13,9 @@ const marketPlace: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Market Place</title>
       </Head>
-        <TabsMarketPlace />
-        <MarketPlaceProducts />
-        <PaginationMarketList />
-
+      <TabsMarketplace />
+      <MarketplaceProducts />
+      <PaginationMarketList />
     </>
   );
 };

@@ -1,0 +1,52 @@
+import { Tab, Tabs } from "@mui/material";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+
+const routes = [
+  { route: "?type=opening-list", label: "Open Listings" },
+  { route: "?type=drafts", label: "Drafts" },
+  { route: "?type=closed-list", label: "Closed Listings" },
+];
+
+const RoutingButton = () => {
+  const [activeLink, setActiveLink] = useState(0);
+  const { push, query } = useRouter();
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setActiveLink(newValue);
+  };
+
+  useEffect(() => {
+    if (!query.type || query.type === "opening-list") setActiveLink(0);
+    if (query.type === "drafts") setActiveLink(1);
+    if (query.type === "closed-list") setActiveLink(2);
+  }, [query]);
+
+  return (
+    <Tabs
+      value={activeLink}
+      onChange={handleChange}
+      className="bg-white rounded-md"
+    >
+      {routes.map((item) => (
+        <Tab
+          key={item.label}
+          onClick={() => push(`/listings/${item.route}`)}
+          sx={{
+            "&.MuiButtonBase-root": {
+              flexGrow: { xs: 1, md: 0 },
+              minWidth: "30px",
+            },
+            marginRight: { md: 1 },
+            px: { md: 6 },
+          }}
+          className={`text-gray-600  futura text-lg`}
+          label={item.label}
+        />
+      ))}
+    </Tabs>
+  );
+};
+
+export default RoutingButton;
+
+// "&.MuiTabs-root": { maxWidth: "full" },

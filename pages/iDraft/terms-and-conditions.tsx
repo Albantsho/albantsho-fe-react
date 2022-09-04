@@ -1,6 +1,6 @@
 import IDraftLayout from "@shared/Layouts/IDraftLayout/IDrafyLayout";
-import HeadingIDraftTAC from "components/IDraftTAC/HeadingIDraftTAC/HeadingIDraftTAC";
-import IDraftTAC from "components/IDraftTAC/IDraftTAC";
+import IDraftTAC from "components/IDraft/IDeaftTAC/DescriptionIDraftTAC/DescriptionIDraftTAC";
+import HeadingIDraftTAC from "components/IDraft/IDeaftTAC/HeadingIDraftTAC/HeadingIDraftTAC";
 import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
 

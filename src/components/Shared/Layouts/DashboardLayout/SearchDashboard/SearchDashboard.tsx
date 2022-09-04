@@ -6,12 +6,12 @@ import { RiSearch2Line } from "react-icons/ri";
 import { BsArrowLeftShort } from "react-icons/bs";
 
 interface IProps {
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpenModalCreateScript: Dispatch<SetStateAction<boolean>>;
 }
 
-const SearchDashboard = ({ setOpen }: IProps) => {
+const SearchDashboard = ({ setOpenModalCreateScript }: IProps) => {
   const { back } = useRouter();
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpenModalCreateScript(true);
 
   return (
     <div className="flex justify-start items-center mt-8">

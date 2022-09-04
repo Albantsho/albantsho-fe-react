@@ -1,7 +1,7 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import SearchDashboard from "@shared/Layouts/DashboardLayout/SearchDashboard/SearchDashboard";
 import ListingsScriptsPage from "components/LisitingsScriptsPage/ListingsScriptsPage";
-import RoutingButton from "components/Listings/RoutingButton/RoutingButton";
+import RoutingButton from "components/Dashboard_ListingsPage/RoutingButton/RoutingButton";
 import Head from "next/head";
 import { useState } from "react";
 import { NextPageWithLayout } from "../_app";

@@ -9,7 +9,7 @@ import { AiFillCaretDown } from "react-icons/ai";
 const DesktopNavDashboard = () => {
   return (
     <>
-      <div className="flex px-10 flex-1 justify-between items-center">
+      <div className="flex px-1 flex-1 justify-between items-center">
         <div className="border border-gray-300 py-2 px-3 rounded-md flex justify-center gap-4 items-center">
           <div className="mt-1">
             <Image src={wallet} alt="wallet" />

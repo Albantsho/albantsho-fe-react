@@ -2,7 +2,6 @@ import {
   Button,
   ButtonGroup,
   IconButton,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -30,15 +29,33 @@ const AuctionsScripts = () => {
       <Typography variant="h6" color="primary.700">
         Auctions
       </Typography>
-
-      <TableContainer component={Paper}>
-        <Table>
+      <TableContainer>
+        <Table className=" overflow-x-scroll">
           <TableHead sx={{ overflow: "scroll" }}>
-            <TableRow>
-              <TableCell>Bidder</TableCell>
-              <TableCell>Asking Price</TableCell>
-              <TableCell> </TableCell>
-              <TableCell> </TableCell>
+            <TableRow className="border-b border-gray-200">
+              <TableCell className="min-w-[150px]">
+                <Typography
+                  variant="body1"
+                  className="text-purple-700 futura font-medium"
+                >
+                  Bidder
+                </Typography>
+              </TableCell>
+              <TableCell
+                sx={{
+                  "&.MuiTableCell-root": {
+                    p: { sm: 0 },
+                    border: 0,
+                  },
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  className="text-purple-700 futura font-medium"
+                >
+                  Asking Price
+                </Typography>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody sx={{ overflow: "scroll" }}>
@@ -47,26 +64,52 @@ const AuctionsScripts = () => {
                 key={auction.price}
                 sx={{ "& td, & th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
-                  {auction.name}
+                <TableCell
+                  sx={{
+                    "&.MuiTableCell-root": {
+                      pr: { sm: 5 },
+                    },
+                  }}
+                  className="min-w-[150px]"
+                >
+                  <Typography>{auction.name}</Typography>
                 </TableCell>
-                <TableCell>$ {auction.price}</TableCell>
+                <TableCell
+                  sx={{
+                    "&.MuiTableCell-root": {
+                      p: { sm: 0 },
+                    },
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    className="text-primary-700 font-semibold"
+                  >
+                    $ {auction.price}
+                  </Typography>
+                </TableCell>
 
-                <TableCell>
-                  <ButtonGroup className="border-none">
-                    <Button className="hidden sm:flex border-none hover:border-none">
+                <TableCell
+                  sx={{
+                    "&.MuiTableCell-root": {
+                      pr: { sm: 0 },
+                    },
+                  }}
+                  className=""
+                >
+                  <ButtonGroup className="border-none md:gap-8 lg:gap-12">
+                    <Button className="hidden sm:flex border-none hover:border-none text-success-500">
                       completed
                     </Button>
-                    <Button className="hidden sm:flex border-none hover:border-none">
+                    <Button className="hidden sm:flex border-none hover:border-none text-secondary-700">
                       deleted
                     </Button>
                   </ButtonGroup>
                   <ButtonGroup>
-                    <IconButton className="flex sm:hidden">
+                    <IconButton className="flex sm:hidden text-success-500">
                       <MdDone />
                     </IconButton>
-
-                    <IconButton className="flex sm:hidden">
+                    <IconButton className="flex sm:hidden text-secondary-700">
                       <AiOutlineClose />
                     </IconButton>
                   </ButtonGroup>
