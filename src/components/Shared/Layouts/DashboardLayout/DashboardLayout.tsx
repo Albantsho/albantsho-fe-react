@@ -8,7 +8,7 @@ interface IProps {
 
 const DashboardLayout = ({ children }: IProps) => {
   return (
-    <main className="flex bg-[#E5E5E5]  relative">
+    <main className="flex bg-[#E5E5E5]  relative ">
       <ListDashboardBigSize />
 
       <div className="flex-1  ">

@@ -1,6 +1,6 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
-import HeadReviews from "components/Dashboard_ReviewsPage/Index/HeadReviews/HeadReviews";
-import SummaryPage from "components/Dashboard_ReviewsPage/ReviewsPage_Summary/SummaryPage";
+import Heading from "components/Dashboard/Reviews/Index/Heading/Heading";
+import SummaryReviews from "components/Dashboard/Reviews/Summary/SummaryReviews";
 import Head from "next/head";
 
 import { NextPageWithLayout } from "../_app";
@@ -12,8 +12,8 @@ const Summary: NextPageWithLayout = () => {
         <title>Albantsho || Summary </title>
       </Head>
       <main className="bg-white rounded-md mb-16  px-3 sm:px-5">
-        <HeadReviews />
-        <SummaryPage />
+        <Heading />
+        <SummaryReviews />
       </main>
     </>
   );

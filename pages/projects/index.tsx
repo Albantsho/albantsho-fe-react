@@ -1,20 +1,20 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import SearchDashboard from "@shared/Layouts/DashboardLayout/SearchDashboard/SearchDashboard";
-import RoutingButton from "components/Dashboard_ProjectsPage/RoutingButton/RoutingButton";
 import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
 import { useRouter } from "next/router";
-import AccordionProjectsList from "components/Dashboard_ProjectsPage/ScriptsRoute/AccordionProjects/AccordionProjectsList";
-import ModalProject from "components/Dashboard_ProjectsPage/ModalProject/ModalProject";
-import ListScriptsPage from "components/Dashboard_ProjectsPage/ArchiveRoute/ListArchiveScripts";
-import ModalArchive from "components/Dashboard_ProjectsPage/ArchiveRoute/ModalArchive/ModalArchive";
+import AccordionProjectsList from "components/Dashboard/Projects/Scripts/AccordionProjects/AccordionScriptsList";
+import CreateScript from "@shared/Modals/CreateScript/CreateScript";
+import ListScriptsPage from "components/Dashboard/Projects/Archive/ListScripts/ListScripts";
+import ModalArchive from "components/Dashboard/Projects/Archive/ModalArchive/ModalArchive";
 import { useState } from "react";
 import { Fab } from "@mui/material";
+import TabButtons from "components/Dashboard/Projects/TabButtons/TabButtons";
 
 const Projects: NextPageWithLayout = () => {
-  const [openModalCreateScript, setOpenModalCreateScript] = useState<boolean>(false);
-  const [openArchive, setOpenArchive] = useState<boolean>(false);
-  const handleOpen = () => setOpenModalCreateScript(true);
+  const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
+  const [openModalUnArchive, setOpenModalUnArchive] = useState<boolean>(false);
+  const handleOpen = () => setOpenCreateScript(true);
   const { query } = useRouter();
 
   return (
@@ -23,19 +23,22 @@ const Projects: NextPageWithLayout = () => {
         <title>Albantsho || Projects </title>
       </Head>
       <main>
-        <RoutingButton />
-        <SearchDashboard setOpenModalCreateScript={setOpenModalCreateScript} />
+        <TabButtons />
+        <SearchDashboard setOpenCreateScript={setOpenCreateScript} />
         {(!query.type || query.type === "scripts") && <AccordionProjectsList />}
         {query.type === "archives" && (
           <>
-            <ListScriptsPage setOpenArchive={setOpenArchive} />
+            <ListScriptsPage setOpenModalUnArchive={setOpenModalUnArchive} />
             <ModalArchive
-              openArchive={openArchive}
-              setOpenArchive={setOpenArchive}
+              openModalUnArchive={openModalUnArchive}
+              setOpenModalUnArchive={setOpenModalUnArchive}
             />
           </>
         )}
-        <ModalProject openModalCreateScript={openModalCreateScript} setOpenModalCreateScript={setOpenModalCreateScript} />
+        <CreateScript
+          openCreateScript={openCreateScript}
+          setOpenCreateScript={setOpenCreateScript}
+        />
         <Fab
           color="primary"
           onClick={handleOpen}

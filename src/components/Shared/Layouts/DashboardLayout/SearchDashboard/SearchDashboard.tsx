@@ -6,12 +6,12 @@ import { RiSearch2Line } from "react-icons/ri";
 import { BsArrowLeftShort } from "react-icons/bs";
 
 interface IProps {
-  setOpenModalCreateScript: Dispatch<SetStateAction<boolean>>;
+  setOpenCreateScript: Dispatch<SetStateAction<boolean>>;
 }
 
-const SearchDashboard = ({ setOpenModalCreateScript }: IProps) => {
+const SearchDashboard = ({ setOpenCreateScript }: IProps) => {
   const { back } = useRouter();
-  const handleOpen = () => setOpenModalCreateScript(true);
+  const handleOpenCreateScript = () => setOpenCreateScript(true);
 
   return (
     <div className="flex justify-start items-center mt-8">
@@ -32,7 +32,7 @@ const SearchDashboard = ({ setOpenModalCreateScript }: IProps) => {
         </div>
       </div>
       <div className="hidden  md:block md:justify-center xl:flex-end">
-        <Btn onClick={handleOpen} className="ml-auto  py-3 px-6" size="large">
+        <Btn onClick={handleOpenCreateScript} className="ml-auto  py-3 px-6" size="large">
           List New Script
         </Btn>
       </div>
