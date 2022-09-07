@@ -1,19 +1,13 @@
-import {
-  Chip,
-  Icon,
-  Rating,
-  Typography,
-} from "@mui/material";
+import { Chip, Icon, Rating, Typography } from "@mui/material";
 import ReviewedIcon from "@assets/icons/reviewed.svg";
 import Image from "next/image";
 import beauty from "@assets/images/beauty.jpg";
 import { useState } from "react";
 import PlaceBid from "./PlaceBid/PlaceBid";
-import ModalBidSuccessful from "../ModalBidSuccessful/ModalBidSuccessful";
-
+import BidSuccessfulModal from "../BidSuccessfulModal/BidSuccessfulModal";
 
 const ScriptInfo = () => {
-  const [open, setOpen] = useState(false);
+  const [openBidSuccessful, setOpenBidSuccessful] = useState(false);
   return (
     <div className="flex flex-col px-6 py-6 sm:px-11 gap-10 md:flex-row max-w-screen-2xl mx-auto">
       <div className="md:w-1/2 lg:w-2/5 flex-shrink-0">
@@ -49,8 +43,11 @@ const ScriptInfo = () => {
         <Typography variant="body1" color="dark.400">
           Story about a man who lived on long beach
         </Typography>
-        <PlaceBid setOpen={setOpen} />
-        <ModalBidSuccessful open={open} setOpen={setOpen} />
+        <PlaceBid setOpenBidSuccessful={setOpenBidSuccessful} />
+        <BidSuccessfulModal
+          openBidSuccessful={openBidSuccessful}
+          setOpenBidSuccessful={setOpenBidSuccessful}
+        />
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import { Fab } from "@mui/material";
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import SearchDashboard from "@shared/Layouts/DashboardLayout/SearchDashboard/SearchDashboard";
-import AcceptOffer from "@shared/Modals/AcceptOffer/AcceptOffer";
-import CreateScript from "@shared/Modals/CreateScript/CreateScript";
+import AcceptOfferModal from "@shared/Modals/AcceptOfferModal/AcceptOfferModal";
+import CreateScriptModal from "@shared/Modals/CreateScriptModal/CreateScriptModal";
 import TabButtons from "components/Dashboard/Listings/Index/TabButtons/TabButtons";
 import BidsPage from "components/Dashboard/Listings/OpenListingInfo/Index/Bids/BidsPage";
 import Head from "next/head";
@@ -19,13 +19,13 @@ const Bids: NextPageWithLayout = () => {
         <title>Albantsho || Bids </title>
       </Head>
       <TabButtons />
-      <CreateScript
+      <CreateScriptModal
         openCreateScript={openCreateScript}
         setOpenCreateScript={setOpenCreateScript}
       />
       <SearchDashboard setOpenCreateScript={setOpenCreateScript} />
       <BidsPage setOpenAcceptOffer={setOpenAcceptOffer} />
-      <AcceptOffer
+      <AcceptOfferModal
         openAcceptOffer={openAcceptOffer}
         setOpenAcceptOffer={setOpenAcceptOffer}
       />

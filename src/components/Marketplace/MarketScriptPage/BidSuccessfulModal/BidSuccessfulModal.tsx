@@ -4,16 +4,26 @@ import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import success from "@assets/images/success.png";
 interface IProps {
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  open: boolean;
+  setOpenBidSuccessful: Dispatch<SetStateAction<boolean>>;
+  openBidSuccessful: boolean;
 }
 
-const ModalBidSuccessful = ({ setOpen, open }: IProps) => {
-  const handleClose = () => setOpen(false);
+const BidSuccessfulModal = ({
+  setOpenBidSuccessful,
+  openBidSuccessful,
+}: IProps) => {
+  const handleCloseBidSuccessful = () => setOpenBidSuccessful(false);
   return (
-    <Modal className="px-5" open={open} onClose={handleClose}>
+    <Modal
+      className="px-5"
+      open={openBidSuccessful}
+      onClose={handleCloseBidSuccessful}
+    >
       <div className="px-6 relative bg-white w-full mt-44 max-w-xl mx-auto flex flex-col items-center py-16 rounded-lg">
-        <IconButton onClick={handleClose} className="absolute top-5 right-5">
+        <IconButton
+          onClick={handleCloseBidSuccessful}
+          className="absolute top-5 right-5"
+        >
           <AiOutlineClose className="text-error-500" />
         </IconButton>
         <div>
@@ -31,4 +41,4 @@ const ModalBidSuccessful = ({ setOpen, open }: IProps) => {
   );
 };
 
-export default ModalBidSuccessful;
+export default BidSuccessfulModal;

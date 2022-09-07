@@ -10,7 +10,7 @@ interface IProps {
   setOpenAddToScript: Dispatch<SetStateAction<boolean>>;
 }
 
-const AddScriptToCompleted = ({
+const AddScriptToCompletedModal = ({
   openAddToScript,
   setOpenAddToScript,
 }: IProps) => {
@@ -53,4 +53,4 @@ const AddScriptToCompleted = ({
   );
 };
 
-export default AddScriptToCompleted;
+export default AddScriptToCompletedModal;

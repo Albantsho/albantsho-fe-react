@@ -22,7 +22,7 @@ const UnListingItemModal = ({
           <AiOutlineClose className="text-error-500" />
         </IconButton>
         <div>
-          <Image src={unlistengItem} alt="unlistingItem" />
+          <Image src={unlistengItem} alt="UnListing Item" />
         </div>
         <Typography
           className="text-center max-w-[212px]"

@@ -4,7 +4,7 @@ import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
 import { useRouter } from "next/router";
 import AccordionProjectsList from "components/Dashboard/Projects/Scripts/AccordionProjects/AccordionScriptsList";
-import CreateScript from "@shared/Modals/CreateScript/CreateScript";
+import CreateScriptModal from "@shared/Modals/CreateScriptModal/CreateScriptModal";
 import ListScriptsPage from "components/Dashboard/Projects/Archive/ListScripts/ListScripts";
 import ModalArchive from "components/Dashboard/Projects/Archive/ModalArchive/ModalArchive";
 import { useState } from "react";
@@ -35,7 +35,7 @@ const Projects: NextPageWithLayout = () => {
             />
           </>
         )}
-        <CreateScript
+        <CreateScriptModal
           openCreateScript={openCreateScript}
           setOpenCreateScript={setOpenCreateScript}
         />

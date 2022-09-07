@@ -4,11 +4,11 @@ import CustomInput from "@shared/CustomInput/CustomInput";
 import { Dispatch, SetStateAction } from "react";
 
 interface IProps {
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpenBidSuccessful: Dispatch<SetStateAction<boolean>>;
 }
 
-const PlaceBid = ({ setOpen }: IProps) => {
-  const handleOpen = () => setOpen(true);
+const PlaceBid = ({ setOpenBidSuccessful }: IProps) => {
+  const handleOpenBidSuccessful = () => setOpenBidSuccessful(true);
   return (
     <div className="flex gap-6 mt-4 rounded-md py-6 px-5 sm:py-12 sm:px-6 lg:px-8 xl:px-12 xl:py-8 sm:mt-10 md:gap-6 flex-col bg-tinted-50/60 flex-1 w-full">
       <div className="flex flex-col">
@@ -31,7 +31,11 @@ const PlaceBid = ({ setOpen }: IProps) => {
           size="small"
           placeholder="Enter Bid"
         />
-        <Btn onClick={handleOpen} size="small" className="mr-auto py-3 px-4">
+        <Btn
+          onClick={handleOpenBidSuccessful}
+          size="small"
+          className="mr-auto py-3 px-4"
+        >
           Place Bid
         </Btn>
       </div>

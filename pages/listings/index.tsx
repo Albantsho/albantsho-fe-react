@@ -3,15 +3,15 @@ import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import SearchDashboard from "@shared/Layouts/DashboardLayout/SearchDashboard/SearchDashboard";
 import ClosedList from "components/Dashboard/Listings/Index/ClosedList/ClosedList";
 import DraftsList from "components/Dashboard/Listings/Index/DraftsList/DraftsList";
-import AddScriptToCompleted from "components/Dashboard/Listings/Index/DraftsList/Modals/AddScriptToCompleted/AddScriptToCompleted";
-import RelistScript from "components/Dashboard/Listings/Index/DraftsList/Modals/RelistScript/RelistScript";
+import AddScriptToCompletedModal from "components/Dashboard/Listings/Index/DraftsList/Modals/AddScriptToCompletedModal/AddScriptToCompletedModal";
+import RelistScriptModal from "components/Dashboard/Listings/Index/DraftsList/Modals/RelistScriptModal/RelistScriptModal";
 import OpeningLists from "components/Dashboard/Listings/Index/OpeningList/OpeningLists";
 import TabButtons from "components/Dashboard/Listings/Index/TabButtons/TabButtons";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { NextPageWithLayout } from "../_app";
-import CreateScript from "@shared/Modals/CreateScript/CreateScript";
+import CreateScriptModal from "@shared/Modals/CreateScriptModal/CreateScriptModal";
 import UnListingItemModal from "components/Dashboard/Listings/Index/OpeningList/Modals/UnListingItemModal/UnListingItemModal";
 
 const Listings: NextPageWithLayout = () => {
@@ -28,7 +28,7 @@ const Listings: NextPageWithLayout = () => {
       </Head>
       <TabButtons />
       <SearchDashboard setOpenCreateScript={setOpenCreateScript} />
-      <CreateScript
+      <CreateScriptModal
         openCreateScript={openCreateScript}
         setOpenCreateScript={setOpenCreateScript}
       />
@@ -47,11 +47,11 @@ const Listings: NextPageWithLayout = () => {
             setOpenAddToScript={setOpenAddToScript}
             setOpenRelistScript={setOpenRelistScript}
           />
-          <AddScriptToCompleted
+          <AddScriptToCompletedModal
             openAddToScript={openAddToScript}
             setOpenAddToScript={setOpenAddToScript}
           />
-          <RelistScript
+          <RelistScriptModal
             openRelistScript={openRelistScript}
             setOpenRelistScript={setOpenRelistScript}
           />

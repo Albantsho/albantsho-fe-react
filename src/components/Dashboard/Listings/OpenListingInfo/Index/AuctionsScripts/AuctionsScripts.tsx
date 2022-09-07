@@ -2,7 +2,6 @@ import {
   Button,
   ButtonGroup,
   IconButton,
-  styled,
   Table,
   TableBody,
   TableCell,
@@ -26,19 +25,6 @@ const auctions = [
   { id: 5, name: "Musa", price: 1000 },
   { id: 6, name: "Lawlyn", price: 18000 },
 ];
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: "#FBF9FF",
-  },
-  "&:nth-of-type(event)": {
-    backgroundColor: "#FFF",
-  },
-
-  " td, th": {
-    border: 0,
-  },
-}));
 
 interface IProps {
   setOpenAcceptOffer: Dispatch<SetStateAction<boolean>>;
@@ -64,7 +50,7 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
         component={Paper}
       >
         <Table>
-          <TableHead >
+          <TableHead>
             <TableRow className="border-b border-gray-200">
               <TableCell className="pr-20">
                 <Typography
@@ -91,7 +77,22 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
                 href={`/listings/${query.scriptSlug}/bids`}
                 passHref
               >
-                <StyledTableRow key={auction.id} className="cursor-pointer">
+                <TableRow
+                  sx={{
+                    "&:nth-of-type(odd)": {
+                      backgroundColor: "#FBF9FF",
+                    },
+                    "&:nth-of-type(event)": {
+                      backgroundColor: "#FFF",
+                    },
+
+                    " td, th": {
+                      border: 0,
+                    },
+                  }}
+                  key={auction.id}
+                  className="cursor-pointer"
+                >
                   <TableCell
                     className="w-20"
                     sx={{
@@ -108,7 +109,7 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
                       $ {auction.price}
                     </Typography>
                   </TableCell>
-                  <TableCell >
+                  <TableCell>
                     <div className="flex justify-end min-w-[240px]">
                       <ButtonGroup className="border-none md:gap-8">
                         <Button
@@ -134,7 +135,7 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
                       </ButtonGroup>
                     </div>
                   </TableCell>
-                </StyledTableRow>
+                </TableRow>
               </Link>
             ))}
           </TableBody>

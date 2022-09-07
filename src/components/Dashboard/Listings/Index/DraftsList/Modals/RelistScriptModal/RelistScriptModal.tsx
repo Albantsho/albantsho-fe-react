@@ -10,7 +10,10 @@ interface IProps {
   setOpenRelistScript: Dispatch<SetStateAction<boolean>>;
 }
 
-const RelistScript = ({ openRelistScript, setOpenRelistScript }: IProps) => {
+const RelistScriptModal = ({
+  openRelistScript,
+  setOpenRelistScript,
+}: IProps) => {
   const handleCloseRelistScript = () => setOpenRelistScript(false);
   return (
     <Modal
@@ -57,4 +60,4 @@ const RelistScript = ({ openRelistScript, setOpenRelistScript }: IProps) => {
   );
 };
 
-export default RelistScript;
+export default RelistScriptModal;

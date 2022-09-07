@@ -6,14 +6,13 @@ import {
   TableHead,
   TableRow,
   Tabs,
-  Typography,
 } from "@mui/material";
-
 import { useState } from "react";
-import Image from "next/image";
 import beautySmall from "@assets/images/beauty-small.jpg";
+import TableTask from "./TableTask/TableTask";
+import DetailScriptModal from "../DetailScriptModal/DetailScriptModal";
 
-const Tasks = [
+const tasks = [
   {
     id: 1,
     image: beautySmall,
@@ -53,13 +52,14 @@ const Tasks = [
 
 const ListTasks = () => {
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
+  const [openDetailScript, setOpenDetailScript] = useState(false);
 
   const activeLinkChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveLinkIndex(newValue);
   };
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 mb-16">
       <Tabs
         value={activeLinkIndex}
         onChange={activeLinkChange}
@@ -89,43 +89,26 @@ const ListTasks = () => {
         />
       </Tabs>
 
-      <Table className=" bg-white rounded-md shadow-sm flex flex-col mb-16">
+      <DetailScriptModal
+        openDetailScript={openDetailScript}
+        setOpenDetailScript={setOpenDetailScript}
+      />
+
+      <Table className=" bg-white rounded-md shadow-sm flex flex-col">
         <TableHead>
           <TableRow>
             <TableCell className="border-none p-0"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {Tasks.map((listItem) => (
-            <TableRow
-              key={listItem.id}
-              className="flex"
-              sx={{
-                "&:last-child td, &:last-child th": { border: 0 }
-              }}
-            >
-              <TableCell className="flex flex-1 items-center flex-wrap sm:flex-nowrap gap-y-2 gap-x-4 py-8 px-12">
-                <div className="flex-shrink-0 mt-2">
-                  <Image
-                    className="rounded-md"
-                    loading="lazy"
-                    src={listItem.image}
-                    alt={listItem.title}
-                  />
-                </div>
-                <div className="flex-growsm:pl-3 sm:max-w-[271px] min-w-[170px]">
-                  <Typography
-                    variant="body1"
-                    className="futura font-semibold text-primary-700"
-                  >
-                    {listItem.title}
-                  </Typography>
-                  <Typography variant="caption" className="text-stone-800">
-                    {listItem.description}
-                  </Typography>
-                </div>
-              </TableCell>
-            </TableRow>
+          {tasks.map((task) => (
+            <TableTask
+              key={task.id}
+              image={task.image}
+              title={task.title}
+              description={task.description}
+              setOpenDetailScript={setOpenDetailScript}
+            />
           ))}
         </TableBody>
       </Table>

@@ -15,7 +15,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 
 const CartScript = () => {
   return (
-    <Card className="h-fit flex-[0.5]">
+    <Card className="h-fit hidden md:block flex-[0.7] lg:flex-[0.6] xl:flex-[0.5]">
       <CardActions className="py-6 px-5">
         <Button variant="contained">Type A</Button>
         <Button variant="outlined" startIcon={<FiArrowUpRight />}>
@@ -27,13 +27,13 @@ const CartScript = () => {
         <div className="flex items-center mb-8">
           <Typography
             variant="body1"
-            className="futura font-medium w-24 pr-6 text-neutral-800"
+            className="futura  font-medium w-24 pr-6 text-neutral-800"
           >
             Title:
           </Typography>
           <Typography
             variant="h6"
-            className="futura font-medium text-primary-700"
+            className="futura flex-1 font-medium text-primary-700 leading-normal"
           >
             The Long Man of Long Beach
           </Typography>

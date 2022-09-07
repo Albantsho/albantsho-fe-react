@@ -8,7 +8,10 @@ interface IProps {
   setOpenCreateScript: Dispatch<SetStateAction<boolean>>;
 }
 
-const CreateScript = ({ openCreateScript, setOpenCreateScript }: IProps) => {
+const CreateScriptModal = ({
+  openCreateScript,
+  setOpenCreateScript,
+}: IProps) => {
   const handleCloseModalCreateScript = () => setOpenCreateScript(false);
   return (
     <Modal
@@ -71,7 +74,7 @@ const CreateScript = ({ openCreateScript, setOpenCreateScript }: IProps) => {
   );
 };
 
-export default CreateScript;
+export default CreateScriptModal;
 
 {
   /* <label className="futura font-medium">

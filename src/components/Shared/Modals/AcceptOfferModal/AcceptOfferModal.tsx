@@ -10,7 +10,7 @@ interface IProps {
   setOpenAcceptOffer: Dispatch<SetStateAction<boolean>>;
 }
 
-const AcceptOffer = ({ openAcceptOffer, setOpenAcceptOffer }: IProps) => {
+const AcceptOfferModal = ({ openAcceptOffer, setOpenAcceptOffer }: IProps) => {
   const handleCloseAcceptOffer = () => setOpenAcceptOffer(false);
 
   return (
@@ -68,4 +68,4 @@ const AcceptOffer = ({ openAcceptOffer, setOpenAcceptOffer }: IProps) => {
   );
 };
 
-export default AcceptOffer;
+export default AcceptOfferModal;
