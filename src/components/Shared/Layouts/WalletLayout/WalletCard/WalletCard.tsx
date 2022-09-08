@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 const WalletCart = () => {
   const { push } = useRouter();
   return (
-    <Card className="px-1 md:flex-[0.6] max-w-[235px] md:max-w-fit w-full max-auto py-3 md:py-0">
+    <Card elevation={0} className="px-1 shadow-sm mx-auto h-fit md:flex-[0.6] max-w-[235px] md:max-w-fit w-full max-auto py-3 md:py-0">
       <CardContent>
         <div className="flex lg:px-5 flex-col items-center gap-2">
           <Avatar
