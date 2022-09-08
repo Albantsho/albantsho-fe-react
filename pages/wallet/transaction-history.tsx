@@ -1,9 +1,18 @@
-import { NextPageWithLayout } from '../_app'
+import WalletLayout from "@shared/Layouts/WalletLayout/WalletLayout";
+import Head from "next/head";
+import { NextPageWithLayout } from "../_app";
 
-const TransactionHistory:NextPageWithLayout = () => {
+const TransactionHistory: NextPageWithLayout = () => {
   return (
-    <div>TransactionHistory</div>
-  )
-}
+    <>
+      <Head>
+        <title>Albantsho || Transaction History </title>
+      </Head>
+      TransactionHistory
+    </>
+  );
+};
 
-export default TransactionHistory
+TransactionHistory.getLayout = (pages) => <WalletLayout>{pages}</WalletLayout>;
+
+export default TransactionHistory;

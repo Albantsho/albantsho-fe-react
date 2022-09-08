@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }: IProps) => {
     <main className="flex bg-[#E5E5E5]  relative ">
       <ListDashboardBigSize />
 
-      <div className="flex-1  ">
+      <div className="flex-1 ">
         <DashboardNav color="inherit" position="static" />
         <ListDashboardMobile />
         <div className="px-5 pt-2 lg:pt-14 flex-1  sm:px-10 max-w-screen-2xl">

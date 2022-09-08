@@ -1,9 +1,18 @@
-import { NextPageWithLayout } from '../_app'
+import WalletLayout from "@shared/Layouts/WalletLayout/WalletLayout";
+import Head from "next/head";
+import { NextPageWithLayout } from "../_app";
 
-const Wallet:NextPageWithLayout = () => {
+const Wallet: NextPageWithLayout = () => {
   return (
-    <div>Wallet</div>
-  )
-}
+    <>
+      <Head>
+        <title>Albantsho || Wallet </title>
+      </Head>
+      wallet
+    </>
+  );
+};
 
-export default Wallet
+Wallet.getLayout = (pages) => <WalletLayout>{pages}</WalletLayout>;
+
+export default Wallet;
