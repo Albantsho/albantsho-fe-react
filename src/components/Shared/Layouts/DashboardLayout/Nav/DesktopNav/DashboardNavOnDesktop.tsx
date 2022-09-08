@@ -82,7 +82,7 @@ const DashboardNavOnDesktop = () => {
           transformOrigin={{ horizontal: "right", vertical: "top" }}
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
-          <MenuItem onClick={() => push("/wallet")}>
+          <MenuItem onClick={() => push("/wallet/withdraw")}>
             <ListItemIcon>
               <SvgIcon
                 className="text-primary-700"
