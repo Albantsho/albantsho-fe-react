@@ -6,11 +6,11 @@ import { NextPageWithLayout } from "../_app";
 import { BiChevronDown } from "react-icons/bi";
 import Btn from "@shared/Btn/Btn";
 
-const Wallet: NextPageWithLayout = () => {
+const Withdraw: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Wallet </title>
+        <title>Albantsho || Withdraw </title>
       </Head>
       <div className="bg-white rounded-md px-3 sm:px-6 py-6 md:px-10 md:py-9 lg:px-14 lg:py-14 flex-1 w-full">
         <Typography
@@ -120,6 +120,6 @@ const Wallet: NextPageWithLayout = () => {
   );
 };
 
-Wallet.getLayout = (pages) => <WalletLayout>{pages}</WalletLayout>;
+Withdraw.getLayout = (pages) => <WalletLayout>{pages}</WalletLayout>;
 
-export default Wallet;
+export default Withdraw;
