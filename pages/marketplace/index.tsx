@@ -2,7 +2,6 @@ import MarketplaceLayout from "@shared/Layouts/MarketplaceLayout/MarketplaceLayo
 import MarketplaceProducts from "components/Marketplace/Index/MarketList/MarketplaceProducts";
 import PaginationMarketList from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
 import TabsMarketplace from "components/Marketplace/Index/TabsMarketplace/TabsMarketplace";
-
 import Head from "next/head";
 import React from "react";
 import { NextPageWithLayout } from "../_app";

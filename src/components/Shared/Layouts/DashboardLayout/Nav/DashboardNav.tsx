@@ -5,8 +5,8 @@ import {
   type AppBarProps,
 } from "@mui/material";
 import { useMemo } from "react";
-import DesktopNavDashboard from "./DesktopNav/DesktopNavDasshboard";
-import MobileNavDashboard from "./MobileNav/MobileNavDashboard";
+import DashboardNavOnDesktop from "./DesktopNav/DashboardNavOnDesktop";
+import DashboardNavOnMobile from "./MobileNav/DashboardNavOnMobile";
 
 const links = [
   { title: "About Us", href: "/about-us" },
@@ -26,9 +26,9 @@ const DashboardNav = ({ color = "transparent", ...props }: AppBarProps) => {
         component="nav"
       >
         {isLgScreen ? (
-          <DesktopNavDashboard />
+          <DashboardNavOnDesktop />
         ) : (
-          <MobileNavDashboard links={links} isTransparent={isTransparent} />
+          <DashboardNavOnMobile links={links} isTransparent={isTransparent} />
         )}
       </Toolbar>
     </AppBar>

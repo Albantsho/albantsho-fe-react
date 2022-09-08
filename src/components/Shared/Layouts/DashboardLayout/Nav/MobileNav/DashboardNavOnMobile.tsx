@@ -20,7 +20,7 @@ interface IProps {
   isTransparent: boolean;
 }
 
-const MobileNavDashboard = ({ links, isTransparent }: IProps) => {
+const DashboardNavOnMobile = ({ links, isTransparent }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNavDashboard();
 
   return (
@@ -36,7 +36,7 @@ const MobileNavDashboard = ({ links, isTransparent }: IProps) => {
       <IconButton
         onClick={handleToggleDrawer(true)}
         color="inherit"
-        className={isTransparent ? "text-white" : "text-primary-main"}
+        className={`${isTransparent ? "text-white" : "text-primary-main"} -mr-2`}
       >
         <SvgIcon component={MenuIcon} sx={{ fontSize: 40 }} />
       </IconButton>
@@ -65,4 +65,4 @@ const MobileNavDashboard = ({ links, isTransparent }: IProps) => {
   );
 };
 
-export default MobileNavDashboard;
+export default DashboardNavOnMobile;
