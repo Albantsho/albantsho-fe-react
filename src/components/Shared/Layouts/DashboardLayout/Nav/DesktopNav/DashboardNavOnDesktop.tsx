@@ -81,70 +81,60 @@ const DashboardNavOnDesktop = () => {
                 overflow: "visible",
                 filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.22))",
                 borderRadius: "8px",
+                maxWidth: "300px",
+                width: "100%",
               },
             }}
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <List>
-              <MenuItem onClick={() => push("/profile")}>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar src="/assets/images/profile.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText>
-                    <Typography
-                      variant="h6"
-                      className="text-primary-700 futura font-medium leading-normal -mb-2"
-                    >
-                      Jane Mawe
-                    </Typography>
-                    <Typography variant="caption" className="text-neutral-800 ">
-                      John Doe@gmail.com{" "}
-                    </Typography>
-                  </ListItemText>
-                </ListItem>
-              </MenuItem>
-              <Divider />
-              <MenuItem onClick={() => push("/projects")}>
-                <ListItem>
-                  <ListItemText>
-                    <Typography variant="body1" className="text-primary-700">
-                      Go to dashboard
-                    </Typography>
-                  </ListItemText>
-                </ListItem>
-              </MenuItem>
-              <Divider />
-              <MenuItem>
-                <ListItem>
-                  <ListItemText>
-                    <Typography variant="body1" className="text-primary-700">
-                      Contact Us
-                    </Typography>
-                  </ListItemText>
-                </ListItem>
-              </MenuItem>
-              <MenuItem>
-                <ListItem>
-                  <ListItemText>
-                    <Typography variant="body1" className="text-primary-700">
-                      Help
-                    </Typography>
-                  </ListItemText>
-                </ListItem>
-              </MenuItem>
-              <Divider />
-              <MenuItem>
-                <ListItem>
-                  <ListItemText>
-                    <Typography variant="body1" className="text-error-700">
-                      Sign Out
-                    </Typography>
-                  </ListItemText>
-                </ListItem>
-              </MenuItem>
-            </List>
+            <MenuItem onClick={() => push("/profile")}>
+              <ListItemAvatar>
+                <Avatar src="/assets/images/profile.jpg" />
+              </ListItemAvatar>
+              <ListItemText>
+                <Typography
+                  variant="h6"
+                  className="text-primary-700 futura font-medium leading-normal -mb-2"
+                >
+                  Jane Mawe
+                </Typography>
+                <Typography variant="caption" className="text-neutral-800 ">
+                  John Doe@gmail.com{" "}
+                </Typography>
+              </ListItemText>
+            </MenuItem>
+            <Divider />
+            <MenuItem onClick={() => push("/projects")}>
+              <ListItemText>
+                <Typography variant="body1" className="text-primary-700">
+                  Go to dashboard
+                </Typography>
+              </ListItemText>
+            </MenuItem>
+            <Divider />
+            <MenuItem>
+              <ListItemText>
+                <Typography variant="body1" className="text-primary-700">
+                  Contact Us
+                </Typography>
+              </ListItemText>
+            </MenuItem>
+            <MenuItem>
+              <ListItemText>
+                <Typography variant="body1" className="text-primary-700">
+                  Help
+                </Typography>
+              </ListItemText>
+            </MenuItem>
+            <Divider />
+            <MenuItem>
+              <ListItemText>
+                <Typography variant="body1" className="text-error-700">
+                  Sign Out
+                </Typography>
+              </ListItemText>
+            </MenuItem>
           </Menu>
         </div>
       </div>

@@ -14,10 +14,7 @@ import pencil from "../assets/pencil.svg";
 const BasicPersonalInformation = () => {
   return (
     <div>
-      <Typography
-        variant="body1"
-        className="futura font-medium text-primary-700 mb-3 lg:mb-5"
-      >
+      <Typography variant="h4" className="futura font-medium text-primary-700">
         Basic Info
       </Typography>
       <Divider />
@@ -35,12 +32,12 @@ const BasicPersonalInformation = () => {
           <div>
             <label
               htmlFor="first-name"
-              className="inline-block mb-1 futura"
+              className="inline-block md:text-lg mb-1 futura"
             >
               First Name
             </label>
             <CustomInput
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7" } }}
+              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="first-name"
               variant="outlined"
@@ -61,12 +58,12 @@ const BasicPersonalInformation = () => {
           <div>
             <label
               htmlFor="last-name"
-              className="inline-block mb-1 futura"
+              className="inline-block md:text-lg mb-1 futura"
             >
               Last Name
             </label>
             <CustomInput
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7" } }}
+              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="last-name"
               variant="outlined"
@@ -87,12 +84,12 @@ const BasicPersonalInformation = () => {
           <div>
             <label
               htmlFor="email"
-              className="inline-block mb-1 futura"
+              className="inline-block md:text-lg mb-1 futura"
             >
               Email Address
             </label>
             <CustomInput
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7" } }}
+              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="email"
               variant="outlined"
@@ -102,12 +99,12 @@ const BasicPersonalInformation = () => {
           <div>
             <label
               htmlFor="country"
-              className="inline-block mb-1 futura"
+              className="inline-block md:text-lg mb-1 futura"
             >
               Country
             </label>
             <CustomInput
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7" } }}
+              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="country"
               variant="outlined"
