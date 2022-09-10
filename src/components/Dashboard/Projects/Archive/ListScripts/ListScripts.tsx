@@ -62,11 +62,16 @@ interface IProps {
 const ListScripts = ({ setOpenModalUnArchive }: IProps) => {
   const handleOpenUnArchive = () => setOpenModalUnArchive(true);
   return (
-    <Table className="mt-4 bg-white rounded-md shadow-sm  py-5 flex flex-col mb-16">
+    <Table className="mt-4 bg-white rounded-md shadow-sm  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
-          <TableCell className="flex-1 pl-7 md:pl-8 xl:pl-16 2xl:flex-[0.4] md:pr-0">
-            Script
+          <TableCell className="flex-1 pl-7  xl:pl-16  xl:max-w-xl  md:pr-0 pt-0 xl:pb-8 pb-5">
+            <Typography
+              variant="h6"
+              className="futura font-medium text-primary-700"
+            >
+              Script
+            </Typography>
           </TableCell>
           <TableCell
             sx={{
@@ -74,14 +79,19 @@ const ListScripts = ({ setOpenModalUnArchive }: IProps) => {
                 px: { xs: 0 },
               },
             }}
-            className="flex-[0.7]  2xl:flex-[0.66]  hidden md:flex"
+            className="flex-[0.71] xl:flex-0 xl:pl-0 xl:pb-8 pb-5 pt-0 hidden md:flex lg:hidden xl:flex"
           >
-            Script Type
+            <Typography
+              variant="h6"
+              className="futura font-medium text-primary-700"
+            >
+              Script Type
+            </Typography>
           </TableCell>
-          <TableCell className=" hidden md:flex"></TableCell>
+          <TableCell className=" hidden md:flex xl:flex-[0.1]"></TableCell>
         </TableRow>
       </TableHead>
-      <TableBody className="px-3 xl:px-12">
+      <TableBody className="px-6 xl:px-14">
         {listScripts.map((script) => (
           <TableRow
             sx={{
@@ -95,9 +105,9 @@ const ListScripts = ({ setOpenModalUnArchive }: IProps) => {
           >
             <TableCell
               scope="script"
-              className="flex flex-1  items-center 2xl:flex-[0.41] flex-wrap sm:flex-nowrap gap-4 sm:gap-8"
+              className="flex flex-1 py-4 pl-0  sm:py-6 xl:py-10 items-center xl:max-w-lg flex-wrap sm:flex-nowrap gap-4 sm:gap-8"
             >
-              <div className="flex flex-1 flex-wrap sm:flex-nowrap sm:gap-2 xl:gap-4">
+              <div className="flex flex-1 flex-wrap sm:flex-nowrap sm:gap-4">
                 <div className="flex-shrink-0 mt-1">
                   <Image
                     className="rounded-md "
@@ -106,7 +116,7 @@ const ListScripts = ({ setOpenModalUnArchive }: IProps) => {
                     alt={script.title}
                   />
                 </div>
-                <div className="flex-grow max-w-[340px]  sm:max-w-[271px] min-w-[170px]">
+                <div className="flex-grow max-w-[360px]  min-w-[170px]">
                   <Typography
                     variant="body1"
                     className="futura font-semibold text-primary-700"
@@ -136,14 +146,14 @@ const ListScripts = ({ setOpenModalUnArchive }: IProps) => {
               sx={{
                 "&.MuiTableCell-root": {
                   px: { xs: 0 },
-                  pl: { lg: 3 },
+                 
                 },
               }}
-              className="hidden md:flex flex-[0.55] items-center"
+              className="hidden py-4  sm:py-6 xl:py-10 md:flex lg:hidden xl:flex flex-[0.55] items-center"
             >
               <Chip
                 label={script.type}
-                className=" py-5 px-4 md:ml-3  hidden md:flex rounded-md bg-tinted-100/60  text-neutral-800"
+                className=" py-5 px-4 md:ml-3 hidden md:flex rounded-md bg-tinted-100/60  text-neutral-800"
               />
             </TableCell>
             <TableCell
@@ -152,7 +162,7 @@ const ListScripts = ({ setOpenModalUnArchive }: IProps) => {
                   pl: { xs: 0 },
                 },
               }}
-              className="hidden md:flex 2xl:flex-[0.2] items-center 2xl:justify-end"
+              className="hidden py-4  sm:py-6 xl:py-10 pr-0  md:flex 2xl:flex-[0.1] items-center 2xl:justify-end"
             >
               <Button
                 onClick={handleOpenUnArchive}
