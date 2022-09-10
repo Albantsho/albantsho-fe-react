@@ -29,7 +29,7 @@ const buttonsProjects = [
   { title: "SCRIPT", image: addScriptIcon, link: "/script_page" },
 ];
 
-const AccordionScripts = ({ title, storyAbout, type }: IProps) => {
+const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -51,26 +51,29 @@ const AccordionScripts = ({ title, storyAbout, type }: IProps) => {
             gap: { xs: 1, sm: 2 },
           },
         }}
-        className="rounded-lg px-3  lg:px-6  pt-4"
+        className="rounded-lg px-4  sm:px-6  py-4"
       >
-        <div className="flex flex-col sm:flex-row flex-1    gap-x-4 gap-y-3 sm:gap-y-0 xl:space-x-6 md:gap-5 xl:pr-20">
-          <div className="flex justify-center w-[72px] h-[72px] items-center self-start  bg-tinted-100/60 rounded-sm">
+        <div className="flex flex-col  sm:flex-row flex-1    gap-x-4 gap-y-3 sm:gap-y-0 xl:pr-20">
+          <div className="flex justify-center w-[72px] h-[72px] items-center self-start  bg-tinted-100/60 rounded-md">
             <Image loading="lazy" src={accordionIcon} alt={title} />
           </div>
-          <div className="sm:max-w-[280px]   flex-1 self-start">
+          <div className="sm:max-w-[280px]   flex-1 self-start leading-none">
             <Typography
               variant="h6"
-              className="futura mb-1 leading-normal text-primary-700 font-semibold"
+              className="futura leading-normal text-primary-700 font-semibold"
             >
               {title}
             </Typography>
-            <Typography variant="caption" className=" text-neutral-600">
+            <Typography
+              variant="caption"
+              className=" text-neutral-600"
+            >
               {storyAbout}
             </Typography>
           </div>
           <Chip
             label={type}
-            className="hidden rounded-md  md:ml-6 xl:ml-20  self-center py-5 px-5 bg-tinted-100/60 text-neutral-800 md:flex"
+            className="hidden rounded-md  md:ml-6 xl:ml-24  self-center py-5 px-5 bg-tinted-100/60 text-neutral-800 md:flex lg:hidden xl:flex"
           />
         </div>
         <div className="flex ml-auto  gap-4 items-center">
@@ -105,4 +108,4 @@ const AccordionScripts = ({ title, storyAbout, type }: IProps) => {
   );
 };
 
-export default AccordionScripts;
+export default ProjectAccordion;

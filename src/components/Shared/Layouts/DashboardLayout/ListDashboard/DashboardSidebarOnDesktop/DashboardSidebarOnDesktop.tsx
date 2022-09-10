@@ -59,6 +59,7 @@ const DashboardSidebarOnDesktop = () => {
         <List className="space-y-4 h-full">
           {listRoutes.map((item) => (
             <ListItem
+              disablePadding
               key={item.title}
               sx={{
                 "&:hover": {
@@ -75,6 +76,10 @@ const DashboardSidebarOnDesktop = () => {
                   sx={{
                     "&:hover": {
                       backgroundColor: "#6842A5",
+                    },
+                    "&.MuiButtonBase-root": {
+                      px: 4,
+                      py: 2,
                     },
                   }}
                 >
@@ -132,7 +137,7 @@ const DashboardSidebarOnDesktop = () => {
             },
           }}
         >
-          <AiFillInstagram/>
+          <AiFillInstagram />
         </IconButton>
       </div>
     </div>

@@ -38,6 +38,10 @@ body {
   overflow-x: hidden;
 }
 
+input {
+  font-family: "Montserrat", "Helvetica", "Arial", "sans-serif";
+}
+
 img {
   max-width: 100%;
   height: auto;

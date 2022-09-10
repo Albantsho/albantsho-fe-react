@@ -1,5 +1,6 @@
 import { IconButton, Modal, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import DeleteBtn from "@shared/DeleteBtn/DeleteBtn";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -51,17 +52,10 @@ const AcceptOfferModal = ({ openAcceptOffer, setOpenAcceptOffer }: IProps) => {
           @$6,000
         </Typography>
         <div className="flex flex-wrap gap-2 sm:gap-6 mt-5 sm:mt-6 lg:mt-10 xl:mt-12   justify-center items-center">
-          <Btn size="large" className="py-3 text-white bg-primary-700">
+          <Btn size="large" className="py-3 text-white bg-primary-700 rounded-lg">
             Accept Offer
           </Btn>
-          <Btn
-            onClick={handleCloseAcceptOffer}
-            size="large"
-            disabled
-            className="py-3 border border-gray-300"
-          >
-            Cancel
-          </Btn>
+          <DeleteBtn onClick={handleCloseAcceptOffer} />
         </div>
       </div>
     </Modal>

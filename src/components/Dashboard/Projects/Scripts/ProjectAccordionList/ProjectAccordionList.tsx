@@ -1,4 +1,4 @@
-import AccordionScripts from "./AccordionScripts/AccordionScripts";
+import ProjectAccordion from "./ProjectAccordion/ProjectAccordion";
 
 const listAccordions = [
   {
@@ -30,12 +30,12 @@ const listAccordions = [
   },
 ];
 
-const AccordionProjectsList = () => {
+const ProjectAccordionList = () => {
   return (
     <div className="mt-4 md:mt-6 pb-16">
       {listAccordions.map((accordion) => {
         return (
-          <AccordionScripts
+          <ProjectAccordion
             key={accordion.id}
             title={accordion.title}
             storyAbout={accordion.storyAbout}
@@ -47,4 +47,4 @@ const AccordionProjectsList = () => {
   );
 };
 
-export default AccordionProjectsList;
+export default ProjectAccordionList;

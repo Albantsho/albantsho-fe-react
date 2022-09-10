@@ -26,6 +26,7 @@ const TabButtons = () => {
       value={activeLinkIndex}
       onChange={activeLinkChange}
       className="bg-white rounded-md"
+      sx={{"& .MuiTabs-indicator":{borderBottom:"5px solid #7953B5",mb:"-1px"}}}
     >
       {routes.map((item) => (
         <Tab
@@ -38,7 +39,7 @@ const TabButtons = () => {
             },
             marginRight: { md: 1 },
           }}
-          className={`text-gray-600 futura text-lg`}
+          className={`text-gray-600 futura text-lg 2xl:text-xl font-medium`}
           label={item.label}
         />
       ))}

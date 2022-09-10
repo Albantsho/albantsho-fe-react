@@ -26,7 +26,7 @@ const DashboardNavOnMobile = ({ links, isTransparent }: IProps) => {
   return (
     <>
       <Logo className={isTransparent ? "text-white" : "text-primary-main"} />
-      <IconButton className="ml-auto mr-7 mt-1">
+      <IconButton className="ml-auto mr-7 mt-1 self-center max-h-[31px]">
         <Badge badgeContent={1} color="error">
           <div>
             <Image src={alert} alt="alert" />
