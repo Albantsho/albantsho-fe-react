@@ -36,7 +36,7 @@ const filterOptions = createFilterOptions({
 
 const ScriptsSearch = () => {
   return (
-    <div className="w-full mt-6 lg:mt-10 space-y-8 mx-auto  max-w-[360px] md:max-w-[616px]">
+    <div className="w-full mt-6 lg:mt-16 space-y-8 mx-auto  md:max-w-[640px]">
       <div>
         <label className="futura  font-medium mb-2 block ">
           Select Script<span className="text-error-500 my-auto">*</span>
@@ -90,7 +90,7 @@ const ScriptsSearch = () => {
         />
       </div>
 
-      <Link href="/abstract?step=1" passHref>
+      <Link href="/reviews/plans" passHref>
         <Btn size="large">Next</Btn>
       </Link>
     </div>

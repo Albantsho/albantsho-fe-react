@@ -13,31 +13,35 @@ const Heading = ({ showSearchScript }: IProps) => {
   const [openSearchScript, setOpenSearchScript] = useState<boolean>(false);
 
   return (
-    <div className="bg-white rounded-md px-5 md:px-8 lg:px-10 xl:px-14 py-9   mt-4">
-      <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 lg:gap-8 ">
-        <div className="flex-shrink-0 mx-auto sm:mx-0">
+    <div className="bg-white rounded-md px-5 md:px-8 lg:px-10 xl:px-14 py-9 lg:py-16 mt-4">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 max-w-[640px] mx-auto lg:gap-8 ">
+        <div className="flex-shrink-[0.5] mx-auto sm:mx-0">
           <Image src={award} alt="award" />
         </div>
-        <div className=" sm:max-w-[240px] md:max-w-[270px] lg:max-w-[320px] ">
+        <div className=" sm:max-w-[380px] ">
           <Typography
-            variant="h5"
-            className="futura font-semibold text-primary-700 leading-normal"
+            variant="h4"
+            className="futura font-semibold text-primary-700 leading-7 sm:leading-10 text-center sm:text-start "
           >
             Get your script reviewed by our top experts
           </Typography>
-          <Typography variant="subtitle1" className="text-neutral-800">
+          <Typography
+            variant="subtitle1"
+            className="text-neutral-800 text-center sm:text-start my:4 md:my-5"
+          >
             Your script gets even more attention from producer when it’s
             professionally reviewed by us.
           </Typography>
           {showSearchScript && !openSearchScript && (
-            <Btn
-              onClick={() => setOpenSearchScript(true)}
-              sx={{ marginTop: { xs: 2, md: 3 } }}
-              size="large"
-              className="mr-auto sm:ml-auto sm:mr-0"
-            >
-              Review a script
-            </Btn>
+            <div className="flex justify-center sm:justify-start">
+              <Btn
+                className="px-8 py-3 sm:px-6 sm:py-3"
+                onClick={() => setOpenSearchScript(true)}
+                size="large"
+              >
+                Review a script
+              </Btn>
+            </div>
           )}
         </div>
       </div>

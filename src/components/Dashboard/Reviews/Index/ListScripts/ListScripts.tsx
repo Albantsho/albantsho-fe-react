@@ -59,19 +59,19 @@ const listScripts = [
 
 const ListScripts = () => {
   return (
-    <Table className="mt-4 bg-white rounded-md  shadow-sm  pt-5 flex flex-col mb-16">
+    <Table className="mt-4 bg-white rounded-md  shadow-sm py-5 xl:py-8  flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex ">
-          <TableCell className="flex-1   2xl:flex-[0.6]  md:pl-8 lg:pl-10 xl:pl-16 2xl:pl-16">
+          <TableCell className="flex-1 pl-5  2xl:flex-[0.6] pb-5 xl:pb-8 pt-0 md:pl-8 lg:pl-10 xl:pl-16 2xl:pl-16">
             Script
           </TableCell>
-          <TableCell className=" hidden  sm:flex flex-[0.6] md:flex-[0.5] lg:flex-[0.6] xl:flex-1 ">
+          <TableCell className=" hidden pb-5 xl:pb-8 pt-0 sm:flex flex-[0.6] md:flex-[0.5] lg:flex-[0.6] xl:flex-1 ">
             Status
           </TableCell>
           <TableCell className=" hidden sm:flex"></TableCell>
         </TableRow>
       </TableHead>
-      <TableBody className="md:px-3 lg:px-6 xl:px-12">
+      <TableBody className="px-1 sm:px-6 xl:px-12">
         {listScripts.map((script) => (
           <TableRow
             sx={{
@@ -155,7 +155,7 @@ const ListScripts = () => {
                   pl: { xs: 0 },
                 },
               }}
-              className="sm:min-w-[116px] flex items-center"
+              className="sm:min-w-[116px]  items-center hidden sm:flex "
             >
               {script.status === "Reviewed" && (
                 <Button
@@ -165,7 +165,6 @@ const ListScripts = () => {
                     paddingX: 1.5,
                     border: "1px solid #7953B5",
                     borderRadius: 1.5,
-                    display: { xs: "none", sm: "block" },
                   }}
                 >
                   See review

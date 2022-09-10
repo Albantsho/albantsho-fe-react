@@ -11,10 +11,10 @@ const Summary: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Summary </title>
       </Head>
-      <main className="bg-white rounded-md mb-16  px-3 sm:px-5">
+      <div className="bg-white rounded-md mb-16  px-3 sm:px-5">
         <Heading />
         <SummaryReviews />
-      </main>
+      </div>
     </>
   );
 };

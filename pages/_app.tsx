@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import type { NextPage } from "next";
+import NextProgress from "next-progress";
 import { AppProps } from "next/app";
 import { useEffect } from "react";
 import "styles/globals.css";
@@ -32,6 +33,7 @@ export default function MyApp(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <NextProgress delay={100} color="#7953B5" options={{ showSpinner: false }} />
         {getLayout(<Component {...pageProps} />)}
       </ThemeProvider>
     </CacheProvider>
