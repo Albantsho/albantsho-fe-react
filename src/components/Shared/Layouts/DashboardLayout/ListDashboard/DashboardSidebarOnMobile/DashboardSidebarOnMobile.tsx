@@ -14,7 +14,7 @@ const routes = [
   { route: "/scripts", title: "Scripts", icon: scripts },
 ];
 
-const ListDashboardMobile = () => {
+const DashboardSidebarOnMobile = () => {
   const [activeRoute, setActiveRoute] = useState(0);
   const { route, push } = useRouter();
 
@@ -23,7 +23,7 @@ const ListDashboardMobile = () => {
       <BottomNavigation
         showLabels
         value={activeRoute}
-        className="bg-primary-900 w-full min-h-[65px] flex justify-evenly text-white"
+        className="bg-primary-900 w-full min-h-[65px] flex justify-evenly text-white sm:px-8"
         onChange={(event, newValue) => {
           setActiveRoute(newValue);
         }}
@@ -34,7 +34,6 @@ const ListDashboardMobile = () => {
               key={item.title}
               onClick={() => push(`${item.route}`)}
               showLabel
-              disableRipple={true}
               sx={{
                 "&:hover": {
                   backgroundColor: "#6842A5",
@@ -51,7 +50,9 @@ const ListDashboardMobile = () => {
                   }`,
                 },
               }}
-              className={`${route === item.route && " bg-primary-700"}`}
+              className={`${
+                route === item.route && " bg-primary-700"
+              } sm:max-w-full`}
               label={item.title}
               icon={<Image loading="lazy" src={item.icon} alt={item.title} />}
             />
@@ -62,4 +63,4 @@ const ListDashboardMobile = () => {
   );
 };
 
-export default ListDashboardMobile;
+export default DashboardSidebarOnMobile;

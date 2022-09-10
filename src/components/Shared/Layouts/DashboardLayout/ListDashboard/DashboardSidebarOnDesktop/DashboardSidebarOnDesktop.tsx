@@ -28,7 +28,7 @@ const listRoutes = [
 
 const drawerWidth = 340;
 
-const ListDashboardBigSize = () => {
+const DashboardSidebarOnDesktop = () => {
   const { route } = useRouter();
 
   return (
@@ -58,25 +58,20 @@ const ListDashboardBigSize = () => {
 
         <List className="space-y-4 h-full">
           {listRoutes.map((item) => (
-            <Link
+            <ListItem
               key={item.title}
-              className="text-white"
-              href={`${item.route}`}
-              passHref
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#6842A5",
+                },
+              }}
+              className={`${
+                item.route === route &&
+                "border-l-4 border-secondary-500 bg-primary-700"
+              } rounded-sm`}
             >
-              <ListItem
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "#6842A5",
-                  },
-                }}
-                className={`${
-                  item.route === route &&
-                  "border-l-4 border-secondary-500 bg-primary-700"
-                } rounded-sm`}
-              >
+              <Link className="text-white" href={`${item.route}`} passHref>
                 <ListItemButton
-                  disableRipple={true}
                   sx={{
                     "&:hover": {
                       backgroundColor: "#6842A5",
@@ -88,15 +83,16 @@ const ListDashboardBigSize = () => {
                   </ListItemIcon>
                   <ListItemText primary={item.title} />
                 </ListItemButton>
-              </ListItem>
-            </Link>
+              </Link>
+            </ListItem>
           ))}
         </List>
       </Drawer>
-      <div className="fixed hidden lg:flex right-auto gap-6 left-auto justify-start  bottom-14  ml-12">
+      <div className="fixed text-white hidden lg:flex gap-6  justify-start bottom-8 xl:bottom-10 left-[90px]">
         <IconButton
           href="https://www.twitter.com/albantsho"
           target="_blank"
+          color="inherit"
           sx={{
             "&.MuiButtonBase-root": {
               border: "1px solid #fff",
@@ -106,11 +102,12 @@ const ListDashboardBigSize = () => {
             },
           }}
         >
-          <FaTwitter className="text-white" />
+          <FaTwitter />
         </IconButton>
         <IconButton
           href="https://www.facebook.com/albantsho"
           target="_blank"
+          color="inherit"
           sx={{
             "&.MuiButtonBase-root": {
               border: "1px solid #fff",
@@ -120,11 +117,12 @@ const ListDashboardBigSize = () => {
             },
           }}
         >
-          <FaFacebookF className="text-white p-[2px]" />
+          <FaFacebookF className="p-[2px]" />
         </IconButton>
         <IconButton
           href="https://www.instagram.com/albantsho/"
           target="_blank"
+          color="inherit"
           sx={{
             "&.MuiButtonBase-root": {
               border: "1px solid #fff",
@@ -134,11 +132,11 @@ const ListDashboardBigSize = () => {
             },
           }}
         >
-          <AiFillInstagram className="text-white" />
+          <AiFillInstagram/>
         </IconButton>
       </div>
     </div>
   );
 };
 
-export default ListDashboardBigSize;
+export default DashboardSidebarOnDesktop;
