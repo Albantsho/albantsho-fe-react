@@ -80,7 +80,7 @@ const CreateScriptModal = ({
         <div className="mt-8 md:ml-auto flex items-stretch  gap-3">
           <Btn
             size="large"
-            className="py-4 px-5 rounded-lg  text-white bg-primary-700"
+            className="py-3 px-5 rounded-lg  text-white bg-primary-700"
           >
             Create Script
           </Btn>
@@ -92,13 +92,3 @@ const CreateScriptModal = ({
 };
 
 export default CreateScriptModal;
-
-{
-  /* <label className="futura font-medium">
-Script Title<span className="text-error-700">*</span>
-</label>
-<input
-type="text"
-className="border border-gray-300 rounded-md outline-none py-3 px-4 w-full bg-white"
-/> */
-}

@@ -27,7 +27,7 @@ const Subscription = () => {
         <title>Albantsho || Subscription </title>
       </Head>
       <Nav color="inherit" position="static" />
-      <div className="py-8 md:py-12 px-5 sm:px-9 lg:mb-16  mx-auto bg-[#f5f5f5]">
+      <div className="py-8 md:py-12 px-5 sm:px-9 lg:mb-16  mx-auto bg-[#f6f8fc]">
         <div className="max-w-[520px] mx-auto">
           <Typography
             variant="h4"

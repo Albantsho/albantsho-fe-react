@@ -12,7 +12,6 @@ import {
   SvgIcon,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
 
 interface ResultsOptionType {
   inputValue?: string;
@@ -36,8 +35,6 @@ const filterOptions = createFilterOptions({
 });
 
 const ScriptsSearch = () => {
-  // const [selectedScript, setSelectedScript] =
-  //   useState<ResultsOptionType | null>(null);
 
   return (
     <div className="w-full mt-6 lg:mt-16 space-y-8 mx-auto  md:max-w-[640px]">
@@ -46,10 +43,6 @@ const ScriptsSearch = () => {
           Select Script<span className="text-error-500 my-auto">*</span>
         </label>
         <Autocomplete
-          // value={selectedScript}
-          // onInputChange={(event, newInputValue) => {
-          //   setSelectedScript(newInputValue);
-          // }}
           size="medium"
           id="filterResults"
           sx={{
@@ -99,7 +92,7 @@ const ScriptsSearch = () => {
         />
       </div>
 
-      <div className="flex justify-center" >
+      <div className="flex justify-center sm:justify-start" >
         <Link href="/reviews/plans" passHref>
           <Btn size="large">Next</Btn>
         </Link>

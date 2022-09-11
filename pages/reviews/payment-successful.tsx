@@ -13,7 +13,7 @@ const PaymentSuccessful: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Payment Successful </title>
       </Head>
-      <div className="pt-24 md:pt-32 px-10 md:px-16 mt-5 text-center pb-16 rounded-md mx-auto bg-white">
+      <div className="py-24 md:py-32 px-5 md:px-16 mt-5 text-center rounded-md mx-auto bg-white">
         <div className="mb-3 sm:mb-4 lg:mb-8 xl:mb-10">
           <Image src={success} alt="success" />
         </div>
@@ -27,14 +27,13 @@ const PaymentSuccessful: NextPageWithLayout = () => {
         <Typography
           variant="h5"
           color="primary.700"
-          mb={0.5}
-          className="futura font-medium"
+          className="futura font-medium mb-1 sm:mb-3"
         >
           Transaction ID: 1234567890AVGED
         </Typography>
         <Typography
           variant="body2"
-          sx={{ marginBottom: { xs: 2, md: 2.5 } }}
+          sx={{ marginBottom: { xs: 2, md: 2.5, lg: 4,xl:5 } }}
           className="text-[#484848] max-w-lg text-center mx-auto"
         >
           Script review has been successfully paid for. Please note that script

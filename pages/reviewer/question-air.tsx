@@ -9,7 +9,7 @@ const QuestionAir = () => {
   const [openSuccessReview, setOpenSuccessReview] = useState(false);
 
   return (
-    <div className="pt-10  bg-[#f5f5f5] flex items-center flex-col px-5 sm:px-10">
+    <div className="pt-10  bg-[#f6f8fc] flex items-center flex-col px-5 sm:px-10">
       <SendReview
         openSendReview={openSendReview}
         setOpenSendReview={setOpenSendReview}

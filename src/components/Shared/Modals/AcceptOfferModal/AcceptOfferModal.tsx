@@ -52,7 +52,7 @@ const AcceptOfferModal = ({ openAcceptOffer, setOpenAcceptOffer }: IProps) => {
           @$6,000
         </Typography>
         <div className="flex flex-wrap gap-2 sm:gap-6 mt-5 sm:mt-6 lg:mt-10 xl:mt-12   justify-center items-center">
-          <Btn size="large" className="py-3 text-white bg-primary-700 rounded-lg">
+          <Btn size="large" className="py-3 px-5 text-white bg-primary-700 rounded-lg">
             Accept Offer
           </Btn>
           <DeleteBtn onClick={handleCloseAcceptOffer} />

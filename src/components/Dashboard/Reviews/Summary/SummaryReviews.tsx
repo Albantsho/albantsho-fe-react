@@ -3,17 +3,17 @@ import Btn from "@shared/Btn/Btn";
 
 const SummaryReviews = () => {
   return (
-    <div className="pb-8 bg-white rounded-md w-fit mx-auto px-5 sm:px-10">
+    <div className="pb-9 lg:pb-16 bg-white rounded-md px-5 sm:px-10 xl:px-20">
       <Divider />
-      <div className="mt-7 rounded-md  lg:px-10 xl:px-14  lg:py-9  xl:py-12 lg:shadow-md  max-w-3xl">
+      <div className="mt-7 lg:mt-12 rounded-md  lg:px-10 xl:px-14  lg:py-9  xl:py-12 lg:shadow-md  max-w-3xl">
         <Typography
           variant="h4"
           color="primary.700"
-          className="mb-2 futura font-medium leading-normal sm:mb-2"
+          className="mb-3 futura font-medium leading-normal lg:mb-6"
         >
           Type A Review
         </Typography>
-        <div className="flex flex-wrap max-w-[380px] lg:max-w-max lg:items-center gap-x-5 gap-y-3 ">
+        <div className="flex flex-wrap max-w-[380px] mb-2 lg:mb-5 lg:max-w-max lg:items-center gap-x-5 gap-y-3 sm:gap-y-1">
           <Typography variant="h6" color="primary.700" className="futura font-medium" >
             The Apple and The Berry
           </Typography>
@@ -26,7 +26,7 @@ const SummaryReviews = () => {
             orientation="vertical"
             flexItem
           />
-          <div className="lg:ml-5 mb-2 lg:mb-6">
+          <div className="lg:ml-5">
             <span>Review Fee:</span> <br />
             <div className="flex gap-1 items-center">
               <Typography

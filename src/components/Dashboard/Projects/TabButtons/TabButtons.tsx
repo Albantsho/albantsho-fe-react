@@ -26,7 +26,7 @@ const TabButtons = () => {
       value={activeLinkIndex}
       onChange={activeLinkChange}
       className="bg-white rounded-md"
-      sx={{"& .MuiTabs-indicator":{borderBottom:"5px solid #7953B5",mb:"-1px"}}}
+      sx={{"& .MuiTabs-indicator":{borderBottom:{sx:"2px solid #7953B5",md:"4px solid #7953B5"},mb:{md:"-1px"}}}}
     >
       {routes.map((item) => (
         <Tab

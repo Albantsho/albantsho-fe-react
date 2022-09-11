@@ -36,7 +36,6 @@ const ModalArchive = ({
         <Typography
           className="text-center font-normal mt-4"
           color="primary.700"
-          
           variant="h6"
           component="p"
         >
@@ -47,7 +46,7 @@ const ModalArchive = ({
             size="large"
             className="py-3 px-5 text-white bg-primary-700 rounded-lg"
           >
-            Create Script
+            Proceed
           </Btn>
           <DeleteBtn onClick={handleCloseUnArchive} />
         </div>

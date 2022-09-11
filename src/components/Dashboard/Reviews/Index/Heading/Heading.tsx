@@ -14,20 +14,20 @@ const Heading = ({ showSearchScript }: IProps) => {
 
   return (
     <div className="bg-white rounded-md px-5 md:px-8 lg:px-10 xl:px-14 py-9 lg:py-16 mt-4">
-      <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 max-w-[640px] mx-auto lg:gap-8 ">
+      <div className="flex flex-col items-center sm:flex-row gap-3 sm:gap-6 max-w-[640px] mx-auto lg:gap-8 ">
         <div className="flex-shrink-[0.5] mx-auto sm:mx-0">
           <Image src={award} alt="award" />
         </div>
         <div className=" sm:max-w-[380px] ">
           <Typography
             variant="h4"
-            className="futura font-semibold text-primary-700 leading-7 sm:leading-10 text-center sm:text-start "
+            className="futura font-semibold text-primary-700 leading-7 mb-2 md:mb-0 sm:leading-10 text-center sm:text-start "
           >
             Get your script reviewed by our top experts
           </Typography>
           <Typography
             variant="subtitle1"
-            className="text-neutral-800 text-center sm:text-start my:4 md:my-5"
+            className="text-neutral-800 text-center sm:text-start  md:my-5"
           >
             Your script gets even more attention from producer when it’s
             professionally reviewed by us.

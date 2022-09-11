@@ -5,15 +5,13 @@ import {
   Menu,
   MenuItem,
   SvgIcon,
-  Typography,
 } from "@mui/material";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { IoIosMore } from "react-icons/io";
+import { IoIosMore, IoMdWallet } from "react-icons/io";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
-import wallet from "../assets/wallet.png";
+
 import { useState } from "react";
 
 const WalletMenu = () => {
@@ -37,20 +35,10 @@ const WalletMenu = () => {
         sx={{ border: "1px solid #ccc" }}
         onClick={handleOpenWalletMenu}
         className="border border-gray-300 py-3 px-3 rounded-md flex justify-center gap-4 items-center cursor-pointer"
+        startIcon={<IoMdWallet />}
+        endIcon={<IoIosMore />}
       >
-        <div className="mt-1">
-          <Image src={wallet} alt="wallet" />
-        </div>
-        <Typography
-          component="p"
-          variant="h6"
-          className="text-primary-700 futura font-medium"
-        >
-          Balance:$20,000
-        </Typography>
-        <div className="my-auto mt-2">
-          <IoIosMore className="text-2xl text-primary-700" />
-        </div>
+        Balance:$20,000
       </Button>
       <Menu
         anchorEl={openWalletMenu}
@@ -77,7 +65,7 @@ const WalletMenu = () => {
         >
           <ListItemIcon>
             <SvgIcon
-              fontSize="small"
+              fontSize="inherit"
               className="text-primary-700"
               inheritViewBox
               component={RiDownloadLine}
@@ -97,7 +85,7 @@ const WalletMenu = () => {
         >
           <ListItemIcon>
             <SvgIcon
-              fontSize="small"
+              fontSize="inherit"
               className="text-primary-700"
               inheritViewBox
               component={TbArrowsSort}
@@ -114,7 +102,7 @@ const WalletMenu = () => {
         <MenuItem className="px-6 py-3" onClick={() => push("/wallet/help")}>
           <ListItemIcon>
             <SvgIcon
-              fontSize="small"
+              fontSize="inherit"
               className="text-primary-700"
               inheritViewBox
               component={AiOutlineQuestionCircle}

@@ -93,7 +93,7 @@ const DashboardSidebarOnDesktop = () => {
           ))}
         </List>
       </Drawer>
-      <div className="fixed text-white hidden lg:flex gap-6  justify-start bottom-8 xl:bottom-10 left-[90px]">
+      <div className="fixed text-white hidden lg:flex gap-6  justify-start bottom-8 left-[90px]">
         <IconButton
           href="https://www.twitter.com/albantsho"
           target="_blank"
