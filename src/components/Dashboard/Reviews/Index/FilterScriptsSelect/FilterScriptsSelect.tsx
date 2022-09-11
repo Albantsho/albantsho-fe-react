@@ -7,7 +7,6 @@ import {
   type SelectChangeEvent,
   SvgIcon,
 } from "@mui/material";
-import { BiChevronDown } from "react-icons/bi";
 
 import { useState } from "react";
 import { MdDone } from "react-icons/md";
@@ -27,16 +26,13 @@ const FilterScriptsSelect = () => {
 
   return (
     <div className="my-4 md:mt-20 md:mb-6">
-      <FormControl sx={{ width: { xs: "200px", md: "220px" } }}>
+      <FormControl sx={{ width: { xs: "200px", md: "215px" } }}>
         <Select
-          IconComponent={() => (
-            <SvgIcon fontSize="medium" component={BiChevronDown} />
-          )}
           defaultValue="AllScripts"
           value={statusSelectInput}
           onChange={handleChangeStatusSelectInput}
           sx={{
-            "&.MuiInputBase-root": { backgroundColor: "white", px: 1 },
+            "&.MuiInputBase-root": { backgroundColor: "white"},
             "& .MuiSelect-select": { py: "12px" },
             "& .MuiOutlinedInput-notchedOutline": { border: "none" },
             "& .MuiSvgIcon-root": {

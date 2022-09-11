@@ -22,7 +22,7 @@ const Projects: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Projects </title>
       </Head>
-      <main>
+      <div>
         <TabButtons />
         <SearchDashboard setOpenCreateScript={setOpenCreateScript} />
         {(!query.type || query.type === "scripts") && <ProjectAccordionList />}
@@ -46,7 +46,7 @@ const Projects: NextPageWithLayout = () => {
         >
           +
         </Fab>
-      </main>
+      </div>
     </>
   );
 };

@@ -62,16 +62,26 @@ const ListScripts = () => {
     <Table className="mt-4 bg-white rounded-md  shadow-sm py-5 xl:py-8  flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex ">
-          <TableCell className="flex-1 pl-5  2xl:flex-[0.6] pb-5 xl:pb-8 pt-0 md:pl-8 lg:pl-10 xl:pl-16 2xl:pl-16">
-            Script
+          <TableCell className="flex-1 pl-6  xl:flex-none pb-5 xl:pb-8 xl:pr-[410px] pt-0 xl:pl-16">
+            <Typography
+              variant="h6"
+              className="text-primary-700 futura font-medium"
+            >
+              Script
+            </Typography>
           </TableCell>
-          <TableCell className=" hidden pb-5 xl:pb-8 pt-0 sm:flex flex-[0.6] md:flex-[0.5] lg:flex-[0.6] xl:flex-1 ">
-            Status
+          <TableCell className=" hidden pb-5 xl:pb-8 pt-0 sm:flex flex-[0.65] md:flex-[0.58] lg:flex-[0.60] xl:flex-1 ">
+            <Typography
+              variant="h6"
+              className="text-primary-700 futura font-medium"
+            >
+              Status
+            </Typography>
           </TableCell>
           <TableCell className=" hidden sm:flex"></TableCell>
         </TableRow>
       </TableHead>
-      <TableBody className="px-1 sm:px-6 xl:px-12">
+      <TableBody className="px-1 sm:px-6 xl:px-16">
         {listScripts.map((script) => (
           <TableRow
             sx={{
@@ -83,7 +93,7 @@ const ListScripts = () => {
             className="flex flex-1"
             key={script.id}
           >
-            <TableCell className="flex  flex-1 2xl:flex-[0.5] sm:gap-4 flex-wrap sm:flex-nowrap gap-2  lg:min-w-[280px]  items-center sm:items-start">
+            <TableCell className="flex sm:pl-0 flex-1 xl:flex-none  xl:pr-20 py-4 sm:py-6 xl:py-10 sm:gap-4 flex-wrap sm:flex-nowrap gap-2  lg:min-w-[280px]  items-center sm:items-start">
               <div className="flex gap-4 ">
                 <div className="flex-shrink-0 ">
                   <Image
@@ -104,7 +114,7 @@ const ListScripts = () => {
                   } text-sm  rounded-sm sm:hidden max-w-[100px] self-end`}
                 />
               </div>
-              <div className="sm:flex-1 sm:max-w-[330px]">
+              <div className="sm:flex-1 sm:max-w-[330px] lg:max-w-[320px] xl:max-w-[300px]">
                 <Typography
                   variant="body1"
                   className="futura font-semibold text-primary-700"
@@ -138,7 +148,7 @@ const ListScripts = () => {
                   pl: "8px",
                 },
               }}
-              className="hidden sm:flex items-center flex-[0.40] xl:flex-[0.76]"
+              className="hidden sm:flex py-4 sm:py-6 xl:py-10 items-center flex-[0.40] xl:flex-[0.76]"
             >
               <Chip
                 label={script.status}
@@ -155,7 +165,7 @@ const ListScripts = () => {
                   pl: { xs: 0 },
                 },
               }}
-              className="sm:min-w-[116px]  items-center hidden sm:flex "
+              className="sm:min-w-[116px] xl:flex-[0.5] xl:justify-end py-4 sm:py-6 xl:py-10 sm:pr-0 items-center hidden sm:flex "
             >
               {script.status === "Reviewed" && (
                 <Button

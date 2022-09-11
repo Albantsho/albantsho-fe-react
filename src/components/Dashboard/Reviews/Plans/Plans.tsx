@@ -34,9 +34,9 @@ const list2 = [
 
 const Plans = () => {
   return (
-    <div className="mt-3 mb-16 w-fit mx-auto px-5 sm:px-10">
+    <div className="mt-3 mb-16 lg:pb-8 w-fit mx-auto px-5 sm:px-10">
       <Divider />
-      <div className="mt-8 sm:px-0 justify-center w-full flex flex-wrap  gap-y-3 md:gap-4 xl:gap-10">
+      <div className="mt-8 sm:px-0 justify-center w-full flex flex-wrap  gap-y-3 md:gap-8 xl:gap-10">
         <Card
           elevation={7}
           sx={{
