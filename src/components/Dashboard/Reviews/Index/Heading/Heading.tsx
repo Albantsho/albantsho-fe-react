@@ -21,13 +21,13 @@ const Heading = ({ showSearchScript }: IProps) => {
         <div className=" sm:max-w-[380px] ">
           <Typography
             variant="h4"
-            className="futura font-semibold text-primary-700 leading-7 mb-2 md:mb-0 sm:leading-10 text-center sm:text-start "
+            className="futura font-semibold text-primary-700 leading-7 mb-2 md:mb-0 sm:leading-8 text-center sm:text-start "
           >
             Get your script reviewed by our top experts
           </Typography>
           <Typography
             variant="subtitle1"
-            className="text-neutral-800 text-center sm:text-start  md:my-5"
+            className="text-neutral-800 text-center sm:text-start leading-normal my-2  md:my-5"
           >
             Your script gets even more attention from producer when it’s
             professionally reviewed by us.

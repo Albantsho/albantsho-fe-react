@@ -32,7 +32,7 @@ const list2 = [
   "Comprehensive summary and actionable suggestions",
 ];
 
-const Plans = () => {
+const ListPlans = () => {
   return (
     <div className="mt-3 mb-16 lg:pb-8 w-full px-5 sm:px-10 xl:px-20">
       <Divider />
@@ -142,4 +142,4 @@ const Plans = () => {
   );
 };
 
-export default Plans;
+export default ListPlans;

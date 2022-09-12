@@ -8,10 +8,10 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { IoIosMore, IoMdWallet } from "react-icons/io";
+import { IoIosMore } from "react-icons/io";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
-
+import wallet from "@assets/icons/wallet.svg";
 import { useState } from "react";
 
 const WalletMenu = () => {
@@ -34,9 +34,23 @@ const WalletMenu = () => {
       <Button
         sx={{ border: "1px solid #ccc" }}
         onClick={handleOpenWalletMenu}
-        className="border border-gray-300 py-3 px-3 rounded-md flex justify-center gap-4 items-center cursor-pointer"
-        startIcon={<IoMdWallet />}
-        endIcon={<IoIosMore />}
+        className="border border-gray-300 py-3 px-5 rounded-md text-base font-medium gap-2"
+        startIcon={
+          <SvgIcon
+            style={{
+              transform: "scale(1.1)",
+            }}
+            inheritViewBox
+            component={wallet}
+          />
+        }
+        endIcon={
+          <IoIosMore
+            style={{
+              transform: "scale(1.2)",
+            }}
+          />
+        }
       >
         Balance:$20,000
       </Button>

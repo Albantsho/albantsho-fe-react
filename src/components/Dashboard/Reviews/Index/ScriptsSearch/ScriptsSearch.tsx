@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   Autocomplete,
   createFilterOptions,
+  Divider,
   InputAdornment,
   ListItem,
   ListItemButton,
@@ -12,13 +13,14 @@ import {
   SvgIcon,
   TextField,
 } from "@mui/material";
+import { useState } from "react";
 
-interface ResultsOptionType {
+interface MoviesOptionType {
   inputValue?: string;
   title: string;
 }
 
-const results = [
+const moviesList = [
   { title: "The Long Man of Long Beach1" },
   { title: "The Long Man of Long Beach2" },
   { title: "The Long Man of Long Beach3" },
@@ -31,13 +33,17 @@ const results = [
 
 const filterOptions = createFilterOptions({
   matchFrom: "start",
-  stringify: (option: ResultsOptionType) => option.title,
+  stringify: (option: MoviesOptionType) => option.title,
 });
 
 const ScriptsSearch = () => {
+  const [selectedStore, setSelectedStory] = useState<MoviesOptionType | null>(
+    null
+  );
+  console.log(selectedStore);
 
   return (
-    <div className="w-full mt-6 lg:mt-16 space-y-8 mx-auto  md:max-w-[640px]">
+    <div className="w-full mt-8 lg:mt-16 space-y-8 mx-auto  md:max-w-[640px]">
       <div>
         <label className="futura  font-medium mb-2 block ">
           Select Script<span className="text-error-500 my-auto">*</span>
@@ -49,16 +55,20 @@ const ScriptsSearch = () => {
             "& .MuiInputBase-input": { color: "#7953B5" },
             "& .MuiOutlinedInput-notchedOutline": { borderRadius: "12px" },
           }}
-          options={results}
+          value={selectedStore}
+          onChange={(value: any, newValue: MoviesOptionType | null) =>
+            setSelectedStory(newValue)
+          }
+          options={moviesList}
           getOptionLabel={(option) => option.title}
           renderOption={(props, option) => (
             <ListItem
               key={option.title}
               {...props}
-              className={`border-b border-gray-200 px-2 sm:px-4 md:px-6`}
+              className={` px-2 sm:px-4 md:px-6`}
               sx={{ "&:last-child": { border: 0 } }}
             >
-              <ListItemButton>
+              <ListItemButton sx={{"&.MuiListItemButton-root":{borderBottom:"1px solid #EEEBF1"}}}>
                 <ListItemText
                   primary={option.title}
                   primaryTypographyProps={{
@@ -69,6 +79,7 @@ const ScriptsSearch = () => {
                   }}
                 />
               </ListItemButton>
+              <Divider />
             </ListItem>
           )}
           filterOptions={filterOptions}
@@ -92,9 +103,11 @@ const ScriptsSearch = () => {
         />
       </div>
 
-      <div className="flex justify-center sm:justify-start" >
+      <div className="flex justify-center sm:justify-start">
         <Link href="/reviews/plans" passHref>
-          <Btn size="large">Next</Btn>
+          <Btn disabled={!selectedStore} size="large">
+            Next
+          </Btn>
         </Link>
       </div>
     </div>

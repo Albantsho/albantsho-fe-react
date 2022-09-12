@@ -1,23 +1,23 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import Heading from "components/Dashboard/Reviews/Index/Heading/Heading";
-import Plans from "components/Dashboard/Reviews/Plans/Plans";
+import ListPlans from "components/Dashboard/Reviews/ListPlans/ListPlans";
 import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
 
-const ReviewsPlans: NextPageWithLayout = () => {
+const Plans: NextPageWithLayout = () => {
   return (
     <>
       <Head>
         <title>Albantsho || Reviews Plans </title>
       </Head>
-      <div className="bg-white mt-2   sm:mt-4 lg:mt-12"> 
+      <div className="bg-white mt-2   sm:mt-4 lg:mt-12">
         <Heading />
-        <Plans />
-       </div> 
+        <ListPlans />
+      </div>
     </>
   );
 };
 
-ReviewsPlans.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+Plans.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
-export default ReviewsPlans;
+export default Plans;
