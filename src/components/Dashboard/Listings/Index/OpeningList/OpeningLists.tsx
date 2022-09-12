@@ -1,14 +1,10 @@
 import {
   Chip,
-  Fab,
+  Divider,
   IconButton,
   Menu,
   MenuItem,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
+  Paper,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -17,6 +13,7 @@ import beautySmall from "@assets/images/beauty-small.jpg";
 import { IoIosMore } from "react-icons/io";
 import { Dispatch, SetStateAction, useState } from "react";
 import Link from "next/link";
+import React from "react";
 
 const listScripts = [
   {
@@ -80,155 +77,121 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
     setOpenMenuItem(null);
   };
   return (
-    <Table className="mt-4 bg-white rounded-md shadow-sm   py-5 xl:py-8 flex flex-col mb-16">
-      <TableHead>
-        <TableRow className="flex">
-          <TableCell
-            sx={{ "&.MuiTableCell-root": { px: { xs: 2.5, sm: 2 } } }}
-            className="flex-1 sm:pl-3 pt-0 xl:pb-8 pb-5 2xl:flex-[0.38]"
-          >
-            <Typography className="xl:pl-10 text-primary-700 font-medium futura">
-              Script
-            </Typography>
-          </TableCell>
-          <TableCell className="hidden pt-0 md:flex flex-[0.46] xl:pb-8 pb-5 lg:flex-[0.5] xl:flex-[0.43]">
-            <Typography
-              variant="h6"
-              className="text-primary-700 font-medium futura"
-            >
-              Script Type
-            </Typography>
-          </TableCell>
-          <TableCell className="hidden pt-0 sm:flex sm:pr-12 lg:pr-0 xl:pb-8 pb-5">
-            <Typography
-              variant="h6"
-              className="text-primary-700 font-medium futura"
-            >
-              {" "}
-              Bids
-            </Typography>
-          </TableCell>
-          <TableCell className="hidden pt-0 sm:flex 2xl:flex-[0.2] xl:pb-8 pb-5 sm:pr-6 lg:pr-16 xl:pr-28"></TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody className="pt-4 px-5 sm:px-1 md:px-2 xl:px-10">
+    <Paper elevation={3} className="mt-4 bg-white mb-16">
+      <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
+        <Typography
+          variant="h6"
+          className="futura w-1/2 sm:w-full sm:max-w-[387px] md:max-w-[377px]  xl:max-w-[408px] font-medium text-primary-700"
+        >
+          Script
+        </Typography>
+
+        <Typography
+          variant="h6"
+          className="futura hidden md:block lg:hidden xl:flex 2xl:ml-3 md:text-center 2xl:mr-28 font-medium text-primary-700"
+        >
+          Script Type
+        </Typography>
+        <Typography
+          variant="h6"
+          className="futura hidden sm:block self-start md:mx-auto  lg:ml-0 xl:ml-20 xl:mr-0 md:text-center lg:text-star font-medium text-primary-700"
+        >
+          Bids
+        </Typography>
+      </div>
+      <div className="px-5 xl:px-14">
         {listScripts.map((script) => (
-          <TableRow
-            key={script.id}
-            sx={{
-              "& td, & th": {
-                borderBottom: { xs: 0, sm: "1px solid #DCD8E4" },
-              },
-              "&:last-child td, &:last-child th": { border: 0 },
-            }}
-            className="flex flex-1 flex-col sm:flex-row"
-          >
-            <TableCell
-              sx={{
-                "&.MuiTableCell-root": {
-                 
-                  px: { xs: 0, sm: 1 },
-                  pr: { xl: 2 },
-                },
-              }}
-              className="flex flex-1  gap-1 sm:py-6 xl:py-10 sm:gap-3 flex-col sm:flex-row sm:flex-1 2xl:flex-[0.4]"
-            >
-              <div className="flex items-center gap-6">
-                <div className="flex-shrink-0">
-                  <Image
-                    className="rounded-md w-full h-full"
-                    loading="lazy"
-                    src={script.image}
-                    alt={script.title}
-                  />
-                </div>
-                <Fab
-                  sx={{
-                    "&.MuiButtonBase-root ": {
-                      backgroundColor: "inherit",
-                      boxShadow: "none",
-                      border: `${
+          <React.Fragment key={script.id}>
+            <div className="flex flex-col sm:flex-row py-6 xl:py-10  sm:justify-start  md:justify-end 2xl:justify-start">
+              <div className="flex flex-col sm:flex-row sm:mr-10 md:mr-6 lg:mr-8 gap-y-1 gap-x-3 xl:gap-5 sm:w-auto xl:mr-12 lg:max-w-[445px] 2xl:max-w-[425px] 2xl:mr-[65px]">
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0">
+                    <Image
+                      className="rounded-md w-full h-full"
+                      loading="lazy"
+                      src={script.image}
+                      alt={script.title}
+                    />
+                  </div>
+                  <Tooltip title="Bids">
+                    <div
+                      className={`${
                         script.bids === 0
-                          ? "1px solid #B7B7B7"
-                          : "1px solid #03B76F"
-                      }`,
-                    },
-                  }}
-                  className={`${
-                    script.bids === 0 ? "text-gray-300" : "text-success-500"
-                  } md:ml-auto sm:hidden flex w-9 h-8  border rounded-full`}
-                >
-                  {script.bids}
-                </Fab>
+                          ? "text-gray-300 border border-gray-300"
+                          : "text-success-500 border border-success-500"
+                      } w-9 h-9 flex justify-center sm:hidden self-center items-center  border rounded-full`}
+                    >
+                      {script.bids}
+                    </div>
+                  </Tooltip>
+                </div>
+                <div className="sm:max-w-[271px]">
+                  <Typography
+                    variant="body1"
+                    className="futura font-semibold text-primary-700"
+                  >
+                    {script.title}
+                  </Typography>
+                  <Typography variant="caption" className="text-stone-800">
+                    {script.description}
+                  </Typography>
+                </div>
               </div>
-              <div className="flex-1 sm:max-w-[271px] min-w-[170px]">
-                <Typography
-                  variant="body1"
-                  className="futura font-semibold text-primary-700"
-                >
-                  {script.title}
-                </Typography>
-                <Typography variant="caption" className="text-stone-800">
-                  {script.description}
-                </Typography>
-              </div>
-            </TableCell>
-            <TableCell
-              sx={{ "&.MuiTableCell-root": { px: { md: 1 } } }}
-              className="hidden md:flex items-center flex-[0.5]"
-            >
               <Chip
-                className="py-5 px-4 bg-tinted-100/60 rounded-md  text-neutral-800"
+                className="py-5 px-4 hidden md:flex lg:hidden xl:flex self-center 2xl:mr-36 md:mr-10 bg-tinted-100/60 rounded-md  text-neutral-800"
                 label={script.type}
               />
-            </TableCell>
-            <TableCell className="hidden sm:flex sm:py-6 xl:py-10 items-center md:ml-auto sm:pr-10 md:pr-0 lg:pr-1 2xl:pr-2">
               <Tooltip title="Bids">
                 <div
                   className={`${
                     script.bids === 0
                       ? "text-gray-300 border border-gray-300"
                       : "text-success-500 border border-success-500"
-                  } md:ml-auto w-9 h-9 flex justify-center items-center  border rounded-full`}
+                  } w-9 h-9 justify-center hidden sm:flex self-center lg:mr-auto lg:ml-0 xl:ml-10  md:ml-auto items-center  border rounded-full`}
                 >
                   {script.bids}
                 </div>
               </Tooltip>
-            </TableCell>
-            <TableCell
-              sx={{
-                "&.MuiTableCell-root": {
-                 
-                  px: { xs: 1, sm: 0, md: 2 },
-                },
-              }}
-              className="flex items-center sm:py-6 xl:py-10 2xl:flex-[0.25] 2xl:justify-end"
-            >
-              <IconButton onClick={handleClick}>
-                <IoIosMore className="text-3xl mt-1 sm:mt-0 text-primary-700" />
-              </IconButton>
-              <Menu
-                sx={{
-                  "& .MuiPaper-root": {
-                    boxShadow: "1px 1px 10px rgba(0,0,0,0.055)",
-                    py: 0,
-                  },
-
-                }}
-                className="shadow-none"
-                anchorEl={openMenuItem}
-                open={open}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "center",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-              >
-                <Link href={`/listings/${script.id}`}>
+              <div className="flex self-center sm:ml-auto justify-center items-center">
+                <IconButton onClick={handleClick}>
+                  <IoIosMore className="text-3xl mt-1 sm:mt-0 text-primary-700" />
+                </IconButton>
+                <Menu
+                  sx={{
+                    "& .MuiPaper-root": {
+                      boxShadow: "1px 1px 10px rgba(0,0,0,0.055)",
+                      py: 0,
+                    },
+                  }}
+                  className="shadow-none"
+                  anchorEl={openMenuItem}
+                  open={open}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "center",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                  }}
+                >
+                  <Link href={`/listings/${script.id}`}>
+                    <MenuItem
+                      sx={{
+                        "&:hover": {
+                          color: "#9A7EC7",
+                          backgroundColor: "#F7F5F8",
+                        },
+                        fontSize: "14px",
+                        px: "25px",
+                        py: 2,
+                      }}
+                      onClick={handleClose}
+                    >
+                      View Script
+                    </MenuItem>
+                  </Link>
                   <MenuItem
                     sx={{
                       "&:hover": {
@@ -239,34 +202,21 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                       px: "25px",
                       py: 2,
                     }}
-                    onClick={handleClose}
+                    onClick={() => {
+                      setOpenUnListingItem(true);
+                      setOpenMenuItem(null);
+                    }}
                   >
-                    View Script
+                    Unlist Script
                   </MenuItem>
-                </Link>
-                <MenuItem
-                  sx={{
-                    "&:hover": {
-                      color: "#9A7EC7",
-                      backgroundColor: "#F7F5F8",
-                    },
-                    fontSize: "14px",
-                    px: "25px",
-                    py: 2,
-                  }}
-                  onClick={() => {
-                    setOpenUnListingItem(true);
-                    setOpenMenuItem(null);
-                  }}
-                >
-                  Unlist Script
-                </MenuItem>
-              </Menu>
-            </TableCell>
-          </TableRow>
+                </Menu>
+              </div>
+            </div>
+           {script.id < listScripts.length  &&<Divider className="hidden sm:flex" /> } 
+          </React.Fragment>
         ))}
-      </TableBody>
-    </Table>
+      </div>
+    </Paper>
   );
 };
 

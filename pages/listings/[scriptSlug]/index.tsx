@@ -25,7 +25,7 @@ const ScriptSlug: NextPageWithLayout = () => {
         setOpenCreateScript={setOpenCreateScript}
       />
       <SearchDashboard setOpenCreateScript={setOpenCreateScript} />
-      <div className="py-6  px-6 sm:px-11  mt-4 md:mt-6 bg-white rounded-md">
+      <div className="py-6  px-6 sm:px-11  my-4 md:my-6 bg-white rounded-md">
         <Heading />
         <AcceptOfferModal
           openAcceptOffer={openAcceptOffer}

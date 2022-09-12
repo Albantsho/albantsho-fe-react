@@ -50,21 +50,21 @@ const MyScriptsArray = [
 
 const MyScripts = () => {
   return (
-    <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-sm  py-5 flex flex-col mb-16">
+    <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-sm   py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
-          <TableCell className="flex-1 pl-3 sm:pl-7  xl:pl-16">
+          <TableCell className="flex-1 pl-5 sm:pl-9 xl:pb-8 pb-5 pt-0 xl:pl-16">
             <Typography
-              variant="body1"
-              className="text-primary-700 font-medium"
+              variant="h6"
+              className="text-primary-700 font-medium futura"
             >
               Script
             </Typography>
           </TableCell>
-          <TableCell className=" hidden md:flex"></TableCell>
+          <TableCell className=" hidden md:flex xl:pb-8 pb-5 pt-0"></TableCell>
         </TableRow>
       </TableHead>
-      <TableBody className="px-3  xl:px-12">
+      <TableBody className="px-5  xl:px-12">
         {MyScriptsArray.map((bid) => (
           <TableRow
             key={bid.id}
@@ -77,34 +77,22 @@ const MyScripts = () => {
             className="flex flex-1"
           >
             <TableCell
-              className="flex flex-1 flex-wrap sm:flex-nowrap gap-4"
+              className="flex flex-1 flex-wrap sm:flex-nowrap items-start sm:py-6 xl:py-10 gap-2"
               sx={{
                 "&.MuiTableCell-root": {
                   px: { xs: 0, sm: 2 },
                 },
               }}
             >
-              <div className="flex gap-3 items-end sm:items-start">
-                <div className="flex-shrink-0 ">
-                  <Image
-                    className="rounded-md"
-                    loading="lazy"
-                    src={bid.image}
-                    alt={bid.title}
-                  />
-                </div>
-                <Button
-                  variant="text"
-                  sx={{
-                    border: "1px solid #7953B5",
-                    borderRadius: 1.5,
-                  }}
-                  className=" sm:hidden mb-1"
-                >
-                  View script
-                </Button>
-              </div>
-              <div className="flex-grow sm:flex-1 sm:max-w-[271px] min-w-[170px] sm:-ml-4 lg:ml-0">
+              <Image
+                width="64"
+                height="64"
+                className="rounded-md"
+                loading="lazy"
+                src={bid.image}
+                alt={bid.title}
+              />
+              <div className="flex-grow sm:flex-1 sm:max-w-[271px] min-w-[170px] sm:ml-2">
                 <Typography
                   variant="body1"
                   className="futura font-semibold text-primary-700"
@@ -115,6 +103,16 @@ const MyScripts = () => {
                   {bid.description}
                 </Typography>
               </div>
+              <Button
+                variant="text"
+                sx={{
+                  border: "1px solid #7953B5",
+                  borderRadius: 1.5,
+                }}
+                className=" sm:hidden mb-2 mt-1"
+              >
+                View script
+              </Button>
             </TableCell>
             <TableCell
               sx={{
@@ -122,7 +120,7 @@ const MyScripts = () => {
                   pl: { lg: 0 },
                 },
               }}
-              className="hidden sm:flex items-center justify-end"
+              className="hidden sm:flex items-center sm:py-6 xl:py-10 justify-end"
             >
               <Button
                 variant="text"
