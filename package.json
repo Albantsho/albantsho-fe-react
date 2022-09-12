@@ -10,7 +10,7 @@
     "export": "next export"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.0",
+    "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/base": "^5.0.0-alpha.92",
@@ -20,6 +20,7 @@
     "next": "12.2.5",
     "next-progress": "^2.2.0",
     "react": "18.2.0",
+    "react-awesome-reveal": "^4.0.1",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-spring": "^9.5.2",
