@@ -17,19 +17,18 @@ const WritersStatement = () => {
   return (
     <>
       <Typography
-        width="100%"
-        variant="h6"
+        variant="h5"
         color="primary.700"
-        className="futura font-medium"
+        className="futura font-medium leading-normal"
       >
-        Character Bible
+        Writers Statement
       </Typography>
 
       <Typography
-        variant="body2"
-        className="text-neutral-700 mb-4 sm:mb-6 lg:mb-10 max-w-[290px] md:max-w-full"
+        variant="body1"
+        className="text-neutral-700 mb-6 lg:mb-10 max-w-[290px] md:max-w-full"
       >
-        The personalities that make up your story
+        Beyond the passion of storytelling, there is purpose.
       </Typography>
 
       <Accordion
@@ -39,7 +38,7 @@ const WritersStatement = () => {
           "&:before": { display: "none" },
           "& .MuiButtonBase-root": { border: "1px solid #D9D9D9" },
         }}
-        className="shadow-sm mb-4 md:mb-5 rounded-md"
+        className="shadow-sm  rounded-md"
       >
         <AccordionSummary
           sx={{
@@ -51,19 +50,19 @@ const WritersStatement = () => {
           className="rounded-lg px-3  lg:px-6  py-2 border"
         >
           <div className="flex gap-6 flex-wrap items-center md:gap-8  md:px-7 ">
-            <Typography variant="body2" className="text-tinted-500">
+            <Typography variant="body1" className="text-tinted-500">
               Is this an adaptation?
             </Typography>
             <div className="flex gap-4">
               <Btn
                 sx={{ "&.MuiButtonBase-root": { border: "none" } }}
-                className="rounded-full text-white"
+                className="rounded-full text-white px-6 py-3 md:px-8 md:py-4"
               >
                 Yes
               </Btn>
               <Btn
                 sx={{ "&.MuiButtonBase-root": { border: "1px solid #7953B5" } }}
-                className="rounded-full bg-white text-primary-700"
+                className="rounded-full bg-white text-primary-700 px-6 py-3 md:px-8 md:py-4"
               >
                 No
               </Btn>
@@ -99,13 +98,19 @@ const WritersStatement = () => {
         </AccordionDetails>
       </Accordion>
 
-      <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-        <label htmlFor="character-bible" className="futura font-medium">
-          Character Bible<span className="text-error-700">*</span>
+      <div className="flex mt-5 md:mt-6 items-start flex-col justify-start gap-2 mb-3 md:mb-5">
+        <label htmlFor="character-bible">
+          <Typography
+            variant="body1"
+            className="futura font-medium text-primary-700"
+          >
+            Inspiration for Story*<span className="text-error-700">*</span>
+          </Typography>
         </label>
         <CustomInput
           sx={{
             "& ::placeholder": { color: "#B7B7B7 !important" },
+            "& .MuiOutlinedInput-input": { py: 2 },
           }}
           multiline
           rows={3}
@@ -114,17 +119,23 @@ const WritersStatement = () => {
           fullWidth
           id="character-bible"
           variant="outlined"
-          size="medium"
+          size="small"
         />
       </div>
 
       <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-        <label htmlFor="motivation" className="futura font-medium">
-          Motivation<span className="text-error-700">*</span>
+        <label htmlFor="motivation">
+          <Typography
+            variant="body1"
+            className="futura font-medium text-primary-700"
+          >
+            Motivation<span className="text-error-700">*</span>
+          </Typography>
         </label>
         <CustomInput
           sx={{
             "& ::placeholder": { color: "#B7B7B7 !important" },
+            "& .MuiOutlinedInput-input": { py: 2 },
           }}
           multiline
           rows={3}
@@ -132,7 +143,7 @@ const WritersStatement = () => {
           fullWidth
           id="motivation"
           variant="outlined"
-          size="medium"
+          size="small"
         />
       </div>
     </>

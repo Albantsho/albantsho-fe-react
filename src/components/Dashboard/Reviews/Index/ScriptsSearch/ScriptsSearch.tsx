@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   Autocomplete,
   createFilterOptions,
-  Divider,
   InputAdornment,
   ListItem,
   ListItemButton,
@@ -79,7 +78,7 @@ const ScriptsSearch = () => {
                   }}
                 />
               </ListItemButton>
-              <Divider />
+             
             </ListItem>
           )}
           filterOptions={filterOptions}

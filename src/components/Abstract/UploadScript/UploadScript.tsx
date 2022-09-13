@@ -42,27 +42,24 @@ const filterOptions = createFilterOptions({
 });
 
 const UploadScript = ({ activeButton, setActiveButton }: IProps) => {
-
   return (
     <>
       <Typography
-        width="100%"
-        variant="h6"
+        variant="h5"
         color="primary.700"
-        className="futura font-medium"
+        className="futura font-medium leading-normal"
       >
         Upload Script
       </Typography>
 
       <Typography
-        variant="body2"
-        className="text-neutral-700 mb-4 sm:mb-6 lg:mb-10 max-w-[290px] md:max-w-full"
+        variant="body1"
+        className="text-neutral-700 mb-6 max-w-[290px] md:max-w-full"
       >
         By the way, your story is not a gift but a NECESSITY
       </Typography>
 
       <ButtonGroup
-       
         disableElevation
         variant="contained"
         className="w-full mt-4 md:mt-7 mb-4 md:mb-7 border rounded-md"
@@ -71,7 +68,6 @@ const UploadScript = ({ activeButton, setActiveButton }: IProps) => {
           onClick={() => {
             setActiveButton(1);
           }}
-       
           className={`${
             activeButton === 0
               ? "bg-primary-700 text-white"
@@ -94,29 +90,35 @@ const UploadScript = ({ activeButton, setActiveButton }: IProps) => {
         </Btn>
       </ButtonGroup>
 
-      <div>
-        <label
-          htmlFor="filter-Results"
-          className="futura  font-medium mb-2 block text-neutral-800"
-        >
-          Select Script<span className="text-error-500 my-auto">*</span>
+      <div className="flex mt-5 md:mt-6 items-start flex-col justify-start gap-2 mb-3 md:mb-5">
+        <label htmlFor="filter-Results">
+          <Typography
+            variant="body1"
+            className="futura font-medium text-primary-700"
+          >
+            Select Script<span className="text-error-500 my-auto">*</span>
+          </Typography>
         </label>
         <Autocomplete
+          fullWidth
           size="medium"
           id="filter-Results"
           sx={{
+            "& .MuiSvgIcon-root": { color: "#7953B5 !important" },
             "& .MuiInputBase-input": { color: "#7953B5" },
             "& .MuiOutlinedInput-notchedOutline": { borderRadius: "12px" },
           }}
           options={results}
           getOptionLabel={(option) => option.title}
           renderOption={(props, option) => (
-            <ListItem
-              {...props}
-              className={`border-b border-gray-200 px-2 sm:px-4 md:px-6`}
-              sx={{ "&:last-child": { border: 0 } }}
-            >
-              <ListItemButton>
+            <ListItem {...props} className={` px-2 sm:px-4 md:px-6`}>
+              <ListItemButton
+                sx={{
+                  "&.MuiListItemButton-root": {
+                    borderBottom: "1px solid #EEEBF1",
+                  },
+                }}
+              >
                 <ListItemText
                   primary={option.title}
                   primaryTypographyProps={{
@@ -148,9 +150,7 @@ const UploadScript = ({ activeButton, setActiveButton }: IProps) => {
             />
           )}
         />
-        <Button
-          className="max-w-[520px] w-full  text-primary-700 text-center py-2 mt-8 block mx-auto rounded-md border-2 border-dashed mb-5 px-8  border-primary-700 "
-        >
+        <Button className="max-w-[520px] w-full  text-primary-700 text-center py-3 mt-8 block mx-auto rounded-lg border-2 border-dashed mb-5 px-8  border-primary-700 ">
           Write new script
         </Button>
       </div>

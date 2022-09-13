@@ -12,14 +12,14 @@ interface IProps {
 const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
   return (
     <>
-      <div className="flex justify-between  mt-4 sm:mt-8 md:mt-12">
+      <div className="flex justify-between mt-20">
         <Link href={`/abstract?step=${step === 1 ? 7 : step - 1}`} passHref>
           <Button
             disabled={step === 1}
             onClick={() => {
               if (step !== 1) setStep((prevCount: number) => prevCount - 1);
             }}
-            className="rounded-md px-6 py-2 hidden md:block"
+            className="rounded-md px-8 py-3 hidden md:block"
             variant="contained"
           >
             Back
@@ -27,7 +27,7 @@ const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
         </Link>
         <Button
           onClick={() => setOpenModalSaveProgress(true)}
-          className="rounded-md px-6 py-2 mx-auto"
+          className="rounded-md px-8 py-3 mx-auto"
           variant="outlined"
         >
           Save & complete later
@@ -38,7 +38,7 @@ const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
             onClick={() => {
               if (step !== 7) setStep((prevCount: number) => prevCount + 1);
             }}
-            className="rounded-md px-6 py-2 hidden md:block"
+            className="rounded-md px-8 py-3 hidden md:block"
             variant="contained"
           >
             Next
@@ -49,12 +49,13 @@ const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
       <div className="flex md:hidden justify-center mt-4 gap-4 items-center">
         <Link href={`/abstract?step=${step === 1 ? 7 : step - 1}`} passHref>
           <IconButton
+           color="primary"
             disabled={step === 1}
             onClick={() => {
               if (step !== 1) setStep((prevCount: number) => prevCount - 1);
             }}
           >
-            <BsArrowLeftShort className="text-3xl text-primary-700" />
+            <BsArrowLeftShort className="text-3xl" />
           </IconButton>
         </Link>
 
@@ -66,12 +67,13 @@ const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
 
         <Link href={`/abstract?step=${step === 7 ? 1 : step + 1}`} passHref>
           <IconButton
+          color="primary"
             disabled={step === 7}
             onClick={() => {
               if (step !== 7) setStep((prevCount: number) => prevCount + 1);
             }}
           >
-            <BsArrowRightShort className="text-3xl text-primary-700" />
+            <BsArrowRightShort className="text-3xl" />
           </IconButton>
         </Link>
       </div>

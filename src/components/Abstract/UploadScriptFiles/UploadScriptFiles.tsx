@@ -4,28 +4,26 @@ import Image from "next/image";
 import UploadFile from "./assets/Upload-file.png";
 import { Dispatch, SetStateAction } from "react";
 
-
 interface IProps {
   activeButton: number;
   setActiveButton: Dispatch<SetStateAction<number>>;
 }
 
 const UploadScriptFiles = ({ activeButton, setActiveButton }: IProps) => {
-
   return (
     <>
       <Typography
-        width="100%"
-        variant="h6"
+        variant="h5"
         color="primary.700"
-        className="futura font-medium"
+        className="futura font-medium leading-normal"
       >
         Upload Script
       </Typography>
 
+
       <Typography
-        variant="body2"
-        className="text-neutral-700 mb-4 sm:mb-6 lg:mb-10 max-w-[290px] md:max-w-full"
+        variant="body1"
+        className="text-neutral-700 mb-6 max-w-[290px] md:max-w-full"
       >
         By the way, your story is not a gift but a NECESSITY
       </Typography>
@@ -33,7 +31,7 @@ const UploadScriptFiles = ({ activeButton, setActiveButton }: IProps) => {
       <ButtonGroup
         disableElevation
         variant="contained"
-        className="w-full mt-4 md:mt-7 mb-4 md:mb-7 border"
+        className="w-full mt-4 md:mt-7 mb-7 md:mb-10 border"
       >
         <Btn
           onClick={() => {
@@ -61,57 +59,59 @@ const UploadScriptFiles = ({ activeButton, setActiveButton }: IProps) => {
         </Btn>
       </ButtonGroup>
 
-      <div className="max-w-[528px] mx-auto rounded-md border-2 border-dashed mb-5 overflow-hidden border-primary-300 flex justify-center items-center">
-        <form className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
-          <label
-            className="absolute cursor-pointer inset-0"
-            htmlFor="add-script"
-          ></label>
-          <input type="file" id="add-script" hidden name="script" />
-          <div className="mx-auto flex justify-center items-center mb-2">
-            <Image src={UploadFile} alt="upload file" />
-          </div>
-          <Typography
-            variant="h6"
-            color="primary.700"
-            className="futura font-semibold text-center"
-          >
-            Upload Copyright
-          </Typography>
-          <Typography
-            variant="caption"
-            className="text-neutral-700 text-center"
-          >
-            Drop your file here, or
-            <span className="text-primary-700 underline">browse</span>
-          </Typography>
-        </form>
-      </div>
-      <div className="max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center">
-        <form className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
-          <label
-            className="absolute cursor-pointer inset-0"
-            htmlFor="add-script"
-          ></label>
-          <input type="file" id="add-script" hidden name="script" />
-          <div className="mx-auto flex justify-center items-center mb-2">
-            <Image src={UploadFile} alt="upload file" />
-          </div>
-          <Typography
-            variant="h6"
-            color="primary.700"
-            className="futura font-semibold text-center"
-          >
-            Upload Script
-          </Typography>
-          <Typography
-            variant="caption"
-            className="text-neutral-700 text-center"
-          >
-            Drop your file here, or{" "}
-            <span className="text-primary-700 underline">browse</span>
-          </Typography>
-        </form>
+      <div className="md:px-10 py-10 md:py-16 space-y-5 md:shadow-md rounded-lg">
+        <div className="max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center">
+          <form className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
+            <label
+              className="absolute cursor-pointer inset-0"
+              htmlFor="add-script"
+            ></label>
+            <input type="file" id="add-script" hidden name="script" />
+            <div className="mx-auto flex justify-center items-center mb-2 sm:mb-3">
+              <Image src={UploadFile} alt="upload file" />
+            </div>
+            <Typography
+              variant="h6"
+              color="primary.700"
+              className="futura font-semibold text-center leading-normal mb-1"
+            >
+              Upload Script
+            </Typography>
+            <Typography
+              variant="body1"
+              className="text-neutral-700 text-center"
+            >
+              Drop your file here, or
+              <span className="text-primary-700 underline ml-1">browse</span>
+            </Typography>
+          </form>
+        </div>
+        <div className="max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center">
+          <form className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
+            <label
+              className="absolute cursor-pointer inset-0"
+              htmlFor="add-script"
+            ></label>
+            <input type="file" id="add-script" hidden name="script" />
+            <div className="mx-auto flex justify-center items-center mb-2 sm:mb-3">
+              <Image src={UploadFile} alt="upload file" />
+            </div>
+            <Typography
+              variant="h6"
+              color="primary.700"
+              className="futura font-semibold text-center leading-normal mb-1"
+            >
+              Upload Copyright
+            </Typography>
+            <Typography
+              variant="body1"
+              className="text-neutral-700 text-center"
+            >
+              Drop your file here, or
+              <span className="text-primary-700 underline ml-1">browse</span>
+            </Typography>
+          </form>
+        </div>
       </div>
     </>
   );
