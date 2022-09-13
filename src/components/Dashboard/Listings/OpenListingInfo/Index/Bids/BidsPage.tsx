@@ -18,69 +18,69 @@ interface IProps {
 const BidsPage = ({ setOpenAcceptOffer }: IProps) => {
   return (
     <>
-      <div className="bg-white shadow-md mt-4 py-4 sm:py-8 px-3 md:px-6 lg:px-8 xl:px-20 rounded-md">
-        <Typography variant="h6" color="primary.700" className="">
+      <div className="bg-white shadow-md mt-4 py-4 sm:py-8 lg:py-12 xl:py-16 px-5 sm:px-8 lg:px-8 xl:px-20 rounded-md">
+        <Typography
+          variant="h4"
+          color="primary.700"
+          className="futura font-medium leading-normal"
+        >
           Auctions
         </Typography>
 
-        <div>
-          <div className="border-b py-4 lg:pb-6 flex flex-wrap items-center lg:flex-nowrap   gap-x-5 gap-y-2 ">
+        <div className="pt-4 sm:pt-8 lg:pt-12 xl:pt-16">
+          <div className="lg:pb-6 flex flex-wrap items-center lg:flex-nowrap gap-x-5 gap-y-2 ">
             <Typography
               variant="h6"
               color="primary.700"
-              className=" mb-2 sm:mb-4 lg:mb-0 futura font-sem leading-normal"
+              className=" futura font-medium leading-normal"
             >
               The Long Man Of Long Beach
+              <SvgIcon inheritViewBox className="-mb-[6px]  ml-4 md:ml-6" component={ReviewedIcon} />
             </Typography>
-
             <Chip
               label="Feature film"
-              className="rounded bg-tinted-50/60 py-2 text-neutral-800 lg:mr-1"
+              className="rounded bg-tinted-50/60 py-2 xl:py-5 xl:px-2 text-neutral-800 lg:mr-1"
             />
-            <SvgIcon inheritViewBox component={ReviewedIcon} />
-
             <Divider
-              className="hidden lg:block"
+              className="hidden md:block mx-2 xl:mx-5 2xl:mx-10"
               orientation="vertical"
               flexItem
             />
-            <div>
-              <span>Base Fee:</span> <br />
-              <div className="flex gap-1 items-center flex-wrap">
+            <div className="mt-2 sm:mt-0">
+              <Typography variant="caption" className="text-[#B7B7B7]">
+                Base Fee:
+              </Typography>
+              <br />
+              <div className="flex gap-1 items-center flex-wrap sm:min-w-[200px] md:min-w-full">
                 <Typography
                   color="primary.700"
-                  className="lg:leading-normal"
+                  className="leading-normal font-semibold"
                   variant="h5"
                 >
                   $100
                 </Typography>
-                <Typography
-                 
-                  variant="caption"
-                  color="primary.700"
-                >
+                <Typography variant="body1" color="primary.700">
                   (0.0237 ETH)
                 </Typography>
               </div>
             </div>
           </div>
-          <div className="mt-4 lg:pt-6 md:flex ">
-            <div className=" sm:mb-4 md:mb-0  md:max-w-[320px]">
-              <Typography variant="body1" className="">
-                <span className="text-lg font-semibold text-primary-700">
-                  Talan
-                </span>
+          <Divider className="my-5 md:my-7 xl:my-10 2xl:my-12" />
+          <div className="lg:pt-6 md:flex ">
+            <div className="mb-4 md:mb-0  space-y-2 lg:space-y-4 xl:space-y-10 2xl:space-y-12">
+              <Typography variant="h6" className="text-neutral-700 font-normal">
+                <span className="font-semibold text-primary-700">Talan</span>{" "}
                 has placed a bid for your script
               </Typography>
               <Typography
                 variant="h5"
                 color="primary.700"
-                className="font-semibold md:mt-2"
+                className="font-semibold"
               >
                 @$6,000
               </Typography>
             </div>
-            <ButtonGroup className="border-none flex-wrap md:flex-nowrap md:items-end  md:-ml-24 gap-x-6 ">
+            <ButtonGroup className="border-none items-stretch md:items-end  md:-ml-24 gap-x-2 md:gap-x-8 xl:gap-x-12">
               <Button
                 onClick={() => setOpenAcceptOffer(true)}
                 sx={{ "&.MuiButtonBase-root": { fontWeight: 600 } }}

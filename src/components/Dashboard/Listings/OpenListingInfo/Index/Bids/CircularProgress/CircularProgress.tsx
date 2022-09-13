@@ -1,16 +1,48 @@
+import Box from "@mui/material/Box";
 import CircularProgress, {
   type CircularProgressProps,
 } from "@mui/material/CircularProgress";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import { useEffect, useState } from "react";
+import { Typography } from "@mui/material";
 
-function CircularProgressWithLabel(
-  props: CircularProgressProps & { value: number }
-) {
+function CircularProgressFunction(props: CircularProgressProps) {
   return (
-    <Box className="mx-auto" sx={{ position: "relative", display: "inline-flex" }}>
-      <CircularProgress variant="determinate" {...props} />
+    <Box sx={{ position: "relative" }}>
+      <CircularProgress
+        variant="determinate"
+        sx={{ color: "#D9D9D9" }}
+        thickness={2}
+        {...props}
+        value={100}
+      />
+      <CircularProgress
+        variant="determinate"
+        value={25}
+        disableShrink
+        sx={{
+          color: "#03B76F",
+          position: "absolute",
+          left: 0,
+        }}
+        thickness={2}
+        {...props}
+      />
+    </Box>
+  );
+}
+interface IProps {
+  isSmall?: boolean;
+}
+
+export default function CustomizedProgressBars({ isSmall }: IProps) {
+  return (
+    <Box
+      sx={{
+        flexGrow: 1,
+        position: "relative",
+        display: "inline-block",
+      }}
+    >
+      <CircularProgressFunction size={isSmall ? 89 : 169} value={24} />
       <Box
         sx={{
           top: 0,
@@ -23,29 +55,10 @@ function CircularProgressWithLabel(
           justifyContent: "center",
         }}
       >
-        <Typography
-          variant="caption"
-          component="div"
-          color="text.secondary"
-        >{`${Math.round(props.value)}`}</Typography>
+        <Typography variant="h4" className="font-semibold text-neutral-800">
+          24
+        </Typography>
       </Box>
     </Box>
   );
-}
-
-export default function CircularStatic() {
-  const [progress, setProgress] = useState(1);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prevProgress) =>
-        prevProgress >= 100 ? 0 : prevProgress + 10
-      );
-    }, 1000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
-  return <CircularProgressWithLabel value={progress} />;
 }

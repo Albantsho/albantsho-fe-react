@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-const DeleteBtn = ({ ...props }) => {
+const CancelBtn = ({ ...props }) => {
   return (
     <div className="text-neutral-300">
       <Button
@@ -16,4 +16,4 @@ const DeleteBtn = ({ ...props }) => {
   );
 };
 
-export default DeleteBtn;
+export default CancelBtn;

@@ -41,7 +41,7 @@ const TabButtons = () => {
           sx={{
             "&.MuiButtonBase-root": {
               flexGrow: { xs: 1, md: 0 },
-              minWidth: "30px",
+              minWidth: "20px",
             },
             marginRight: { md: 1 },
             px: { md: 6 },
