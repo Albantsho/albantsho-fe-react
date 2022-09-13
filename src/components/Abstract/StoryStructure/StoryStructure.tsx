@@ -5,53 +5,56 @@ const StoryStructure = () => {
   return (
     <>
       <Typography
-        width="100%"
-        variant="h6"
+        variant="h5"
         color="primary.700"
-        className="futura font-medium"
+        className="futura font-medium leading-normal"
       >
         Story Structure
       </Typography>
-
       <Typography
-        variant="body2"
-        className="text-neutral-700 mb-4 sm:mb-6 lg:mb-10 max-w-[290px] md:max-w-full"
+        variant="body1"
+        className="text-neutral-700 mb-6 lg:mb-10 max-w-[290px] md:max-w-full"
       >
         There is only one rule: be surprising
       </Typography>
 
       <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-        <label
-          htmlFor="story-world"
-          className="futura font-medium text-neutral-800"
-        >
-          Story World<span className="text-error-700">*</span>
+        <label htmlFor="story-world">
+          <Typography
+            variant="body1"
+            className="futura font-medium text-primary-700"
+          >
+            Story World<span className="text-error-700">*</span>
+          </Typography>
         </label>
         <CustomInput
-          sx={{
-            "& ::placeholder": { color: "#B7B7B7 !important" },
-          }}
-          className="placeholder:text-red-500"
           placeholder="Where is this story domicile?"
           fullWidth
           id="story-world"
           variant="outlined"
-          size="medium"
+          size="small"
+          sx={{
+            "& ::placeholder": { color: "#B7B7B7 !important" },
+            "& .MuiOutlinedInput-input": { py: 2 },
+          }}
         />
       </div>
 
       <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-        <label
-          htmlFor="act-structure"
-          className="futura font-medium text-neutral-800"
-        >
-          Act Structure (Recommended)
+        <label htmlFor="act-structure">
+          <Typography
+            variant="body1"
+            className="futura font-medium text-primary-700"
+          >
+            Act Structure (Recommended)
+          </Typography>
         </label>
         <CustomInput
           fullWidth
           id="act-structure"
           variant="outlined"
-          size="medium"
+          size="small"
+          sx={{ "& .MuiOutlinedInput-input": { py: 2 } }}
         />
       </div>
     </>

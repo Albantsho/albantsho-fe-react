@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 
-const UncompletedLists = [
+const closedList = [
   {
     id: 1,
     image: beautySmall,
@@ -55,37 +55,37 @@ const UncompletedLists = [
 
 const ClosedList = () => {
   return (
-    <Table className=" mt-4 sm:mt-6 bg-white rounded-md shadow-sm  py-5 flex flex-col mb-16">
+    <Table className=" mt-4 sm:mt-6 bg-white rounded-md shadow-sm  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
-          <TableCell className="flex-1  xl:flex-[0.6] pl-2 2xl:flex-[0.4]  sm:pl-6 lg:pl-10 xl:pl-16 ">
+          <TableCell className="flex-1 sm:max-w-[370px] sm:min-w-[370px] md:min-w-[470px] md:max-w-[470px] lg:min-w-[370px] lg:max-w-[370px] xl:max-w-[500px] xl:min-w-[500px] pl-5 pt-0 xl:pb-8 pb-5  sm:pl-6 lg:pl-10 xl:pl-16 ">
             <Typography
-              variant="body1"
-              className="text-primary-700 font-medium"
+              variant="h6"
+              className="text-primary-700 futura font-medium"
             >
               Script
             </Typography>
           </TableCell>
-          <TableCell className="hidden sm:flex flex-[0.5] lg:flex-[0.22] ">
+          <TableCell className="hidden sm:flex flex-[0.5] pt-0 xl:pb-8 pb-5">
             <Typography
-              variant="body1"
-              className="text-primary-700 font-medium"
+              variant="h6"
+              className="text-primary-700 futura font-medium"
             >
               Price
             </Typography>
           </TableCell>
-          <TableCell className="flex  pr-2 sm:pr-8 lg:pr-12 xl:flex-[0.3] 2xl:flex-[0.4] xl:pr-20 justify-end">
+          <TableCell className="hidden sm:flex pr-2 sm:pr-8 lg:pr-12 pt-0 xl:pb-8 pb-5 xl:flex-[0.3] xl:pr-20 justify-end">
             <Typography
-              variant="body1"
-              className="text-primary-700 font-medium "
+              variant="h6"
+              className="text-primary-700 futura font-medium "
             >
               Date
             </Typography>
           </TableCell>
         </TableRow>
       </TableHead>
-      <TableBody className="px-2 lg:px-6 xl:px-12">
-        {UncompletedLists.map((listItem) => (
+      <TableBody className="px-1  xl:px-12">
+        {closedList.map((listItem) => (
           <TableRow
             key={listItem.id}
             sx={{
@@ -96,14 +96,27 @@ const ClosedList = () => {
             }}
             className="flex "
           >
-            <TableCell className="flex flex-1  xl:flex-[0.5] 2xl:flex-[0.39] items-center flex-wrap sm:flex-nowrap gap-1 sm:gap-4 ">
-              <div className="flex-shrink-0 ">
+            <TableCell className="flex flex-1 sm:max-w-[365px] sm:py-6 xl:py-10 sm:min-w-[365px] md:max-w-[465px] md:min-w-[465px] lg:max-w-[365px] lg:min-w-[365px] xl:max-w-[465px] xl:min-w-[465px] items-center flex-wrap sm:flex-nowrap gap-1 sm:gap-4 ">
+              <div className="flex gap-2 sm:gap-0">
                 <Image
+                  layout="fixed"
+                  width="64"
+                  height="64"
                   className="rounded-md"
                   loading="lazy"
                   src={listItem.image}
                   alt={listItem.title}
                 />
+                <div className="flex flex-col gap-2">
+                  <Chip
+                    label={`$${listItem.price}`}
+                    className="text-success-500 bg-success-50 sm:hidden"
+                  />
+                  <Chip
+                    label={` 01/02/22`}
+                    className="text-secondary-500 bg-secondary-50 sm:hidden"
+                  />
+                </div>
               </div>
               <div className="flex-grow sm:flex-1 sm:pl-3 -mt-1  sm:max-w-[271px] min-w-[170px] sm:-ml-4">
                 <Typography
@@ -123,12 +136,12 @@ const ClosedList = () => {
                   px: { xs: 0 },
                 },
               }}
-              className="hidden sm:flex sm:flex-[0.6] lg:flex-[0.3] md:gap-4 items-center xl:justify-between"
+              className="hidden sm:flex sm:w-full lg:flex-[0.3] md:gap-4 items-center xl:justify-between"
             >
-              <Chip
-                label={`$ ${listItem.price}`}
-                className=" py-5 px-4   hidden sm:flex rounded-md bg-inherit text-primary-500 font-semibold"
-              />
+              <Typography
+                variant="h6"
+                className="rounded-md bg-inherit sm:min-w-[70px] lg:min-w-[85px] text-primary-500 font-semibold"
+              >{`$ ${listItem.price}`}</Typography>
             </TableCell>
             <TableCell
               sx={{
@@ -136,13 +149,14 @@ const ClosedList = () => {
                   px: { xs: 0, sm: 2 },
                 },
               }}
-              className="flex sm:items-center xl:flex-[0.2] 2xl:flex-[0.35] sm:justify-end"
+              className="hidden sm:flex items-center xl:flex-[0.2] lg:w-full 2xl:flex-[0.4] justify-end"
             >
-              <Chip
-                sx={{ "& .MuiChip-label": { px: { xs: 0 } } }}
-                className="bg-inherit"
-                label={"01/02/22"}
-              />
+              <Typography
+                variant="h6"
+                className=" text-neutral-700 font-medium"
+              >
+                01/02/22
+              </Typography>
             </TableCell>
           </TableRow>
         ))}

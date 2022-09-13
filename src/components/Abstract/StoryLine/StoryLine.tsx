@@ -6,46 +6,88 @@ const StoryLine = () => {
   return (
     <>
       <Typography
-        width="100%"
-        variant="h6"
+        variant="h5"
         color="primary.700"
-        className="futura font-medium"
+        className="futura font-medium leading-normal"
       >
         Storyline
       </Typography>
 
       <Typography
-        variant="body2"
-        className="text-neutral-700 mb-4 sm:mb-6 lg:mb-10  max-w-[290px] md:max-w-full"
+        variant="body1"
+        className="text-neutral-700 mb-6 lg:mb-10 max-w-[290px] md:max-w-full"
       >
         What if the 'line' was a kaleidoscope'?
       </Typography>
 
       <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-        <label htmlFor="tagline" className="futura font-medium text-neutral-800">
-          Tagline<span className="text-error-700">*</span>
+        <label htmlFor="tagline">
+          <Typography
+            variant="body1"
+            className="futura font-medium text-primary-700"
+          >
+            Tagline<span className="text-error-700">*</span>
+          </Typography>
         </label>
-        <CustomInput fullWidth id="tagline" variant="outlined" size="medium" />
-        <span className="text-blue-600 flex items-center gap-2">
-          <AiFillInfoCircle className="text-xl" />
-          What’s a tagline?
-        </span>
+        <CustomInput
+          fullWidth
+          id="tagline"
+          variant="outlined"
+          size="small"
+          sx={{
+            "& .MuiOutlinedInput-input": { py: 2 },
+            "& .MuiFormHelperText-root": {
+              mx: 0,
+              color: "#5D5FEF",
+            },
+          }}
+          helperText={
+            <div className="flex items-center gap-2">
+              <AiFillInfoCircle className="text-xl" />
+              What’s a tagline?
+            </div>
+          }
+        />
       </div>
 
       <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-        <label htmlFor="Logline" className="futura font-medium text-neutral-800">
-          Logline<span className="text-error-700">*</span>
+        <label htmlFor="Logline">
+          <Typography
+            variant="body1"
+            className="futura font-medium text-primary-700"
+          >
+            Logline<span className="text-error-700">*</span>
+          </Typography>
         </label>
-        <CustomInput fullWidth id="Logline" variant="outlined" size="medium" />
-        <span className="text-blue-600 flex items-center gap-2">
-          <AiFillInfoCircle className="text-xl" />
-          See sample logline that works
-        </span>
+        <CustomInput
+          fullWidth
+          id="Logline"
+          variant="outlined"
+          size="small"
+          sx={{
+            "& .MuiOutlinedInput-input": { py: 2 },
+            "& .MuiFormHelperText-root": {
+              mx: 0,
+              color: "#5D5FEF",
+            },
+          }}
+          helperText={
+            <div className="flex items-center gap-2">
+              <AiFillInfoCircle className="text-xl" />
+              See sample logline that works
+            </div>
+          }
+        />
       </div>
 
       <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-        <label htmlFor="synopsis" className="futura font-medium text-neutral-800">
-          Synopsis<span className="text-error-700">*</span>
+        <label htmlFor="synopsis">
+          <Typography
+            variant="body1"
+            className="futura font-medium text-primary-700"
+          >
+            Synopsis<span className="text-error-700">*</span>
+          </Typography>
         </label>
         <CustomInput
           multiline
@@ -53,14 +95,21 @@ const StoryLine = () => {
           fullWidth
           id="synopsis"
           variant="outlined"
-          size="medium"
+          sx={{
+            "& .MuiOutlinedInput-input": { py: 2 },
+            "& .MuiFormHelperText-root": {
+              mx: 0,
+              color: "#5D5FEF",
+            },
+          }}
+          helperText={
+            <div className="flex items-center gap-2">
+              <AiFillInfoCircle className="text-xl" />
+              Write a synopsis that slaps
+            </div>
+          }
         />
-        <span className="text-blue-600 flex items-center gap-2">
-          <AiFillInfoCircle className="text-xl" />
-          Write a synopsis that slaps
-        </span>
       </div>
-    
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { IconButton, Modal, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import DeleteBtn from "@shared/DeleteBtn/DeleteBtn";
+import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -20,42 +20,46 @@ const AcceptOfferModal = ({ openAcceptOffer, setOpenAcceptOffer }: IProps) => {
       open={openAcceptOffer}
       onClose={handleCloseAcceptOffer}
     >
-      <div className="px-6 relative bg-white w-full mt-12 max-w-lg mx-auto flex flex-col items-center py-16 rounded-lg">
+      <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-xl mx-auto flex flex-col items-center py-14 xl:py-20 rounded-lg">
         <IconButton
           onClick={handleCloseAcceptOffer}
           className="absolute top-5 right-5"
+          color="error"
         >
-          <AiOutlineClose className="text-error-500" />
+          <AiOutlineClose />
         </IconButton>
         <div>
           <Image src={acceptOffer} alt="accept offer" />
         </div>
         <Typography
-          className="text-center mt-3 sm:mt-5 lg:mt-8"
+          className="text-center my-3 sm:my-5 lg:mt-6 lg:mb-3"
           color="primary.700"
-          variant="body2"
+          variant="body1"
         >
           You are accepting a bid for your script
         </Typography>
         <Typography
-          className="text-center mt-1 futura font-medium"
+          className="text-center futura leading-normal font-medium"
           color="primary.700"
-          variant="h6"
+          variant="h5"
         >
           The Longman of Long Beach
         </Typography>
         <Typography
-          className="text-center mt-3 sm:mt-5  futura font-semibold"
+          className="text-center mt-3 lg:mt-6 leading-normal  futura font-semibold"
           color="primary.700"
-          variant="h6"
+          variant="h4"
         >
           @$6,000
         </Typography>
-        <div className="flex flex-wrap gap-2 sm:gap-6 mt-5 sm:mt-6 lg:mt-10 xl:mt-12   justify-center items-center">
-          <Btn size="large" className="py-3 px-5 text-white bg-primary-700 rounded-lg">
+        <div className="flex w-full justify-center gap-3 sm:gap-6 mt-10 lg:mt-8">
+          <Btn
+            size="large"
+            className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"
+          >
             Accept Offer
           </Btn>
-          <DeleteBtn onClick={handleCloseAcceptOffer} />
+          <CancelBtn onClick={handleCloseAcceptOffer} />
         </div>
       </div>
     </Modal>

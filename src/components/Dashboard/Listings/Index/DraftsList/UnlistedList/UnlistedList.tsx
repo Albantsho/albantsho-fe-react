@@ -1,16 +1,15 @@
 import {
   Button,
   Chip,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
+  Divider,
+  Paper,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import beautySmall from "@assets/images/beauty-small.jpg";
+import React from "react";
 
 const UnlistedItems = [
   {
@@ -61,56 +60,55 @@ interface IProps {
 
 const UnlistedList = ({ setOpenRelistScript }: IProps) => {
   return (
-    <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-sm  py-5 flex flex-col mb-16">
-      <TableHead>
-        <TableRow className="flex">
-          <TableCell className="flex-1 2xl:flex-[0.5] pl-3 sm:pl-7  xl:pl-16">
-            <Typography
-              variant="body1"
-              className="text-primary-700 font-medium"
-            >
-              Script
-            </Typography>
-          </TableCell>
-          <TableCell className=" md:flex-[0.7]  2xl:flex-[0.64]  hidden md:flex  ">
-            <Typography
-              variant="body1"
-              className="text-primary-700 font-medium"
-            >
-              Script Type
-            </Typography>
-          </TableCell>
-          <TableCell className=" hidden md:flex 2xl:flex-[0.3] "></TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody className="px-3  xl:px-12">
-        {UnlistedItems.map((script) => (
-          <TableRow
-            key={script.id}
-            sx={{
-              "& td, & th": {
-                borderBottom: { xs: 0, sm: "1px solid #DCD8E4" },
-              },
-              "&:last-child td, &:last-child th": { border: 0 },
-            }}
-            className="flex flex-1"
-          >
-            <TableCell
-              className="flex flex-1 2xl:flex-[0.45]  flex-wrap sm:flex-nowrap gap-4 sm:gap-8 lg:gap-4"
-              sx={{
-                "&.MuiTableCell-root": {
-                  px: { xs: 0, sm: 2 },
-                },
-              }}
-            >
-              <div className="flex gap-3 items-end sm:items-start">
-                <div className="flex-shrink-0 ">
+    <Paper elevation={0} className="mt-4 sm:mt-6 bg-white">
+      <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
+        <Typography
+          variant="h6"
+          className="futura w-1/2 sm:w-full md:max-w-[220px]  lg:max-w-full xl:max-w-[415px] font-medium text-primary-700"
+        >
+          Script
+        </Typography>
+
+        <Typography
+          variant="h6"
+          className="futura hidden sm:min-w-[100px] sm:block self-start md:self-center md:mx-auto xl:mr-auto xl:ml-0  sm:mr-3 md:text-center lg:text-start lg:mr-6 font-medium text-primary-700"
+        >
+        Script Type
+        </Typography>
+        <Typography></Typography>
+      </div>
+      <div className="px-5 xl:px-14">
+        {UnlistedItems.map((script,index) => (
+          <React.Fragment key={script.id}>
+            <div className="flex py-6 items-center sm:justify-between xl:justify-start">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-14 lg:max-w-[445px] ">
+                <div className="flex gap-3 items-end sm:items-start">
                   <Image
-                    className="rounded-md"
+                    width="64"
+                    height="64"
+                    className="rounded-md flex-shrink-0"
                     loading="lazy"
                     src={script.image}
                     alt={script.title}
                   />
+
+                  <Tooltip title="Progress">
+                    <Chip
+                      label={script.scriptType}
+                      className="sm:hidden rounded-md bg-tinted-100/80 text-neutral-800 w-fit"
+                    />
+                  </Tooltip>
+                </div>
+                <div className="flex-grow sm:max-w-[271px] min-w-[170px] ">
+                  <Typography
+                    variant="body1"
+                    className="futura font-semibold text-primary-700"
+                  >
+                    {script.title}
+                  </Typography>
+                  <Typography variant="caption" className="text-stone-800">
+                    {script.description}
+                  </Typography>
                 </div>
                 <Button
                   onClick={() => setOpenRelistScript(true)}
@@ -124,58 +122,39 @@ const UnlistedList = ({ setOpenRelistScript }: IProps) => {
                   Relist
                 </Button>
               </div>
-              <div className="flex-grow sm:flex-1 sm:max-w-[271px] min-w-[170px] sm:-ml-4 lg:ml-0">
-                <Typography
-                  variant="body1"
-                  className="futura font-semibold text-primary-700"
-                >
-                  {script.title}
-                </Typography>
-                <Typography variant="caption" className="text-stone-800">
-                  {script.description}
-                </Typography>
+              <div className="hidden md:flex lg:hidden xl:flex gap-4 justify-start  flex-col items-center md:items-center lg:items-end xl:items-start xl:ml-2">
+                <div className="xl:min-w-[138px]">
+                  <Chip
+                    label={script.scriptType}
+                    className=" py-5 px-4  rounded-md bg-tinted-100/80 text-neutral-800 w-fit"
+                  />
+                </div>
               </div>
-            </TableCell>
-            <TableCell
-              sx={{
-                "&.MuiTableCell-root": {
-                  pl: { lg: 0 },
-                },
-              }}
-              className="hidden md:flex items-center md:flex-[0.53]  lg:flex-[0.5]"
-            >
-              <div className="xl:min-w-[138px]">
+              <div className="sm:min-w-[116px] justify-end xl:py-10 sm:pr-0 items-center hidden flex-col gap-2 sm:flex xl:ml-auto">
                 <Chip
                   label={script.scriptType}
-                  className=" py-5 px-4  hidden md:flex rounded-md bg-tinted-100/80 text-neutral-800 w-fit"
+                  className=" py-5 px-4 w-full md:hidden lg:flex xl:hidden min-w-[138px] rounded-md bg-tinted-100/80 text-neutral-800"
                 />
+
+                <Button
+                  onClick={() => setOpenRelistScript(true)}
+                  variant="text"
+                  sx={{
+                    paddingY: 1,
+                    border: "1px solid #7953B5",
+                    borderRadius: 1.5,
+                  }}
+                  className="md:ml-auto xl:ml-0 w-full"
+                >
+                  Relist
+                </Button>
               </div>
-            </TableCell>
-            <TableCell
-              sx={{
-                "&.MuiTableCell-root": {
-                  pl: { lg: 0 },
-                },
-              }}
-              className="hidden sm:flex items-center 2xl:flex-[0.3] 2xl:justify-end"
-            >
-              <Button
-                onClick={() => setOpenRelistScript(true)}
-                variant="text"
-                sx={{
-                  paddingY: 1,
-                  border: "1px solid #7953B5",
-                  borderRadius: 1.5,
-                }}
-                className="md:ml-auto xl:ml-0"
-              >
-                Relist
-              </Button>
-            </TableCell>
-          </TableRow>
+            </div>
+            {index < UnlistedItems.length - 1 &&<Divider className="hidden sm:flex" />}
+          </React.Fragment>
         ))}
-      </TableBody>
-    </Table>
+      </div>
+    </Paper>
   );
 };
 

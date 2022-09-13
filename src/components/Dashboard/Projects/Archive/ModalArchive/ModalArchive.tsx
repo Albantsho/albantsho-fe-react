@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import pictureModalsSaves from "@assets/images/picture-modals-saves.png";
 import { AiOutlineClose } from "react-icons/ai";
-import DeleteBtn from "@shared/DeleteBtn/DeleteBtn";
+import CancelBtn from "@shared/CancelBtn/CancelBtn";
 
 interface IProps {
   openModalUnArchive: boolean;
@@ -48,7 +48,7 @@ const ModalArchive = ({
           >
             Proceed
           </Btn>
-          <DeleteBtn onClick={handleCloseUnArchive} />
+          <CancelBtn onClick={handleCloseUnArchive} />
         </div>
       </div>
     </Modal>

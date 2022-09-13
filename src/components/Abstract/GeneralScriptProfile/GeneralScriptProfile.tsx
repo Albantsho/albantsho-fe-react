@@ -1,8 +1,6 @@
 import {
   ListItemText,
   MenuItem,
-  Select,
-  type SelectChangeEvent,
   Typography,
   Autocomplete,
 } from "@mui/material";
@@ -19,189 +17,192 @@ const genresFilms = [
 const GeneralScriptProfile = () => {
   const [statusScriptFormat, setStatusScriptFormat] = useState("Documentary");
   const [statusStoryFormat, setStatusStoryFormat] = useState("HighConcept");
-  const handleChangeScriptFormat = (event: SelectChangeEvent<string>): void => {
+  const handleChangeScriptFormat = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setStatusScriptFormat(event.target.value);
   };
-  const handleChangeStoryFormat = (event: SelectChangeEvent<string>): void => {
+  const handleChangeStoryFormat = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setStatusStoryFormat(event.target.value);
   };
   return (
     <>
       <Typography
-        variant="h6"
+        variant="h5"
         color="primary.700"
-        className="futura font-medium"
+        className="futura font-medium leading-normal"
       >
         General Script Profile
       </Typography>
       <Typography
-        variant="body2"
-        className="text-neutral-700 mb-4 sm:mb-6 lg:mb-10 max-w-[290px] md:max-w-full"
+        variant="body1"
+        className="text-neutral-700 mb-6 lg:mb-10 max-w-[290px] md:max-w-full"
       >
         If it can be written, it can be filmed.
       </Typography>
 
-      <div className="flex justify-between gap-x-3 items-center flex-wrap ">
-        <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-          <label
-            htmlFor="script-format"
-            className="futura font-medium text-neutral-800"
-          >
-            Script Format<span className="text-error-700">*</span>
+      <div className="flex gap-y-3 gap-x-5 md:gap-10 items-center flex-wrap mb-5">
+        <div className="flex flex-1 items-start flex-col justify-start gap-2">
+          <label htmlFor="script-format">
+            <Typography
+              variant="body1"
+              className="futura font-medium text-primary-700"
+            >
+              Script Format<span className="text-error-700">*</span>
+            </Typography>
           </label>
-
-          <Select
+          <CustomInput
+            select
+            fullWidth
+            size="small"
+            sx={{
+              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+              "& .MuiSvgIcon-root": { color: "#7953B5" },
+            }}
+            variant="outlined"
             id="script-format"
             defaultValue="AllScripts"
             value={statusScriptFormat}
             onChange={handleChangeScriptFormat}
-            sx={{
-              "&.MuiInputBase-root": {
-                maxWidth: { xs: "172px", md: "100%" },
-                width: { xs: "100%", md: "270px" },
-              },
-              "& .MuiSelect-select": {
-                backgroundColor: "white",
-                p: "8px 16px",
-              },
-              "& .MuiSvgIcon-root": {
-                color: "#7953B5",
-              },
-            }}
           >
             <MenuItem value="Documentary">
               <ListItemText className="text-primary-700">
                 Documentary
               </ListItemText>
             </MenuItem>
-          </Select>
+          </CustomInput>
         </div>
-        <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-          <label
-            htmlFor="story-script"
-            className="futura font-medium text-neutral-800"
-          >
-            Story Format<span className="text-error-700">*</span>
+        <div className="flex flex-1 items-start flex-col justify-start gap-2">
+          <label htmlFor="story-script">
+            <Typography
+              variant="body1"
+              className="futura font-medium text-primary-700"
+            >
+              Story Format<span className="text-error-700">*</span>
+            </Typography>
           </label>
-          <Select
+          <CustomInput
+            select
+            fullWidth
+            size="small"
+            sx={{
+              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+              "& .MuiSvgIcon-root": { color: "#7953B5" },
+            }}
+            variant="outlined"
             id="story-format"
             defaultValue="Documentary"
             value={statusStoryFormat}
             onChange={handleChangeStoryFormat}
-            sx={{
-              "&.MuiInputBase-root": {
-                maxWidth: { xs: "172px", md: "100%" },
-                width: { xs: "100%", md: "270px" },
-              },
-              "& .MuiSelect-select": {
-                backgroundColor: "white",
-                p: "8px 16px",
-              },
-              "& .MuiSvgIcon-root": {
-                color: "#7953B5",
-              },
-            }}
           >
             <MenuItem value="HighConcept">
               <ListItemText className="text-primary-700">
                 High Concept
               </ListItemText>
             </MenuItem>
-          </Select>
+          </CustomInput>
         </div>
       </div>
 
       <div className="flex justify-between gap-y-2 items-center flex-wrap mb-5">
-        <label
-          htmlFor="script-title"
-          className="futura font-medium text-neutral-800"
-        >
-          Script Title<span className="text-error-700">*</span>
+        <label htmlFor="script-title">
+          <Typography
+            variant="body1"
+            className="futura font-medium text-primary-700"
+          >
+            Script Title<span className="text-error-700">*</span>
+          </Typography>
         </label>
         <CustomInput
           fullWidth
           id="script-title"
           variant="outlined"
-          size="medium"
+          size="small"
+          sx={{
+            "& .MuiOutlinedInput-input": { py: 2 },
+            "& .MuiFormHelperText-root": {
+              mx: 0,
+              color: "#5D5FEF",
+            },
+          }}
+          helperText={
+            <div className="flex items-center gap-2">
+              <AiFillInfoCircle className="text-xl" />
+              note: ways to create killer titles
+            </div>
+          }
         />
-        <span className="text-blue-600 flex items-center gap-2">
-          <AiFillInfoCircle className="text-xl" />
-          note: ways to create killer titles
-        </span>
       </div>
 
-      <div className="flex justify-between gap-5 items-center flex-wrap mb-5">
-        <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-          <label
-            htmlFor="genre-script-primary"
-            className="futura font-medium text-neutral-800"
-          >
-            Genre (Primary)<span className="text-error-700">*</span>
+      <div className="flex gap-y-3 gap-x-5 md:gap-10 items-center flex-wrap mb-5">
+        <div className="flex flex-1 items-start flex-col justify-start gap-2">
+          <label htmlFor="genre-script-primary">
+            <Typography
+              variant="body1"
+              className="futura font-medium text-primary-700"
+            >
+              Genre (Primary)<span className="text-error-700">*</span>
+            </Typography>
           </label>
-          <Select
+          <CustomInput
+            select
+            fullWidth
+            size="small"
+            sx={{
+              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+              "& .MuiSvgIcon-root": { color: "#7953B5" },
+            }}
+            variant="outlined"
             id="genre-script-primary"
             defaultValue="AllScripts"
             value={statusScriptFormat}
             onChange={handleChangeScriptFormat}
-            sx={{
-              "&.MuiInputBase-root": {
-                maxWidth: { xs: "172px", md: "100%" },
-                width: { xs: "159px", md: "270px" },
-              },
-              "& .MuiSelect-select": {
-                backgroundColor: "white",
-                p: "8px 16px",
-              },
-              "& .MuiSvgIcon-root": {
-                color: "#7953B5",
-              },
-            }}
           >
             <MenuItem value="Documentary">
               <ListItemText className="text-primary-700">Sci Fi</ListItemText>
             </MenuItem>
-          </Select>
+          </CustomInput>
         </div>
-        <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-          <label
-            htmlFor="genre-script-secondary"
-            className="futura font-medium"
-          >
-            Genre (Secondary)<span className="text-error-700">*</span>
+        <div className="flex flex-1 items-start flex-col justify-start gap-2">
+          <label htmlFor="genre-script-secondary">
+            <Typography
+              variant="body1"
+              className="futura font-medium text-primary-700"
+            >
+              Genre (Secondary)<span className="text-error-700">*</span>
+            </Typography>
           </label>
-          <Select
+          <CustomInput
+            select
+            fullWidth
+            size="small"
+            sx={{
+              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+              "& .MuiSvgIcon-root": { color: "#7953B5" },
+            }}
+            variant="outlined"
             id="genre-script-secondary"
             defaultValue="Documentary"
             value={statusStoryFormat}
             onChange={handleChangeStoryFormat}
-            sx={{
-              "&.MuiInputBase-root": {
-                maxWidth: { xs: "172px", md: "100%" },
-                width: { xs: "159px", md: "270px" },
-              },
-              "& .MuiSelect-select": {
-                backgroundColor: "white",
-                p: "8px 16px",
-              },
-              "& .MuiSvgIcon-root": {
-                color: "#7953B5",
-              },
-            }}
           >
             <MenuItem value="HighConcept">
               <ListItemText className="text-primary-700">Romance</ListItemText>
             </MenuItem>
-          </Select>
+          </CustomInput>
         </div>
       </div>
 
-      <div className="mb-5">
-        <label className="futura  font-medium mb-2 block text-neutral-800">
-          Select Script<span className="text-error-500 my-auto">*</span>
+      <div className="mb-5 flex flex-col gap-2">
+        <label htmlFor="select-script">
+          <Typography
+            variant="body1"
+            className="futura font-medium text-primary-700"
+          >
+           Themes<span className="text-error-500 my-auto">*</span>
+          </Typography>
         </label>
         <Autocomplete
           multiple
-          id="tags-standard"
+          id="select-script"
           sx={{
             "& .MuiChip-label": { color: "#7953B5" },
             "& .MuiSvgIcon-root": { color: "#BCA9DA !important" },
@@ -211,110 +212,113 @@ const GeneralScriptProfile = () => {
           getOptionLabel={(option) => option.label}
           defaultValue={[genresFilms[1]]}
           renderInput={(params) => (
-            <CustomInput {...params} variant="outlined" />
+            <CustomInput
+              {...params}
+              variant="outlined"
+              sx={{
+                "& .MuiInputBase-root": { py: "12px !important" },
+                "& .MuiFormHelperText-root": {
+                  mx: 0,
+                  color: "#5D5FEF",
+                },
+              }}
+              helperText={
+                <div className="flex items-center gap-2">
+                  <AiFillInfoCircle className="text-xl" />
+                  Understanding screenplay themes
+                </div>
+              }
+            />
           )}
         />
-        <span className="text-blue-600 flex items-center gap-2">
-          <AiFillInfoCircle className="text-xl" />
-          Understanding screenplay themes
-        </span>
       </div>
 
-      <div className="flex justify-between gap-5 items-center flex-wrap">
-        <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-          <label
-            htmlFor="cast-script-primary"
-            className="futura font-medium text-neutral-800"
-          >
-            Cast(Main)<span className="text-error-700">*</span>
+      <div className="flex gap-y-3 gap-x-5 md:gap-10 items-center flex-wrap mb-5">
+        <div className="flex flex-1 items-start flex-col justify-start gap-2">
+          <label htmlFor="cast-script-primary">
+            <Typography
+              variant="body1"
+              className="futura font-medium text-primary-700"
+            >
+              Cast(Main)<span className="text-error-700">*</span>
+            </Typography>
           </label>
-          <Select
+          <CustomInput
+            select
+            fullWidth
+            size="small"
+            sx={{
+              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+              "& .MuiSvgIcon-root": { color: "#7953B5" },
+            }}
+            variant="outlined"
             id="cast-script-primary"
             defaultValue="AllScripts"
             value={statusScriptFormat}
             onChange={handleChangeScriptFormat}
-            sx={{
-              "&.MuiInputBase-root": {
-                maxWidth: { xs: "172px", md: "100%" },
-                width: { xs: "159px", md: "270px" },
-              },
-              "& .MuiSelect-select": {
-                backgroundColor: "white",
-                p: "8px 16px",
-              },
-              "& .MuiSvgIcon-root": {
-                color: "#7953B5",
-              },
-            }}
           >
             <MenuItem value="Documentary">
               <ListItemText className="text-primary-700">200</ListItemText>
             </MenuItem>
-          </Select>
+          </CustomInput>
         </div>
-        <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-          <label
-            htmlFor="cast-script-secondary"
-            className="futura font-medium text-neutral-800"
-          >
-            Cast(Secondary)<span className="text-error-700">*</span>
+        <div className="flex flex-1 items-start flex-col justify-start gap-2">
+          <label htmlFor="cast-script-secondary">
+            <Typography
+              variant="body1"
+              className="futura font-medium text-primary-700"
+            >
+              Cast(Secondary)<span className="text-error-700">*</span>
+            </Typography>
           </label>
-          <Select
+          <CustomInput
+            select
+            fullWidth
+            size="small"
+            sx={{
+              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+              "& .MuiSvgIcon-root": { color: "#7953B5" },
+            }}
+            variant="outlined"
             id="cast-script-secondary"
             defaultValue="Documentary"
             value={statusStoryFormat}
             onChange={handleChangeStoryFormat}
-            sx={{
-              "&.MuiInputBase-root": {
-                maxWidth: { xs: "172px", md: "100%" },
-                width: { xs: "159px", md: "270px" },
-              },
-              "& .MuiSelect-select": {
-                backgroundColor: "white",
-                p: "8px 16px",
-              },
-              "& .MuiSvgIcon-root": {
-                color: "#7953B5",
-              },
-            }}
           >
             <MenuItem value="HighConcept">
               <ListItemText className="text-primary-700">50</ListItemText>
             </MenuItem>
-          </Select>
+          </CustomInput>
         </div>
       </div>
 
-      <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-        <label
-          htmlFor="budget-script"
-          className="futura font-medium text-neutral-800"
-        >
-          Estimated Budget<span className="text-error-700">*</span>
+      <div className="flex  sm:pr-5 sm:w-1/2 items-start flex-col justify-start gap-2">
+        <label htmlFor="budget-script">
+          <Typography
+            variant="body1"
+            className="futura font-medium text-primary-700"
+          >
+            Estimated Budget<span className="text-error-700">*</span>
+          </Typography>
         </label>
-        <Select
+        <CustomInput
+          select
+          fullWidth
+          size="small"
+          variant="outlined"
+          sx={{
+            "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+            "& .MuiSvgIcon-root": { color: "#7953B5" },
+          }}
           id="budget-script"
           defaultValue="AllScripts"
           value={statusScriptFormat}
           onChange={handleChangeScriptFormat}
-          sx={{
-            "&.MuiInputBase-root": {
-              maxWidth: { xs: "172px", md: "100%" },
-              width: { xs: "159px", md: "270px" },
-            },
-            "& .MuiSelect-select": {
-              backgroundColor: "white",
-              p: "8px 16px",
-            },
-            "& .MuiSvgIcon-root": {
-              color: "#7953B5",
-            },
-          }}
         >
           <MenuItem value="Documentary">
             <ListItemText className="text-primary-700">N1M-N3M</ListItemText>
           </MenuItem>
-        </Select>
+        </CustomInput>
       </div>
     </>
   );

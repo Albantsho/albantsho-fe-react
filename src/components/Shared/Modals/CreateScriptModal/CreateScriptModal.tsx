@@ -1,7 +1,7 @@
-import {  IconButton, Modal } from "@mui/material";
+import { IconButton, Modal } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import DeleteBtn from "@shared/DeleteBtn/DeleteBtn";
+import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import { Dispatch, SetStateAction } from "react";
 import { AiFillInfoCircle, AiOutlineClose } from "react-icons/ai";
 interface IProps {
@@ -84,7 +84,7 @@ const CreateScriptModal = ({
           >
             Create Script
           </Btn>
-          <DeleteBtn onClick={handleCloseModalCreateScript} />
+          <CancelBtn onClick={handleCloseModalCreateScript} />
         </div>
       </div>
     </Modal>

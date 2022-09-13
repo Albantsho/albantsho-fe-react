@@ -10,10 +10,10 @@ interface IProps {
 
 const DraftsList = ({ setOpenRelistScript, setOpenAddToScript }: IProps) => {
   return (
-    <div className="mt-8">
+    <div className="my-8">
       <div className="bg-white p-3 inline-block rounded-md">
         <Typography
-          variant="body1"
+          variant="h6"
           color="primary.700"
           className="futura font-medium"
         >
@@ -23,7 +23,7 @@ const DraftsList = ({ setOpenRelistScript, setOpenAddToScript }: IProps) => {
       <UncompletedList setOpenAddToScript={setOpenAddToScript} />
       <div className="bg-white p-3 inline-block rounded-md mt-10 px-6">
         <Typography
-          variant="body1"
+          variant="h6"
           color="primary.700"
           className="futura font-medium"
         >

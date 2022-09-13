@@ -37,8 +37,8 @@ const Abstract = () => {
         openModalSaveProgress={openModalSaveProgress}
         setOpenModalSaveProgress={setOpenModalSaveProgress}
       />
-      <div className="px-5 sm:px-11 pt-10 pb-10">
-        <div className="relative px-4 py-8 sm:px-6 md:px-16 rounded-md shadow-lg  max-w-[420px] md:max-w-[700px] mx-auto">
+      <div className="px-5 sm:px-10 py-10 md:py-20">
+        <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 rounded-md shadow-lg max-w-[700px] mx-auto">
           <LineSteps step={step} />
           {(Number(query.step) === 1 || !query.step) && (
             <GeneralScriptProfile />

@@ -42,7 +42,11 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
 
   return (
     <div className="mt-12 md:mt-20 grid">
-      <Typography className="pl-4" variant="h6" color="primary.700">
+      <Typography
+        className="pl-4 futura font-medium leading-normal"
+        variant="h4"
+        color="primary.700"
+      >
         Auctions
       </Typography>
       <TableContainer
@@ -52,9 +56,9 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
         <Table>
           <TableHead>
             <TableRow className="border-b border-gray-200">
-              <TableCell className="pr-20">
+              <TableCell className="pr-20 lg:pr-40">
                 <Typography
-                  variant="body1"
+                  variant="h6"
                   className="text-primary-700 futura font-medium w-28"
                 >
                   Bidder
@@ -62,8 +66,8 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
               </TableCell>
               <TableCell>
                 <Typography
-                  variant="body1"
-                  className="text-primary-700 futura font-medium w-20"
+                  variant="h6"
+                  className="text-primary-700 text-center futura font-medium w-28"
                 >
                   Asking Price
                 </Typography>
@@ -85,25 +89,21 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
                     "&:nth-of-type(event)": {
                       backgroundColor: "#FFF",
                     },
-
                     " td, th": {
                       border: 0,
                     },
                   }}
                   key={auction.id}
-                  className="cursor-pointer"
+                  className="cursor-pointer hover:bg-primary-50/40 duration-200"
                 >
-                  <TableCell
-                    className="w-20"
-                    sx={{
-                      "&.MuiTableCell-root": {},
-                    }}
-                  >
-                    <Typography>{auction.name}</Typography>
+                  <TableCell className="w-40 lg:py-6">
+                    <Typography variant="h6" className="font-normal text-neutral-700">
+                      {auction.name}
+                    </Typography>
                   </TableCell>
-                  <TableCell className="w-16">
+                  <TableCell align="center" className="w-20">
                     <Typography
-                      variant="body1"
+                      variant="h6"
                       className="text-primary-700 font-semibold"
                     >
                       $ {auction.price}
@@ -114,11 +114,11 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
                       <ButtonGroup className="border-none md:gap-8">
                         <Button
                           onClick={handleOpenAcceptOfferModal}
-                          className="hidden sm:flex border-none hover:border-none text-success-500"
+                          className="hidden sm:flex border-none hover:border-none font-semibold text-success-500"
                         >
                           Accept Offer
                         </Button>
-                        <Button className="hidden sm:flex border-none hover:border-none text-secondary-700">
+                        <Button className="hidden sm:flex border-none hover:border-none font-semibold text-secondary-700">
                           Decline
                         </Button>
                       </ButtonGroup>
