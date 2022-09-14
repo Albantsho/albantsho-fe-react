@@ -11,7 +11,7 @@ const Reviewer = () => {
         <title>Albantsho || Reviewer</title>
       </Head>
       <DashboardNav color="inherit" position="static" />
-      <div className="pt-10 px-5 sm:px-10 bg-[#f6f8fc] flex gap-6 lg:gap-10  justify-between">
+      <div className="pt-10 px-5 sm:px-10 bg-[#f6f8fc] min-h-screen flex gap-6 lg:gap-10  justify-between">
         <ListTasks />
         <CartScript />
       </div>

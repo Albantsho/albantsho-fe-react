@@ -6,28 +6,35 @@ import {
   Chip,
   Divider,
   Rating,
-
   Typography,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import { FiArrowUpRight } from "react-icons/fi";
 
-
 const CartScript = () => {
   return (
-    <Card className="h-fit hidden md:block flex-[0.7] lg:flex-[0.6] xl:flex-[0.5]">
-      <CardActions className="py-6 px-5">
-        <Button variant="contained">Type A</Button>
-        <Button variant="outlined" startIcon={<FiArrowUpRight />}>
+    <Card
+      elevation={0}
+      className="h-fit hidden md:block  pt-7 pb-3 flex-[0.7]  xl:flex-[0.55] max-w-2xl"
+    >
+      <CardActions className="px-5 py-0 space-x-3 lg:space-x-6">
+        <Button disableElevation className="py-[10px] px-4" variant="contained">
+          Type A
+        </Button>
+        <Button
+          className="py-[10px] px-4"
+          variant="outlined"
+          startIcon={<FiArrowUpRight />}
+        >
           View script
         </Button>
       </CardActions>
-      <Divider />
-      <CardContent className="py-6 px-5">
+      <Divider className="my-7" />
+      <CardContent className="px-5 py-0 ">
         <div className="flex items-center mb-8">
           <Typography
-            variant="body1"
-            className="futura  font-medium w-24 pr-6 text-neutral-800"
+            variant="h6"
+            className="futura  font-medium w-[120px] text-neutral-800"
           >
             Title:
           </Typography>
@@ -40,17 +47,17 @@ const CartScript = () => {
         </div>
         <div className="flex items-center mb-8">
           <Typography
-            variant="body1"
-            className="futura font-medium w-24 pr-6 text-neutral-800"
+            variant="h6"
+            className="futura font-medium w-[120px] text-neutral-800"
           >
             Genre:
           </Typography>
-          <Chip label="Tv pilot" />
+          <Chip className="py-3 px-4 rounded-md" label="Tv pilot" />
         </div>
         <div className="flex items-center mb-8">
           <Typography
-            variant="body1"
-            className="futura font-medium w-24 pr-6 text-neutral-800"
+            variant="h6"
+            className="futura font-medium w-[120px] text-neutral-800"
           >
             Entry Date:
           </Typography>
@@ -63,15 +70,15 @@ const CartScript = () => {
         </div>
         <div className="flex items-center mb-8">
           <Typography
-            variant="body1"
-            className="futura font-medium w-24 pr-6 text-neutral-800"
+            variant="h6"
+            className="futura font-medium w-[120px] text-neutral-800"
           >
             Rating:
           </Typography>
           <Rating name="half-rating" defaultValue={4.5} precision={0.5} />
         </div>
 
-        <Btn className="w-full mb-6 py-3">Begin review</Btn>
+        <Btn className="w-full  py-3 rounded-lg">Begin review</Btn>
       </CardContent>
     </Card>
   );

@@ -34,16 +34,16 @@ const Ratings = () => {
           <div className="flex gap-3">
             <div className="sm:pr-36">
               <Typography
-                variant="h6"
-                className="futura font-medium text-primary-700 mb-2 sm:mb-4"
+                variant="h4"
+                className="futura font-medium text-primary-700 mb-2 sm:mb-4 leading-normal"
               >
                 RATING
               </Typography>
               <div className="flex gap-2 flex-wrap">
                 <Rating size="large" defaultValue={2.5} precision={0.5} />
                 <Typography
-                  variant="h6"
-                  className="futura font-medium text-primary-700"
+                  variant="h4"
+                  className="futura font-medium text-primary-700 leading-normal"
                 >
                   - IMPROVE!
                 </Typography>

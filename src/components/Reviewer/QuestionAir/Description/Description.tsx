@@ -1,7 +1,7 @@
 import { Rating, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import { Dispatch, SetStateAction } from "react";
-import  React from "react";
+import React from "react";
 
 interface IProps {
   setOpenSendReview: Dispatch<SetStateAction<boolean>>;
@@ -17,16 +17,16 @@ const listTitles = [
 
 const Description = ({ setOpenSendReview }: IProps) => {
   return (
-    <div className="px-6 sm:px-10  lg:px-44  sm:mt-6 lg:mt-14">
+    <div className="sm:px-10  lg:px-44  sm:mt-6 lg:mt-14">
       {listTitles.map((title) => (
         <React.Fragment key={title}>
           <Typography
-            variant="h5"
+            variant="h4"
             className="futura text-primary-700 font-medium leading-normal mt-4 sm:mt-6 lg:mt-10"
           >
             {title}
           </Typography>
-          <Typography variant="caption">
+          <Typography variant="body1" className="font-medium">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus
             massa praesent pellentesque sit a. Nunc mattis aliquam consectetur
             mi sit tincidunt eget nunc. Cursus euismod rhoncus venenatis in
@@ -38,21 +38,21 @@ const Description = ({ setOpenSendReview }: IProps) => {
           </Typography>
         </React.Fragment>
       ))}
- 
+
       <Typography
-        variant="h5"
+        variant="h4"
         className="futura text-primary-700 font-medium leading-normal mt-4 sm:mt-6 lg:mt-10"
       >
         Story quality
       </Typography>
       <Typography
-        variant="h6"
-        className="futura text-primary-700 font-extralight leading-normal"
+        variant="h4"
+        className="futura text-primary-700 font-light mb-3 md:mb-5 leading-7"
       >
         (how relevant is this story concept and what is unique or not about its
         approach to the ide)
       </Typography>
-      <Typography variant="caption">
+      <Typography variant="body1" className="font-medium">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus massa
         praesent pellentesque sit a. Nunc mattis aliquam consectetur mi sit
         tincidunt eget nunc. Cursus euismod rhoncus venenatis in faucibus
@@ -63,20 +63,19 @@ const Description = ({ setOpenSendReview }: IProps) => {
         eu mattis est mattis. Ut donec tincidunt.
       </Typography>
 
-
       <Typography
-        variant="h5"
+        variant="h4"
         className="futura text-primary-700 font-medium leading-normal mt-10"
       >
         Suggestions
       </Typography>
       <Typography
-        variant="h6"
-        className="futura text-primary-700 font-extralight leading-normal"
+        variant="h4"
+        className="futura text-primary-700 font-light mb-3 md:mb-5 leading-7"
       >
         (your final thoughts and suggestions)
       </Typography>
-      <Typography variant="caption">
+      <Typography variant="body1" className="font-medium">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rhoncus massa
         praesent pellentesque sit a. Nunc mattis aliquam consectetur mi sit
         tincidunt eget nunc. Cursus euismod rhoncus venenatis in faucibus
@@ -88,10 +87,10 @@ const Description = ({ setOpenSendReview }: IProps) => {
       </Typography>
 
       <Typography
-        variant="h5"
+        variant="h4"
         className="futura text-primary-700 font-medium leading-normal mt-10"
       >
-        Suggestions
+        RATING
       </Typography>
 
       <div className="mt-4 sm:mt-10 gap-3 flex flex-wrap">
@@ -102,7 +101,7 @@ const Description = ({ setOpenSendReview }: IProps) => {
           precision={0.5}
         />
         <Typography
-          variant="h6"
+          variant="h5"
           className="futura text-primary-700 font-medium leading-normal"
         >
           - GREAT!

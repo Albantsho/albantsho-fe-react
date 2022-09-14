@@ -12,7 +12,6 @@ interface IProps {
 
 const SuccessReview = ({ setOpenSuccessReview, openSuccessReview }: IProps) => {
   const { push } = useRouter();
-  console.log(push);
 
   const handleCloseSuccessReview = () => setOpenSuccessReview(false);
   return (
@@ -21,12 +20,13 @@ const SuccessReview = ({ setOpenSuccessReview, openSuccessReview }: IProps) => {
       open={openSuccessReview}
       onClose={handleCloseSuccessReview}
     >
-      <div className="px-6 relative bg-white w-full mt-12 max-w-xl mx-auto flex flex-col items-center py-16 rounded-lg">
+      <div className="px-6 relative bg-white w-full mt-8 sm:mt-12 lg:mt-28 max-w-xl mx-auto flex flex-col items-center py-16 rounded-lg">
         <IconButton
+          color="error"
           onClick={handleCloseSuccessReview}
           className="absolute top-5 right-5"
         >
-          <AiOutlineClose className="text-error-500" />
+          <AiOutlineClose />
         </IconButton>
         <div>
           <Image src={success} alt="success" />
@@ -35,11 +35,11 @@ const SuccessReview = ({ setOpenSuccessReview, openSuccessReview }: IProps) => {
           color="primary.700"
           mt={1}
           className="futura font-medium"
-          variant="h6"
+          variant="h5"
         >
           Review complete
         </Typography>
-        <Typography variant="body2" className="text-center text-[#484848]">
+        <Typography variant="body1" className="text-center text-[#484848]">
           Thanks for your professional review
         </Typography>
 

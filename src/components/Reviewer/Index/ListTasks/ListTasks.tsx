@@ -1,15 +1,7 @@
-import {
-  Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Tabs,
-} from "@mui/material";
+import { Divider, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
 import beautySmall from "@assets/images/beauty-small.jpg";
-import TableTask from "./TableTask/TableTask";
+import ListTask from "./ListTask/ListTask";
 import DetailScriptModal from "../DetailScriptModal/DetailScriptModal";
 
 const tasks = [
@@ -64,27 +56,33 @@ const ListTasks = () => {
         value={activeLinkIndex}
         onChange={activeLinkChange}
         className="bg-white rounded-md"
+        sx={{
+          "& .MuiTabs-indicator": {
+            borderBottom: { sx: "2px solid #7953B5", md: "4px solid #7953B5" },
+            mb: { md: "-1px" },
+          },
+        }}
       >
         <Tab
           sx={{
             "&.MuiButtonBase-root": {
-              flexGrow: { xs: 1 },
+              flex: { xs: 1 },
+              maxWidth: "100%",
               px: { md: 6 },
             },
-            marginRight: { md: 1 },
           }}
-          className={`text-gray-600 futura text-lg`}
+          className={`text-gray-600 futura text-lg 2xl:text-2xl font-medium py-3 md:py-5 xl:py-7 my-auto`}
           label="Tasks"
         />
         <Tab
           sx={{
             "&.MuiButtonBase-root": {
-              flexGrow: { xs: 1 },
+              flex: { xs: 1 },
+              maxWidth: "100%",
               px: { md: 6 },
             },
-            marginRight: { md: 1 },
           }}
-          className={`text-gray-600 futura text-lg`}
+          className={`text-gray-600 futura text-lg 2xl:text-2xl font-medium py-3 md:py-5 xl:py-7 my-auto`}
           label="History"
         />
       </Tabs>
@@ -94,24 +92,20 @@ const ListTasks = () => {
         setOpenDetailScript={setOpenDetailScript}
       />
 
-      <Table className=" bg-white rounded-md shadow-sm flex flex-col">
-        <TableHead>
-          <TableRow>
-            <TableCell className="border-none p-0"></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {tasks.map((task) => (
-            <TableTask
+      <div className=" bg-white rounded-md shadow-sm flex flex-col">
+        {tasks.map((task, index) => (
+          <>
+            <ListTask
               key={task.id}
               image={task.image}
               title={task.title}
               description={task.description}
               setOpenDetailScript={setOpenDetailScript}
             />
-          ))}
-        </TableBody>
-      </Table>
+            {index < tasks.length - 1 && <Divider className="hidden md:block" />}
+          </>
+        ))}
+      </div>
     </div>
   );
 };

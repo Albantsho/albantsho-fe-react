@@ -3,7 +3,7 @@ import Logo from "@shared/Logo/Logo";
 
 const Heading = () => {
   return (
-    <div className="text-center px-4 sm:px-0">
+    <div className="text-center">
       <Logo className="mb-4" color="primary" />
       <Typography variant="body1">Entry Type: Type A</Typography>
       <Typography

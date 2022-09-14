@@ -1,4 +1,12 @@
-import { Button, Chip, Divider, Modal, Rating, Slide, Typography } from "@mui/material";
+import {
+  Button,
+  Chip,
+  Divider,
+  Grow,
+  Modal,
+  Rating,
+  Typography,
+} from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import { Dispatch, SetStateAction } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
@@ -18,27 +26,33 @@ const DetailScriptModal = ({
 
   return (
     <Modal
-      className="px-5"
+      className="px-5 md:hidden"
       disableAutoFocus={true}
       open={openDetailScript}
       onClose={handleCloseUnArchive}
     >
-      <Slide direction="up" in={openDetailScript} mountOnEnter unmountOnExit>
+      <Grow in={openDetailScript} mountOnEnter unmountOnExit>
         <div
-          className={`bg-white  w-full mt-12 max-w-lg mx-auto py-6 rounded-lg duration-150`}
+          className={`bg-white  w-full mt-12 max-w-lg mx-auto py-8 rounded-lg`}
         >
-          <div className="py-6 px-5 flex gap-3 flex-wrap">
-            <Button variant="contained">Type A</Button>
-            <Button variant="outlined" startIcon={<FiArrowUpRight />}>
+          <div className="pb-8 px-5 sm:px-7 flex gap-3 items-stretch">
+            <Button className="py-2 px-4" variant="contained">
+              Type A
+            </Button>
+            <Button
+              className="py-2 px-4"
+              variant="outlined"
+              startIcon={<FiArrowUpRight />}
+            >
               View script
             </Button>
           </div>
           <Divider />
-          <div className="py-6 px-5">
+          <div className="pt-8 px-5 sm:px-7">
             <div className="flex items-center mb-8">
               <Typography
-                variant="body1"
-                className="futura  font-medium pr-6 text-neutral-800"
+                variant="h6"
+                className="futura  font-medium w-[120px] text-neutral-800"
               >
                 Title:
               </Typography>
@@ -51,31 +65,31 @@ const DetailScriptModal = ({
             </div>
             <div className="flex items-center mb-8">
               <Typography
-                variant="body1"
-                className="futura font-medium pr-6 text-neutral-800"
+                variant="h6"
+                className="futura  font-medium w-[120px] text-neutral-800"
               >
                 Genre:
               </Typography>
-              <Chip label="Tv pilot" />
+              <Chip className="py-3 px-4 rounded-md" label="Tv pilot" />
             </div>
             <div className="flex items-center mb-8">
               <Typography
-                variant="body1"
-                className="futura font-medium pr-6 text-neutral-800"
+                variant="h6"
+                className="futura  font-medium w-[120px] text-neutral-800"
               >
                 Entry Date:
               </Typography>
               <Typography
                 variant="h6"
-                className="futura font-medium text-neutral-800"
+                className="futura  font-medium w-[120px] text-neutral-800"
               >
                 23-04-22
               </Typography>
             </div>
             <div className="flex items-center mb-8">
               <Typography
-                variant="body1"
-                className="futura font-medium pr-6 text-neutral-800"
+                variant="h6"
+                className="futura  font-medium w-[120px] text-neutral-800"
               >
                 Rating:
               </Typography>
@@ -85,7 +99,7 @@ const DetailScriptModal = ({
             <Btn className="w-full  py-3">Begin review</Btn>
           </div>
         </div>
-      </Slide>
+      </Grow>
     </Modal>
   );
 };
