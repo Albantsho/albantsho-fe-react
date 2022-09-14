@@ -10,7 +10,7 @@ import TabButtons from "components/Dashboard/Listings/Index/TabButtons/TabButton
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "../../_app";
 import CreateScriptModal from "@shared/Modals/CreateScriptModal/CreateScriptModal";
 import UnListingItemModal from "components/Dashboard/Listings/Index/OpeningList/Modals/UnListingItemModal/UnListingItemModal";
 

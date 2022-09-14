@@ -4,11 +4,11 @@ import bell from "./assets/bell.png";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Image from "next/image";
+import routes from "routes/routes";
 
 const VerifyEmail = () => {
   return (
     <div className="px-8 py-12 lg:px-24  mx-auto">
-
       <div className="lg:py-32 grid place-content-center mx-auto">
         <div className="flex items-center lg:flex-col">
           <Typography
@@ -71,7 +71,7 @@ const VerifyEmail = () => {
         <div className="text-center tlg:hidden mt-7">
           <Typography className="text-grey-400 leading-5 font-medium mb-1 futura">
             Already have an account?
-            <Link href="/signin">
+            <Link href={`${routes.signin}`}>
               <a className="text-success-500 ml-2">Sign in</a>
             </Link>
           </Typography>

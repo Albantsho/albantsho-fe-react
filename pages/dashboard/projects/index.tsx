@@ -1,7 +1,7 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import SearchDashboard from "@shared/Layouts/DashboardLayout/SearchDashboard/SearchDashboard";
 import Head from "next/head";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "../../_app";
 import { useRouter } from "next/router";
 import CreateScriptModal from "@shared/Modals/CreateScriptModal/CreateScriptModal";
 import ListScriptsPage from "components/Dashboard/Projects/Archive/ListScripts/ListScripts";

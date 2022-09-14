@@ -2,6 +2,7 @@ import { Button, IconButton } from "@mui/material";
 import Link from "next/link";
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 import { Dispatch, SetStateAction } from "react";
+import routes from "routes/routes";
 
 interface IProps {
   step: number;
@@ -13,7 +14,10 @@ const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
   return (
     <>
       <div className="flex justify-between mt-20">
-        <Link href={`/abstract?step=${step === 1 ? 7 : step - 1}`} passHref>
+        <Link
+          href={`${routes.abstract}?step=${step === 1 ? 7 : step - 1}`}
+          passHref
+        >
           <Button
             disabled={step === 1}
             onClick={() => {
@@ -32,7 +36,10 @@ const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
         >
           Save & complete later
         </Button>
-        <Link href={`/abstract?step=${step === 7 ? 1 : step + 1}`} passHref>
+        <Link
+          href={`${routes.abstract}?step=${step === 7 ? 1 : step + 1}`}
+          passHref
+        >
           <Button
             disabled={step === 7}
             onClick={() => {
@@ -47,9 +54,9 @@ const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
       </div>
 
       <div className="flex md:hidden justify-center mt-4 gap-4 items-center">
-        <Link href={`/abstract?step=${step === 1 ? 7 : step - 1}`} passHref>
+        <Link href={`${routes.abstract}?step=${step === 1 ? 7 : step - 1}`} passHref>
           <IconButton
-           color="primary"
+            color="primary"
             disabled={step === 1}
             onClick={() => {
               if (step !== 1) setStep((prevCount: number) => prevCount - 1);
@@ -65,9 +72,9 @@ const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
           <span>7</span>
         </div>
 
-        <Link href={`/abstract?step=${step === 7 ? 1 : step + 1}`} passHref>
+        <Link href={`${routes.abstract}?step=${step === 7 ? 1 : step + 1}`} passHref>
           <IconButton
-          color="primary"
+            color="primary"
             disabled={step === 7}
             onClick={() => {
               if (step !== 7) setStep((prevCount: number) => prevCount + 1);

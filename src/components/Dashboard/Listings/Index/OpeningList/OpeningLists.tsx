@@ -14,6 +14,7 @@ import { IoIosMore } from "react-icons/io";
 import { Dispatch, SetStateAction, useState } from "react";
 import Link from "next/link";
 import React from "react";
+import routes from "routes/routes";
 
 const listScripts = [
   {
@@ -176,7 +177,7 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                     horizontal: "center",
                   }}
                 >
-                  <Link href={`/listings/${script.id}`}>
+                  <Link href={`${routes.listingsDashboard}/${script.id}`}>
                     <MenuItem
                       sx={{
                         "&:hover": {

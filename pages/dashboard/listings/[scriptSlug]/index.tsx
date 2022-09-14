@@ -4,7 +4,7 @@ import Heading from "components/Dashboard/Listings/OpenListingInfo/Index/Heading
 import TabButtons from "components/Dashboard/Listings/Index/TabButtons/TabButtons";
 import Head from "next/head";
 import { useState } from "react";
-import { NextPageWithLayout } from "../../_app";
+import { NextPageWithLayout } from "../../../_app";
 import AuctionsScripts from "components/Dashboard/Listings/OpenListingInfo/Index/AuctionsScripts/AuctionsScripts";
 import AcceptOfferModal from "@shared/Modals/AcceptOfferModal/AcceptOfferModal";
 import CreateScriptModal from "@shared/Modals/CreateScriptModal/CreateScriptModal";

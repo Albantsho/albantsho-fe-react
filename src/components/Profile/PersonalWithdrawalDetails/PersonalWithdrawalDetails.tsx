@@ -115,7 +115,10 @@ const PersonalWithdrawalDetails = () => {
             </label>
             <CustomInput
               select
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
+              sx={{
+                "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
+                "& .MuiSvgIcon-root": { color: "#7953B5" },
+              }}
               fullWidth
               id="bank"
               variant="outlined"

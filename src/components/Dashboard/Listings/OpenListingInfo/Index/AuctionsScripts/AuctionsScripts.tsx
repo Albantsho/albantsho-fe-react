@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import React, { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
+import routes from "routes/routes";
 
 const auctions = [
   { id: 1, name: "Woyenbrakemi", price: 4000 },
@@ -78,8 +79,8 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
             {auctions.map((auction) => (
               <Link
                 key={auction.id}
-                href={`/listings/${query.scriptSlug}/bids`}
-                passHref
+                href={`${routes.listingsDashboard}/${query.scriptSlug}/bids`}
+                
               >
                 <TableRow
                   sx={{
@@ -97,7 +98,10 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
                   className="cursor-pointer hover:bg-primary-50/40 duration-200"
                 >
                   <TableCell className="w-40 lg:py-6">
-                    <Typography variant="h6" className="font-normal text-neutral-700">
+                    <Typography
+                      variant="h6"
+                      className="font-normal text-neutral-700"
+                    >
                       {auction.name}
                     </Typography>
                   </TableCell>

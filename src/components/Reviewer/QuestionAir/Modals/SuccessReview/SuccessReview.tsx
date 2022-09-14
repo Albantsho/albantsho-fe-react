@@ -5,6 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import success from "@assets/images/success.png";
 import Btn from "@shared/Btn/Btn";
 import { useRouter } from "next/router";
+import routes from "routes/routes";
 interface IProps {
   setOpenSuccessReview: Dispatch<SetStateAction<boolean>>;
   openSuccessReview: boolean;
@@ -44,7 +45,7 @@ const SuccessReview = ({ setOpenSuccessReview, openSuccessReview }: IProps) => {
         </Typography>
 
         <Btn
-          onClick={() => push("/projects")}
+          onClick={() => push(routes.projectsDashboard)}
           size="medium"
           className="mt-4 sm:mt-6 py-3 px-6"
         >

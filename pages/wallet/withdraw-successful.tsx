@@ -7,6 +7,7 @@ import success from "@assets/images/success.png";
 import Image from "next/image";
 import Btn from "@shared/Btn/Btn";
 import { useRouter } from "next/router";
+import routes from "routes/routes";
 
 const WithdrawSuccessful: NextPageWithLayout = () => {
   const { push } = useRouter();
@@ -54,7 +55,7 @@ const WithdrawSuccessful: NextPageWithLayout = () => {
         </Typography>
 
         <div
-          onClick={() => push("/projects")}
+          onClick={() => push(routes.projectsDashboard)}
           className="flex mt-4 sm:mt-6 md:my-8"
         >
           <Btn className="py-3 px-6 mx-auto">Back to dashboard</Btn>

@@ -7,7 +7,7 @@ import TabButtons from "components/Dashboard/Listings/Index/TabButtons/TabButton
 import BidsPage from "components/Dashboard/Listings/OpenListingInfo/Index/Bids/BidsPage";
 import Head from "next/head";
 import { useState } from "react";
-import { NextPageWithLayout } from "../../_app";
+import { NextPageWithLayout } from "../../../_app";
 
 const Bids: NextPageWithLayout = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);

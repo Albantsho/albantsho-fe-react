@@ -1,8 +1,9 @@
 import { Tab, Tabs } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import routes from "routes/routes";
 
-const routes = [
+const routesArray = [
   { route: "?type=scripts", label: "Scripts" },
   { route: "?type=archives", label: "Archive" },
 ];
@@ -26,12 +27,17 @@ const TabButtons = () => {
       value={activeLinkIndex}
       onChange={activeLinkChange}
       className="bg-white rounded-md"
-      sx={{"& .MuiTabs-indicator":{borderBottom:{sx:"2px solid #7953B5",md:"4px solid #7953B5"},mb:{md:"-1px"}}}}
+      sx={{
+        "& .MuiTabs-indicator": {
+          borderBottom: { sx: "2px solid #7953B5", md: "4px solid #7953B5" },
+          mb: { md: "-1px" },
+        },
+      }}
     >
-      {routes.map((item) => (
+      {routesArray.map((item) => (
         <Tab
           key={item.label}
-          onClick={() => push(`/projects/${item.route}`)}
+          onClick={() => push(`${routes.projectsDashboard}/${item.route}`)}
           sx={{
             "&.MuiButtonBase-root": {
               flexGrow: { xs: 1, md: 0 },

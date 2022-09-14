@@ -5,14 +5,15 @@ import {
   type AppBarProps,
 } from "@mui/material";
 import { useMemo } from "react";
+import routes from "routes/routes";
 import DashboardNavOnDesktop from "./DesktopNav/DashboardNavOnDesktop";
 import DashboardNavOnMobile from "./MobileNav/DashboardNavOnMobile";
 
 const links = [
-  { title: "About Us", href: "/about-us" },
-  { title: "Marketplace", href: "/marketplace" },
+  { title: "About Us", href: routes.aboutUs },
+  { title: "Marketplace", href: routes.marketplace },
   { title: "Education", href: "/education" },
-  { title: "iDraft", href: "/iDraft" },
+  { title: "iDraft", href: routes.iDraft },
 ];
 
 const DashboardNav = ({ color = "transparent", ...props }: AppBarProps) => {

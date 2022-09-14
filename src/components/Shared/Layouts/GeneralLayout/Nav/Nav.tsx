@@ -2,18 +2,19 @@ import {
   AppBar,
   Toolbar,
   useMediaQuery,
-  type AppBarProps
+  type AppBarProps,
 } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
 import { useMemo } from "react";
+import routes from "routes/routes";
 import DesktopNav from "./DesktopNav/DesktopNav";
 import MobileNav from "./MobileNav/MobileNav";
 
 const links = [
-  { title: "About Us", href: "/about-us" },
-  { title: "Marketplace", href: "/marketplace" },
+  { title: "About Us", href: routes.aboutUs },
+  { title: "Marketplace", href: routes.marketplace },
   { title: "Education", href: "/education" },
-  { title: "iDraft", href: "/iDraft" },
+  { title: "iDraft", href: routes.iDraft },
 ];
 
 const Nav = ({ color = "transparent", ...props }: AppBarProps) => {

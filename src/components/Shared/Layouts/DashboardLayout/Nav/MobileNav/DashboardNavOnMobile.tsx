@@ -14,6 +14,7 @@ import Link from "next/link";
 import useMobileNavDashboard from "./useMobileNavDashboard";
 import alert from "./assets/alert.png";
 import Logo from "@shared/Logo/Logo";
+import routes from "routes/routes";
 
 interface IProps {
   links: { title: string; href: string }[];
@@ -36,7 +37,9 @@ const DashboardNavOnMobile = ({ links, isTransparent }: IProps) => {
       <IconButton
         onClick={handleToggleDrawer(true)}
         color="inherit"
-        className={`${isTransparent ? "text-white" : "text-primary-main"} -mr-2`}
+        className={`${
+          isTransparent ? "text-white" : "text-primary-main"
+        } -mr-2`}
       >
         <SvgIcon component={MenuIcon} sx={{ fontSize: 40 }} />
       </IconButton>
@@ -53,7 +56,7 @@ const DashboardNavOnMobile = ({ links, isTransparent }: IProps) => {
             </ListItem>
           ))}
           <ListItem disablePadding>
-            <Link href="/login" passHref>
+            <Link href={`${routes.signin}`} passHref>
               <ListItemButton>
                 <ListItemText primary="Sign In" />
               </ListItemButton>

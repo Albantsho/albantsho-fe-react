@@ -14,6 +14,7 @@ import { TbArrowsSort } from "react-icons/tb";
 import deposit from "@assets/icons/deposit.svg";
 import wallet from "@assets/icons/wallet.svg";
 import { useState } from "react";
+import routes from "routes/routes";
 
 const WalletMenu = () => {
   const { push } = useRouter();
@@ -76,7 +77,7 @@ const WalletMenu = () => {
       >
         <MenuItem
           className="px-6 py-3"
-          onClick={() => push("/wallet/withdraw")}
+          onClick={() => push(`${routes.withdrawWallet}`)}
         >
           <ListItemIcon>
             <SvgIcon
@@ -96,7 +97,7 @@ const WalletMenu = () => {
         </MenuItem>
         <MenuItem
           className="px-6 py-3"
-          onClick={() => push("/wallet/withdraw")}
+          onClick={() => push(`${routes.depositWallet}`)}
         >
           <ListItemIcon>
             <SvgIcon
@@ -116,7 +117,7 @@ const WalletMenu = () => {
         </MenuItem>
         <MenuItem
           className="px-6 py-3"
-          onClick={() => push("/wallet/transaction-history")}
+          onClick={() => push(`${routes.transactionHistoryWallet}`)}
         >
           <ListItemIcon>
             <SvgIcon
@@ -134,7 +135,10 @@ const WalletMenu = () => {
             Transaction History
           </ListItemText>
         </MenuItem>
-        <MenuItem className="px-6 py-3" onClick={() => push("/wallet/help")}>
+        <MenuItem
+          className="px-6 py-3"
+          onClick={() => push(`${routes.helpWallet}`)}
+        >
           <ListItemIcon>
             <SvgIcon
               fontSize="inherit"

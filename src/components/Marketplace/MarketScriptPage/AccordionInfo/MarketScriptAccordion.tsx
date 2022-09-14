@@ -9,6 +9,7 @@ import Image from "next/image";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
 import AccordionCustom from "./AccordionCustom/AccordionCustom";
+import routes from "routes/routes";
 
 export default function MarketScriptAccordion() {
   return (
@@ -38,7 +39,7 @@ export default function MarketScriptAccordion() {
                 You’re unable to view this content because you’re not
                 subscribed.
               </Typography>
-              <Link href="/market-place/subscription" passHref>
+              <Link href={`${routes.marketplace}/subscription`} passHref>
                 <Btn
                   size="large"
                   sx={{ padding: { xs: "6px 12px", md: "12px 24px" } }}

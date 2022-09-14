@@ -10,6 +10,7 @@ import DeadLineIDraft from "components/IDraft/Index/DeadLineIDraft/DeadLineIDraf
 import Sponsers from "components/IDraft/Index/Sponsers/Sponsers";
 import MentorInfoList from "components/IDraft/Index/MentorInfoList/MentorInfoList";
 import IDraftLayout from "@shared/Layouts/IDraftLayout/IDrafyLayout";
+import routes from "routes/routes";
 
 const IDraft: NextPageWithLayout = () => {
   return (
@@ -22,7 +23,7 @@ const IDraft: NextPageWithLayout = () => {
       <BenefitsIDraft />
       <ElgibilityIDraft />
       <DeadLineIDraft />
-      <Link href="/iDraft/iDraft-terms-and-conditions">
+      <Link href={`${routes.iDraft}/terms-and-conditions`}>
         <a className="text-gray-900">
           <Typography
             variant="h6"

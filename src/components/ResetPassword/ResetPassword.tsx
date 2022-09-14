@@ -4,6 +4,7 @@ import iconPassword from "./assets/icon-password.svg";
 import iconShow from "./assets/icon-show.svg";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
+import routes from "routes/routes";
 
 const ResetPassword = () => {
   return (
@@ -97,7 +98,7 @@ const ResetPassword = () => {
       <div className="text-center mt-7 lg:hidden">
         <Typography className="text-grey-400 mb-1 futura">
           Don’t have an account yet?
-          <Link href="/signup">
+          <Link href={`${routes.signup}`} passHref>
             <a className="text-success-500 ml-2">Sign up</a>
           </Link>
         </Typography>

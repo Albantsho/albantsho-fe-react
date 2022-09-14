@@ -2,6 +2,7 @@ import {  Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
 import Link from "next/link";
+import routes from "routes/routes";
 import check from "./assets/check.png";
 
 const CheckEmail = () => {
@@ -36,7 +37,7 @@ const CheckEmail = () => {
       <div className="mt-14 lg:hidden">
         <Typography className="text-grey-400 mb-1 futura">
           Already have an account?
-          <Link href="/signin">
+          <Link href={`${routes.signin}`} passHref >
             <a className="text-success-500 ml-2">Sign in</a>
           </Link>
         </Typography>

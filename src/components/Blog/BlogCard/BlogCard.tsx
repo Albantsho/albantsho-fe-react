@@ -8,6 +8,7 @@ import {
   Typography
 } from "@mui/material";
 import Link from "next/link";
+import routes from "routes/routes";
 
 interface IProps {
   post: {
@@ -37,7 +38,7 @@ const BlogCard = ({ post }: IProps) => {
         <Typography color="gray.400">{post.desc}</Typography>
       </CardContent>
       <CardActions className="px-4 pb-4">
-        <Link href="/blog/test" passHref>
+        <Link href={`${routes.blog}/test`} passHref>
           <MuiLink>Read more</MuiLink>
         </Link>
       </CardActions>

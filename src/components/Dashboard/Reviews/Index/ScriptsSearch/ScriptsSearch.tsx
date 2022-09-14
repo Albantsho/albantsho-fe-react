@@ -13,6 +13,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
+import routes from "routes/routes";
 
 interface MoviesOptionType {
   inputValue?: string;
@@ -67,7 +68,13 @@ const ScriptsSearch = () => {
               className={` px-2 sm:px-4 md:px-6`}
               sx={{ "&:last-child": { border: 0 } }}
             >
-              <ListItemButton sx={{"&.MuiListItemButton-root":{borderBottom:"1px solid #EEEBF1"}}}>
+              <ListItemButton
+                sx={{
+                  "&.MuiListItemButton-root": {
+                    borderBottom: "1px solid #EEEBF1",
+                  },
+                }}
+              >
                 <ListItemText
                   primary={option.title}
                   primaryTypographyProps={{
@@ -78,7 +85,6 @@ const ScriptsSearch = () => {
                   }}
                 />
               </ListItemButton>
-             
             </ListItem>
           )}
           filterOptions={filterOptions}
@@ -103,7 +109,7 @@ const ScriptsSearch = () => {
       </div>
 
       <div className="flex justify-center sm:justify-start">
-        <Link href="/reviews/plans" passHref>
+        <Link href={`${routes.reviewsPlans}`} passHref>
           <Btn disabled={!selectedStore} size="large">
             Next
           </Btn>

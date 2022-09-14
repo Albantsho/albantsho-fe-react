@@ -6,9 +6,10 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  SvgIcon
+  SvgIcon,
 } from "@mui/material";
 import Link from "next/link";
+import routes from "routes/routes";
 import useMobileNav from "./useMobileNav";
 
 interface IProps {
@@ -40,7 +41,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
             </ListItem>
           ))}
           <ListItem disablePadding>
-            <Link href="/login" passHref>
+            <Link href={`${routes.signin}`} passHref>
               <ListItemButton>
                 <ListItemText primary="Sign In" />
               </ListItemButton>

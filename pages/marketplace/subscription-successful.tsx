@@ -6,6 +6,7 @@ import Head from "next/head";
 import Link from "next/link";
 import success from "@assets/images/success.png";
 import Image from "next/image";
+import routes from "routes/routes";
 
 const subscriptionSuccessful = () => {
   return (
@@ -41,7 +42,7 @@ const subscriptionSuccessful = () => {
           Subscription activated! you now have unlimited access to all scripts
           on the platform!
         </Typography>
-        <Link href="/marketplace" passHref>
+        <Link href={`${routes.marketplace}`} passHref>
           <Btn size="large" className="py-3 px-6">
             Back to marketplace
           </Btn>

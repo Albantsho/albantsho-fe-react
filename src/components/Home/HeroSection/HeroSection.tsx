@@ -2,6 +2,7 @@ import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
 import Link from "next/link";
 import { animated, useSpring } from "react-spring";
+import routes from "routes/routes";
 import Bg from "./assets/bg.png";
 
 const AnimatedScriptCard = animated(ScriptCard);
@@ -46,7 +47,7 @@ const HeroSection = () => {
               Write better screenplays and be discovered by top producers to
               bring them to life.
             </Typography>
-            <Link href="/login" passHref>
+            <Link href={`${routes.signin}`} passHref>
               <Button
                 size="large"
                 className="px-8 py-3"

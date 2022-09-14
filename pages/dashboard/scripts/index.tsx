@@ -4,7 +4,7 @@ import MyScripts from "components/Dashboard/Scripts/MyScripts";
 import TabButtons from "components/Dashboard/Scripts/TabButtons";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "../../_app";
 
 const Scripts: NextPageWithLayout = () => {
   const { query } = useRouter();

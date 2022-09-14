@@ -1,8 +1,9 @@
 import { Tab, Tabs } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import routes from "routes/routes";
 
-const routes = [
+const routesArray = [
   { route: "?type=opening-list", label: "Open Listings" },
   { route: "?type=drafts", label: "Drafts" },
   { route: "?type=closed-list", label: "Closed Listings" },
@@ -34,10 +35,10 @@ const TabButtons = () => {
         },
       }}
     >
-      {routes.map((item) => (
+      {routesArray.map((item) => (
         <Tab
           key={item.label}
-          onClick={() => push(`/listings/${item.route}`)}
+          onClick={() => push(`${routes.listingsDashboard}/${item.route}`)}
           sx={{
             "&.MuiButtonBase-root": {
               flexGrow: { xs: 1, md: 0 },

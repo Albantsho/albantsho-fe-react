@@ -12,6 +12,7 @@ import Link from "next/link";
 import iconEmail from "./assets/icon-email.svg";
 import iconPassword from "./assets/icon-password.svg";
 import iconShow from "./assets/icon-show.svg";
+import routes from "routes/routes";
 
 const SigninForm = () => {
   return (
@@ -93,7 +94,7 @@ const SigninForm = () => {
             />
           </FormGroup>
           <Typography className="leading-5 font-medium mb-1 futura">
-            <Link href="/forget-password" passHref>
+            <Link href={`${routes.forgetPassword}`} passHref>
               <a className="text-blue-400">Forgot Password?</a>
             </Link>
           </Typography>
@@ -110,7 +111,7 @@ const SigninForm = () => {
       <div className="text-center mt-7 lg:hidden">
         <Typography className="text-grey-400 mb-1 futura">
           Don’t have an account yet?
-          <Link href="/signup">
+          <Link href={`${routes.signup}`}>
             <a className="text-success-500 ml-2">Sign up</a>
           </Link>
         </Typography>

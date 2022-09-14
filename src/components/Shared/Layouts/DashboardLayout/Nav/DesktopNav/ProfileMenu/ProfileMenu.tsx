@@ -9,6 +9,7 @@ import {
 import { useRouter } from "next/router";
 import { AiFillCaretDown } from "react-icons/ai";
 import { useState } from "react";
+import routes from "routes/routes";
 
 const ProfileMenu = () => {
   const [openProfileMenu, setOpenProfileMenu] = useState<null | HTMLElement>(
@@ -62,7 +63,7 @@ const ProfileMenu = () => {
         <MenuItem
           divider
           className="px-6 py-4"
-          onClick={() => push("/profile")}
+          onClick={() => push(routes.profile)}
         >
           <ListItemAvatar>
             <Avatar src="/assets/images/profile.jpg" />
@@ -83,7 +84,7 @@ const ProfileMenu = () => {
         <MenuItem
           divider
           className="px-6 py-4"
-          onClick={() => push("/projects")}
+          onClick={() => push(routes.projectsDashboard)}
         >
           <ListItemText
             primaryTypographyProps={{

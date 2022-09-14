@@ -1,11 +1,12 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import Head from "next/head";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "../../_app";
 import success from "@assets/images/success.png";
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
 import Link from "next/link";
+import routes from "routes/routes";
 
 const PaymentSuccessful: NextPageWithLayout = () => {
   return (
@@ -33,7 +34,7 @@ const PaymentSuccessful: NextPageWithLayout = () => {
         </Typography>
         <Typography
           variant="body2"
-          sx={{ marginBottom: { xs: 2, md: 2.5, lg: 4,xl:5 } }}
+          sx={{ marginBottom: { xs: 2, md: 2.5, lg: 4, xl: 5 } }}
           className="text-[#484848] max-w-lg text-center mx-auto"
         >
           Script review has been successfully paid for. Please note that script
@@ -41,7 +42,7 @@ const PaymentSuccessful: NextPageWithLayout = () => {
           script has been reviewed. Please check your dashboard regularly to see
           the review status on your project.
         </Typography>
-        <Link href="/reviews" passHref>
+        <Link href={`${routes.reviewsDashboard}`} passHref>
           <Btn size="large" className="py-3 px-6">
             Back to dashboard
           </Btn>

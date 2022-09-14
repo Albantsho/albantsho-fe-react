@@ -18,12 +18,13 @@ import { FaTwitter } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import routes from "routes/routes";
 
 const listRoutes = [
-  { route: "/projects", title: "Projects", icon: projects },
-  { route: "/listings", title: "Listings", icon: listings },
-  { route: "/reviews", title: "Reviews", icon: reviews },
-  { route: "/scripts", title: "Scripts", icon: scripts },
+  { route: routes.projectsDashboard, title: "Projects", icon: projects },
+  { route: routes.listingsDashboard, title: "Listings", icon: listings },
+  { route: routes.reviewsDashboard, title: "Reviews", icon: reviews },
+  { route: routes.scriptsDashboard, title: "Scripts", icon: scripts },
 ];
 
 const drawerWidth = 340;

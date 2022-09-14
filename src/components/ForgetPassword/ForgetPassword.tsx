@@ -5,6 +5,7 @@ import iconEmail from "./assets/icon-email.svg";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Image from "next/image";
+import routes from "routes/routes";
 
 const ForgetPassword = () => {
   return (
@@ -67,7 +68,7 @@ const ForgetPassword = () => {
       <div className="text-center lg:hidden mt-4">
         <Typography className="text-grey-400 mb-1 futura">
           Already have an account?
-          <Link href="/signin">
+          <Link href={`${routes.signin}`} passHref>
             <a className="text-success-500 ml-2">Sign in</a>
           </Link>
         </Typography>

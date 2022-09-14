@@ -1,10 +1,11 @@
 import LogoSvg from "@assets/logo.svg";
 import { SvgIcon, type SvgIconProps } from "@mui/material";
 import Link from "next/link";
+import routes from "routes/routes";
 
 const Logo = ({ sx, ...props }: SvgIconProps) => {
   return (
-    <Link href="/" passHref>
+    <Link href={`${routes.home}`} passHref>
       <a>
         <SvgIcon
           inheritViewBox

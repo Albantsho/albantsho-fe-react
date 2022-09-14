@@ -6,12 +6,13 @@ import scripts from "../assets/scripts.png";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import routes from "routes/routes";
 
-const routes = [
-  { route: "/projects", title: "Projects", icon: projects },
-  { route: "/listings", title: "Listings", icon: listings },
-  { route: "/reviews", title: "Reviews", icon: reviews },
-  // { route: "/scripts", title: "Scripts", icon: scripts },
+const routesArray = [
+  { route: routes.projectsDashboard, title: "Projects", icon: projects },
+  { route: routes.listingsDashboard, title: "Listings", icon: listings },
+  { route: routes.reviewsDashboard, title: "Reviews", icon: reviews },
+  { route: routes.scriptsDashboard, title: "Scripts", icon: scripts },
 ];
 
 const DashboardSidebarOnMobile = () => {
@@ -28,7 +29,7 @@ const DashboardSidebarOnMobile = () => {
           setActiveRoute(newValue);
         }}
       >
-        {routes.map((item) => {
+        {routesArray.map((item) => {
           return (
             <BottomNavigationAction
               key={item.title}

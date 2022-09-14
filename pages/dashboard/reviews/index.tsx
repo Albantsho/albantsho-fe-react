@@ -3,7 +3,7 @@ import FilterScriptsSelect from "components/Dashboard/Reviews/Index/FilterScript
 import Heading from "components/Dashboard/Reviews/Index/Heading/Heading";
 import ListScripts from "components/Dashboard/Reviews/Index/ListScripts/ListScripts";
 import Head from "next/head";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "../../_app";
 
 const Reviews: NextPageWithLayout = () => {
   return (

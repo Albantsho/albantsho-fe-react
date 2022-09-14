@@ -10,7 +10,6 @@ const Heading = () => {
         <Image
           width={300}
           height={300}
-          layout="fill"
           src={beauty}
           className="rounded-xl"
           alt="beauty"

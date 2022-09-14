@@ -2,6 +2,7 @@ import { Box, Button, IconButton, Typography } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import routes from "routes/routes";
 
 const Footer = () => {
   return (
@@ -51,34 +52,34 @@ const Footer = () => {
             </Typography>
           </div>
           <div className="flex flex-col gap-1">
-            <Link passHref href="/FAQs">
+            <Link passHref href={`${routes.FAQs}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 FAQs
               </Button>
             </Link>
-            <Link passHref href="/privacy-policy">
+            <Link passHref href={`${routes.privacyPolicy}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Privacy Policy
               </Button>
             </Link>
-            <Link passHref href="/terms-and-conditions">
+            <Link passHref href={`${routes.termsAndCondition}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Terms and Conditions
               </Button>
             </Link>
           </div>
           <div className="flex flex-col gap-1">
-            <Link passHref href="/about-us">
+            <Link passHref href={`${routes.aboutUs}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 About Us
               </Button>
             </Link>
-            <Link href="/script-writing" passHref>
+            <Link href={`${routes.scriptWriting}`} passHref>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Script Writing
               </Button>
             </Link>
-            <Link href="/marketplace" passHref>
+            <Link href={`${routes.marketplace}`} passHref>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Marketplace
               </Button>

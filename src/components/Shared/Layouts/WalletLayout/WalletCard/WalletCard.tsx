@@ -21,6 +21,7 @@ import deposit from "@assets/icons/deposit.svg";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Btn from "@shared/Btn/Btn";
+import routes from "routes/routes";
 
 const WalletCart = () => {
   const { push, route } = useRouter();
@@ -41,7 +42,7 @@ const WalletCart = () => {
   return (
     <Card
       elevation={0}
-      className="px-1 rounded-lg md:min-w-[248px] shadow-md mx-auto h-fit md:flex-[0.6] !max-w-[295px] md:max-w-fit  max-auto py-3 md:py-0"
+      className="px-1 rounded-lg md:min-w-[248px] shadow-md mx-auto h-fit md:flex-[0.6] !max-w-[295px] md:max-w-fit  max-auto py-3 md:py-0 md:pt-6"
     >
       <CardContent>
         <div className="flex lg:px-5 flex-col items-center gap-2">
@@ -82,7 +83,7 @@ const WalletCart = () => {
           >
             <MenuItem
               className="px-6 py-3"
-              onClick={() => push("/wallet/withdraw")}
+              onClick={() => push(`${routes.withdrawWallet}`)}
             >
               <ListItemIcon>
                 <SvgIcon
@@ -103,7 +104,7 @@ const WalletCart = () => {
             </MenuItem>
             <MenuItem
               className="px-6 py-3"
-              onClick={() => push("/wallet/withdraw")}
+              onClick={() => push(`${routes.depositWallet}`)}
             >
               <ListItemIcon>
                 <SvgIcon
@@ -124,7 +125,7 @@ const WalletCart = () => {
             </MenuItem>
             <MenuItem
               className="px-6 py-3"
-              onClick={() => push("/wallet/transaction-history")}
+              onClick={() => push(`${routes.transactionHistoryWallet}`)}
             >
               <ListItemIcon>
                 <SvgIcon
@@ -145,7 +146,7 @@ const WalletCart = () => {
             </MenuItem>
             <MenuItem
               className="px-6 py-3"
-              onClick={() => push("/wallet/help")}
+              onClick={() => push(`${routes.helpWallet}`)}
             >
               <ListItemIcon>
                 <SvgIcon
@@ -174,10 +175,10 @@ const WalletCart = () => {
           />
         </div>
         <Divider className="mt-6 mb-4 hidden md:block" />
-        <List className="md:mb-6 hidden md:flex flex-col">
+        <List className="md:mb-2 hidden md:flex flex-col">
           <ListItemButton
-            selected={route === "/wallet/withdraw"}
-            onClick={() => push("/wallet/withdraw")}
+            selected={route === `${routes.withdrawWallet}`}
+            onClick={() => push(`${routes.withdrawWallet}`)}
           >
             <ListItemIcon
               sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
@@ -197,8 +198,8 @@ const WalletCart = () => {
             </ListItemText>
           </ListItemButton>
           <ListItemButton
-            selected={route === "/wallet/deposit"}
-            onClick={() => push("/wallet/withdraw")}
+            selected={route === `${routes.depositWallet}`}
+            onClick={() => push(`${routes.depositWallet}`)}
           >
             <ListItemIcon
               sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
@@ -218,8 +219,8 @@ const WalletCart = () => {
             </ListItemText>
           </ListItemButton>
           <ListItemButton
-            selected={route === "/wallet/transaction-history"}
-            onClick={() => push("/wallet/transaction-history")}
+            selected={route === `${routes.transactionHistoryWallet}`}
+            onClick={() => push(`${routes.transactionHistoryWallet}`)}
           >
             <ListItemIcon
               sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
@@ -239,8 +240,8 @@ const WalletCart = () => {
             </ListItemText>
           </ListItemButton>
           <ListItemButton
-            selected={route === "/wallet/help"}
-            onClick={() => push("/wallet/help")}
+            selected={route === `${routes.helpWallet}`}
+            onClick={() => push(`${routes.helpWallet}`)}
           >
             <ListItemIcon
               sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}

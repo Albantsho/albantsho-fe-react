@@ -3,7 +3,7 @@ import Heading from "components/Dashboard/Reviews/Index/Heading/Heading";
 import SummaryReviews from "components/Dashboard/Reviews/Summary/SummaryReviews";
 import Head from "next/head";
 
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "../../_app";
 
 const Summary: NextPageWithLayout = () => {
   return (

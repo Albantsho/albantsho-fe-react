@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
+import routes from "routes/routes";
 
 interface IProps {
   links: { title: string; href: string }[];
@@ -23,7 +24,7 @@ const DesktopNav = ({ links, isTransparent }: IProps) => {
           </Link>
         ))}
       </div>
-      <Link href="/login" passHref>
+      <Link href={`${routes.signin}`} passHref>
         <Btn size="large" className="py-4 px-7">
           Sign In
         </Btn>
