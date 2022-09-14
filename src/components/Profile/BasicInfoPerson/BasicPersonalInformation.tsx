@@ -10,98 +10,131 @@ import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import camera from "./assets/camera.svg";
 import pencil from "../assets/pencil.svg";
+import { useState } from "react";
 
 const BasicPersonalInformation = () => {
+  const [availableChangeValue, setAvailableChangeValue] = useState(true);
   return (
     <div>
       <Typography variant="h4" className="futura font-medium text-primary-700">
         Basic Info
       </Typography>
       <Divider />
-      <div className="flex flex-col md:mt-8 py-7 gap-3 gap-y-6 md:items-start  md:flex-row md:gap-x-10">
-        <div className="relative mx-auto ">
+      <div className="flex flex-col md:mt-8 py-8 gap-3 gap-y-8 md:items-start  md:flex-row md:gap-x-20">
+        <div className="relative mx-auto">
           <Avatar
             src="/assets/images/profile.jpg"
             sx={{ width: { xs: 100, md: 180 }, height: { xs: 100, md: 180 } }}
           />
-          <IconButton className="bg-white absolute -bottom-1 -right-1 md:bottom-0 md:right-0  md:w-14 md:h-14 shadow-md hover:bg-white">
+          <IconButton
+            component="label"
+            className="bg-white absolute -bottom-1 -right-1 md:bottom-0 md:right-0  md:w-14 md:h-14 shadow-md hover:bg-white"
+          >
+            <input hidden accept="image/*" type="file" />
             <SvgIcon component={camera} inheritViewBox />
           </IconButton>
         </div>
         <div className="gap-y-5 md:gap-y-6 flex flex-col md:flex-1">
           <div>
-            <label
-              htmlFor="first-name"
-              className="inline-block md:text-lg mb-1 futura"
-            >
-              First Name
+            <label className="mb-1 inline-block" htmlFor="first-name">
+              <Typography
+                variant="h6"
+                className=" futura font-medium text-neutral-800"
+              >
+                First Name
+              </Typography>
             </label>
             <CustomInput
               sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="first-name"
               variant="outlined"
+              defaultValue="Jane"
               size="small"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <SvgIcon
-                      fontSize="small"
-                      component={pencil}
-                      inheritViewBox
-                    />
+                    <IconButton
+                      onClick={() =>
+                        setAvailableChangeValue(!availableChangeValue)
+                      }
+                      color="primary"
+                    >
+                      <SvgIcon
+                        fontSize="small"
+                        component={pencil}
+                        inheritViewBox
+                      />
+                    </IconButton>
                   </InputAdornment>
                 ),
+                readOnly: availableChangeValue,
               }}
             />
           </div>
           <div>
-            <label
-              htmlFor="last-name"
-              className="inline-block md:text-lg mb-1 futura"
-            >
-              Last Name
+            <label className="mb-1 inline-block" htmlFor="last-name">
+              <Typography
+                variant="h6"
+                className=" futura font-medium text-neutral-800"
+              >
+                Last Name
+              </Typography>
             </label>
             <CustomInput
               sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="last-name"
               variant="outlined"
+              defaultValue="Mawe"
               size="small"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <SvgIcon
-                      fontSize="small"
-                      component={pencil}
-                      inheritViewBox
-                    />
+                    <IconButton
+                      onClick={() =>
+                        setAvailableChangeValue(!availableChangeValue)
+                      }
+                      color="primary"
+                    >
+                      <SvgIcon
+                        fontSize="small"
+                        component={pencil}
+                        inheritViewBox
+                      />
+                    </IconButton>
                   </InputAdornment>
                 ),
+                readOnly: availableChangeValue,
               }}
             />
           </div>
           <div>
-            <label
-              htmlFor="email"
-              className="inline-block md:text-lg mb-1 futura"
-            >
-              Email Address
+            <label className="mb-1 inline-block" htmlFor="email">
+              <Typography
+                variant="h6"
+                className="futura font-medium text-neutral-800"
+              >
+                Email
+              </Typography>
             </label>
             <CustomInput
               sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="email"
+              defaultValue="JaneMawe@dummymail.com"
               variant="outlined"
               size="small"
             />
           </div>
           <div>
-            <label
-              htmlFor="country"
-              className="inline-block md:text-lg mb-1 futura"
-            >
-              Country
+            <label className="mb-1 inline-block" htmlFor="country">
+              <Typography
+                variant="h6"
+                className="futura font-medium text-neutral-800"
+              >
+                Country
+              </Typography>
             </label>
             <CustomInput
               sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
@@ -109,9 +142,10 @@ const BasicPersonalInformation = () => {
               id="country"
               variant="outlined"
               size="small"
+              defaultValue="Nigeria"
             />
           </div>
-          <Btn className="mt-2 py-3 px-6 mr-auto md:mr-0 md:ml-auto">
+          <Btn className="mt-2  xl:mt-5 py-3 px-6 mr-auto md:mr-0 md:ml-auto">
             Save and Update
           </Btn>
         </div>
