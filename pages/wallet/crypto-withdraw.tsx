@@ -1,17 +1,24 @@
-import { Divider, ListItemText, MenuItem, Typography } from "@mui/material";
+import {
+  Chip,
+  Divider,
+  InputAdornment,
+  ListItemText,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import WalletLayout from "@shared/Layouts/WalletLayout/WalletLayout";
 import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
 import Btn from "@shared/Btn/Btn";
 
-const Withdraw: NextPageWithLayout = () => {
+const CryptoWithdraw: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Withdraw </title>
+        <title>Albantsho || WithdrawCrypto </title>
       </Head>
-      <div className="bg-white rounded-md px-5 sm:px-6 py-9 md:px-10  lg:px-14 lg:py-14 flex-1 w-full">
+      <div className="bg-white rounded-md px-5 sm:px-6 md:px-10 py-9 lg:px-14 lg:py-14 flex-1 w-full">
         <Typography
           variant="h4"
           className="text-primary-700 futura font-medium leading-normal mb-2 md:mb-3"
@@ -54,77 +61,79 @@ const Withdraw: NextPageWithLayout = () => {
           </label>
           <CustomInput
             fullWidth
+            sx={{ "& .MuiOutlinedInput-input": { py: 2 }, maxWidth: "628px" }}
+            id="method"
+            variant="outlined"
+            size="medium"
+          />
+        </div>
+
+        <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
+          <label htmlFor="bank" className="futura font-medium text-neutral-800">
+            Method<span className="text-error-700">*</span>
+          </label>
+          <CustomInput
+            fullWidth
             select
             sx={{
               maxWidth: "628px",
               "& .MuiSvgIcon-root": { color: "#7953B5" },
               "& .MuiOutlinedInput-input": { py: 1.5 },
             }}
-            id="method"
+            id="bank"
             variant="outlined"
             size="medium"
-            value="Bank Deposit"
+            value="USDT"
           >
-            <MenuItem value="Bank Deposit">
-              <ListItemText className="text-primary-700">
-                Bank Deposit
-              </ListItemText>
+            <MenuItem value="USDT">
+              <ListItemText className="text-primary-700">USDT</ListItemText>
             </MenuItem>
           </CustomInput>
         </div>
 
         <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-          <label htmlFor="bank">
-            <Typography
-              variant="body1"
-              className="futura font-medium text-neutral-800"
-            >
-              Bank<span className="text-error-700">*</span>
-            </Typography>
+          <label
+            htmlFor="network"
+            className="futura font-medium text-neutral-800"
+          >
+            Network<span className="text-error-700">*</span>
           </label>
           <CustomInput
+            defaultValue="TRC - 20"
             fullWidth
             sx={{
-              "& .MuiOutlinedInput-input": { py: 2 },
               maxWidth: "628px",
+              "& .MuiSvgIcon-root": { color: "#7953B5" },
+              "& .MuiOutlinedInput-input": { py: 2 },
             }}
-            id="bank"
+            id="network"
             variant="outlined"
             size="medium"
-          />
-        </div>
-
-        <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-          <label htmlFor="account-name">
-            <Typography
-              variant="body1"
-              className="futura font-medium text-neutral-800"
-            >
-              Account Name<span className="text-error-700">*</span>
-            </Typography>
-          </label>
-          <CustomInput
-            fullWidth
-            sx={{ "& .MuiOutlinedInput-input": { py: 2 }, maxWidth: "628px" }}
-            id="account-name"
-            variant="outlined"
-            size="medium"
+            value="USDT"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="start">
+                  <Chip
+                    className="text-primary-700 bg-primary-50/50 px-4"
+                    label="Fee - $1"
+                  />
+                </InputAdornment>
+              ),
+            }}
           />
         </div>
 
         <div className="flex items-start flex-col justify-start gap-2 mb-8 lg:mb-12">
-          <label htmlFor="account-number">
-            <Typography
-              variant="body1"
-              className="futura font-medium text-neutral-800"
-            >
-              Account Number<span className="text-error-700">*</span>
-            </Typography>
+          <label
+            htmlFor="address"
+            className="futura font-medium text-neutral-800"
+          >
+            Address<span className="text-error-700">*</span>
           </label>
           <CustomInput
             fullWidth
-            sx={{   "& .MuiOutlinedInput-input": { py: 2 }, maxWidth: "628px" }}
-            id="account-number"
+            sx={{ "& .MuiOutlinedInput-input": { py: 2 }, maxWidth: "628px" }}
+            id="address"
             variant="outlined"
             size="medium"
           />
@@ -136,6 +145,6 @@ const Withdraw: NextPageWithLayout = () => {
   );
 };
 
-Withdraw.getLayout = (pages) => <WalletLayout>{pages}</WalletLayout>;
+CryptoWithdraw.getLayout = (pages) => <WalletLayout>{pages}</WalletLayout>;
 
-export default Withdraw;
+export default CryptoWithdraw;

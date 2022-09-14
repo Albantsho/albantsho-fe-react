@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Button,
   Card,
   CardContent,
   Chip,
@@ -14,15 +13,17 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-import { IoMdWallet } from "react-icons/io";
+import wallet from "@assets/icons/wallet.svg";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import deposit from "@assets/icons/deposit.svg";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Btn from "@shared/Btn/Btn";
 
 const WalletCart = () => {
-  const { push } = useRouter();
+  const { push, route } = useRouter();
   const [openWalletMenu, setOpenWalletMenu] = useState<null | HTMLElement>(
     null
   );
@@ -35,10 +36,12 @@ const WalletCart = () => {
     setOpenWalletMenu(null);
   };
 
+  console.log(route);
+
   return (
     <Card
       elevation={0}
-      className="px-1 md:min-w-[248px] shadow-sm mx-auto h-fit md:flex-[0.6] max-w-[235px] md:max-w-fit w-full max-auto py-3 md:py-0"
+      className="px-1 rounded-lg md:min-w-[248px] shadow-md mx-auto h-fit md:flex-[0.6] !max-w-[295px] md:max-w-fit  max-auto py-3 md:py-0"
     >
       <CardContent>
         <div className="flex lg:px-5 flex-col items-center gap-2">
@@ -52,14 +55,15 @@ const WalletCart = () => {
           >
             Jane Mawe
           </Typography>
-          <Button
+          <Btn
+            disableElevation
             onClick={handleOpenWalletMenu}
             variant="contained"
-            className="bg-primary-50/50 md:hidden hover:bg-primary-50 active:bg-primary-300 active:text-white py-3 text-primary-700  px-6"
-            startIcon={<SvgIcon component={IoMdWallet} inheritViewBox />}
+            className="md:hidden px-6 py-3 font-medium"
+            startIcon={<SvgIcon component={wallet} inheritViewBox />}
           >
-            Balance:$20,000
-          </Button>
+            Balance: $20,000
+          </Btn>
           <Menu
             className="md:hidden"
             anchorEl={openWalletMenu}
@@ -69,82 +73,117 @@ const WalletCart = () => {
             PaperProps={{
               elevation: 0,
               sx: {
-                overflow: "visible",
                 filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.22))",
                 borderRadius: "8px",
               },
             }}
-            transformOrigin={{ horizontal: "right", vertical: "top" }}
-            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+            transformOrigin={{ horizontal: "center", vertical: "top" }}
+            anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
           >
-            <MenuItem onClick={() => push("/wallet")}>
+            <MenuItem
+              className="px-6 py-3"
+              onClick={() => push("/wallet/withdraw")}
+            >
               <ListItemIcon>
                 <SvgIcon
+                  fontSize="inherit"
                   className="text-primary-700"
                   inheritViewBox
                   component={RiDownloadLine}
                 />
               </ListItemIcon>
-              <ListItemText>
-                <Typography
-                  variant="h6"
-                  className="text-primary-700 futura font-normal leading-normal"
-                >
-                  Withdraw
-                </Typography>
+              <ListItemText
+                primaryTypographyProps={{
+                  className:
+                    "text-primary-700 futura font-normal leading-normal",
+                }}
+              >
+                Withdraw
               </ListItemText>
             </MenuItem>
-            <MenuItem onClick={() => push("/wallet/transaction-history")}>
+            <MenuItem
+              className="px-6 py-3"
+              onClick={() => push("/wallet/withdraw")}
+            >
               <ListItemIcon>
                 <SvgIcon
+                  fontSize="inherit"
+                  className="text-primary-700"
+                  inheritViewBox
+                  component={deposit}
+                />
+              </ListItemIcon>
+              <ListItemText
+                primaryTypographyProps={{
+                  className:
+                    "text-primary-700 futura font-normal leading-normal",
+                }}
+              >
+                Deposit
+              </ListItemText>
+            </MenuItem>
+            <MenuItem
+              className="px-6 py-3"
+              onClick={() => push("/wallet/transaction-history")}
+            >
+              <ListItemIcon>
+                <SvgIcon
+                  fontSize="inherit"
                   className="text-primary-700"
                   inheritViewBox
                   component={TbArrowsSort}
                 />
               </ListItemIcon>
-              <ListItemText>
-                <Typography
-                  variant="h6"
-                  className="text-primary-700 futura font-normal"
-                >
-                  Transaction History
-                </Typography>
+              <ListItemText
+                primaryTypographyProps={{
+                  className:
+                    "text-primary-700 futura font-normal leading-normal",
+                }}
+              >
+                Transaction History
               </ListItemText>
             </MenuItem>
-            <MenuItem onClick={() => push("/wallet/help")}>
+            <MenuItem
+              className="px-6 py-3"
+              onClick={() => push("/wallet/help")}
+            >
               <ListItemIcon>
                 <SvgIcon
+                  fontSize="inherit"
                   className="text-primary-700"
                   inheritViewBox
                   component={AiOutlineQuestionCircle}
                 />
               </ListItemIcon>
-              <ListItemText>
-                <Typography
-                  variant="h6"
-                  className="text-primary-700 futura font-normal"
-                >
-                  Help
-                </Typography>
+              <ListItemText
+                primaryTypographyProps={{
+                  className:
+                    "text-primary-700 futura font-normal leading-normal",
+                }}
+              >
+                Help
               </ListItemText>
             </MenuItem>
           </Menu>
           <Chip
+            title="$20,000"
             sx={{ "& .MuiChip-icon": { color: "#7953B5" } }}
-            className="py-6 hidden md:flex text-primary-700 futura font-medium text-lg px-2 md:px-4 lg:px-8 rounded-md bg-primary-50/50"
-            icon={
-              <SvgIcon color="primary" component={IoMdWallet} inheritViewBox />
-            }
+            className="py-6 hidden md:flex text-primary-700 futura font-medium text-lg px-2 md:px-4  rounded-md bg-primary-50/50"
+            icon={<SvgIcon color="primary" component={wallet} inheritViewBox />}
             label="Balance:$20,000"
           />
         </div>
         <Divider className="mt-6 mb-4 hidden md:block" />
         <List className="md:mb-6 hidden md:flex flex-col">
-          <ListItemButton onClick={() => push("/wallet")}>
+          <ListItemButton
+            selected={route === "/wallet/withdraw"}
+            onClick={() => push("/wallet/withdraw")}
+          >
             <ListItemIcon
               sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
             >
               <SvgIcon
+                fontSize="small"
                 className="text-primary-700"
                 component={RiDownloadLine}
                 inheritViewBox
@@ -157,11 +196,36 @@ const WalletCart = () => {
               Withdraw
             </ListItemText>
           </ListItemButton>
-          <ListItemButton onClick={() => push("/wallet/transaction-history")}>
+          <ListItemButton
+            selected={route === "/wallet/deposit"}
+            onClick={() => push("/wallet/withdraw")}
+          >
             <ListItemIcon
               sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
             >
               <SvgIcon
+                fontSize="small"
+                className="text-primary-700"
+                component={deposit}
+                inheritViewBox
+              />
+            </ListItemIcon>
+            <ListItemText
+              sx={{ "& .MuiTypography-root": { fontFamily: "futura" } }}
+              className="text-primary-700"
+            >
+              Deposit
+            </ListItemText>
+          </ListItemButton>
+          <ListItemButton
+            selected={route === "/wallet/transaction-history"}
+            onClick={() => push("/wallet/transaction-history")}
+          >
+            <ListItemIcon
+              sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
+            >
+              <SvgIcon
+                fontSize="small"
                 className="text-primary-700"
                 component={TbArrowsSort}
                 inheritViewBox
@@ -174,11 +238,15 @@ const WalletCart = () => {
               Transaction History
             </ListItemText>
           </ListItemButton>
-          <ListItemButton onClick={() => push("/wallet/help")}>
+          <ListItemButton
+            selected={route === "/wallet/help"}
+            onClick={() => push("/wallet/help")}
+          >
             <ListItemIcon
               sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
             >
               <SvgIcon
+                fontSize="small"
                 className="text-primary-700"
                 component={AiOutlineQuestionCircle}
                 inheritViewBox

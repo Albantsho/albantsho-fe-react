@@ -16,10 +16,10 @@ const WithdrawSuccessful: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Withdraw Successful </title>
       </Head>
-      <div className="bg-white rounded-md px-3 sm:px-6 py-6 md:px-10 md:py-9 lg:px-14 lg:py-14 flex-1 w-full">
+      <div className="bg-white rounded-md px-5 sm:px-6  md:px-10 py-9 lg:px-14 lg:py-14 flex-1 w-full max-w-screen-2xl">
         <Typography
           variant="h4"
-          className="text-primary-700 futura font-medium"
+          className="text-primary-700 futura font-medium leading-normal mb-2 md:mb-3"
         >
           Withdraw
         </Typography>
@@ -33,20 +33,20 @@ const WithdrawSuccessful: NextPageWithLayout = () => {
         </div>
 
         <Typography
-          variant="h6"
-          className="mt-3 sm:mt-6 md:mt-10 text-center mx-auto futura font-medium text-primary-700"
+          variant="h5"
+          className="mt-3 sm:mt-6 md:mt-10 text-center leading-normal mx-auto futura font-medium text-primary-700"
         >
           Successful Withdrawal
         </Typography>
         <Typography
-          variant="h6"
-          className="sm:mt-3 text-center mx-auto futura font-medium text-primary-700"
+          variant="h5"
+          className="mt-3 text-center leading-normal mx-auto futura font-medium text-primary-700"
         >
           Transaction ID: 1234567890AVGED
         </Typography>
         <Typography
           variant="body1"
-          className="sm:mt-5 text-center mx-auto max-w-[357px] md:max-w-[501px]"
+          className="mt-5 text-center mx-auto max-w-[357px] md:max-w-[501px]"
         >
           Please note that your withdrawal includes charges and may take up to
           24 hours before arriving in your account. Thanks for trusting

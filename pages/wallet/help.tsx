@@ -12,10 +12,10 @@ const Help: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Help </title>
       </Head>
-      <div className="bg-white rounded-md px-3 sm:px-6 py-6 md:px-10 md:py-9 lg:px-14 lg:py-14 flex-1 w-full">
+      <div className="bg-white rounded-md px-5 sm:px-6 md:px-10 py-9 lg:px-14 lg:py-14 flex-1 w-full">
         <Typography
           variant="h4"
-          className="text-primary-700 futura font-medium"
+          className="text-primary-700 futura font-medium leading-normal mb-2 md:mb-3"
         >
           Withdraw
         </Typography>
@@ -25,11 +25,13 @@ const Help: NextPageWithLayout = () => {
         </Typography>
         <Divider className="my-5 md:mb-12" />
         <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-8 lg:mb-12">
-          <label
-            htmlFor="contact-us"
-            className="futura font-medium text-neutral-800"
-          >
-            Contact Us
+          <label htmlFor="contact-us">
+            <Typography
+              variant="body1"
+              className="futura font-medium text-neutral-800"
+            >
+              Contact Us
+            </Typography>
           </label>
           <CustomInput
             sx={{ maxWidth: "628px" }}
@@ -45,11 +47,11 @@ const Help: NextPageWithLayout = () => {
         <Divider className="my-3 sm:my-5 md:my-8 lg:my-12" />
         <Typography
           variant="h4"
-          className="text-primary-700 futura font-medium"
+          className="text-primary-700 futura font-medium md:mb-4"
         >
           FAQs
         </Typography>
-        <div className="-mx-5 sm:-mx-10">
+        <div className="-mx-5 sm:-mx-10 lg:mr-auto xl:-ml-12">
           <Questions />
         </div>
       </div>

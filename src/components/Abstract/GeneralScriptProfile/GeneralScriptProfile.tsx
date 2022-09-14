@@ -216,7 +216,7 @@ const GeneralScriptProfile = () => {
               {...params}
               variant="outlined"
               sx={{
-                "& .MuiInputBase-root": { py: "12px !important" },
+                "& .MuiInputBase-root": { py: "10px !important" },
                 "& .MuiFormHelperText-root": {
                   mx: 0,
                   color: "#5D5FEF",

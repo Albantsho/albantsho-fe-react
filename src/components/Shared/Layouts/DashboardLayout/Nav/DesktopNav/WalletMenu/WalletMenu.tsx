@@ -11,6 +11,7 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { IoIosMore } from "react-icons/io";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
+import deposit from "@assets/icons/deposit.svg";
 import wallet from "@assets/icons/wallet.svg";
 import { useState } from "react";
 
@@ -91,6 +92,26 @@ const WalletMenu = () => {
             }}
           >
             Withdraw
+          </ListItemText>
+        </MenuItem>
+        <MenuItem
+          className="px-6 py-3"
+          onClick={() => push("/wallet/withdraw")}
+        >
+          <ListItemIcon>
+            <SvgIcon
+              fontSize="inherit"
+              className="text-primary-700"
+              inheritViewBox
+              component={deposit}
+            />
+          </ListItemIcon>
+          <ListItemText
+            primaryTypographyProps={{
+              className: "text-primary-700 futura font-normal leading-normal",
+            }}
+          >
+            Deposit
           </ListItemText>
         </MenuItem>
         <MenuItem

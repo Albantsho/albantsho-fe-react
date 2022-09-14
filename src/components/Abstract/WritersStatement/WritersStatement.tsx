@@ -104,7 +104,7 @@ const WritersStatement = () => {
             variant="body1"
             className="futura font-medium text-primary-700"
           >
-            Inspiration for Story*<span className="text-error-700">*</span>
+            Inspiration for Story<span className="text-error-700">*</span>
           </Typography>
         </label>
         <CustomInput

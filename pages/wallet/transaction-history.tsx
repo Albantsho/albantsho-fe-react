@@ -28,17 +28,16 @@ const TransactionHistory: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Transaction History </title>
       </Head>
-      <div className="bg-white rounded-md px-3 sm:px-6 py-6 md:px-10 md:py-9 lg:px-14 lg:py-14 flex-1 w-full">
+      <div className="bg-white rounded-md px-5 sm:px-6  md:px-10 py-9 lg:px-14 lg:py-14 flex-1 w-full">
         <Typography
           variant="h4"
-          className="text-primary-700 futura font-medium"
+          className="text-primary-700 futura font-medium leading-normal mb-2 md:mb-3"
         >
           Transaction History
         </Typography>
         <Typography variant="body1" className="text-neutral-800 max-w-lg">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vulputate
-          scelerisque nulla eget tincidunt venenatis convallis massa nisi,
-          egestas.
+          Below are your most recently approved transactions. To resolve any
+          challenges, please contact us via our “Contact us” page” thank you.
         </Typography>
         <Divider className="mt-5" />
         <div className="grid">
@@ -46,21 +45,27 @@ const TransactionHistory: NextPageWithLayout = () => {
             <Table>
               <TableHead>
                 <TableRow className="border-b border-gray-200">
-                  <TableCell className="w-full">
-                    <Typography variant="body1" className="futura font-medium">
+                  <TableCell className="w-full lg:py-5 xl:py-7">
+                    <Typography
+                      variant="h6"
+                      className="futura font-medium text-neutral-800"
+                    >
                       Transaction ID
                     </Typography>
                   </TableCell>
                   <TableCell>
                     <Typography
-                      variant="body1"
-                      className="lg:mr-20 futura font-medium w-20"
+                      variant="h6"
+                      className="lg:mr-20 futura font-medium text-neutral-800 w-20"
                     >
                       Price
                     </Typography>
                   </TableCell>
-                  <TableCell>
-                    <Typography variant="body1" className="futura font-medium">
+                  <TableCell className="pl-10">
+                    <Typography
+                      variant="h6"
+                      className="futura font-medium text-neutral-800"
+                    >
                       Date
                     </Typography>
                   </TableCell>
@@ -69,21 +74,27 @@ const TransactionHistory: NextPageWithLayout = () => {
               <TableBody>
                 {transactionList.map((transaction) => (
                   <TableRow key={transaction.id}>
-                    <TableCell className="w-full">
-                      <Typography className="text-primary-700 futura font-medium">
+                    <TableCell className="w-full  pr-10 lg:py-8 xl:py-16">
+                      <Typography
+                        variant="h6"
+                        className="text-primary-700 futura font-medium"
+                      >
                         {transaction.TransactionID}
                       </Typography>
                     </TableCell>
                     <TableCell>
                       <Typography
-                        variant="body1"
+                        variant="h6"
                         className="font-semibold text-primary-700"
                       >
                         $ {transaction.price}
                       </Typography>
                     </TableCell>
-                    <TableCell>
-                      <Typography className="font-medium text-primary-700">
+                    <TableCell className="pl-10">
+                      <Typography
+                        variant="h6"
+                        className="font-medium text-primary-700"
+                      >
                         {transaction.date}
                       </Typography>
                     </TableCell>
