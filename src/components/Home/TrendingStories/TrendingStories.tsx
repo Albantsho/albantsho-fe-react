@@ -1,5 +1,6 @@
-import { Box, Typography } from "@mui/material";
-import ScriptCard from "@shared/ScriptCard/ScriptCard";
+import { Typography } from "@mui/material";
+import Image from "next/image";
+import TrendingStoriesPreview from "./assets/preview.png";
 
 const TrendingStories = () => {
   return (
@@ -15,7 +16,19 @@ const TrendingStories = () => {
       >
         Albantsho Story Base
       </Typography>
-      <Box
+      <div className="flex justify-center relative rounded-3xl overflow-hidden">
+        <Image src={TrendingStoriesPreview} alt="Story base preview" />
+        <div className="absolute inset-0 bg-black/80 grid place-content-center text-center">
+          <Typography
+            variant="display"
+            color="secondary"
+            className="leading-none"
+          >
+            Coming Soon
+          </Typography>
+        </div>
+      </div>
+      {/* <Box
         className="grid gap-3 md:gap-12"
         gridTemplateColumns={{
           sm: "repeat(auto-fill, minmax(300px, auto))",
@@ -36,7 +49,7 @@ const TrendingStories = () => {
             }}
           />
         ))}
-      </Box>
+      </Box> */}
     </section>
   );
 };
