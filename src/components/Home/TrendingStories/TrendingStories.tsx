@@ -7,9 +7,9 @@ const TrendingStories = () => {
     <section
       id="trending-stories"
       className="px-5 sm:px-10 max-w-screen-2xl mx-auto mt-12 md:mt-28 mb-12 md:mb-32"
+      data-aos="fade-up"
     >
       <Typography
-        data-aos="fade-down"
         variant="h4"
         className="grotesk text-center mb-4 md:mb-8 leading-normal"
         color="primary.main"
