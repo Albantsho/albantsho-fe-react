@@ -37,7 +37,7 @@ const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
       expanded={expanded}
       onChange={() => setExpanded(!expanded)}
       sx={{ "&:before": { display: "none" } }}
-      className="shadow-sm mb-4 md:mb-5 rounded-md"
+      className="shadow-primary mb-4 md:mb-5 rounded-md"
     >
       <AccordionSummary
         sx={{
@@ -51,7 +51,7 @@ const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
             gap: { xs: 1, sm: 2 },
           },
         }}
-        className="rounded-lg px-4  sm:px-6  py-4"
+        className="rounded-lg px-4 sm:px-6 py-4"
       >
         <div className="flex flex-col  sm:flex-row flex-1    gap-x-4 gap-y-3 sm:gap-y-0 xl:pr-20">
           <div className="flex justify-center w-[72px] h-[72px] items-center self-start  bg-tinted-100/60 rounded-md">
@@ -90,7 +90,7 @@ const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
           />
         </div>
       </AccordionSummary>
-      <AccordionDetails className=" rounded-md pt-3 md:pt-5 bg-primary-dark/95">
+      <AccordionDetails className="rounded-md pt-3 md:pt-5 bg-primary-dark/95">
         <div className="flex  pt-4 justify-center gap-5 sm:justify-start md:pb-5 md:pt-7 sm:gap-6 md:gap-8 flex-wrap md:px-4 lg:px-6 xl:px-12">
           {buttonsProjects.map((button) => {
             return (

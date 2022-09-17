@@ -15,7 +15,7 @@ const StoryLine = () => {
 
       <Typography
         variant="body1"
-        className="text-neutral-700 mb-6 lg:mb-10 max-w-[290px] md:max-w-full"
+        className="text-neutral-700 mb-6 lg:mb-10"
       >
         What if the 'line' was a kaleidoscope'?
       </Typography>
@@ -42,10 +42,10 @@ const StoryLine = () => {
             },
           }}
           helperText={
-            <div className="flex items-center gap-2">
+            <span className="flex items-center gap-2">
               <AiFillInfoCircle className="text-xl" />
               What’s a tagline?
-            </div>
+            </span>
           }
         />
       </div>
@@ -72,10 +72,10 @@ const StoryLine = () => {
             },
           }}
           helperText={
-            <div className="flex items-center gap-2">
+            <span className="flex items-center gap-2">
               <AiFillInfoCircle className="text-xl" />
               See sample logline that works
-            </div>
+            </span>
           }
         />
       </div>
@@ -103,10 +103,10 @@ const StoryLine = () => {
             },
           }}
           helperText={
-            <div className="flex items-center gap-2">
+            <span className="flex items-center gap-2">
               <AiFillInfoCircle className="text-xl" />
               Write a synopsis that slaps
-            </div>
+            </span>
           }
         />
       </div>

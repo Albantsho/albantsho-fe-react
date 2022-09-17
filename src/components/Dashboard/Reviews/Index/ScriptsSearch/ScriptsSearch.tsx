@@ -63,6 +63,7 @@ const ScriptsSearch = () => {
           getOptionLabel={(option) => option.title}
           renderOption={(props, option) => (
             <ListItem
+            disablePadding
               key={option.title}
               {...props}
               className={` px-2 sm:px-4 md:px-6`}

@@ -25,8 +25,8 @@ const Projects: NextPageWithLayout = () => {
       <div>
         <TabButtons />
         <SearchDashboard setOpenCreateScript={setOpenCreateScript} />
-        {(!query.type || query.type === "scripts") && <ProjectAccordionList />}
-        {query.type === "archives" && (
+        {(!query.tab || query.tab === "scripts") && <ProjectAccordionList />}
+        {query.tab === "archives" && (
           <>
             <ListScriptsPage setOpenModalUnArchive={setOpenModalUnArchive} />
             <ModalArchive

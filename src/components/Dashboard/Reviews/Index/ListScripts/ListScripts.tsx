@@ -48,7 +48,7 @@ const listScripts = [
 
 const ListScripts = () => {
   return (
-    <Paper elevation={0} className="mt-4 bg-white mb-16">
+    <Paper elevation={0} className="mt-4 bg-white mb-16 shadow-primary">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
         <Typography
           variant="h6"

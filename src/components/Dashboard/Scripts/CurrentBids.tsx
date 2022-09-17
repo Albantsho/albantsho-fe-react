@@ -56,10 +56,10 @@ const CurrentBidsArray = [
 
 const CurrentBids = () => {
   return (
-    <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-sm  py-5 xl:py-8 flex flex-col mb-16">
+    <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-primary py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
-          <TableCell className="flex-1 md:max-w-[380px] xl:max-w-[465px] 2xl:mr-3  pl-5 sm:pl-10  xl:pl-16 xl:pb-8 pb-5 pt-0">
+          <TableCell className="flex-1 md:max-w-[380px] xl:max-w-[465px] pl-5 sm:pl-10  xl:pl-16 xl:pb-8 pb-5 pt-0">
             <Typography
               variant="h6"
               className="text-primary-700 font-medium futura"
@@ -67,7 +67,7 @@ const CurrentBids = () => {
               Script
             </Typography>
           </TableCell>
-          <TableCell className=" md:flex-[0.55]    hidden md:flex lg:hidden xl:flex  pb-5 pt-0">
+          <TableCell className=" md:flex-[0.55] hidden md:flex lg:hidden xl:flex  pb-5 pt-0">
             <Typography
               variant="h6"
               className="text-primary-700 font-medium futura"
@@ -108,7 +108,7 @@ const CurrentBids = () => {
                   alt={bid.title}
                 />
                 <Chip
-                  className="bg-secondary-50 font-xs font-semibold sm:hidden text-secondary-700"
+                  className="bg-success-50 font-xs font-semibold sm:hidden text-success-500"
                   label={`Current Bid : $${bid.CurrentBid}`}
                 />
               </div>
@@ -157,7 +157,7 @@ const CurrentBids = () => {
               className="hidden sm:flex md:min-w-[160px] lg:w-full gap-3 flex-col items-center md:justify-center sm:py-6 xl:py-10"
             >
               <Chip
-                className="bg-secondary-50 font-xs font-semibold md:hidden lg:flex lg:ml-auto xl:hidden text-secondary-700"
+                className="bg-success-50 font-xs font-semibold md:hidden lg:flex lg:ml-auto xl:hidden text-success-500"
                 label={`Current Bid : $${bid.CurrentBid}`}
               />
               <Button

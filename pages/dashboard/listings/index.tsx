@@ -32,7 +32,7 @@ const Listings: NextPageWithLayout = () => {
         openCreateScript={openCreateScript}
         setOpenCreateScript={setOpenCreateScript}
       />
-      {(!query.type || query.type === "opening-list") && (
+      {(!query.tab || query.tab === "opening-list") && (
         <>
           <OpeningLists setOpenUnListingItem={setOpenUnListingItem} />
           <UnListingItemModal
@@ -41,7 +41,7 @@ const Listings: NextPageWithLayout = () => {
           />
         </>
       )}
-      {query.type === "drafts" && (
+      {query.tab === "drafts" && (
         <>
           <DraftsList
             setOpenAddToScript={setOpenAddToScript}
@@ -57,7 +57,7 @@ const Listings: NextPageWithLayout = () => {
           />
         </>
       )}
-      {query.type === "closed-list" && <ClosedList />}
+      {query.tab === "closed-list" && <ClosedList />}
       <Fab
         onClick={() => setOpenCreateScript(true)}
         color="primary"

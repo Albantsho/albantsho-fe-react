@@ -42,7 +42,7 @@ const WalletCart = () => {
   return (
     <Card
       elevation={0}
-      className="px-1 rounded-lg md:min-w-[248px] shadow-md mx-auto h-fit md:flex-[0.6] !max-w-[295px] md:max-w-fit  max-auto py-3 md:py-0 md:pt-6"
+      className="px-1 rounded-lg md:min-w-[248px] shadow-primary mx-auto h-fit md:flex-[0.6] !max-w-[295px] md:max-w-fit  max-auto py-3 md:py-0 md:pt-6"
     >
       <CardContent>
         <div className="flex lg:px-5 flex-col items-center gap-2">

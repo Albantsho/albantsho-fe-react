@@ -3,31 +3,37 @@ import Btn from "@shared/Btn/Btn";
 
 const SummaryReviews = () => {
   return (
-    <div className="pb-9 lg:pb-16 bg-white rounded-md px-5 sm:px-10 xl:px-20">
+    <div className="pb-9 lg:pb-16 bg-white rounded-md px-5">
       <Divider />
-      <div className="mt-7 lg:mt-12 rounded-md  lg:px-10 xl:px-14  lg:py-9  xl:py-12 lg:shadow-md  max-w-3xl">
+      <div className="mt-7 lg:mt-12 rounded-md mx-auto lg:px-10   lg:py-9  xl:py-12 lg:shadow-secondary  max-w-3xl">
         <Typography
           variant="h4"
           color="primary.700"
-          className="mb-3 futura font-medium leading-normal text-[#7B61FF] lg:mb-6"
+          className="mb-3 futura font-medium text-[#7B61FF] lg:mb-6"
         >
           Type A Review
         </Typography>
-        <div className="flex flex-wrap max-w-[380px] mb-2 lg:mb-5 lg:max-w-max lg:items-center gap-x-5 gap-y-3 sm:gap-y-1">
-          <Typography variant="h5" color="primary.700" className="futura font-medium" >
-            The Apple and The Berry
-          </Typography>
-          <Chip
-            label="Feature film"
-            className="rounded bg-tinted-50/60 text-neutral-800 lg:mr-5 md:px-4 md:py-5"
-          />
+        <div className="flex flex-col  md:flex-row lg:flex-col xl:flex-row mb-2 lg:mb-5 lg:max-w-max  gap-x-2 xl:gap-x-4 gap-y-4">
+          <div className="flex items-center gap-x-4 gap-y-2 flex-wrap">
+            <Typography
+              variant="h5"
+              color="primary.700"
+              className="futura font-medium leading-normal"
+            >
+              The Apple and The Berry
+            </Typography>
+            <Chip
+              label="Feature film"
+              className="rounded bg-tinted-50/60 text-neutral-800 lg:mr-5 md:px-4 md:py-5"
+            />
+          </div>
           <Divider
-            className="hidden lg:block lg:mr-5"
+            className="hidden md:block md:mx-4 xl:mx-7 2xl:mx-9 lg:hidden xl:block"
             orientation="vertical"
             flexItem
           />
           <div>
-            <span className="font-semibold" >Review Fee:</span> <br />
+            <span className="font-semibold">Review Fee:</span> <br />
             <div className="flex gap-1 items-center">
               <Typography
                 color="primary.700"

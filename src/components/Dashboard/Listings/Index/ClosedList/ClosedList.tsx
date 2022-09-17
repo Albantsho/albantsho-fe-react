@@ -55,10 +55,10 @@ const closedList = [
 
 const ClosedList = () => {
   return (
-    <Table className=" mt-4 sm:mt-6 bg-white rounded-md shadow-sm  py-5 xl:py-8 flex flex-col mb-16">
+    <Table className=" mt-4 sm:mt-6 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
-          <TableCell className="flex-1 sm:max-w-[370px] sm:min-w-[370px] md:min-w-[470px] md:max-w-[470px] lg:min-w-[370px] lg:max-w-[370px] xl:max-w-[500px] xl:min-w-[500px] pl-5 pt-0 xl:pb-8 pb-5  sm:pl-6 lg:pl-10 xl:pl-16 ">
+          <TableCell className="flex-1 sm:max-w-[360px] sm:min-w-[360px] md:min-w-[460px] md:max-w-[460px] lg:min-w-[360px] lg:max-w-[360px] xl:max-w-[500px] xl:min-w-[500px] pl-5 pt-0 xl:pb-8 pb-5  sm:pl-6 lg:pl-10 xl:pl-16 ">
             <Typography
               variant="h6"
               className="text-primary-700 futura font-medium"
@@ -66,7 +66,8 @@ const ClosedList = () => {
               Script
             </Typography>
           </TableCell>
-          <TableCell className="hidden sm:flex flex-[0.5] pt-0 xl:pb-8 pb-5">
+          <TableCell
+          className="hidden sm:flex flex-[0.6]  pt-0 xl:pb-8 pb-5">
             <Typography
               variant="h6"
               className="text-primary-700 futura font-medium"
@@ -74,7 +75,7 @@ const ClosedList = () => {
               Price
             </Typography>
           </TableCell>
-          <TableCell className="hidden sm:flex pr-2 sm:pr-8 lg:pr-12 pt-0 xl:pb-8 pb-5 xl:flex-[0.3] xl:pr-20 justify-end">
+          <TableCell className="hidden sm:flex pr-2 sm:pr-8 lg:pr-8 pt-0 xl:pb-8 pb-5 xl:flex-[0.3] xl:pr-20 justify-end">
             <Typography
               variant="h6"
               className="text-primary-700 futura font-medium "
@@ -109,12 +110,12 @@ const ClosedList = () => {
                 />
                 <div className="flex flex-col gap-2">
                   <Chip
-                    label={`$${listItem.price}`}
+                    label={`Price: $${listItem.price}`}
                     className="text-success-500 bg-success-50 sm:hidden"
                   />
                   <Chip
-                    label={` 01/02/22`}
-                    className="text-secondary-500 bg-secondary-50 sm:hidden"
+                    label={`Date: 01/02/22`}
+                    className="text-primary-700 bg-primary-50/50 sm:hidden"
                   />
                 </div>
               </div>
@@ -139,7 +140,7 @@ const ClosedList = () => {
               className="hidden sm:flex sm:w-full lg:flex-[0.3] md:gap-4 items-center xl:justify-between"
             >
               <Typography
-                variant="h6"
+                variant="body1"
                 className="rounded-md bg-inherit sm:min-w-[70px] lg:min-w-[85px] text-primary-500 font-semibold"
               >{`$ ${listItem.price}`}</Typography>
             </TableCell>
@@ -152,7 +153,7 @@ const ClosedList = () => {
               className="hidden sm:flex items-center xl:flex-[0.2] lg:w-full 2xl:flex-[0.4] justify-end"
             >
               <Typography
-                variant="h6"
+                variant="body1"
                 className=" text-neutral-700 font-medium"
               >
                 01/02/22

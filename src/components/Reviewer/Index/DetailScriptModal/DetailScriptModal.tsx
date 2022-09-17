@@ -26,7 +26,7 @@ const DetailScriptModal = ({
 
   return (
     <Modal
-      className="px-5 md:hidden"
+      className="px-5 lg:hidden"
       disableAutoFocus={true}
       open={openDetailScript}
       onClose={handleCloseUnArchive}

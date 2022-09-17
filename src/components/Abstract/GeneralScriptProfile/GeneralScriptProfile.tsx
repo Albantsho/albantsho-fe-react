@@ -34,7 +34,7 @@ const GeneralScriptProfile = () => {
       </Typography>
       <Typography
         variant="body1"
-        className="text-neutral-700 mb-6 lg:mb-10 max-w-[290px] md:max-w-full"
+        className="text-neutral-700 mb-6 lg:mb-10"
       >
         If it can be written, it can be filmed.
       </Typography>
@@ -124,10 +124,10 @@ const GeneralScriptProfile = () => {
             },
           }}
           helperText={
-            <div className="flex items-center gap-2">
+            <span className="flex items-center gap-2">
               <AiFillInfoCircle className="text-xl" />
               note: ways to create killer titles
-            </div>
+            </span>
           }
         />
       </div>
@@ -223,10 +223,10 @@ const GeneralScriptProfile = () => {
                 },
               }}
               helperText={
-                <div className="flex items-center gap-2">
+                <span className="flex items-center gap-2">
                   <AiFillInfoCircle className="text-xl" />
                   Understanding screenplay themes
-                </div>
+                </span>
               }
             />
           )}

@@ -26,13 +26,16 @@ const FilterScriptsSelect = () => {
 
   return (
     <div className="my-4 md:mt-20 md:mb-6">
-      <FormControl sx={{ width: { xs: "200px", md: "215px" } }}>
+      <FormControl
+        className="shadow-primary"
+        sx={{ width: { xs: "200px", md: "215px" } }}
+      >
         <Select
           defaultValue="AllScripts"
           value={statusSelectInput}
           onChange={handleChangeStatusSelectInput}
           sx={{
-            "&.MuiInputBase-root": { backgroundColor: "white"},
+            "&.MuiInputBase-root": { backgroundColor: "white" },
             "& .MuiSelect-select": { py: "12px" },
             "& .MuiOutlinedInput-notchedOutline": { border: "none" },
             "& .MuiSvgIcon-root": {

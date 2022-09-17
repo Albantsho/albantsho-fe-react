@@ -51,15 +51,15 @@ const ListTasks = () => {
   };
 
   return (
-    <div className="flex flex-col flex-1 mb-16">
+    <div className="flex flex-col flex-1 mb-16 shadow-primary">
       <Tabs
         value={activeLinkIndex}
         onChange={activeLinkChange}
         className="bg-white rounded-md"
         sx={{
           "& .MuiTabs-indicator": {
-            borderBottom: { sx: "2px solid #7953B5", md: "4px solid #7953B5" },
-            mb: { md: "-1px" },
+            borderBottom: { sx: "2px solid #7953B5", lg: "4px solid #7953B5" },
+            mb: { lg: "-1px" },
           },
         }}
       >

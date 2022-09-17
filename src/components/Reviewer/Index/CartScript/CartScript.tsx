@@ -15,7 +15,7 @@ const CartScript = () => {
   return (
     <Card
       elevation={0}
-      className="h-fit hidden md:block  pt-7 pb-3 flex-[0.7]  xl:flex-[0.55] max-w-2xl"
+      className="h-fit hidden lg:block shadow-primary  pt-7 pb-3 flex-[0.7]  xl:flex-[0.55] max-w-2xl"
     >
       <CardActions className="px-5 py-0 space-x-3 lg:space-x-6">
         <Button disableElevation className="py-[10px] px-4" variant="contained">

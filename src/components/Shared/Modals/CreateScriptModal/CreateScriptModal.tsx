@@ -38,17 +38,17 @@ const CreateScriptModal = ({
             variant="outlined"
             size="small"
             sx={{
-              "& .MuiOutlinedInput-input": { py: 1.3 },
+              "& .MuiOutlinedInput-input": { py: 2 },
               "& .MuiFormHelperText-root": {
                 mx: 0,
                 color: "#5D5FEF",
               },
             }}
             helperText={
-              <div className="flex items-center gap-2">
+              <span className="flex items-center gap-2">
                 <AiFillInfoCircle className="text-xl" />
                 note: ways to create killer titles
-              </div>
+              </span>
             }
           />
         </div>
@@ -63,7 +63,7 @@ const CreateScriptModal = ({
             variant="outlined"
             size="small"
             sx={{
-              "& .MuiOutlinedInput-input": { py: 1.3 },
+              "& .MuiOutlinedInput-input": { py: 2 },
               "& .MuiFormHelperText-root": {
                 mx: 0,
                 color: "#5D5FEF",

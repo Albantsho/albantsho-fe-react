@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import routes from "routes/routes";
 
 const routesArray = [
-  { route: "?type=scripts", label: "Scripts" },
-  { route: "?type=archives", label: "Archive" },
+  { route: "?tab=scripts", label: "Scripts" },
+  { route: "?tab=archives", label: "Archive" },
 ];
 
 const TabButtons = () => {
@@ -17,7 +17,7 @@ const TabButtons = () => {
   };
 
   useEffect(() => {
-    !query.type || query.type === "scripts"
+    !query.tab || query.tab === "scripts"
       ? setActiveLinkIndex(0)
       : setActiveLinkIndex(1);
   }, [query]);
@@ -26,11 +26,11 @@ const TabButtons = () => {
     <Tabs
       value={activeLinkIndex}
       onChange={activeLinkChange}
-      className="bg-white rounded-md"
+      className="bg-white rounded-md shadow-primary"
       sx={{
         "& .MuiTabs-indicator": {
-          borderBottom: { sx: "2px solid #7953B5", md: "4px solid #7953B5" },
-          mb: { md: "-1px" },
+          borderBottom: { sx: "2px solid #7953B5", lg: "4px solid #7953B5" },
+          mb: { lg: "-1px" },
         },
       }}
     >

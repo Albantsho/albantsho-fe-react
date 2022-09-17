@@ -3,7 +3,6 @@ import {
   Chip,
   Divider,
   Paper,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
@@ -60,7 +59,7 @@ interface IProps {
 
 const UnlistedList = ({ setOpenRelistScript }: IProps) => {
   return (
-    <Paper elevation={0} className="mt-4 sm:mt-6 bg-white">
+    <Paper elevation={0} className="mt-4 sm:mt-6 bg-white shadow-primary">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
         <Typography
           variant="h6"
@@ -71,34 +70,26 @@ const UnlistedList = ({ setOpenRelistScript }: IProps) => {
 
         <Typography
           variant="h6"
-          className="futura hidden sm:min-w-[100px] sm:block self-start md:self-center md:mx-auto xl:mr-auto xl:ml-0  sm:mr-3 md:text-center lg:text-start lg:mr-6 font-medium text-primary-700"
+          className="futura hidden  md:block lg:hidden xl:block self-start md:self-center md:mx-auto xl:mr-auto xl:ml-0  sm:mr-3 md:text-center  font-medium text-primary-700"
         >
-        Script Type
+          Script Type
         </Typography>
         <Typography></Typography>
       </div>
       <div className="px-5 xl:px-14">
-        {UnlistedItems.map((script,index) => (
+        {UnlistedItems.map((script, index) => (
           <React.Fragment key={script.id}>
             <div className="flex py-6 items-center sm:justify-between xl:justify-start">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-14 lg:max-w-[445px] ">
-                <div className="flex gap-3 items-end sm:items-start">
-                  <Image
-                    width="64"
-                    height="64"
-                    className="rounded-md flex-shrink-0"
-                    loading="lazy"
-                    src={script.image}
-                    alt={script.title}
-                  />
+                <Image
+                  width="64"
+                  height="64"
+                  className="rounded-md flex-shrink-0"
+                  loading="lazy"
+                  src={script.image}
+                  alt={script.title}
+                />
 
-                  <Tooltip title="Progress">
-                    <Chip
-                      label={script.scriptType}
-                      className="sm:hidden rounded-md bg-tinted-100/80 text-neutral-800 w-fit"
-                    />
-                  </Tooltip>
-                </div>
                 <div className="flex-grow sm:max-w-[271px] min-w-[170px] ">
                   <Typography
                     variant="body1"
@@ -130,12 +121,7 @@ const UnlistedList = ({ setOpenRelistScript }: IProps) => {
                   />
                 </div>
               </div>
-              <div className="sm:min-w-[116px] justify-end xl:py-10 sm:pr-0 items-center hidden flex-col gap-2 sm:flex xl:ml-auto">
-                <Chip
-                  label={script.scriptType}
-                  className=" py-5 px-4 w-full md:hidden lg:flex xl:hidden min-w-[138px] rounded-md bg-tinted-100/80 text-neutral-800"
-                />
-
+              <div className="sm:min-w-[116px] justify-end xl:py-10 sm:pr-0 items-center hidden sm:flex xl:ml-auto">
                 <Button
                   onClick={() => setOpenRelistScript(true)}
                   variant="text"
@@ -150,7 +136,9 @@ const UnlistedList = ({ setOpenRelistScript }: IProps) => {
                 </Button>
               </div>
             </div>
-            {index < UnlistedItems.length - 1 &&<Divider className="hidden sm:flex" />}
+            {index < UnlistedItems.length - 1 && (
+              <Divider className="hidden sm:flex" />
+            )}
           </React.Fragment>
         ))}
       </div>

@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const plugin = require("tailwindcss/plugin");
 
@@ -78,6 +77,10 @@ module.exports = {
           700: "#D32D2D",
           900: "#830F0F",
         },
+      },
+      boxShadow: {
+        primary: "1px 2px 15px 1px rgba(0, 0, 0, 0.05)",
+        secondary: "3px 2px 15px 2px rgba(0, 0, 0, 0.07)",
       },
     },
   },

@@ -43,9 +43,9 @@ const ListPlans = () => {
             maxWidth: { xs: 400 },
             width: "100%",
           }}
-          className="shadow-md shadow-slate-300  px-5 self-center md:self-start lg:self-center xl:self-start py-10 h-fit mb-10"
+          className="shadow-secondary  px-5 self-center md:self-start lg:self-center xl:self-start py-10 h-fit mb-10"
         >
-          <CardContent className="px-0">
+          <CardContent className="px-0 py-0">
             <Typography
               variant="h6"
               className="futura font-medium text-xl text-[#8873F3]"
@@ -81,7 +81,7 @@ const ListPlans = () => {
               );
             })}
           </CardContent>
-          <CardActions>
+          <CardActions className="mt-7" >
             <Btn size="large" className="py-2 w-full text-center">
               Proceed to pay
             </Btn>
@@ -93,9 +93,9 @@ const ListPlans = () => {
             maxWidth: { xs: 400 },
             width: "100%",
           }}
-          className="shadow-md shadow-slate-300 px-4 sm:px-6 py-10  mb-10"
+          className="shadow-secondary px-4 sm:px-6 py-10  mb-10"
         >
-          <CardContent className="px-0">
+          <CardContent className="px-0 py-0">
             <Typography
               variant="h6"
               className="futura font-medium text-xl text-[#FFAF19]"
@@ -131,7 +131,7 @@ const ListPlans = () => {
               );
             })}
           </CardContent>
-          <CardActions>
+          <CardActions className="mt-7">
             <Btn size="large" className="py-2 w-full text-center">
               Proceed to pay
             </Btn>

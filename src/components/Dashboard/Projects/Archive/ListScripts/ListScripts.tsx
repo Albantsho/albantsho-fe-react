@@ -62,7 +62,7 @@ interface IProps {
 const ListScripts = ({ setOpenModalUnArchive }: IProps) => {
   const handleOpenUnArchive = () => setOpenModalUnArchive(true);
   return (
-    <Table className="mt-4 bg-white rounded-md shadow-sm  py-5 xl:py-8 flex flex-col mb-16">
+    <Table className="mt-4 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
           <TableCell className="flex-1 pl-7  xl:pl-16  xl:max-w-xl  md:pr-0 pt-0 xl:pb-8 pb-5">
@@ -105,18 +105,22 @@ const ListScripts = ({ setOpenModalUnArchive }: IProps) => {
           >
             <TableCell
               scope="script"
-              className="flex flex-1 py-4 pl-0  sm:py-6 xl:py-10 items-center xl:max-w-lg flex-wrap sm:flex-nowrap gap-4 sm:gap-8"
+              className="flex flex-1 py-4 pl-0 flex-col sm:flex-row  sm:py-6 xl:py-10 items-start sm:items-center xl:max-w-lg gap-4 sm:gap-8"
             >
-              <div className="flex flex-1 flex-wrap sm:flex-nowrap sm:gap-4">
-                <div className="flex-shrink-0 mt-1">
+              <div className="flex flex-col sm:flex-row sm:gap-4">
+                <div className="mt-1">
                   <Image
+                    width={64}
+                    height={64}
+                    layout="fixed"
                     className="rounded-md "
                     loading="lazy"
                     src={script.image}
                     alt={script.title}
                   />
                 </div>
-                <div className="flex-grow max-w-[360px]  min-w-[170px]">
+
+                <div className="flex-grow sm:max-w-[360px]">
                   <Typography
                     variant="body1"
                     className="futura font-semibold text-primary-700"
@@ -146,7 +150,6 @@ const ListScripts = ({ setOpenModalUnArchive }: IProps) => {
               sx={{
                 "&.MuiTableCell-root": {
                   px: { xs: 0 },
-                 
                 },
               }}
               className="hidden py-4  sm:py-6 xl:py-10 md:flex lg:hidden xl:flex flex-[0.55] items-center"

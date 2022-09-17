@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import routes from "routes/routes";
 
 const routesArray = [
-  { route: "?type=opening-list", label: "Open Listings" },
-  { route: "?type=drafts", label: "Drafts" },
-  { route: "?type=closed-list", label: "Closed Listings" },
+  { route: "?tab=opening-list", label: "Open Listings" },
+  { route: "?tab=drafts", label: "Drafts" },
+  { route: "?tab=closed-list", label: "Closed Listings" },
 ];
 
 const TabButtons = () => {
@@ -17,9 +17,9 @@ const TabButtons = () => {
   };
 
   useEffect(() => {
-    if (!query.type || query.type === "opening-list") setActiveLink(0);
-    if (query.type === "drafts") setActiveLink(1);
-    if (query.type === "closed-list") setActiveLink(2);
+    if (!query.tab || query.tab === "opening-list") setActiveLink(0);
+    if (query.tab === "drafts") setActiveLink(1);
+    if (query.tab === "closed-list") setActiveLink(2);
   }, [query]);
 
   return (
@@ -27,11 +27,11 @@ const TabButtons = () => {
       value={activeLink}
       variant="scrollable"
       onChange={handleChange}
-      className="bg-white rounded-md"
+      className="bg-white rounded-md shadow-primary"
       sx={{
         "& .MuiTabs-indicator": {
-          borderBottom: { sx: "2px solid #7953B5", md: "4px solid #7953B5" },
-          mb: { md: "-1px" },
+          borderBottom: { sx: "2px solid #7953B5", lg: "4px solid #7953B5" },
+          mb: { lg: "-1px" },
         },
       }}
     >
@@ -45,7 +45,7 @@ const TabButtons = () => {
               minWidth: "20px",
             },
             marginRight: { md: 1 },
-            px: { md: 6 },
+            px: { xs: 1.5, md: 6 },
           }}
           className={`text-gray-600 futura text-lg 2xl:text-xl font-medium`}
           label={item.label}

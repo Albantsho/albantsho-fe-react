@@ -13,7 +13,11 @@ const Heading = ({ showSearchScript }: IProps) => {
   const [openSearchScript, setOpenSearchScript] = useState<boolean>(false);
 
   return (
-    <div className="bg-white rounded-md px-5 md:px-8 lg:px-10 xl:px-14 py-9 lg:py-16 mt-4">
+    <div
+      className={`${
+        showSearchScript && "shadow-primary"
+      } bg-white rounded-md px-5 md:px-8 lg:px-10 xl:px-14 py-9 lg:py-16 mt-4`}
+    >
       <div className="flex flex-col items-center sm:flex-row gap-3 sm:gap-6 max-w-[640px] mx-auto lg:gap-8 ">
         <div className="flex-shrink-[0.5] mx-auto sm:mx-0">
           <Image src={award} alt="award" />

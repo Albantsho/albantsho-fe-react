@@ -33,7 +33,12 @@ export default function MyApp(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <NextProgress delay={100} color="#7953B5" options={{ showSpinner: false }} />
+        <NextProgress
+          delay={100}
+          color="#FDD038"
+          height="3px"
+          options={{ showSpinner: false }}
+        />
         {getLayout(<Component {...pageProps} />)}
       </ThemeProvider>
     </CacheProvider>

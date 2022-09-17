@@ -18,7 +18,7 @@ interface IProps {
 const BidsPage = ({ setOpenAcceptOffer }: IProps) => {
   return (
     <>
-      <div className="bg-white shadow-md mt-4 py-4 sm:py-8 lg:py-12 xl:py-16 px-5 sm:px-8 lg:px-8 xl:px-20 rounded-md">
+      <div className="bg-white shadow-primary my-4 md:my-6 py-4 sm:py-8 lg:py-12 xl:py-16 px-5 sm:px-8 lg:px-8 xl:px-20 rounded-md">
         <Typography
           variant="h4"
           color="primary.700"
@@ -28,21 +28,27 @@ const BidsPage = ({ setOpenAcceptOffer }: IProps) => {
         </Typography>
 
         <div className="pt-4 sm:pt-8 lg:pt-12 xl:pt-16">
-          <div className="lg:pb-6 flex flex-wrap items-center lg:flex-nowrap gap-x-5 gap-y-2 ">
-            <Typography
-              variant="h6"
-              color="primary.700"
-              className=" futura font-medium leading-normal"
-            >
-              The Long Man Of Long Beach
-              <SvgIcon inheritViewBox className="-mb-[6px]  ml-4 md:ml-6" component={ReviewedIcon} />
-            </Typography>
-            <Chip
-              label="Feature film"
-              className="rounded bg-tinted-50/60 py-2 xl:py-5 xl:px-2 text-neutral-800 lg:mr-1"
-            />
+          <div className="lg:pb-6 flex flex-col md:flex-row lg:flex-col xl:flex-row md:items-center lg:items-start xl:items-center  gap-x-5 gap-y-2 ">
+            <div className="flex flex-wrap gap-x-4 gap-y-2" >
+              <Typography
+                variant="h6"
+                color="primary.700"
+                className=" futura font-medium leading-normal"
+              >
+                The Long Man Of Long Beach
+                <SvgIcon
+                  inheritViewBox
+                  className="-mb-[6px]  ml-2 sm:ml-4 md:ml-6"
+                  component={ReviewedIcon}
+                />
+              </Typography>
+              <Chip
+                label="Feature film"
+                className="rounded bg-tinted-50/60 py-2 xl:py-5 xl:px-2 text-neutral-800 lg:mr-1"
+              />
+            </div>
             <Divider
-              className="hidden md:block mx-2 xl:mx-5 2xl:mx-10"
+              className="hidden md:block lg:hidden xl:flex xl:mx-2 2xl:mx-10"
               orientation="vertical"
               flexItem
             />
@@ -51,11 +57,11 @@ const BidsPage = ({ setOpenAcceptOffer }: IProps) => {
                 Base Fee:
               </Typography>
               <br />
-              <div className="flex gap-1 items-center flex-wrap sm:min-w-[200px] md:min-w-full">
+              <div className="flex gap-1 items-center">
                 <Typography
                   color="primary.700"
                   className="leading-normal font-semibold"
-                  variant="h5"
+                  variant="h4"
                 >
                   $100
                 </Typography>
@@ -65,7 +71,7 @@ const BidsPage = ({ setOpenAcceptOffer }: IProps) => {
               </div>
             </div>
           </div>
-          <Divider className="my-5 md:my-7 xl:my-10 2xl:my-12" />
+          <Divider className="my-5 md:my-7 lg:my-4 xl:my-6" />
           <div className="lg:pt-6 md:flex ">
             <div className="mb-4 md:mb-0  space-y-2 lg:space-y-4 xl:space-y-10 2xl:space-y-12">
               <Typography variant="h6" className="text-neutral-700 font-normal">

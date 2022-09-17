@@ -11,7 +11,7 @@ interface IProps {
 const DraftsList = ({ setOpenRelistScript, setOpenAddToScript }: IProps) => {
   return (
     <div className="my-8">
-      <div className="bg-white p-3 inline-block rounded-md">
+      <div className="bg-white p-3 inline-block rounded-md shadow-primary">
         <Typography
           variant="h6"
           color="primary.700"
@@ -21,7 +21,7 @@ const DraftsList = ({ setOpenRelistScript, setOpenAddToScript }: IProps) => {
         </Typography>
       </div>
       <UncompletedList setOpenAddToScript={setOpenAddToScript} />
-      <div className="bg-white p-3 inline-block rounded-md mt-10 px-6">
+      <div className="bg-white p-3 inline-block rounded-md mt-10 px-6 shadow-primary">
         <Typography
           variant="h6"
           color="primary.700"

@@ -10,7 +10,7 @@ const Plans: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Reviews Plans </title>
       </Head>
-      <div className="bg-white mt-2   sm:mt-4 lg:mt-12">
+      <div className="bg-white mt-2 shadow-primary sm:mt-4 lg:mt-12">
         <Heading />
         <ListPlans />
       </div>

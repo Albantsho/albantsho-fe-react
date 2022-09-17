@@ -22,7 +22,7 @@ const PersonalWithdrawalDetails = () => {
         Withdrawal Details
       </Typography>
       <Divider />
-      <div className="flex flex-col md:mt-8 py-8 gap-3 gap-y-8 md:items-start  md:flex-row md:gap-x-20">
+      <div className="flex flex-col md:mt-8 pt-8 gap-3 gap-y-8 md:items-start  md:flex-row md:gap-x-20">
         <div className="w-[102px] h-[102px] md:w-44 md:h-44 bg-purple-100 flex justify-center items-center mx-auto rounded-full">
           <div className="w-14 h-14 md:w-24 md:h-24">
             <Image src={bank} alt="withdrawal details" />
@@ -149,7 +149,7 @@ const PersonalWithdrawalDetails = () => {
               size="small"
             />
           </div>
-          <Btn className="mt-2 xl:mt-5 py-3 px-6 mr-auto md:mr-0 md:ml-auto">
+          <Btn className="mt-2 xl:mt-8 py-3 px-6 mr-auto md:mr-0 md:ml-auto">
             Save and Update
           </Btn>
         </div>

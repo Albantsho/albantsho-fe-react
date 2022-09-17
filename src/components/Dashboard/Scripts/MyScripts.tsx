@@ -50,10 +50,10 @@ const MyScriptsArray = [
 
 const MyScripts = () => {
   return (
-    <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-sm   py-5 xl:py-8 flex flex-col mb-16">
+    <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
-          <TableCell className="flex-1 pl-5 sm:pl-9 xl:pb-8 pb-5 pt-0 xl:pl-16">
+          <TableCell className="flex-1 pl-5 sm:pl-10 xl:pb-8 pb-5 pt-0 xl:pl-16">
             <Typography
               variant="h6"
               className="text-primary-700 font-medium futura"

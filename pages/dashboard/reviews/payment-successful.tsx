@@ -14,7 +14,7 @@ const PaymentSuccessful: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Payment Successful </title>
       </Head>
-      <div className="py-24 md:py-32 px-5 md:px-16 mt-5 text-center rounded-md mx-auto bg-white">
+      <div className="py-24 md:py-32 px-5 md:px-16 mt-5 shadow-primary text-center rounded-md mx-auto bg-white">
         <div className="mb-3 sm:mb-4 lg:mb-8 xl:mb-10">
           <Image src={success} alt="success" />
         </div>
@@ -28,7 +28,7 @@ const PaymentSuccessful: NextPageWithLayout = () => {
         <Typography
           variant="h5"
           color="primary.700"
-          className="futura font-medium mb-1 sm:mb-3"
+          className="futura font-medium sm:mb-3 leading-normal mb-2"
         >
           Transaction ID: 1234567890AVGED
         </Typography>

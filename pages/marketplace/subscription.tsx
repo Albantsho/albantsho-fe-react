@@ -47,7 +47,7 @@ const Subscription = () => {
         <Card
           elevation={10}
           sx={{ maxWidth: { xs: 388, md: 478 } }}
-          className="bg-white shadow-md shadow-slate-300 px-8 py-10 mx-auto  mb-10 lg:mb-28"
+          className="bg-white rounded-lg shadow-primary px-8 py-10 mx-auto  mb-10 lg:mb-28"
         >
           <CardContent>
             <Typography

@@ -20,7 +20,7 @@ const ListTask = ({
       onClick={() => {
         setOpenDetailScript(true);
       }}
-      className="flex flex-1 cursor-pointer md:cursor-auto items-center hover:bg-[#FBF9FF] flex-wrap sm:flex-nowrap gap-y-2 gap-x-2 py-5 sm:py-6 lg:py-9 px-5 sm:px-6 lg:px-12"
+      className="flex flex-1 cursor-pointer  items-center hover:bg-primary-50/40 flex-wrap sm:flex-nowrap gap-y-2 gap-x-2 py-5 sm:py-6 lg:py-9 px-5 sm:px-6 lg:px-12"
     >
       <div className="flex-shrink-0 -mb-2">
         <Image className="rounded-md" loading="lazy" src={image} alt={title} />
