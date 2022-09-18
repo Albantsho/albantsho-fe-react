@@ -11,7 +11,6 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -32,7 +31,7 @@ interface IProps {
 }
 
 const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
-  const { query } = useRouter();
+  const { query,push } = useRouter();
 
   const handleOpenAcceptOfferModal = (
     event: React.PointerEvent<HTMLButtonElement>
@@ -77,70 +76,67 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
           </TableHead>
           <TableBody>
             {auctions.map((auction) => (
-              <Link
+              <TableRow
                 key={auction.id}
-                href={`${routes.listingsDashboard}/${query.scriptSlug}/bids`}
-                
+                onClick={() =>
+                  push(`${routes.listingsDashboard}/${query.scriptSlug}/bids`)
+                }
+                sx={{
+                  "&:nth-of-type(odd)": {
+                    backgroundColor: "#FBF9FF",
+                  },
+                  "&:nth-of-type(event)": {
+                    backgroundColor: "#FFF",
+                  },
+                  " td, th": {
+                    border: 0,
+                  },
+                }}
+                className="cursor-pointer hover:bg-primary-50/40 duration-200"
               >
-                <TableRow
-                  sx={{
-                    "&:nth-of-type(odd)": {
-                      backgroundColor: "#FBF9FF",
-                    },
-                    "&:nth-of-type(event)": {
-                      backgroundColor: "#FFF",
-                    },
-                    " td, th": {
-                      border: 0,
-                    },
-                  }}
-                  key={auction.id}
-                  className="cursor-pointer hover:bg-primary-50/40 duration-200"
-                >
-                  <TableCell className="w-40 lg:py-6">
-                    <Typography
-                      variant="h6"
-                      className="font-normal text-neutral-700"
-                    >
-                      {auction.name}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center" className="w-20">
-                    <Typography
-                      variant="h6"
-                      className="text-primary-700 font-semibold"
-                    >
-                      $ {auction.price}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex justify-end min-w-[240px]">
-                      <ButtonGroup className="border-none md:gap-8">
-                        <Button
-                          onClick={handleOpenAcceptOfferModal}
-                          className="hidden sm:flex border-none hover:border-none font-semibold text-success-500"
-                        >
-                          Accept Offer
-                        </Button>
-                        <Button className="hidden sm:flex border-none hover:border-none font-semibold text-secondary-700">
-                          Decline
-                        </Button>
-                      </ButtonGroup>
-                      <ButtonGroup className="gap-16">
-                        <IconButton
-                          onClick={handleOpenAcceptOfferModal}
-                          className="flex sm:hidden text-success-500"
-                        >
-                          <MdDone />
-                        </IconButton>
-                        <IconButton className="flex sm:hidden text-secondary-700">
-                          <AiOutlineClose />
-                        </IconButton>
-                      </ButtonGroup>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              </Link>
+                <TableCell className="w-40 lg:py-6">
+                  <Typography
+                    variant="h6"
+                    className="font-normal text-neutral-700"
+                  >
+                    {auction.name}
+                  </Typography>
+                </TableCell>
+                <TableCell align="center" className="w-20">
+                  <Typography
+                    variant="h6"
+                    className="text-primary-700 font-semibold"
+                  >
+                    $ {auction.price}
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <div className="flex justify-end min-w-[240px]">
+                    <ButtonGroup className="border-none md:gap-8">
+                      <Button
+                        onClick={handleOpenAcceptOfferModal}
+                        className="hidden sm:flex border-none hover:border-none font-semibold text-success-500"
+                      >
+                        Accept Offer
+                      </Button>
+                      <Button className="hidden sm:flex border-none hover:border-none font-semibold text-secondary-700">
+                        Decline
+                      </Button>
+                    </ButtonGroup>
+                    <ButtonGroup className="gap-16">
+                      <IconButton
+                        onClick={handleOpenAcceptOfferModal}
+                        className="flex sm:hidden text-success-500"
+                      >
+                        <MdDone />
+                      </IconButton>
+                      <IconButton className="flex sm:hidden text-secondary-700">
+                        <AiOutlineClose />
+                      </IconButton>
+                    </ButtonGroup>
+                  </div>
+                </TableCell>
+              </TableRow>
             ))}
           </TableBody>
         </Table>

@@ -177,21 +177,26 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                     horizontal: "center",
                   }}
                 >
-                  <Link href={`${routes.listingsOneScript(script.title)}`}>
-                    <MenuItem
-                      sx={{
-                        "&:hover": {
-                          color: "#9A7EC7",
-                          backgroundColor: "#F7F5F8",
-                        },
-                        fontSize: "14px",
-                        px: "25px",
-                        py: 2,
-                      }}
-                      onClick={handleClose}
-                    >
-                      View Script
-                    </MenuItem>
+                  <Link
+                    href={`${routes.listingsOneScript(script.title)}`}
+                    passHref
+                  >
+                    <a className="text-inherit" >
+                      <MenuItem
+                        sx={{
+                          "&:hover": {
+                            color: "#9A7EC7",
+                            backgroundColor: "#F7F5F8",
+                          },
+                          fontSize: "14px",
+                          px: "25px",
+                          py: 2,
+                        }}
+                        onClick={handleClose}
+                      >
+                        View Script
+                      </MenuItem>
+                    </a>
                   </Link>
                   <MenuItem
                     sx={{

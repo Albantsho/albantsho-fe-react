@@ -43,7 +43,7 @@ const Heading = () => {
           Story about a man who lived on long beach
         </Typography>
 
-        <div className="hidden md:block mt-4">
+        <div className="mt-4">
           <Typography variant="caption" className="text-tinted-500">
             Base Fee:
           </Typography>

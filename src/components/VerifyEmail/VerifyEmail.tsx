@@ -53,7 +53,7 @@ const VerifyEmail = () => {
           </Typography>
 
           <Typography className=" mb-6 futura">
-            <Link href="#">
+            <Link href="#" passHref>
               <a className="text-[#5D5FEF]">Resend code</a>
             </Link>
           </Typography>
@@ -71,7 +71,7 @@ const VerifyEmail = () => {
         <div className="text-center tlg:hidden mt-7">
           <Typography className="text-grey-400 leading-5 font-medium mb-1 futura">
             Already have an account?
-            <Link href={`${routes.signin}`}>
+            <Link href={`${routes.signin}`} passHref>
               <a className="text-success-500 ml-2">Sign in</a>
             </Link>
           </Typography>

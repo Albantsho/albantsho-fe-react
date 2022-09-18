@@ -11,7 +11,7 @@ const Summary: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Summary </title>
       </Head>
-      <div className="bg-white shadow-primary rounded-md mb-16  px-3 sm:px-5">
+      <div className="bg-white shadow-primary rounded-md mb-16">
         <Heading />
         <SummaryReviews />
       </div>

@@ -14,7 +14,7 @@ const NavbarAuthentication = ({ text, link, buttonText }: IProps) => {
       <Logo color="primary" />
       <div className="gap-4 flex items-center">
         <Typography variant="body1" className="font-normal text-gray-400">{text}</Typography>
-        <Link href={`/${link}`}   passHref>
+        <Link href={`/${link}`} passHref>
           <Button variant="outlined" size="large">
             {buttonText}
           </Button>
