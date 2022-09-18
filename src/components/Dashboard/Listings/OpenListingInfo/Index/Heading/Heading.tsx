@@ -55,7 +55,7 @@ const Heading = () => {
             >
               $4,000
             </Typography>
-            <Typography variant="body1" className="text-neutral-500">
+            <Typography variant="body1" color="primary">
               (1.237 ETH)
             </Typography>
           </div>
