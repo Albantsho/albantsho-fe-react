@@ -51,7 +51,7 @@ const Help: NextPageWithLayout = () => {
         >
           FAQs
         </Typography>
-        <div className="-mx-5 sm:-mx-10 lg:mr-auto xl:-ml-12">
+        <div className="-mx-5 sm:-mx-10 lg:mr-auto xl:-ml-14">
           <Questions />
         </div>
       </div>

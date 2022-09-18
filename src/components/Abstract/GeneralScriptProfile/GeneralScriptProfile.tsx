@@ -17,10 +17,14 @@ const genresFilms = [
 const GeneralScriptProfile = () => {
   const [statusScriptFormat, setStatusScriptFormat] = useState("Documentary");
   const [statusStoryFormat, setStatusStoryFormat] = useState("HighConcept");
-  const handleChangeScriptFormat = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChangeScriptFormat = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     setStatusScriptFormat(event.target.value);
   };
-  const handleChangeStoryFormat = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChangeStoryFormat = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     setStatusStoryFormat(event.target.value);
   };
   return (
@@ -32,10 +36,7 @@ const GeneralScriptProfile = () => {
       >
         General Script Profile
       </Typography>
-      <Typography
-        variant="body1"
-        className="text-neutral-700 mb-6 lg:mb-10"
-      >
+      <Typography variant="body1" className="text-neutral-700 mb-6 lg:mb-10">
         If it can be written, it can be filmed.
       </Typography>
 
@@ -50,6 +51,7 @@ const GeneralScriptProfile = () => {
             </Typography>
           </label>
           <CustomInput
+
             select
             fullWidth
             size="small"
@@ -197,7 +199,7 @@ const GeneralScriptProfile = () => {
             variant="body1"
             className="futura font-medium text-primary-700"
           >
-           Themes<span className="text-error-500 my-auto">*</span>
+            Themes<span className="text-error-500 my-auto">*</span>
           </Typography>
         </label>
         <Autocomplete

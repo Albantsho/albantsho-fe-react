@@ -4,7 +4,7 @@ import Btn from "@shared/Btn/Btn";
 const SummaryReviews = () => {
   return (
     <div className="pb-9 lg:pb-16 bg-white rounded-md px-5">
-      <Divider />
+      <Divider className="lg:mx-5 2xl:mx-20" />
       <div className="mt-7 lg:mt-12 rounded-md mx-auto lg:px-10   lg:py-9  xl:py-12 lg:shadow-secondary  max-w-3xl">
         <Typography
           variant="h4"

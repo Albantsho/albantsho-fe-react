@@ -38,7 +38,7 @@ const TabButtons = () => {
       {routesArray.map((item) => (
         <Tab
           key={item.label}
-          onClick={() => push(`${routes.listingsDashboard}/${item.route}`)}
+          onClick={() => push(`${routes.listingsDashboardTabs(item.route)}`)}
           sx={{
             "&.MuiButtonBase-root": {
               flexGrow: { xs: 1, md: 0 },

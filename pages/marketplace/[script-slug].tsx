@@ -3,7 +3,7 @@ import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import MainDetailsMarketScript from "components/Marketplace/MarketScriptPage/Accordionbig/MainDetailsPageMarketScript";
 import MarketScriptAccordion from "components/Marketplace/MarketScriptPage/AccordionInfo/MarketScriptAccordion";
 import MarketScriptChips from "components/Marketplace/MarketScriptPage/MarketScriptChips/MarketScriptChips";
-import RateToScript from "components/Marketplace/MarketScriptPage/RatesToScript/RateToScript";
+import RateToScript from "components/Marketplace/MarketScriptPage/RateToScript/RateToScript";
 import ScriptInfo from "components/Marketplace/MarketScriptPage/ScriptInfo/ScriptInfo";
 import Head from "next/head";
 

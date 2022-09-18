@@ -177,7 +177,7 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                     horizontal: "center",
                   }}
                 >
-                  <Link href={`${routes.listingsDashboard}/${script.id}`}>
+                  <Link href={`${routes.listingsOneScript(script.title)}`}>
                     <MenuItem
                       sx={{
                         "&:hover": {
@@ -213,7 +213,9 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                 </Menu>
               </div>
             </div>
-           {script.id < listScripts.length  &&<Divider className="hidden sm:flex" /> } 
+            {script.id < listScripts.length && (
+              <Divider className="hidden sm:flex" />
+            )}
           </React.Fragment>
         ))}
       </div>

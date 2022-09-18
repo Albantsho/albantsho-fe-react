@@ -61,7 +61,7 @@ const BidsPage = ({ setOpenAcceptOffer }: IProps) => {
                 <Typography
                   color="primary.700"
                   className="leading-normal font-semibold"
-                  variant="h4"
+                  variant="h5"
                 >
                   $100
                 </Typography>
@@ -73,20 +73,20 @@ const BidsPage = ({ setOpenAcceptOffer }: IProps) => {
           </div>
           <Divider className="my-5 md:my-7 lg:my-4 xl:my-6" />
           <div className="lg:pt-6 md:flex ">
-            <div className="mb-4 md:mb-0  space-y-2 lg:space-y-4 xl:space-y-10 2xl:space-y-12">
+            <div className="mb-4 md:mb-0  space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12">
               <Typography variant="h6" className="text-neutral-700 font-normal">
                 <span className="font-semibold text-primary-700">Talan</span>{" "}
                 has placed a bid for your script
               </Typography>
               <Typography
-                variant="h5"
+                variant="h3"
                 color="primary.700"
-                className="font-semibold"
+                className="font-semibold leading-normal"
               >
                 @$6,000
               </Typography>
             </div>
-            <ButtonGroup className="border-none items-stretch md:items-end  md:-ml-24 gap-x-2 md:gap-x-8 xl:gap-x-12">
+            <ButtonGroup className="border-none items-stretch md:items-end md:pb-2  md:-ml-24 gap-x-2 md:gap-x-8 xl:gap-x-12">
               <Button
                 onClick={() => setOpenAcceptOffer(true)}
                 sx={{ "&.MuiButtonBase-root": { fontWeight: 600 } }}
