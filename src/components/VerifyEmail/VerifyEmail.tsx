@@ -12,9 +12,9 @@ const VerifyEmail = () => {
       <div className="lg:py-32 grid place-content-center mx-auto">
         <div className="flex items-center lg:flex-col">
           <Typography
-            variant="h5"
+            variant="h3"
             color="primary.main"
-            className="futura lg:order-2 font-medium  mr-5"
+            className="futura lg:order-2 font-medium leading-normal mr-5"
             mb={1}
           >
             Verify your email
@@ -23,7 +23,7 @@ const VerifyEmail = () => {
             <Image src={bell} alt="bell" />
           </div>
         </div>
-        <Typography className="max-w-[420px] lg:text-center lg:mx-auto">
+        <Typography className="max-w-[420px] lg:text-center lg:mx-auto mt-1">
           Hi Jane, kindly input the 6 digit code that was sent to your mail to
           verify your email address.
         </Typography>

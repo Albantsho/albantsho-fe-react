@@ -10,20 +10,20 @@ import routes from "routes/routes";
 const ForgetPassword = () => {
   return (
     <div className="lg:py-28 px-8 py-12 lg:px-24  flex-1 flex justify-center flex-col lg:items-center">
-      <div className="flex lg:flex-col lg:gap-10 items-center">
+      <div className="flex lg:flex-col mb-2  lg:gap-10 items-center">
         <Typography
-          variant="h4"
+          variant="h3"
           color="primary.main"
-          className="futura lg:order-2 font-medium leading-10 mr-5"
+          className="futura lg:order-2 font-medium leading-none mr-5"
           mb={1}
         >
           Trouble Logging in?
         </Typography>
-        <div className="w-16 h-full lg:w-36 lg:h-20 lg:order-1">
+        <div className="flex-shrink-0 w-16 h-full lg:w-36 lg:h-20 lg:order-1">
           <Image src={forget} alt="forget" />
         </div>
       </div>
-      <Typography className="mt-2 lg:mt-3 lg:text-center  max-w-[430px]  text-[#484848]">
+      <Typography variant="body1" className="mt-2 lg:mt-3 lg:text-center  max-w-[430px]  text-[#484848]">
         Enter your email and we’ll send you a link to help you get back into
         your account
       </Typography>

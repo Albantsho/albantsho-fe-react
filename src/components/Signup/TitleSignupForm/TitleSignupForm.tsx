@@ -14,7 +14,7 @@ const TitleSignupForm = () => {
       </Typography>
       <Typography
         color="grey.700"
-        variant="body2"
+        variant="body1"
         className="leading-6 md:max-w-[430px]"
       >
         Let’s get you all set up so you can start writing and trading script on

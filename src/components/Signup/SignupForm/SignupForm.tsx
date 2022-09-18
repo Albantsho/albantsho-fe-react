@@ -119,6 +119,7 @@ const SignupForm = () => {
           variant="outlined"
           size="medium"
           className="text-purple-700"
+          sx={{ "& .MuiSvgIcon-root": { color: "#7953B5" } }}
         />
       </div>
 
@@ -137,10 +138,9 @@ const SignupForm = () => {
           variant="outlined"
           size="medium"
           className="text-purple-700"
+          sx={{ "& .MuiSvgIcon-root": { color: "#7953B5" } }}
         >
-          <MenuItem sx={{ marginBottom: 2 }} value="Writer">
-            I’m a writer
-          </MenuItem>
+          <MenuItem value="Writer">I’m a writer</MenuItem>
           <MenuItem value="Producer">I’m a producer</MenuItem>
         </CustomInput>
       </div>
@@ -195,7 +195,7 @@ const SignupForm = () => {
               />
             }
             label={
-              <Typography className="text-grey-600  futura">
+              <Typography variant="body1" className="text-grey-600  futura">
                 I accept the
                 <Link href={`${routes.termsAndCondition}`}>
                   <a className="text-warning-500 ml-1">Terms & conditions</a>

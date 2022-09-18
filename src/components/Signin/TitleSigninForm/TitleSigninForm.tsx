@@ -10,7 +10,7 @@ const TitleSigninForm = () => {
       >
         Welcome
       </Typography>
-      <Typography className="max-w-[430px]" color="grey.700">
+      <Typography variant="body1" className="max-w-[430px]" color="grey.700">
         It’s nice to have you back, Sign back in to write or find the perfect
         script for you.
       </Typography>

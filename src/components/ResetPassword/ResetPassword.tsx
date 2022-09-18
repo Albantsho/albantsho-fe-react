@@ -12,13 +12,12 @@ const ResetPassword = () => {
       <Typography
         variant="h3"
         color="primary.main"
-        className="futura font-medium leading-normal"
-        mb={1}
+        className="futura font-medium leading-none mb-3"
       >
         Create New Password
       </Typography>
       <Typography
-        variant="body2"
+        variant="body1"
         className="text-[#484848] lg:text-primary-main lg:text-center md:max-w-[430px]"
       >
         Your new password must be different from all other previously used
