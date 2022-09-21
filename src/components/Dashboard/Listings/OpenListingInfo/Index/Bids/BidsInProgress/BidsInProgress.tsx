@@ -12,12 +12,10 @@ const BidsInProgress = () => {
           Buyer has 24hours to make the payment for your script
         </Typography>
       </div>
-      <div className="my-8  mx-auto w-[100px] md:hidden">
-        <CircularStatic isSmall />
+      <div className="my-8 md:my-16  mx-auto w-[100px] md:w-[200px]">
+        <CircularStatic  />
       </div>
-      <div className="md:my-16 hidden mx-auto w-[200px] md:block">
-        <CircularStatic />
-      </div>
+
     </div>
   );
 };

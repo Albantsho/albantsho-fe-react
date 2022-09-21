@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material";
-import React from "react";
 
-const TitleSignupForm = () => {
+const TitleRegisterForm = () => {
   return (
     <div className="lg:mt-28 px-8 mt-16 lg:px-24  mx-auto">
       <Typography
@@ -24,4 +23,4 @@ const TitleSignupForm = () => {
   );
 };
 
-export default TitleSignupForm;
+export default TitleRegisterForm;

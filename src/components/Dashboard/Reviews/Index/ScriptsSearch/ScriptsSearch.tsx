@@ -1,7 +1,6 @@
 import { AiOutlineSearch } from "react-icons/ai";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
-
 import {
   Autocomplete,
   createFilterOptions,
@@ -40,7 +39,6 @@ const ScriptsSearch = () => {
   const [selectedStore, setSelectedStory] = useState<MoviesOptionType | null>(
     null
   );
-  console.log(selectedStore);
 
   return (
     <div className="w-full mt-8 lg:mt-16 space-y-8 mx-auto  md:max-w-[640px]">
@@ -56,14 +54,15 @@ const ScriptsSearch = () => {
             "& .MuiOutlinedInput-notchedOutline": { borderRadius: "12px" },
           }}
           value={selectedStore}
-          onChange={(value: any, newValue: MoviesOptionType | null) =>
-            setSelectedStory(newValue)
-          }
+          onChange={(value, newValue: MoviesOptionType | null): void => {
+            console.log(value);
+            setSelectedStory(newValue);
+          }}
           options={moviesList}
           getOptionLabel={(option) => option.title}
           renderOption={(props, option) => (
             <ListItem
-            disablePadding
+              disablePadding
               key={option.title}
               {...props}
               className={` px-2 sm:px-4 md:px-6`}

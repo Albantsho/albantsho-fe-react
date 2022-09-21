@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-const TitleSigninForm = () => {
+const TitleLoginForm = () => {
   return (
     <div className="lg:mt-28 mt-16 px-8  lg:mb-12  lg:px-24  mx-auto">
       <Typography
@@ -18,4 +18,4 @@ const TitleSigninForm = () => {
   );
 };
 
-export default TitleSigninForm;
+export default TitleLoginForm;

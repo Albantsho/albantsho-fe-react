@@ -8,7 +8,7 @@ const Heading = () => {
       <Typography variant="body1">Entry Type: Type A</Typography>
       <Typography
         variant="body1"
-        className="mb-8 lg:mb-16"
+        className="mb-16"
       >{`Start date: {{dd/mm/yyyy/}}`}</Typography>
 
       <Typography

@@ -6,8 +6,10 @@ import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Image from "next/image";
 import routes from "routes/routes";
+import useForgetPassword from "./useForgetPassword";
 
 const ForgetPassword = () => {
+  const { register, handleSubmit, onSubmit } = useForgetPassword();
   return (
     <div className="lg:py-28 px-8 py-12 lg:px-24  flex-1 flex justify-center flex-col lg:items-center">
       <div className="flex lg:flex-col mb-2  lg:gap-10 items-center">
@@ -23,47 +25,53 @@ const ForgetPassword = () => {
           <Image src={forget} alt="forget" />
         </div>
       </div>
-      <Typography variant="body1" className="mt-2 lg:mt-3 lg:text-center  max-w-[430px]  text-[#484848]">
+      <Typography
+        variant="body1"
+        className="mt-2 lg:mt-3 lg:text-center  max-w-[430px]  text-[#484848]"
+      >
         Enter your email and we’ll send you a link to help you get back into
         your account
       </Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="w-full mt-6 flex flex-col">
+          <Typography
+            variant="h6"
+            htmlFor="email"
+            component="label"
+            className="text-purple-700 leading-5 font-medium mb-2 futura"
+          >
+            Email address
+          </Typography>
+          <CustomInput
+            {...register("email")}
+            id="email"
+            variant="outlined"
+            size="medium"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SvgIcon
+                    fontSize="small"
+                    component={iconEmail}
+                    inheritViewBox
+                  />
+                </InputAdornment>
+              ),
+            }}
+            placeholder="Email"
+          />
+        </div>
 
-      <div className="w-full mt-6 flex flex-col">
-        <Typography
-          variant="h6"
-          htmlFor="email"
-          component="label"
-          className="text-purple-700 leading-5 font-medium mb-2 futura"
-        >
-          Email address
-        </Typography>
-        <CustomInput
-          id="email"
-          variant="outlined"
-          size="medium"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SvgIcon
-                  fontSize="small"
-                  component={iconEmail}
-                  inheritViewBox
-                />
-              </InputAdornment>
-            ),
-          }}
-          placeholder="Email"
-        />
-      </div>
-
-      <div className="justify-center lg:justify-start flex mt-6 lg:mt-12">
-        <Btn
-          size="large"
-          className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"
-        >
-          Send Link
-        </Btn>
-      </div>
+        <div className="justify-center lg:justify-start flex mt-6 lg:mt-12">
+          <Btn
+            type="submit"
+            size="large"
+            className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"
+          >
+            Send Link
+          </Btn>
+        </div>
+      </form>
 
       <div className="text-center lg:hidden mt-4">
         <Typography className="text-grey-400 mb-1 futura">

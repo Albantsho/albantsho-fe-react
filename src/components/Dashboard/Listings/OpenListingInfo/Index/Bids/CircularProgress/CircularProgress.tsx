@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import CircularProgress, {
   type CircularProgressProps,
 } from "@mui/material/CircularProgress";
-import { Typography } from "@mui/material";
+import { Typography, useMediaQuery, useTheme } from "@mui/material";
 
 function CircularProgressFunction(props: CircularProgressProps) {
   return (
@@ -29,11 +29,12 @@ function CircularProgressFunction(props: CircularProgressProps) {
     </Box>
   );
 }
-interface IProps {
-  isSmall?: boolean;
-}
 
-export default function CustomizedProgressBars({ isSmall }: IProps) {
+
+export default function CustomizedProgressBars() {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <Box
       sx={{
@@ -42,7 +43,7 @@ export default function CustomizedProgressBars({ isSmall }: IProps) {
         display: "inline-block",
       }}
     >
-      <CircularProgressFunction size={isSmall ? 89 : 169} value={24} />
+      <CircularProgressFunction size={matches ? 169 : 89} value={24} />
       <Box
         sx={{
           top: 0,

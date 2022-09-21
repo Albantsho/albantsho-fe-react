@@ -24,7 +24,7 @@ const Preview = () => {
           openSuccessReview={openSuccessReview}
           setOpenSuccessReview={setOpenSuccessReview}
         />
-        <div className="bg-white shadow-primary rounded-lg  pt-6 sm:pt-10 lg:pt-20 flex flex-col items-center max-w-5xl mx-auto px-5">
+        <div className="bg-white shadow-primary rounded-lg  pt-10 lg:pt-20 flex flex-col items-center max-w-5xl mx-auto px-5">
           <Heading />
           <Description setOpenSendReview={setOpenSendReview} />
         </div>

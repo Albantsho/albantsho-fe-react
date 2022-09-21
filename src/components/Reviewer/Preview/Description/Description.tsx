@@ -17,12 +17,12 @@ const listTitles = [
 
 const Description = ({ setOpenSendReview }: IProps) => {
   return (
-    <div className="sm:px-10  lg:px-44  sm:mt-6 lg:mt-14">
+    <div className="sm:px-10  lg:px-44 mt-14">
       {listTitles.map((title) => (
         <React.Fragment key={title}>
           <Typography
             variant="h4"
-            className="futura text-primary-700 font-medium leading-normal mt-4 sm:mt-6 lg:mt-10"
+            className="futura text-primary-700 font-medium leading-6 mb-5 mt-10"
           >
             {title}
           </Typography>
@@ -41,13 +41,13 @@ const Description = ({ setOpenSendReview }: IProps) => {
 
       <Typography
         variant="h4"
-        className="futura text-primary-700 font-medium leading-normal mt-4 sm:mt-6 lg:mt-10"
+        className="futura text-primary-700 font-medium leading-normal mt-10"
       >
         Story quality
       </Typography>
       <Typography
         variant="h4"
-        className="futura text-primary-700 font-light mb-3 md:mb-5 leading-7"
+        className="futura text-primary-700 font-light mb-5 leading-7"
       >
         (how relevant is this story concept and what is unique or not about its
         approach to the ide)
@@ -71,7 +71,7 @@ const Description = ({ setOpenSendReview }: IProps) => {
       </Typography>
       <Typography
         variant="h4"
-        className="futura text-primary-700 font-light mb-3 md:mb-5 leading-7"
+        className="futura text-primary-700 font-light mb-5 leading-7"
       >
         (your final thoughts and suggestions)
       </Typography>
@@ -108,7 +108,7 @@ const Description = ({ setOpenSendReview }: IProps) => {
         </Typography>
       </div>
 
-      <div className="mt-4 sm:mt-10 lg:mt-16 mb-16  flex flex-wrap justify-start w-full gap-y-3 gap-x-8 ">
+      <div className="mt-16 mb-16  flex flex-wrap justify-start w-full gap-y-3 gap-x-8 ">
         <Btn
           onClick={() => setOpenSendReview(true)}
           className="py-3 px-3  min-w-[170px] flex-1 "

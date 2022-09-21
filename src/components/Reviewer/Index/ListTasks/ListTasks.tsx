@@ -3,6 +3,7 @@ import { useState } from "react";
 import beautySmall from "@assets/images/beauty-small.jpg";
 import ListTask from "./ListTask/ListTask";
 import DetailScriptModal from "../DetailScriptModal/DetailScriptModal";
+import React from "react";
 
 const tasks = [
   {
@@ -94,16 +95,17 @@ const ListTasks = () => {
 
       <div className=" bg-white rounded-md shadow-sm flex flex-col">
         {tasks.map((task, index) => (
-          <>
+          <React.Fragment key={index}>
             <ListTask
-              key={task.id}
               image={task.image}
               title={task.title}
               description={task.description}
               setOpenDetailScript={setOpenDetailScript}
             />
-            {index < tasks.length - 1 && <Divider className="hidden md:block" />}
-          </>
+            {index < tasks.length - 1 && (
+              <Divider className="hidden md:block" />
+            )}
+          </React.Fragment>
         ))}
       </div>
     </div>

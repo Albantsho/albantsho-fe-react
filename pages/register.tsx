@@ -1,7 +1,7 @@
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
 import NavbarAuthentication from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthentication";
-import SignupForm from "components/Signup/SignupForm/SignupForm";
-import TitleSignupForm from "components/Signup/TitleSignupForm/TitleSignupForm";
+import RegisterForm from "components/Register/RegisterForm/RegisterForm";
+import TitleRegisterForm from "components/Register/TitleRegisterForm/TitleRegisterForm";
 import Head from "next/head";
 import { NextPageWithLayout } from "./_app";
 
@@ -16,8 +16,8 @@ const Signup: NextPageWithLayout = () => {
         link="signin"
         buttonText="SIGN IN"
       />
-      <TitleSignupForm />
-      <SignupForm />
+      <TitleRegisterForm />
+      <RegisterForm />
     </>
   );
 };
