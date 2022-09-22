@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, FormEvent } from "react";
 
 const useVerifyEmail = () => {
   const inputs = useRef<HTMLInputElement[]>([]);
@@ -13,7 +13,8 @@ const useVerifyEmail = () => {
 
   const handleChange =
     (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setFormValues((prev) => ({ ...prev, [index]: event.target.value }));
+      const result = event.target.value.replace(/\D/g, "");
+      setFormValues((prev) => ({ ...prev, [index]: result }));
     };
 
   const handleAutoFocus =
@@ -28,7 +29,7 @@ const useVerifyEmail = () => {
       }
     };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: FormEvent) => {
     console.log(e);
   };
 

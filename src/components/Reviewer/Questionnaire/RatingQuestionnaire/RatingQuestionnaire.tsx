@@ -7,6 +7,7 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
+import CustomRating from "@shared/CustomRating/CustomRating";
 import { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 
@@ -50,8 +51,17 @@ const RatingQuestionnaire = () => {
         </Typography>
       </AccordionSummary>
       <AccordionDetails className="rounded-lg px-0 pb-6 md:pb-9 lg:pb-12">
-        <div className="flex gap-2 flex-wrap justify-center sm:justify-start">
-          <Rating
+        <div className="flex gap-2 flex-wrap justify-center sm:justify-start items-center">
+          <CustomRating
+            sx={{
+              "& .MuiSvgIcon-root": {
+                width: { sm: "40px" },
+                height: { sm: "40px" },
+              },
+              "&.MuiRating-root": {
+                gap: { sm: "8px" },
+              },
+            }}
             getLabelText={getLabelText}
             size="large"
             defaultValue={3}

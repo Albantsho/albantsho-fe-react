@@ -120,10 +120,7 @@ const RegisterForm = () => {
               ),
               endAdornment: (
                 <InputAdornment position="start">
-                  <IconButton
-                    onClick={handleTypeInputPassword}
-                    color="inherit"
-                  >
+                  <IconButton onClick={handleTypeInputPassword} color="inherit">
                     <SvgIcon
                       fontSize="small"
                       component={iconShow}

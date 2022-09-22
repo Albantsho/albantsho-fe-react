@@ -4,10 +4,10 @@ import {
   Divider,
   Grow,
   Modal,
-  Rating,
   Typography,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import CustomRating from "@shared/CustomRating/CustomRating";
 import { Dispatch, SetStateAction } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 
@@ -93,7 +93,11 @@ const DetailScriptModal = ({
               >
                 Rating:
               </Typography>
-              <Rating name="half-rating" defaultValue={4.5} precision={0.5} />
+              <CustomRating
+                name="half-rating"
+                defaultValue={4.5}
+                precision={0.5}
+              />
             </div>
 
             <Btn className="w-full  py-3">Begin review</Btn>

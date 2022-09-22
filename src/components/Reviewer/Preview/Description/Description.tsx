@@ -1,7 +1,8 @@
-import { Rating, Typography } from "@mui/material";
+import {  Typography, useMediaQuery, useTheme } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import { Dispatch, SetStateAction } from "react";
 import React from "react";
+import CustomRating from "@shared/CustomRating/CustomRating";
 
 interface IProps {
   setOpenSendReview: Dispatch<SetStateAction<boolean>>;
@@ -16,6 +17,9 @@ const listTitles = [
 ];
 
 const Description = ({ setOpenSendReview }: IProps) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+
   return (
     <div className="sm:px-10  lg:px-44 mt-14">
       {listTitles.map((title) => (
@@ -94,8 +98,8 @@ const Description = ({ setOpenSendReview }: IProps) => {
       </Typography>
 
       <div className="mt-4 sm:mt-10 gap-3 flex flex-wrap">
-        <Rating
-          size="large"
+        <CustomRating
+          size={matches ? "large" : "small"}
           name="half-rating"
           defaultValue={2.5}
           precision={0.5}

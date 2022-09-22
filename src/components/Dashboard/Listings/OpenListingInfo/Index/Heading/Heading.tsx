@@ -1,7 +1,8 @@
-import { Chip, Icon, Rating, Typography } from "@mui/material";
+import { Chip, Icon, Typography } from "@mui/material";
 import ReviewedIcon from "@assets/icons/reviewed.svg";
 import Image from "next/image";
 import beauty from "@assets/images/beauty.jpg";
+import CustomRating from "@shared/CustomRating/CustomRating";
 
 const Heading = () => {
   return (
@@ -22,7 +23,7 @@ const Heading = () => {
             className="bg-tinted-50/60 py-5 px-4 text-neutral-800"
             sx={{ borderRadius: 1 }}
           />
-          <Rating readOnly defaultValue={4} />
+          <CustomRating readOnly defaultValue={4} />
         </div>
 
         <Typography

@@ -1,6 +1,6 @@
-import { Button } from "@mui/material";
+import { Button, type ButtonProps } from "@mui/material";
 
-const CancelBtn = ({ ...props }) => {
+const CancelBtn = (props: ButtonProps) => {
   return (
     <div className="text-neutral-300">
       <Button

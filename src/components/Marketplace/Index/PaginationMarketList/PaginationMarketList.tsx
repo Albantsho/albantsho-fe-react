@@ -10,7 +10,7 @@ const PaginationMarketList = () => {
       <Pagination
         defaultPage={1}
         siblingCount={matches ? 2 : 0}
-        boundaryCount={matches ? 2 : 0}
+        boundaryCount={matches ? 2 : 1}
         sx={{
           "& .MuiPaginationItem-root.Mui-selected": {
             backgroundColor: "#fff !important",
@@ -21,7 +21,7 @@ const PaginationMarketList = () => {
         }}
         className="bg-white shadow-md w-auto rounded-md p-4 md:px-10"
         count={8}
-        size="large"
+        size={matches ? "large" : "medium"}
       />
     </div>
   );

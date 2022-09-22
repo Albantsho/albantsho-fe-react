@@ -1,10 +1,11 @@
-import { Chip, Icon, Rating, Typography } from "@mui/material";
+import { Chip, Icon, Typography } from "@mui/material";
 import ReviewedIcon from "@assets/icons/reviewed.svg";
 import Image from "next/image";
 import beauty from "@assets/images/beauty.jpg";
 import { useState } from "react";
 import PlaceBid from "./PlaceBid/PlaceBid";
 import BidSuccessfulModal from "../BidSuccessfulModal/BidSuccessfulModal";
+import CustomRating from "@shared/CustomRating/CustomRating";
 
 const ScriptInfo = () => {
   const [openBidSuccessful, setOpenBidSuccessful] = useState(false);
@@ -25,7 +26,7 @@ const ScriptInfo = () => {
             className="bg-tinted-50/60 text-neutral-800"
             sx={{ borderRadius: 1 }}
           />
-          <Rating readOnly defaultValue={4} />
+          <CustomRating defaultValue={4} />
         </div>
         <div className="flex gap-8 items-center">
           <Typography

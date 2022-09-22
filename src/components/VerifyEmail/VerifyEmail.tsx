@@ -57,7 +57,6 @@ const VerifyEmail = () => {
                 inputProps={{
                   maxLength: 1,
                   min: 0,
-                  pattern: "d*",
                 }}
               />
             ))}
