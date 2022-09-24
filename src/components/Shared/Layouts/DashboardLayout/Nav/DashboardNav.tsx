@@ -5,15 +5,30 @@ import {
   type AppBarProps,
 } from "@mui/material";
 import { useMemo } from "react";
+import { RiDownloadLine } from "react-icons/ri";
 import routes from "routes/routes";
 import DashboardNavOnDesktop from "./DesktopNav/DashboardNavOnDesktop";
 import DashboardNavOnMobile from "./MobileNav/DashboardNavOnMobile";
+import deposit from "@assets/icons/deposit.svg";
+import { TbArrowsSort } from "react-icons/tb";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
-const links = [
-  { title: "About Us", href: routes.aboutUs },
-  { title: "Marketplace", href: routes.marketplace },
-  { title: "Education", href: "/education" },
-  { title: "iDraft", href: routes.iDraft },
+const profileLinks = [
+  { title: "Go to dashboard", href: routes.projectsDashboard },
+  { title: "Contact Us", href: "#" },
+  { title: "Help", href: "#" },
+  { title: "Sign Out", href: "#" },
+];
+
+const walletLinks = [
+  { title: "Withdraw", href: routes.withdrawWallet, icon: RiDownloadLine },
+  { title: "Deposit", href: routes.depositWallet, icon: deposit },
+  {
+    title: "Transaction History",
+    href: routes.transactionHistoryWallet,
+    icon: TbArrowsSort,
+  },
+  { title: "Help", href: routes.helpWallet, icon: AiOutlineQuestionCircle },
 ];
 
 const DashboardNav = ({ color = "transparent", ...props }: AppBarProps) => {
@@ -29,7 +44,11 @@ const DashboardNav = ({ color = "transparent", ...props }: AppBarProps) => {
         {isLgScreen ? (
           <DashboardNavOnDesktop />
         ) : (
-          <DashboardNavOnMobile links={links} isTransparent={isTransparent} />
+          <DashboardNavOnMobile
+            walletLinks={walletLinks}
+            profileLinks={profileLinks}
+            isTransparent={isTransparent}
+          />
         )}
       </Toolbar>
     </AppBar>
