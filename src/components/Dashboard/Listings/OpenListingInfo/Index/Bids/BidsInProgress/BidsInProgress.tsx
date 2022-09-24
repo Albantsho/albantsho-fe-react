@@ -13,9 +13,8 @@ const BidsInProgress = () => {
         </Typography>
       </div>
       <div className="my-8 md:my-16  mx-auto w-[100px] md:w-[200px]">
-        <CircularStatic  />
+        <CircularStatic />
       </div>
-
     </div>
   );
 };

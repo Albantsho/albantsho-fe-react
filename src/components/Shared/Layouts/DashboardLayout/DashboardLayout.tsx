@@ -1,6 +1,6 @@
 import DashboardSidebarOnDesktop from "./ListDashboard/DashboardSidebarOnDesktop/DashboardSidebarOnDesktop";
 import DashboardSidebarOnMobile from "./ListDashboard/DashboardSidebarOnMobile/DashboardSidebarOnMobile";
-import DashboardNav from "./Nav/DashboardNav";
+import DashboardNav from "./DashboardNav/DashboardNav";
 
 interface IProps {
   children: React.ReactNode;

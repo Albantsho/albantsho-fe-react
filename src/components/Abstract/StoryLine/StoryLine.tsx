@@ -13,10 +13,7 @@ const StoryLine = () => {
         Storyline
       </Typography>
 
-      <Typography
-        variant="body1"
-        className="text-neutral-700 mb-6 lg:mb-10"
-      >
+      <Typography variant="body1" className="text-neutral-700 mb-6 lg:mb-10">
         What if the 'line' was a kaleidoscope'?
       </Typography>
 

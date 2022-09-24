@@ -16,7 +16,11 @@ const SearchDashboard = ({ setOpenCreateScript }: IProps) => {
   return (
     <div className="flex justify-start text-primary-700 items-center mt-8">
       <div className="flex gap-4 flex-1 w-full">
-        <IconButton color="inherit" onClick={back} className="bg-white shadow-primary">
+        <IconButton
+          color="inherit"
+          onClick={back}
+          className="bg-white shadow-primary"
+        >
           <BsArrowLeftShort className="text-3xl" />
         </IconButton>
 

@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-const ElgibilityIDraft = () => {
+const EligibilityIDraft = () => {
   return (
     <div className="px-5 sm:px-10 py-24 bg-[#181025]  pt-16 pb-20">
       <div className="md:max-w-screen-lg mx-auto">
@@ -56,4 +56,4 @@ const ElgibilityIDraft = () => {
   );
 };
 
-export default ElgibilityIDraft;
+export default EligibilityIDraft;

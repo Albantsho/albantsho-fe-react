@@ -1,9 +1,5 @@
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import { BiChevronDown } from "react-icons/bi";
-import { Chip, ListItem } from "@mui/material";
+import { Chip } from "@mui/material";
 import lock from "./assets/lock.png";
 import Image from "next/image";
 import Btn from "@shared/Btn/Btn";

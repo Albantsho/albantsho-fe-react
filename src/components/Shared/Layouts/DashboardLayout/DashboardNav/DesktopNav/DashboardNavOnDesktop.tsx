@@ -1,8 +1,8 @@
 import { Badge, IconButton } from "@mui/material";
+import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
 import Image from "next/image";
-import alert from "./assets/alert.png";
+import alert from "@assets/images/alert.png";
 import WalletMenu from "./WalletMenu/WalletMenu";
-import ProfileMenu from "./ProfileMenu/ProfileMenu";
 
 const DashboardNavOnDesktop = () => {
   return (

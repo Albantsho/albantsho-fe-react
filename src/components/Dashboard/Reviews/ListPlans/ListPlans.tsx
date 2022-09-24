@@ -81,7 +81,7 @@ const ListPlans = () => {
               );
             })}
           </CardContent>
-          <CardActions className="mt-7" >
+          <CardActions className="mt-7">
             <Btn size="large" className="py-2 w-full text-center">
               Proceed to pay
             </Btn>

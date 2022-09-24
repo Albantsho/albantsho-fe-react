@@ -66,9 +66,7 @@ const Questionnaire = () => {
               description={accordionTitle.description}
             />
           ))}
-
           <RatingQuestionnaire />
-
           <Btn fullWidth className="mt-6 py-4 rounded-lg">
             COMPLETE REVIEW
           </Btn>

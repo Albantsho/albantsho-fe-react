@@ -25,7 +25,7 @@ const BlogPost = () => {
           className="leading-normal mb-2 md:mb-14 md:text-center"
           color="primary.main"
         >
-          Lorem ipsum dolor sit amet 
+          Lorem ipsum dolor sit amet
         </Typography>
         <Typography paragraph>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit

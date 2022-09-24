@@ -11,9 +11,9 @@ const Preview = () => {
 
   return (
     <>
-    <Head>
-      <title>Albantsho || Preview</title>
-    </Head>
+      <Head>
+        <title>Albantsho || Preview</title>
+      </Head>
       <div className="py-6 md:py-6 lg:py-8 bg-[#f6f8fc] flex items-center flex-col px-5 sm:px-10">
         <SendReview
           openSendReview={openSendReview}

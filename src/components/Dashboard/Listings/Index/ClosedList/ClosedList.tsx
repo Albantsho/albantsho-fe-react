@@ -66,8 +66,7 @@ const ClosedList = () => {
               Script
             </Typography>
           </TableCell>
-          <TableCell
-          className="hidden sm:flex flex-[0.6]  pt-0 xl:pb-8 pb-5">
+          <TableCell className="hidden sm:flex flex-[0.6]  pt-0 xl:pb-8 pb-5">
             <Typography
               variant="h6"
               className="text-primary-700 futura font-medium"

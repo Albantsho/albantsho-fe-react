@@ -54,7 +54,10 @@ const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
       </div>
 
       <div className="flex md:hidden justify-center mt-4 gap-4 items-center">
-        <Link href={`${routes.abstract}?step=${step === 1 ? 7 : step - 1}`} passHref>
+        <Link
+          href={`${routes.abstract}?step=${step === 1 ? 7 : step - 1}`}
+          passHref
+        >
           <IconButton
             color="primary"
             disabled={step === 1}
@@ -72,7 +75,10 @@ const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
           <span>7</span>
         </div>
 
-        <Link href={`${routes.abstract}?step=${step === 7 ? 1 : step + 1}`} passHref>
+        <Link
+          href={`${routes.abstract}?step=${step === 7 ? 1 : step + 1}`}
+          passHref
+        >
           <IconButton
             color="primary"
             disabled={step === 7}

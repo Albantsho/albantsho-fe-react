@@ -20,11 +20,7 @@ const UploadScriptFiles = ({ activeButton, setActiveButton }: IProps) => {
         Upload Script
       </Typography>
 
-
-      <Typography
-        variant="body1"
-        className="text-neutral-700 mb-6"
-      >
+      <Typography variant="body1" className="text-neutral-700 mb-6">
         By the way, your story is not a gift but a NECESSITY
       </Typography>
 

@@ -51,7 +51,6 @@ const GeneralScriptProfile = () => {
             </Typography>
           </label>
           <CustomInput
-
             select
             fullWidth
             size="small"

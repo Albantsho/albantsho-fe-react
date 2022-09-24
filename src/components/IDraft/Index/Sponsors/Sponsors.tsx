@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import oneBrand from "./assets/one-brand.png";
 import twoBrand from "./assets/two-brand.png";
@@ -23,7 +23,7 @@ const brands = [
   nineBrand,
 ];
 
-const Sponsers = () => {
+const Sponsors = () => {
   return (
     <div className=" mx-auto  justify-center px-5 sm:px-10 -mt-12 md:-mt-8 lg:-mt-4 xl:mt-0   pb-16">
       <div className="mx-auto  rounded-2xl bg-[#F9F5FF] max-w-[950px]">
@@ -50,4 +50,4 @@ const Sponsers = () => {
   );
 };
 
-export default Sponsers;
+export default Sponsors;

@@ -8,13 +8,8 @@ import useVerifyEmail from "./useVerifyEmail";
 import CustomInput from "@shared/CustomInput/CustomInput";
 
 const VerifyEmail = () => {
-  const {
-    handleChange,
-    onSubmit,
-    inputs,
-    formValues,
-    handleAutoFocus,
-  } = useVerifyEmail();
+  const { handleChange, onSubmit, inputs, formValues, handleAutoFocus } =
+    useVerifyEmail();
 
   return (
     <div className="px-8 py-12 lg:px-24  mx-auto">

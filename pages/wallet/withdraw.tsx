@@ -123,7 +123,7 @@ const Withdraw: NextPageWithLayout = () => {
           </label>
           <CustomInput
             fullWidth
-            sx={{   "& .MuiOutlinedInput-input": { py: 2 }, maxWidth: "628px" }}
+            sx={{ "& .MuiOutlinedInput-input": { py: 2 }, maxWidth: "628px" }}
             id="account-number"
             variant="outlined"
             size="medium"

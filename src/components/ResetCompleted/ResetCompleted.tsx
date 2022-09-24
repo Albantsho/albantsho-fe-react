@@ -20,7 +20,10 @@ const ResetCompleted = () => {
         >
           Password Reset Complete
         </Typography>
-        <Typography variant="body1" className="text-[#484848] text-center max-w-[418px] leading-6 text-sm">
+        <Typography
+          variant="body1"
+          className="text-[#484848] text-center max-w-[418px] leading-6 text-sm"
+        >
           You’ve successfully reset your password. Get back to enjoying the
           platform
         </Typography>
@@ -39,4 +42,3 @@ const ResetCompleted = () => {
 };
 
 export default ResetCompleted;
-

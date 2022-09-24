@@ -1,11 +1,4 @@
-import {
-  Button,
-  Chip,
-  Divider,
-  Grow,
-  Modal,
-  Typography,
-} from "@mui/material";
+import { Button, Chip, Divider, Grow, Modal, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomRating from "@shared/CustomRating/CustomRating";
 import { Dispatch, SetStateAction } from "react";

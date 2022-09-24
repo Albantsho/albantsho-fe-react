@@ -3,7 +3,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Paper,
-  Typography
+  Typography,
 } from "@mui/material";
 import { MdExpandLess } from "react-icons/md";
 

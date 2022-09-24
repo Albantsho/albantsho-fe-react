@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
+import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
 import useMobileNav from "./useMobileNav";
 
@@ -31,13 +32,26 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
         <SvgIcon component={MenuIcon} sx={{ fontSize: 40 }} />
       </IconButton>
       <Drawer
+        className="relative"
         anchor="right"
         sx={{
-          "& .MuiPaper-root": { maxWidth: "240px", width: "100%" },
+          "& .MuiPaper-root": {
+            maxWidth: "290px",
+            width: "100%",
+            px: 5,
+            py: 7,
+          },
         }}
         open={open}
         onClose={handleToggleDrawer(false)}
       >
+        <IconButton
+          onClick={handleToggleDrawer(false)}
+          className="absolute top-4 right-4"
+          color="error"
+        >
+          <AiOutlineClose />
+        </IconButton>
         <List>
           {links.map(({ title, href }, i) => (
             <ListItem disablePadding key={i}>
@@ -51,9 +65,6 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
           <div className="px-5 py-2">
             <Link href={`${routes.signin}`} passHref>
               <Btn className="px-6 py-3">Sign In</Btn>
-              {/* <ListItemButton>
-                <ListItemText primary="Sign In" />
-              </ListItemButton> */}
             </Link>
           </div>
         </List>

@@ -11,7 +11,11 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { useState } from "react";
 import routes from "routes/routes";
 
-const ProfileMenu = () => {
+interface IProps {
+  isMobile?: boolean;
+}
+
+const ProfileMenu = ({ isMobile }: IProps) => {
   const [openProfileMenu, setOpenProfileMenu] = useState<null | HTMLElement>(
     null
   );
@@ -30,7 +34,9 @@ const ProfileMenu = () => {
     <>
       <div
         onClick={handleOpenMenu}
-        className="flex gap-2 items-center cursor-pointer"
+        className={`${
+          isMobile && "justify-center flex-col-reverse"
+        } flex gap-2 items-center cursor-pointer`}
       >
         <Typography
           variant="h6"
@@ -40,7 +46,9 @@ const ProfileMenu = () => {
           Jane Mawe
         </Typography>
         <Avatar src="/assets/images/profile.jpg" />
-        <AiFillCaretDown className="text-primary-700" />
+        <AiFillCaretDown
+          className={`${isMobile ? "hidden " : "block text-primary-700"}`}
+        />
       </div>
       <Menu
         anchorEl={openProfileMenu}
@@ -53,15 +61,19 @@ const ProfileMenu = () => {
           sx: {
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.22))",
             borderRadius: "8px",
-            maxWidth: "300px",
+            maxWidth: `${isMobile ? "260px" : "300px"}`,
             width: "100%",
           },
         }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        transformOrigin={{
+          horizontal: `${isMobile ? "center" : "right"}`,
+          vertical: "top",
+        }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem
           divider
+          color="primary"
           className="px-6 py-4"
           onClick={() => push(routes.profile)}
         >

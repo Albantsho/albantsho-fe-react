@@ -17,7 +17,7 @@ const MarketplaceLayout = ({ children, description }: IProps) => {
         {children}
       </main>
       <Suspense fallback={null}>
-        <Footer  />
+        <Footer />
       </Suspense>
     </>
   );

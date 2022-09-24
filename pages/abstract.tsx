@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import DashboardNav from "@shared/Layouts/DashboardLayout/Nav/DashboardNav";
+import DashboardNav from "@shared/Layouts/DashboardLayout/DashboardNav/DashboardNav";
 import ModalSaveProgressScript from "components/Abstract/ModalSaveProgressScript/ModalSaveProgressScript";
 import { useRouter } from "next/router";
 import GeneralScriptProfile from "components/Abstract/GeneralScriptProfile/GeneralScriptProfile";

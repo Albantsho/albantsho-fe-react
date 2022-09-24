@@ -5,7 +5,7 @@ import TitleRegisterForm from "components/Register/TitleRegisterForm/TitleRegist
 import Head from "next/head";
 import { NextPageWithLayout } from "./_app";
 
-const Signup: NextPageWithLayout = () => {
+const Register: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -22,8 +22,8 @@ const Signup: NextPageWithLayout = () => {
   );
 };
 
-Signup.getLayout = (page) => (
+Register.getLayout = (page) => (
   <AuthenticationLayout>{page}</AuthenticationLayout>
 );
 
-export default Signup;
+export default Register;

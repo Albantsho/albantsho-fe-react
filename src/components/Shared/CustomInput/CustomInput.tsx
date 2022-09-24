@@ -2,7 +2,7 @@ import {
   inputAdornmentClasses,
   outlinedInputClasses,
   TextField,
-  type OutlinedTextFieldProps
+  type OutlinedTextFieldProps,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { forwardRef } from "react";
@@ -45,7 +45,6 @@ const CustomInput = styled(RootInput)`
         color: ${({ theme }) => theme.palette.tinted[400]};
       }
     }
-
 
     .${outlinedInputClasses.notchedOutline} {
       border: 1px solid ${({ theme }) => theme.palette.tinted[100]};

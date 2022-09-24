@@ -1,4 +1,4 @@
-import {  Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import { Dispatch, SetStateAction } from "react";
 import React from "react";

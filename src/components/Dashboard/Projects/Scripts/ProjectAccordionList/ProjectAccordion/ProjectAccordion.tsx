@@ -64,10 +64,7 @@ const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
             >
               {title}
             </Typography>
-            <Typography
-              variant="caption"
-              className=" text-neutral-600"
-            >
+            <Typography variant="caption" className=" text-neutral-600">
               {storyAbout}
             </Typography>
           </div>

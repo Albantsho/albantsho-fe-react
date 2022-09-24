@@ -1,10 +1,4 @@
-import {
-  Button,
-  Chip,
-  Divider,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Button, Chip, Divider, Paper, Typography } from "@mui/material";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import beautySmall from "@assets/images/beauty-small.jpg";

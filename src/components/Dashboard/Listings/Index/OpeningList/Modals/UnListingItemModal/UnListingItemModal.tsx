@@ -4,7 +4,7 @@ import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import UnListengItem from "./assets/un-listing-item.png";
+import UnListingItem from "./assets/un-listing-item.png";
 
 interface IProps {
   openUnListingItem: boolean;
@@ -18,7 +18,12 @@ const UnListingItemModal = ({
   const handleClose = () => setOpenUnListingItem(false);
   return (
     <Modal className="px-5" open={openUnListingItem} onClose={handleClose}>
-      <Slide direction="right" in={openUnListingItem} mountOnEnter unmountOnExit>
+      <Slide
+        direction="right"
+        in={openUnListingItem}
+        mountOnEnter
+        unmountOnExit
+      >
         <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-xl mx-auto flex flex-col items-center py-16 rounded-lg">
           <IconButton
             color="error"
@@ -28,7 +33,7 @@ const UnListingItemModal = ({
             <AiOutlineClose />
           </IconButton>
           <div>
-            <Image src={UnListengItem} alt="UnListing Item" />
+            <Image src={UnListingItem} alt="UnListing Item" />
           </div>
           <Typography
             className="text-center max-w-[212px] my-5 lg:my-6"

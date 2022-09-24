@@ -15,10 +15,7 @@ const UploadImage = () => {
         Upload Image
       </Typography>
 
-      <Typography
-        variant="body1"
-        className="text-neutral-700 mb-6 lg:mb-10"
-      >
+      <Typography variant="body1" className="text-neutral-700 mb-6 lg:mb-10">
         A most striking visual image for the medium
       </Typography>
 
@@ -47,7 +44,10 @@ const UploadImage = () => {
               Drop your file here, or
               <span className="text-primary-700 underline ml-1">browse</span>
             </Typography>
-            <Typography variant="caption" className="text-tinted-500 text-center leading-4">
+            <Typography
+              variant="caption"
+              className="text-tinted-500 text-center leading-4"
+            >
               Supports JPEG, JPEG2000, PNG
             </Typography>
           </form>

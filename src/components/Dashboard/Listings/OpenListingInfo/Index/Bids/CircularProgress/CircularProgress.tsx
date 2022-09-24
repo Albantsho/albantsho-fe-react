@@ -30,7 +30,6 @@ function CircularProgressFunction(props: CircularProgressProps) {
   );
 }
 
-
 export default function CustomizedProgressBars() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("md"));

@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
 
-
 const OurVision = () => {
   return (
     <section id="our-vision" className="mt-12 relative">

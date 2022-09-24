@@ -12,7 +12,7 @@ const subscriptionSuccessful = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Subscription Successfull </title>
+        <title>Albantsho || Subscription Successful </title>
       </Head>
       <Nav color="inherit" position="static" />
       <div className="pt-24 md:pt-32 px-10 md:px-16 text-center min-h-screen md:max-w-lg mx-auto">

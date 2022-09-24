@@ -5,12 +5,12 @@ import { Typography } from "@mui/material";
 import HeadingIDraft from "components/IDraft/Index/HeadingIDraft/HeadingIDraft";
 import DescriptionIDraft from "components/IDraft/Index/DescriptionIDraft/DescriptionIDraft";
 import BenefitsIDraft from "components/IDraft/Index/BenefitsIDraft/BenefitsIDraft";
-import ElgibilityIDraft from "components/IDraft/Index/ElgibilityIDraft/ElgibilityIDraft";
+import EligibilityIDraft from "components/IDraft/Index/EligibilityIDraft/EligibilityIDraft";
 import DeadLineIDraft from "components/IDraft/Index/DeadLineIDraft/DeadLineIDraft";
-import Sponsers from "components/IDraft/Index/Sponsers/Sponsers";
+import Sponsors from "components/IDraft/Index/Sponsors/Sponsors";
 import MentorInfoList from "components/IDraft/Index/MentorInfoList/MentorInfoList";
-import IDraftLayout from "@shared/Layouts/IDraftLayout/IDrafyLayout";
 import routes from "routes/routes";
+import IDraftLayout from "@shared/Layouts/IDraftLayout/IDraftLayout";
 
 const IDraft: NextPageWithLayout = () => {
   return (
@@ -21,7 +21,7 @@ const IDraft: NextPageWithLayout = () => {
       <HeadingIDraft />
       <DescriptionIDraft />
       <BenefitsIDraft />
-      <ElgibilityIDraft />
+      <EligibilityIDraft />
       <DeadLineIDraft />
       <Link href={`${routes.iDraft}/terms-and-conditions`}>
         <a className="text-gray-900">
@@ -34,7 +34,7 @@ const IDraft: NextPageWithLayout = () => {
         </a>
       </Link>
       ;
-      <Sponsers />
+      <Sponsors />
       <MentorInfoList />
     </>
   );

@@ -181,7 +181,7 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                     href={`${routes.listingsOneScript(script.title)}`}
                     passHref
                   >
-                    <a className="text-inherit" >
+                    <a className="text-inherit">
                       <MenuItem
                         sx={{
                           "&:hover": {

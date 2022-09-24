@@ -1,5 +1,4 @@
-import { Box, InputAdornment, Typography } from "@mui/material";
-import CustomInput from "@shared/CustomInput/CustomInput";
+import { Box, Typography } from "@mui/material";
 import { AiOutlineSearch } from "react-icons/ai";
 
 interface IProps {

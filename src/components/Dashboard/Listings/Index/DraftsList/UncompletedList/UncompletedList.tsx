@@ -78,7 +78,7 @@ const UncompletedList = ({ setOpenAddToScript }: IProps) => {
         <Typography></Typography>
       </div>
       <div className="px-5 xl:px-14">
-        {uncompletedList.map((listItem,index) => (
+        {uncompletedList.map((listItem, index) => (
           <React.Fragment key={listItem.id}>
             <div className="flex py-6 items-center sm:justify-between xl:justify-start">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-14 lg:max-w-[445px] ">
@@ -146,7 +146,9 @@ const UncompletedList = ({ setOpenAddToScript }: IProps) => {
                 </Button>
               </div>
             </div>
-          { index < uncompletedList.length - 1 && <Divider className="hidden sm:flex" />}
+            {index < uncompletedList.length - 1 && (
+              <Divider className="hidden sm:flex" />
+            )}
           </React.Fragment>
         ))}
       </div>

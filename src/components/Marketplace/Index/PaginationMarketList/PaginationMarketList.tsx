@@ -3,7 +3,6 @@ import { Pagination, useMediaQuery, useTheme } from "@mui/material";
 const PaginationMarketList = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  console.log(matches);
 
   return (
     <div className=" flex justify-center px-5 sm:px-10   mb-6 sm:mb-14 m-3 sm:mt-7 ">

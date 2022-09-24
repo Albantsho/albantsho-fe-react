@@ -17,7 +17,7 @@ const DeadLineIDraft = () => {
       </div>
 
       <div className="flex relative flex-col w-full gap-6 justify-center items-center mt-6 md:mt-36">
-        <div className="lg:min-w-[1020px] xl:min-w-[1250px] w-full" >
+        <div className="lg:min-w-[1020px] xl:min-w-[1250px] w-full">
           <div className="absolute  -left-[60%] sm:-left-[100%] lg:left-16 top-0 bottom-0 -z-10 opacity-70">
             <Image src={flash} alt="flash" />
           </div>

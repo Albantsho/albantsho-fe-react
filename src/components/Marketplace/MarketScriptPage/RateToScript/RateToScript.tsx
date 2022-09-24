@@ -1,5 +1,4 @@
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
-
 import CustomRating from "@shared/CustomRating/CustomRating";
 
 const RateToScript = () => {

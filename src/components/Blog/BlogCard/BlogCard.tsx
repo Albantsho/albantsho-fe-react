@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardMedia,
   Link as MuiLink,
-  Typography
+  Typography,
 } from "@mui/material";
 import Link from "next/link";
 import routes from "routes/routes";

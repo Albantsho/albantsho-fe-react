@@ -4,7 +4,6 @@ import {
   AccordionSummary,
   Typography,
 } from "@mui/material";
-import React from "react";
 import { BiChevronDown } from "react-icons/bi";
 
 const MainDetailsMarketScript = () => {
@@ -35,10 +34,7 @@ const MainDetailsMarketScript = () => {
             LOGLINE
           </Typography>
         </AccordionSummary>
-        <AccordionDetails
-        className="px-5 sm:px-10 bg-tinted-50/60"
-
-        >
+        <AccordionDetails className="px-5 sm:px-10 bg-tinted-50/60">
           <Typography
             sx={{ marginTop: { xs: 3, sm: 4, md: 5, xl: 7 } }}
             variant="body2"

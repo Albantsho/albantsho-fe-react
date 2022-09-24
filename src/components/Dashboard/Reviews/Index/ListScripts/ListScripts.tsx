@@ -157,7 +157,7 @@ const ListScripts = () => {
                 )}
               </div>
             </div>
-            {index < listScripts.length -1 && (
+            {index < listScripts.length - 1 && (
               <Divider className="hidden sm:flex" />
             )}
           </React.Fragment>

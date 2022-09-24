@@ -24,10 +24,7 @@ const WritersStatement = () => {
         Writers Statement
       </Typography>
 
-      <Typography
-        variant="body1"
-        className="text-neutral-700 mb-6 lg:mb-10"
-      >
+      <Typography variant="body1" className="text-neutral-700 mb-6 lg:mb-10">
         Beyond the passion of storytelling, there is purpose.
       </Typography>
 

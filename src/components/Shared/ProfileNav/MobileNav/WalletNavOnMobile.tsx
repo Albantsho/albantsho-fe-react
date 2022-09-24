@@ -1,47 +1,36 @@
 import MenuIcon from "@assets/icons/menu.svg";
+import wallet from "@assets/icons/wallet.svg";
 import {
-  Avatar,
   Badge,
   Divider,
   Drawer,
   IconButton,
   List,
   ListItem,
-  ListItemAvatar,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   SvgIcon,
-  type SvgIconProps,
-  Typography,
 } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
-import useMobileNavDashboard from "./useMobileNavDashboard";
-import alert from "./assets/alert.png";
 import Logo from "@shared/Logo/Logo";
-import wallet from "@assets/icons/wallet.svg";
-import routes from "routes/routes";
-import ProfileMenu from "../DesktopNav/ProfileMenu/ProfileMenu";
-import { AiFillCaretDown, AiFillInstagram } from "react-icons/ai";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import { AiFillInstagram, AiOutlineClose } from "react-icons/ai";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
+import ProfileMenu from "../../ProfileMenu/ProfileMenu";
+import alert from "@assets/images/alert.png";
+import useMobileNavDashboard from "./useMobileNavMobile";
 
 interface IProps {
-  profileLinks: { title: string; href: string }[];
   walletLinks: {
     title: string;
     href: string;
-    icon: React.ReactNode;
+    icon: any;
   }[];
   isTransparent: boolean;
 }
 
-const DashboardNavOnMobile = ({
-  profileLinks,
-  walletLinks,
-  isTransparent,
-}: IProps) => {
+const WalletNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNavDashboard();
   const { push } = useRouter();
 
@@ -66,54 +55,32 @@ const DashboardNavOnMobile = ({
       </IconButton>
 
       <Drawer
+        className="relative"
         sx={{
-          "& .MuiPaper-root": { maxWidth: "240px", width: "100%" },
+          "& .MuiPaper-root": {
+            maxWidth: "290px",
+            width: "100%",
+            px: 5,
+            py: 7,
+            textAlign: "center",
+          },
         }}
         anchor="right"
         open={open}
         onClose={handleToggleDrawer(false)}
       >
-        <List className="mt-12">
-          <ListItem className="px-5">
-            <ListItemAvatar>
-              <Avatar src="/assets/images/profile.jpg" />
-            </ListItemAvatar>
-            <ListItemText>
-              <Typography
-                variant="h6"
-                className="text-primary-700 futura font-medium leading-normal -mb-2"
-              >
-                Jane Mawe
-              </Typography>
-              <Typography variant="caption" className="text-neutral-800 ">
-                John Doe@gmail.com
-              </Typography>
-            </ListItemText>
-          </ListItem>
-          <Divider className="mt-1" />
-          {profileLinks.map(({ title, href }, i) => (
-            <ListItem disablePadding key={i}>
-              <Link href={href} passHref>
-                <ListItemButton className="px-6">
-                  <ListItemText
-                    primary={title}
-                    primaryTypographyProps={{
-                      className: `${
-                        title === "Sign Out"
-                          ? "text-error-500"
-                          : "text-primary-700 "
-                      }`,
-                    }}
-                  />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
-        </List>
+        <IconButton
+          onClick={handleToggleDrawer(false)}
+          className="absolute top-4 right-4"
+          color="error"
+        >
+          <AiOutlineClose />
+        </IconButton>
+        <ProfileMenu isMobile />
         <Divider className="my-4" />
-        <List disablePadding>
-          <ListItem className="px-5 mb-4">
-            <ListItemIcon>
+        <List>
+          <ListItem className="px-5 mb-4 border border-gray-300 rounded-md">
+            <ListItemIcon className="min-w-0 mr-3">
               <SvgIcon
                 color="primary"
                 style={{
@@ -125,38 +92,42 @@ const DashboardNavOnMobile = ({
             </ListItemIcon>
             <ListItemText
               primaryTypographyProps={{
-                className: "text-primary-700 ",
+                className: "text-primary-700 futura font-medium",
+                variant: "h6",
               }}
-              primary=" Balance:$20,000"
+              primary="Balance:$20,000"
             />
           </ListItem>
           {walletLinks.map((walletLink) => (
-            <ListItemButton
-              key={walletLink.title}
-              className="px-6"
-              onClick={() => push(`${walletLink.href}`)}
-            >
-              <ListItemIcon>
-                <SvgIcon
-                  fontSize="inherit"
-                  className="text-primary-700"
-                  inheritViewBox
-                  component={walletLink.icon}
-                />
-              </ListItemIcon>
-              <ListItemText
-                primaryTypographyProps={{
-                  className:
-                    "text-primary-700 futura font-normal leading-normal",
-                }}
+            <ListItem disablePadding className="py-1" key={walletLink.title}>
+              <ListItemButton
+                TouchRippleProps={{className:"text-primary-main"}}
+                className="px-2 rounded-md"
+                onClick={() => push(`${walletLink.href}`)}
               >
-                {walletLink.title}
-              </ListItemText>
-            </ListItemButton>
+                <ListItemIcon className="min-w-0 mr-3">
+                  <SvgIcon
+                    fontSize="small"
+                    className="text-primary-700"
+                    inheritViewBox
+                    component={walletLink.icon}
+                  />
+                </ListItemIcon>
+                <ListItemText
+                  primaryTypographyProps={{
+                    className:
+                      "text-primary-700 futura font-normal leading-normal",
+                    variant: "h6",
+                  }}
+                >
+                  {walletLink.title}
+                </ListItemText>
+              </ListItemButton>
+            </ListItem>
           ))}
         </List>
 
-        <div className="fixed text-primary-700 flex gap-6  justify-start bottom-8 right-[40px]">
+        <div className="fixed text-primary-700 flex gap-6 right-[75px] bottom-8">
           <IconButton
             href="https://www.twitter.com/albantsho"
             target="_blank"
@@ -208,4 +179,4 @@ const DashboardNavOnMobile = ({
   );
 };
 
-export default DashboardNavOnMobile;
+export default WalletNavOnMobile;

@@ -11,10 +11,7 @@ const StoryStructure = () => {
       >
         Story Structure
       </Typography>
-      <Typography
-        variant="body1"
-        className="text-neutral-700 mb-6 lg:mb-10"
-      >
+      <Typography variant="body1" className="text-neutral-700 mb-6 lg:mb-10">
         There is only one rule: be surprising
       </Typography>
 

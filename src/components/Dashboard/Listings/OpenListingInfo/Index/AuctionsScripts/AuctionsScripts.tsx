@@ -12,7 +12,7 @@ import {
   Paper,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import routes from "routes/routes";
@@ -31,7 +31,7 @@ interface IProps {
 }
 
 const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
-  const { query,push } = useRouter();
+  const { query, push } = useRouter();
 
   const handleOpenAcceptOfferModal = (
     event: React.PointerEvent<HTMLButtonElement>

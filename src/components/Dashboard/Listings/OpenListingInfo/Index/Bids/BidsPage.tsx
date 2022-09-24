@@ -29,7 +29,7 @@ const BidsPage = ({ setOpenAcceptOffer }: IProps) => {
 
         <div className="pt-4 sm:pt-8 lg:pt-12 xl:pt-16">
           <div className="lg:pb-6 flex flex-col md:flex-row lg:flex-col xl:flex-row md:items-center lg:items-start xl:items-center  gap-x-5 gap-y-2 ">
-            <div className="flex flex-wrap gap-x-4 gap-y-2" >
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
               <Typography
                 variant="h6"
                 color="primary.700"
