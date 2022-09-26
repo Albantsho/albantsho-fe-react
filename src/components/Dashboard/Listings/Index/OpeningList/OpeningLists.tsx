@@ -183,11 +183,9 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                   >
                     <a className="text-inherit">
                       <MenuItem
+                        TouchRippleProps={{ className: "text-primary-main" }}
+                        className="w-full hover:bg-primary-50/25 hover:text-primary-500"
                         sx={{
-                          "&:hover": {
-                            color: "#9A7EC7",
-                            backgroundColor: "#F7F5F8",
-                          },
                           fontSize: "14px",
                           px: "25px",
                           py: 2,
@@ -199,11 +197,9 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                     </a>
                   </Link>
                   <MenuItem
+                    TouchRippleProps={{ className: "text-primary-main" }}
+                    className="w-full hover:bg-primary-50/25 hover:text-primary-500"
                     sx={{
-                      "&:hover": {
-                        color: "#9A7EC7",
-                        backgroundColor: "#F7F5F8",
-                      },
                       fontSize: "14px",
                       px: "25px",
                       py: 2,

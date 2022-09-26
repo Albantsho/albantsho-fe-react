@@ -72,9 +72,10 @@ const ProfileMenu = ({ isMobile }: IProps) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem
+          TouchRippleProps={{ className: "text-primary-main" }}
           divider
           color="primary"
-          className="px-6 py-4"
+          className="px-6 py-4 hover:bg-primary-50/25"
           onClick={() => push(routes.profile)}
         >
           <ListItemAvatar>
@@ -94,8 +95,9 @@ const ProfileMenu = ({ isMobile }: IProps) => {
         </MenuItem>
 
         <MenuItem
+          TouchRippleProps={{ className: "text-primary-main" }}
           divider
-          className="px-6 py-4"
+          className="px-6 py-4 hover:bg-primary-50/25"
           onClick={() => push(routes.projectsDashboard)}
         >
           <ListItemText
@@ -106,7 +108,10 @@ const ProfileMenu = ({ isMobile }: IProps) => {
             Go to dashboard
           </ListItemText>
         </MenuItem>
-        <MenuItem className="px-6 py-4">
+        <MenuItem
+          TouchRippleProps={{ className: "text-primary-main" }}
+          className="px-6 py-4 hover:bg-primary-50/25"
+        >
           <ListItemText
             primaryTypographyProps={{
               className: "text-primary-700",
@@ -115,7 +120,11 @@ const ProfileMenu = ({ isMobile }: IProps) => {
             Contact Us
           </ListItemText>
         </MenuItem>
-        <MenuItem divider className="px-6 py-4">
+        <MenuItem
+          divider
+          TouchRippleProps={{ className: "text-primary-main" }}
+          className="px-6 py-4 hover:bg-primary-50/25"
+        >
           <ListItemText
             primaryTypographyProps={{
               className: "text-primary-700",
@@ -124,7 +133,9 @@ const ProfileMenu = ({ isMobile }: IProps) => {
             Help
           </ListItemText>
         </MenuItem>
-        <MenuItem className="px-6 py-4">
+        <MenuItem 
+         TouchRippleProps={{ className: "text-error-700" }}
+        className="px-6 py-4 hover:bg-error-50">
           <ListItemText
             primaryTypographyProps={{
               className: "text-error-700",

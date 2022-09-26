@@ -4,7 +4,7 @@ import Image from "next/image";
 import alert from "@assets/images/alert.png";
 import WalletLogo from "./assets/wallet-logo.svg";
 
-const WalletNavOnDesktop = () => {
+const ProfileNavOnDesktop = () => {
   return (
     <>
       <div className="flex px-1 flex-1 justify-between items-center">
@@ -33,4 +33,4 @@ const WalletNavOnDesktop = () => {
   );
 };
 
-export default WalletNavOnDesktop;
+export default ProfileNavOnDesktop;

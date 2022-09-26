@@ -46,7 +46,8 @@ const FilterScriptsSelect = () => {
         >
           {menuItems.map((item) => (
             <MenuItem
-              className="w-full"
+              TouchRippleProps={{ className: "text-primary-main" }}
+              className="w-full hover:bg-primary-50/25"
               sx={{
                 "&.MuiButtonBase-root": { py: 2 },
                 "&.MuiList-root": { width: "100%" },

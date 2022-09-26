@@ -30,7 +30,7 @@ interface IProps {
   isTransparent: boolean;
 }
 
-const WalletNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
+const ProfileNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNavDashboard();
   const { push } = useRouter();
 
@@ -101,8 +101,8 @@ const WalletNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
           {walletLinks.map((walletLink) => (
             <ListItem disablePadding className="py-1" key={walletLink.title}>
               <ListItemButton
-                TouchRippleProps={{className:"text-primary-main"}}
-                className="px-2 rounded-md"
+                TouchRippleProps={{ className: "text-primary-main" }}
+                className="px-2 rounded-md hover:bg-primary-50/25"
                 onClick={() => push(`${walletLink.href}`)}
               >
                 <ListItemIcon className="min-w-0 mr-3">
@@ -179,4 +179,4 @@ const WalletNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
   );
 };
 
-export default WalletNavOnMobile;
+export default ProfileNavOnMobile;

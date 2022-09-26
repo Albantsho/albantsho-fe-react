@@ -8,8 +8,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Menu,
-  MenuItem,
   SvgIcon,
   Typography,
 } from "@mui/material";
@@ -19,23 +17,12 @@ import { TbArrowsSort } from "react-icons/tb";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import deposit from "@assets/icons/deposit.svg";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import Btn from "@shared/Btn/Btn";
 import routes from "routes/routes";
 
 const WalletCart = () => {
   const { push, route } = useRouter();
-  const [openWalletMenu, setOpenWalletMenu] = useState<null | HTMLElement>(
-    null
-  );
-  const openWallet = Boolean(openWalletMenu);
 
-  const handleOpenWalletMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setOpenWalletMenu(event.currentTarget);
-  };
-  const handleCloseWalletMenu = () => {
-    setOpenWalletMenu(null);
-  };
+
 
   console.log(route);
 
@@ -56,127 +43,19 @@ const WalletCart = () => {
           >
             Jane Mawe
           </Typography>
-          <Btn
-            disableElevation
-            onClick={handleOpenWalletMenu}
-            variant="contained"
-            className="md:hidden px-6 py-3 font-medium"
-            startIcon={<SvgIcon component={wallet} inheritViewBox />}
-          >
-            Balance: $20,000
-          </Btn>
-          <Menu
-            className="md:hidden"
-            anchorEl={openWalletMenu}
-            open={openWallet}
-            onClose={handleCloseWalletMenu}
-            onClick={handleCloseWalletMenu}
-            PaperProps={{
-              elevation: 0,
-              sx: {
-                filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.22))",
-                borderRadius: "8px",
-              },
-            }}
-            transformOrigin={{ horizontal: "center", vertical: "top" }}
-            anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
-          >
-            <MenuItem
-              className="px-6 py-3"
-              onClick={() => push(`${routes.withdrawWallet}`)}
-            >
-              <ListItemIcon>
-                <SvgIcon
-                  fontSize="inherit"
-                  className="text-primary-700"
-                  inheritViewBox
-                  component={RiDownloadLine}
-                />
-              </ListItemIcon>
-              <ListItemText
-                primaryTypographyProps={{
-                  className:
-                    "text-primary-700 futura font-normal leading-normal",
-                }}
-              >
-                Withdraw
-              </ListItemText>
-            </MenuItem>
-            <MenuItem
-              className="px-6 py-3"
-              onClick={() => push(`${routes.depositWallet}`)}
-            >
-              <ListItemIcon>
-                <SvgIcon
-                  fontSize="inherit"
-                  className="text-primary-700"
-                  inheritViewBox
-                  component={deposit}
-                />
-              </ListItemIcon>
-              <ListItemText
-                primaryTypographyProps={{
-                  className:
-                    "text-primary-700 futura font-normal leading-normal",
-                }}
-              >
-                Deposit
-              </ListItemText>
-            </MenuItem>
-            <MenuItem
-              className="px-6 py-3"
-              onClick={() => push(`${routes.transactionHistoryWallet}`)}
-            >
-              <ListItemIcon>
-                <SvgIcon
-                  fontSize="inherit"
-                  className="text-primary-700"
-                  inheritViewBox
-                  component={TbArrowsSort}
-                />
-              </ListItemIcon>
-              <ListItemText
-                primaryTypographyProps={{
-                  className:
-                    "text-primary-700 futura font-normal leading-normal",
-                }}
-              >
-                Transaction History
-              </ListItemText>
-            </MenuItem>
-            <MenuItem
-              className="px-6 py-3"
-              onClick={() => push(`${routes.helpWallet}`)}
-            >
-              <ListItemIcon>
-                <SvgIcon
-                  fontSize="inherit"
-                  className="text-primary-700"
-                  inheritViewBox
-                  component={AiOutlineQuestionCircle}
-                />
-              </ListItemIcon>
-              <ListItemText
-                primaryTypographyProps={{
-                  className:
-                    "text-primary-700 futura font-normal leading-normal",
-                }}
-              >
-                Help
-              </ListItemText>
-            </MenuItem>
-          </Menu>
           <Chip
             title="$20,000"
             sx={{ "& .MuiChip-icon": { color: "#7953B5" } }}
-            className="py-6 hidden md:flex text-primary-700 futura font-medium text-lg px-2 md:px-4  rounded-md bg-primary-50/50"
+            className="py-6 flex text-primary-700 futura font-medium text-lg px-2 md:px-4  rounded-md bg-primary-50/50"
             icon={<SvgIcon color="primary" component={wallet} inheritViewBox />}
             label="Balance:$20,000"
           />
         </div>
         <Divider className="mt-6 mb-4 hidden md:block" />
-        <List className="md:mb-2 hidden md:flex flex-col">
+        <List className="md:mb-2 hidden md:flex flex-col gap-y-2">
           <ListItemButton
+            TouchRippleProps={{ className: "text-primary-main" }}
+            className="hover:bg-primary-50/25"
             selected={route === `${routes.withdrawWallet}`}
             onClick={() => push(`${routes.withdrawWallet}`)}
           >
@@ -198,6 +77,8 @@ const WalletCart = () => {
             </ListItemText>
           </ListItemButton>
           <ListItemButton
+            TouchRippleProps={{ className: "text-primary-main" }}
+            className="hover:bg-primary-50/25"
             selected={route === `${routes.depositWallet}`}
             onClick={() => push(`${routes.depositWallet}`)}
           >
@@ -219,6 +100,8 @@ const WalletCart = () => {
             </ListItemText>
           </ListItemButton>
           <ListItemButton
+            TouchRippleProps={{ className: "text-primary-main" }}
+            className="hover:bg-primary-50/25"
             selected={route === `${routes.transactionHistoryWallet}`}
             onClick={() => push(`${routes.transactionHistoryWallet}`)}
           >
@@ -240,6 +123,8 @@ const WalletCart = () => {
             </ListItemText>
           </ListItemButton>
           <ListItemButton
+            TouchRippleProps={{ className: "text-primary-main" }}
+            className="hover:bg-primary-50/25"
             selected={route === `${routes.helpWallet}`}
             onClick={() => push(`${routes.helpWallet}`)}
           >

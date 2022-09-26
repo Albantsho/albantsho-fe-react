@@ -10,8 +10,8 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
 import routes from "routes/routes";
-import WalletNavOnDesktop from "./DesktopNav/WalletNavOnDesktop";
-import WalletNavOnMobile from "./MobileNav/WalletNavOnMobile";
+import ProfileNavOnDesktop from "./DesktopNav/ProfileNavOnDesktop";
+import ProfileNavOnMobile from "./MobileNav/ProfileNavOnMobile";
 
 const walletLinks = [
   { title: "Withdraw", href: routes.withdrawWallet, icon: RiDownloadLine },
@@ -41,9 +41,9 @@ const ProfileNav = ({ color = "transparent", ...props }: AppBarProps) => {
         component="nav"
       >
         {isLgScreen ? (
-          <WalletNavOnDesktop />
+          <ProfileNavOnDesktop />
         ) : (
-          <WalletNavOnMobile
+          <ProfileNavOnMobile
             walletLinks={walletLinks}
             isTransparent={isTransparent}
           />
