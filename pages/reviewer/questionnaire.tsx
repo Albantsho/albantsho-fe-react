@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Logo from "@shared/Logo/Logo";
+import ProfileNav from "@shared/ProfileNav/ProfileNav";
 import AccordionQuestionnaire from "components/Reviewer/Questionnaire/AccordionQuestionnaire/AccordionQuestionnaire";
 import RatingQuestionnaire from "components/Reviewer/Questionnaire/RatingQuestionnaire/RatingQuestionnaire";
 import Head from "next/head";
@@ -28,6 +29,7 @@ const Questionnaire = () => {
       <Head>
         <title>Albantsho || Questionnaire </title>
       </Head>
+      <ProfileNav color="inherit" position="static" />
       <div className="py-6 md:py-6 lg:py-8 gap-6 bg-[#f6f8fc] px-5 sm:px-10 space-y-6">
         <div className="bg-white shadow-primary rounded-lg py-6 sm:py-10 lg:py-20 text-center max-w-5xl mx-auto px-5">
           <Logo className="mb-4" color="primary" />

@@ -2,6 +2,7 @@ import MenuIcon from "@assets/icons/menu.svg";
 import wallet from "@assets/icons/wallet.svg";
 import {
   Badge,
+  Button,
   Divider,
   Drawer,
   IconButton,
@@ -12,7 +13,6 @@ import {
   ListItemText,
   SvgIcon,
 } from "@mui/material";
-import Logo from "@shared/Logo/Logo";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { AiFillInstagram, AiOutlineClose } from "react-icons/ai";
@@ -20,6 +20,8 @@ import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import ProfileMenu from "../../ProfileMenu/ProfileMenu";
 import alert from "@assets/images/alert.png";
 import useMobileNavDashboard from "./useMobileNavMobile";
+import ProfileLogo from "../assets/profile-logo.svg";
+import Link from "next/link";
 
 interface IProps {
   walletLinks: {
@@ -36,8 +38,16 @@ const ProfileNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
 
   return (
     <>
-      <Logo className={isTransparent ? "text-white" : "text-primary-main"} />
-      <IconButton className="ml-auto mr-7 mt-1 self-center max-h-[31px]">
+      <Link href="/dashboard/projects" passHref>
+        <Button
+          startIcon={<ProfileLogo className="w-5 h-5" />}
+          className="hover:bg-transparent text-xl futura font-medium"
+          disableRipple
+        >
+          Dashboard
+        </Button>
+      </Link>
+      <IconButton className="ml-auto mr-4 sm:mr-7 mt-1 self-center max-h-[31px]">
         <Badge badgeContent={1} color="error">
           <div>
             <Image src={alert} alt="alert" />

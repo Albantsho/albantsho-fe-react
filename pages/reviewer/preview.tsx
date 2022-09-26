@@ -1,3 +1,4 @@
+import ProfileNav from "@shared/ProfileNav/ProfileNav";
 import Description from "components/Reviewer/Preview/Description/Description";
 import Heading from "components/Reviewer/Preview/Heading/Heading";
 import SendReview from "components/Reviewer/Preview/Modals/SendReview/SendReview";
@@ -14,6 +15,7 @@ const Preview = () => {
       <Head>
         <title>Albantsho || Preview</title>
       </Head>
+      <ProfileNav color="inherit" position="static" />
       <div className="py-6 md:py-6 lg:py-8 bg-[#f6f8fc] flex items-center flex-col px-5 sm:px-10">
         <SendReview
           openSendReview={openSendReview}
