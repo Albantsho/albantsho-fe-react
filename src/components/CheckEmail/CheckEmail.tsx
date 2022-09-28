@@ -7,7 +7,11 @@ import check from "./assets/check.png";
 
 const CheckEmail = () => {
   return (
-    <div className="lg:py-28  px-8 py-12 lg:px-24 flex-1 flex justify-center flex-col lg:items-center">
+    <div
+      data-aos="fade-left"
+      data-aos-delay="300"
+      className="lg:py-28  px-8 py-12 lg:px-24 flex-1 flex justify-center flex-col lg:items-center"
+    >
       <div className="mb-2 lg:mb-4 flex lg:flex-col gap-x-8 gap-y-6 items-center">
         <Typography
           variant="h3"

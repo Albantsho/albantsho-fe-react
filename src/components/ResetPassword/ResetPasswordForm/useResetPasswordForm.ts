@@ -5,7 +5,7 @@ interface IAuthResetPassword {
   verify_password: string;
 }
 
-const useResetPassword = () => {
+const useResetPasswordForm = () => {
   const { register, handleSubmit } = useForm<IAuthResetPassword>();
 
   const onSubmit = (data: IAuthResetPassword) => {
@@ -15,4 +15,4 @@ const useResetPassword = () => {
   return { register, onSubmit, handleSubmit };
 };
 
-export default useResetPassword;
+export default useResetPasswordForm;

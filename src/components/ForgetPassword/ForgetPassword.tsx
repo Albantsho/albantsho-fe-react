@@ -11,7 +11,11 @@ import useForgetPassword from "./useForgetPassword";
 const ForgetPassword = () => {
   const { register, handleSubmit, onSubmit } = useForgetPassword();
   return (
-    <div className="lg:py-28 px-8 py-12 lg:px-24  flex-1 flex justify-center flex-col lg:items-center">
+    <div
+      data-aos="fade-left"
+      data-aos-delay="300"
+      className="lg:py-28 px-8 py-12 lg:px-24  flex-1 flex justify-center flex-col"
+    >
       <div className="flex lg:flex-col mb-2  lg:gap-10 items-center">
         <Typography
           variant="h3"
@@ -27,7 +31,7 @@ const ForgetPassword = () => {
       </div>
       <Typography
         variant="body1"
-        className="mt-2 lg:mt-3 lg:text-center  max-w-[430px]  text-[#484848]"
+        className="mt-2 lg:mt-3 lg:text-center lg:mx-auto  max-w-[430px]  text-[#484848]"
       >
         Enter your email and we’ll send you a link to help you get back into
         your account
@@ -44,6 +48,7 @@ const ForgetPassword = () => {
           </Typography>
           <CustomInput
             {...register("email")}
+            fullWidth
             id="email"
             variant="outlined"
             size="medium"

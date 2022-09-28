@@ -33,7 +33,11 @@ const RegisterForm = () => {
   } = useRegisterForm();
 
   return (
-    <div className="px-8 py-6 lg:py-12 lg:px-24 mx-auto">
+    <div
+      data-aos="fade-left"
+      data-aos-delay="300"
+      className="px-8 py-6 lg:py-12 lg:px-24 mx-auto"
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full mt-7 flex flex-col">
           <Typography

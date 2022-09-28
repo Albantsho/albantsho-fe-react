@@ -2,7 +2,11 @@ import { Typography } from "@mui/material";
 
 const TitleLoginForm = () => {
   return (
-    <div className="lg:mt-28 mt-16 px-8  lg:mb-12  lg:px-24  mx-auto">
+    <div
+      data-aos="fade-left"
+      data-aos-delay="300"
+      className="lg:mt-28 mt-16 px-8  lg:mb-12  lg:px-24  mx-auto"
+    >
       <Typography
         variant="h3"
         color="primary.main"

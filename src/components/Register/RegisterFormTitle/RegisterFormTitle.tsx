@@ -1,8 +1,12 @@
 import { Typography } from "@mui/material";
 
-const TitleRegisterForm = () => {
+const RegisterFormTitle = () => {
   return (
-    <div className="lg:mt-28 px-8 mt-16 lg:px-24  mx-auto">
+    <div
+      data-aos="fade-left"
+      data-aos-delay="300"
+      className="lg:mt-28 px-8 mt-16 lg:px-24  mx-auto"
+    >
       <Typography
         variant="h3"
         color="primary.main"
@@ -23,4 +27,4 @@ const TitleRegisterForm = () => {
   );
 };
 
-export default TitleRegisterForm;
+export default RegisterFormTitle;

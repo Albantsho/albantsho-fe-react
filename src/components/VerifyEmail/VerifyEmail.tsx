@@ -12,7 +12,11 @@ const VerifyEmail = () => {
     useVerifyEmail();
 
   return (
-    <div className="px-8 py-12 lg:px-24  mx-auto">
+    <div
+      data-aos="fade-left"
+      data-aos-delay="300"
+      className="px-8 py-12 lg:px-24  mx-auto"
+    >
       <div className="lg:py-32 grid place-content-center mx-auto">
         <div className="flex items-center lg:flex-col">
           <Typography

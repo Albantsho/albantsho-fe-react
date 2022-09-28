@@ -5,26 +5,18 @@ import iconShow from "./assets/icon-show.svg";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
 import routes from "routes/routes";
-import useResetPassword from "./useResetPassword";
+import useResetPasswordForm from "./useResetPasswordForm";
+import ResetPasswordFormTitle from "../ResetPasswordFormTitle/ResetPasswordFormTitle";
 
 const ResetPassword = () => {
-  const { handleSubmit, onSubmit, register } = useResetPassword();
+  const { handleSubmit, onSubmit, register } = useResetPasswordForm();
   return (
-    <div className="px-8 py-12 pb-16 lg:px-24  mx-auto lg:py-24 flex flex-col lg:items-center">
-      <Typography
-        variant="h3"
-        color="primary.main"
-        className="futura font-medium leading-none mb-3"
-      >
-        Create New Password
-      </Typography>
-      <Typography
-        variant="body1"
-        className="text-[#484848] lg:text-primary-main lg:text-center md:max-w-[430px]"
-      >
-        Your new password must be different from all other previously used
-        passwords.
-      </Typography>
+    <div
+      data-aos="fade-left"
+      data-aos-delay="300"
+      className="px-8 py-12 pb-16 lg:px-24  mx-auto lg:py-24 flex flex-col"
+    >
+      <ResetPasswordFormTitle />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full mt-5 flex flex-col">
           <Typography

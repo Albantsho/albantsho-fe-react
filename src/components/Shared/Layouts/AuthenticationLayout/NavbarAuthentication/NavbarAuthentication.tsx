@@ -10,7 +10,11 @@ interface IProps {
 
 const NavbarAuthentication = ({ text, link, buttonText }: IProps) => {
   return (
-    <Box className="px-8 py-12 lg:px-24 hidden lg:flex justify-between">
+    <Box
+      data-aos="fade-down"
+      data-aos-delay="300"
+      className="px-8 py-12 lg:px-24 hidden lg:flex justify-between"
+    >
       <Logo color="primary" />
       <div className="gap-4 flex items-center">
         <Typography variant="body1" className="font-normal text-gray-400">

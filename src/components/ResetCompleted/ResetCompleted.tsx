@@ -5,7 +5,11 @@ import success from "@assets/images/success.png";
 
 const ResetCompleted = () => {
   return (
-    <div className="px-8 py-12 lg:px-24  mx-auto lg:py-28 text-center flex flex-col items-center">
+    <div
+      data-aos="fade-left"
+      data-aos-delay="300"
+      className="px-8 py-12 lg:px-24  mx-auto lg:py-28 text-center flex flex-col items-center"
+    >
       <div>
         <div className="lg:order-1 w-14 h-14 lg:w-24 lg:h-full ">
           <Image src={success} alt="success" />
