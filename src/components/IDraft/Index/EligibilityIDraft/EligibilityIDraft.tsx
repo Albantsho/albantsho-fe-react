@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 const EligibilityIDraft = () => {
   return (
     <div className="px-5 sm:px-10 py-24 bg-[#181025]  pt-16 pb-20">
-      <div className="md:max-w-screen-lg mx-auto">
+      <div data-aos="zoom-out" className="md:max-w-screen-lg mx-auto">
         <Typography
           variant="h5"
           className="font-semibold leading-normal text-white pb-8"

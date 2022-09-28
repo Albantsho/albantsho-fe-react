@@ -51,7 +51,7 @@ const MentorInfoList = () => {
   return (
     <div className="py-4 px-5 sm:px-10 xl:px-32 bg-primary-700">
       <div className="max-w-screen-xl mx-auto relative">
-        <div className="lg:my-24 my-12">
+        <div data-aos="zoom-out-down" className="lg:my-24 my-12">
           <Image src={mentors} alt="mentors" />
         </div>
         <ListStars />
@@ -67,7 +67,7 @@ const MentorInfoList = () => {
             );
           })}
 
-          <div className="my-10 md:my-14">
+          <div data-aos="zoom-out-up" className="my-10 md:my-14">
             <Image src={more} alt="more" />
           </div>
         </div>

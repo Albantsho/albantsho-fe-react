@@ -22,7 +22,13 @@ const Nav = ({ color = "transparent", ...props }: AppBarProps) => {
   const isTransparent = useMemo(() => color === "transparent", [color]);
 
   return (
-    <AppBar position="absolute" elevation={0} color={color} {...props}>
+    <AppBar
+      className={`${color !== "transparent" && "shadow-primary z-10"}`}
+      position="absolute"
+      elevation={0}
+      color={color}
+      {...props}
+    >
       <Toolbar
         className="py-2 lg:py-5 px-5 sm:px-10 max-w-screen-2xl mx-auto w-full justify-between"
         component="nav"

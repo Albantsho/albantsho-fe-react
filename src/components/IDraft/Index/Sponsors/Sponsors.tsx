@@ -26,7 +26,11 @@ const brands = [
 const Sponsors = () => {
   return (
     <div className=" mx-auto  justify-center px-5 sm:px-10 -mt-12 md:-mt-8 lg:-mt-4 xl:mt-0   pb-16">
-      <div className="mx-auto  rounded-2xl bg-[#F9F5FF] max-w-[950px]">
+      <div
+        data-aos="flip-left"
+        data-aos-duration="1000"
+        className="mx-auto  rounded-2xl bg-[#F9F5FF] max-w-[950px]"
+      >
         <Typography
           variant="h6"
           color="grey.900"

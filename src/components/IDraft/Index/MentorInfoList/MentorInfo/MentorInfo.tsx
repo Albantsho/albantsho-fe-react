@@ -11,6 +11,7 @@ interface IProps {
 const MentorInfo = ({ image, name, description }: IProps) => {
   return (
     <div
+      data-aos="flip-up"
       className={`${
         name !== "FUNMI ODUSHOLA" && "border-b  border-tinted-100"
       } flex flex-col gap-4 md:gap-10 md:flex-row pb-10`}

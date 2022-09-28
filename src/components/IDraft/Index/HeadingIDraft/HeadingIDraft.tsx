@@ -6,7 +6,7 @@ import commentImage from "./assets/comment-image.png";
 const HeadingIDraft = () => {
   return (
     <div className="flex max-w-screen-lg mx-auto justify-between gap-5 w-full px-5 sm:px-10 py-16 lg:py-28 items-center">
-      <div className="max-w-[607px]">
+      <div data-aos="fade-right" className="max-w-[607px]">
         <Typography
           variant="h5"
           color="grey.900"
@@ -22,7 +22,7 @@ const HeadingIDraft = () => {
           </Btn>
         </div>
       </div>
-      <div className="hidden lg:block">
+      <div data-aos="fade-left" className="hidden lg:block">
         <Image src={commentImage} objectFit="cover" alt="commentImage" />
       </div>
     </div>

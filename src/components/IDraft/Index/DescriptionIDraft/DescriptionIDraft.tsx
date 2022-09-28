@@ -5,7 +5,10 @@ import vector from "./assets/vector.png";
 const DescriptionIDraft = () => {
   return (
     <div className=" bg-[#e5e5e5]">
-      <div className="pt-14 px-5 sm:px-10 pb-14 flex flex-col items-center lg:flex-row max-w-screen-lg justify-between mx-auto w-full   ">
+      <div
+        data-aos="fade-up"
+        className="pt-14 px-5 sm:px-10 pb-14 flex flex-col items-center lg:flex-row max-w-screen-lg justify-between mx-auto w-full   "
+      >
         <div className="xl:ml-4 mb-10 ">
           <Image src={vector} alt="tv-show" layout="fixed" />
         </div>

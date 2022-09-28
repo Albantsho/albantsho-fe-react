@@ -33,7 +33,10 @@ const BenefitsIDraft = () => {
         BENEFITS
       </Typography>
 
-      <div className="flex max-w-md sm:items-center sm:justify-center sm:mx-auto   py-4 pb-16">
+      <div
+        data-aos="zoom-in-down"
+        className="flex max-w-md sm:items-center sm:justify-center sm:mx-auto   py-4 pb-16"
+      >
         <Timeline className=" px-0">
           {benefitsList.map((item, index) => {
             return (
