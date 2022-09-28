@@ -7,10 +7,10 @@ import routes from "routes/routes";
 interface IProps {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
-  setOpenModalSaveProgress: Dispatch<SetStateAction<boolean>>;
+  setOpenSaveProgressModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
+const ButtonsSteps = ({ step, setStep, setOpenSaveProgressModal }: IProps) => {
   return (
     <>
       <div className="flex justify-between mt-20">
@@ -30,7 +30,7 @@ const ButtonsSteps = ({ step, setStep, setOpenModalSaveProgress }: IProps) => {
           </Button>
         </Link>
         <Button
-          onClick={() => setOpenModalSaveProgress(true)}
+          onClick={() => setOpenSaveProgressModal(true)}
           className="rounded-md px-8 py-3 mx-auto"
           variant="outlined"
         >

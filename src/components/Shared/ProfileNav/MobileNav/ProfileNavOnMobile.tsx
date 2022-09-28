@@ -34,7 +34,7 @@ interface IProps {
 
 const ProfileNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNavDashboard();
-  const { push } = useRouter();
+  const { push, route } = useRouter();
 
   return (
     <>
@@ -111,6 +111,7 @@ const ProfileNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
           {walletLinks.map((walletLink) => (
             <ListItem disablePadding className="py-1" key={walletLink.title}>
               <ListItemButton
+                selected={route === walletLink.href}
                 TouchRippleProps={{ className: "text-primary-main" }}
                 className="px-2 rounded-md hover:bg-primary-50/25"
                 onClick={() => push(`${walletLink.href}`)}

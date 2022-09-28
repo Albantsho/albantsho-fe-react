@@ -3,7 +3,6 @@ import MarketplaceProducts from "components/Marketplace/Index/MarketList/Marketp
 import PaginationMarketList from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
 import TabsMarketplace from "components/Marketplace/Index/TabsMarketplace/TabsMarketplace";
 import Head from "next/head";
-import React from "react";
 import { NextPageWithLayout } from "../_app";
 
 const marketPlace: NextPageWithLayout = () => {

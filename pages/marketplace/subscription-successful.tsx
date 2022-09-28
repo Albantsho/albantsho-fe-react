@@ -7,6 +7,7 @@ import Link from "next/link";
 import success from "@assets/images/success.png";
 import Image from "next/image";
 import routes from "routes/routes";
+import { Suspense } from "react";
 
 const subscriptionSuccessful = () => {
   return (
@@ -48,7 +49,9 @@ const subscriptionSuccessful = () => {
           </Btn>
         </Link>
       </div>
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </>
   );
 };

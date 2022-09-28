@@ -55,7 +55,6 @@ const ScriptsSearch = () => {
           }}
           value={selectedStore}
           onChange={(value, newValue: MoviesOptionType | null): void => {
-            console.log(value);
             setSelectedStory(newValue);
           }}
           options={moviesList}

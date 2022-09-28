@@ -11,7 +11,7 @@ const ListStars = () => {
         <Star isSmall="isSmall" />
       </div>
 
-      <div className="absolute bottom-[32%]  xl:bottom-[20%] right-4 lg:-right-[100px] hidden md:block ">
+      <div className="absolute bottom-[30%]  xl:bottom-[20%] right-4 lg:-right-[100px] hidden md:block ">
         <Star />
       </div>
 

@@ -3,13 +3,20 @@ import SearchDashboard from "@shared/Layouts/DashboardLayout/SearchDashboard/Sea
 import Head from "next/head";
 import { NextPageWithLayout } from "../../_app";
 import { useRouter } from "next/router";
-import CreateScriptModal from "@shared/Modals/CreateScriptModal/CreateScriptModal";
 import ListScriptsPage from "components/Dashboard/Projects/Archive/ListScripts/ListScripts";
-import ModalArchive from "components/Dashboard/Projects/Archive/ModalArchive/ModalArchive";
 import { useState } from "react";
 import { Fab } from "@mui/material";
 import TabButtons from "components/Dashboard/Projects/TabButtons/TabButtons";
 import ProjectAccordionList from "components/Dashboard/Projects/Scripts/ProjectAccordionList/ProjectAccordionList";
+import dynamic from "next/dynamic";
+
+const ModalArchive = dynamic(
+  () =>
+    import("components/Dashboard/Projects/Archive/ModalArchive/ModalArchive")
+);
+const CreateScriptModal = dynamic(
+  () => import("@shared/Modals/CreateScriptModal/CreateScriptModal")
+);
 
 const Projects: NextPageWithLayout = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);

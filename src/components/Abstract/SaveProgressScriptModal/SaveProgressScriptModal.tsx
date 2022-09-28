@@ -6,25 +6,25 @@ import success from "@assets/images/success.png";
 import { Dispatch, SetStateAction } from "react";
 
 interface IProps {
-  openModalSaveProgress: boolean;
-  setOpenModalSaveProgress: Dispatch<SetStateAction<boolean>>;
+  openSaveProgressModal: boolean;
+  setOpenSaveProgressModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const ModalSaveProgressScript = ({
-  openModalSaveProgress,
-  setOpenModalSaveProgress,
+const SaveProgressScriptModal = ({
+  openSaveProgressModal,
+  setOpenSaveProgressModal,
 }: IProps) => {
   return (
     <Modal
-      open={openModalSaveProgress}
-      onClick={() => setOpenModalSaveProgress(false)}
+      open={openSaveProgressModal}
+      onClick={() => setOpenSaveProgressModal(false)}
       className="px-5"
     >
-      <Grow in={openModalSaveProgress}>
+      <Grow in={openSaveProgressModal}>
         <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-xl mx-auto flex flex-col items-center py-16 rounded-lg">
           <IconButton
             color="error"
-            onClick={() => setOpenModalSaveProgress(false)}
+            onClick={() => setOpenSaveProgressModal(false)}
             className="absolute top-5 right-5"
           >
             <AiOutlineClose />
@@ -47,7 +47,7 @@ const ModalSaveProgressScript = ({
               Back to dash board
             </Btn>
             <Button
-              onClick={() => setOpenModalSaveProgress(false)}
+              onClick={() => setOpenSaveProgressModal(false)}
               variant="outlined"
               size="large"
               className="py-3 px-5"
@@ -61,4 +61,4 @@ const ModalSaveProgressScript = ({
   );
 };
 
-export default ModalSaveProgressScript;
+export default SaveProgressScriptModal;

@@ -19,6 +19,7 @@ const plans = [
 ];
 
 import Head from "next/head";
+import { Suspense } from "react";
 
 const Subscription = () => {
   return (
@@ -87,7 +88,9 @@ const Subscription = () => {
           </CardActions>
         </Card>
       </div>
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </>
   );
 };

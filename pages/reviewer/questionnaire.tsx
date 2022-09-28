@@ -2,9 +2,22 @@ import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Logo from "@shared/Logo/Logo";
 import ProfileNav from "@shared/ProfileNav/ProfileNav";
-import AccordionQuestionnaire from "components/Reviewer/Questionnaire/AccordionQuestionnaire/AccordionQuestionnaire";
-import RatingQuestionnaire from "components/Reviewer/Questionnaire/RatingQuestionnaire/RatingQuestionnaire";
 import Head from "next/head";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+
+const AccordionQuestionnaire = dynamic(
+  () =>
+    import(
+      "components/Reviewer/Questionnaire/AccordionQuestionnaire/AccordionQuestionnaire"
+    )
+);
+const RatingQuestionnaire = dynamic(
+  () =>
+    import(
+      "components/Reviewer/Questionnaire/RatingQuestionnaire/RatingQuestionnaire"
+    )
+);
 
 const listQuestionnaireAccordion = [
   { title: "INTRODUCTION" },
@@ -61,14 +74,16 @@ const Questionnaire = () => {
         </div>
 
         <div className="rounded-lg text-center max-w-5xl mx-auto space-y-6">
-          {listQuestionnaireAccordion.map((accordionTitle) => (
-            <AccordionQuestionnaire
-              key={accordionTitle.title}
-              title={accordionTitle.title}
-              description={accordionTitle.description}
-            />
-          ))}
-          <RatingQuestionnaire />
+          <Suspense fallback={null}>
+            {listQuestionnaireAccordion.map((accordionTitle) => (
+              <AccordionQuestionnaire
+                key={accordionTitle.title}
+                title={accordionTitle.title}
+                description={accordionTitle.description}
+              />
+            ))}
+            <RatingQuestionnaire />
+          </Suspense>
           <Btn fullWidth className="mt-6 py-4 rounded-lg">
             COMPLETE REVIEW
           </Btn>

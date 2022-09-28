@@ -112,25 +112,35 @@ const AuctionsScripts = ({ setOpenAcceptOffer }: IProps) => {
                 </TableCell>
                 <TableCell>
                   <div className="flex justify-end min-w-[240px]">
-                    <ButtonGroup className="border-none md:gap-8">
+                    <div className="flex md:gap-8">
                       <Button
+                        variant="text"
+                        color="success"
                         onClick={handleOpenAcceptOfferModal}
-                        className="hidden sm:flex border-none hover:border-none font-semibold text-success-500"
+                        className="hidden sm:flex font-semibold text-success-500"
                       >
                         Accept Offer
                       </Button>
-                      <Button className="hidden sm:flex border-none hover:border-none font-semibold text-secondary-700">
+                      <Button
+                        variant="text"
+                        color="warning"
+                        className="hidden sm:flex font-semibold text-secondary-700"
+                      >
                         Decline
                       </Button>
-                    </ButtonGroup>
+                    </div>
                     <ButtonGroup className="gap-16">
                       <IconButton
+                        color="success"
                         onClick={handleOpenAcceptOfferModal}
                         className="flex sm:hidden text-success-500"
                       >
                         <MdDone />
                       </IconButton>
-                      <IconButton className="flex sm:hidden text-secondary-700">
+                      <IconButton
+                        color="warning"
+                        className="flex sm:hidden text-secondary-700"
+                      >
                         <AiOutlineClose />
                       </IconButton>
                     </ButtonGroup>

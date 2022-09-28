@@ -1,7 +1,9 @@
-import Footer from "@shared/Footer/Footer";
-import React from "react";
+import dynamic from "next/dynamic";
+import React, { Suspense } from "react";
 import Nav from "../GeneralLayout/Nav/Nav";
 import ImageSection from "./ImageSection/ImageSection";
+
+const Footer = dynamic(() => import("@shared/Footer/Footer"));
 
 interface IProps {
   children: React.ReactNode;
@@ -13,7 +15,9 @@ const IDraftLayout = ({ children }: IProps) => {
       <Nav color="inherit" position="static" />
       <ImageSection />
       {children}
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </main>
   );
 };

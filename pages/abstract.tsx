@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Head from "next/head";
 import DashboardNav from "@shared/Layouts/DashboardLayout/DashboardNav/DashboardNav";
-import ModalSaveProgressScript from "components/Abstract/ModalSaveProgressScript/ModalSaveProgressScript";
 import { useRouter } from "next/router";
 import GeneralScriptProfile from "components/Abstract/GeneralScriptProfile/GeneralScriptProfile";
 import StoryLine from "components/Abstract/StoryLine/StoryLine";
@@ -13,10 +12,18 @@ import UploadScriptFiles from "components/Abstract/UploadScriptFiles/UploadScrip
 import UploadImage from "components/Abstract/UploadImage/UploadImage";
 import LineSteps from "components/Abstract/LineSteps/LineSteps";
 import ButtonsSteps from "components/Abstract/ButtonsSteps/ButtonsSteps";
+import dynamic from "next/dynamic";
+
+const SaveProgressScriptModal = dynamic(
+  () =>
+    import(
+      "components/Abstract/SaveProgressScriptModal/SaveProgressScriptModal"
+    )
+);
 
 const Abstract = () => {
   const [step, setStep] = useState(1);
-  const [openModalSaveProgress, setOpenModalSaveProgress] = useState(false);
+  const [openSaveProgressModal, setOpenSaveProgressModal] = useState(false);
   const [activeButton, setActiveButton] = useState<number>(0);
 
   const { query } = useRouter();
@@ -33,10 +40,13 @@ const Abstract = () => {
         <title>Albantsho || Abstract</title>
       </Head>
       <DashboardNav color="inherit" position="static" />
-      <ModalSaveProgressScript
-        openModalSaveProgress={openModalSaveProgress}
-        setOpenModalSaveProgress={setOpenModalSaveProgress}
-      />
+      <Suspense fallback={null}>
+        <SaveProgressScriptModal
+          openSaveProgressModal={openSaveProgressModal}
+          setOpenSaveProgressModal={setOpenSaveProgressModal}
+        />
+      </Suspense>
+
       <div className="px-5 sm:px-10 py-10 md:py-20 bg-gray-50">
         <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto">
           <LineSteps step={step} />
@@ -61,7 +71,7 @@ const Abstract = () => {
           )}
           {Number(query.step) === 7 && <UploadImage />}
           <ButtonsSteps
-            setOpenModalSaveProgress={setOpenModalSaveProgress}
+            setOpenSaveProgressModal={setOpenSaveProgressModal}
             step={step}
             setStep={setStep}
           />

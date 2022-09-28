@@ -40,6 +40,7 @@ const PersonalWithdrawalDetails = () => {
               </Typography>
             </label>
             <CustomInput
+              disabled={availableChangeValue}
               sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="account-name"
@@ -77,6 +78,8 @@ const PersonalWithdrawalDetails = () => {
               </Typography>
             </label>
             <CustomInput
+              disabled={availableChangeValue}
+              className="disabled:text-red-700"
               sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="account-number"

@@ -3,6 +3,8 @@ import {
   Divider,
   IconButton,
   InputAdornment,
+  ListItemText,
+  MenuItem,
   SvgIcon,
   Typography,
 } from "@mui/material";
@@ -45,6 +47,7 @@ const BasicPersonalInformation = () => {
               </Typography>
             </label>
             <CustomInput
+              disabled={availableChangeValue}
               sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="first-name"
@@ -82,6 +85,7 @@ const BasicPersonalInformation = () => {
               </Typography>
             </label>
             <CustomInput
+              disabled={availableChangeValue}
               sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="last-name"
@@ -137,13 +141,29 @@ const BasicPersonalInformation = () => {
               </Typography>
             </label>
             <CustomInput
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
+              select
+              sx={{
+                "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
+                "& .MuiSvgIcon-root": {
+                  color: "#7953B5",
+                },
+              }}
               fullWidth
               id="country"
               variant="outlined"
               size="small"
               defaultValue="Nigeria"
-            />
+            >
+              <MenuItem
+                TouchRippleProps={{ className: "text-primary-main" }}
+                className="w-full hover:bg-primary-50/25"
+                value="Nigeria"
+              >
+                <ListItemText className="text-primary-700">
+                  Nigeria
+                </ListItemText>
+              </MenuItem>
+            </CustomInput>
           </div>
           <Btn className="mt-2  xl:mt-5 py-3 px-6 mr-auto md:mr-0 md:ml-auto">
             Save and Update

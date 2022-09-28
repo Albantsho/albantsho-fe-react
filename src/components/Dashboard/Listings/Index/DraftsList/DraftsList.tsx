@@ -1,7 +1,9 @@
 import { Typography } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import dynamic from "next/dynamic";
+import { Dispatch, SetStateAction, Suspense } from "react";
 import UncompletedList from "./UncompletedList/UncompletedList";
-import UnlistedList from "./UnlistedList/UnlistedList";
+
+const UnlistedList = dynamic(() => import("./UnlistedList/UnlistedList"));
 
 interface IProps {
   setOpenAddToScript: Dispatch<SetStateAction<boolean>>;
@@ -30,7 +32,9 @@ const DraftsList = ({ setOpenRelistScript, setOpenAddToScript }: IProps) => {
           Unlisted
         </Typography>
       </div>
-      <UnlistedList setOpenRelistScript={setOpenRelistScript} />
+      <Suspense fallback={null}>
+        <UnlistedList setOpenRelistScript={setOpenRelistScript} />
+      </Suspense>
     </div>
   );
 };

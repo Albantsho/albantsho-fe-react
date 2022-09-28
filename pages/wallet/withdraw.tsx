@@ -129,7 +129,6 @@ const Withdraw: NextPageWithLayout = () => {
             size="medium"
           />
         </div>
-
         <Btn className="py-3 px-6">Withdraw</Btn>
       </div>
     </>

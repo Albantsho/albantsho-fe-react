@@ -1,7 +1,9 @@
-import Footer from "@shared/Footer/Footer";
+import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
 import Nav from "../GeneralLayout/Nav/Nav";
 import HeroSection from "./HeroSection/HeroSection";
+
+const Footer = dynamic(() => import("@shared/Footer/Footer"));
 
 interface IProps {
   children: React.ReactNode;

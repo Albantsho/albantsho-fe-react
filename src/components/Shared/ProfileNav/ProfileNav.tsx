@@ -25,7 +25,7 @@ const walletLinks = [
 ];
 
 const ProfileNav = ({ color = "transparent", ...props }: AppBarProps) => {
-  const isLgScreen = useMediaQuery("(min-width: 1024px)");
+  const isLgScreen = useMediaQuery("(min-width: 768px)");
   const isTransparent = useMemo(() => color === "transparent", [color]);
 
   return (

@@ -22,10 +22,6 @@ import routes from "routes/routes";
 const WalletCart = () => {
   const { push, route } = useRouter();
 
-
-
-  console.log(route);
-
   return (
     <Card
       elevation={0}
