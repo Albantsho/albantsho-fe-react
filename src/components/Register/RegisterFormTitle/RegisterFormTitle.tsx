@@ -2,11 +2,7 @@ import { Typography } from "@mui/material";
 
 const RegisterFormTitle = () => {
   return (
-    <div
-      data-aos="fade-left"
-      data-aos-delay="300"
-      className="lg:mt-28 px-8 mt-16 lg:px-24  mx-auto"
-    >
+    <div className="lg:mt-28 px-8 mt-16 lg:px-24  mx-auto">
       <Typography
         variant="h3"
         color="primary.main"

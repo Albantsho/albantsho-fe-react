@@ -3,8 +3,6 @@ import { Typography } from "@mui/material";
 const TitleLoginForm = () => {
   return (
     <div
-      data-aos="fade-left"
-      data-aos-delay="300"
       className="lg:mt-28 mt-16 px-8  lg:mb-12  lg:px-24  mx-auto"
     >
       <Typography

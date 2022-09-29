@@ -16,8 +16,12 @@ const Register: NextPageWithLayout = () => {
         link="signin"
         buttonText="SIGN IN"
       />
-      <RegisterFormTitle />
-      <RegisterForm />
+      <div className="overflow-hidden">
+        <div data-aos="fade-up" data-aos-delay="300">
+          <RegisterFormTitle />
+          <RegisterForm />
+        </div>
+      </div>
     </>
   );
 };

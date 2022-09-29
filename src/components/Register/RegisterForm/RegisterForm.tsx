@@ -34,8 +34,6 @@ const RegisterForm = () => {
 
   return (
     <div
-      data-aos="fade-left"
-      data-aos-delay="300"
       className="px-8 py-6 lg:py-12 lg:px-24 mx-auto"
     >
       <form onSubmit={handleSubmit(onSubmit)}>

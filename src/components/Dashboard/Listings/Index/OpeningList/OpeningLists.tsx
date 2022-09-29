@@ -103,7 +103,10 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
       <div className="px-5 xl:px-14">
         {listScripts.map((script) => (
           <React.Fragment key={script.id}>
-            <div className="flex flex-col sm:flex-row py-6 xl:py-10 sm:justify-start  md:justify-end 2xl:justify-start">
+            <div
+              data-aos="zoom-in"
+              className="flex flex-col sm:flex-row py-6 xl:py-10 sm:justify-start  md:justify-end 2xl:justify-start"
+            >
               <div className="flex flex-col sm:flex-row sm:mr-10 md:mr-6 lg:mr-8 gap-y-1 gap-x-3 xl:gap-5 sm:w-auto xl:mr-12 lg:max-w-[445px] 2xl:max-w-[425px] 2xl:mr-[65px]">
                 <div className="flex gap-3">
                   <div className="flex-shrink-0 mt-1">

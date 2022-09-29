@@ -16,8 +16,12 @@ const Login: NextPageWithLayout = () => {
         link="signup"
         buttonText="SIGN UP"
       />
-      <TitleLoginForm />
-      <LoginForm />
+      <div className="overflow-hidden">
+        <div data-aos="fade-up" data-aos-delay="300">
+          <TitleLoginForm />
+          <LoginForm />
+        </div>
+      </div>
     </>
   );
 };

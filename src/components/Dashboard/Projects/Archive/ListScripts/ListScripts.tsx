@@ -94,6 +94,7 @@ const ListScripts = ({ setOpenModalUnArchive }: IProps) => {
       <TableBody className="px-6 xl:px-14">
         {listScripts.map((script) => (
           <TableRow
+            data-aos="fade-up"
             sx={{
               "& td, & th": {
                 borderBottom: { xs: 0, sm: "1px solid #DCD8E4" },
