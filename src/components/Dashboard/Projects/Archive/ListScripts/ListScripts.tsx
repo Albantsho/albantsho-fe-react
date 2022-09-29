@@ -91,7 +91,7 @@ const ListScripts = ({ setOpenModalUnArchive }: IProps) => {
           <TableCell className=" hidden md:flex xl:flex-[0.1]"></TableCell>
         </TableRow>
       </TableHead>
-      <TableBody className="px-6 xl:px-14">
+      <TableBody className="px-6 xl:px-14 overflow-hidden">
         {listScripts.map((script) => (
           <TableRow
             data-aos="fade-up"

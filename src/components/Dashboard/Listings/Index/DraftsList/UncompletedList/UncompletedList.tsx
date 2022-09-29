@@ -77,10 +77,13 @@ const UncompletedList = ({ setOpenAddToScript }: IProps) => {
         </Typography>
         <Typography></Typography>
       </div>
-      <div className="px-5 xl:px-14">
+      <div className="px-5 xl:px-14 overflow-hidden">
         {uncompletedList.map((listItem, index) => (
           <React.Fragment key={listItem.id}>
-            <div className="flex py-6 items-center sm:justify-between xl:justify-start">
+            <div
+              data-aos="fade-up"
+              className="flex py-6 items-center sm:justify-between xl:justify-start"
+            >
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-14 lg:max-w-[445px] ">
                 <div className="flex gap-3 items-end sm:items-start">
                   <Image

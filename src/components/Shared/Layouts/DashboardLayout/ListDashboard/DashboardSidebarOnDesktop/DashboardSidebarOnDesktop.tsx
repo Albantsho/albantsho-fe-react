@@ -33,8 +33,9 @@ const DashboardSidebarOnDesktop = () => {
   const { route } = useRouter();
 
   return (
-    <div className="min-h-screen relative bg-primary-900">
+    <div className="min-h-screen relative bg-primary-900 overflow-hidden">
       <Drawer
+        data-aos="fade-right"
         sx={{
           width: drawerWidth,
           "& .MuiDrawer-paper": {
@@ -94,7 +95,11 @@ const DashboardSidebarOnDesktop = () => {
           ))}
         </List>
       </Drawer>
-      <div className="fixed text-white hidden lg:flex gap-6  justify-start bottom-8 left-[90px]">
+      <div
+        data-aos-anchor-placement="top-bottom"
+        data-aos="zoom-in"
+        className="fixed text-white hidden lg:flex gap-6  justify-start bottom-8 left-[90px]"
+      >
         <IconButton
           href="https://www.twitter.com/albantsho"
           target="_blank"

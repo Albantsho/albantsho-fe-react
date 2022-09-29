@@ -55,7 +55,7 @@ const DashboardNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
       </IconButton>
 
       <Drawer
-        className="relative"
+        className="relative  overflow-hidden h-fit"
         sx={{
           "& .MuiPaper-root": {
             maxWidth: "290px",

@@ -100,7 +100,7 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
           Bids
         </Typography>
       </div>
-      <div className="px-5 xl:px-14">
+      <div className="px-5 xl:px-14 overflow-hidden">
         {listScripts.map((script) => (
           <React.Fragment key={script.id}>
             <div

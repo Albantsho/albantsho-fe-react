@@ -84,9 +84,10 @@ const ClosedList = () => {
           </TableCell>
         </TableRow>
       </TableHead>
-      <TableBody className="px-1  xl:px-12">
+      <TableBody className="px-1  xl:px-12 overflow-hidden">
         {closedList.map((listItem) => (
           <TableRow
+            data-aos="fade-right"
             key={listItem.id}
             sx={{
               "& td, & th": {

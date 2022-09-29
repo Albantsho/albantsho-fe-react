@@ -1,6 +1,5 @@
 import {
   Button,
-  ButtonGroup,
   Chip,
   Divider,
   SvgIcon,
@@ -86,7 +85,7 @@ const BidsPage = ({ setOpenAcceptOffer }: IProps) => {
                 @$6,000
               </Typography>
             </div>
-            <ButtonGroup className="border-none items-stretch md:items-end md:pb-2  md:-ml-24 gap-x-2 md:gap-x-8 xl:gap-x-12">
+            <div className="border-none flex items-stretch md:items-end md:pb-2  md:-ml-24 gap-x-2 md:gap-x-8 xl:gap-x-12">
               <Button
                 onClick={() => setOpenAcceptOffer(true)}
                 sx={{ "&.MuiButtonBase-root": { fontWeight: 600 } }}
@@ -104,7 +103,7 @@ const BidsPage = ({ setOpenAcceptOffer }: IProps) => {
               >
                 Decline
               </Button>
-            </ButtonGroup>
+            </div>
           </div>
           <BidsInProgress />
           <BidsCompleted />
