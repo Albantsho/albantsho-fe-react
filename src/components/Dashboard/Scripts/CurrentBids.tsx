@@ -78,9 +78,10 @@ const CurrentBids = () => {
           <TableCell className="hidden md:flex lg:w-full xl:w-auto 2xl:flex-1 xl:pb-8 pb-5 pt-0"></TableCell>
         </TableRow>
       </TableHead>
-      <TableBody className="px-5 xl:px-12">
+      <TableBody className="px-5 xl:px-12 overflow-hidden">
         {CurrentBidsArray.map((bid) => (
           <TableRow
+            data-aos="fade-up"
             key={bid.id}
             sx={{
               "& td, & th": {

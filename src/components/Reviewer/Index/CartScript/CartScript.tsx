@@ -14,6 +14,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 const CartScript = () => {
   return (
     <Card
+    data-aos="fade-left"
       elevation={0}
       className="h-fit hidden lg:block shadow-primary  pt-7 pb-3 flex-[0.7]  xl:flex-[0.55] max-w-2xl"
     >

@@ -1,9 +1,13 @@
 import { Divider, Tab, Tabs } from "@mui/material";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import beautySmall from "@assets/images/beauty-small.jpg";
 import ListTask from "./ListTask/ListTask";
-import DetailScriptModal from "../DetailScriptModal/DetailScriptModal";
 import React from "react";
+import dynamic from "next/dynamic";
+
+const DetailScriptModal = dynamic(
+  () => import("../DetailScriptModal/DetailScriptModal")
+);
 
 const tasks = [
   {
@@ -52,7 +56,10 @@ const ListTasks = () => {
   };
 
   return (
-    <div className="flex flex-col flex-1 mb-16 shadow-primary">
+    <div
+      data-aos="fade-right"
+      className="flex flex-col flex-1 mb-16 shadow-primary"
+    >
       <Tabs
         value={activeLinkIndex}
         onChange={activeLinkChange}
@@ -87,13 +94,13 @@ const ListTasks = () => {
           label="History"
         />
       </Tabs>
-
-      <DetailScriptModal
-        openDetailScript={openDetailScript}
-        setOpenDetailScript={setOpenDetailScript}
-      />
-
-      <div className=" bg-white rounded-md shadow-sm flex flex-col">
+      <Suspense fallback={null}>
+        <DetailScriptModal
+          openDetailScript={openDetailScript}
+          setOpenDetailScript={setOpenDetailScript}
+        />
+      </Suspense>
+      <div className=" bg-white rounded-md shadow-sm flex flex-col overflow-hidden">
         {tasks.map((task, index) => (
           <React.Fragment key={index}>
             <ListTask

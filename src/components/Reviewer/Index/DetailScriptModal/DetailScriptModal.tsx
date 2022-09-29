@@ -1,6 +1,5 @@
-import { Button, Chip, Divider, Grow, Modal, Typography } from "@mui/material";
+import { Button, Chip, Divider, Grow, Modal, Rating, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import CustomRating from "@shared/CustomRating/CustomRating";
 import { Dispatch, SetStateAction } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 
@@ -86,13 +85,8 @@ const DetailScriptModal = ({
               >
                 Rating:
               </Typography>
-              <CustomRating
-                name="half-rating"
-                defaultValue={4.5}
-                precision={0.5}
-              />
+              <Rating/>
             </div>
-
             <Btn className="w-full  py-3">Begin review</Btn>
           </div>
         </div>

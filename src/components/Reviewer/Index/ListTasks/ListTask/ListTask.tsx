@@ -17,6 +17,8 @@ const ListTask = ({
 }: IProps) => {
   return (
     <div
+      data-aos-anchor-placement="top-bottom"
+      data-aos="fade-up"
       onClick={() => {
         setOpenDetailScript(true);
       }}
