@@ -65,10 +65,13 @@ const ListScripts = () => {
         </Typography>
         <Typography></Typography>
       </div>
-      <div className="px-5 xl:px-14">
+      <div className="px-5 xl:px-14 overflow-hidden">
         {listScripts.map((script, index) => (
           <React.Fragment key={script.id}>
-            <div className="flex py-6 xl:py-10 items-center sm:justify-between md:justify-end 2xl:justify-start">
+            <div
+              data-aos="fade-up"
+              className="flex py-6 xl:py-10 items-center sm:justify-between md:justify-end 2xl:justify-start"
+            >
               <div className="sm:flex md:w-fit xl:mr-14 lg:max-w-[445px] 2xl:max-w-[425px] 2xl:mr-[75px]">
                 <div className="flex gap-4 sm:mr-3 md:mr-[85px]">
                   <div className="flex-shrink-0">

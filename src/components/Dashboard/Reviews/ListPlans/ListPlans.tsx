@@ -38,6 +38,8 @@ const ListPlans = () => {
       <Divider />
       <div className="mt-7 lg:mt-12  sm:px-0 justify-center items-center w-full flex flex-col md:flex-row lg:flex-col xl:flex-row  gap-y-3 md:gap-8 xl:gap-10">
         <Card
+          data-aos="flip-left"
+          data-aos-anchor-placement="top-bottom"
           elevation={7}
           sx={{
             maxWidth: { xs: 400 },
@@ -88,6 +90,8 @@ const ListPlans = () => {
           </CardActions>
         </Card>
         <Card
+          data-aos="flip-right"
+          data-aos-anchor-placement="top-bottom"
           elevation={7}
           sx={{
             maxWidth: { xs: 400 },

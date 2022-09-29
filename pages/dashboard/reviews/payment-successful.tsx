@@ -14,7 +14,11 @@ const PaymentSuccessful: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Payment Successful </title>
       </Head>
-      <div className="py-24 md:py-32 px-5 md:px-16 mt-5 shadow-primary text-center rounded-md mx-auto bg-white">
+      <div
+        data-aos="zoom-in"
+        data-aos-delay="300"
+        className="py-24 md:py-32 px-5 md:px-16 mt-5 shadow-primary text-center rounded-md mx-auto bg-white"
+      >
         <div className="mb-3 sm:mb-4 lg:mb-8 xl:mb-10">
           <Image src={success} alt="success" />
         </div>

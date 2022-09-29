@@ -14,6 +14,7 @@ const Heading = ({ showSearchScript }: IProps) => {
 
   return (
     <div
+      data-aos="flip-left"
       className={`${
         showSearchScript && "shadow-primary"
       } bg-white rounded-md px-5 md:px-8 lg:px-10 xl:px-14 py-9 lg:py-16 mt-4`}

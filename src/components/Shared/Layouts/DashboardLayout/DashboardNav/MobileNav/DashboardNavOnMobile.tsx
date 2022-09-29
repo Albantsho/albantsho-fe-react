@@ -101,7 +101,8 @@ const DashboardNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
           {walletLinks.map((walletLink) => (
             <ListItem disablePadding className="py-1" key={walletLink.title}>
               <ListItemButton
-                className="px-2 rounded-md"
+                TouchRippleProps={{ className: "text-primary-main" }}
+                className="px-2 rounded-md hover:bg-primary-50/25"
                 onClick={() => push(`${walletLink.href}`)}
               >
                 <ListItemIcon className="min-w-0 mr-3">

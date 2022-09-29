@@ -25,8 +25,10 @@ const FilterScriptsSelect = () => {
   };
 
   return (
-    <div className="my-4 md:mt-20 md:mb-6">
+    <div className="my-4 md:mt-20 md:mb-6 overflow-hidden">
       <FormControl
+        data-aos="fade-right"
+        data-aos-anchor-placement="top-bottom"
         className="shadow-primary"
         sx={{ width: { xs: "200px", md: "215px" } }}
       >
