@@ -1,5 +1,5 @@
-import DashboardSidebarOnDesktop from "./ListDashboard/DashboardSidebarOnDesktop/DashboardSidebarOnDesktop";
-import DashboardSidebarOnMobile from "./ListDashboard/DashboardSidebarOnMobile/DashboardSidebarOnMobile";
+import DashboardSidebarOnDesktop from "./DashboardList/DashboardSidebarOnDesktop/DashboardSidebarOnDesktop";
+import DashboardSidebarOnMobile from "./DashboardList/DashboardSidebarOnMobile/DashboardSidebarOnMobile";
 import DashboardNav from "./DashboardNav/DashboardNav";
 
 interface IProps {

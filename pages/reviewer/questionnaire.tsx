@@ -9,13 +9,13 @@ import { Suspense } from "react";
 const AccordionQuestionnaire = dynamic(
   () =>
     import(
-      "components/Reviewer/Questionnaire/AccordionQuestionnaire/AccordionQuestionnaire"
+      "components/Reviewer/Questionnaire/QuestionnaireAccordion/QuestionnaireAccordion"
     )
 );
 const RatingQuestionnaire = dynamic(
   () =>
     import(
-      "components/Reviewer/Questionnaire/RatingQuestionnaire/RatingQuestionnaire"
+      "components/Reviewer/Questionnaire/QuestionnaireRating/QuestionnaireRating"
     )
 );
 

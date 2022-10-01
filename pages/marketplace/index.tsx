@@ -1,24 +1,24 @@
 import MarketplaceLayout from "@shared/Layouts/MarketplaceLayout/MarketplaceLayout";
-import MarketplaceProducts from "components/Marketplace/Index/MarketList/MarketplaceProducts";
+import MarketplaceProducts from "components/Marketplace/Index/MarketplaceProducts/MarketplaceProducts";
 import PaginationMarketList from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
-import TabsMarketplace from "components/Marketplace/Index/TabsMarketplace/TabsMarketplace";
+import MarketplaceTabs from "components/Marketplace/Index/MarketplaceTabs/MarketplaceTabs";
 import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
 
-const marketPlace: NextPageWithLayout = () => {
+const Marketplace: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Market Place</title>
+        <title>Albantsho || Marketplace</title>
       </Head>
-      <TabsMarketplace />
+      <MarketplaceTabs />
       <MarketplaceProducts />
       <PaginationMarketList />
     </>
   );
 };
 
-marketPlace.getLayout = (page) => (
+Marketplace.getLayout = (page) => (
   <MarketplaceLayout
     description={`"To make a great film you need three
 things: the script, the script and the script.
@@ -28,4 +28,4 @@ things: the script, the script and the script.
   </MarketplaceLayout>
 );
 
-export default marketPlace;
+export default Marketplace;

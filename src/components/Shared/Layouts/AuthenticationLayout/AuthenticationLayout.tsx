@@ -1,4 +1,4 @@
-import ImageAuth from "./ImageSection/ImageAuth";
+import ImageAuth from "./ImageAuth/ImageAuth";
 
 interface IProps {
   children: React.ReactNode;

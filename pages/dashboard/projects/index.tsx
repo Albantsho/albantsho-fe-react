@@ -1,18 +1,20 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
-import SearchDashboard from "@shared/Layouts/DashboardLayout/SearchDashboard/SearchDashboard";
+import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/DashboardSearch";
 import Head from "next/head";
 import { NextPageWithLayout } from "../../_app";
 import { useRouter } from "next/router";
-import ListScriptsPage from "components/Dashboard/Projects/Archive/ListScripts/ListScripts";
+import ArchiveList from "components/Dashboard/Projects/Archive/ArchiveList/ArchiveList";
 import { useState } from "react";
 import { Fab } from "@mui/material";
 import TabButtons from "components/Dashboard/Projects/TabButtons/TabButtons";
 import ProjectAccordionList from "components/Dashboard/Projects/Scripts/ProjectAccordionList/ProjectAccordionList";
 import dynamic from "next/dynamic";
 
-const ModalArchive = dynamic(
+const UnArchiveModal = dynamic(
   () =>
-    import("components/Dashboard/Projects/Archive/ModalArchive/ModalArchive")
+    import(
+      "components/Dashboard/Projects/Archive/UnArchiveModal/UnArchiveModal"
+    )
 );
 const CreateScriptModal = dynamic(
   () => import("@shared/Modals/CreateScriptModal/CreateScriptModal")
@@ -20,7 +22,7 @@ const CreateScriptModal = dynamic(
 
 const Projects: NextPageWithLayout = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
-  const [openModalUnArchive, setOpenModalUnArchive] = useState<boolean>(false);
+  const [openUnArchive, setOpenUnArchive] = useState<boolean>(false);
   const handleOpen = () => setOpenCreateScript(true);
   const { query } = useRouter();
 
@@ -31,14 +33,14 @@ const Projects: NextPageWithLayout = () => {
       </Head>
       <div>
         <TabButtons />
-        <SearchDashboard setOpenCreateScript={setOpenCreateScript} />
+        <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
         {(!query.tab || query.tab === "scripts") && <ProjectAccordionList />}
         {query.tab === "archives" && (
           <>
-            <ListScriptsPage setOpenModalUnArchive={setOpenModalUnArchive} />
-            <ModalArchive
-              openModalUnArchive={openModalUnArchive}
-              setOpenModalUnArchive={setOpenModalUnArchive}
+            <ArchiveList setOpenUnArchive={setOpenUnArchive} />
+            <UnArchiveModal
+              openUnArchive={openUnArchive}
+              setOpenUnArchive={setOpenUnArchive}
             />
           </>
         )}

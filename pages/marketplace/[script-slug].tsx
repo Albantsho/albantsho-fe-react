@@ -1,6 +1,6 @@
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
-import ScriptInfo from "components/Marketplace/MarketScriptPage/ScriptInfo/ScriptInfo";
+import ScriptInfo from "components/Marketplace/MarketScript/ScriptInfo/ScriptInfo";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { Suspense } from "react";
@@ -8,31 +8,31 @@ import { Suspense } from "react";
 const MarketScriptChips = dynamic(
   () =>
     import(
-      "components/Marketplace/MarketScriptPage/MarketScriptChips/MarketScriptChips"
+      "components/Marketplace/MarketScript/MarketScriptChips/MarketScriptChips"
     )
 );
 const MarketScriptAccordion = dynamic(
   () =>
     import(
-      "components/Marketplace/MarketScriptPage/AccordionInfo/MarketScriptAccordion"
+      "components/Marketplace/MarketScript/AccordionInfo/MarketScriptAccordion"
     )
 );
 const MainDetailsMarketScript = dynamic(
   () =>
     import(
-      "components/Marketplace/MarketScriptPage/Accordionbig/MainDetailsPageMarketScript"
+      "components/Marketplace/MarketScript/ScriptMainDetails/ScriptMainDetails "
     )
 );
 const RateToScript = dynamic(
   () =>
-    import("components/Marketplace/MarketScriptPage/RateToScript/RateToScript")
+    import("components/Marketplace/MarketScript/RateToScript/RateToScript")
 );
 
-const MarketPlace = () => {
+const ScriptInfoPage = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Market Place Info</title>
+        <title>Albantsho || Marketplace Info</title>
       </Head>
       <Nav color="inherit" position="static" />
       <ScriptInfo />
@@ -49,4 +49,4 @@ const MarketPlace = () => {
   );
 };
 
-export default MarketPlace;
+export default ScriptInfoPage;

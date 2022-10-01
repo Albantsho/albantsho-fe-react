@@ -1,7 +1,7 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import FilterScriptsSelect from "components/Dashboard/Reviews/Index/FilterScriptsSelect/FilterScriptsSelect";
 import Heading from "components/Dashboard/Reviews/Index/Heading/Heading";
-import ListScripts from "components/Dashboard/Reviews/Index/ListScripts/ListScripts";
+import ScriptsList from "components/Dashboard/Reviews/Index/ScriptsList/ScriptsList";
 import Head from "next/head";
 import { NextPageWithLayout } from "../../_app";
 
@@ -13,7 +13,7 @@ const Reviews: NextPageWithLayout = () => {
       </Head>
       <Heading showSearchScript />
       <FilterScriptsSelect />
-      <ListScripts />
+      <ScriptsList />
     </>
   );
 };

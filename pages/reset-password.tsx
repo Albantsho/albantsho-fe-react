@@ -3,7 +3,7 @@ import Head from "next/head";
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
 import ResetPassword from "components/ResetPassword/ResetPasswordForm/ResetPasswordForm";
 import { NextPageWithLayout } from "./_app";
-import NavbarAuthentication from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthentication";
+import AuthenticationNavbar from "@shared/Layouts/AuthenticationLayout/AuthenticationNavbar/AuthenticationNavbar";
 
 const ResetPasswordPage: NextPageWithLayout = () => {
   return (
@@ -11,7 +11,7 @@ const ResetPasswordPage: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Reset Password</title>
       </Head>
-      <NavbarAuthentication
+      <AuthenticationNavbar
         text="Already have an account?"
         link="signin"
         buttonText="SIGN IN"

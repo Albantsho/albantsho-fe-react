@@ -10,8 +10,8 @@ import WritersStatement from "components/Abstract/WritersStatement/WritersStatem
 import UploadScript from "components/Abstract/UploadScript/UploadScript";
 import UploadScriptFiles from "components/Abstract/UploadScriptFiles/UploadScriptFiles";
 import UploadImage from "components/Abstract/UploadImage/UploadImage";
-import LineSteps from "components/Abstract/LineSteps/LineSteps";
-import ButtonsSteps from "components/Abstract/ButtonsSteps/ButtonsSteps";
+import StepsLines from "components/Abstract/StepsLines/StepsLines";
+import StepsButtons from "components/Abstract/StepsButtons/StepsButtons";
 import dynamic from "next/dynamic";
 
 const SaveProgressScriptModal = dynamic(
@@ -49,7 +49,7 @@ const Abstract = () => {
 
       <div className="px-5 sm:px-10 py-10 md:py-20 bg-gray-50">
         <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto">
-          <LineSteps step={step} />
+          <StepsLines step={step} />
           {(Number(query.step) === 1 || !query.step) && (
             <GeneralScriptProfile />
           )}
@@ -70,7 +70,7 @@ const Abstract = () => {
             />
           )}
           {Number(query.step) === 7 && <UploadImage />}
-          <ButtonsSteps
+          <StepsButtons
             setOpenSaveProgressModal={setOpenSaveProgressModal}
             step={step}
             setStep={setStep}

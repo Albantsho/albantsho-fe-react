@@ -28,7 +28,7 @@ const DetailScriptModal = ({
           className={`bg-white  w-full mt-12 max-w-lg mx-auto py-8 rounded-lg`}
         >
           <div className="pb-8 px-5 sm:px-7 flex gap-3 items-stretch">
-            <Button className="py-2 px-4" variant="contained">
+            <Button disableElevation className="py-2 px-4" variant="contained">
               Type A
             </Button>
             <Button

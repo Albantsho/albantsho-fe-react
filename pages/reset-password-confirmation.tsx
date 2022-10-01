@@ -1,28 +1,28 @@
 import Head from "next/head";
 
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
-import ResetCompleted from "components/ResetCompleted/ResetCompleted";
+import ResetPasswordConfirmation from "components/ResetPasswordConfirmation/ResetPasswordConfirmation";
 import { NextPageWithLayout } from "./_app";
-import NavbarAuthentication from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthentication";
+import AuthenticationNavbar from "@shared/Layouts/AuthenticationLayout/AuthenticationNavbar/AuthenticationNavbar";
 
-const ResetPasswordConfirmation: NextPageWithLayout = () => {
+const ResetPasswordConfirmationPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
         <title>Albantsho || Complete Password</title>
       </Head>
-      <NavbarAuthentication
+      <AuthenticationNavbar
         text="Already have an account?"
         link="signin"
         buttonText="SIGN IN"
       />
-      <ResetCompleted />
+      <ResetPasswordConfirmation />
     </>
   );
 };
 
-ResetPasswordConfirmation.getLayout = (page) => (
+ResetPasswordConfirmationPage.getLayout = (page) => (
   <AuthenticationLayout>{page}</AuthenticationLayout>
 );
 
-export default ResetPasswordConfirmation;
+export default ResetPasswordConfirmationPage;

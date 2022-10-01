@@ -1,5 +1,5 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
-import SearchDashboard from "@shared/Layouts/DashboardLayout/SearchDashboard/SearchDashboard";
+import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/DashboardSearch";
 import Heading from "components/Dashboard/Listings/OpenListingInfo/Index/Heading/Heading";
 import TabButtons from "components/Dashboard/Listings/Index/TabButtons/TabButtons";
 import Head from "next/head";
@@ -11,7 +11,7 @@ import { Fab } from "@mui/material";
 const AuctionsScripts = dynamic(
   () =>
     import(
-      "components/Dashboard/Listings/OpenListingInfo/Index/AuctionsScripts/AuctionsScripts"
+      "components/Dashboard/Listings/OpenListingInfo/Index/ScriptsAuction/ScriptsAuction"
     )
 );
 const AcceptOfferModal = dynamic(
@@ -32,7 +32,7 @@ const ScriptSlug: NextPageWithLayout = () => {
       </Head>
       <TabButtons />
 
-      <SearchDashboard setOpenCreateScript={setOpenCreateScript} />
+      <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
       <div className="py-8 md:py-12 xl:py-20  px-5 sm:px-10 xl:px-20  my-4 md:my-6 bg-white shadow-primary rounded-md">
         <Heading />
         <Suspense fallback={null}>

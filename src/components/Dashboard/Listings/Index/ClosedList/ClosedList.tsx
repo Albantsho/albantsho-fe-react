@@ -97,7 +97,7 @@ const ClosedList = () => {
             }}
             className="flex "
           >
-            <TableCell className="flex flex-1 sm:max-w-[365px] sm:py-6 xl:py-10 sm:min-w-[365px] md:max-w-[465px] md:min-w-[465px] lg:max-w-[365px] lg:min-w-[365px] xl:max-w-[465px] xl:min-w-[465px] items-center flex-wrap sm:flex-nowrap gap-1 sm:gap-4 ">
+            <TableCell className="flex flex-1 sm:flex-auto sm:min-w-[365px] sm:py-6 xl:py-10 md:min-w-[465px] lg:min-w-[365px] xl:min-w-[465px] xl:max-w-[465px] items-center flex-wrap sm:flex-nowrap gap-1 sm:gap-4 ">
               <div className="flex gap-2 sm:gap-0">
                 <Image
                   layout="fixed"
@@ -150,7 +150,7 @@ const ClosedList = () => {
                   px: { xs: 0, sm: 2 },
                 },
               }}
-              className="hidden sm:flex items-center xl:flex-[0.2] lg:w-full 2xl:flex-[0.4] justify-end"
+              className="hidden sm:flex items-center xl:flex-[0.5] lg:w-full 2xl:flex-[0.6] justify-end"
             >
               <Typography
                 variant="body1"

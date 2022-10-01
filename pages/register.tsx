@@ -1,5 +1,5 @@
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
-import NavbarAuthentication from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthentication";
+import AuthenticationNavbar from "@shared/Layouts/AuthenticationLayout/AuthenticationNavbar/AuthenticationNavbar";
 import RegisterForm from "components/Register/RegisterForm/RegisterForm";
 import RegisterFormTitle from "components/Register/RegisterFormTitle/RegisterFormTitle";
 import Head from "next/head";
@@ -11,7 +11,7 @@ const Register: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Sign Up</title>
       </Head>
-      <NavbarAuthentication
+      <AuthenticationNavbar
         text="Already have an account?"
         link="signin"
         buttonText="SIGN IN"

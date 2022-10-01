@@ -1,5 +1,5 @@
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
-import NavbarAuthentication from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthentication";
+import AuthenticationNavbar from "@shared/Layouts/AuthenticationLayout/AuthenticationNavbar/AuthenticationNavbar";
 import LoginForm from "components/Login/LoginForm/LoginForm";
 import TitleLoginForm from "components/Login/TitleLoginForm/TitleLoginForm";
 import Head from "next/head";
@@ -11,7 +11,7 @@ const Login: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Login</title>
       </Head>
-      <NavbarAuthentication
+      <AuthenticationNavbar
         text="Don’t have an account yet?"
         link="signup"
         buttonText="SIGN UP"

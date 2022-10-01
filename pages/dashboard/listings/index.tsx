@@ -1,6 +1,6 @@
 import { Fab } from "@mui/material";
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
-import SearchDashboard from "@shared/Layouts/DashboardLayout/SearchDashboard/SearchDashboard";
+import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/DashboardSearch";
 import ClosedList from "components/Dashboard/Listings/Index/ClosedList/ClosedList";
 import DraftsList from "components/Dashboard/Listings/Index/DraftsList/DraftsList";
 import OpeningLists from "components/Dashboard/Listings/Index/OpeningList/OpeningLists";
@@ -46,7 +46,7 @@ const Listings: NextPageWithLayout = () => {
         <title>Albantsho || Listings </title>
       </Head>
       <TabButtons />
-      <SearchDashboard setOpenCreateScript={setOpenCreateScript} />
+      <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
       <Suspense fallback={null}>
         <CreateScriptModal
           openCreateScript={openCreateScript}

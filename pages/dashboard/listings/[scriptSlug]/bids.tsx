@@ -1,8 +1,8 @@
 import { Fab } from "@mui/material";
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
-import SearchDashboard from "@shared/Layouts/DashboardLayout/SearchDashboard/SearchDashboard";
+import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/DashboardSearch";
 import TabButtons from "components/Dashboard/Listings/Index/TabButtons/TabButtons";
-import BidsPage from "components/Dashboard/Listings/OpenListingInfo/Index/Bids/BidsPage";
+import Bids from "components/Dashboard/Listings/OpenListingInfo/Bids/Bids";
 import Head from "next/head";
 import { Suspense, useState } from "react";
 import { NextPageWithLayout } from "../../../_app";
@@ -15,7 +15,7 @@ const CreateScriptModal = dynamic(
   () => import("@shared/Modals/CreateScriptModal/CreateScriptModal")
 );
 
-const Bids: NextPageWithLayout = () => {
+const BidsPage: NextPageWithLayout = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
   const [openAcceptOffer, setOpenAcceptOffer] = useState<boolean>(false);
 
@@ -25,8 +25,8 @@ const Bids: NextPageWithLayout = () => {
         <title>Albantsho || Bids </title>
       </Head>
       <TabButtons />
-      <SearchDashboard setOpenCreateScript={setOpenCreateScript} />
-      <BidsPage setOpenAcceptOffer={setOpenAcceptOffer} />
+      <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
+      <Bids setOpenAcceptOffer={setOpenAcceptOffer} />
       <Suspense fallback={null}>
         <CreateScriptModal
           openCreateScript={openCreateScript}
@@ -48,6 +48,6 @@ const Bids: NextPageWithLayout = () => {
   );
 };
 
-Bids.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+BidsPage.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
-export default Bids;
+export default BidsPage;

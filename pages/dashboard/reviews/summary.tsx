@@ -1,11 +1,11 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import Heading from "components/Dashboard/Reviews/Index/Heading/Heading";
-import SummaryReviews from "components/Dashboard/Reviews/Summary/SummaryReviews";
+import Summary from "components/Dashboard/Reviews/Summary/Summary";
 import Head from "next/head";
 
 import { NextPageWithLayout } from "../../_app";
 
-const Summary: NextPageWithLayout = () => {
+const SummaryPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
@@ -13,12 +13,12 @@ const Summary: NextPageWithLayout = () => {
       </Head>
       <div className="bg-white shadow-primary rounded-md mb-16">
         <Heading />
-        <SummaryReviews />
+        <Summary />
       </div>
     </>
   );
 };
 
-Summary.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+SummaryPage.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
-export default Summary;
+export default SummaryPage;

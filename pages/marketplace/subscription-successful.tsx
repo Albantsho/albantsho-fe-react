@@ -9,7 +9,7 @@ import Image from "next/image";
 import routes from "routes/routes";
 import { Suspense } from "react";
 
-const subscriptionSuccessful = () => {
+const SubscriptionSuccessful = () => {
   return (
     <>
       <Head>
@@ -56,4 +56,4 @@ const subscriptionSuccessful = () => {
   );
 };
 
-export default subscriptionSuccessful;
+export default SubscriptionSuccessful;

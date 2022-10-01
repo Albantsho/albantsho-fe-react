@@ -1,5 +1,5 @@
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
-import NavbarAuthentication from "@shared/Layouts/AuthenticationLayout/NavbarAuthentication/NavbarAuthentication";
+import AuthenticationNavbar from "@shared/Layouts/AuthenticationLayout/AuthenticationNavbar/AuthenticationNavbar";
 import VerifyEmail from "components/VerifyEmail/VerifyEmail";
 import Head from "next/head";
 import { NextPageWithLayout } from "./_app";
@@ -10,7 +10,7 @@ const VerifyEmailPage: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Verify Email</title>
       </Head>
-      <NavbarAuthentication
+      <AuthenticationNavbar
         text="Don’t have an account yet?"
         link="signup"
         buttonText="SIGN UP"
