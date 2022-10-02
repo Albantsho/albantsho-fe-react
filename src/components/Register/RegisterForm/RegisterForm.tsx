@@ -9,11 +9,11 @@ import {
   IconButton,
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import UserIcon from "./assets/icon-user.svg";
-import EmailIcon from "./assets/icon-email.svg";
-import PasswordIcon from "./assets/icon-password.svg";
-import ShowIcon from "./assets/icon-show.svg";
-import NotShowIcon from "./assets/icon-not-show.svg";
+import UserIcon from "./assets/user.svg";
+import EmailIcon from "@assets/icons/email.svg";
+import PasswordIcon from "@assets/icons/password.svg";
+import ShowIcon from "@assets/icons/show-password.svg";
+import NotShowIcon from "@assets/icons/not-show-password.svg";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
 import routes from "routes/routes";

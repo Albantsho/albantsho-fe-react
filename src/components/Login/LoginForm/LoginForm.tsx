@@ -2,6 +2,7 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
+  IconButton,
   InputAdornment,
   SvgIcon,
   Typography,
@@ -9,14 +10,22 @@ import {
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
-import iconEmail from "./assets/icon-email.svg";
-import iconPassword from "./assets/icon-password.svg";
-import iconShow from "./assets/icon-show.svg";
+import EmailIcon from "@assets/icons/email.svg";
+import PasswordIcon from "@assets/icons/password.svg";
+import ShowIcon from "@assets/icons/show-password.svg";
+import NotShowIcon from "@assets/icons/not-show-password.svg";
 import routes from "routes/routes";
 import useLoginForm from "./useLoginForm";
 
 const LoginForm = () => {
-  const { register, handleSubmit, onSubmit } = useLoginForm();
+  const {
+    register,
+    handleSubmit,
+    onSubmit,
+    errors,
+    typePasswordInput,
+    handleTypeInputPassword,
+  } = useLoginForm();
 
   return (
     <div className="px-8  lg:px-24  mx-auto">
@@ -31,6 +40,7 @@ const LoginForm = () => {
             Email address
           </Typography>
           <CustomInput
+            error={Boolean(errors.email) || false}
             {...register("email")}
             id="email"
             variant="outlined"
@@ -40,13 +50,22 @@ const LoginForm = () => {
                 <InputAdornment position="start">
                   <SvgIcon
                     fontSize="small"
-                    component={iconEmail}
+                    component={EmailIcon}
                     inheritViewBox
                   />
                 </InputAdornment>
               ),
             }}
             placeholder="Email"
+            sx={{
+              "& .MuiFormHelperText-root": {
+                mt: "8px",
+                mx: 0,
+                color: "red",
+                fontSize: "16px",
+              },
+            }}
+            helperText={errors.email?.message}
           />
         </div>
         <div className="w-full mt-3 flex flex-col">
@@ -59,31 +78,44 @@ const LoginForm = () => {
             Password
           </Typography>
           <CustomInput
+            error={Boolean(errors.password) || false}
             {...register("password")}
             id="password"
             variant="outlined"
+            type={typePasswordInput ? "password" : "text"}
             size="medium"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
                   <SvgIcon
                     fontSize="small"
-                    component={iconPassword}
+                    component={PasswordIcon}
                     inheritViewBox
                   />
                 </InputAdornment>
               ),
               endAdornment: (
                 <InputAdornment position="start">
-                  <SvgIcon
-                    fontSize="small"
-                    component={iconShow}
-                    inheritViewBox
-                  />
+                  <IconButton onClick={handleTypeInputPassword} color="inherit">
+                    <SvgIcon
+                      fontSize="small"
+                      component={typePasswordInput ? ShowIcon : NotShowIcon}
+                      inheritViewBox
+                    />
+                  </IconButton>
                 </InputAdornment>
               ),
             }}
             placeholder="Password"
+            sx={{
+              "& .MuiFormHelperText-root": {
+                mt: "8px",
+                mx: 0,
+                color: "red",
+                fontSize: "16px",
+              },
+            }}
+            helperText={errors.password?.message}
           />
         </div>
         <div className="flex justify-between items-center">
