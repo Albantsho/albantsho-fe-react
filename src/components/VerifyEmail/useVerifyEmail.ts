@@ -1,3 +1,4 @@
+import AuthApi from "apis/Auth.api";
 import React, { useState, useRef, FormEvent } from "react";
 
 const useVerifyEmail = () => {
@@ -30,7 +31,10 @@ const useVerifyEmail = () => {
     };
 
   const onSubmit = (e: FormEvent) => {
-    console.log(e);
+    e.preventDefault();
+    AuthApi()
+      .emailVerify({ otp: Object.values(formValues).join("") })
+      .then((res) => console.log(res));
   };
 
   return {

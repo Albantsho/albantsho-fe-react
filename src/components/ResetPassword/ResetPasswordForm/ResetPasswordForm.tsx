@@ -1,7 +1,8 @@
-import { InputAdornment, SvgIcon, Typography } from "@mui/material";
+import { IconButton, InputAdornment, SvgIcon, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import iconPassword from "./assets/icon-password.svg";
-import iconShow from "./assets/icon-show.svg";
+import PasswordIcon from "@assets/icons/password.svg";
+import ShowIcon from "@assets/icons/show-password.svg";
+import NotShowIcon from "@assets/icons/not-show-password.svg";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
 import routes from "routes/routes";
@@ -9,7 +10,14 @@ import useResetPasswordForm from "./useResetPasswordForm";
 import ResetPasswordFormTitle from "../ResetPasswordFormTitle/ResetPasswordFormTitle";
 
 const ResetPassword = () => {
-  const { handleSubmit, onSubmit, register } = useResetPasswordForm();
+  const {
+    handleSubmit,
+    onSubmit,
+    register,
+    errors,
+    handleTypeInputPassword,
+    typePasswordInput,
+  } = useResetPasswordForm();
   return (
     <div className="overflow-hidden">
       <div
@@ -29,7 +37,9 @@ const ResetPassword = () => {
               New password
             </Typography>
             <CustomInput
+              error={Boolean(errors.password) || false}
               {...register("password")}
+              type={typePasswordInput ? "password" : "text"}
               id="password"
               variant="outlined"
               size="medium"
@@ -38,22 +48,37 @@ const ResetPassword = () => {
                   <InputAdornment position="start">
                     <SvgIcon
                       fontSize="small"
-                      component={iconPassword}
+                      component={PasswordIcon}
                       inheritViewBox
                     />
                   </InputAdornment>
                 ),
                 endAdornment: (
                   <InputAdornment position="start">
-                    <SvgIcon
-                      fontSize="small"
-                      component={iconShow}
-                      inheritViewBox
-                    />
+                    <IconButton
+                      onClick={handleTypeInputPassword}
+                      color="inherit"
+                    >
+                      <SvgIcon
+                        fontSize="small"
+                        component={typePasswordInput ? ShowIcon : NotShowIcon}
+                        inheritViewBox
+                      />
+                    </IconButton>
                   </InputAdornment>
                 ),
               }}
               placeholder="Password"
+              sx={{
+                "& .MuiFormHelperText-root": {
+                  mt: "8px",
+                  mx: 0,
+                  color: "red",
+                  fontSize: "16px",
+                  lineHeight: "24px",
+                },
+              }}
+              helperText={errors.password?.message}
             />
           </div>
 
@@ -67,6 +92,7 @@ const ResetPassword = () => {
               Verify password
             </Typography>
             <CustomInput
+              error={Boolean(errors.verify_password) || false}
               {...register("verify_password")}
               id="verify-password"
               variant="outlined"
@@ -76,13 +102,22 @@ const ResetPassword = () => {
                   <InputAdornment position="start">
                     <SvgIcon
                       fontSize="small"
-                      component={iconPassword}
+                      component={PasswordIcon}
                       inheritViewBox
                     />
                   </InputAdornment>
                 ),
               }}
               placeholder="Verify Password"
+              sx={{
+                "& .MuiFormHelperText-root": {
+                  mt: "8px",
+                  mx: 0,
+                  color: "red",
+                  fontSize: "16px",
+                },
+              }}
+              helperText={errors.verify_password?.message}
             />
           </div>
 

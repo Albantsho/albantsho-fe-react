@@ -1,3 +1,7 @@
+import AuthApi from "apis/Auth.api";
+import { useState } from "react";
+import { resetPasswordSchema } from "./validation/resetPassword.validation";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 
 interface IAuthResetPassword {
@@ -6,13 +10,31 @@ interface IAuthResetPassword {
 }
 
 const useResetPasswordForm = () => {
-  const { register, handleSubmit } = useForm<IAuthResetPassword>();
+  const [typePasswordInput, setTypePasswordInput] = useState(true);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IAuthResetPassword>({
+    resolver: yupResolver(resetPasswordSchema),
+  });
 
-  const onSubmit = (data: IAuthResetPassword) => {
-    console.log(data);
+  const handleTypeInputPassword = () => {
+    setTypePasswordInput((prevState) => !prevState);
   };
 
-  return { register, onSubmit, handleSubmit };
+  const onSubmit = (data: IAuthResetPassword) => {
+    AuthApi().resetPassword({ password: data.password });
+  };
+
+  return {
+    register,
+    onSubmit,
+    handleSubmit,
+    errors,
+    handleTypeInputPassword,
+    typePasswordInput,
+  };
 };
 
 export default useResetPasswordForm;

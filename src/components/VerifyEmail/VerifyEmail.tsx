@@ -77,6 +77,9 @@ const VerifyEmail = () => {
 
             <div className="justify-center  flex">
               <Btn
+                disabled={
+                  !Object.values(formValues).every((item) => Boolean(item))
+                }
                 type="submit"
                 size="large"
                 className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"

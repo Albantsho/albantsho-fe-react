@@ -1,7 +1,7 @@
 import { InputAdornment, SvgIcon, Typography } from "@mui/material";
 import Link from "next/link";
 import forget from "./assets/forget.png";
-import iconEmail from "./assets/icon-email.svg";
+import EmailIcon from "@assets/icons/email.svg";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Image from "next/image";
@@ -9,7 +9,7 @@ import routes from "routes/routes";
 import useForgetPassword from "./useForgetPassword";
 
 const ForgetPassword = () => {
-  const { register, handleSubmit, onSubmit } = useForgetPassword();
+  const { register, handleSubmit, onSubmit, errors } = useForgetPassword();
   return (
     <div className="overflow-hidden">
       <div
@@ -48,6 +48,7 @@ const ForgetPassword = () => {
               Email address
             </Typography>
             <CustomInput
+              error={Boolean(errors.email) || false}
               {...register("email")}
               fullWidth
               id="email"
@@ -58,13 +59,22 @@ const ForgetPassword = () => {
                   <InputAdornment position="start">
                     <SvgIcon
                       fontSize="small"
-                      component={iconEmail}
+                      component={EmailIcon}
                       inheritViewBox
                     />
                   </InputAdornment>
                 ),
               }}
               placeholder="Email"
+              sx={{
+                "& .MuiFormHelperText-root": {
+                  mt: "8px",
+                  mx: 0,
+                  color: "red",
+                  fontSize: "16px",
+                },
+              }}
+              helperText={errors.email?.message}
             />
           </div>
 

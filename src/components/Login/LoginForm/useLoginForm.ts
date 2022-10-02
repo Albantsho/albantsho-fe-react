@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "./login.validation";
+import { loginSchema } from "./validation/login.validation";
 import AuthApi from "apis/Auth.api";
 import { useState } from "react";
 interface IAuthLogin {
