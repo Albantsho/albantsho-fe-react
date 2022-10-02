@@ -5,8 +5,9 @@ interface IRegisterPayload {
   email: string;
   password: string;
   country: string;
-  portfolio: string;
-  production_company_name: string;
+  user_type: "user" | "producer";
+  portfolio?: string;
+  production_company_name?: string;
 }
 
 interface ILoginPayload {
@@ -40,13 +41,12 @@ const AuthApi = (controller?: AbortController) => ({
   },
 
   async forgetPassword(payload: string) {
-   const res = await api.post("/authentication/reset-password", payload, {
-     signal: controller?.signal,
-   });
+    const res = await api.post("/authentication/reset-password", payload, {
+      signal: controller?.signal,
+    });
 
-   return res.data;
- },
-
+    return res.data;
+  },
 
   async emailVerify(payload: string) {
     const res = await api.post("/verification", payload, {

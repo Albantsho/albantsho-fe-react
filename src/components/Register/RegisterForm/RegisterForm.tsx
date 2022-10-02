@@ -9,15 +9,18 @@ import {
   IconButton,
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import iconUser from "./assets/icon-user.svg";
-import iconEmail from "./assets/icon-email.svg";
-import iconPassword from "./assets/icon-password.svg";
-import iconShow from "./assets/icon-show.svg";
+import UserIcon from "./assets/icon-user.svg";
+import EmailIcon from "./assets/icon-email.svg";
+import PasswordIcon from "./assets/icon-password.svg";
+import ShowIcon from "./assets/icon-show.svg";
+import NotShowIcon from "./assets/icon-not-show.svg";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
 import routes from "routes/routes";
 import useRegisterForm from "./useRegisterForm";
 import { Controller } from "react-hook-form";
+import countryList from "config/country-list.json";
+import Image from "next/image";
 
 const RegisterForm = () => {
   const {
@@ -30,12 +33,11 @@ const RegisterForm = () => {
     HandleAcceptTermsAndCondition,
     typePasswordInput,
     handleTypeInputPassword,
+    errors,
   } = useRegisterForm();
 
   return (
-    <div
-      className="px-8 py-6 lg:py-12 lg:px-24 mx-auto"
-    >
+    <div className="px-8 py-6 lg:py-12 lg:px-24 mx-auto">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full mt-7 flex flex-col">
           <Typography
@@ -47,6 +49,7 @@ const RegisterForm = () => {
             Full Name
           </Typography>
           <CustomInput
+            error={Boolean(errors.full_name) || false}
             {...register("full_name")}
             id="full-name"
             variant="outlined"
@@ -56,13 +59,22 @@ const RegisterForm = () => {
                 <InputAdornment position="start">
                   <SvgIcon
                     fontSize="small"
-                    component={iconUser}
+                    component={UserIcon}
                     inheritViewBox
                   />
                 </InputAdornment>
               ),
             }}
             placeholder="Full Name"
+            sx={{
+              "& .MuiFormHelperText-root": {
+                mt: "8px",
+                mx: 0,
+                color: "red",
+                fontSize: "16px",
+              },
+            }}
+            helperText={errors.full_name?.message}
           />
         </div>
 
@@ -76,6 +88,7 @@ const RegisterForm = () => {
             Email address
           </Typography>
           <CustomInput
+            error={Boolean(errors.email) || false}
             {...register("email")}
             id="email"
             variant="outlined"
@@ -85,13 +98,22 @@ const RegisterForm = () => {
                 <InputAdornment position="start">
                   <SvgIcon
                     fontSize="small"
-                    component={iconEmail}
+                    component={EmailIcon}
                     inheritViewBox
                   />
                 </InputAdornment>
               ),
             }}
             placeholder="Email"
+            sx={{
+              "& .MuiFormHelperText-root": {
+                mt: "8px",
+                mx: 0,
+                color: "red",
+                fontSize: "16px",
+              },
+            }}
+            helperText={errors.email?.message}
           />
         </div>
 
@@ -105,6 +127,7 @@ const RegisterForm = () => {
             Password
           </Typography>
           <CustomInput
+            error={Boolean(errors.password) || false}
             type={typePasswordInput ? "password" : "text"}
             {...register("password")}
             id="password"
@@ -115,7 +138,7 @@ const RegisterForm = () => {
                 <InputAdornment position="start">
                   <SvgIcon
                     fontSize="small"
-                    component={iconPassword}
+                    component={PasswordIcon}
                     inheritViewBox
                   />
                 </InputAdornment>
@@ -125,7 +148,7 @@ const RegisterForm = () => {
                   <IconButton onClick={handleTypeInputPassword} color="inherit">
                     <SvgIcon
                       fontSize="small"
-                      component={iconShow}
+                      component={typePasswordInput ? ShowIcon : NotShowIcon}
                       inheritViewBox
                     />
                   </IconButton>
@@ -133,6 +156,16 @@ const RegisterForm = () => {
               ),
             }}
             placeholder="Password"
+            sx={{
+              "& .MuiFormHelperText-root": {
+                mt: "8px",
+                mx: 0,
+                color: "red",
+                fontSize: "16px",
+                lineHeight: "24px",
+              },
+            }}
+            helperText={errors.password?.message}
           />
         </div>
 
@@ -150,16 +183,48 @@ const RegisterForm = () => {
             control={control}
             render={({ field }) => (
               <CustomInput
+                error={Boolean(errors.country) || false}
                 {...field}
                 id="country"
                 select
                 variant="outlined"
                 size="medium"
                 className="text-purple-700"
-                sx={{ "& .MuiSvgIcon-root": { color: "#7953B5" } }}
+                placeholder="Country"
+                sx={{
+                  "& .MuiInputBase-root": { height: "56px" },
+                  "& .MuiSvgIcon-root": { color: "#7953B5" },
+                  "& .MuiSelect-outlined": {
+                    display: "flex",
+                    alignItems: "center",
+                  },
+                  "& .MuiFormHelperText-root": {
+                    mt: "8px",
+                    mx: 0,
+                    color: "red",
+                    fontSize: "16px",
+                  },
+                }}
+                helperText={errors.country?.message}
               >
-                <MenuItem value="nigeria">Nigeria</MenuItem>
-                <MenuItem value="  france"> France</MenuItem>
+                {Object.entries(countryList).map((country) => (
+                  <MenuItem
+                    TouchRippleProps={{ className: "text-primary-main" }}
+                    className="hover:bg-primary-50/25"
+                    key={country[0]}
+                    value={country[1]}
+                  >
+                    <span className="mr-3 -mb-1">
+                      <Image
+                        width={40}
+                        height={30}
+                        src={`https://flagcdn.com/w40/${country[0]}.png`}
+                        alt={`${country[1]} flag`}
+                      />
+                    </span>
+                    {country[1]}
+                  </MenuItem>
+                ))}
               </CustomInput>
             )}
           />
@@ -168,26 +233,36 @@ const RegisterForm = () => {
         <div className="w-full mt-3 lg:mt-7 flex flex-col">
           <Typography
             variant="h6"
-            htmlFor="role"
+            htmlFor="user_type"
             component="label"
             className="text-purple-700 leading-normal font-normal mb-2 futura"
           >
             Writer/ Producer
           </Typography>
           <Controller
-            name="role"
+            name="user_type"
             control={control}
             render={({ field }) => (
               <CustomInput
+                error={Boolean(errors.user_type) || false}
                 {...field}
-                id="role"
+                id="user_type"
                 select
                 variant="outlined"
                 size="medium"
                 className="text-purple-700"
-                sx={{ "& .MuiSvgIcon-root": { color: "#7953B5" } }}
+                sx={{
+                  "& .MuiSvgIcon-root": { color: "#7953B5" },
+                  "& .MuiFormHelperText-root": {
+                    mt: "8px",
+                    mx: 0,
+                    color: "red",
+                    fontSize: "16px",
+                  },
+                }}
+                helperText={errors.user_type?.message}
               >
-                <MenuItem value="writer">I’m a writer</MenuItem>
+                <MenuItem value="user">I’m a writer</MenuItem>
                 <MenuItem value="producer">I’m a producer</MenuItem>
               </CustomInput>
             )}
@@ -206,12 +281,22 @@ const RegisterForm = () => {
                 What production company are you affiliated with?
               </Typography>
               <CustomInput
+                error={Boolean(errors.production_company_name) || false}
                 {...register("production_company_name")}
                 id="Company"
                 variant="outlined"
                 size="medium"
                 className="text-purple-700"
                 placeholder="Company"
+                sx={{
+                  "& .MuiFormHelperText-root": {
+                    mt: "8px",
+                    mx: 0,
+                    color: "red",
+                    fontSize: "16px",
+                  },
+                }}
+                helperText={errors.production_company_name?.message}
               />
             </div>
 
@@ -225,12 +310,22 @@ const RegisterForm = () => {
                 Portfolio link
               </Typography>
               <CustomInput
+                error={Boolean(errors.portfolio) || false}
                 {...register("portfolio")}
                 id="portfolio"
                 variant="outlined"
                 size="medium"
                 className="text-purple-700"
                 placeholder="Link to your best work"
+                sx={{
+                  "& .MuiFormHelperText-root": {
+                    mt: "8px",
+                    mx: 0,
+                    color: "red",
+                    fontSize: "16px",
+                  },
+                }}
+                helperText={errors.portfolio?.message}
               />
             </div>
           </>
