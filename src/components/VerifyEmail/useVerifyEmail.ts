@@ -30,11 +30,16 @@ const useVerifyEmail = () => {
       }
     };
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    AuthApi()
-      .emailVerify({ otp: Object.values(formValues).join("") })
-      .then((res) => console.log(res));
+    try {
+      const res = await AuthApi().emailVerify({
+        otp: Object.values(formValues).join(""),
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return {

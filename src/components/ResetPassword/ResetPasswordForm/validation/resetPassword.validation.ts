@@ -10,5 +10,5 @@ export const resetPasswordSchema = Yup.object({
     .label("Password"),
   verify_password: Yup.string()
     .required()
-    .oneOf([Yup.ref("password"), null]).label("Verify password"),
+    .oneOf([Yup.ref("password"), null],"Password must matches").label("Verify password"),
 }).required();

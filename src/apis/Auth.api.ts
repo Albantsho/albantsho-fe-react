@@ -33,7 +33,7 @@ const AuthApi = (controller?: AbortController) => ({
   },
 
   async resetPassword(payload: object) {
-    const res = await api.post("/authentication/password-reset", payload, {
+    const res = await api.post("/profile/password-reset", payload, {
       signal: controller?.signal,
     });
 
@@ -51,6 +51,9 @@ const AuthApi = (controller?: AbortController) => ({
   async emailVerify(payload: object) {
     const res = await api.post("/verification", payload, {
       signal: controller?.signal,
+      headers: {
+        Token: localStorage.getItem("USER_TOKEN")!,
+      },
     });
 
     return res.data;

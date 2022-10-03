@@ -94,6 +94,7 @@ const ResetPassword = () => {
             <CustomInput
               error={Boolean(errors.verify_password) || false}
               {...register("verify_password")}
+              type={typePasswordInput ? "password" : "text"}
               id="verify-password"
               variant="outlined"
               size="medium"

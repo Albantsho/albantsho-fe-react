@@ -10,6 +10,8 @@ import { useEffect } from "react";
 import "styles/globals.css";
 import theme from "styles/themes/theme";
 import createEmotionCache from "utils/create-emotion-cache";
+import { Provider } from "react-redux";
+import { store } from "app/store";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -31,16 +33,18 @@ export default function MyApp(props: MyAppProps) {
 
   return (
     <CacheProvider value={emotionCache}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <NextProgress
-          delay={100}
-          color="#FDD038"
-          height="3px"
-          options={{ showSpinner: false }}
-        />
-        {getLayout(<Component {...pageProps} />)}
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <NextProgress
+            delay={100}
+            color="#FDD038"
+            height="3px"
+            options={{ showSpinner: false }}
+          />
+          {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
+      </Provider>
     </CacheProvider>
   );
 }

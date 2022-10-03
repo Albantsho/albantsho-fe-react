@@ -5,6 +5,7 @@ export const registerSchema = Yup.object({
   full_name: Yup.string()
     .required()
     .min(3)
+    .matches(/^\s*[\S]+(\s[\S]+)+\s*$/gms, "Please enter your full name.")
     .label("Full name"),
   email: Yup.string().email().required().label("Email"),
   password: Yup.string()
