@@ -1,4 +1,4 @@
-import AuthApi from "apis/Auth.api";
+import useAuthApi from "apis/Auth.api";
 import { useState } from "react";
 import { resetPasswordSchema } from "./validation/resetPassword.validation";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,6 +11,7 @@ interface IAuthResetPassword {
 
 const useResetPasswordForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
+  const { resetPassword } = useAuthApi();
   const {
     register,
     handleSubmit,
@@ -23,16 +24,20 @@ const useResetPasswordForm = () => {
     setTypePasswordInput((prevState) => !prevState);
   };
 
-  const onSubmit =async (data: IAuthResetPassword) => {
+  const onSubmit = async (data: IAuthResetPassword) => {
     const token = localStorage.getItem("USER_Token");
     console.log(token);
     try {
-     const res=  await AuthApi().resetPassword({ password: data.password });
-     console.log(res);
-     
+      const res = await resetPassword({ password: data.password });
+      console.log(
+        "🚀 ~ file: useResetPasswordForm.ts ~ line 32 ~ onSubmit ~ res",
+        res
+      );
     } catch (error) {
-      console.log("🚀 ~ file: useResetPasswordForm.ts ~ line 34 ~ onSubmit ~ error", error)
-      
+      console.log(
+        "🚀 ~ file: useResetPasswordForm.ts ~ line 34 ~ onSubmit ~ error",
+        error
+      );
     }
   };
 

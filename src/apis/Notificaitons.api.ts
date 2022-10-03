@@ -1,13 +1,27 @@
+import { useEffect, useRef } from "react";
 import api from "./configs/axios.config";
 
-const NotificationsApi = (controller?: AbortController) => ({
-  async getUserInformation() {
-    const res = await api.get("/notifications", {
-      signal: controller?.signal,
-    });
+const useNotificationsApi = (controller?: AbortController) => {
+  const token = useRef<string>("");
 
-    return res.data;
-  },
-});
+  useEffect(() => {
+    let tk = localStorage.getItem("USER_TOKEN");
+    if (tk === null) tk = "";
+    token.current = tk;
+  }, []);
 
-export default NotificationsApi;
+  return {
+    async getUserInformation() {
+      const res = await api.get("/notifications", {
+        signal: controller?.signal,
+        headers: {
+          Token: token.current,
+        },
+      });
+
+      return res.data;
+    },
+  };
+};
+
+export default useNotificationsApi;

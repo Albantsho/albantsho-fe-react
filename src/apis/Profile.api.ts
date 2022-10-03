@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import api from "./configs/axios.config";
 
 interface IWithdrawalDetail {
@@ -7,21 +8,37 @@ interface IWithdrawalDetail {
   bank_code: string;
 }
 
-const ProfileApi = (controller?: AbortController) => ({
-  async getUserInformation() {
-    const res = await api.get("/profile/user", {
-      signal: controller?.signal,
-    });
+const useProfileApi = (controller?: AbortController) => {
+  const token = useRef<string>("");
 
-    return res.data;
-  },
-  async addingWithdrawalDetail(payload: IWithdrawalDetail) {
-    const res = await api.post("/profile/user", payload, {
-      signal: controller?.signal,
-    });
+  useEffect(() => {
+    let tk = localStorage.getItem("USER_TOKEN");
+    if (tk === null) tk = "";
+    token.current = tk;
+  }, []);
 
-    return res.data;
-  },
-});
+  return {
+    async getUserInformation() {
+      const res = await api.get("/profile/user", {
+        signal: controller?.signal,
+        headers: {
+          Token: token.current,
+        },
+      });
 
-export default ProfileApi;
+      return res.data;
+    },
+    async addingWithdrawalDetail(payload: IWithdrawalDetail) {
+      const res = await api.post("/profile/user", payload, {
+        signal: controller?.signal,
+        headers: {
+          Token: token.current,
+        },
+      });
+
+      return res.data;
+    },
+  };
+};
+
+export default useProfileApi;

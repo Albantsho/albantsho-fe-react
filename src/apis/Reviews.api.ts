@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import api from "./configs/axios.config";
 
 interface IUpdateReview {
@@ -12,14 +13,27 @@ interface IUpdateReview {
   status: string;
 }
 
-const ReviewsApi = (controller?: AbortController) => ({
-  async updateReview(id: string, payload: IUpdateReview) {
-    const res = await api.post(`/reviews/${id}`, payload, {
-      signal: controller?.signal,
-    });
+const useReviewsApi = (controller?: AbortController) => {
+  const token = useRef<string>("");
 
-    return res.data;
-  },
-});
+  useEffect(() => {
+    let tk = localStorage.getItem("USER_TOKEN");
+    if (tk === null) tk = "";
+    token.current = tk;
+  }, []);
 
-export default ReviewsApi;
+  return {
+    async updateReview(id: string, payload: IUpdateReview) {
+      const res = await api.post(`/reviews/${id}`, payload, {
+        signal: controller?.signal,
+        headers: {
+          Token: token.current,
+        },
+      });
+
+      return res.data;
+    },
+  };
+};
+
+export default useReviewsApi;

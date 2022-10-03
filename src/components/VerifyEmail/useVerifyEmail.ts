@@ -1,7 +1,8 @@
-import AuthApi from "apis/Auth.api";
+import useAuthApi from "apis/Auth.api";
 import React, { useState, useRef, FormEvent } from "react";
 
 const useVerifyEmail = () => {
+  const { emailVerify } = useAuthApi();
   const inputs = useRef<HTMLInputElement[]>([]);
   const [formValues, setFormValues] = useState<{ [key: number]: string }>({
     0: "",
@@ -33,10 +34,13 @@ const useVerifyEmail = () => {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const res = await AuthApi().emailVerify({
+      const res = await emailVerify({
         otp: Object.values(formValues).join(""),
       });
-      console.log(res);
+      console.log(
+        "🚀 ~ file: useVerifyEmail.ts ~ line 40 ~ onSubmit ~ res",
+        res
+      );
     } catch (error) {
       console.log(error);
     }

@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import api from "./configs/axios.config";
 
 interface ICreateBid {
@@ -6,42 +7,61 @@ interface ICreateBid {
 }
 
 interface IUserBid {
-   script_basic_id: string;
-   amount: number;
- }
+  script_basic_id: string;
+  amount: number;
+}
 
-const BidsApi = (controller?: AbortController) => ({
-  async createBid(payload: ICreateBid) {
-    const res = await api.post("/market/bid", payload, {
-      signal: controller?.signal,
-    });
+const BidsApi = (controller?: AbortController) => {
+  const token = useRef<string>("");
 
-    return res.data;
-  },
+  useEffect(() => {
+    let tk = localStorage.getItem("USER_TOKEN");
+    if (tk === null) tk = "";
+    token.current = tk;
+  }, []);
 
-  async userBid(payload: IUserBid) {
-    const res = await api.post("/market/bid", payload, {
-      signal: controller?.signal,
-    });
+  return {
+    async createBid(payload: ICreateBid) {
+      const res = await api.post("/market/bid", payload, {
+        signal: controller?.signal,
+      });
 
-    return res.data;
-  },
+      return res.data;
+    },
 
-  async acceptBid(payload: string) {
-    const res = await api.get(`/market/bid/accept/${payload}`, {
-      signal: controller?.signal,
-    });
+    async userBid(payload: IUserBid) {
+      const res = await api.post("/market/bid", payload, {
+        signal: controller?.signal,
+        headers: {
+          Token: token.current,
+        },
+      });
 
-    return res.data;
-  },
+      return res.data;
+    },
 
-  async rejectBid(payload: string) {
-    const res = await api.get(`/market/bid/reject/${payload}`, {
-      signal: controller?.signal,
-    });
+    async acceptBid(payload: string) {
+      const res = await api.get(`/market/bid/accept/${payload}`, {
+        signal: controller?.signal,
+        headers: {
+          Token: token.current,
+        },
+      });
 
-    return res.data;
-  },
-});
+      return res.data;
+    },
+
+    async rejectBid(payload: string) {
+      const res = await api.get(`/market/bid/reject/${payload}`, {
+        signal: controller?.signal,
+        headers: {
+          Token: token.current,
+        },
+      });
+
+      return res.data;
+    },
+  };
+};
 
 export default BidsApi;

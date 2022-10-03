@@ -4,8 +4,18 @@ import PaginationMarketList from "components/Marketplace/Index/PaginationMarketL
 import MarketplaceTabs from "components/Marketplace/Index/MarketplaceTabs/MarketplaceTabs";
 import Head from "next/head";
 import { NextPageWithLayout } from "../_app";
+import { useEffect } from "react";
+import useMarketplaceApi from "apis/Marketplace.api";
 
 const Marketplace: NextPageWithLayout = () => {
+  const { getScripts } = useMarketplaceApi();
+  useEffect(() => {
+    async function fetchScripts() {
+      const res = await getScripts();
+    }
+    fetchScripts();
+  }, []);
+
   return (
     <>
       <Head>

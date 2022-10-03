@@ -51,22 +51,15 @@ const initialState: UserState = {
   },
 };
 
-console.log(initialState);
-
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     registerType: (state, action: PayloadAction<UserState>) => {
       state = action.payload;
-      console.log("hello register");
-      console.log({ state, action });
     },
     loginType: (state, action: PayloadAction<UserState>) => {
       state = action.payload;
-      console.log("hello login");
-
-      console.log({ state, action });
     },
   },
 });

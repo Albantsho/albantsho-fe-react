@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import api from "./configs/axios.config";
 
 interface IRegisterPayload {
@@ -15,49 +16,62 @@ interface ILoginPayload {
   password: string;
 }
 
-const AuthApi = (controller?: AbortController) => ({
-  async register(payload: IRegisterPayload) {
-    const res = await api.post("/authentication/register", payload, {
-      signal: controller?.signal,
-    });
+const useAuthApi = (controller?: AbortController) => {
+  const token = useRef<string>("");
 
-    return res.data;
-  },
+  useEffect(() => {
+    let tk = localStorage.getItem("USER_TOKEN");
+    if (tk === null) tk = "";
+    token.current = tk;
+  }, []);
 
-  async login(payload: ILoginPayload) {
-    const res = await api.post("/authentication/login", payload, {
-      signal: controller?.signal,
-    });
+  return {
+    async register(payload: IRegisterPayload) {
+      const res = await api.post("/authentication/register", payload, {
+        signal: controller?.signal,
+      });
 
-    return res.data;
-  },
+      return res.data;
+    },
 
-  async resetPassword(payload: object) {
-    const res = await api.post("/profile/password-reset", payload, {
-      signal: controller?.signal,
-    });
+    async login(payload: ILoginPayload) {
+      const res = await api.post("/authentication/login", payload, {
+        signal: controller?.signal,
+      });
 
-    return res.data;
-  },
+      return res.data;
+    },
 
-  async forgetPassword(payload: object) {
-    const res = await api.post("/authentication/reset-password", payload, {
-      signal: controller?.signal,
-    });
+    async resetPassword(payload: object) {
+      const res = await api.post("/profile/password-reset", payload, {
+        signal: controller?.signal,
+        headers: {
+          Token: token.current,
+        },
+      });
 
-    return res.data;
-  },
+      return res.data;
+    },
 
-  async emailVerify(payload: object) {
-    const res = await api.post("/verification", payload, {
-      signal: controller?.signal,
-      headers: {
-        Token: localStorage.getItem("USER_TOKEN")!,
-      },
-    });
+    async forgetPassword(payload: object) {
+      const res = await api.post("/authentication/reset-password", payload, {
+        signal: controller?.signal,
+      });
 
-    return res.data;
-  },
-});
+      return res.data;
+    },
 
-export default AuthApi;
+    async emailVerify(payload: object) {
+      const res = await api.post("/verification", payload, {
+        signal: controller?.signal,
+        headers: {
+          Token: token.current,
+        },
+      });
+
+      return res.data;
+    },
+  };
+};
+
+export default useAuthApi;

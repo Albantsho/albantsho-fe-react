@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "./validation/register.validation";
-import AuthApi from "apis/Auth.api";
+import useAuthApi from "apis/Auth.api";
 import { useDispatch } from "react-redux";
 import { registerType } from "../../../app/features/user/userSlice";
 
@@ -17,6 +17,7 @@ interface IRegisterFormValues {
 }
 
 const useRegisterForm = () => {
+  const { register: registerApi } = useAuthApi();
   const {
     register,
     watch,
@@ -42,10 +43,8 @@ const useRegisterForm = () => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data: IRegisterFormValues) => {
-    console.log(data);
     try {
-      const res = await AuthApi().register(data);
-      console.log({ res });
+      const res = await registerApi(data);
       await localStorage.setItem("USER_Token", res.data.token);
       await dispatch(registerType({ user: res.data }));
     } catch (error) {

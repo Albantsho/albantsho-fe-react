@@ -1,13 +1,27 @@
+import { useEffect, useRef } from "react";
 import api from "./configs/axios.config";
 
-const SubscriptionsApi = (controller?: AbortController) => ({
-  async getUserInformation() {
-    const res = await api.get("/subscription", {
-      signal: controller?.signal,
-    });
+const useSubscriptionsApi = (controller?: AbortController) => {
+  const token = useRef<string>("");
 
-    return res.data;
-  },
-});
+  useEffect(() => {
+    let tk = localStorage.getItem("USER_TOKEN");
+    if (tk === null) tk = "";
+    token.current = tk;
+  }, []);
 
-export default SubscriptionsApi;
+  return {
+    async getUserInformation() {
+      const res = await api.get("/subscription", {
+        signal: controller?.signal,
+        headers: {
+          Token: token.current,
+        },
+      });
+
+      return res.data;
+    },
+  };
+};
+
+export default useSubscriptionsApi;
