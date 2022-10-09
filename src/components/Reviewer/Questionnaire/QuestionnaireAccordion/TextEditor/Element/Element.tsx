@@ -15,8 +15,14 @@ const Element = ({ attributes, children, element }: RenderElementProps) => {
       );
     case "link":
       return (
-        <Link {...attributes} href={element.href}>
+        <Link underline="always" {...attributes} href={element.url}>
+          <span contentEditable={false} style={{ fontSize: 0 }}>
+            ${String.fromCodePoint(160) /* Non-breaking space */}
+          </span>
           {children}
+          <span contentEditable={false} style={{ fontSize: 0 }}>
+            ${String.fromCodePoint(160) /* Non-breaking space */}
+          </span>
         </Link>
       );
     case "image":

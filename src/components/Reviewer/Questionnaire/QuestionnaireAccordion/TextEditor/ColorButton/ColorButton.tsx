@@ -1,5 +1,5 @@
 import { IconButton, SvgIcon } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { type ColorResult, SketchPicker } from "react-color";
 import { RiFontColor } from "react-icons/ri";
 import { useSlate } from "slate-react";
@@ -10,6 +10,17 @@ const ColorButton = () => {
   const { toggleMark } = useMarkButton();
   const [colorPickerOpen, setColorPickerOpen] = useState(false);
   const editor = useSlate();
+
+  // useEffect(() => {
+  //   const marks = editor.marks;
+  //   console.log(
+  //     "🚀 ~ file: ColorButton.tsx ~ line 16 ~ useEffect ~ marks",
+  //     marks
+  //   );
+  //   if (editor.marks) {
+  //     setColor(marks?.color);
+  //   }
+  // }, [editor.marks]);
 
   const handleColor = (color: ColorResult) => {
     setColor(color.hex);

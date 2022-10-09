@@ -1,7 +1,7 @@
 import { Divider } from "@mui/material";
 import { CustomElement } from "interfaces/slate";
-import { useState } from "react";
-import { BsCode, BsLink45Deg, BsTypeBold } from "react-icons/bs";
+import { useMemo } from "react";
+import { BsCode, BsTypeBold } from "react-icons/bs";
 import { FiItalic, FiMoreHorizontal } from "react-icons/fi";
 import {
   MdFormatListBulleted,
@@ -14,7 +14,9 @@ import ColorButton from "./ColorButton/ColorButton";
 import Element from "./Element/Element";
 import HeadingButtonList from "./HeadingButtonList/HeadingButtonList";
 import Leaf from "./Leaf/Leaf";
+import LinkButton from "./LinkButton/LinkButton";
 import MarkButton from "./MarkButton/MarkButton";
+import withLink from "./plugins/withLink";
 
 const initialValue: CustomElement[] = [
   {
@@ -38,7 +40,7 @@ const initialValue: CustomElement[] = [
 ];
 
 const TextEditor = () => {
-  const [editor] = useState(() => withReact(createEditor()));
+  const editor = useMemo(() => withLink(withReact(createEditor())), []);
 
   return (
     <Slate editor={editor} value={initialValue}>
@@ -54,7 +56,7 @@ const TextEditor = () => {
         <BlockButton format="numberList" icon={MdOutlineFormatListNumbered} />
         <BlockButton format="bulletList" icon={MdFormatListBulleted} />
         <Divider orientation="vertical" />
-        <BlockButton format="link" icon={BsLink45Deg} href="www" />
+        <LinkButton />
         <MarkButton format="code" icon={BsCode} />
       </div>
       <Editable

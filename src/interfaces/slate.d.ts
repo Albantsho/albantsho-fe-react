@@ -21,9 +21,9 @@ interface IListItem {
   children: CustomText[];
 }
 
-interface ILink {
+export interface ILink {
   type: "link";
-  href: string;
+  url: string;
   children: CustomText[];
 }
 
@@ -35,11 +35,11 @@ interface IImage {
 
 export type CustomElement =
   | ITypography
-  | ILink
   | IImage
   | IBulletList
   | INumberList
-  | IListItem;
+  | IListItem
+  | ILink;
 
 export interface CustomText {
   text: string;
