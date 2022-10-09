@@ -6,7 +6,11 @@ const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
   if (leaf.underline) children = <u>{children}</u>;
   if (leaf.code) children = <code>{children}</code>;
 
-  return <span {...attributes}>{children}</span>;
+  return (
+    <span style={{ color: leaf?.color }} {...attributes}>
+      {children}
+    </span>
+  );
 };
 
 export default Leaf;

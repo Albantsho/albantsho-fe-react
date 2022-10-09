@@ -2,7 +2,7 @@ import { IconButton, SvgIcon, type TypographyProps } from "@mui/material";
 import { CustomElement } from "interfaces/slate";
 import type { IconType } from "react-icons";
 import { useSlate } from "slate-react";
-import useBlockButton from "../hooks/useBlockButton";
+import useBlockButton from "../hooks/useBlockButton/useBlockButton";
 
 interface IProps {
   icon: IconType;

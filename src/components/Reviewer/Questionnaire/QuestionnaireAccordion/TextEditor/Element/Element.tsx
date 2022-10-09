@@ -25,13 +25,13 @@ const Element = ({ attributes, children, element }: RenderElementProps) => {
       return <li {...attributes}>{children}</li>;
     case "bulletList":
       return (
-        <ul {...attributes} className="list-disc">
+        <ul {...attributes} className="list-disc list-inside">
           {children}
         </ul>
       );
     case "numberList":
       return (
-        <ol {...attributes} className="list-decimal">
+        <ol {...attributes} className="list-decimal list-inside">
           {children}
         </ol>
       );

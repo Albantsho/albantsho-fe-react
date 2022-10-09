@@ -2,7 +2,7 @@ import { IconButton, SvgIcon } from "@mui/material";
 import { CustomText } from "interfaces/slate";
 import type { IconType } from "react-icons";
 import { useSlate } from "slate-react";
-import useMarkButton from "./useMarkButton";
+import useMarkButton from "../hooks/useMarkButton/useMarkButton";
 
 interface IProps {
   icon: IconType;

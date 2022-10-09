@@ -46,6 +46,7 @@ export interface CustomText {
   bold?: boolean;
   italic?: boolean;
   underline?: boolean;
+  color?: string;
   code?: boolean;
 }
 

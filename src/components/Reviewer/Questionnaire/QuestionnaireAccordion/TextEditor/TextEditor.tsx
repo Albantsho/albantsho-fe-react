@@ -1,24 +1,25 @@
-import { useState } from "react";
-import { Slate, Editable, withReact } from "slate-react";
-import { createEditor } from "slate";
+import { Divider } from "@mui/material";
 import { CustomElement } from "interfaces/slate";
-import Element from "./Element/Element";
-import Leaf from "./Leaf/Leaf";
+import { useState } from "react";
+import { BsCode, BsLink45Deg, BsTypeBold } from "react-icons/bs";
+import { FiItalic, FiMoreHorizontal } from "react-icons/fi";
 import {
-  MdFormatAlignCenter,
   MdFormatListBulleted,
   MdOutlineFormatListNumbered,
 } from "react-icons/md";
-import MarkButton from "./MarkButton/MarkButton";
+import { createEditor } from "slate";
+import { Editable, Slate, withReact } from "slate-react";
 import BlockButton from "./BlockButton/BlockButton";
-import { BsCode, BsLink45Deg, BsTypeBold } from "react-icons/bs";
-import { FiItalic, FiMoreHorizontal } from "react-icons/fi";
+import ColorButton from "./ColorButton/ColorButton";
+import Element from "./Element/Element";
 import HeadingButtonList from "./HeadingButtonList/HeadingButtonList";
+import Leaf from "./Leaf/Leaf";
+import MarkButton from "./MarkButton/MarkButton";
 
 const initialValue: CustomElement[] = [
   {
     type: "typography",
-    variant: "h1",
+    variant: "h6",
     children: [{ text: "Hello" }],
   },
   {
@@ -41,33 +42,23 @@ const TextEditor = () => {
 
   return (
     <Slate editor={editor} value={initialValue}>
-      <div className="flex gap-3 h-8">
+      <div className="flex gap-3 h-8 mb-8">
+        <HeadingButtonList />
+        <Divider orientation="vertical" />
         <MarkButton format="bold" icon={BsTypeBold} />
         <MarkButton format="italic" icon={FiItalic} />
         <MarkButton format="underline" icon={FiMoreHorizontal} />
-        <MarkButton format="code" icon={BsCode} />
+        <Divider orientation="vertical" />
+        <ColorButton />
+        <Divider orientation="vertical" />
         <BlockButton format="numberList" icon={MdOutlineFormatListNumbered} />
         <BlockButton format="bulletList" icon={MdFormatListBulleted} />
+        <Divider orientation="vertical" />
         <BlockButton format="link" icon={BsLink45Deg} href="www" />
-        <BlockButton
-          format="typography"
-          icon={MdFormatAlignCenter}
-          variant="h2"
-        />
-        <BlockButton
-          format="typography"
-          icon={MdFormatAlignCenter}
-          variant="h3"
-        />
-        <HeadingButtonList />
+        <MarkButton format="code" icon={BsCode} />
       </div>
       <Editable
         placeholder="Add comment..."
-        renderPlaceholder={({ children, attributes }) => (
-          <div {...attributes}>
-            <p className="text-left pt-4">{children}</p>
-          </div>
-        )}
         spellCheck
         autoFocus
         renderElement={(props) => <Element {...props} />}

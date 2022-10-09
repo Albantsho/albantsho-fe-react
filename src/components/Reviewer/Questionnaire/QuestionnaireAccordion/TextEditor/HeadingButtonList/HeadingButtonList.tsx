@@ -14,8 +14,10 @@ import {
 import { CustomElement } from "interfaces/slate";
 import React from "react";
 import { AiOutlineCaretDown } from "react-icons/ai";
+import { BiChevronDown } from "react-icons/bi";
+import { BsFillCaretDownFill } from "react-icons/bs";
 import { useSlate } from "slate-react";
-import useBlockButton from "../hooks/useBlockButton";
+import useBlockButton from "../hooks/useBlockButton/useBlockButton";
 
 interface IListButtons {
   format: CustomElement["type"];
@@ -25,17 +27,17 @@ interface IListButtons {
 
 const listButtons: IListButtons[] = [
   { format: "typography", option: "Normal Text", variant: "body1" },
-  { format: "typography", option: "H1", variant: "h1" },
-  { format: "typography", option: "H2", variant: "h2" },
-  { format: "typography", option: "H3", variant: "h3" },
-  { format: "typography", option: "H4", variant: "h4" },
-  { format: "typography", option: "H5", variant: "h5" },
-  { format: "typography", option: "H6", variant: "h6" },
+  { format: "typography", option: "Heading 1", variant: "h1" },
+  { format: "typography", option: "Heading 2", variant: "h2" },
+  { format: "typography", option: "Heading 3", variant: "h3" },
+  { format: "typography", option: "Heading 4", variant: "h4" },
+  { format: "typography", option: "Heading 5", variant: "h5" },
+  { format: "typography", option: "Heading 6", variant: "h6" },
 ];
 
 const HeadingButtonList = () => {
   const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLDivElement>(null);
+  const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const { isBlockActive, toggleBlock } = useBlockButton();
   const editor = useSlate();
@@ -69,19 +71,34 @@ const HeadingButtonList = () => {
 
   return (
     <React.Fragment>
-      <ButtonGroup variant="text" ref={anchorRef} aria-label="split button">
-        <Button>{listButtons[selectedIndex].option}</Button>
-        <IconButton
-          size="small"
-          aria-controls={open ? "split-button-menu" : undefined}
-          aria-expanded={open ? "true" : undefined}
-          aria-label="select merge strategy"
-          aria-haspopup="menu"
-          onClick={handleToggle}
-        >
-          <SvgIcon color="primary" component={AiOutlineCaretDown} />
-        </IconButton>
-      </ButtonGroup>
+      {/* <ButtonGroup variant="text" ref={anchorRef} aria-label="split button"> */}
+      <Button
+        sx={{
+          "&.MuiButtonBase-root": {
+            maxWidth: "135px",
+            width: "100%",
+            paddingY: "20px",
+            textAlign: "start",
+            justifyContent: "space-between",
+            fontSize: "18px",
+            fontWeight: "600",
+          },
+        }}
+        ref={anchorRef}
+        onClick={handleToggle}
+        endIcon={
+          <SvgIcon
+            fontSize="large"
+            color="primary"
+            component={BiChevronDown}
+            inheritViewBox
+          />
+        }
+      >
+        {listButtons[selectedIndex].option}
+      </Button>
+
+      {/* </ButtonGroup> */}
       <Popper
         sx={{
           zIndex: 1,
@@ -102,27 +119,30 @@ const HeadingButtonList = () => {
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList id="split-button-menu" autoFocusItem>
+                <MenuList disablePadding id="split-button-menu" autoFocusItem>
                   {listButtons.map(({ format, option, variant }, index) => {
                     return (
                       <MenuItem
                         key={index}
+                        TouchRippleProps={{ className: "text-primary-main" }}
+                        className="hover:bg-primary-50/25"
                         sx={{
                           "&.MuiButtonBase-root": {
                             fontSize:
-                              option === "H1"
-                                ? "36px"
-                                : option === "H2"
+                              option === "Heading 1"
+                                ? "26px"
+                                : option === "Heading 2"
                                 ? "24px"
-                                : option === "H3"
+                                : option === "Heading 3"
+                                ? "22px"
+                                : option === "Heading 4"
                                 ? "20px"
-                                : option === "H4"
+                                : option === "Heading 5"
+                                ? "18px"
+                                : option === "Heading 6"
                                 ? "16px"
-                                : option === "H5"
-                                ? "12px"
-                                : option === "H6"
-                                ? "8px"
                                 : "16px",
+                            fontWeight: "bold",
                           },
                         }}
                         selected={isBlockActive(editor, format, variant)}
