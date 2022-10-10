@@ -11,13 +11,13 @@ import { createEditor } from "slate";
 import { Editable, Slate, withReact } from "slate-react";
 import BlockButton from "./BlockButton/BlockButton";
 import ColorButton from "./ColorButton/ColorButton";
-import Element from "./Element/Element";
+import EditorElement from "./EditorElement/EditorElement";
 import HeadingButtonList from "./HeadingButtonList/HeadingButtonList";
-import ImageButton from "./ImageButton/ImageButton";
-import Leaf from "./Leaf/Leaf";
+import ImageButton from "./ImageButtonList/ImageButtonList";
+import EditorLeaf from "./EditorLeaf/EditorLeaf";
 import LinkButton from "./LinkButton/LinkButton";
 import MarkButton from "./MarkButton/MarkButton";
-import withLink from "./plugins/withLink";
+import withNewFeatures from "./plugins/withNewFeatures";
 
 const initialValue: CustomElement[] = [
   {
@@ -46,7 +46,7 @@ const initialValue: CustomElement[] = [
 ];
 
 const TextEditor = () => {
-  const editor = useMemo(() => withLink(withReact(createEditor())), []);
+  const editor = useMemo(() => withNewFeatures(withReact(createEditor())), []);
 
   return (
     <Slate editor={editor} value={initialValue}>
@@ -70,8 +70,8 @@ const TextEditor = () => {
         placeholder="Add comment..."
         spellCheck
         autoFocus
-        renderElement={(props) => <Element {...props} />}
-        renderLeaf={(props) => <Leaf {...props} />}
+        renderElement={(props) => <EditorElement {...props} />}
+        renderLeaf={(props) => <EditorLeaf {...props} />}
       />
     </Slate>
   );

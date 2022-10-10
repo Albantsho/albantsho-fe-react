@@ -1,38 +1,11 @@
 import { IconButton, SvgIcon } from "@mui/material";
-import { useEffect, useState } from "react";
-import { type ColorResult, SketchPicker } from "react-color";
+import { SketchPicker } from "react-color";
 import { RiFontColor } from "react-icons/ri";
-import { useSlate } from "slate-react";
-import useMarkButton from "../hooks/useMarkButton/useMarkButton";
+import useColorButton from "./useColorButton";
 
 const ColorButton = () => {
-  const [color, setColor] = useState("#000");
-  const { toggleMark } = useMarkButton();
-  const [colorPickerOpen, setColorPickerOpen] = useState(false);
-  const editor = useSlate();
-
-  // useEffect(() => {
-  //   const marks = editor.marks;
-  //   console.log(
-  //     "🚀 ~ file: ColorButton.tsx ~ line 16 ~ useEffect ~ marks",
-  //     marks
-  //   );
-  //   if (editor.marks) {
-  //     setColor(marks?.color);
-  //   }
-  // }, [editor.marks]);
-
-  const handleColor = (color: ColorResult) => {
-    setColor(color.hex);
-    toggleMark({ editor, format: "color", color: color.hex });
-  };
-  const handleClose = () => {
-    setColorPickerOpen(false);
-  };
-
-  const handleOpenColorPicker = () => {
-    setColorPickerOpen((prevState) => !prevState);
-  };
+  const { color, colorPickerOpen, handleOpenColorPicker, handleSelectedColor } =
+    useColorButton();
 
   return (
     <div className="relative">
@@ -48,17 +21,9 @@ const ColorButton = () => {
         ></div>
       </IconButton>
       {colorPickerOpen && (
-        // <Menu>
-        //   <MenuItem onClick={handleClose}>
-        <div className="absolute -left-[80px] top-4 p-5 z-10">
-          <SketchPicker
-            onSwatchHover={handleClose}
-            color={color}
-            onChangeComplete={handleColor}
-          />
+        <div className="absolute -left-[80px] top-6 p-5 z-10">
+          <SketchPicker color={color} onChangeComplete={handleSelectedColor} />
         </div>
-        //   </MenuItem>
-        // </Menu>
       )}
     </div>
   );

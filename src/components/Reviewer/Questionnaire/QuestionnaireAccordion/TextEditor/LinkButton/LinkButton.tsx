@@ -1,51 +1,10 @@
 import { IconButton, SvgIcon } from "@mui/material";
-import type { ILink } from "interfaces/slate";
 import { BiUnlink } from "react-icons/bi";
 import { BsLink45Deg } from "react-icons/bs";
-import { Editor, Element as SlateElement, Range, Transforms } from "slate";
-import { useSlate } from "slate-react";
+import useLinkButton from "./useLinkButton";
 
 const LinkButton = () => {
-  const editor = useSlate();
-
-  const isLinkActive = () => {
-    const [link] = Editor.nodes(editor, {
-      match: (n) =>
-        !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "link",
-    });
-
-    return !!link;
-  };
-
-  const unwrapLink = () => {
-    Transforms.unwrapNodes(editor, {
-      match: (n) =>
-        !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "link",
-    });
-  };
-
-  const wrapLink = (url: string) => {
-    if (!editor.selection) return;
-    if (isLinkActive()) {
-      unwrapLink();
-      return;
-    }
-
-    const { selection } = editor;
-    const isCollapsed = selection && Range.isCollapsed(selection);
-    const link: ILink = {
-      type: "link",
-      url,
-      children: isCollapsed ? [{ text: url }] : [],
-    };
-
-    if (isCollapsed) {
-      Transforms.insertNodes(editor, link);
-    } else {
-      Transforms.wrapNodes(editor, link, { split: true });
-      Transforms.collapse(editor, { edge: "end" });
-    }
-  };
+  const { isLinkActive, unwrapLink, wrapLink } = useLinkButton();
 
   return (
     <IconButton

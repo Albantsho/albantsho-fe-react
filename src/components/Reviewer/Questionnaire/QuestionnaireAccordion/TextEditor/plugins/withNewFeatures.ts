@@ -3,7 +3,7 @@ import type { ReactEditor } from "slate-react";
 
 type IEditor = BaseEditor & ReactEditor;
 
-const withLink = (editor: IEditor) => {
+const withNewFeatures = (editor: IEditor) => {
   const { isInline, isVoid } = editor;
 
   editor.isInline = (element) =>
@@ -16,4 +16,4 @@ const withLink = (editor: IEditor) => {
   return editor;
 };
 
-export default withLink;
+export default withNewFeatures;

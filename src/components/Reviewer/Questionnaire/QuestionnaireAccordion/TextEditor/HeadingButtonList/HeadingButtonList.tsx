@@ -1,9 +1,7 @@
 import {
   Button,
-  ButtonGroup,
   ClickAwayListener,
   Grow,
-  IconButton,
   MenuItem,
   MenuList,
   Paper,
@@ -13,11 +11,8 @@ import {
 } from "@mui/material";
 import { CustomElement } from "interfaces/slate";
 import React from "react";
-import { AiOutlineCaretDown } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
-import { BsFillCaretDownFill } from "react-icons/bs";
-import { useSlate } from "slate-react";
-import useBlockButton from "../hooks/useBlockButton/useBlockButton";
+import useHeadingButtonList from "./useHeadingButtonList";
 
 interface IListButtons {
   format: CustomElement["type"];
@@ -36,46 +31,23 @@ const listButtons: IListButtons[] = [
 ];
 
 const HeadingButtonList = () => {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLButtonElement>(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-  const { isBlockActive, toggleBlock } = useBlockButton();
-  const editor = useSlate();
-
-  const handleMenuItemClick =
-    (
-      index: number,
-      variant: TypographyProps["variant"],
-      format: CustomElement["type"]
-    ) =>
-    () => {
-      setSelectedIndex(index);
-      setOpen(false);
-      toggleBlock(editor, format, variant);
-    };
-
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleClose = (event: Event) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
-
-    setOpen(false);
-  };
+  const {
+    handleCloseListHeadingButton,
+    handleMenuItemClick,
+    handleToggleListHeadingButton,
+    isBlockActive,
+    openListHeadingButton,
+    selectedIndex,
+    anchorRef,
+    editor,
+  } = useHeadingButtonList();
 
   return (
     <React.Fragment>
-      {/* <ButtonGroup variant="text" ref={anchorRef} aria-label="split button"> */}
       <Button
         sx={{
           "&.MuiButtonBase-root": {
-            maxWidth: "135px",
+            maxWidth: "140px",
             width: "100%",
             paddingY: "20px",
             textAlign: "start",
@@ -85,7 +57,7 @@ const HeadingButtonList = () => {
           },
         }}
         ref={anchorRef}
-        onClick={handleToggle}
+        onClick={handleToggleListHeadingButton}
         endIcon={
           <SvgIcon
             fontSize="large"
@@ -97,13 +69,11 @@ const HeadingButtonList = () => {
       >
         {listButtons[selectedIndex].option}
       </Button>
-
-      {/* </ButtonGroup> */}
       <Popper
         sx={{
           zIndex: 1,
         }}
-        open={open}
+        open={openListHeadingButton}
         anchorEl={anchorRef.current}
         role={undefined}
         transition
@@ -118,7 +88,7 @@ const HeadingButtonList = () => {
             }}
           >
             <Paper>
-              <ClickAwayListener onClickAway={handleClose}>
+              <ClickAwayListener onClickAway={handleCloseListHeadingButton}>
                 <MenuList disablePadding id="split-button-menu" autoFocusItem>
                   {listButtons.map(({ format, option, variant }, index) => {
                     return (
