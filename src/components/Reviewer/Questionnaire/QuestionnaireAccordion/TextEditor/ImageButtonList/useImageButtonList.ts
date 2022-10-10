@@ -42,10 +42,14 @@ const useImageButton = () => {
   };
 
   const handleGetPicture = (e: ChangeEvent<HTMLInputElement>) => {
-    const url = e.target.value;
-    url && insertImage(url);
-    setAnchorEl(null);
-    handleCloseListImageButton();
+    if (e.target.files) {
+      const url = URL.createObjectURL(e.target.files[0]);
+      url && insertImage(url);
+      setAnchorEl(null);
+      handleCloseListImageButton();
+    } else {
+      alert("Image not found");
+    }
   };
 
   return {

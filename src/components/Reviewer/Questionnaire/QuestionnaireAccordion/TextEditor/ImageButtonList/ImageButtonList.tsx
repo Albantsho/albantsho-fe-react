@@ -1,6 +1,14 @@
-import { Button, Menu, MenuItem, SvgIcon } from "@mui/material";
+import {
+  Button,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  SvgIcon,
+} from "@mui/material";
+import { AiOutlineSearch } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
-import { BsImageFill } from "react-icons/bs";
+import { BsImageFill, BsUpload } from "react-icons/bs";
 import useImageButton from "./useImageButtonList";
 
 const ImageButton = () => {
@@ -19,7 +27,7 @@ const ImageButton = () => {
         onClick={handleOpenListImageButton}
         startIcon={<SvgIcon component={BsImageFill} inheritViewBox />}
         endIcon={<SvgIcon component={BiChevronDown} inheritViewBox />}
-        className="w-10 h-10"
+        className="w-10 h-10 text-gray-500"
       />
       <Menu
         anchorEl={anchorEl}
@@ -34,16 +42,30 @@ const ImageButton = () => {
         }}
         onClose={handleCloseListImageButton}
       >
-        <MenuItem onClick={handleGetUrl}>upload Image with URL</MenuItem>
+        <MenuItem onClick={handleGetUrl}>
+          <ListItemIcon>
+            <SvgIcon fontSize="small" component={BsUpload} inheritViewBox />
+          </ListItemIcon>
+          <ListItemText>Upload from web </ListItemText>
+        </MenuItem>
         <MenuItem>
-          <label htmlFor="upload-image">upload Image in system</label>
-          <input
-            onChange={handleGetPicture}
-            type="file"
-            id="upload-image"
-            className="opacity-0 hidden"
-            accept="image/*"
-          />
+          <ListItemIcon>
+            <SvgIcon
+              fontSize="small"
+              component={AiOutlineSearch}
+              inheritViewBox
+            />
+          </ListItemIcon>
+          <ListItemText>
+            <label htmlFor="upload-image">Upload from system</label>
+            <input
+              onChange={handleGetPicture}
+              type="file"
+              id="upload-image"
+              className="opacity-0 hidden"
+              accept="image/*"
+            />
+          </ListItemText>
         </MenuItem>
       </Menu>
     </>

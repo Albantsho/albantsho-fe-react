@@ -28,9 +28,11 @@ const ImageComponent = ({
       <div {...attributes}>
         <div style={{ opacity: 0 }}>{children}</div>
         <div
-          contentEditable={true}
-          className={`relative ${
-            selected && focused ? "shadow-primary" : "none"
+          contentEditable={false}
+          className={`relative  rounded-lg ${
+            selected && focused
+              ? "shadow-sm border border-gray-300 p-4 duration-200 ease-in"
+              : "none duration-200 ease-in"
           }`}
         >
           <img alt="" src={element.url} />
