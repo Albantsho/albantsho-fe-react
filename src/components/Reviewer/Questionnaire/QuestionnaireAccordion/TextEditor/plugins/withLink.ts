@@ -4,10 +4,14 @@ import type { ReactEditor } from "slate-react";
 type IEditor = BaseEditor & ReactEditor;
 
 const withLink = (editor: IEditor) => {
-  const { isInline } = editor;
+  const { isInline, isVoid } = editor;
 
   editor.isInline = (element) =>
     ["link"].includes(element.type) || isInline(element);
+
+  editor.isVoid = (element) => {
+    return element.type === "image" ? true : isVoid(element);
+  };
 
   return editor;
 };

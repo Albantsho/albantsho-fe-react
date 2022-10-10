@@ -13,6 +13,7 @@ import BlockButton from "./BlockButton/BlockButton";
 import ColorButton from "./ColorButton/ColorButton";
 import Element from "./Element/Element";
 import HeadingButtonList from "./HeadingButtonList/HeadingButtonList";
+import ImageButton from "./ImageButton/ImageButton";
 import Leaf from "./Leaf/Leaf";
 import LinkButton from "./LinkButton/LinkButton";
 import MarkButton from "./MarkButton/MarkButton";
@@ -23,6 +24,11 @@ const initialValue: CustomElement[] = [
     type: "typography",
     variant: "h6",
     children: [{ text: "Hello" }],
+  },
+  {
+    type: "image",
+    url: "https://upload.wikimedia.org/wikipedia/commons/2/21/Love_heart_uidaodjsdsew.gif",
+    children: [{ text: "" }],
   },
   {
     type: "numberList",
@@ -57,6 +63,7 @@ const TextEditor = () => {
         <BlockButton format="bulletList" icon={MdFormatListBulleted} />
         <Divider orientation="vertical" />
         <LinkButton />
+        <ImageButton />
         <MarkButton format="code" icon={BsCode} />
       </div>
       <Editable

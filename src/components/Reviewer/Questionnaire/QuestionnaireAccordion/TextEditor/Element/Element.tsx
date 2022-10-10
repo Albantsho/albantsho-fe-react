@@ -1,5 +1,13 @@
-import { Link, Typography } from "@mui/material";
-import { type RenderElementProps } from "slate-react";
+import { IconButton, Link, SvgIcon, Typography } from "@mui/material";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { Transforms } from "slate";
+import {
+  ReactEditor,
+  useFocused,
+  useSelected,
+  useSlate,
+  type RenderElementProps,
+} from "slate-react";
 
 const Element = ({ attributes, children, element }: RenderElementProps) => {
   switch (element.type) {
@@ -26,7 +34,11 @@ const Element = ({ attributes, children, element }: RenderElementProps) => {
         </Link>
       );
     case "image":
-      return <input {...attributes} type="file" />;
+      return (
+        <ImageComp attributes={attributes} element={element}>
+          {children}
+        </ImageComp>
+      );
     case "listItem":
       return <li {...attributes}>{children}</li>;
     case "bulletList":
@@ -48,3 +60,33 @@ const Element = ({ attributes, children, element }: RenderElementProps) => {
 };
 
 export default Element;
+
+const ImageComp = ({ attributes, children, element }: RenderElementProps) => {
+  const editor = useSlate();
+  const path = ReactEditor.findPath(editor as any, element);
+  const selected = useSelected();
+  const focused = useFocused();
+  if (element.type === "image") {
+    return (
+      <div {...attributes}>
+        <div style={{ opacity: 0 }}>{children}</div>
+        <div
+          contentEditable={true}
+          className={`relative ${
+            selected && focused ? "shadow-primary" : "none"
+          }`}
+        >
+          <img alt="" src={element.url} />
+          <IconButton
+            onClick={() => Transforms.removeNodes(editor, { at: path })}
+            className={`${selected ? "flex" : "hidden"} top-1 left-1 absolute`}
+          >
+            <SvgIcon component={RiDeleteBin6Line} />
+          </IconButton>
+        </div>
+      </div>
+    );
+  } else {
+    return <Typography {...attributes}>{children}</Typography>;
+  }
+};

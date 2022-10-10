@@ -27,7 +27,7 @@ export interface ILink {
   children: CustomText[];
 }
 
-interface IImage {
+export interface IImage {
   type: "image";
   url: string;
   children: CustomText[];

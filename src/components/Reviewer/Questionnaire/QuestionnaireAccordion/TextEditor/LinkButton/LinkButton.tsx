@@ -1,10 +1,9 @@
 import { IconButton, SvgIcon } from "@mui/material";
 import type { ILink } from "interfaces/slate";
-import type { IconType } from "react-icons";
+import { BiUnlink } from "react-icons/bi";
+import { BsLink45Deg } from "react-icons/bs";
 import { Editor, Element as SlateElement, Range, Transforms } from "slate";
 import { useSlate } from "slate-react";
-import { BsLink45Deg } from "react-icons/bs";
-import { BiUnlink } from "react-icons/bi";
 
 const LinkButton = () => {
   const editor = useSlate();
