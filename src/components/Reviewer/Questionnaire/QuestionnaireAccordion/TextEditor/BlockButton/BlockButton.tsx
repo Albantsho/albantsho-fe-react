@@ -19,6 +19,7 @@ const BlockButton = ({ format, icon, variant }: IProps) => {
 
   return (
     <IconButton
+      className="w-10 h-10"
       color={isActive ? "primary" : "default"}
       onClick={handleFormatElement}
     >

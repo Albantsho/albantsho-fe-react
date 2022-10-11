@@ -12,37 +12,19 @@ import { Editable, Slate, withReact } from "slate-react";
 import BlockButton from "./BlockButton/BlockButton";
 import ColorButton from "./ColorButton/ColorButton";
 import EditorElement from "./EditorElement/EditorElement";
+import EditorLeaf from "./EditorLeaf/EditorLeaf";
 import HeadingButtonList from "./HeadingButtonList/HeadingButtonList";
 import ImageButton from "./ImageButtonList/ImageButtonList";
-import EditorLeaf from "./EditorLeaf/EditorLeaf";
+import EmojiButton from "./EmojiButton/EmojiButton";
 import LinkButton from "./LinkButton/LinkButton";
 import MarkButton from "./MarkButton/MarkButton";
 import withNewFeatures from "./plugins/withNewFeatures";
+import TableButton from "./TableButton/TableButton";
+import { AiFillExclamationCircle } from "react-icons/ai";
+import EmailButton from "./EmailButton/EmailButton";
 
 const initialValue: CustomElement[] = [
-  {
-    type: "typography",
-    variant: "h6",
-    children: [{ text: "Hello" }],
-  },
-  {
-    type: "image",
-    url: "https://upload.wikimedia.org/wikipedia/commons/2/21/Love_heart_uidaodjsdsew.gif",
-    children: [{ text: "" }],
-  },
-  {
-    type: "numberList",
-    children: [
-      {
-        type: "listItem",
-        children: [
-          {
-            text: "Hi lossw",
-          },
-        ],
-      },
-    ],
-  },
+  { type: "typography", variant: "body1", children: [{ text: "" }] },
 ];
 
 const TextEditor = () => {
@@ -64,7 +46,11 @@ const TextEditor = () => {
         <Divider orientation="vertical" />
         <LinkButton />
         <ImageButton />
+        <EmailButton />
+        <EmojiButton />
+        <TableButton />
         <MarkButton format="code" icon={BsCode} />
+        <BlockButton format="blockquote" icon={AiFillExclamationCircle} />
       </div>
       <Editable
         placeholder="Add comment..."

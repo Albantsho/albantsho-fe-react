@@ -6,6 +6,11 @@ interface ITypography {
   children: CustomText[];
 }
 
+interface IBlockQuote {
+  type: "blockquote";
+  children: CustomText[];
+}
+
 interface IBulletList {
   type: "bulletList";
   children: IListItem[];
@@ -23,7 +28,14 @@ interface IListItem {
 
 export interface ILink {
   type: "link";
-  url: string;
+  url?: string;
+  email?: string;
+  children: CustomText[];
+}
+
+export interface IEmail {
+  type: "email";
+  email: string;
   children: CustomText[];
 }
 
@@ -32,14 +44,32 @@ export interface IImage {
   url: string;
   children: CustomText[];
 }
+export interface ITable {
+  type: "table";
+  children: ITableRow[];
+}
+
+export interface ITableRow {
+  type: "tableRow";
+  children: ITableCell[];
+}
+export interface ITableCell {
+  type: "tableCell";
+  children: CustomText[];
+}
 
 export type CustomElement =
   | ITypography
+  | IBlockQuote
   | IImage
   | IBulletList
   | INumberList
   | IListItem
-  | ILink;
+  | ILink
+  | ITable
+  | ITableRow
+  | ITableCell
+  | IEmail;
 
 export interface CustomText {
   text: string;
