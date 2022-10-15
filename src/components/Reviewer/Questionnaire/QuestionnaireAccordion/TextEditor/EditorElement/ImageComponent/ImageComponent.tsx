@@ -35,7 +35,7 @@ const ImageComponent = ({
               : "none duration-200 ease-in"
           }`}
         >
-          <img alt="" src={element.url} />
+          <img style={{ resize: "both" }} alt="" src={element.url} />
           <IconButton
             onClick={handleRemoveImage}
             className={`${selected ? "flex" : "hidden"} top-1 left-1 absolute`}

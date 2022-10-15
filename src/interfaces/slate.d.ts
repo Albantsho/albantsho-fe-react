@@ -56,6 +56,9 @@ export interface ITableRow {
 export interface ITableCell {
   type: "tableCell";
   children: CustomText[];
+  key: string;
+  rowSpan?: number;
+  colSpan: number;
 }
 
 export type CustomElement =

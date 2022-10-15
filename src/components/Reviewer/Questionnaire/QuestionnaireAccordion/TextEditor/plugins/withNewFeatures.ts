@@ -1,17 +1,17 @@
 import {
   Editor,
-  type BaseEditor,
   Element as SlateElement,
-  Range,
   Point,
+  Range,
+  Transforms,
+  type BaseEditor,
 } from "slate";
 import type { ReactEditor } from "slate-react";
 
 type IEditor = BaseEditor & ReactEditor;
 
 const withNewFeatures = (editor: IEditor) => {
-  const { isInline, isVoid, deleteBackward, deleteForward, insertBreak } =
-    editor;
+  const { isInline, isVoid, deleteBackward, insertBreak } = editor;
 
   editor.isInline = (element) =>
     ["link"].includes(element.type) || isInline(element);
@@ -44,30 +44,6 @@ const withNewFeatures = (editor: IEditor) => {
     deleteBackward(unit);
   };
 
-  editor.deleteForward = (unit) => {
-    const { selection } = editor;
-
-    if (selection && Range.isCollapsed(selection)) {
-      const [cell] = Editor.nodes(editor, {
-        match: (n) =>
-          !Editor.isEditor(n) &&
-          SlateElement.isElement(n) &&
-          n.type === "tableCell",
-      });
-
-      if (cell) {
-        const [, cellPath] = cell;
-        const end = Editor.end(editor, cellPath);
-
-        if (Point.equals(selection.anchor, end)) {
-          return;
-        }
-      }
-    }
-
-    deleteForward(unit);
-  };
-
   editor.insertBreak = () => {
     const { selection } = editor;
 
@@ -79,7 +55,14 @@ const withNewFeatures = (editor: IEditor) => {
           n.type === "table",
       });
 
-      if (table) {
+      const [image] = Editor.nodes(editor, {
+        match: (n) =>
+          !Editor.isEditor(n) &&
+          SlateElement.isElement(n) &&
+          n.type === "image",
+      });
+
+      if (table || image) {
         return;
       }
     }

@@ -1,14 +1,7 @@
-import {
-  Link,
-  Typography,
-  Table,
-  TableCell,
-  TableRow,
-  TableBody,
-  TableContainer,
-} from "@mui/material";
+import { Link, TableCell, TableRow, Typography } from "@mui/material";
 import { type RenderElementProps } from "slate-react";
 import ImageComponent from "./ImageComponent/ImageComponent";
+import TableComponent from "./TableComponent/TableComponent";
 
 const EditorElement = ({
   attributes,
@@ -87,11 +80,9 @@ const EditorElement = ({
       );
     case "table":
       return (
-        <TableContainer {...attributes}>
-          <Table sx={{ minWidth: 350 }}>
-            <TableBody>{children}</TableBody>
-          </Table>
-        </TableContainer>
+        <TableComponent attributes={attributes} element={element}>
+          {children}
+        </TableComponent>
       );
 
     case "tableRow":
@@ -99,11 +90,7 @@ const EditorElement = ({
 
     case "tableCell":
       return (
-        <TableCell
-          contentEditable={false}
-          className="border border-black"
-          {...attributes}
-        >
+        <TableCell className="border border-black" {...attributes}>
           {children}
         </TableCell>
       );

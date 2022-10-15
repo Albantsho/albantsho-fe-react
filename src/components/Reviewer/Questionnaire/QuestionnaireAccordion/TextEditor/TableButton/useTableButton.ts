@@ -1,6 +1,6 @@
-import { ITableCell, ITableRow, ITable } from "interfaces/slate";
+import { ITable, ITableRow } from "interfaces/slate";
 import React, { useState } from "react";
-import { Transforms } from "slate";
+import { Transforms, Editor } from "slate";
 import { useSlate } from "slate-react";
 
 const useTableButton = () => {
@@ -28,19 +28,18 @@ const useTableButton = () => {
   };
 
   const insertTable = () => {
-    const columns: ITableCell[] = Array.from(
-      new Array(+rowsAndColumns.columns)
-    ).map(() => ({
-      type: "tableCell",
-      children: [{ text: "sh" }],
-    }));
-
-    console.log(columns);
+    const [hasTable] = Editor.nodes(editor, {
+      match: (n) => Editor.isBlock(editor, n) && n.type === "table",
+    });
+    if (hasTable) return;
 
     const rows: ITableRow[] = Array.from(new Array(+rowsAndColumns.rows)).map(
-      () => ({
+      (_, i) => ({
         type: "tableRow",
-        children: columns,
+        children: Array.from(new Array(+rowsAndColumns.columns)).map(() => ({
+          type: "tableCell",
+          children: [{ text: `${+i + 10}` }],
+        })),
       })
     );
 
@@ -48,8 +47,20 @@ const useTableButton = () => {
       type: "table",
       children: rows,
     };
+
     Transforms.insertNodes(editor, table);
-    console.log(rowsAndColumns);
+
+    Transforms.insertNodes(
+      editor,
+      [{ type: "typography", children: [{ text: "" }] }],
+      { mode: "highest" }
+    );
+
+    setRowsAndColumns({
+      rows: "",
+      columns: "",
+    });
+
     handleCloseMenu();
   };
 

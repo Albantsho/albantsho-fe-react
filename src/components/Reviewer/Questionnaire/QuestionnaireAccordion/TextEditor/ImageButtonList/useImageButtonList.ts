@@ -1,7 +1,7 @@
 import { IImage } from "interfaces/slate";
 import isUrl from "is-url";
 import { ChangeEvent, useState } from "react";
-import { Transforms } from "slate";
+import { Transforms, Editor } from "slate";
 import { useSlate } from "slate-react";
 import imageExtensions from "image-extensions";
 
@@ -19,8 +19,11 @@ const useImageButton = () => {
 
   const insertImage = (url: string) => {
     const text = { text: "" };
-    const image: IImage = { type: "image", url, children: [text] };
+    const image: IImage[] = [{ type: "image", url, children: [text] }];
     Transforms.insertNodes(editor, image);
+    Transforms.insertNodes(editor, [
+      { type: "typography", children: [{ text: "" }] },
+    ]);
   };
 
   const handleOpenListImageButton = (event: React.MouseEvent<HTMLElement>) => {
@@ -37,11 +40,21 @@ const useImageButton = () => {
       alert("URL is not an image");
       return;
     }
+    const [table] = Editor.nodes(editor, {
+      match: (n) => Editor.isBlock(editor, n) && n.type === "table",
+    });
+    if (table) return;
+
     url && insertImage(url);
     handleCloseListImageButton();
   };
 
   const handleGetPicture = (e: ChangeEvent<HTMLInputElement>) => {
+    const [table] = Editor.nodes(editor, {
+      match: (n) => Editor.isBlock(editor, n) && n.type === "table",
+    });
+    if (table) return;
+
     if (e.target.files) {
       const url = URL.createObjectURL(e.target.files[0]);
       url && insertImage(url);

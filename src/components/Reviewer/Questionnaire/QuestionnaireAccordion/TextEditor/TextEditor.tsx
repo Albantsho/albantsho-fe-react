@@ -32,7 +32,7 @@ const TextEditor = () => {
 
   return (
     <Slate editor={editor} value={initialValue}>
-      <div className="flex gap-3 h-8 mb-8">
+      <div className="flex gap-2 h-8 mb-8">
         <HeadingButtonList />
         <Divider orientation="vertical" />
         <MarkButton format="bold" icon={BsTypeBold} />

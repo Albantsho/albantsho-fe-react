@@ -4,12 +4,15 @@ import {
   type BaseEditor,
   Editor,
   Transforms,
+  Node,
   Element as SlateElement,
 } from "slate";
+import { useSlate } from "slate-react";
 
 const LIST_TYPES = ["numberList", "bulletList"];
 
 const useBlockButton = () => {
+  const mainEditor = useSlate();
   const isBlockActive = (
     editor: BaseEditor,
     format: CustomElement["type"],
@@ -49,6 +52,12 @@ const useBlockButton = () => {
   ) => {
     const isActive = isBlockActive(editor, format, variant);
     const isList = LIST_TYPES.includes(format);
+
+    const [table] = Editor.nodes(mainEditor, {
+      match: (n) => Editor.isBlock(mainEditor, n) && n.type === "table",
+    });
+
+    if (table) return;
 
     Transforms.unwrapNodes(editor, {
       match: (n) =>
