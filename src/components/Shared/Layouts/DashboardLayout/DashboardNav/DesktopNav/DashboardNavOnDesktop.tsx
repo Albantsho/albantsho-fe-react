@@ -6,7 +6,7 @@ import WalletMenu from "./WalletMenu/WalletMenu";
 
 const DashboardNavOnDesktop = () => {
   return (
-    <div className="flex px-1 flex-1 justify-between items-center">
+    <div className="lg:flex px-1 flex-1 justify-between items-center hidden">
       <WalletMenu />
       <div className="flex items-center   gap-12">
         <IconButton className="ml-auto self-center max-h-[31px]  mt-1">

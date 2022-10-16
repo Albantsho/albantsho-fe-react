@@ -1,9 +1,4 @@
-import {
-  AppBar,
-  Toolbar,
-  useMediaQuery,
-  type AppBarProps,
-} from "@mui/material";
+import { AppBar, Toolbar, type AppBarProps } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
 import { useMemo } from "react";
 import routes from "routes/routes";
@@ -18,7 +13,6 @@ const links = [
 ];
 
 const Nav = ({ color = "transparent", ...props }: AppBarProps) => {
-  const isLgScreen = useMediaQuery("(min-width: 1024px)");
   const isTransparent = useMemo(() => color === "transparent", [color]);
 
   return (
@@ -34,11 +28,8 @@ const Nav = ({ color = "transparent", ...props }: AppBarProps) => {
         component="nav"
       >
         <Logo className={isTransparent ? "text-white" : "text-primary-main"} />
-        {isLgScreen ? (
-          <DesktopNav links={links} isTransparent={isTransparent} />
-        ) : (
-          <MobileNav links={links} isTransparent={isTransparent} />
-        )}
+        <DesktopNav links={links} isTransparent={isTransparent} />
+        <MobileNav links={links} isTransparent={isTransparent} />
       </Toolbar>
     </AppBar>
   );

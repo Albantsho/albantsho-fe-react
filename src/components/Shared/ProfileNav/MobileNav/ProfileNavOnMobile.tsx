@@ -22,12 +22,13 @@ import alert from "@assets/images/alert.png";
 import useMobileNavDashboard from "./useMobileNavMobile";
 import ProfileLogo from "../assets/profile-logo.svg";
 import Link from "next/link";
+import type { IconType } from "react-icons/lib";
 
 interface IProps {
   walletLinks: {
     title: string;
     href: string;
-    icon: any;
+    icon: IconType;
   }[];
   isTransparent: boolean;
 }
@@ -37,7 +38,7 @@ const ProfileNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
   const { push, route } = useRouter();
 
   return (
-    <>
+    <div className="flex md:hidden w-full">
       <Link href="/dashboard/projects" passHref>
         <Button
           startIcon={<ProfileLogo className="w-5 h-5" />}
@@ -186,7 +187,7 @@ const ProfileNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
           </IconButton>
         </div>
       </Drawer>
-    </>
+    </div>
   );
 };
 

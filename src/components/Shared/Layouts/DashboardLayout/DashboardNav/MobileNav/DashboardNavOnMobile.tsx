@@ -36,7 +36,7 @@ const DashboardNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
   const { push } = useRouter();
 
   return (
-    <>
+    <div className="flex items-center lg:hidden w-full">
       <Logo className={isTransparent ? "text-white" : "text-primary-main"} />
       <IconButton className="ml-auto mr-7 mt-1 self-center max-h-[31px]">
         <Badge badgeContent={1} color="error">
@@ -176,7 +176,7 @@ const DashboardNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
           </IconButton>
         </div>
       </Drawer>
-    </>
+    </div>
   );
 };
 

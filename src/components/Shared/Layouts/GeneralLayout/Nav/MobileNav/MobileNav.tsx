@@ -23,7 +23,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNav();
 
   return (
-    <>
+    <div className="flex items-center lg:hidden">
       <IconButton
         onClick={handleToggleDrawer(true)}
         color="inherit"
@@ -56,7 +56,10 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
           {links.map(({ title, href }, i) => (
             <ListItem disablePadding key={i}>
               <Link href={href} passHref>
-                <ListItemButton className="px-5">
+                <ListItemButton
+                  TouchRippleProps={{ className: "text-transparent" }}
+                  className="px-5 hover:bg-primary-50/25"
+                >
                   <ListItemText primary={title} />
                 </ListItemButton>
               </Link>
@@ -69,7 +72,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
           </div>
         </List>
       </Drawer>
-    </>
+    </div>
   );
 };
 

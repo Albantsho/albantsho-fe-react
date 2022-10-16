@@ -10,7 +10,7 @@ interface IProps {
 
 const DesktopNav = ({ links, isTransparent }: IProps) => {
   return (
-    <>
+    <div className="lg:flex items-center w-full hidden">
       <div className="flex gap-12 text-white mx-10 flex-1 justify-center">
         {links.map(({ title, href }, i) => (
           <Link href={href} passHref key={i}>
@@ -29,7 +29,7 @@ const DesktopNav = ({ links, isTransparent }: IProps) => {
           Sign In
         </Btn>
       </Link>
-    </>
+    </div>
   );
 };
 

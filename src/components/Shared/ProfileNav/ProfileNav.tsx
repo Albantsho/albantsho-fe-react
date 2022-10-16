@@ -1,10 +1,5 @@
 import deposit from "@assets/icons/deposit.svg";
-import {
-  AppBar,
-  Toolbar,
-  useMediaQuery,
-  type AppBarProps,
-} from "@mui/material";
+import { AppBar, Toolbar, type AppBarProps } from "@mui/material";
 import { useMemo } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { RiDownloadLine } from "react-icons/ri";
@@ -25,7 +20,6 @@ const walletLinks = [
 ];
 
 const ProfileNav = ({ color = "transparent", ...props }: AppBarProps) => {
-  const isLgScreen = useMediaQuery("(min-width: 768px)");
   const isTransparent = useMemo(() => color === "transparent", [color]);
 
   return (
@@ -40,14 +34,11 @@ const ProfileNav = ({ color = "transparent", ...props }: AppBarProps) => {
         className="py-3 lg:py-4 px-5 sm:px-10  mx-auto w-full justify-between"
         component="nav"
       >
-        {isLgScreen ? (
-          <ProfileNavOnDesktop />
-        ) : (
-          <ProfileNavOnMobile
-            walletLinks={walletLinks}
-            isTransparent={isTransparent}
-          />
-        )}
+        <ProfileNavOnDesktop />
+        <ProfileNavOnMobile
+          walletLinks={walletLinks}
+          isTransparent={isTransparent}
+        />
       </Toolbar>
     </AppBar>
   );

@@ -8,7 +8,7 @@ import Link from "next/link";
 const ProfileNavOnDesktop = () => {
   return (
     <>
-      <div className="flex px-1 flex-1 justify-between items-center">
+      <div className="md:flex px-1 flex-1 justify-between items-center hidden">
         <Link href="/dashboard/projects" passHref>
           <Button
             startIcon={<ProfileLogo className="w-5 h-5" />}

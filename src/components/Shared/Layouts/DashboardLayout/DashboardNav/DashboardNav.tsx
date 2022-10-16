@@ -1,9 +1,4 @@
-import {
-  AppBar,
-  Toolbar,
-  useMediaQuery,
-  type AppBarProps,
-} from "@mui/material";
+import { AppBar, Toolbar, type AppBarProps } from "@mui/material";
 import { useMemo } from "react";
 import { RiDownloadLine } from "react-icons/ri";
 import routes from "routes/routes";
@@ -25,7 +20,6 @@ const walletLinks = [
 ];
 
 const DashboardNav = ({ color = "transparent", ...props }: AppBarProps) => {
-  const isLgScreen = useMediaQuery("(min-width: 1024px)");
   const isTransparent = useMemo(() => color === "transparent", [color]);
 
   return (
@@ -40,14 +34,11 @@ const DashboardNav = ({ color = "transparent", ...props }: AppBarProps) => {
         className="py-3 lg:py-4 px-5 sm:px-10  mx-auto w-full justify-between"
         component="nav"
       >
-        {isLgScreen ? (
-          <DashboardNavOnDesktop />
-        ) : (
-          <DashboardNavOnMobile
-            walletLinks={walletLinks}
-            isTransparent={isTransparent}
-          />
-        )}
+        <DashboardNavOnDesktop />
+        <DashboardNavOnMobile
+          walletLinks={walletLinks}
+          isTransparent={isTransparent}
+        />
       </Toolbar>
     </AppBar>
   );
