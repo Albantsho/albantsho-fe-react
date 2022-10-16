@@ -191,6 +191,7 @@ const RegisterForm = () => {
                 size="medium"
                 className="text-purple-700"
                 placeholder="Country"
+                SelectProps={{ MenuProps: { className: "max-h-[400px]" } }}
                 sx={{
                   "& .MuiInputBase-root": { height: "56px" },
                   "& .MuiSvgIcon-root": { color: "#7953B5" },

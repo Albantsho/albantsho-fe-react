@@ -20,12 +20,13 @@ import ProfileMenu from "../../../../ProfileMenu/ProfileMenu";
 import { AiFillInstagram, AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
+import type { IconType } from "react-icons/lib";
 
 interface IProps {
   walletLinks: {
     title: string;
     href: string;
-    icon: any;
+    icon: IconType;
   }[];
   isTransparent: boolean;
 }

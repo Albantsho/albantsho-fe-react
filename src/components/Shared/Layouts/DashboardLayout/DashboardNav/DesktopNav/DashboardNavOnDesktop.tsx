@@ -6,21 +6,19 @@ import WalletMenu from "./WalletMenu/WalletMenu";
 
 const DashboardNavOnDesktop = () => {
   return (
-    <>
-      <div className="flex px-1 flex-1 justify-between items-center">
-        <WalletMenu />
-        <div className="flex items-center   gap-12">
-          <IconButton className="ml-auto self-center max-h-[31px]  mt-1">
-            <Badge badgeContent={1} color="error">
-              <div>
-                <Image src={alert} alt="alert" />
-              </div>
-            </Badge>
-          </IconButton>
-          <ProfileMenu />
-        </div>
+    <div className="flex px-1 flex-1 justify-between items-center">
+      <WalletMenu />
+      <div className="flex items-center   gap-12">
+        <IconButton className="ml-auto self-center max-h-[31px]  mt-1">
+          <Badge badgeContent={1} color="error">
+            <div>
+              <Image src={alert} alt="alert" />
+            </div>
+          </Badge>
+        </IconButton>
+        <ProfileMenu />
       </div>
-    </>
+    </div>
   );
 };
 
