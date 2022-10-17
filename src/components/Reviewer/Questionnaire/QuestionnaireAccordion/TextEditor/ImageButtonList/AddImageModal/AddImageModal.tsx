@@ -47,8 +47,7 @@ const AddImageModal = ({
             fullWidth
             size="small"
             sx={{
-              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
-              "& .MuiSvgIcon-root": { color: "#7953B5" },
+              "& .MuiOutlinedInput-input": { py: 1.5 },
             }}
             variant="outlined"
             id="insert-image"
@@ -62,6 +61,7 @@ const AddImageModal = ({
               onClick={handleGetUrl}
               size="large"
               color="primary"
+              className="py-3 px-5"
             >
               Enter Image
             </Button>

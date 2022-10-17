@@ -4,25 +4,22 @@ import { Transforms, Editor } from "slate";
 import { useSlate } from "slate-react";
 
 const useTableButton = () => {
-  const [rowsAndColumns, setRowsAndColumns] = useState({
+  const [tableValues, setTableValues] = useState({
     rows: "",
     columns: "",
   });
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const [openAddTable, setOpenAddTable] = useState(false);
   const editor = useSlate();
 
-  const handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) =>
-    setAnchorEl(event.currentTarget);
-
-  const handleCloseMenu = () => setAnchorEl(null);
+  const handleOpenAddTableModal = () => setOpenAddTable(true);
+  const handleCloseAddTableModal = () => setOpenAddTable(false);
 
   const handleChangeValueTable = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const result = e.target.value.replace(/\D/g, "");
-    setRowsAndColumns({
-      ...rowsAndColumns,
+    setTableValues({
+      ...tableValues,
       [e.target.name]: result,
     });
   };
@@ -33,10 +30,10 @@ const useTableButton = () => {
     });
     if (hasTable) return;
 
-    const rows: ITableRow[] = Array.from(new Array(+rowsAndColumns.rows)).map(
+    const rows: ITableRow[] = Array.from(new Array(+tableValues.rows)).map(
       () => ({
         type: "tableRow",
-        children: Array.from(new Array(+rowsAndColumns.columns)).map(() => ({
+        children: Array.from(new Array(+tableValues.columns)).map(() => ({
           type: "tableCell",
           children: [{ text: "" }],
         })),
@@ -56,22 +53,20 @@ const useTableButton = () => {
       { mode: "highest" }
     );
 
-    setRowsAndColumns({
+    setTableValues({
       rows: "",
       columns: "",
     });
-
-    handleCloseMenu();
+    handleCloseAddTableModal();
   };
 
   return {
-    anchorEl,
-    open,
-    handleOpenMenu,
-    handleCloseMenu,
+    openAddTable,
+    handleOpenAddTableModal,
     handleChangeValueTable,
     insertTable,
-    rowsAndColumns,
+    handleCloseAddTableModal,
+    tableValues,
   };
 };
 

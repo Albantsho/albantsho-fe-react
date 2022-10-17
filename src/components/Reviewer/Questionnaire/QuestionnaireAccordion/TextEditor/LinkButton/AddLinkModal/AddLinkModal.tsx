@@ -49,8 +49,7 @@ const AddLinkModal = ({
             fullWidth
             size="small"
             sx={{
-              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
-              "& .MuiSvgIcon-root": { color: "#7953B5" },
+              "& .MuiOutlinedInput-input": { py: 1.5 },
             }}
             variant="outlined"
             id="wrap-link"
@@ -64,6 +63,7 @@ const AddLinkModal = ({
               onClick={wrapLinkFunction}
               size="large"
               color="primary"
+              className="py-3 px-5"
             >
               Enter Link
             </Button>
