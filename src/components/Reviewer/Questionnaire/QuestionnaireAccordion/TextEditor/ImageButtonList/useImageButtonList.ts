@@ -9,6 +9,11 @@ const useImageButton = () => {
   const editor = useSlate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openListImageButton = Boolean(anchorEl);
+  const [openAddImage, setOpenAddImage] = useState(false);
+  const [imageValue, setImageValue] = useState("");
+  const [table] = Editor.nodes(editor, {
+    match: (n) => Editor.isBlock(editor, n) && n.type === "table",
+  });
 
   const isImageUrl = (url: string) => {
     if (!url) return false;
@@ -34,27 +39,24 @@ const useImageButton = () => {
     setAnchorEl(null);
   };
 
+  const handleOpenAddImageModal = () => setOpenAddImage(true);
+  const handleCloseAddImageModal = () => setOpenAddImage(false);
+  const changeImageValue = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setImageValue(e.target.value);
   const handleGetUrl = () => {
-    const url = window.prompt("Enter the URL of the image:");
-    if (url && !isImageUrl(url)) {
+    if (imageValue && !isImageUrl(imageValue)) {
       alert("URL is not an image");
       return;
     }
-    const [table] = Editor.nodes(editor, {
-      match: (n) => Editor.isBlock(editor, n) && n.type === "table",
-    });
     if (table) return;
-
-    url && insertImage(url);
+    imageValue && insertImage(imageValue);
+    setImageValue("");
     handleCloseListImageButton();
+    handleCloseAddImageModal();
   };
-
   const handleGetPicture = (e: ChangeEvent<HTMLInputElement>) => {
-    const [table] = Editor.nodes(editor, {
-      match: (n) => Editor.isBlock(editor, n) && n.type === "table",
-    });
     if (table) return;
-
     if (e.target.files) {
       const url = URL.createObjectURL(e.target.files[0]);
       url && insertImage(url);
@@ -72,6 +74,11 @@ const useImageButton = () => {
     handleGetPicture,
     handleCloseListImageButton,
     anchorEl,
+    openAddImage,
+    imageValue,
+    handleOpenAddImageModal,
+    handleCloseAddImageModal,
+    changeImageValue,
   };
 };
 

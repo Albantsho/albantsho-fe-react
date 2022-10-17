@@ -9,6 +9,7 @@ import {
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
 import { BsImageFill, BsUpload } from "react-icons/bs";
+import AddImageModal from "./AddImageModal/AddImageModal";
 import useImageButton from "./useImageButtonList";
 
 const ImageButton = () => {
@@ -19,6 +20,11 @@ const ImageButton = () => {
     openListImageButton,
     anchorEl,
     handleCloseListImageButton,
+    changeImageValue,
+    handleCloseAddImageModal,
+    handleOpenAddImageModal,
+    imageValue,
+    openAddImage,
   } = useImageButton();
 
   return (
@@ -45,7 +51,7 @@ const ImageButton = () => {
         <MenuItem
           TouchRippleProps={{ className: "text-primary-main" }}
           className="w-full hover:bg-primary-50/25"
-          onClick={handleGetUrl}
+          onClick={handleOpenAddImageModal}
         >
           <ListItemIcon>
             <SvgIcon fontSize="small" component={BsUpload} inheritViewBox />
@@ -75,6 +81,13 @@ const ImageButton = () => {
           </ListItemText>
         </MenuItem>
       </Menu>
+      <AddImageModal
+        changeImageValue={changeImageValue}
+        handleCloseAddImageModal={handleCloseAddImageModal}
+        handleGetUrl={handleGetUrl}
+        imageValue={imageValue}
+        openAddImage={openAddImage}
+      />
     </>
   );
 };
