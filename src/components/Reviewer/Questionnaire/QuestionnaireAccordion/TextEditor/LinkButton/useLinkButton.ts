@@ -1,9 +1,12 @@
 import { ILink } from "interfaces/slate";
+import { ChangeEvent, useState } from "react";
 import { Editor, Transforms, Element as SlateElement, Range } from "slate";
 import { useSlate } from "slate-react";
 
 const useLinkButton = () => {
   const editor = useSlate();
+  const [openAddLink, setOpenAddLink] = useState(false);
+  const [linkValue, setLinkValue] = useState("");
 
   const isLinkActive = () => {
     const [link] = Editor.nodes(editor, {
@@ -43,7 +46,34 @@ const useLinkButton = () => {
       Transforms.collapse(editor, { edge: "end" });
     }
   };
-  return { wrapLink, isLinkActive, unwrapLink };
+  const handleOpenAddLinkModal = () => setOpenAddLink(true);
+  const handleCloseAddLinkModal = () => setOpenAddLink(false);
+  const changeLinkValue = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setLinkValue(e.target.value);
+
+  const wrapLinkFunction = () => {
+    wrapLink(linkValue);
+    setLinkValue("");
+    handleCloseAddLinkModal();
+  };
+  const unWrapLinkFunction = () => {
+    wrapLink(linkValue);
+    setLinkValue("");
+    handleCloseAddLinkModal();
+  };
+
+  return {
+    wrapLink,
+    isLinkActive,
+    openAddLink,
+    handleCloseAddLinkModal,
+    handleOpenAddLinkModal,
+    linkValue,
+    changeLinkValue,
+    wrapLinkFunction,
+    unWrapLinkFunction,
+  };
 };
 
 export default useLinkButton;

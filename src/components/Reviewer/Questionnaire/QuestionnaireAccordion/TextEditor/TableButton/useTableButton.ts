@@ -34,11 +34,11 @@ const useTableButton = () => {
     if (hasTable) return;
 
     const rows: ITableRow[] = Array.from(new Array(+rowsAndColumns.rows)).map(
-      (_, i) => ({
+      () => ({
         type: "tableRow",
         children: Array.from(new Array(+rowsAndColumns.columns)).map(() => ({
           type: "tableCell",
-          children: [{ text: `${+i + 10}` }],
+          children: [{ text: "" }],
         })),
       })
     );

@@ -1,6 +1,7 @@
 import { Divider } from "@mui/material";
 import { CustomElement } from "interfaces/slate";
 import { useMemo } from "react";
+import { AiFillExclamationCircle } from "react-icons/ai";
 import { BsCode, BsTypeBold } from "react-icons/bs";
 import { FiItalic, FiMoreHorizontal } from "react-icons/fi";
 import {
@@ -13,15 +14,14 @@ import BlockButton from "./BlockButton/BlockButton";
 import ColorButton from "./ColorButton/ColorButton";
 import EditorElement from "./EditorElement/EditorElement";
 import EditorLeaf from "./EditorLeaf/EditorLeaf";
+import EmailButton from "./EmailButton/EmailButton";
+import EmojiButton from "./EmojiButton/EmojiButton";
 import HeadingButtonList from "./HeadingButtonList/HeadingButtonList";
 import ImageButton from "./ImageButtonList/ImageButtonList";
-import EmojiButton from "./EmojiButton/EmojiButton";
 import LinkButton from "./LinkButton/LinkButton";
 import MarkButton from "./MarkButton/MarkButton";
 import withNewFeatures from "./plugins/withNewFeatures";
 import TableButton from "./TableButton/TableButton";
-import { AiFillExclamationCircle } from "react-icons/ai";
-import EmailButton from "./EmailButton/EmailButton";
 
 const initialValue: CustomElement[] = [
   { type: "typography", variant: "body1", children: [{ text: "" }] },

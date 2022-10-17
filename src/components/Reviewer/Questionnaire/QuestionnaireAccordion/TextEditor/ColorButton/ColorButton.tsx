@@ -4,8 +4,13 @@ import { RiFontColor } from "react-icons/ri";
 import useColorButton from "./useColorButton";
 
 const ColorButton = () => {
-  const { color, colorPickerOpen, handleOpenColorPicker, handleSelectedColor } =
-    useColorButton();
+  const {
+    color,
+    colorPickerOpen,
+    handleOpenColorPicker,
+    handleSelectedColor,
+    handleCloseColorPicker,
+  } = useColorButton();
 
   return (
     <div className="relative">
@@ -21,7 +26,10 @@ const ColorButton = () => {
         ></div>
       </IconButton>
       {colorPickerOpen && (
-        <div className="absolute -left-[80px] top-6 p-5 z-10">
+        <div
+          onClick={handleCloseColorPicker}
+          className="absolute -left-[80px] top-6 p-5 z-10"
+        >
           <SketchPicker color={color} onChangeComplete={handleSelectedColor} />
         </div>
       )}

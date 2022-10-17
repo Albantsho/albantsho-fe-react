@@ -42,13 +42,20 @@ const ImageButton = () => {
         }}
         onClose={handleCloseListImageButton}
       >
-        <MenuItem onClick={handleGetUrl}>
+        <MenuItem
+          TouchRippleProps={{ className: "text-primary-main" }}
+          className="w-full hover:bg-primary-50/25"
+          onClick={handleGetUrl}
+        >
           <ListItemIcon>
             <SvgIcon fontSize="small" component={BsUpload} inheritViewBox />
           </ListItemIcon>
           <ListItemText>Upload from web </ListItemText>
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+          TouchRippleProps={{ className: "text-primary-main" }}
+          className="w-full hover:bg-primary-50/25"
+        >
           <ListItemIcon>
             <SvgIcon
               fontSize="small"

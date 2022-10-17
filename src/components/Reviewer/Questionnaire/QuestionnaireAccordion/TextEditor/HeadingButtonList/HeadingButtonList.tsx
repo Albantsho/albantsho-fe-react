@@ -7,28 +7,10 @@ import {
   Paper,
   Popper,
   SvgIcon,
-  type TypographyProps,
 } from "@mui/material";
-import { CustomElement } from "interfaces/slate";
 import React from "react";
 import { BiChevronDown } from "react-icons/bi";
 import useHeadingButtonList from "./useHeadingButtonList";
-
-interface IListButtons {
-  format: CustomElement["type"];
-  option: string;
-  variant: TypographyProps["variant"];
-}
-
-const listButtons: IListButtons[] = [
-  { format: "typography", option: "Normal Text", variant: "body1" },
-  { format: "typography", option: "Heading 1", variant: "h1" },
-  { format: "typography", option: "Heading 2", variant: "h2" },
-  { format: "typography", option: "Heading 3", variant: "h3" },
-  { format: "typography", option: "Heading 4", variant: "h4" },
-  { format: "typography", option: "Heading 5", variant: "h5" },
-  { format: "typography", option: "Heading 6", variant: "h6" },
-];
 
 const HeadingButtonList = () => {
   const {
@@ -40,6 +22,7 @@ const HeadingButtonList = () => {
     selectedIndex,
     anchorRef,
     editor,
+    listButtons,
   } = useHeadingButtonList();
 
   return (
@@ -52,7 +35,7 @@ const HeadingButtonList = () => {
             paddingY: "20px",
             textAlign: "start",
             justifyContent: "space-between",
-            fontSize: "18px",
+            fontSize: "15px",
             fontWeight: "600",
           },
         }}

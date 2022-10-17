@@ -34,7 +34,9 @@ const TableComponent = ({
         onContextMenu={handleContextMenu}
       >
         <Table>
-          <TableBody {...attributes}>{children}</TableBody>
+          <TableBody className="border-collapse" {...attributes}>
+            {children}
+          </TableBody>
         </Table>
         <Menu
           style={{ top: contextMenu?.mouseY, left: contextMenu?.mouseX }}
@@ -63,6 +65,8 @@ const TableComponent = ({
           }}
         >
           <MenuItem
+            TouchRippleProps={{ className: "text-primary-main" }}
+            className="w-full hover:bg-primary-50/25"
             onClick={() => {
               removeTableHandler();
             }}
@@ -72,13 +76,21 @@ const TableComponent = ({
             </ListItemIcon>
             <ListItemText>Delete Table</ListItemText>
           </MenuItem>
-          <MenuItem onClick={removeRowHandler}>
+          <MenuItem
+            TouchRippleProps={{ className: "text-primary-main" }}
+            className="w-full hover:bg-primary-50/25"
+            onClick={removeRowHandler}
+          >
             <ListItemIcon>
               <SvgIcon component={BsTrash} fontSize="small" inheritViewBox />
             </ListItemIcon>
             <ListItemText>Delete Row</ListItemText>
           </MenuItem>
-          <MenuItem onClick={removeColumnHandler}>
+          <MenuItem
+            TouchRippleProps={{ className: "text-primary-main" }}
+            className="w-full hover:bg-primary-50/25"
+            onClick={removeColumnHandler}
+          >
             <ListItemIcon>
               <SvgIcon component={BsTrash} fontSize="small" inheritViewBox />
             </ListItemIcon>
