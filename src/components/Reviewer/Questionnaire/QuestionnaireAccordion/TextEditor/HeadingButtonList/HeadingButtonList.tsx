@@ -1,0 +1,118 @@
+import {
+  Button,
+  ClickAwayListener,
+  Grow,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+  SvgIcon,
+} from "@mui/material";
+import React from "react";
+import { BiChevronDown } from "react-icons/bi";
+import useHeadingButtonList from "./useHeadingButtonList";
+
+const HeadingButtonList = () => {
+  const {
+    handleCloseListHeadingButton,
+    handleMenuItemClick,
+    handleToggleListHeadingButton,
+    isBlockActive,
+    openListHeadingButton,
+    selectedIndex,
+    anchorRef,
+    editor,
+    listButtons,
+  } = useHeadingButtonList();
+
+  return (
+    <React.Fragment>
+      <Button
+        sx={{
+          "&.MuiButtonBase-root": {
+            maxWidth: "140px",
+            width: "100%",
+            paddingY: "20px",
+            textAlign: "start",
+            justifyContent: "space-between",
+            fontSize: "15px",
+            fontWeight: "600",
+          },
+        }}
+        ref={anchorRef}
+        onClick={handleToggleListHeadingButton}
+        endIcon={
+          <SvgIcon
+            fontSize="large"
+            color="primary"
+            component={BiChevronDown}
+            inheritViewBox
+          />
+        }
+      >
+        {listButtons[selectedIndex].option}
+      </Button>
+      <Popper
+        sx={{
+          zIndex: 1,
+        }}
+        open={openListHeadingButton}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        transition
+        disablePortal
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin:
+                placement === "bottom" ? "center top" : "center bottom",
+            }}
+          >
+            <Paper>
+              <ClickAwayListener onClickAway={handleCloseListHeadingButton}>
+                <MenuList disablePadding id="split-button-menu" autoFocusItem>
+                  {listButtons.map(({ format, option, variant }, index) => {
+                    return (
+                      <MenuItem
+                        key={index}
+                        TouchRippleProps={{ className: "text-primary-main" }}
+                        className="hover:bg-primary-50/25"
+                        sx={{
+                          "&.MuiButtonBase-root": {
+                            fontSize:
+                              option === "Heading 1"
+                                ? "26px"
+                                : option === "Heading 2"
+                                ? "24px"
+                                : option === "Heading 3"
+                                ? "22px"
+                                : option === "Heading 4"
+                                ? "20px"
+                                : option === "Heading 5"
+                                ? "18px"
+                                : option === "Heading 6"
+                                ? "16px"
+                                : "16px",
+                            fontWeight: "bold",
+                          },
+                        }}
+                        selected={isBlockActive(editor, format, variant)}
+                        onClick={handleMenuItemClick(index, variant, format)}
+                      >
+                        {option}
+                      </MenuItem>
+                    );
+                  })}
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
+    </React.Fragment>
+  );
+};
+
+export default HeadingButtonList;

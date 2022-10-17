@@ -77,9 +77,7 @@ const Questionnaire = () => {
           </Typography>
         </div>
 
-        <div
-          className="rounded-lg text-center max-w-5xl mx-auto space-y-6"
-        >
+        <div className="rounded-lg text-center max-w-5xl mx-auto space-y-6">
           <Suspense fallback={null}>
             {listQuestionnaireAccordion.map((accordionTitle) => (
               <AccordionQuestionnaire
