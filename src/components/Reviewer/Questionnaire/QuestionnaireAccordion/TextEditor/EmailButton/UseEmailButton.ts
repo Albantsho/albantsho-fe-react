@@ -1,9 +1,12 @@
 import { IEmail } from "interfaces/slate";
+import { ChangeEvent, useState } from "react";
 import { Editor, Transforms, Element as SlateElement, Range } from "slate";
 import { useSlate } from "slate-react";
 
 const useEmailButton = () => {
   const editor = useSlate();
+  const [openAddEmail, setOpenAddEmail] = useState(false);
+  const [emailValue, setEmailValue] = useState("");
 
   const isLinkActive = () => {
     const [link] = Editor.nodes(editor, {
@@ -43,7 +46,39 @@ const useEmailButton = () => {
       Transforms.collapse(editor, { edge: "end" });
     }
   };
-  return { wrapLink, isLinkActive, unwrapLink };
+
+  const handleOpenAddEmailModal = () => setOpenAddEmail(true);
+  const handleCloseAddEmailModal = () => setOpenAddEmail(false);
+
+  const changeEmailValue = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setEmailValue(e.target.value);
+
+  const wrapEmailFunction = () => {
+    // const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
+
+    // regex.test(emailValue) ? wrapLink(emailValue) : setError("Email invalid");
+
+    wrapLink(emailValue);
+    setEmailValue("");
+    handleCloseAddEmailModal();
+  };
+  const unWrapEmailFunction = () => {
+    wrapLink(emailValue);
+    setEmailValue("");
+    handleCloseAddEmailModal();
+  };
+
+  return {
+    isLinkActive,
+    openAddEmail,
+    handleCloseAddEmailModal,
+    handleOpenAddEmailModal,
+    emailValue,
+    changeEmailValue,
+    wrapEmailFunction,
+    unWrapEmailFunction,
+  };
 };
 
 export default useEmailButton;

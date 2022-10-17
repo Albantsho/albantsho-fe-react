@@ -46,6 +46,7 @@ const useLinkButton = () => {
       Transforms.collapse(editor, { edge: "end" });
     }
   };
+
   const handleOpenAddLinkModal = () => setOpenAddLink(true);
   const handleCloseAddLinkModal = () => setOpenAddLink(false);
   const changeLinkValue = (
@@ -64,7 +65,6 @@ const useLinkButton = () => {
   };
 
   return {
-    wrapLink,
     isLinkActive,
     openAddLink,
     handleCloseAddLinkModal,
