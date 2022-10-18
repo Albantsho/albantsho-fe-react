@@ -9,6 +9,7 @@ import {
   TableContainer,
   Typography,
 } from "@mui/material";
+import { AiOutlineBorderlessTable } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { type RenderElementProps } from "slate-react";
 import useTableComponent from "./useTableComponent";
@@ -25,6 +26,8 @@ const TableComponent = ({
     removeRowHandler,
     removeTableHandler,
     contextMenu,
+    addRowHandler,
+    addColumnHandler,
   } = useTableComponent();
 
   if (element.type === "table") {
@@ -55,6 +58,7 @@ const TableComponent = ({
               ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
               : undefined
           }
+          anchorReference="none"
           anchorOrigin={{
             vertical: "top",
             horizontal: "left",
@@ -67,9 +71,36 @@ const TableComponent = ({
           <MenuItem
             TouchRippleProps={{ className: "text-primary-main" }}
             className="w-full hover:bg-primary-50/25"
-            onClick={() => {
-              removeTableHandler();
-            }}
+            onClick={addRowHandler}
+          >
+            <ListItemIcon>
+              <SvgIcon
+                component={AiOutlineBorderlessTable}
+                fontSize="small"
+                inheritViewBox
+              />
+            </ListItemIcon>
+            <ListItemText>Add Row</ListItemText>
+          </MenuItem>
+          <MenuItem
+            divider
+            TouchRippleProps={{ className: "text-primary-main" }}
+            className="w-full hover:bg-primary-50/25"
+            onClick={addColumnHandler}
+          >
+            <ListItemIcon>
+              <SvgIcon
+                component={AiOutlineBorderlessTable}
+                fontSize="small"
+                inheritViewBox
+              />
+            </ListItemIcon>
+            <ListItemText>Add Column</ListItemText>
+          </MenuItem>
+          <MenuItem
+            TouchRippleProps={{ className: "text-primary-main" }}
+            className="w-full hover:bg-primary-50/25"
+            onClick={removeTableHandler}
           >
             <ListItemIcon>
               <SvgIcon component={BsTrash} fontSize="small" inheritViewBox />

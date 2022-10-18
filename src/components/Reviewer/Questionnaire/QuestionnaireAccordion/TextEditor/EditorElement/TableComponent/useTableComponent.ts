@@ -1,3 +1,4 @@
+import { ITableCell, ITableRow } from "interfaces/slate";
 import { useState } from "react";
 import { Editor, Path, Transforms } from "slate";
 import { useSlate } from "slate-react";
@@ -22,6 +23,61 @@ const useTableComponent = () => {
   };
 
   const handleClose = () => setContextMenu(null);
+
+  const addRowHandler = () => {
+    const [tableRow] = Editor.nodes<ITableRow>(editor, {
+      match: (n) => Editor.isBlock(editor, n) && n.type === "tableRow",
+    });
+    const columns: ITableCell[] = Array.from(
+      new Array(tableRow[0].children.length)
+    ).map(() => ({
+      type: "tableCell",
+      children: [{ text: "" }],
+    }));
+    const row: ITableRow = {
+      type: "tableRow",
+      children: columns,
+    };
+    const location = [tableRow[1][0], tableRow[1][1] + 1];
+    Transforms.insertNodes(editor, row, {
+      at: location,
+      match: (n) => Editor.isBlock(editor, n) && n.type === "tableRow",
+      mode: "lowest",
+    });
+
+    handleClose();
+  };
+
+  const addColumnHandler = () => {
+    try {
+      const [table, tablePath] = Editor.parent(editor, editor.selection!, {
+        depth: 2,
+      });
+
+      const tableCellPath = Path.parent(editor.selection?.anchor.path as Path);
+      const cellPath = tableCellPath[tableCellPath.length - 1];
+      // INFO: Get the number of rows
+      const rowsLength = table.children.length;
+      for (let i = 0; i < rowsLength; i++) {
+        const location = [...tablePath, i, cellPath + 1];
+        Transforms.insertNodes(
+          editor,
+          {
+            type: "tableCell",
+            children: [{ text: "" }],
+          },
+          {
+            at: location,
+            match: (node) =>
+              Editor.isBlock(editor, node) && node.type === "tableCell",
+          }
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    handleClose();
+  };
 
   const removeTableHandler = () => {
     Transforms.removeNodes(editor, {
@@ -92,6 +148,8 @@ const useTableComponent = () => {
     removeRowHandler,
     removeColumnHandler,
     contextMenu,
+    addRowHandler,
+    addColumnHandler,
   };
 };
 

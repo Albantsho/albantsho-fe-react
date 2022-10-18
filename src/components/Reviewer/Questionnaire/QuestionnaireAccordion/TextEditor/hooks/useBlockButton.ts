@@ -1,11 +1,10 @@
 import type { TypographyProps } from "@mui/material";
 import { CustomElement } from "interfaces/slate";
 import {
-  type BaseEditor,
   Editor,
-  Transforms,
-  Node,
   Element as SlateElement,
+  Transforms,
+  type BaseEditor,
 } from "slate";
 import { useSlate } from "slate-react";
 

@@ -28,7 +28,8 @@ const useTableButton = () => {
     const [hasTable] = Editor.nodes(editor, {
       match: (n) => Editor.isBlock(editor, n) && n.type === "table",
     });
-    if (hasTable) return;
+    if (hasTable || tableValues.rows === "0" || !tableValues.rows) return;
+    if (tableValues.columns === "0" || !tableValues.columns) return;
 
     const rows: ITableRow[] = Array.from(new Array(+tableValues.rows)).map(
       () => ({

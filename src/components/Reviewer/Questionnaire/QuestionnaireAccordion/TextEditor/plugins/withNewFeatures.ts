@@ -3,7 +3,6 @@ import {
   Element as SlateElement,
   Point,
   Range,
-  Transforms,
   type BaseEditor,
 } from "slate";
 import type { ReactEditor } from "slate-react";
@@ -11,13 +10,38 @@ import type { ReactEditor } from "slate-react";
 type IEditor = BaseEditor & ReactEditor;
 
 const withNewFeatures = (editor: IEditor) => {
-  const { isInline, isVoid, deleteBackward, insertBreak } = editor;
+  const { isInline, isVoid, deleteBackward, insertBreak, deleteForward } =
+    editor;
 
   editor.isInline = (element) =>
     ["link"].includes(element.type) || isInline(element);
 
   editor.isVoid = (element) => {
     return element.type === "image" ? true : isVoid(element);
+  };
+
+  editor.deleteForward = (unit) => {
+    const { selection } = editor;
+
+    if (selection && Range.isCollapsed(selection)) {
+      const [cell] = Editor.nodes(editor, {
+        match: (n) =>
+          !Editor.isEditor(n) &&
+          SlateElement.isElement(n) &&
+          n.type === "tableCell",
+      });
+
+      if (cell) {
+        const [, cellPath] = cell;
+        const end = Editor.end(editor, cellPath);
+
+        if (Point.equals(selection.anchor, end)) {
+          return;
+        }
+      }
+    }
+
+    deleteForward(unit);
   };
 
   editor.deleteBackward = (unit) => {

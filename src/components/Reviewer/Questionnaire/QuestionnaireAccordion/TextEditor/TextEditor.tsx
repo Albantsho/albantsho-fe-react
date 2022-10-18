@@ -8,7 +8,7 @@ import {
   MdFormatListBulleted,
   MdOutlineFormatListNumbered,
 } from "react-icons/md";
-import { createEditor } from "slate";
+import { createEditor, Editor } from "slate";
 import { Editable, Slate, withReact } from "slate-react";
 import BlockButton from "./BlockButton/BlockButton";
 import ColorButton from "./ColorButton/ColorButton";
@@ -22,6 +22,7 @@ import LinkButton from "./LinkButton/LinkButton";
 import MarkButton from "./MarkButton/MarkButton";
 import withNewFeatures from "./plugins/withNewFeatures";
 import TableButton from "./TableButton/TableButton";
+import useTextEditor from "./useTextEditor";
 
 const initialValue: CustomElement[] = [
   { type: "typography", variant: "body1", children: [{ text: "" }] },
@@ -29,7 +30,7 @@ const initialValue: CustomElement[] = [
 
 const TextEditor = () => {
   const editor = useMemo(() => withNewFeatures(withReact(createEditor())), []);
-
+  const { handleKeyDown } = useTextEditor({ editor });
   return (
     <Slate editor={editor} value={initialValue}>
       <div className="flex gap-2 h-8 mb-8">
@@ -56,6 +57,7 @@ const TextEditor = () => {
         placeholder="Add comment..."
         spellCheck
         autoFocus
+        onKeyDown={handleKeyDown}
         renderElement={(props) => <EditorElement {...props} />}
         renderLeaf={(props) => <EditorLeaf {...props} />}
       />
