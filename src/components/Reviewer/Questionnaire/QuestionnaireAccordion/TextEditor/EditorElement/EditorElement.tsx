@@ -86,13 +86,16 @@ const EditorElement = ({
       );
 
     case "tableRow":
-      return <TableRow {...attributes}>{children}</TableRow>;
+      return <tr {...attributes}>{children}</tr>;
 
     case "tableCell":
       return (
-        <TableCell className="border border-black" {...attributes}>
+        <td
+          className="border-2  rounded-md text-start align-top py-2 px-4 min-w-[200px] max-w-xs"
+          {...attributes}
+        >
           {children}
-        </TableCell>
+        </td>
       );
 
     default:

@@ -16,7 +16,7 @@ const ColorButton = () => {
     <div className="relative">
       <IconButton
         disableRipple
-        className="hover:bg-inherit"
+        className="hover:bg-inherit text-primary-700 lg:text-gray-500"
         onClick={handleOpenColorPicker}
       >
         <SvgIcon component={RiFontColor} />

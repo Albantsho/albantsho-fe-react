@@ -33,7 +33,7 @@ const ImageButton = () => {
         onClick={handleOpenListImageButton}
         startIcon={<SvgIcon component={BsImageFill} inheritViewBox />}
         endIcon={<SvgIcon component={BiChevronDown} inheritViewBox />}
-        className="w-10 h-10 text-gray-500"
+        className="w-10 h-10 lg:text-gray-500 text-primary-700"
       />
       <Menu
         anchorEl={anchorEl}

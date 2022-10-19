@@ -32,15 +32,13 @@ const TableComponent = ({
 
   if (element.type === "table") {
     return (
-      <TableContainer
-        className="relative mb-2"
+      <div
+        className="relative mb-2 w-full flex shadow-sm overflow-scroll no-scrollbar"
         onContextMenu={handleContextMenu}
       >
-        <Table>
-          <TableBody className="border-collapse" {...attributes}>
-            {children}
-          </TableBody>
-        </Table>
+        <table className="border-collapse flex-1" {...attributes}>
+          <tbody>{children}</tbody>
+        </table>
         <Menu
           style={{ top: contextMenu?.mouseY, left: contextMenu?.mouseX }}
           sx={{
@@ -128,7 +126,7 @@ const TableComponent = ({
             <ListItemText>Delete Column</ListItemText>
           </MenuItem>
         </Menu>
-      </TableContainer>
+      </div>
     );
   } else {
     return <Typography {...attributes}>{children}</Typography>;

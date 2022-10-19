@@ -1,5 +1,5 @@
 import { CustomText } from "interfaces/slate";
-import { KeyboardEvent } from "react";
+import { KeyboardEvent, useState } from "react";
 import { Editor, Range, type BaseEditor } from "slate";
 import type { ReactEditor } from "slate-react";
 
@@ -81,7 +81,9 @@ const useTextEditor = ({ editor }: IProps) => {
     }
   };
 
-  return { handleKeyDown };
+  return {
+    handleKeyDown,
+  };
 };
 
 export default useTextEditor;

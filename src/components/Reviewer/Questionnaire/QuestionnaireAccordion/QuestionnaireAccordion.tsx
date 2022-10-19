@@ -21,7 +21,7 @@ const QuestionnaireAccordion = ({ title, description }: IProps) => {
         "&.MuiPaper-root": { borderRadius: "8px" },
         "&:before": { display: "none" },
       }}
-      className="px-6 md:px-9 lg:px-16 shadow-primary rounded-lg"
+      className="px-6 md:px-8  shadow-primary rounded-lg"
     >
       <AccordionSummary
         className="py-6 md:py-9 lg:py-12 px-0 rounded-lg flex-col sm:flex-row sm:items-start  gap-y-3"
@@ -48,9 +48,9 @@ const QuestionnaireAccordion = ({ title, description }: IProps) => {
         </div>
       </AccordionSummary>
       <AccordionDetails className="rounded-lg px-0 pb-6 md:pb-9 lg:pb-12">
-        <div className="border rounded-xl py-4 px-8 min-h-[350px] flex flex-col justify-start text-start">
+
           <TextEditor />
-        </div>
+        
         <div className="flex py-6 gap-x-5 flex-nowrap justify-center sm:justify-start">
           <Button
             disableElevation

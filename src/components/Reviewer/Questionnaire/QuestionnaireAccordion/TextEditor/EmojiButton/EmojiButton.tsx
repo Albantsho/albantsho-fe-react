@@ -1,4 +1,4 @@
-import { IconButton, SvgIcon } from "@mui/material";
+import { Button, IconButton, SvgIcon } from "@mui/material";
 import EmojiPicker, { type EmojiClickData } from "emoji-picker-react";
 import { useState } from "react";
 import { BsEmojiSmile } from "react-icons/bs";
@@ -22,9 +22,18 @@ const EmojiButton = () => {
 
   return (
     <div className="relative">
-      <IconButton className="w-10 h-10" onClick={handleOpenEmojiPicker}>
+      <IconButton
+        className="w-10 h-10 hidden lg:flex"
+        onClick={handleOpenEmojiPicker}
+      >
         <SvgIcon fontSize="small" component={BsEmojiSmile} inheritViewBox />
       </IconButton>
+      <Button
+        className={`lg:hidden w-10 h-10 min-w-[40px]`}
+        onClick={handleOpenEmojiPicker}
+      >
+        <SvgIcon fontSize="small" component={BsEmojiSmile} inheritViewBox />
+      </Button>
       {openEmojiPicker && (
         <div className="w-20 z-10 absolute top-8 right-24">
           <EmojiPicker onEmojiClick={selectEmoji} />

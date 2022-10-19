@@ -30,12 +30,12 @@ const HeadingButtonList = () => {
       <Button
         sx={{
           "&.MuiButtonBase-root": {
-            maxWidth: "140px",
+            maxWidth: { xs: "130px", lg: "140px" },
             width: "100%",
-            paddingY: "20px",
+            paddingY: { xs: "4px", lg: "20px" },
             textAlign: "start",
             justifyContent: "space-between",
-            fontSize: "15px",
+            fontSize: { xs: "13px", lg: "15px" },
             fontWeight: "600",
           },
         }}
