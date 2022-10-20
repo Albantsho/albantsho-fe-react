@@ -2,9 +2,10 @@ import { useState } from "react";
 import { CustomElement } from "interfaces/slate";
 import type { TypographyProps } from "@mui/material";
 import useBlockButton from "../hooks/useBlockButton";
-import useHeadingButtonList from "../HeadingButtonList/useHeadingButtonList";
+
 import { useSlate } from "slate-react";
 import { HistoryEditor } from "slate-history";
+import useHeadingButtonList from "../Buttons/HeadingButtonList/useHeadingButtonList";
 
 const useEditorDrawer = () => {
   const [openDrawer, setOpenDrawer] = useState(false);

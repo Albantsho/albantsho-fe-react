@@ -9,28 +9,25 @@ const useEmailButton = () => {
   const [emailValue, setEmailValue] = useState("");
 
   const isLinkActive = () => {
-    const [link] = Editor.nodes(editor, {
+    const [email] = Editor.nodes(editor, {
       match: (n) =>
         !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "email",
     });
 
-    return !!link;
+    return !!email;
   };
-
   const unwrapLink = () => {
     Transforms.unwrapNodes(editor, {
       match: (n) =>
         !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "email",
     });
   };
-
   const wrapLink = (emailUrl: string) => {
     if (!editor.selection) return;
     if (isLinkActive()) {
       unwrapLink();
       return;
     }
-
     const { selection } = editor;
     const isCollapsed = selection && Range.isCollapsed(selection);
     const link: IEmail = {
@@ -38,7 +35,6 @@ const useEmailButton = () => {
       email: emailUrl,
       children: isCollapsed ? [{ text: emailUrl }] : [],
     };
-
     if (isCollapsed) {
       Transforms.insertNodes(editor, link);
     } else {
@@ -46,19 +42,12 @@ const useEmailButton = () => {
       Transforms.collapse(editor, { edge: "end" });
     }
   };
-
   const handleOpenAddEmailModal = () => setOpenAddEmail(true);
   const handleCloseAddEmailModal = () => setOpenAddEmail(false);
-
   const changeEmailValue = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setEmailValue(e.target.value);
-
   const wrapEmailFunction = () => {
-    // const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
-
-    // regex.test(emailValue) ? wrapLink(emailValue) : setError("Email invalid");
-
     wrapLink(emailValue);
     setEmailValue("");
     handleCloseAddEmailModal();

@@ -7,19 +7,19 @@ import {
   MdOutlineFormatListNumbered,
   MdFormatListBulleted,
 } from "react-icons/md";
-import BlockButton from "../BlockButton/BlockButton";
-import ColorButton from "../ColorButton/ColorButton";
-import EmailButton from "../EmailButton/EmailButton";
-import EmojiButton from "../EmojiButton/EmojiButton";
-import HeadingButtonList from "../HeadingButtonList/HeadingButtonList";
-import ImageButton from "../ImageButtonList/ImageButtonList";
-import LinkButton from "../LinkButton/LinkButton";
-import MarkButton from "../MarkButton/MarkButton";
-import TableButton from "../TableButton/TableButton";
+import BlockButton from "../../Buttons/BlockButton/BlockButton";
+import ColorButton from "../../Buttons/ColorButton/ColorButton";
+import EmailButton from "../../Buttons/EmailButton/EmailButton";
+import EmojiButton from "../../Buttons/EmojiButton/EmojiButton";
+import HeadingButtonList from "../../Buttons/HeadingButtonList/HeadingButtonList";
+import ImageButton from "../../Buttons/ImageButtonList/ImageButtonList";
+import LinkButton from "../../Buttons/LinkButton/LinkButton";
+import MarkButton from "../../Buttons/MarkButton/MarkButton";
+import TableButton from "../../Buttons/TableButton/TableButton";
 
-const DesktopMenu = () => {
+const DesktopToolbar = () => {
   return (
-    <div className="lg:flex gap-2 h-8 mb-8 hidden">
+    <div className="lg:flex gap-2 h-8 mb-8 hidden sticky top-0">
       <HeadingButtonList />
       <Divider orientation="vertical" />
       <MarkButton format="bold" icon={BsTypeBold} />
@@ -42,4 +42,4 @@ const DesktopMenu = () => {
   );
 };
 
-export default DesktopMenu;
+export default DesktopToolbar;

@@ -42,7 +42,7 @@ const AddEmailModal = ({
               variant="body1"
               className="futura font-medium text-primary-700"
             >
-              Enter the Email
+              Enter Your Email
             </Typography>
           </label>
           <CustomInput

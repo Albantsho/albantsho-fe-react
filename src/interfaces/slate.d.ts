@@ -83,9 +83,10 @@ export interface CustomText {
   code?: boolean;
 }
 
+export type IEditor = BaseEditor & ReactEditor & HistoryEditor;
 declare module "slate" {
   interface CustomTypes {
-    Editor: BaseEditor & ReactEditor & HistoryEditor;
+    Editor: IEditor;
     Element: CustomElement;
     Text: CustomText;
   }

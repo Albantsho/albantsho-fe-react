@@ -21,7 +21,7 @@ const QuestionnaireAccordion = ({ title, description }: IProps) => {
         "&.MuiPaper-root": { borderRadius: "8px" },
         "&:before": { display: "none" },
       }}
-      className="px-6 md:px-8  shadow-primary rounded-lg"
+      className="px-6 md:px-8 max-w-5xl shadow-primary rounded-lg"
     >
       <AccordionSummary
         className="py-6 md:py-9 lg:py-12 px-0 rounded-lg flex-col sm:flex-row sm:items-start  gap-y-3"

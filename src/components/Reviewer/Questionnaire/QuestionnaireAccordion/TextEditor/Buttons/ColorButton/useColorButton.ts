@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import type { ColorResult } from "react-color";
 import { Editor } from "slate";
 import { useSlate } from "slate-react";
-import useMarkButton from "../hooks/useMarkButton";
+import useMarkButton from "../../hooks/useMarkButton";
 
 const useColorButton = () => {
   const [color, setColor] = useState("#000");
   const { toggleMark } = useMarkButton();
-  const [colorPickerOpen, setColorPickerOpen] = useState(false);
+  const [openColorPicker, setOpenColorPicker] = useState(false);
   const editor = useSlate();
-
   const marks = Editor.marks(editor);
 
   useEffect(() => {
@@ -23,17 +22,15 @@ const useColorButton = () => {
     setColor(color.hex);
     toggleMark({ editor, format: "color", color: color.hex });
   };
-
   const handleOpenColorPicker = () =>
-    setColorPickerOpen((prevState) => !prevState);
-
+    setOpenColorPicker((prevState) => !prevState);
   const handleCloseColorPicker = () => {
-    if (color !== "#000") setColorPickerOpen(false);
+    if (color !== "#000") setOpenColorPicker(false);
   };
 
   return {
     color,
-    colorPickerOpen,
+    openColorPicker,
     handleSelectedColor,
     handleOpenColorPicker,
     handleCloseColorPicker,

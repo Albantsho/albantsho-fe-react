@@ -3,11 +3,11 @@ import { useMemo } from "react";
 import { createEditor } from "slate";
 import { Editable, Slate, withReact } from "slate-react";
 import { withHistory } from "slate-history";
-import DesktopMenu from "./DesktopMenu/DesktopMenu";
+import DesktopToolbar from "./Toolbars/DesktopToolbar/DesktopToolbar";
 import EditorDrawer from "./EditorDrawer/EditorDrawer";
 import EditorElement from "./EditorElement/EditorElement";
 import EditorLeaf from "./EditorLeaf/EditorLeaf";
-import MobileMenu from "./MobileMenu/MobileMenu";
+import MobileToolbar from "./Toolbars/MobileToolbar/MobileToolbar";
 import withNewFeatures from "./plugins/withNewFeatures";
 import useTextEditor from "./useTextEditor";
 
@@ -24,9 +24,9 @@ const TextEditor = () => {
   const { handleKeyDown } = useTextEditor({ editor });
 
   return (
-    <div className="relative border rounded-xl py-4 px-8 lg:px-4 min-h-[350px] flex flex-col justify-start text-start pb-16 overflow-hidden">
+    <div className="relative border rounded-xl py-4 px-8 lg:px-4 min-h-[350px] flex flex-col justify-start text-start pb-16 lg:pb-8">
       <Slate editor={editor} value={initialValue}>
-        <DesktopMenu />
+        <DesktopToolbar />
         <EditorDrawer />
         <Editable
           placeholder="Add comment..."
@@ -36,7 +36,7 @@ const TextEditor = () => {
           renderElement={(props) => <EditorElement {...props} />}
           renderLeaf={(props) => <EditorLeaf {...props} />}
         />
-        <MobileMenu />
+        <MobileToolbar />
       </Slate>
     </div>
   );

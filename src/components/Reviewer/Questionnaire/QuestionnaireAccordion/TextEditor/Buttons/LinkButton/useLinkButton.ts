@@ -16,21 +16,18 @@ const useLinkButton = () => {
 
     return !!link;
   };
-
   const unwrapLink = () => {
     Transforms.unwrapNodes(editor, {
       match: (n) =>
         !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "link",
     });
   };
-
   const wrapLink = (url: string) => {
     if (!editor.selection) return;
     if (isLinkActive()) {
       unwrapLink();
       return;
     }
-
     const { selection } = editor;
     const isCollapsed = selection && Range.isCollapsed(selection);
     const link: ILink = {

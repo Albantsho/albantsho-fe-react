@@ -9,14 +9,14 @@ import {
 import { CustomElement } from "interfaces/slate";
 import type { IconType } from "react-icons";
 import { useSlate } from "slate-react";
-import useBlockButton from "../hooks/useBlockButton";
+import useBlockButton from "../../hooks/useBlockButton";
 
 interface IProps {
   icon: IconType;
   format: CustomElement["type"];
   variant?: TypographyProps["variant"];
   inDrawer?: "inDrawer";
-  inDrawerTitle?: string;
+  titleInDrawer?: string;
 }
 
 const BlockButton = ({
@@ -24,17 +24,16 @@ const BlockButton = ({
   icon,
   variant,
   inDrawer,
-  inDrawerTitle,
+  titleInDrawer,
 }: IProps) => {
   const editor = useSlate();
   const { isBlockActive, toggleBlock } = useBlockButton();
   const isActive = isBlockActive(editor, format);
-
   const handleFormatElement = () => toggleBlock(editor, format, variant);
 
   return (
     <>
-      {!inDrawer && (
+      {!inDrawer ? (
         <>
           <IconButton
             className="w-10 h-10 hidden lg:flex"
@@ -54,8 +53,7 @@ const BlockButton = ({
             <SvgIcon component={icon} inheritViewBox />
           </Button>
         </>
-      )}
-      {inDrawer && (
+      ) : (
         <ListItemButton
           onClick={handleFormatElement}
           TouchRippleProps={{ className: "text-primary-main" }}
@@ -73,7 +71,7 @@ const BlockButton = ({
             }}
             className="pl-4"
           >
-            {inDrawerTitle}
+            {titleInDrawer}
           </ListItemText>
         </ListItemButton>
       )}

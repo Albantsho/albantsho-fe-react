@@ -10,10 +10,11 @@ import {
 import { BsCode, BsTypeBold } from "react-icons/bs";
 import { FiItalic } from "react-icons/fi";
 import { MdExpandLess, MdOutlineExpandMore } from "react-icons/md";
-import ColorButton from "../../../ColorButton/ColorButton";
-import EmojiButton from "../../../EmojiButton/EmojiButton";
-import useHeadingButtonList from "../../../HeadingButtonList/useHeadingButtonList";
-import MarkButton from "../../../MarkButton/MarkButton";
+import ColorButton from "../../../Buttons/ColorButton/ColorButton";
+import EmojiButton from "../../../Buttons/EmojiButton/EmojiButton";
+import useHeadingButtonList from "../../../Buttons/HeadingButtonList/useHeadingButtonList";
+import MarkButton from "../../../Buttons/MarkButton/MarkButton";
+
 import useEditorDrawer from "../../useEditorDrawer";
 
 const TabPanelText = () => {

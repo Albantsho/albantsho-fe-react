@@ -25,7 +25,7 @@ const TableButton = ({ inDrawer }: IProps) => {
 
   return (
     <>
-      {!inDrawer && (
+      {!inDrawer ? (
         <>
           <IconButton
             onClick={handleOpenAddTableModal}
@@ -48,8 +48,7 @@ const TableButton = ({ inDrawer }: IProps) => {
             />
           </Button>
         </>
-      )}
-      {inDrawer && (
+      ) : (
         <ListItemButton
           onClick={handleOpenAddTableModal}
           TouchRippleProps={{ className: "text-primary-main" }}

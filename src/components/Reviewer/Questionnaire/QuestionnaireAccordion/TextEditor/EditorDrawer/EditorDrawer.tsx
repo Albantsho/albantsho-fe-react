@@ -1,7 +1,6 @@
 import { Button, Drawer, SvgIcon } from "@mui/material";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiRedo, BiUndo } from "react-icons/bi";
-import { useSlate } from "slate-react";
 import TabsList from "./TabsList/TabsList";
 import useEditorDrawer from "./useEditorDrawer";
 
@@ -15,7 +14,7 @@ const EditorDrawer = () => {
   } = useEditorDrawer();
 
   return (
-    <div className="w-full flex justify-end gap-2 mb-4 lg:hidden">
+    <div className="w-full flex justify-end gap-2 mb-4 lg:hidden sticky top-0">
       <Button
         onClick={handleUndoButton}
         className={`lg:hidden w-10 h-10 min-w-[40px]`}

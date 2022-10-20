@@ -1,4 +1,4 @@
-import { Link, TableCell, TableRow, Typography } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import { type RenderElementProps } from "slate-react";
 import ImageComponent from "./ImageComponent/ImageComponent";
 import TableComponent from "./TableComponent/TableComponent";
@@ -31,7 +31,6 @@ const EditorElement = ({
           </span>
         </Link>
       );
-
     case "email":
       return (
         <Link
@@ -48,7 +47,6 @@ const EditorElement = ({
           </span>
         </Link>
       );
-
     case "image":
       return (
         <ImageComponent attributes={attributes} element={element}>
@@ -84,10 +82,8 @@ const EditorElement = ({
           {children}
         </TableComponent>
       );
-
     case "tableRow":
       return <tr {...attributes}>{children}</tr>;
-
     case "tableCell":
       return (
         <td

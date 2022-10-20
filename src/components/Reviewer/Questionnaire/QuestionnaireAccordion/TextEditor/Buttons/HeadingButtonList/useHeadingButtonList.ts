@@ -2,7 +2,8 @@ import type { TypographyProps } from "@mui/material";
 import { CustomElement } from "interfaces/slate";
 import { useRef, useState } from "react";
 import { useSlate } from "slate-react";
-import useBlockButton from "../hooks/useBlockButton";
+import useBlockButton from "../../hooks/useBlockButton";
+
 interface IListButtons {
   format: CustomElement["type"];
   option: string;
@@ -38,17 +39,15 @@ const useHeadingButtonList = () => {
       toggleBlock(editor, format, variant);
     };
 
-  const handleToggleListHeadingButton = () => {
+  const handleToggleListHeadingButton = () =>
     setOpenListHeadingButton((prevOpen) => !prevOpen);
-  };
 
   const handleCloseListHeadingButton = (event: Event) => {
     if (
       anchorRef.current &&
       anchorRef.current.contains(event.target as HTMLElement)
-    ) {
+    )
       return;
-    }
 
     setOpenListHeadingButton(false);
   };

@@ -79,7 +79,6 @@ const EmailButton = ({ inDrawer }: IProps) => {
           </ListItemText>
         </ListItemButton>
       )}
-
       <AddEmailModal
         changeEmailValue={changeEmailValue}
         emailValue={emailValue}

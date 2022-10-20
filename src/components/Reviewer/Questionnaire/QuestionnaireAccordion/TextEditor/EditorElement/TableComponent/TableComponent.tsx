@@ -4,9 +4,6 @@ import {
   Menu,
   MenuItem,
   SvgIcon,
-  Table,
-  TableBody,
-  TableContainer,
   Typography,
 } from "@mui/material";
 import { AiOutlineBorderlessTable } from "react-icons/ai";

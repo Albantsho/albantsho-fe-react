@@ -1,8 +1,8 @@
-import { CustomText } from "interfaces/slate";
-import { type BaseEditor, Editor } from "slate";
+import { CustomText, IEditor } from "interfaces/slate";
+import { Editor } from "slate";
 
 interface IToggleMark {
-  editor: BaseEditor;
+  editor: IEditor;
   format: keyof Omit<CustomText, "text">;
   color?: string;
 }

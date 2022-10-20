@@ -1,13 +1,5 @@
-import {
-  Editor,
-  Element as SlateElement,
-  Point,
-  Range,
-  type BaseEditor,
-} from "slate";
-import type { ReactEditor } from "slate-react";
-
-type IEditor = BaseEditor & ReactEditor;
+import { IEditor } from "interfaces/slate";
+import { Editor, Element as SlateElement, Point, Range } from "slate";
 
 const withNewFeatures = (editor: IEditor) => {
   const { isInline, isVoid, deleteBackward, insertBreak, deleteForward } =

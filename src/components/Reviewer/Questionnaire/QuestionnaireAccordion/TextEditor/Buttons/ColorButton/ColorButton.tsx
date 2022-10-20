@@ -6,7 +6,7 @@ import useColorButton from "./useColorButton";
 const ColorButton = () => {
   const {
     color,
-    colorPickerOpen,
+    openColorPicker,
     handleOpenColorPicker,
     handleSelectedColor,
     handleCloseColorPicker,
@@ -20,12 +20,9 @@ const ColorButton = () => {
         onClick={handleOpenColorPicker}
       >
         <SvgIcon component={RiFontColor} />
-        <div
-          style={{ backgroundColor: `${color}` }}
-          className={`w-2 h-2`}
-        ></div>
+        <div style={{ backgroundColor: `${color}` }} className="w-2 h-2"></div>
       </IconButton>
-      {colorPickerOpen && (
+      {openColorPicker && (
         <div
           onClick={handleCloseColorPicker}
           className="absolute -left-[100px] lg:-left-[80px] top-6 p-5 z-10"

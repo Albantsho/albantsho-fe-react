@@ -13,7 +13,6 @@ const useTableButton = () => {
 
   const handleOpenAddTableModal = () => setOpenAddTable(true);
   const handleCloseAddTableModal = () => setOpenAddTable(false);
-
   const handleChangeValueTable = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -47,7 +46,6 @@ const useTableButton = () => {
     };
 
     Transforms.insertNodes(editor, table);
-
     Transforms.insertNodes(
       editor,
       [{ type: "typography", children: [{ text: "" }] }],

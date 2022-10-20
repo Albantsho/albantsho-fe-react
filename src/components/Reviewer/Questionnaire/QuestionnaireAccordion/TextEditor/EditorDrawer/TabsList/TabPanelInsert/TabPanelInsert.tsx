@@ -6,11 +6,11 @@ import {
   MdOutlineFormatListNumbered,
   MdFormatListBulleted,
 } from "react-icons/md";
-import BlockButton from "../../../BlockButton/BlockButton";
-import EmailButton from "../../../EmailButton/EmailButton";
-import ImageButton from "../../../ImageButtonList/ImageButtonList";
-import LinkButton from "../../../LinkButton/LinkButton";
-import TableButton from "../../../TableButton/TableButton";
+import BlockButton from "../../../Buttons/BlockButton/BlockButton";
+import EmailButton from "../../../Buttons/EmailButton/EmailButton";
+import ImageButton from "../../../Buttons/ImageButtonList/ImageButtonList";
+import LinkButton from "../../../Buttons/LinkButton/LinkButton";
+import TableButton from "../../../Buttons/TableButton/TableButton";
 
 const TabPanelInsert = () => {
   return (
@@ -22,19 +22,19 @@ const TabPanelInsert = () => {
           format="numberList"
           icon={MdOutlineFormatListNumbered}
           inDrawer="inDrawer"
-          inDrawerTitle="Number List"
+          titleInDrawer="Number List"
         />
         <BlockButton
           format="bulletList"
           icon={MdFormatListBulleted}
           inDrawer="inDrawer"
-          inDrawerTitle="Bullet List"
+          titleInDrawer="Bullet List"
         />
         <BlockButton
           format="blockquote"
           icon={AiFillExclamationCircle}
           inDrawer="inDrawer"
-          inDrawerTitle="Blockquote"
+          titleInDrawer="Blockquote"
         />
         <LinkButton inDrawer="inDrawer" />
         <EmailButton inDrawer="inDrawer" />

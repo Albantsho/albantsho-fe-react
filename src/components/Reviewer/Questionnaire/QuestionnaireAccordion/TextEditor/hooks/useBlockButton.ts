@@ -1,11 +1,6 @@
 import type { TypographyProps } from "@mui/material";
-import { CustomElement } from "interfaces/slate";
-import {
-  Editor,
-  Element as SlateElement,
-  Transforms,
-  type BaseEditor,
-} from "slate";
+import { CustomElement, IEditor } from "interfaces/slate";
+import { Editor, Element as SlateElement, Transforms } from "slate";
 import { useSlate } from "slate-react";
 
 const LIST_TYPES = ["numberList", "bulletList"];
@@ -13,7 +8,7 @@ const LIST_TYPES = ["numberList", "bulletList"];
 const useBlockButton = () => {
   const mainEditor = useSlate();
   const isBlockActive = (
-    editor: BaseEditor,
+    editor: IEditor,
     format: CustomElement["type"],
     variant?: TypographyProps["variant"]
   ) => {
@@ -45,7 +40,7 @@ const useBlockButton = () => {
   };
 
   const toggleBlock = (
-    editor: BaseEditor,
+    editor: IEditor,
     format: CustomElement["type"],
     variant?: TypographyProps["variant"]
   ) => {

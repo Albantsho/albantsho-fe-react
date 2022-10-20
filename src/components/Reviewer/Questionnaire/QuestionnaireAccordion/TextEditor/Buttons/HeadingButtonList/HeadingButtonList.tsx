@@ -8,7 +8,6 @@ import {
   Popper,
   SvgIcon,
 } from "@mui/material";
-import React from "react";
 import { BiChevronDown } from "react-icons/bi";
 import useHeadingButtonList from "./useHeadingButtonList";
 
@@ -26,7 +25,7 @@ const HeadingButtonList = () => {
   } = useHeadingButtonList();
 
   return (
-    <React.Fragment>
+    <>
       <Button
         sx={{
           "&.MuiButtonBase-root": {
@@ -111,7 +110,7 @@ const HeadingButtonList = () => {
           </Grow>
         )}
       </Popper>
-    </React.Fragment>
+    </>
   );
 };
 

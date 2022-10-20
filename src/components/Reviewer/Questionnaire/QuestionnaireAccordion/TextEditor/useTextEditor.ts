@@ -1,16 +1,11 @@
-import { CustomText } from "interfaces/slate";
+import { CustomText, IEditor } from "interfaces/slate";
 import { KeyboardEvent } from "react";
-import { Editor, Range, type BaseEditor } from "slate";
-import type { ReactEditor } from "slate-react";
-
-type IEditor = BaseEditor & ReactEditor;
-
+import { Editor, Range } from "slate";
 interface IProps {
   editor: IEditor;
 }
-
 interface IToggleMark {
-  editor: BaseEditor;
+  editor: IEditor;
   format: keyof Omit<CustomText, "text">;
   color?: string;
 }
@@ -37,6 +32,7 @@ const useTextEditor = ({ editor }: IProps) => {
       isMarkActive({ editor, format: "code" });
       toggleMark({ editor, format: "code" });
     }
+
     const beforeTag = Editor.previous(editor, {
       match: (n) => Editor.isBlock(editor, n) && n.type === "table",
     });

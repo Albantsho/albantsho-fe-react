@@ -161,7 +161,6 @@ const ImageButton = ({ inDrawer }: IProps) => {
           </Collapse>
         </>
       )}
-
       <AddImageModal
         changeImageValue={changeImageValue}
         handleCloseAddImageModal={handleCloseAddImageModal}

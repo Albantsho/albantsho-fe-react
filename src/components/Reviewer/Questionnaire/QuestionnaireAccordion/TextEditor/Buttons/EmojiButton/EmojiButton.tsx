@@ -17,15 +17,12 @@ const EmojiButton = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
-  const handleOpenEmojiPicker = () => {
+  const handleOpenEmojiPicker = () =>
     setOpenEmojiPicker((prevState) => !prevState);
-  };
-
-  const handleClose = () => setOpenEmojiPicker(false);
-
+  const handleCloseEmojiPicker = () => setOpenEmojiPicker(false);
   const selectEmoji = (emojiData: EmojiClickData) => {
     Transforms.insertText(editor, emojiData.emoji);
-    handleClose();
+    handleCloseEmojiPicker();
   };
 
   return (
