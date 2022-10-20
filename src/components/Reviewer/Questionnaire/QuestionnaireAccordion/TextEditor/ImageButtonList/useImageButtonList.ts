@@ -8,6 +8,7 @@ import imageExtensions from "image-extensions";
 const useImageButton = () => {
   const editor = useSlate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [openImageList, setOpenImageList] = useState(false);
   const openListImageButton = Boolean(anchorEl);
   const [openAddImage, setOpenAddImage] = useState(false);
   const [imageValue, setImageValue] = useState("");
@@ -31,14 +32,11 @@ const useImageButton = () => {
     ]);
   };
 
-  const handleOpenListImageButton = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenListImageButton = (event: React.MouseEvent<HTMLElement>) =>
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleCloseListImageButton = () => {
-    setAnchorEl(null);
-  };
-
+  const handleCloseListImageButton = () => setAnchorEl(null);
+  const handleOpenImageList = () => setOpenImageList((prevState) => !prevState);
+  const handleCloseImageList = () => setOpenImageList(false);
   const handleOpenAddImageModal = () => setOpenAddImage(true);
   const handleCloseAddImageModal = () => setOpenAddImage(false);
   const changeImageValue = (
@@ -53,6 +51,7 @@ const useImageButton = () => {
     imageValue && insertImage(imageValue);
     setImageValue("");
     handleCloseListImageButton();
+    handleCloseImageList();
     handleCloseAddImageModal();
   };
   const handleGetPicture = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +60,7 @@ const useImageButton = () => {
       const url = URL.createObjectURL(e.target.files[0]);
       url && insertImage(url);
       setAnchorEl(null);
+      handleCloseImageList();
       handleCloseListImageButton();
     } else {
       alert("Image not found");
@@ -79,6 +79,9 @@ const useImageButton = () => {
     handleOpenAddImageModal,
     handleCloseAddImageModal,
     changeImageValue,
+    handleOpenImageList,
+    handleCloseImageList,
+    openImageList,
   };
 };
 

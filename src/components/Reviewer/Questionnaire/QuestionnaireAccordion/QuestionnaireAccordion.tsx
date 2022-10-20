@@ -48,9 +48,7 @@ const QuestionnaireAccordion = ({ title, description }: IProps) => {
         </div>
       </AccordionSummary>
       <AccordionDetails className="rounded-lg px-0 pb-6 md:pb-9 lg:pb-12">
-
-          <TextEditor />
-        
+        <TextEditor />
         <div className="flex py-6 gap-x-5 flex-nowrap justify-center sm:justify-start">
           <Button
             disableElevation

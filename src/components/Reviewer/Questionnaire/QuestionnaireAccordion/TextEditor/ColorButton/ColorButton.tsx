@@ -28,7 +28,7 @@ const ColorButton = () => {
       {colorPickerOpen && (
         <div
           onClick={handleCloseColorPicker}
-          className="absolute -left-[80px] top-6 p-5 z-10"
+          className="absolute -left-[100px] lg:-left-[80px] top-6 p-5 z-10"
         >
           <SketchPicker color={color} onChangeComplete={handleSelectedColor} />
         </div>

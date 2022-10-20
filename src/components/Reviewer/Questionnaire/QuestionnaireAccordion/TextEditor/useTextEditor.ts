@@ -1,5 +1,5 @@
 import { CustomText } from "interfaces/slate";
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent } from "react";
 import { Editor, Range, type BaseEditor } from "slate";
 import type { ReactEditor } from "slate-react";
 

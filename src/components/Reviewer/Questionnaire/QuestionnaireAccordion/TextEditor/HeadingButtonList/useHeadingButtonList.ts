@@ -63,6 +63,7 @@ const useHeadingButtonList = () => {
     anchorRef,
     editor,
     listButtons,
+    setSelectedIndex,
   };
 };
 

@@ -1,4 +1,10 @@
-import { Button, IconButton, SvgIcon } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  SvgIcon,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import EmojiPicker, { type EmojiClickData } from "emoji-picker-react";
 import { useState } from "react";
 import { BsEmojiSmile } from "react-icons/bs";
@@ -8,6 +14,8 @@ import { useSlate } from "slate-react";
 const EmojiButton = () => {
   const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
   const editor = useSlate();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
   const handleOpenEmojiPicker = () => {
     setOpenEmojiPicker((prevState) => !prevState);
@@ -35,8 +43,8 @@ const EmojiButton = () => {
         <SvgIcon fontSize="small" component={BsEmojiSmile} inheritViewBox />
       </Button>
       {openEmojiPicker && (
-        <div className="w-20 z-10 absolute top-8 right-24">
-          <EmojiPicker onEmojiClick={selectEmoji} />
+        <div className="w-20 z-10 absolute top-8 right-[116px] lg:right-24">
+          <EmojiPicker width={matches ? 350 : 260} onEmojiClick={selectEmoji} />
         </div>
       )}
     </div>

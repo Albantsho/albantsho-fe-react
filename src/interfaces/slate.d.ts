@@ -1,4 +1,7 @@
 import { type TypographyProps } from "@mui/system";
+import type { BaseEditor } from "slate";
+import type { ReactEditor } from "slate-react";
+import type { HistoryEditor } from "slate-history";
 
 interface ITypography {
   type: "typography";
@@ -82,7 +85,7 @@ export interface CustomText {
 
 declare module "slate" {
   interface CustomTypes {
-    Editor: BaseEditor & ReactEditor;
+    Editor: BaseEditor & ReactEditor & HistoryEditor;
     Element: CustomElement;
     Text: CustomText;
   }
