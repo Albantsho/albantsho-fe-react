@@ -1,6 +1,4 @@
-import { useEffect, useRef } from "react";
 import api from "./configs/axios.config";
-
 interface IRegisterPayload {
   full_name: string;
   email: string;
@@ -17,14 +15,6 @@ interface ILoginPayload {
 }
 
 const useAuthApi = (controller?: AbortController) => {
-  const token = useRef<string>("");
-
-  useEffect(() => {
-    let tk = localStorage.getItem("USER_TOKEN");
-    if (tk === null) tk = "";
-    token.current = tk;
-  }, []);
-
   return {
     async register(payload: IRegisterPayload) {
       const res = await api.post("/authentication/register", payload, {
@@ -46,7 +36,7 @@ const useAuthApi = (controller?: AbortController) => {
       const res = await api.post("/profile/password-reset", payload, {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${""}`,
         },
       });
 
@@ -65,7 +55,7 @@ const useAuthApi = (controller?: AbortController) => {
       const res = await api.post("/verification", payload, {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${""}`,
         },
       });
 

@@ -1,10 +1,8 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import useAuthApi from "apis/Auth.api";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "./validation/register.validation";
-import useAuthApi from "apis/Auth.api";
-import { useDispatch } from "react-redux";
-import { registerType } from "../../../app/features/user/userSlice";
 
 interface IRegisterFormValues {
   full_name: string;
@@ -40,13 +38,10 @@ const useRegisterForm = () => {
   const [acceptTermsAndCondition, setAcceptTermsAndCondition] =
     useState<boolean>(false);
   const [typePasswordInput, setTypePasswordInput] = useState(true);
-  const dispatch = useDispatch();
 
   const onSubmit = async (data: IRegisterFormValues) => {
     try {
       const res = await registerApi(data);
-      await localStorage.setItem("USER_Token", res.data.token);
-      await dispatch(registerType({ user: res.data }));
     } catch (error) {
       console.log(error);
     }

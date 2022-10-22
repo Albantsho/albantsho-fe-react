@@ -17,7 +17,6 @@
     "@mui/base": "^5.0.0-alpha.92",
     "@mui/lab": "^5.0.0-alpha.96",
     "@mui/material": "^5.10.0",
-    "@reduxjs/toolkit": "^1.8.5",
     "aos": "^2.3.4",
     "axios": "^0.27.2",
     "emoji-picker-react": "^4.2.0",
@@ -25,13 +24,11 @@
     "is-url": "^1.2.4",
     "next": "12.2.5",
     "next-progress": "^2.2.0",
-    "next-redux-wrapper": "^8.0.0",
     "react": "18.2.0",
     "react-color": "^2.19.3",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.35.0",
     "react-icons": "^4.4.0",
-    "react-redux": "^8.0.4",
     "react-resize-detector": "^7.1.2",
     "react-spring": "^9.5.2",
     "sharp": "^0.30.7",
@@ -39,7 +36,8 @@
     "slate-history": "^0.66.0",
     "slate-react": "^0.83.1",
     "swiper": "^8.3.2",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "zustand": "^4.1.2"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.3.1",
