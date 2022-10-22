@@ -34,11 +34,17 @@ const useImageButton = () => {
 
   const handleOpenListImageButton = (event: React.MouseEvent<HTMLElement>) =>
     setAnchorEl(event.currentTarget);
+
   const handleCloseListImageButton = () => setAnchorEl(null);
+
   const handleOpenImageList = () => setOpenImageList((prevState) => !prevState);
+
   const handleCloseImageList = () => setOpenImageList(false);
+
   const handleOpenAddImageModal = () => setOpenAddImage(true);
+
   const handleCloseAddImageModal = () => setOpenAddImage(false);
+
   const changeImageValue = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setImageValue(e.target.value);
@@ -54,6 +60,7 @@ const useImageButton = () => {
     handleCloseImageList();
     handleCloseAddImageModal();
   };
+
   const handleGetPicture = (e: ChangeEvent<HTMLInputElement>) => {
     if (table) return;
     if (e.target.files) {

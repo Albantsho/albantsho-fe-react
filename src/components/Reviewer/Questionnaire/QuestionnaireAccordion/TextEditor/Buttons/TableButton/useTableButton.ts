@@ -12,7 +12,9 @@ const useTableButton = () => {
   const editor = useSlate();
 
   const handleOpenAddTableModal = () => setOpenAddTable(true);
+
   const handleCloseAddTableModal = () => setOpenAddTable(false);
+
   const handleChangeValueTable = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

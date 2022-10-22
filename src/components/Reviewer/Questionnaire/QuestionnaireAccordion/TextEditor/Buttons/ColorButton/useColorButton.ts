@@ -22,8 +22,10 @@ const useColorButton = () => {
     setColor(color.hex);
     toggleMark({ editor, format: "color", color: color.hex });
   };
+
   const handleOpenColorPicker = () =>
     setOpenColorPicker((prevState) => !prevState);
+
   const handleCloseColorPicker = () => {
     if (color !== "#000") setOpenColorPicker(false);
   };

@@ -24,7 +24,7 @@ const TextEditor = () => {
   const { handleKeyDown } = useTextEditor({ editor });
 
   return (
-    <div className="relative border rounded-xl py-4 px-8 lg:px-4 min-h-[350px] flex flex-col justify-start text-start pb-16 lg:pb-8">
+    <div className="relative border rounded-xl py-4 px-5 sm:px-8 lg:px-4 min-h-[350px] flex flex-col justify-start text-start pb-16 lg:pb-8">
       <Slate editor={editor} value={initialValue}>
         <DesktopToolbar />
         <EditorDrawer />

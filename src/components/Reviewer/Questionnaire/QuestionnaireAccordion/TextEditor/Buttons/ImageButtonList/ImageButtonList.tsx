@@ -66,7 +66,11 @@ const ImageButton = ({ inDrawer }: IProps) => {
               onClick={handleOpenAddImageModal}
             >
               <ListItemIcon>
-                <SvgIcon fontSize="small" component={BsUpload} inheritViewBox />
+                <SvgIcon
+                  fontSize="small"
+                  component={AiOutlineSearch}
+                  inheritViewBox
+                />
               </ListItemIcon>
               <ListItemText>Upload from web </ListItemText>
             </MenuItem>
@@ -75,11 +79,7 @@ const ImageButton = ({ inDrawer }: IProps) => {
               className="w-full hover:bg-primary-50/25"
             >
               <ListItemIcon>
-                <SvgIcon
-                  fontSize="small"
-                  component={AiOutlineSearch}
-                  inheritViewBox
-                />
+                <SvgIcon fontSize="small" component={BsUpload} inheritViewBox />
               </ListItemIcon>
               <ListItemText>
                 <label htmlFor="upload-image">Upload from system</label>
@@ -124,7 +124,7 @@ const ImageButton = ({ inDrawer }: IProps) => {
                 TouchRippleProps={{ className: "text-primary-main" }}
                 className="bg-transparent text-gray-500 hover:bg-primary-50/50 max-h-[40px]"
               >
-                <SvgIcon component={BsUpload} inheritViewBox />
+                <SvgIcon component={AiOutlineSearch} inheritViewBox />
                 <ListItemText
                   primaryTypographyProps={{
                     variant: "h6",
@@ -139,7 +139,8 @@ const ImageButton = ({ inDrawer }: IProps) => {
                 TouchRippleProps={{ className: "text-primary-main" }}
                 className="bg-transparent text-gray-500 hover:bg-primary-50/50 max-h-[40px]"
               >
-                <SvgIcon component={AiOutlineSearch} inheritViewBox />
+                <SvgIcon component={BsUpload} inheritViewBox />
+
                 <ListItemText
                   primaryTypographyProps={{
                     variant: "h6",

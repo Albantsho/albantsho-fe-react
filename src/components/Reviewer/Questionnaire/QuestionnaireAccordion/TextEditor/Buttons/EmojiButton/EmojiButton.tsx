@@ -19,14 +19,16 @@ const EmojiButton = () => {
 
   const handleOpenEmojiPicker = () =>
     setOpenEmojiPicker((prevState) => !prevState);
+
   const handleCloseEmojiPicker = () => setOpenEmojiPicker(false);
+
   const selectEmoji = (emojiData: EmojiClickData) => {
     Transforms.insertText(editor, emojiData.emoji);
     handleCloseEmojiPicker();
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full lg:w-auto">
       <IconButton
         className="w-10 h-10 hidden lg:flex"
         onClick={handleOpenEmojiPicker}
@@ -34,10 +36,10 @@ const EmojiButton = () => {
         <SvgIcon fontSize="small" component={BsEmojiSmile} inheritViewBox />
       </IconButton>
       <Button
-        className={`lg:hidden w-10 h-10 min-w-[40px]`}
+        className={`lg:hidden w-full h-10 min-w-[40px]`}
         onClick={handleOpenEmojiPicker}
       >
-        <SvgIcon fontSize="small" component={BsEmojiSmile} inheritViewBox />
+        <SvgIcon component={BsEmojiSmile} inheritViewBox />
       </Button>
       {openEmojiPicker && (
         <div className="w-20 z-10 absolute top-8 right-[116px] lg:right-24">

@@ -22,6 +22,7 @@ const useLinkButton = () => {
         !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "link",
     });
   };
+
   const wrapLink = (url: string) => {
     if (!editor.selection) return;
     if (isLinkActive()) {
@@ -45,7 +46,9 @@ const useLinkButton = () => {
   };
 
   const handleOpenAddLinkModal = () => setOpenAddLink(true);
+
   const handleCloseAddLinkModal = () => setOpenAddLink(false);
+
   const changeLinkValue = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setLinkValue(e.target.value);

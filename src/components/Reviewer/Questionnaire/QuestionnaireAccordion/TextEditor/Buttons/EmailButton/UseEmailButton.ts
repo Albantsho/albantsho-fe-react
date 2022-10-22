@@ -16,12 +16,14 @@ const useEmailButton = () => {
 
     return !!email;
   };
+
   const unwrapLink = () => {
     Transforms.unwrapNodes(editor, {
       match: (n) =>
         !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "email",
     });
   };
+
   const wrapLink = (emailUrl: string) => {
     if (!editor.selection) return;
     if (isLinkActive()) {
@@ -43,7 +45,9 @@ const useEmailButton = () => {
     }
   };
   const handleOpenAddEmailModal = () => setOpenAddEmail(true);
+
   const handleCloseAddEmailModal = () => setOpenAddEmail(false);
+
   const changeEmailValue = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setEmailValue(e.target.value);
@@ -52,6 +56,7 @@ const useEmailButton = () => {
     setEmailValue("");
     handleCloseAddEmailModal();
   };
+
   const unWrapEmailFunction = () => {
     wrapLink(emailValue);
     setEmailValue("");

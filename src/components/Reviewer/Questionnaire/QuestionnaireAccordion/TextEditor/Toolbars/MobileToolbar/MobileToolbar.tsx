@@ -53,7 +53,7 @@ const MobileToolbar = () => {
           <BlockButton format="bulletList" icon={MdFormatListBulleted} />
         </>
       )}
-      {width! > 805 && (
+      {width! > 810 && (
         <>
           <Divider className="flex h-full" orientation="vertical" />
           <HeadingButtonList />

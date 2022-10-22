@@ -7,6 +7,7 @@ const LIST_TYPES = ["numberList", "bulletList"];
 
 const useBlockButton = () => {
   const mainEditor = useSlate();
+
   const isBlockActive = (
     editor: IEditor,
     format: CustomElement["type"],
@@ -74,6 +75,7 @@ const useBlockButton = () => {
       Transforms.wrapNodes(editor, block);
     }
   };
+
   return { toggleBlock, isBlockActive };
 };
 

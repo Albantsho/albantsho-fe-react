@@ -15,11 +15,12 @@ import HeadingButtonList from "../../Buttons/HeadingButtonList/HeadingButtonList
 import ImageButton from "../../Buttons/ImageButtonList/ImageButtonList";
 import LinkButton from "../../Buttons/LinkButton/LinkButton";
 import MarkButton from "../../Buttons/MarkButton/MarkButton";
+import MoreFeaturesButton from "../../Buttons/MoreFeaturesButton/MoreFeaturesButton";
 import TableButton from "../../Buttons/TableButton/TableButton";
 
 const DesktopToolbar = () => {
   return (
-    <div className="lg:flex gap-2 h-8 mb-8 hidden sticky top-0">
+    <div className="lg:flex gap-[7px] h-8 mb-8 hidden sticky top-0">
       <HeadingButtonList />
       <Divider orientation="vertical" />
       <MarkButton format="bold" icon={BsTypeBold} />
@@ -38,6 +39,7 @@ const DesktopToolbar = () => {
       <TableButton />
       <MarkButton format="code" icon={BsCode} />
       <BlockButton format="blockquote" icon={AiFillExclamationCircle} />
+      <MoreFeaturesButton />
     </div>
   );
 };

@@ -21,7 +21,9 @@ const useTableComponent = () => {
         : null
     );
   };
+
   const handleClose = () => setContextMenu(null);
+
   const addRowHandler = () => {
     const [tableRow] = Editor.nodes<ITableRow>(editor, {
       match: (n) => Editor.isBlock(editor, n) && n.type === "tableRow",
@@ -45,6 +47,7 @@ const useTableComponent = () => {
 
     handleClose();
   };
+
   const addColumnHandler = () => {
     try {
       const [table, tablePath] = Editor.parent(editor, editor.selection!, {
@@ -74,12 +77,14 @@ const useTableComponent = () => {
     }
     handleClose();
   };
+
   const removeTableHandler = () => {
     Transforms.removeNodes(editor, {
       match: (n) => Editor.isBlock(editor, n) && n.type === "table",
     });
     handleClose();
   };
+
   const removeRowHandler = () => {
     try {
       const [table, tablePath] = Editor.parent(editor, editor.selection!, {
@@ -101,6 +106,7 @@ const useTableComponent = () => {
     }
     handleClose();
   };
+
   const removeColumnHandler = () => {
     try {
       const [table, tablePath] = Editor.parent(editor, editor.selection!, {

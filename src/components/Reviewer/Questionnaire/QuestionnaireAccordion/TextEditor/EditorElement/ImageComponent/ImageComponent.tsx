@@ -1,5 +1,7 @@
 import { IconButton, SvgIcon, Typography } from "@mui/material";
+import { IoIosResize } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { useResizeDetector } from "react-resize-detector";
 import { Transforms } from "slate";
 import {
   ReactEditor,
@@ -8,6 +10,7 @@ import {
   useSlate,
   type RenderElementProps,
 } from "slate-react";
+import useResize from "./useResize";
 
 const ImageComponent = ({
   attributes,
@@ -18,6 +21,8 @@ const ImageComponent = ({
   const path = ReactEditor.findPath(editor as any, element);
   const selected = useSelected();
   const focused = useFocused();
+  const { ref, width } = useResizeDetector();
+  const { size, onMouseDown } = useResize();
 
   const handleRemoveImage = () => {
     Transforms.removeNodes(editor, { at: path });
@@ -27,21 +32,41 @@ const ImageComponent = ({
     return (
       <div {...attributes}>
         <div style={{ opacity: 0 }}>{children}</div>
-        <div
-          contentEditable={false}
-          className={`relative  rounded-lg ${
-            selected && focused
-              ? "shadow-sm border border-gray-300 p-4 duration-200 ease-in"
-              : "none duration-200 ease-in"
-          }`}
-        >
-          <img style={{ resize: "both" }} alt="" src={element.url} />
-          <IconButton
-            onClick={handleRemoveImage}
-            className={`${selected ? "flex" : "hidden"} top-1 left-1 absolute`}
+        <div ref={ref}>
+          <div
+            contentEditable={false}
+            style={{
+              width: `${size.width}px`,
+              height: `${size.height}px`,
+              maxWidth: `${width}px`,
+            }}
+            className={`relative  rounded-lg  min-w-[80px] min-h-[80px] ${
+              selected && focused
+                ? "shadow-sm border border-gray-300 p-4 duration-200 ease-in"
+                : "none duration-200 ease-in"
+            }`}
           >
-            <SvgIcon component={RiDeleteBin6Line} />
-          </IconButton>
+            <img className="w-full h-full" alt="" src={element.url} />
+            <button
+              onMouseDown={onMouseDown}
+              className={`${
+                selected ? "flex" : "hidden"
+              } bottom-0 -right-2 absolute bg-transparent cursor-nwse-resize`}
+            >
+              <IoIosResize
+                style={{ rotate: "90deg", fontSize: "20px" }}
+                fontSize="16px"
+              />
+            </button>
+            <IconButton
+              onClick={handleRemoveImage}
+              className={`${
+                selected ? "flex" : "hidden"
+              } top-1 left-1 absolute`}
+            >
+              <SvgIcon fontSize="small" component={RiDeleteBin6Line} />
+            </IconButton>
+          </div>
         </div>
       </div>
     );

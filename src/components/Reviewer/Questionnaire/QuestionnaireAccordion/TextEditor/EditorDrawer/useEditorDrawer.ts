@@ -27,15 +27,22 @@ const useEditorDrawer = () => {
       handleCloseOpenDrawer();
       handleCloseHeadingList();
     };
+
   const handleOpenDrawer = () => setOpenDrawer(true);
+
   const handleCloseOpenDrawer = () => setOpenDrawer(false);
+
   const activeLinkChange = (event: React.SyntheticEvent, newValue: string) => {
     setActiveLinkIndex(newValue);
   };
+
   const handleOpenHeadingList = () =>
     setOpenHeadingList((prevState) => !prevState);
+
   const handleCloseHeadingList = () => setOpenHeadingList(false);
+
   const handleRedoButton = () => HistoryEditor.redo(editor);
+
   const handleUndoButton = () => HistoryEditor.undo(editor);
 
   return {

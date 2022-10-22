@@ -23,6 +23,7 @@ const useMarkButton = () => {
       Editor.addMark(editor, format, format === "color" ? color : true);
     }
   };
+
   return { isMarkActive, toggleMark };
 };
 

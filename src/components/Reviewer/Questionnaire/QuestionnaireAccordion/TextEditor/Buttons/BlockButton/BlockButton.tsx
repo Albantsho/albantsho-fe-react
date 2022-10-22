@@ -47,7 +47,7 @@ const BlockButton = ({
               isActive
                 ? "bg-primary-700 text-white hover:text-primary-700"
                 : "text-primary-700"
-            } lg:hidden w-10 h-10 min-w-[40px]`}
+            } lg:hidden w-full h-10 min-w-[40px]`}
             onClick={handleFormatElement}
           >
             <SvgIcon component={icon} inheritViewBox />

@@ -38,7 +38,7 @@ const TableButton = ({ inDrawer }: IProps) => {
             />
           </IconButton>
           <Button
-            className={`lg:hidden w-10 h-10 min-w-[40px]`}
+            className={`lg:hidden w-full h-10 min-w-[40px]`}
             onClick={handleOpenAddTableModal}
           >
             <SvgIcon

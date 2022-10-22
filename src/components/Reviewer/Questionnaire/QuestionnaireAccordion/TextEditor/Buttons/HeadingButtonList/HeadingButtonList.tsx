@@ -29,8 +29,7 @@ const HeadingButtonList = () => {
       <Button
         sx={{
           "&.MuiButtonBase-root": {
-            maxWidth: { xs: "130px", lg: "140px" },
-            width: "100%",
+            minWidth: { xs: "130px", lg: "140px" },
             paddingY: { xs: "4px", lg: "20px" },
             textAlign: "start",
             justifyContent: "space-between",
@@ -38,15 +37,11 @@ const HeadingButtonList = () => {
             fontWeight: "600",
           },
         }}
+        className="text-gray-500"
         ref={anchorRef}
         onClick={handleToggleListHeadingButton}
         endIcon={
-          <SvgIcon
-            fontSize="large"
-            color="primary"
-            component={BiChevronDown}
-            inheritViewBox
-          />
+          <SvgIcon fontSize="large" component={BiChevronDown} inheritViewBox />
         }
       >
         {listButtons[selectedIndex].option}
