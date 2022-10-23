@@ -15,7 +15,7 @@ const useLoginForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
   const { login } = useAuthApi();
   const { push } = useRouter();
-  const { loginUser } = useUserStore();
+  const { authenticationUser } = useUserStore();
   const {
     register,
     handleSubmit,
@@ -31,7 +31,9 @@ const useLoginForm = () => {
   const onSubmit = async (data: IAuthLogin) => {
     try {
       const res = await login(data);
-      await loginUser(res.data);
+      console.log(res);
+
+      await authenticationUser(res.data);
       await push(routes.home);
     } catch (error) {
       console.log(error);

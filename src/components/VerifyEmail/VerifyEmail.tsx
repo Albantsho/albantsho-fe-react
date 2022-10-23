@@ -1,15 +1,22 @@
 import { Typography } from "@mui/material";
-import Link from "next/link";
-import bell from "./assets/bell.png";
 import Btn from "@shared/Btn/Btn";
-import Image from "next/image";
-import routes from "routes/routes";
-import useVerifyEmail from "./useVerifyEmail";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import Image from "next/image";
+import Link from "next/link";
+import routes from "routes/routes";
+import bell from "./assets/bell.png";
+import CutDownTimer from "./CutDownTimer/CutDownTimer";
+import useVerifyEmail from "./useVerifyEmail";
 
 const VerifyEmail = () => {
-  const { handleChange, onSubmit, inputs, formValues, handleAutoFocus } =
-    useVerifyEmail();
+  const {
+    handleChange,
+    onSubmit,
+    inputs,
+    formValues,
+    handleAutoFocus,
+    targetTime,
+  } = useVerifyEmail();
 
   return (
     <div className="overflow-hidden">
@@ -64,15 +71,7 @@ const VerifyEmail = () => {
             </div>
 
             <div className="mt-3 flex flex-wrap justify-between items-center">
-              <Typography className=" text-warning-500 font-normal mb-6 futura">
-                20:00
-              </Typography>
-
-              <Typography className=" mb-6 futura">
-                <Link href="/" passHref>
-                  <a className="text-[#5D5FEF]">Resend code</a>
-                </Link>
-              </Typography>
+              <CutDownTimer targetData={targetTime} />
             </div>
 
             <div className="justify-center  flex">

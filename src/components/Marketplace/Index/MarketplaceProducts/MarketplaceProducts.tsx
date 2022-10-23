@@ -18,7 +18,7 @@ const MarketplaceProducts = () => {
             data-aos="fade-up"
             key={product.id}
             script={{
-              productId: product.script_id,
+              productId: product.id,
               genres: [product.script_format],
               image: product.script_image,
               rate: 4,

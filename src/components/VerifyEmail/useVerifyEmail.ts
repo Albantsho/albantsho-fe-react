@@ -1,12 +1,13 @@
 import useAuthApi from "apis/Auth.api";
 import { useRouter } from "next/router";
-import React, { useState, useRef, FormEvent } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 import routes from "routes/routes";
 
 const useVerifyEmail = () => {
   const { push } = useRouter();
   const { emailVerify } = useAuthApi();
   const inputs = useRef<HTMLInputElement[]>([]);
+  const [resendCode, setResendCode] = useState(false);
   const [formValues, setFormValues] = useState<{ [key: number]: string }>({
     0: "",
     1: "",
@@ -15,6 +16,7 @@ const useVerifyEmail = () => {
     4: "",
     5: "",
   });
+  let targetTime = 120000000 + new Date().getTime();
 
   const handleChange =
     (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,12 +48,19 @@ const useVerifyEmail = () => {
     }
   };
 
+  const handleResendCode = () => {
+    targetTime = 120000000 + new Date().getTime();
+    setResendCode(true);
+  };
+
   return {
     handleChange,
     onSubmit,
     inputs,
     formValues,
     handleAutoFocus,
+    handleResendCode,
+    targetTime,
   };
 };
 

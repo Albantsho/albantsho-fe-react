@@ -1,13 +1,15 @@
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import { IProduct } from "interfaces/product";
 import { Dispatch, SetStateAction } from "react";
 
 interface IProps {
   setOpenBidSuccessful: Dispatch<SetStateAction<boolean>>;
+  script: IProduct;
 }
 
-const PlaceBid = ({ setOpenBidSuccessful }: IProps) => {
+const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
   const handleOpenBidSuccessful = () => setOpenBidSuccessful(true);
   return (
     <div className="flex gap-6 mt-4 rounded-md py-6 px-5 sm:py-12 sm:px-6 lg:px-8 xl:px-12 xl:py-8 sm:mt-10 md:gap-6 flex-col bg-tinted-50/60 flex-1 w-full">
@@ -18,7 +20,7 @@ const PlaceBid = ({ setOpenBidSuccessful }: IProps) => {
             variant="h4"
             className="text-primary-main leading-normal font-semibold"
           >
-            $1,000
+            ${script.script_price}
           </Typography>
           <span className="text-neutral-500">(1.237 ETH)</span>
         </div>

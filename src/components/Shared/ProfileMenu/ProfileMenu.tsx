@@ -8,27 +8,22 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { AiFillCaretDown } from "react-icons/ai";
-import { useState } from "react";
 import routes from "routes/routes";
+import useProfileMenu from "./useProfileMenu";
 
 interface IProps {
   isMobile?: boolean;
 }
 
 const ProfileMenu = ({ isMobile }: IProps) => {
-  const [openProfileMenu, setOpenProfileMenu] = useState<null | HTMLElement>(
-    null
-  );
-  const openProfile = Boolean(openProfileMenu);
+  const {
+    handleCloseProfileMenu,
+    handleOpenMenu,
+    openProfile,
+    openProfileMenu,
+    signOutUser,
+  } = useProfileMenu();
   const { push } = useRouter();
-
-  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setOpenProfileMenu(event.currentTarget);
-  };
-
-  const handleCloseProfileMenu = () => {
-    setOpenProfileMenu(null);
-  };
 
   return (
     <>
@@ -133,9 +128,11 @@ const ProfileMenu = ({ isMobile }: IProps) => {
             Help
           </ListItemText>
         </MenuItem>
-        <MenuItem 
-         TouchRippleProps={{ className: "text-error-700" }}
-        className="px-6 py-4 hover:bg-error-50">
+        <MenuItem
+          onClick={signOutUser}
+          TouchRippleProps={{ className: "text-error-700" }}
+          className="px-6 py-4 hover:bg-error-50"
+        >
           <ListItemText
             primaryTypographyProps={{
               className: "text-error-700",

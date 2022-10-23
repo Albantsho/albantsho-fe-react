@@ -6,15 +6,20 @@ import { useState } from "react";
 import BidSuccessfulModal from "../BidSuccessfulModal/BidSuccessfulModal";
 import PlaceBid from "./PlaceBid/PlaceBid";
 import beauty from "@assets/images/beauty.jpg";
+import { IProduct } from "interfaces/product";
 
-const ScriptInfo = () => {
+interface IProps {
+  script: IProduct;
+}
+
+const ScriptInfo = ({ script }: IProps) => {
   const [openBidSuccessful, setOpenBidSuccessful] = useState(false);
 
   return (
     <div className="flex flex-col px-6 py-6 sm:px-11 gap-10 md:flex-row max-w-screen-2xl mx-auto">
       <div className="md:w-1/2 lg:w-2/5 flex-shrink-0">
         <Image
-          src={beauty}
+          src={script.script_image}
           className="rounded-xl"
           layout="responsive"
           alt="beauty"
@@ -23,7 +28,7 @@ const ScriptInfo = () => {
       <div className="flex-shrink w-full">
         <div className="flex mb-3 md:mb-5 items-center flex-wrap gap-6 sm:gap-10 md:gap-14">
           <Chip
-            label="Feature film"
+            label={script.script_format}
             className="bg-tinted-50/60 text-neutral-800"
             sx={{ borderRadius: 1 }}
           />
@@ -35,7 +40,7 @@ const ScriptInfo = () => {
             color="primary.700"
             className="font-medium leading-normal futura"
           >
-            The Long Man Of Long Beach
+            {script.title}
           </Typography>
           <Icon fontSize="large">
             <ReviewedIcon />
@@ -43,9 +48,9 @@ const ScriptInfo = () => {
         </div>
 
         <Typography variant="body1" color="dark.400">
-          Story about a man who lived on long beach
+          {script.motivation}
         </Typography>
-        <PlaceBid setOpenBidSuccessful={setOpenBidSuccessful} />
+        <PlaceBid script={script} setOpenBidSuccessful={setOpenBidSuccessful} />
         <BidSuccessfulModal
           openBidSuccessful={openBidSuccessful}
           setOpenBidSuccessful={setOpenBidSuccessful}

@@ -4,9 +4,14 @@ import {
   AccordionSummary,
   Typography,
 } from "@mui/material";
+import { IProduct } from "interfaces/product";
 import { BiChevronDown } from "react-icons/bi";
 
-const ScriptMainDetails = () => {
+interface IProps {
+  script: IProduct | undefined;
+}
+
+const ScriptMainDetails = ({ script }: IProps) => {
   return (
     <div className="px-5 sm:px-10 py-10  md:max-w-3xl mx-auto max-w-screen-md">
       <Accordion

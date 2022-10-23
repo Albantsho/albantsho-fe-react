@@ -11,6 +11,8 @@ const useMarketplaceProducts = () => {
     async function getScriptsFunc() {
       const res = await getScripts();
       await setProducts(res.data);
+      await console.log(res.data);
+
       await setLoading(false);
     }
     getScriptsFunc();

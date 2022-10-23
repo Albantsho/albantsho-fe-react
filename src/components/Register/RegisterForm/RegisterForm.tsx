@@ -1,28 +1,26 @@
+import EmailIcon from "@assets/icons/email.svg";
+import NotShowIcon from "@assets/icons/not-show-password.svg";
+import PasswordIcon from "@assets/icons/password.svg";
+import ShowIcon from "@assets/icons/show-password.svg";
 import {
-  InputAdornment,
-  SvgIcon,
-  Typography,
   Checkbox,
   FormControlLabel,
   FormGroup,
-  MenuItem,
   IconButton,
+  InputAdornment,
+  MenuItem,
+  SvgIcon,
+  Typography,
 } from "@mui/material";
-import CustomInput from "@shared/CustomInput/CustomInput";
-import UserIcon from "./assets/user.svg";
-import EmailIcon from "@assets/icons/email.svg";
-import PasswordIcon from "@assets/icons/password.svg";
-import ShowIcon from "@assets/icons/show-password.svg";
-import NotShowIcon from "@assets/icons/not-show-password.svg";
 import Btn from "@shared/Btn/Btn";
-import Link from "next/link";
-import routes from "routes/routes";
-import useRegisterForm from "./useRegisterForm";
-import { Controller } from "react-hook-form";
+import CustomInput from "@shared/CustomInput/CustomInput";
 import countryList from "config/country-list.json";
-import LoadingButton from "@mui/lab/LoadingButton";
 import Image from "next/image";
-
+import Link from "next/link";
+import { Controller } from "react-hook-form";
+import routes from "routes/routes";
+import UserIcon from "./assets/user.svg";
+import useRegisterForm from "./useRegisterForm";
 const RegisterForm = () => {
   const {
     register,

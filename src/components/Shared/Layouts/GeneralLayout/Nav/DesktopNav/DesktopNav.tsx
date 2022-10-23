@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const DesktopNav = ({ links, isTransparent }: IProps) => {
-  const { user } = useUserStore();
+  // const { user } = useUserStore();
 
   return (
     <div className="lg:flex items-center w-full hidden">
@@ -28,15 +28,15 @@ const DesktopNav = ({ links, isTransparent }: IProps) => {
           </Link>
         ))}
       </div>
-      {user.active ? (
+      {/* {user.active ? (
         <ProfileMenu />
-      ) : (
-        <Link href={`${routes.signin}`} passHref>
-          <Btn size="large" className="py-4 px-7">
-            Sign In
-          </Btn>
-        </Link>
-      )}
+      ) : ( */}
+      <Link href={`${routes.signin}`} passHref>
+        <Btn size="large" className="py-4 px-7">
+          Sign In
+        </Btn>
+      </Link>
+      {/* )} */}
     </div>
   );
 };
