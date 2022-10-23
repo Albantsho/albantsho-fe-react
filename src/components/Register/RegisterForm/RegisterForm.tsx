@@ -21,6 +21,7 @@ import useRegisterForm from "./useRegisterForm";
 import { Controller } from "react-hook-form";
 import countryList from "config/country-list.json";
 import Image from "next/image";
+import CongratulationModal from "../CongratulationModal/CongratulationModal";
 
 const RegisterForm = () => {
   const {
@@ -34,6 +35,9 @@ const RegisterForm = () => {
     typePasswordInput,
     handleTypeInputPassword,
     errors,
+    openCongratulation,
+    handleCloseCongratulation,
+    handleGoToHomePage,
   } = useRegisterForm();
 
   return (
@@ -378,6 +382,11 @@ const RegisterForm = () => {
           </Typography>
         </div>
       </form>
+      <CongratulationModal
+        openCongratulation={openCongratulation}
+        handleCloseCongratulation={handleCloseCongratulation}
+        handleGoToHomePage={handleGoToHomePage}
+      />
     </div>
   );
 };
