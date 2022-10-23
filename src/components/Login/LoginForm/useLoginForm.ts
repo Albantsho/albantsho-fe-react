@@ -3,6 +3,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./validation/login.validation";
 import useAuthApi from "apis/Auth.api";
 import { useState } from "react";
+import useUserStore from "app/user.store";
+import { useRouter } from "next/router";
+import routes from "routes/routes";
 interface IAuthLogin {
   email: string;
   password: string;
@@ -11,6 +14,8 @@ interface IAuthLogin {
 const useLoginForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
   const { login } = useAuthApi();
+  const { push } = useRouter();
+  const { loginUser } = useUserStore();
   const {
     register,
     handleSubmit,
@@ -26,7 +31,10 @@ const useLoginForm = () => {
   const onSubmit = async (data: IAuthLogin) => {
     try {
       const res = await login(data);
-      console.log({ res });
+      console.log(res);
+
+      await loginUser(res.data);
+      await push(routes.home);
     } catch (error) {
       console.log(error);
     }

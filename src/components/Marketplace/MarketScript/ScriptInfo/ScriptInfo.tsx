@@ -1,14 +1,15 @@
-import { Chip, Icon, Typography } from "@mui/material";
 import ReviewedIcon from "@assets/icons/reviewed.svg";
-import Image from "next/image";
-import beauty from "@assets/images/beauty.jpg";
-import { useState } from "react";
-import PlaceBid from "./PlaceBid/PlaceBid";
-import BidSuccessfulModal from "../BidSuccessfulModal/BidSuccessfulModal";
+import { Chip, Icon, Typography } from "@mui/material";
 import CustomRating from "@shared/CustomRating/CustomRating";
+import Image from "next/image";
+import { useState } from "react";
+import BidSuccessfulModal from "../BidSuccessfulModal/BidSuccessfulModal";
+import PlaceBid from "./PlaceBid/PlaceBid";
+import beauty from "@assets/images/beauty.jpg";
 
 const ScriptInfo = () => {
   const [openBidSuccessful, setOpenBidSuccessful] = useState(false);
+
   return (
     <div className="flex flex-col px-6 py-6 sm:px-11 gap-10 md:flex-row max-w-screen-2xl mx-auto">
       <div className="md:w-1/2 lg:w-2/5 flex-shrink-0">

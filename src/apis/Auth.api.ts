@@ -1,3 +1,4 @@
+import useUserStore from "app/user.store";
 import api from "./configs/axios.config";
 interface IRegisterPayload {
   full_name: string;
@@ -15,6 +16,10 @@ interface ILoginPayload {
 }
 
 const useAuthApi = (controller?: AbortController) => {
+  const {
+    user: { token },
+  } = useUserStore();
+
   return {
     async register(payload: IRegisterPayload) {
       const res = await api.post("/authentication/register", payload, {
@@ -36,7 +41,7 @@ const useAuthApi = (controller?: AbortController) => {
       const res = await api.post("/profile/password-reset", payload, {
         signal: controller?.signal,
         headers: {
-          Authorization: `Bearer ${""}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -55,7 +60,7 @@ const useAuthApi = (controller?: AbortController) => {
       const res = await api.post("/verification", payload, {
         signal: controller?.signal,
         headers: {
-          Authorization: `Bearer ${""}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 

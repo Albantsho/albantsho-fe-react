@@ -10,6 +10,8 @@ import {
   type CardProps,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import Link from "next/link";
+import routes from "routes/routes";
 import ReviewedIcon from "./assets/reviewed.svg";
 
 interface IScript {
@@ -20,6 +22,7 @@ interface IScript {
   image: string;
   reviewed?: boolean;
   price?: number;
+  productId: string;
 }
 
 interface IProps extends CardProps {
@@ -38,12 +41,17 @@ const ScriptCard = (props: IProps) => {
       }}
       {...cardProps}
     >
-      <CardMedia
-        component="img"
-        className="object-cover object-left min-h-[250px]"
-        src={script.image}
-        loading="lazy"
-      />
+      <Link href={routes.marketplaceOneScript(script.productId)} passHref>
+        <a>
+          <CardMedia
+            component="img"
+            className="object-cover object-left w-full max-h-[250px]"
+            src={script.image}
+            loading="lazy"
+          />
+        </a>
+      </Link>
+
       <CardContent className="py-6">
         <div className="flex flex-wrap gap-2">
           {script.genres.map((genre, i) => (

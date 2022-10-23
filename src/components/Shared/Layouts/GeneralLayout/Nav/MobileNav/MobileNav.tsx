@@ -9,6 +9,8 @@ import {
   SvgIcon,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
+import useUserStore from "app/user.store";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
@@ -21,6 +23,7 @@ interface IProps {
 
 const MobileNav = ({ links, isTransparent }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNav();
+  const { user } = useUserStore();
 
   return (
     <div className="flex items-center lg:hidden">
@@ -65,11 +68,15 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
               </Link>
             </ListItem>
           ))}
-          <div className="px-5 py-2">
-            <Link href={`${routes.signin}`} passHref>
-              <Btn className="px-6 py-3">Sign In</Btn>
-            </Link>
-          </div>
+          {user.active ? (
+            <ProfileMenu />
+          ) : (
+            <div className="px-5 py-2">
+              <Link href={`${routes.signin}`} passHref>
+                <Btn className="px-6 py-3">Sign In</Btn>
+              </Link>
+            </div>
+          )}
         </List>
       </Drawer>
     </div>

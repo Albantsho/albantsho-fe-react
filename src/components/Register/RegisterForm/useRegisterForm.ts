@@ -1,7 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useAuthApi from "apis/Auth.api";
+import useUserStore from "app/user.store";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import routes from "routes/routes";
 import { registerSchema } from "./validation/register.validation";
 
 interface IRegisterFormValues {
@@ -16,6 +19,8 @@ interface IRegisterFormValues {
 
 const useRegisterForm = () => {
   const { register: registerApi } = useAuthApi();
+  const { push } = useRouter();
+  const { registerUser } = useUserStore();
   const {
     register,
     watch,
@@ -42,6 +47,8 @@ const useRegisterForm = () => {
   const onSubmit = async (data: IRegisterFormValues) => {
     try {
       const res = await registerApi(data);
+      await registerUser(res.data);
+      // await push(routes.verifyEmail);
     } catch (error) {
       console.log(error);
     }

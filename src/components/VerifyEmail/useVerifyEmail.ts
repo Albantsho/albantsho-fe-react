@@ -1,7 +1,10 @@
 import useAuthApi from "apis/Auth.api";
+import { useRouter } from "next/router";
 import React, { useState, useRef, FormEvent } from "react";
+import routes from "routes/routes";
 
 const useVerifyEmail = () => {
+  const { push } = useRouter();
   const { emailVerify } = useAuthApi();
   const inputs = useRef<HTMLInputElement[]>([]);
   const [formValues, setFormValues] = useState<{ [key: number]: string }>({
@@ -41,6 +44,7 @@ const useVerifyEmail = () => {
         "🚀 ~ file: useVerifyEmail.ts ~ line 40 ~ onSubmit ~ res",
         res
       );
+      await push(routes.home);
     } catch (error) {
       console.log(error);
     }

@@ -1,21 +1,17 @@
-import { useEffect, useRef } from "react";
+import useUserStore from "app/user.store";
 import api from "./configs/axios.config";
 
 const useMarketplaceApi = (controller?: AbortController) => {
-  const token = useRef<string>("");
-
-  useEffect(() => {
-    let tk = localStorage.getItem("USER_TOKEN");
-    if (tk === null) tk = "";
-    token.current = tk;
-  }, []);
+  const {
+    user: { token },
+  } = useUserStore();
 
   return {
     async getScripts() {
       const res = await api.get("/market", {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -26,7 +22,7 @@ const useMarketplaceApi = (controller?: AbortController) => {
       const res = await api.get("/market/user/all", {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -37,7 +33,7 @@ const useMarketplaceApi = (controller?: AbortController) => {
       const res = await api.get(`/market/${id}`, {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -48,7 +44,7 @@ const useMarketplaceApi = (controller?: AbortController) => {
       const res = await api.post(`/market/${id}`, payload, {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${token}`,
         },
       });
 
