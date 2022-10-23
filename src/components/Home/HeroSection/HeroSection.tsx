@@ -81,6 +81,7 @@ const HeroSection = () => {
                 boxShadow: "0px 35px 60px 0px #0000004D",
               }}
               script={{
+                productId: "1",
                 genres: ["Feature film"],
                 title: "Black Onion",
                 desc: "One platform sets out to enable better stories one script at a time.",

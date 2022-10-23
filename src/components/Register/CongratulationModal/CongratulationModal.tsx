@@ -1,6 +1,5 @@
 import { IconButton, Modal, SvgIcon, Typography, Zoom } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
 import Celebration from "./assets/celebration.svg";
 

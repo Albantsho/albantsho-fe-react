@@ -10,12 +10,16 @@ const useResize = () => {
   const [resizing, setResizing] = useState(false);
 
   const onMouseDown = () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
     setResizing(true);
   };
 
   const onMouseUp = () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     document.removeEventListener("mousemove", onMouseMove);
     document.removeEventListener("mouseup", onMouseUp);
     setResizing(false);
