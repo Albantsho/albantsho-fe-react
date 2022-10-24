@@ -3,6 +3,7 @@ const routes = {
   aboutUs: "/about-us",
   abstract: "/abstract",
   checkEmail: "/check-email",
+  welcome: "/welcome",
   education: "/education",
   FAQs: "/FAQs",
   forgetPassword: "/forget-password",

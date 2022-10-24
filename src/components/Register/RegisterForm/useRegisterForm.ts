@@ -19,8 +19,7 @@ interface IRegisterFormValues {
 
 const useRegisterForm = () => {
   const { register: registerApi } = useAuthApi();
-  const [openCongratulation, setOpenCongratulation] = useState(false);
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const { registerUser } = useUserStore();
   const {
     register,
@@ -50,7 +49,7 @@ const useRegisterForm = () => {
       const res = await registerApi(data);
       await registerUser(res.data);
       // await push(routes.verifyEmail);
-      await setOpenCongratulation(true);
+      await replace(routes.welcome);
     } catch (error) {
       console.log(error);
     }
@@ -60,15 +59,6 @@ const useRegisterForm = () => {
   };
   const handleTypeInputPassword = () => {
     setTypePasswordInput((prevState) => !prevState);
-  };
-
-  const handleCloseCongratulation = () => {
-    setOpenCongratulation(false);
-    push(routes.blog);
-  };
-  const handleGoToHomePage = () => {
-    setOpenCongratulation(false);
-    push(routes.home);
   };
 
   return {
@@ -82,9 +72,6 @@ const useRegisterForm = () => {
     typePasswordInput,
     handleTypeInputPassword,
     errors,
-    handleCloseCongratulation,
-    openCongratulation,
-    handleGoToHomePage,
   };
 };
 
