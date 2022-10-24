@@ -32,34 +32,41 @@ const RateToScript = dynamic(
 );
 
 const ScriptInfoPage = () => {
-  const [script, setScript] = useState<IProduct>();
-  const [loading, setLoading] = useState(true);
-  const { getScript } = useMarketplaceApi();
-  const { query } = useRouter();
+  // const [script, setScript] = useState<IProduct>();
+  // const [loading, setLoading] = useState(true);
+  // const { getScript } = useMarketplaceApi();
+  // const { query } = useRouter();
 
-  useEffect(() => {
-    async function getScriptsDate() {
-      try {
-        if (query.script_id === "string") {
-          const res = await getScript(query.script_id);
-          await setScript(res.data);
-          await setLoading(false);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getScriptsDate();
-  }, []);
+  // useEffect(() => {
+  //   async function getScriptsDate() {
+  //     try {
+  //       if (query.script_id === "string") {
+  //         const res = await getScript(query.script_id);
+  //         console.log(
+  //           "🚀 ~ file: [script-id].tsx ~ line 45 ~ getScriptsDate ~ res",
+  //           res
+  //         );
+  //         await setScript(res.data);
+  //         await console.log(script);
+  //         await setLoading(false);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   getScriptsDate();
+  // }, []);
+
   return (
     <>
       <Head>
         <title>Albantsho || Marketplace Info</title>
       </Head>
       <Nav color="inherit" position="static" />
-      {!loading && script ? (
+      <ScriptInfo />
+      {/* {!loading && script ? (
         <>
-          <ScriptInfo script={script} />
+          <ScriptInfo />
           <Suspense fallback={null}>
             <div className="flex flex-col md:flex-row mt-7 mb-4 py-6 gap-10 lg:gap-7 mx-auto px-5 sm:px-10 max-w-screen-2xl">
               <MarketScriptChips script={script} />
@@ -72,7 +79,7 @@ const ScriptInfoPage = () => {
         </>
       ) : (
         <h2>loading</h2>
-      )}
+      )} */}
     </>
   );
 };

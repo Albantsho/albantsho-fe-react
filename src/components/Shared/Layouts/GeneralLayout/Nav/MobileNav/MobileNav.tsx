@@ -23,7 +23,8 @@ interface IProps {
 
 const MobileNav = ({ links, isTransparent }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNav();
-  // const { user } = useUserStore();
+  const user = useUserStore((state) => state.user);
+  // console.log("🚀 ~ file: MobileNav.tsx ~ line 27 ~ MobileNav ~ user", user);
 
   return (
     <div className="flex items-center lg:hidden">
@@ -70,13 +71,13 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
           ))}
           {/* {user.active ? (
             <ProfileMenu />
-          ) : ( */}
-          <div className="px-5 py-2">
-            <Link href={`${routes.signin}`} passHref>
-              <Btn className="px-6 py-3">Sign In</Btn>
-            </Link>
-          </div>
-          {/* )} */}
+          ) : (
+            <div className="px-5 py-2">
+              <Link href={`${routes.signin}`} passHref>
+                <Btn className="px-6 py-3">Sign In</Btn>
+              </Link>
+            </div>
+          )} */}
         </List>
       </Drawer>
     </div>
