@@ -1,18 +1,21 @@
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import projects from "../assets/projects.png";
-import reviews from "../assets/reviews.png";
-import listings from "../assets/listings.png";
-import scripts from "../assets/scripts.png";
-import Image from "next/image";
-import { useState } from "react";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  SvgIcon,
+} from "@mui/material";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import routes from "routes/routes";
+import Comment from "../assets/comment.svg";
+import Document from "../assets/document.svg";
+import Export from "../assets/export.svg";
+import Scenes from "../assets/scenes.svg";
 
 const routesArray = [
-  { route: routes.projectsDashboard, title: "Projects", icon: projects },
-  { route: routes.listingsDashboard, title: "Listings", icon: listings },
-  { route: routes.reviewsDashboard, title: "Reviews", icon: reviews },
-  { route: routes.scriptsDashboard, title: "Scripts", icon: scripts },
+  { route: routes.scenesScript, title: "Scenes", icon: Scenes },
+  { route: routes.commentScript, title: "Comment", icon: Comment },
+  { route: routes.exportScript, title: "Export", icon: Export },
+  { route: routes.documentScript, title: "Document", icon: Document },
 ];
 
 const ScriptSidebarOnMobile = () => {
@@ -55,7 +58,7 @@ const ScriptSidebarOnMobile = () => {
                 route === item.route && " bg-primary-700"
               } sm:max-w-full`}
               label={item.title}
-              icon={<Image loading="lazy" src={item.icon} alt={item.title} />}
+              icon={<SvgIcon component={item.icon} inheritViewBox />}
             />
           );
         })}

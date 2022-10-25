@@ -1,4 +1,5 @@
 import {
+  Divider,
   Drawer,
   IconButton,
   List,
@@ -6,39 +7,48 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  SvgIcon,
 } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
-import projects from "../assets/projects.png";
-import reviews from "../assets/reviews.png";
-import listings from "../assets/listings.png";
-import scripts from "../assets/scripts.png";
-import Image from "next/image";
-import { FaFacebookF } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { AiFillInstagram } from "react-icons/ai";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { AiFillInstagram } from "react-icons/ai";
+import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import routes from "routes/routes";
+import Comment from "../assets/comment.svg";
+import Document from "../assets/document.svg";
+import Export from "../assets/export.svg";
+import Scenes from "../assets/scenes.svg";
 
-const listRoutes = [
-  { route: routes.projectsDashboard, title: "Projects", icon: projects },
-  { route: routes.listingsDashboard, title: "Listings", icon: listings },
-  { route: routes.reviewsDashboard, title: "Reviews", icon: reviews },
-  { route: routes.scriptsDashboard, title: "Scripts", icon: scripts },
+const listRoutes1 = [
+  { route: routes.scenesScript, title: "Scenes", icon: Scenes, value: 1 },
+  { route: routes.commentScript, title: "Comment", icon: Comment, value: 2 },
+];
+const listRoutes2 = [
+  { route: routes.exportScript, title: "Export", icon: Export, value: 3 },
+  { route: routes.documentScript, title: "Document", icon: Document, value: 4 },
 ];
 
 const drawerWidth = 340;
 
 const ScriptSidebarOnDesktop = () => {
+  const [openCompleteDrawer, setOpenCompleteDrawer] = useState(true);
+  const [openInformationTab, setOpenInformationTab] = useState(0);
   const { route } = useRouter();
 
+  const handleOpenCompleteDrawer = (value: number) => () => {
+    setOpenCompleteDrawer((prevState) => !prevState);
+    setOpenInformationTab(value);
+  };
+
   return (
-    <div className="min-h-screen relative bg-primary-900">
+    <div className="min-h-screen relative bg-primary-900 flex">
       <Drawer
         sx={{
-          width: drawerWidth,
+          width: openCompleteDrawer ? drawerWidth : 100,
           "& .MuiDrawer-paper": {
-            width: drawerWidth,
+            width: openCompleteDrawer ? drawerWidth : 100,
             boxSizing: "border-box",
             backgroundColor: "#573195",
             padding: "38px 20px",
@@ -58,7 +68,7 @@ const ScriptSidebarOnDesktop = () => {
         <Logo color="primary" className="text-white ml-3 mb-5" />
 
         <List className="space-y-4 h-full">
-          {listRoutes.map((item) => (
+          {listRoutes1.map((item) => (
             <ListItem
               disablePadding
               key={item.title}
@@ -74,6 +84,7 @@ const ScriptSidebarOnDesktop = () => {
             >
               <Link className="text-white" href={`${item.route}`} passHref>
                 <ListItemButton
+                  onClick={handleOpenCompleteDrawer(item.value)}
                   sx={{
                     "&:hover": {
                       backgroundColor: "#6842A5",
@@ -85,15 +96,71 @@ const ScriptSidebarOnDesktop = () => {
                   }}
                 >
                   <ListItemIcon>
-                    <Image loading="lazy" src={item.icon} alt={item.title} />
+                    <SvgIcon component={item.icon} inheritViewBox />
                   </ListItemIcon>
-                  <ListItemText primary={item.title} />
+                  {openCompleteDrawer && <ListItemText primary={item.title} />}
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          ))}
+          <Divider className="my-10" />
+          {listRoutes2.map((item) => (
+            <ListItem
+              disablePadding
+              key={item.title}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#6842A5",
+                },
+              }}
+              className={`${
+                item.route === route &&
+                "border-l-4 border-secondary-500 bg-primary-700"
+              } rounded-sm`}
+            >
+              <Link className="text-white" href={`${item.route}`} passHref>
+                <ListItemButton
+                  onClick={handleOpenCompleteDrawer(item.value)}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#6842A5",
+                    },
+                    "&.MuiButtonBase-root": {
+                      px: 4,
+                      py: 2,
+                    },
+                  }}
+                >
+                  <ListItemIcon>
+                    <SvgIcon component={item.icon} inheritViewBox />
+                  </ListItemIcon>
+                  {openCompleteDrawer && <ListItemText primary={item.title} />}
                 </ListItemButton>
               </Link>
             </ListItem>
           ))}
         </List>
       </Drawer>
+      {openInformationTab === 1 && (
+        <div className="">
+          <h1>Scense</h1>
+        </div>
+      )}
+      {openInformationTab === 2 && (
+        <div>
+          <h1>comment</h1>
+        </div>
+      )}
+      {openInformationTab === 3 && (
+        <div>
+          <h1>export</h1>
+        </div>
+      )}
+      {openInformationTab === 4 && (
+        <div>
+          <h1>document</h1>
+        </div>
+      )}
       <div className="fixed text-white hidden lg:flex gap-6  justify-start bottom-8 left-[90px]">
         <IconButton
           href="https://www.twitter.com/albantsho"

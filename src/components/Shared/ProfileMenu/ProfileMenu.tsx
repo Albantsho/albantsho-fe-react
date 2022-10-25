@@ -19,7 +19,7 @@ interface IProps {
 
 const ProfileMenu = ({ isMobile }: IProps) => {
   const useUser = () => {
-    const { user } = useUserStore(
+    const { user, logOutUser } = useUserStore(
       (store) => ({
         user: store.user,
         logOutUser: store.logOutUser,

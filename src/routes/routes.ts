@@ -42,6 +42,10 @@ const routes = {
   transactionHistoryWallet: "/wallet/transaction-history",
   withdrawSuccessfulWallet: "/wallet/withdraw-successful",
   depositWallet: "/wallet/deposit",
+  scenesScript: "/script/scenes",
+  commentScript: "/script/comment",
+  exportScript: "/script/export",
+  documentScript: "/script/document",
 };
 
 export default routes;
