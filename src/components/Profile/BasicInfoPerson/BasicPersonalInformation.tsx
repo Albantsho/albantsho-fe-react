@@ -13,9 +13,12 @@ import CustomInput from "@shared/CustomInput/CustomInput";
 import camera from "./assets/camera.svg";
 import pencil from "../assets/pencil.svg";
 import { useState } from "react";
+import useUserStore from "app/user.store";
 
 const BasicPersonalInformation = () => {
   const [availableChangeValue, setAvailableChangeValue] = useState(true);
+  const user = useUserStore((state) => state.user);
+
   return (
     <div>
       <Typography variant="h4" className="futura font-medium text-primary-700">
@@ -52,7 +55,7 @@ const BasicPersonalInformation = () => {
               fullWidth
               id="first-name"
               variant="outlined"
-              defaultValue="Jane"
+              defaultValue={user.full_name.split(" ")[0]}
               size="small"
               InputProps={{
                 endAdornment: (
@@ -90,7 +93,7 @@ const BasicPersonalInformation = () => {
               fullWidth
               id="last-name"
               variant="outlined"
-              defaultValue="Mawe"
+              defaultValue={user.full_name.split(" ")[1]}
               size="small"
               InputProps={{
                 endAdornment: (
@@ -126,7 +129,7 @@ const BasicPersonalInformation = () => {
               sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="email"
-              defaultValue="JaneMawe@dummymail.com"
+              defaultValue={user.email}
               variant="outlined"
               size="small"
             />

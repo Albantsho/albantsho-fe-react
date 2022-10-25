@@ -12,25 +12,12 @@ const MarketplaceProducts = () => {
         sm: "repeat(auto-fill, minmax(300px, auto))",
       }}
     >
-      {!loading ? (
-        products.map((product) => (
-          <ScriptCard
-            data-aos="fade-up"
-            key={product.id}
-            script={{
-              productId: product.id,
-              genres: [product.script_format],
-              image: product.script_image,
-              rate: 4,
-              title: product.title,
-              price: product.script_price,
-              reviewed: product.user !== null ? true : false,
-              desc: product.story_world,
-            }}
-          />
-        ))
+      {loading && products.length === 0 ? (
+        <h1>loading</h1>
       ) : (
-        <h2>loading</h2>
+        products.map((product) => (
+          <ScriptCard data-aos="fade-up" key={product.id} script={product} />
+        ))
       )}
     </Box>
   );

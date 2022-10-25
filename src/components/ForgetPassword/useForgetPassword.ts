@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import AuthApi from "apis/Auth.api";
+import useAuthApi from "apis/Auth.api";
 import { useForm } from "react-hook-form";
 import { forgetPasswordSchema } from "./validation/forgetPassword.validation";
 
@@ -8,6 +8,7 @@ interface IAuthForgetPassword {
 }
 
 const useForgetPassword = () => {
+  const { forgetPassword } = useAuthApi();
   const {
     register,
     handleSubmit,
@@ -16,8 +17,8 @@ const useForgetPassword = () => {
     resolver: yupResolver(forgetPasswordSchema),
   });
 
-  const onSubmit = (data: IAuthForgetPassword) => {
-    AuthApi().forgetPassword(data);
+  const onSubmit = async (data: IAuthForgetPassword) => {
+    await forgetPassword(data);
   };
 
   return { register, onSubmit, handleSubmit, errors };

@@ -1,8 +1,21 @@
-import useUserStore from "app/user.store";
+import { useUserStore } from "app/user.store";
+import shallow from "zustand/shallow";
 import api from "./configs/axios.config";
 
 const useMarketplaceApi = (controller?: AbortController) => {
-  const { token } = useUserStore((state) => state.user);
+  const useUser = () => {
+    const { user } = useUserStore(
+      (store) => ({
+        user: store.user,
+      }),
+      shallow
+    );
+    return { user };
+  };
+
+  const {
+    user: { token },
+  } = useUser();
 
   return {
     async getScripts() {
@@ -28,7 +41,7 @@ const useMarketplaceApi = (controller?: AbortController) => {
     },
 
     async getScript(id: string) {
-      const res = await api.get(`market/${id}`, {
+      const res = await api.get(`/market/${id}`, {
         signal: controller?.signal,
         headers: {
           Authorization: `Bearer ${token}`,

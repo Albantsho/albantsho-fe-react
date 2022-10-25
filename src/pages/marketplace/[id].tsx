@@ -1,7 +1,6 @@
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import useMarketplaceApi from "apis/Marketplace.api";
-import useUserStore from "app/user.store";
 import ScriptInfo from "components/Marketplace/MarketScript/ScriptInfo/ScriptInfo";
 import { IProduct } from "interfaces/product";
 import dynamic from "next/dynamic";
@@ -32,30 +31,26 @@ const RateToScript = dynamic(
 );
 
 const ScriptInfoPage = () => {
-  // const [script, setScript] = useState<IProduct>();
-  // const [loading, setLoading] = useState(true);
-  // const { getScript } = useMarketplaceApi();
-  // const { query } = useRouter();
+  const [script, setScript] = useState<IProduct>();
+  const [loading, setLoading] = useState(true);
+  const { getScript } = useMarketplaceApi();
+  const router = useRouter();
+  console.log("🚀 ~ file: [id].tsx ~ line 38 ~ ScriptInfoPage ~ router", {
+    router,
+  });
 
-  // useEffect(() => {
-  //   async function getScriptsDate() {
-  //     try {
-  //       if (query.script_id === "string") {
-  //         const res = await getScript(query.script_id);
-  //         console.log(
-  //           "🚀 ~ file: [script-id].tsx ~ line 45 ~ getScriptsDate ~ res",
-  //           res
-  //         );
-  //         await setScript(res.data);
-  //         await console.log(script);
-  //         await setLoading(false);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   getScriptsDate();
-  // }, []);
+  useEffect(() => {
+    async function getScriptsDate() {
+      try {
+        const res = await getScript(router.query.id as string);
+        setScript(res.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getScriptsDate();
+  }, [router.query.id]);
 
   return (
     <>
@@ -63,10 +58,9 @@ const ScriptInfoPage = () => {
         <title>Albantsho || Marketplace Info</title>
       </Head>
       <Nav color="inherit" position="static" />
-      <ScriptInfo />
-      {/* {!loading && script ? (
+      {!loading && script ? (
         <>
-          <ScriptInfo />
+          <ScriptInfo script={script} />
           <Suspense fallback={null}>
             <div className="flex flex-col md:flex-row mt-7 mb-4 py-6 gap-10 lg:gap-7 mx-auto px-5 sm:px-10 max-w-screen-2xl">
               <MarketScriptChips script={script} />
@@ -79,7 +73,7 @@ const ScriptInfoPage = () => {
         </>
       ) : (
         <h2>loading</h2>
-      )} */}
+      )}
     </>
   );
 };

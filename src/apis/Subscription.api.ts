@@ -1,17 +1,17 @@
 import useUserStore from "app/user.store";
 import api from "./configs/axios.config";
 
-interface IVerifyScriptPayment {
-  bid_id: string;
-  transaction_id: number;
+interface ISubscriptions {
+  sub_name: string;
+  paid: boolean;
 }
 
-const usePaymentApi = (controller?: AbortController) => {
+const useSubscriptionApi = (controller?: AbortController) => {
   const { token } = useUserStore((state) => state.user);
 
   return {
-    async verifyScriptPayment(payload: IVerifyScriptPayment) {
-      const res = await api.post("/market/bid/user-payment", payload, {
+    async subscription(payload: ISubscriptions) {
+      const res = await api.post("/subscription", payload, {
         signal: controller?.signal,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -23,4 +23,4 @@ const usePaymentApi = (controller?: AbortController) => {
   };
 };
 
-export default usePaymentApi;
+export default useSubscriptionApi;

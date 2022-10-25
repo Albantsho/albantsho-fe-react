@@ -13,9 +13,23 @@ import Image from "next/image";
 import pencil from "../assets/pencil.svg";
 import bank from "./assets/bank.png";
 import { useState } from "react";
+import { useUserStore } from "app/user.store";
+import shallow from "zustand/shallow";
 
 const PersonalWithdrawalDetails = () => {
   const [availableChangeValue, setAvailableChangeValue] = useState(true);
+  const useUser = () => {
+    const { user } = useUserStore(
+      (store) => ({
+        user: store.user,
+      }),
+      shallow
+    );
+    return { user };
+  };
+
+  const { user } = useUser();
+
   return (
     <div>
       <Typography variant="h4" className="futura font-medium text-primary-700">
@@ -46,7 +60,7 @@ const PersonalWithdrawalDetails = () => {
               id="account-name"
               variant="outlined"
               size="small"
-              defaultValue="Jane Mawe"
+              defaultValue={user.full_name}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -85,7 +99,7 @@ const PersonalWithdrawalDetails = () => {
               id="account-number"
               variant="outlined"
               size="small"
-              defaultValue="0118535169"
+              defaultValue={user.bank_account}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -126,9 +140,9 @@ const PersonalWithdrawalDetails = () => {
               id="bank"
               variant="outlined"
               size="small"
-              defaultValue="Guaranty Trust Bank"
+              defaultValue={user.bank_name}
             >
-              <MenuItem value="guaranty-trust-bank">
+              <MenuItem value={user.bank_name}>
                 <ListItemText className="text-primary-700">
                   Guaranty Trust Bank
                 </ListItemText>

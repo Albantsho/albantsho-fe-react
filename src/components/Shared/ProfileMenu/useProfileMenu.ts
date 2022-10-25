@@ -14,13 +14,10 @@ const useProfileMenu = () => {
     setOpenProfileMenu(null);
   };
 
-  const signOutUser = () => localStorage.removeItem("user");
-
   return {
     openProfileMenu,
     openProfile,
     handleOpenMenu,
-    signOutUser,
     handleCloseProfileMenu,
   };
 };

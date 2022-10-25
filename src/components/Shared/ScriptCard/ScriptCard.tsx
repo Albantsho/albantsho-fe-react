@@ -10,23 +10,13 @@ import {
   type CardProps,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import { IProduct } from "interfaces/product";
 import Link from "next/link";
 import routes from "routes/routes";
 import ReviewedIcon from "./assets/reviewed.svg";
 
-interface IScript {
-  title: string;
-  desc: string;
-  rate: number;
-  genres: string[];
-  image: string;
-  reviewed?: boolean;
-  price?: number;
-  productId: string;
-}
-
 interface IProps extends CardProps {
-  script: IScript;
+  script: IProduct;
 }
 
 const ScriptCard = (props: IProps) => {
@@ -41,12 +31,12 @@ const ScriptCard = (props: IProps) => {
       }}
       {...cardProps}
     >
-      <Link href={routes.marketplaceOneScript(script.productId)} passHref>
+      <Link href={routes.marketplaceOneScript(script.id)} passHref>
         <a>
           <CardMedia
             component="img"
             className="object-cover object-left w-full max-h-[250px]"
-            src={script.image}
+            src={script.script_image}
             loading="lazy"
           />
         </a>
@@ -54,55 +44,45 @@ const ScriptCard = (props: IProps) => {
 
       <CardContent className="py-6">
         <div className="flex flex-wrap gap-2">
-          {script.genres.map((genre, i) => (
-            <Chip key={i} label={genre} sx={{ borderRadius: 1 }} />
-          ))}
+          <Chip label={script.script_format} sx={{ borderRadius: 1 }} />
         </div>
-        <Rating
-          readOnly
-          defaultValue={script.rate}
-          className="sm:hidden mt-4"
-        />
+        <Rating readOnly defaultValue={4} className="sm:hidden mt-4" />
         <div className="flex justify-between mt-1 sm:mt-4 mb-2 gap-2">
-          <Typography
-            variant="h4"
-            color="primary.main"
-            className="futura font-normal leading-tight"
-          >
-            {script.title}
-          </Typography>
-          {script.reviewed && (
-            <Icon fontSize="large">
-              <ReviewedIcon />
-            </Icon>
-          )}
+          <Link href={routes.marketplaceOneScript(script.id)} passHref>
+            <a>
+              <Typography
+                variant="h4"
+                color="primary.main"
+                className="futura font-normal leading-tight"
+              >
+                {script.title}
+              </Typography>
+            </a>
+          </Link>
+          <Icon fontSize="large">
+            <ReviewedIcon />
+          </Icon>
         </div>
-        <Typography>{script.desc}</Typography>
-        {script.price && (
-          <Chip
-            className="rounded mt-6"
-            label={
-              <>
-                <span className="text-neutral-300">Price:</span>
-                <span className="text-primary-main text-lg font-semibold">
-                  ${script.price}
-                </span>
-              </>
-            }
-          />
-        )}
+        <Typography>{script.script_themes}</Typography>
+        <Chip
+          className="rounded mt-6"
+          label={
+            <>
+              <span className="text-neutral-300">Price:</span>
+              <span className="text-primary-main text-lg font-semibold">
+                ${script.script_price}
+              </span>
+            </>
+          }
+        />
       </CardContent>
       <CardActions className="px-4 justify-between pb-6 pt-0 gap-3">
-        {script.price && (
-          <Btn size="large" className="rounded-">
+        {script.user && (
+          <Btn size="large" className="rounded-md">
             Place Bid
           </Btn>
         )}
-        <Rating
-          readOnly
-          defaultValue={script.rate}
-          className="hidden sm:inline-flex"
-        />
+        <Rating readOnly defaultValue={4} className="hidden sm:inline-flex" />
       </CardActions>
     </Card>
   );

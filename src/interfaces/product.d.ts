@@ -1,10 +1,10 @@
 import { IMarketBidScript } from "./market_bid_script";
 
-export type IProduct = {
+export interface IProduct {
   act_structure: string;
   adaptation: boolean;
   adaptation_permission: string;
-  all_character_bible: [];
+  all_character_bible: IAll_character_bible[];
   created_at: string;
   estimated_budget: string;
   id: string;
@@ -17,7 +17,6 @@ export type IProduct = {
   primary_genre: string;
   script_accepted: boolean;
   script_accepted_time: string;
-  production_company_name?: string;
   script_content: string;
   script_content_html: string;
   script_content_pdf: string;
@@ -33,7 +32,7 @@ export type IProduct = {
   script_themes: string;
   secondary_cast: string;
   secondary_genre: string;
-  story_concept: [];
+  story_concept: IStory_concept[];
   story_format: string;
   story_world: string;
   synopsis: string;
@@ -43,4 +42,18 @@ export type IProduct = {
   user: null | string;
   user_id: string;
   view_subscription: boolean;
-};
+}
+
+interface IAll_character_bible {
+  character: string;
+  id: string;
+  script_basic_id: string;
+}
+
+interface IStory_concept {
+  created_at: string;
+  id: string;
+  script_basic_id: string;
+  themes: string;
+  updated_at: string;
+}

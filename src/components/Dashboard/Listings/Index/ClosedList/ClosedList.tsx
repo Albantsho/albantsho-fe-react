@@ -8,7 +8,10 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import useMarketplaceApi from "apis/Marketplace.api";
+import { IProduct } from "interfaces/product";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const closedList = [
   {
@@ -54,6 +57,21 @@ const closedList = [
 ];
 
 const ClosedList = () => {
+  const [products, setProducts] = useState<Array<IProduct>>([]);
+  const [loading, setLoading] = useState(true);
+  const { getScripts } = useMarketplaceApi();
+
+  useEffect(() => {
+    async function getScriptsFunc() {
+      const res = await getScripts();
+      setProducts(res.data);
+      setLoading(false);
+    }
+    getScriptsFunc();
+  }, []);
+
+  if (loading && products.length === 0) return <h2>loading</h2>;
+
   return (
     <Table className=" mt-4 sm:mt-6 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
@@ -85,82 +103,86 @@ const ClosedList = () => {
         </TableRow>
       </TableHead>
       <TableBody className="px-1  xl:px-12 overflow-hidden">
-        {closedList.map((listItem) => (
-          <TableRow
-            data-aos="fade-right"
-            key={listItem.id}
-            sx={{
-              "& td, & th": {
-                borderBottom: { xs: 0, sm: "1px solid #DCD8E4" },
-              },
-              "&:last-child td, &:last-child th": { border: 0 },
-            }}
-            className="flex "
-          >
-            <TableCell className="flex flex-1 sm:flex-auto sm:min-w-[365px] sm:py-6 xl:py-10 md:min-w-[465px] lg:min-w-[365px] xl:min-w-[465px] xl:max-w-[465px] items-center flex-wrap sm:flex-nowrap gap-1 sm:gap-4 ">
-              <div className="flex gap-2 sm:gap-0">
-                <Image
-                  layout="fixed"
-                  width="64"
-                  height="64"
-                  className="rounded-md"
-                  loading="lazy"
-                  src={listItem.image}
-                  alt={listItem.title}
-                />
-                <div className="flex flex-col gap-2">
-                  <Chip
-                    label={`Price: $${listItem.price}`}
-                    className="text-success-500 bg-success-50 sm:hidden"
+        {products
+          .filter((item) => item.script_market_status === "closed")
+          .map((listItem) => (
+            <TableRow
+              data-aos="fade-right"
+              key={listItem.id}
+              sx={{
+                "& td, & th": {
+                  borderBottom: { xs: 0, sm: "1px solid #DCD8E4" },
+                },
+                "&:last-child td, &:last-child th": { border: 0 },
+              }}
+              className="flex "
+            >
+              <TableCell className="flex flex-1 sm:flex-auto sm:min-w-[365px] sm:py-6 xl:py-10 md:min-w-[465px] lg:min-w-[365px] xl:min-w-[465px] xl:max-w-[465px] items-center flex-wrap sm:flex-nowrap gap-1 sm:gap-4 ">
+                <div className="flex gap-2 sm:gap-0">
+                  <img
+                    // layout="fixed"
+                    width="64"
+                    height="64"
+                    className="rounded-md"
+                    // loading="lazy"
+                    src={listItem.script_image}
+                    alt={listItem.title}
                   />
-                  <Chip
-                    label={`Date: 01/02/22`}
-                    className="text-primary-700 bg-primary-50/50 sm:hidden"
-                  />
+                  <div className="flex flex-col gap-2">
+                    <Chip
+                      label={`Price: $${listItem.script_price}`}
+                      className="text-success-500 bg-success-50 sm:hidden"
+                    />
+                    <Chip
+                      label={`Date:${new Date().getYear(
+                        listItem.script_accepted_time
+                      )}`}
+                      className="text-primary-700 bg-primary-50/50 sm:hidden"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="flex-grow sm:flex-1 sm:pl-3 -mt-1  sm:max-w-[271px] min-w-[170px] sm:-ml-4">
+                <div className="flex-grow sm:flex-1 sm:pl-3 -mt-1  sm:max-w-[271px] min-w-[170px] sm:-ml-4">
+                  <Typography
+                    variant="body1"
+                    className="futura font-semibold text-primary-700"
+                  >
+                    {listItem.title}
+                  </Typography>
+                  <Typography variant="caption" className="text-stone-800">
+                    {listItem.script_themes}
+                  </Typography>
+                </div>
+              </TableCell>
+              <TableCell
+                sx={{
+                  "&.MuiTableCell-root": {
+                    px: { xs: 0 },
+                  },
+                }}
+                className="hidden sm:flex sm:w-full lg:flex-[0.3] md:gap-4 items-center xl:justify-between"
+              >
                 <Typography
                   variant="body1"
-                  className="futura font-semibold text-primary-700"
-                >
-                  {listItem.title}
-                </Typography>
-                <Typography variant="caption" className="text-stone-800">
-                  {listItem.description}
-                </Typography>
-              </div>
-            </TableCell>
-            <TableCell
-              sx={{
-                "&.MuiTableCell-root": {
-                  px: { xs: 0 },
-                },
-              }}
-              className="hidden sm:flex sm:w-full lg:flex-[0.3] md:gap-4 items-center xl:justify-between"
-            >
-              <Typography
-                variant="body1"
-                className="rounded-md bg-inherit sm:min-w-[70px] lg:min-w-[85px] text-primary-500 font-semibold"
-              >{`$ ${listItem.price}`}</Typography>
-            </TableCell>
-            <TableCell
-              sx={{
-                "&.MuiTableCell-root": {
-                  px: { xs: 0, sm: 2 },
-                },
-              }}
-              className="hidden sm:flex items-center xl:flex-[0.5] lg:w-full 2xl:flex-[0.6] justify-end"
-            >
-              <Typography
-                variant="body1"
-                className=" text-neutral-700 font-medium"
+                  className="rounded-md bg-inherit sm:min-w-[70px] lg:min-w-[85px] text-primary-500 font-semibold"
+                >{`$ ${listItem.script_price}`}</Typography>
+              </TableCell>
+              <TableCell
+                sx={{
+                  "&.MuiTableCell-root": {
+                    px: { xs: 0, sm: 2 },
+                  },
+                }}
+                className="hidden sm:flex items-center xl:flex-[0.5] lg:w-full 2xl:flex-[0.6] justify-end"
               >
-                01/02/22
-              </Typography>
-            </TableCell>
-          </TableRow>
-        ))}
+                <Typography
+                  variant="body1"
+                  className=" text-neutral-700 font-medium"
+                >
+                  {new Date().getYear(listItem.script_accepted_time)}
+                </Typography>
+              </TableCell>
+            </TableRow>
+          ))}
       </TableBody>
     </Table>
   );

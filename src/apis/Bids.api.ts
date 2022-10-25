@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import useUserStore from "app/user.store";
 import api from "./configs/axios.config";
 
 interface ICreateBid {
@@ -12,13 +12,7 @@ interface IUserBid {
 }
 
 const BidsApi = (controller?: AbortController) => {
-  const token = useRef<string>("");
-
-  useEffect(() => {
-    let tk = localStorage.getItem("USER_TOKEN");
-    if (tk === null) tk = "";
-    token.current = tk;
-  }, []);
+  const { token } = useUserStore((state) => state.user);
 
   return {
     async createBid(payload: ICreateBid) {
@@ -33,7 +27,7 @@ const BidsApi = (controller?: AbortController) => {
       const res = await api.post("/market/bid", payload, {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -44,7 +38,7 @@ const BidsApi = (controller?: AbortController) => {
       const res = await api.get(`/market/bid/accept/${payload}`, {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -55,7 +49,7 @@ const BidsApi = (controller?: AbortController) => {
       const res = await api.get(`/market/bid/reject/${payload}`, {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${token}`,
         },
       });
 

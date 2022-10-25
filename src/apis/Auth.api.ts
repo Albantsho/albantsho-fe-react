@@ -1,4 +1,5 @@
-import useUserStore from "app/user.store";
+import { useUserStore } from "app/user.store";
+import shallow from "zustand/shallow";
 import api from "./configs/axios.config";
 interface IRegisterPayload {
   full_name: string;
@@ -16,9 +17,19 @@ interface ILoginPayload {
 }
 
 const useAuthApi = (controller?: AbortController) => {
+  const useUser = () => {
+    const { user } = useUserStore(
+      (store) => ({
+        user: store.user,
+      }),
+      shallow
+    );
+    return { user };
+  };
+
   const {
     user: { token },
-  } = useUserStore();
+  } = useUser();
 
   return {
     async register(payload: IRegisterPayload) {

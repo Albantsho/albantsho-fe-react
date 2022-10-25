@@ -8,7 +8,7 @@ import { IProduct } from "interfaces/product";
 import { BiChevronDown } from "react-icons/bi";
 
 interface IProps {
-  script: IProduct | undefined;
+  script: IProduct;
 }
 
 const ScriptMainDetails = ({ script }: IProps) => {
@@ -40,30 +40,7 @@ const ScriptMainDetails = ({ script }: IProps) => {
           </Typography>
         </AccordionSummary>
         <AccordionDetails className="px-5 sm:px-10 bg-tinted-50/60">
-          <Typography
-            sx={{ marginTop: { xs: 3, sm: 4, md: 5, xl: 7 } }}
-            variant="body2"
-            color="primary.700"
-          >
-            THE LONGMAN OF LONG BEACH Written by Micheal
-          </Typography>
-          <br />
-          <Typography variant="body1" className="text-gray-600 leading-relaxed">
-            KRISTEN BELL speaks directly into the CAMERA. KRISTEN BELL You can’t
-            begin to describe it. It’s just so... it’s... CUT TO: ADAM SCOTT
-            speaks directly into the CAMERA. ADAM SCOTT I mean... CUT TO: KEVIN
-            SMITH Like nothing you’ve ever seen. CUT TO: LIZZY CAPLAN Totally,
-            impossibly terrible. CUT TO: IKE BARINHOLTZ What the fuuuuuck? CUT
-            TO: J.J. ABRAMS To say it’s a “bad” movie is offensive to other bad
-            movies. CUT TO: ADAM SCOTT The acting, the script, the green
-            screen... CUT TO: KRISTEN BELL The sex scenes are particularly
-            upsetting. CUT TO: KEVIN SMITH The thing... anyone can make a bad
-            movie. This is something else, something... extraordinary. CUT TO:
-            J.J. ABRAMS It’s more than a movie. It’s an experience, a triumph...
-            KEVIN SMITH The thing... anyone can make a bad movie. This is
-            something else, something... extraordinary. CUT TO: J.J. ABRAMS It’s
-            more than a movie. It’s an experience, a triumph...
-          </Typography>
+          {script.script_content_html}
         </AccordionDetails>
       </Accordion>
     </div>

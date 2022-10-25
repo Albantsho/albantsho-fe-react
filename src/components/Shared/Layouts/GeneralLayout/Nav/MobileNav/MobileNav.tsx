@@ -10,10 +10,11 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
-import useUserStore from "app/user.store";
+import { useUserStore } from "app/user.store";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
+import shallow from "zustand/shallow";
 import useMobileNav from "./useMobileNav";
 
 interface IProps {
@@ -21,10 +22,22 @@ interface IProps {
   isTransparent: boolean;
 }
 
+const useUser = () => {
+  const { user } = useUserStore(
+    (store) => ({
+      user: store.user,
+    }),
+    shallow
+  );
+  return { user };
+};
+
 const MobileNav = ({ links, isTransparent }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNav();
-  const user = useUserStore((state) => state.user);
-  // console.log("🚀 ~ file: MobileNav.tsx ~ line 27 ~ MobileNav ~ user", user);
+
+  const { user } = useUser();
+
+  console.log("🚀 ~ file: MobileNav.tsx ~ line 27 ~ MobileNav ~ user", user);
 
   return (
     <div className="flex items-center lg:hidden">
@@ -69,7 +82,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
               </Link>
             </ListItem>
           ))}
-          {/* {user.active ? (
+          {user.active ? (
             <ProfileMenu />
           ) : (
             <div className="px-5 py-2">
@@ -77,7 +90,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
                 <Btn className="px-6 py-3">Sign In</Btn>
               </Link>
             </div>
-          )} */}
+          )}
         </List>
       </Drawer>
     </div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import useUserStore from "app/user.store";
 import api from "./configs/axios.config";
 
 interface IWithdrawalDetail {
@@ -9,30 +9,24 @@ interface IWithdrawalDetail {
 }
 
 const useProfileApi = (controller?: AbortController) => {
-  const token = useRef<string>("");
-
-  useEffect(() => {
-    let tk = localStorage.getItem("USER_TOKEN");
-    if (tk === null) tk = "";
-    token.current = tk;
-  }, []);
+  const { token } = useUserStore((state) => state.user);
 
   return {
     async getUserInformation() {
       const res = await api.get("/profile/user", {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${token}`,
         },
       });
 
       return res.data;
     },
     async addingWithdrawalDetail(payload: IWithdrawalDetail) {
-      const res = await api.post("/profile/user", payload, {
+      const res = await api.post("/profile/bank", payload, {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${token}`,
         },
       });
 

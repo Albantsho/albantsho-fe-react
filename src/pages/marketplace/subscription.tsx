@@ -1,5 +1,4 @@
-import Footer from "@shared/Footer/Footer";
-import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
+import ReviewedIcon from "@assets/icons/reviewed.svg";
 import {
   Card,
   CardActions,
@@ -8,7 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import ReviewedIcon from "@assets/icons/reviewed.svg";
+import Footer from "@shared/Footer/Footer";
+import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 
 const plans = [
   "Synopsis",
@@ -18,10 +18,24 @@ const plans = [
   "Writer’s inspiration",
 ];
 
+import useSubscriptionApi from "apis/Subscription.api";
 import Head from "next/head";
 import { Suspense } from "react";
 
 const Subscription = () => {
+  const { subscription } = useSubscriptionApi();
+
+  const subscriptionFunc = async () => {
+    const res = await subscription({
+      sub_name: "mauve",
+      paid: true,
+    });
+    console.log(
+      "🚀 ~ file: subscription.tsx ~ line 33 ~ subscriptionFunc ~ res",
+      res
+    );
+  };
+
   return (
     <>
       <Head>
@@ -82,7 +96,11 @@ const Subscription = () => {
             </div>
           </CardContent>
           <CardActions>
-            <Btn size="large" className="mt-4 py-2 md:mt-5 w-full text-center">
+            <Btn
+              onClick={subscriptionFunc}
+              size="large"
+              className="mt-4 py-2 md:mt-5 w-full text-center"
+            >
               Subscribe
             </Btn>
           </CardActions>

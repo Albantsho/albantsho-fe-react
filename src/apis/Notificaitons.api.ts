@@ -1,21 +1,15 @@
-import { useEffect, useRef } from "react";
+import useUserStore from "app/user.store";
 import api from "./configs/axios.config";
 
 const useNotificationsApi = (controller?: AbortController) => {
-  const token = useRef<string>("");
-
-  useEffect(() => {
-    let tk = localStorage.getItem("USER_TOKEN");
-    if (tk === null) tk = "";
-    token.current = tk;
-  }, []);
+  const { token } = useUserStore((state) => state.user);
 
   return {
     async getUserInformation() {
       const res = await api.get("/notifications", {
         signal: controller?.signal,
         headers: {
-          Token: token.current,
+          Authorization: `Bearer ${token}`,
         },
       });
 

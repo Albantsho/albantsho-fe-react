@@ -3,6 +3,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Provider, useCreateStore } from "app/user.store";
 import type { NextPage } from "next";
 import NextProgress from "next-progress";
 import { AppProps } from "next/app";
@@ -26,6 +27,7 @@ interface MyAppProps extends AppProps {
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const getLayout = Component.getLayout ?? ((page) => page);
+  const createStore = useCreateStore(pageProps.initialZustandState);
 
   useEffect(() => {
     AOS.init();
@@ -34,15 +36,17 @@ export default function MyApp(props: MyAppProps) {
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <NextProgress
-          delay={100}
-          color="#FDD038"
-          height="3px"
-          options={{ showSpinner: false }}
-        />
-        {getLayout(<Component {...pageProps} />)}
-        <ToastContainer />
+        <Provider createStore={createStore}>
+          <CssBaseline />
+          <NextProgress
+            delay={100}
+            color="#FDD038"
+            height="3px"
+            options={{ showSpinner: false }}
+          />
+          {getLayout(<Component {...pageProps} />)}
+          <ToastContainer />
+        </Provider>
       </ThemeProvider>
     </CacheProvider>
   );

@@ -1,8 +1,8 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import useAuthApi from "apis/Auth.api";
 import { useState } from "react";
-import { resetPasswordSchema } from "./validation/resetPassword.validation";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { resetPasswordSchema } from "./validation/resetPassword.validation";
 
 interface IAuthResetPassword {
   password: string;
@@ -25,7 +25,6 @@ const useResetPasswordForm = () => {
   };
 
   const onSubmit = async (data: IAuthResetPassword) => {
-    const token = localStorage.getItem("USER_Token");
     try {
       const res = await resetPassword({ password: data.password });
     } catch (error) {

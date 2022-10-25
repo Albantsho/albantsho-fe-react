@@ -1,10 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useAuthApi from "apis/Auth.api";
-import useUserStore from "app/user.store";
+import { useUserStore } from "app/user.store";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
+import shallow from "zustand/shallow";
 import { registerSchema } from "./validation/register.validation";
 import { toast } from "react-toastify";
 
@@ -22,7 +23,16 @@ const useRegisterForm = () => {
   const { register: registerApi } = useAuthApi();
   const [loading, setLoading] = useState(false);
   const { replace } = useRouter();
-  const { registerUser } = useUserStore();
+  const useUser = () => {
+    const { registerUser } = useUserStore(
+      (store) => ({
+        authenticationUser: store.authenticationUser,
+      }),
+      shallow
+    );
+    return { authenticationUser };
+  };
+
   const {
     register,
     watch,
