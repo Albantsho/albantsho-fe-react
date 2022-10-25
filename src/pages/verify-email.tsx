@@ -12,7 +12,7 @@ const VerifyEmailPage: NextPageWithLayout = () => {
       </Head>
       <AuthenticationNavbar
         text="Don’t have an account yet?"
-        link="signup"
+        link="register"
         buttonText="SIGN UP"
       />
       <VerifyEmail />

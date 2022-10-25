@@ -40,10 +40,6 @@ const useVerifyEmail = () => {
       const res = await emailVerify({
         otp: Object.values(formValues).join(""),
       });
-      console.log(
-        "🚀 ~ file: useVerifyEmail.ts ~ line 40 ~ onSubmit ~ res",
-        res
-      );
       await push(routes.home);
     } catch (error) {
       console.log(error);

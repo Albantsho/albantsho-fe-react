@@ -13,8 +13,6 @@ const useProductsStore = create(
     products: [],
 
     getProducts: (products) => {
-      console.log(products);
-
       set(products);
     },
   }))

@@ -33,11 +33,9 @@ const useUserStore = create(
       updated_at: "",
     },
     registerUser: (user) => {
-      console.log(user);
       set(user);
     },
     loginUser: (user) => {
-      console.log(user);
       set(user);
     },
   }))

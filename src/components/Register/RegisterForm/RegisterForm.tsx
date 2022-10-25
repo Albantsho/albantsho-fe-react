@@ -20,6 +20,7 @@ import routes from "routes/routes";
 import useRegisterForm from "./useRegisterForm";
 import { Controller } from "react-hook-form";
 import countryList from "config/country-list.json";
+import LoadingButton from "@mui/lab/LoadingButton";
 import Image from "next/image";
 
 const RegisterForm = () => {
@@ -34,6 +35,7 @@ const RegisterForm = () => {
     typePasswordInput,
     handleTypeInputPassword,
     errors,
+    loading,
   } = useRegisterForm();
 
   return (
@@ -364,6 +366,8 @@ const RegisterForm = () => {
             type="submit"
             size="large"
             className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"
+            loading={loading}
+            color="primary"
           >
             Get Started
           </Btn>

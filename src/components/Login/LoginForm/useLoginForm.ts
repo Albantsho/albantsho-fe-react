@@ -31,8 +31,6 @@ const useLoginForm = () => {
   const onSubmit = async (data: IAuthLogin) => {
     try {
       const res = await login(data);
-      console.log(res);
-
       await loginUser(res.data);
       await push(routes.home);
     } catch (error) {

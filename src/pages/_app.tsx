@@ -10,6 +10,8 @@ import { useEffect } from "react";
 import "styles/globals.css";
 import theme from "styles/themes/theme";
 import createEmotionCache from "utils/create-emotion-cache";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -40,6 +42,7 @@ export default function MyApp(props: MyAppProps) {
           options={{ showSpinner: false }}
         />
         {getLayout(<Component {...pageProps} />)}
+        <ToastContainer />
       </ThemeProvider>
     </CacheProvider>
   );

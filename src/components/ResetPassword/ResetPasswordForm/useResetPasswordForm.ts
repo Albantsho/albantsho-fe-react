@@ -26,13 +26,8 @@ const useResetPasswordForm = () => {
 
   const onSubmit = async (data: IAuthResetPassword) => {
     const token = localStorage.getItem("USER_Token");
-    console.log(token);
     try {
       const res = await resetPassword({ password: data.password });
-      console.log(
-        "🚀 ~ file: useResetPasswordForm.ts ~ line 32 ~ onSubmit ~ res",
-        res
-      );
     } catch (error) {
       console.log(
         "🚀 ~ file: useResetPasswordForm.ts ~ line 34 ~ onSubmit ~ error",

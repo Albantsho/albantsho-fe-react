@@ -13,7 +13,7 @@ const Register: NextPageWithLayout = () => {
       </Head>
       <AuthenticationNavbar
         text="Already have an account?"
-        link="signin"
+        link="login"
         buttonText="SIGN IN"
       />
       <div className="overflow-hidden">

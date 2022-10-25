@@ -1,10 +1,11 @@
-import { Button, buttonClasses, type ButtonProps } from "@mui/material";
+import { buttonClasses } from "@mui/material";
 import { styled } from "@mui/system";
 import { forwardRef } from "react";
+import LoadingButton, { type LoadingButtonProps } from "@mui/lab/LoadingButton";
 
-const ButtonRoot = forwardRef<HTMLButtonElement, ButtonProps>(
+const ButtonRoot = forwardRef<HTMLButtonElement, LoadingButtonProps>(
   ({ children, ...props }, ref) => (
-    <Button
+    <LoadingButton
       {...props}
       variant="contained"
       disableRipple
@@ -12,7 +13,7 @@ const ButtonRoot = forwardRef<HTMLButtonElement, ButtonProps>(
       ref={ref}
     >
       {children}
-    </Button>
+    </LoadingButton>
   )
 );
 ButtonRoot.displayName = "ButtonRoot";
