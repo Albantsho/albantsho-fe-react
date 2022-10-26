@@ -1,22 +1,22 @@
 import useMarketplaceApi from "apis/Marketplace.api";
-import type { IProduct } from "interfaces/product";
-import { useEffect, useState } from "react";
+import { IProduct } from "interfaces/product";
+import React, { useEffect, useState } from "react";
 
-const useMarketplaceProducts = () => {
-  const [products, setProducts] = useState<Array<IProduct>>([]);
+const useMarketPlace = () => {
+  const [scripts, setScripts] = useState<Array<IProduct>>([]);
   const [loading, setLoading] = useState(true);
   const { getScripts } = useMarketplaceApi();
 
   useEffect(() => {
     async function getScriptsFunc() {
       const res = await getScripts();
-      setProducts(res.data);
+      setScripts(res.data);
       setLoading(false);
     }
     getScriptsFunc();
   }, []);
 
-  return { products, loading };
+  return { scripts, loading };
 };
 
-export default useMarketplaceProducts;
+export default useMarketPlace;

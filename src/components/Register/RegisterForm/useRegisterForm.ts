@@ -5,9 +5,10 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 import shallow from "zustand/shallow";
 import { registerSchema } from "./validation/register.validation";
-import { toast } from "react-toastify";
 
 interface IRegisterFormValues {
   full_name: string;
@@ -24,7 +25,7 @@ const useRegisterForm = () => {
   const [loading, setLoading] = useState(false);
   const { replace } = useRouter();
   const useUser = () => {
-    const { registerUser } = useUserStore(
+    const { authenticationUser } = useUserStore(
       (store) => ({
         authenticationUser: store.authenticationUser,
       }),
@@ -32,6 +33,8 @@ const useRegisterForm = () => {
     );
     return { authenticationUser };
   };
+
+  const { authenticationUser } = useUser();
 
   const {
     register,
@@ -57,18 +60,15 @@ const useRegisterForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
 
   const onSubmit = async (data: IRegisterFormValues) => {
-    console.log(
-      "🚀 ~ file: useRegisterForm.ts ~ line 61 ~ onSubmit ~ data",
-      data
-    );
     try {
       setLoading(true);
       const res = await registerApi(data);
-      await registerUser(res.data);
-      // await push(routes.verifyEmail);
-      await replace(routes.welcome);
+      successHandler(res.message);
+      authenticationUser(res.data);
+      replace(routes.welcome);
+      // replace(routes.verifyEmail);
     } catch (error) {
-      toast.error("Something went wrong");
+      errorHandler(error);
     } finally {
       setLoading(false);
     }

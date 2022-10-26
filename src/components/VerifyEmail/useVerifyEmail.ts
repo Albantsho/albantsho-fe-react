@@ -2,9 +2,11 @@ import useAuthApi from "apis/Auth.api";
 import { useRouter } from "next/router";
 import React, { FormEvent, useRef, useState } from "react";
 import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 const useVerifyEmail = () => {
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const { emailVerify } = useAuthApi();
   const inputs = useRef<HTMLInputElement[]>([]);
   const [resendCode, setResendCode] = useState(false);
@@ -42,9 +44,10 @@ const useVerifyEmail = () => {
       const res = await emailVerify({
         otp: Object.values(formValues).join(""),
       });
-      await push(routes.home);
+      successHandler(res.message);
+      replace(routes.home);
     } catch (error) {
-      console.log(error);
+      errorHandler(error);
     }
   };
 

@@ -77,7 +77,7 @@ const DashboardSidebarOnMobile = () => {
               />
             );
           })}
-        {user.user_type !== "user" &&
+        {user.user_type === "producer" &&
           routesArray2.map((item) => {
             return (
               <BottomNavigationAction

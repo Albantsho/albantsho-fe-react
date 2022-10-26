@@ -110,7 +110,7 @@ const WalletMenu = () => {
             </ListItemText>
           </MenuItem>
         )}
-        {user.user_type !== "user" && (
+        {user.user_type === "producer" && (
           <MenuItem
             className="px-6 py-3"
             onClick={() => push(`${routes.depositWallet}`)}

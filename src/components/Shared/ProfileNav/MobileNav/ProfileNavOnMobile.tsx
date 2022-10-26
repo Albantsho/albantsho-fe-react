@@ -1,5 +1,7 @@
+import deposit from "@assets/icons/deposit.svg";
 import MenuIcon from "@assets/icons/menu.svg";
 import wallet from "@assets/icons/wallet.svg";
+import alert from "@assets/images/alert.png";
 import {
   Badge,
   Button,
@@ -14,27 +16,46 @@ import {
   SvgIcon,
 } from "@mui/material";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { AiFillInstagram, AiOutlineClose } from "react-icons/ai";
-import { FaFacebookF, FaTwitter } from "react-icons/fa";
-import ProfileMenu from "../../ProfileMenu/ProfileMenu";
-import alert from "@assets/images/alert.png";
-import useMobileNavMobile from "./useMobileNavMobile";
-import ProfileLogo from "../assets/profile-logo.svg";
 import Link from "next/link";
-import type { IconType } from "react-icons/lib";
+import { useRouter } from "next/router";
+import {
+  AiFillInstagram,
+  AiOutlineClose,
+  AiOutlineQuestionCircle,
+} from "react-icons/ai";
+import { FaFacebookF, FaTwitter } from "react-icons/fa";
+import { RiDownloadLine } from "react-icons/ri";
+import { TbArrowsSort } from "react-icons/tb";
+import routes from "routes/routes";
+import ProfileMenu from "../../ProfileMenu/ProfileMenu";
+import ProfileLogo from "../assets/profile-logo.svg";
+import useMobileNavMobile from "./useMobileNavMobile";
 
 interface IProps {
-  walletLinks: {
-    title: string;
-    href: string;
-    icon: IconType;
-  }[];
   isTransparent: boolean;
 }
 
-const ProfileNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
-  const { handleToggleDrawer, open, getNotifications, notificationList } =
+const walletLinksForWriter = [
+  { title: "Withdraw", href: routes.withdrawWallet, icon: RiDownloadLine },
+  {
+    title: "Transaction History",
+    href: routes.transactionHistoryWallet,
+    icon: TbArrowsSort,
+  },
+  { title: "Help", href: routes.helpWallet, icon: AiOutlineQuestionCircle },
+];
+const walletLinksForProducer = [
+  { title: "Deposit", href: routes.depositWallet, icon: deposit },
+  {
+    title: "Transaction History",
+    href: routes.transactionHistoryWallet,
+    icon: TbArrowsSort,
+  },
+  { title: "Help", href: routes.helpWallet, icon: AiOutlineQuestionCircle },
+];
+
+const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
+  const { handleToggleDrawer, open, getNotifications, notificationList, user } =
     useMobileNavMobile();
   const { push, route } = useRouter();
 
@@ -113,34 +134,64 @@ const ProfileNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
               primary="Balance:$20,000"
             />
           </ListItem>
-          {walletLinks.map((walletLink) => (
-            <ListItem disablePadding className="py-1" key={walletLink.title}>
-              <ListItemButton
-                selected={route === walletLink.href}
-                TouchRippleProps={{ className: "text-primary-main" }}
-                className="px-2 rounded-md hover:bg-primary-50/25"
-                onClick={() => push(`${walletLink.href}`)}
-              >
-                <ListItemIcon className="min-w-0 mr-3">
-                  <SvgIcon
-                    fontSize="small"
-                    className="text-primary-700"
-                    inheritViewBox
-                    component={walletLink.icon}
-                  />
-                </ListItemIcon>
-                <ListItemText
-                  primaryTypographyProps={{
-                    className:
-                      "text-primary-700 futura font-normal leading-normal",
-                    variant: "h6",
-                  }}
+          {user.user_type === "user" &&
+            walletLinksForWriter.map((walletLink) => (
+              <ListItem disablePadding className="py-1" key={walletLink.title}>
+                <ListItemButton
+                  selected={route === walletLink.href}
+                  TouchRippleProps={{ className: "text-primary-main" }}
+                  className="px-2 rounded-md hover:bg-primary-50/25"
+                  onClick={() => push(`${walletLink.href}`)}
                 >
-                  {walletLink.title}
-                </ListItemText>
-              </ListItemButton>
-            </ListItem>
-          ))}
+                  <ListItemIcon className="min-w-0 mr-3">
+                    <SvgIcon
+                      fontSize="small"
+                      className="text-primary-700"
+                      inheritViewBox
+                      component={walletLink.icon}
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    primaryTypographyProps={{
+                      className:
+                        "text-primary-700 futura font-normal leading-normal",
+                      variant: "h6",
+                    }}
+                  >
+                    {walletLink.title}
+                  </ListItemText>
+                </ListItemButton>
+              </ListItem>
+            ))}
+          {user.user_type === "producer" &&
+            walletLinksForProducer.map((walletLink) => (
+              <ListItem disablePadding className="py-1" key={walletLink.title}>
+                <ListItemButton
+                  selected={route === walletLink.href}
+                  TouchRippleProps={{ className: "text-primary-main" }}
+                  className="px-2 rounded-md hover:bg-primary-50/25"
+                  onClick={() => push(`${walletLink.href}`)}
+                >
+                  <ListItemIcon className="min-w-0 mr-3">
+                    <SvgIcon
+                      fontSize="small"
+                      className="text-primary-700"
+                      inheritViewBox
+                      component={walletLink.icon}
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    primaryTypographyProps={{
+                      className:
+                        "text-primary-700 futura font-normal leading-normal",
+                      variant: "h6",
+                    }}
+                  >
+                    {walletLink.title}
+                  </ListItemText>
+                </ListItemButton>
+              </ListItem>
+            ))}
         </List>
 
         <div className="fixed text-primary-700 flex gap-6 right-[75px] bottom-8">

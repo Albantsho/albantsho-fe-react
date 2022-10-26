@@ -1,6 +1,9 @@
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import BidsApi from "apis/Bids.api";
+import { IMarketBidScript } from "interfaces/market-bid-script";
+import { IProduct } from "interfaces/product";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -9,10 +12,23 @@ import acceptOffer from "./assets/accept-offer.png";
 interface IProps {
   openAcceptOffer: boolean;
   setOpenAcceptOffer: Dispatch<SetStateAction<boolean>>;
+  script: IProduct;
+  auction: IMarketBidScript;
 }
 
-const AcceptOfferModal = ({ openAcceptOffer, setOpenAcceptOffer }: IProps) => {
+const AcceptOfferModal = ({
+  openAcceptOffer,
+  setOpenAcceptOffer,
+  auction,
+  script,
+}: IProps) => {
+  const { acceptBid } = BidsApi();
+
   const handleCloseAcceptOffer = () => setOpenAcceptOffer(false);
+  const acceptOfferFunc =
+    (script_basic_id: string, amount: number) => async () => {
+      const res = await acceptBid({ script_basic_id, amount });
+    };
 
   return (
     <Modal
@@ -44,17 +60,18 @@ const AcceptOfferModal = ({ openAcceptOffer, setOpenAcceptOffer }: IProps) => {
             color="primary.700"
             variant="h5"
           >
-            The Longman of Long Beach
+            {script.title}
           </Typography>
           <Typography
             className="text-center mt-3 lg:mt-6 leading-normal  futura font-semibold"
             color="primary.700"
             variant="h4"
           >
-            @$6,000
+            @${auction.amount}
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-10 lg:mt-8">
             <Btn
+              onClick={acceptOfferFunc(auction.script_basic_id, auction.amount)}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"
             >

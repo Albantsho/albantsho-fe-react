@@ -10,7 +10,6 @@ import {
   Typography,
 } from "@mui/material";
 import { IProduct } from "interfaces/product";
-import Image from "next/image";
 import Link from "next/link";
 import React, { Dispatch, SetStateAction } from "react";
 import { IoIosMore } from "react-icons/io";
@@ -188,7 +187,7 @@ const OpeningList = ({ setOpenUnListingItem, scripts }: IProps) => {
                   }}
                 >
                   <Link
-                    href={`${routes.listingsOneScript(script.title)}`}
+                    href={`${routes.listingsOneScript(script.id)}`}
                     passHref
                   >
                     <a className="text-inherit">

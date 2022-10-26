@@ -10,17 +10,30 @@ import {
   type CardProps,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import { useUserStore } from "app/user.store";
 import { IProduct } from "interfaces/product";
 import Link from "next/link";
 import routes from "routes/routes";
+import shallow from "zustand/shallow";
 import ReviewedIcon from "./assets/reviewed.svg";
 
 interface IProps extends CardProps {
   script: IProduct;
 }
 
+const useUser = () => {
+  const { user } = useUserStore(
+    (store) => ({
+      user: store.user,
+    }),
+    shallow
+  );
+  return { user };
+};
+
 const ScriptCard = (props: IProps) => {
   const { script, sx, ...cardProps } = props;
+  const { user } = useUser();
 
   return (
     <Card
@@ -77,7 +90,7 @@ const ScriptCard = (props: IProps) => {
         />
       </CardContent>
       <CardActions className="px-4 justify-between pb-6 pt-0 gap-3">
-        {script.user && (
+        {(!user.active || user.user_type === "producer") && (
           <Btn size="large" className="rounded-md">
             Place Bid
           </Btn>

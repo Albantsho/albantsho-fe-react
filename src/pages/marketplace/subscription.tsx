@@ -30,10 +30,6 @@ const Subscription = () => {
       sub_name: "mauve",
       paid: true,
     });
-    console.log(
-      "🚀 ~ file: subscription.tsx ~ line 33 ~ subscriptionFunc ~ res",
-      res
-    );
   };
 
   return (

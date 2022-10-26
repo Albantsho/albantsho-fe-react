@@ -2,8 +2,6 @@ import { Box, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Logo from "@shared/Logo/Logo";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import routes from "routes/routes";
 import welcome from "./assets/welcome.png";
 
 const Welcome = () => {

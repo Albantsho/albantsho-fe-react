@@ -1,7 +1,6 @@
 import useMarketplaceApi from "apis/Marketplace.api";
 import { IProduct } from "interfaces/product";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useListings = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
@@ -10,16 +9,12 @@ const useListings = () => {
   const [openUnListingItem, setOpenUnListingItem] = useState<boolean>(false);
   const [scripts, setScripts] = useState<Array<IProduct>>([]);
   const [loading, setLoading] = useState(true);
-  const { getScripts, getUsers } = useMarketplaceApi();
+  const { getScripts } = useMarketplaceApi();
 
   useEffect(() => {
     async function getScriptsFunc() {
       const res = await getScripts();
-      const respa = await getUsers();
-      console.log(
-        "🚀 ~ file: uselistings.ts ~ line 19 ~ getScriptsFunc ~ respa",
-        respa
-      );
+
       setScripts(res.data);
       setLoading(false);
     }

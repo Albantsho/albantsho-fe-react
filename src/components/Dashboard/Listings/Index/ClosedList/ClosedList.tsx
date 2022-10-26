@@ -8,10 +8,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import useMarketplaceApi from "apis/Marketplace.api";
 import { IProduct } from "interfaces/product";
-import Image from "next/image";
-import { useEffect, useState } from "react";
 
 const closedList = [
   {
@@ -63,10 +60,6 @@ interface IProps {
 const ClosedList = ({ scripts }: IProps) => {
   const closedScripts = scripts.filter(
     (script) => script.script_market_status === "closed"
-  );
-  console.log(
-    "🚀 ~ file: ClosedList.tsx ~ line 67 ~ ClosedList ~ filteredScripts",
-    closedScripts
   );
 
   return (

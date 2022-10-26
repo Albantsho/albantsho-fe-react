@@ -7,10 +7,8 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
-import React from "react";
 import { IProduct } from "interfaces/product";
+import React, { Dispatch, SetStateAction } from "react";
 
 const uncompletedList = [
   {

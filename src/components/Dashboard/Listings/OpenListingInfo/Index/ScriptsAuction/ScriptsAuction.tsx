@@ -2,6 +2,7 @@ import {
   Button,
   ButtonGroup,
   IconButton,
+  Paper,
   Table,
   TableBody,
   TableCell,
@@ -9,10 +10,12 @@ import {
   TableHead,
   TableRow,
   Typography,
-  Paper,
 } from "@mui/material";
+import AcceptOfferModal from "@shared/Modals/AcceptOfferModal/AcceptOfferModal";
+import BidsApi from "apis/Bids.api";
+import { IProduct } from "interfaces/product";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import routes from "routes/routes";
@@ -27,11 +30,13 @@ const auctions = [
 ];
 
 interface IProps {
-  setOpenAcceptOffer: Dispatch<SetStateAction<boolean>>;
+  script: IProduct;
 }
 
-const ScriptsAuction = ({ setOpenAcceptOffer }: IProps) => {
+const ScriptsAuction = ({ script }: IProps) => {
   const { query, push } = useRouter();
+  const { rejectBid } = BidsApi();
+  const [openAcceptOffer, setOpenAcceptOffer] = useState<boolean>(false);
 
   const handleOpenAcceptOfferModal = (
     event: React.PointerEvent<HTMLButtonElement>
@@ -39,6 +44,11 @@ const ScriptsAuction = ({ setOpenAcceptOffer }: IProps) => {
     event.stopPropagation();
     setOpenAcceptOffer(true);
   };
+
+  const rejectOfferFunc =
+    (script_basic_id: string, amount: number) => async () => {
+      await rejectBid({ script_basic_id, amount });
+    };
 
   return (
     <div className="mt-12 md:mt-20 grid">
@@ -75,78 +85,94 @@ const ScriptsAuction = ({ setOpenAcceptOffer }: IProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {auctions.map((auction) => (
-              <TableRow
-                key={auction.id}
-                onClick={() =>
-                  push(`${routes.listingsDashboard}/${query.scriptSlug}/bids`)
-                }
-                sx={{
-                  "&:nth-of-type(odd)": {
-                    backgroundColor: "#FBF9FF",
-                  },
-                  "&:nth-of-type(event)": {
-                    backgroundColor: "#FFF",
-                  },
-                  " td, th": {
-                    border: 0,
-                  },
-                }}
-                className="cursor-pointer hover:bg-primary-50/40 duration-200"
-              >
-                <TableCell className="w-40 lg:py-6">
-                  <Typography
-                    variant="h6"
-                    className="font-normal text-neutral-700"
-                  >
-                    {auction.name}
-                  </Typography>
-                </TableCell>
-                <TableCell align="center" className="w-20">
-                  <Typography
-                    variant="h6"
-                    className="text-primary-700 font-semibold"
-                  >
-                    $ {auction.price}
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <div className="flex justify-end min-w-[240px]">
-                    <div className="flex md:gap-8">
-                      <Button
-                        variant="text"
-                        color="success"
-                        onClick={handleOpenAcceptOfferModal}
-                        className="hidden sm:flex font-semibold text-success-500"
-                      >
-                        Accept Offer
-                      </Button>
-                      <Button
-                        variant="text"
-                        color="warning"
-                        className="hidden sm:flex font-semibold text-secondary-700"
-                      >
-                        Decline
-                      </Button>
+            {script.market_bid_script.map((auction) => (
+              <>
+                <TableRow
+                  key={auction.id}
+                  onClick={() =>
+                    push(`${routes.listingsDashboard}/${query.id}/bids`)
+                  }
+                  sx={{
+                    "&:nth-of-type(odd)": {
+                      backgroundColor: "#FBF9FF",
+                    },
+                    "&:nth-of-type(event)": {
+                      backgroundColor: "#FFF",
+                    },
+                    " td, th": {
+                      border: 0,
+                    },
+                  }}
+                  className="cursor-pointer hover:bg-primary-50/40 duration-200"
+                >
+                  <TableCell className="w-40 lg:py-6">
+                    <Typography
+                      variant="h6"
+                      className="font-normal text-neutral-700"
+                    >
+                      {auction.user.name}
+                    </Typography>
+                  </TableCell>
+                  <TableCell align="center" className="w-20">
+                    <Typography
+                      variant="h6"
+                      className="text-primary-700 font-semibold"
+                    >
+                      $ {auction.amount}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex justify-end min-w-[240px]">
+                      <div className="flex md:gap-8">
+                        <Button
+                          variant="text"
+                          color="success"
+                          onClick={handleOpenAcceptOfferModal}
+                          className="hidden sm:flex font-semibold text-success-500"
+                        >
+                          Accept Offer
+                        </Button>
+                        <Button
+                          onClick={rejectOfferFunc(
+                            auction.script_basic_id,
+                            auction.amount
+                          )}
+                          variant="text"
+                          color="warning"
+                          className="hidden sm:flex font-semibold text-secondary-700"
+                        >
+                          Decline
+                        </Button>
+                      </div>
+                      <ButtonGroup className="gap-16">
+                        <IconButton
+                          color="success"
+                          onClick={handleOpenAcceptOfferModal}
+                          className="flex sm:hidden text-success-500"
+                        >
+                          <MdDone />
+                        </IconButton>
+                        <IconButton
+                          onClick={rejectOfferFunc(
+                            auction.script_basic_id,
+                            auction.amount
+                          )}
+                          color="warning"
+                          className="flex sm:hidden text-secondary-700"
+                        >
+                          <AiOutlineClose />
+                        </IconButton>
+                      </ButtonGroup>
                     </div>
-                    <ButtonGroup className="gap-16">
-                      <IconButton
-                        color="success"
-                        onClick={handleOpenAcceptOfferModal}
-                        className="flex sm:hidden text-success-500"
-                      >
-                        <MdDone />
-                      </IconButton>
-                      <IconButton
-                        color="warning"
-                        className="flex sm:hidden text-secondary-700"
-                      >
-                        <AiOutlineClose />
-                      </IconButton>
-                    </ButtonGroup>
-                  </div>
-                </TableCell>
-              </TableRow>
+                  </TableCell>
+                </TableRow>
+                <AcceptOfferModal
+                  script={script}
+                  auction={auction}
+                  openAcceptOffer={openAcceptOffer}
+                  setOpenAcceptOffer={setOpenAcceptOffer}
+                />
+              </>
             ))}
           </TableBody>
         </Table>

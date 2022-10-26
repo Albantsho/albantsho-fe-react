@@ -12,6 +12,11 @@ interface IUserBid {
   amount: number;
 }
 
+interface IRefreshedBid {
+  script_basic_id: string;
+  amount: number;
+}
+
 const BidsApi = (controller?: AbortController) => {
   const useUser = () => {
     const { user } = useUserStore(
@@ -47,7 +52,7 @@ const BidsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async acceptBid(payload: string) {
+    async acceptBid(payload: IRefreshedBid) {
       const res = await api.get(`/market/bid/accept/${payload}`, {
         signal: controller?.signal,
         headers: {
@@ -58,7 +63,7 @@ const BidsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async rejectBid(payload: string) {
+    async rejectBid(payload: IRefreshedBid) {
       const res = await api.get(`/market/bid/reject/${payload}`, {
         signal: controller?.signal,
         headers: {

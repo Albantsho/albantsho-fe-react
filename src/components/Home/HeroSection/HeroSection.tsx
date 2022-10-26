@@ -72,7 +72,7 @@ const HeroSection = () => {
               </Button>
             </Link>
           </animated.div>
-          {lgScreen && (
+          {/* {lgScreen && (
             <AnimatedScriptCard
               className="w-full"
               style={cardAnim}
@@ -81,16 +81,13 @@ const HeroSection = () => {
                 boxShadow: "0px 35px 60px 0px #0000004D",
               }}
               script={{
-                productId: "1",
-                genres: ["Feature film"],
                 title: "Black Onion",
-                desc: "One platform sets out to enable better stories one script at a time.",
-                rate: 4,
-                image: "/assets/images/julie.jpg",
-                reviewed: true,
+                script_themes:
+                  "One platform sets out to enable better stories one script at a time.",
+                script_image: "/assets/images/julie.jpg",
               }}
             />
-          )}
+          )} */}
         </div>
       </div>
     </Box>

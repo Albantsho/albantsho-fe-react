@@ -23,6 +23,11 @@ const nextConfig = {
         destination: '/dashboard/listings',
         permanent: false,
       },
+      {
+        source: '/wallet',
+        destination: '/wallet/help',
+        permanent: false,
+      },
     ];
   },
 };

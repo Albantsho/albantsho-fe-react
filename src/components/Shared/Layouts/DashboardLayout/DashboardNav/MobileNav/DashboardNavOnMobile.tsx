@@ -1,4 +1,6 @@
 import MenuIcon from "@assets/icons/menu.svg";
+import wallet from "@assets/icons/wallet.svg";
+import alert from "@assets/images/alert.png";
 import {
   Badge,
   Divider,
@@ -11,24 +13,21 @@ import {
   ListItemText,
   SvgIcon,
 } from "@mui/material";
-import Image from "next/image";
-import useMobileNavDashboard from "./useMobileNavDashboard";
-import alert from "@assets/images/alert.png";
 import Logo from "@shared/Logo/Logo";
-import wallet from "@assets/icons/wallet.svg";
-import ProfileMenu from "../../../../ProfileMenu/ProfileMenu";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import Deposit from "pages/wallet/deposit";
 import {
   AiFillInstagram,
   AiOutlineClose,
   AiOutlineQuestionCircle,
 } from "react-icons/ai";
-import { useRouter } from "next/router";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
-import type { IconType } from "react-icons/lib";
-import Deposit from "pages/wallet/deposit";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
 import routes from "routes/routes";
+import ProfileMenu from "../../../../ProfileMenu/ProfileMenu";
+import useMobileNavDashboard from "./useMobileNavDashboard";
 
 interface IProps {
   isTransparent: boolean;
@@ -155,7 +154,7 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
               </ListItem>
             ))}
 
-          {user.user_type !== "user" &&
+          {user.user_type === "producer" &&
             walletLinksForProducer.map((walletLink) => (
               <ListItem disablePadding className="py-1" key={walletLink.title}>
                 <ListItemButton

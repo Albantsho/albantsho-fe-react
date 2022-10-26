@@ -34,10 +34,7 @@ const useUser = () => {
 
 const MobileNav = ({ links, isTransparent }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNav();
-
   const { user } = useUser();
-
-  console.log("🚀 ~ file: MobileNav.tsx ~ line 27 ~ MobileNav ~ user", user);
 
   return (
     <div className="flex items-center lg:hidden">

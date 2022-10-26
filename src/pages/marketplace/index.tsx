@@ -1,29 +1,31 @@
 import MarketplaceLayout from "@shared/Layouts/MarketplaceLayout/MarketplaceLayout";
 import MarketplaceProducts from "components/Marketplace/Index/MarketplaceProducts/MarketplaceProducts";
-import PaginationMarketList from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
 import MarketplaceTabs from "components/Marketplace/Index/MarketplaceTabs/MarketplaceTabs";
+import PaginationMarketList from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
 import Head from "next/head";
+import { DotLoader } from "react-spinners";
 import { NextPageWithLayout } from "../_app";
-import { useEffect } from "react";
-import useMarketplaceApi from "apis/Marketplace.api";
+import useMarketPlace from "./useMarketPlace";
 
 const Marketplace: NextPageWithLayout = () => {
-  const { getScripts } = useMarketplaceApi();
-  useEffect(() => {
-    async function fetchScripts() {
-      const res = await getScripts();
-    }
-    fetchScripts();
-  }, []);
+  const { loading, scripts } = useMarketPlace();
 
   return (
     <>
       <Head>
         <title>Albantsho || Marketplace</title>
       </Head>
-      <MarketplaceTabs />
-      <MarketplaceProducts />
-      <PaginationMarketList />
+      <div className="min-h-screen">
+        {loading && scripts.length === 0 ? (
+          <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        ) : (
+          <>
+            <MarketplaceTabs />
+            <MarketplaceProducts scripts={scripts} />
+            <PaginationMarketList />
+          </>
+        )}
+      </div>
     </>
   );
 };

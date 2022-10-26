@@ -14,7 +14,7 @@ const DashboardNavOnDesktop = () => {
             </div>
           </Badge>
         </IconButton>
-        {/* <ProfileMenu /> */}
+        <ProfileMenu />
       </div>
     </div>
   );

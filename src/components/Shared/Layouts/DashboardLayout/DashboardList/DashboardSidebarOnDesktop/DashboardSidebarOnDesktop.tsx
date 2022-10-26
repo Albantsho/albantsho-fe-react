@@ -109,7 +109,7 @@ const DashboardSidebarOnDesktop = () => {
                 </Link>
               </ListItem>
             ))}
-          {user.user_type !== "user" &&
+          {user.user_type === "producer" &&
             listRoutes2.map((item) => (
               <ListItem
                 disablePadding

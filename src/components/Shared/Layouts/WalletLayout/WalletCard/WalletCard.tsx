@@ -31,7 +31,7 @@ const useUser = () => {
   return { user };
 };
 
-const WalletCart = () => {
+const WalletCard = () => {
   const { push, route } = useRouter();
   const { user } = useUser();
 
@@ -62,7 +62,7 @@ const WalletCart = () => {
         </div>
         <Divider className="mt-6 mb-4 hidden md:block" />
         <List className="md:mb-2 hidden md:flex flex-col gap-y-2">
-          {user.user_type === "users" && (
+          {user.user_type === "user" && (
             <ListItemButton
               TouchRippleProps={{ className: "text-primary-main" }}
               className="hover:bg-primary-50/25"
@@ -164,4 +164,4 @@ const WalletCart = () => {
   );
 };
 
-export default WalletCart;
+export default WalletCard;

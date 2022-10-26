@@ -1,4 +1,4 @@
-import { IMarketBidScript } from "./market_bid_script";
+import { IMarketBidScript } from "./market-bid-script";
 
 export interface IProduct {
   act_structure: string;

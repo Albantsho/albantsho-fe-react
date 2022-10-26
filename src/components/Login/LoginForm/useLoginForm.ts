@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import routes from "routes/routes";
 import { useUserStore } from "app/user.store";
 import shallow from "zustand/shallow";
+import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 interface IAuthLogin {
   email: string;
   password: string;
@@ -15,7 +17,7 @@ interface IAuthLogin {
 const useLoginForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
   const { login } = useAuthApi();
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const useUser = () => {
     const { authenticationUser } = useUserStore(
       (store) => ({
@@ -42,12 +44,11 @@ const useLoginForm = () => {
   const onSubmit = async (data: IAuthLogin) => {
     try {
       const res = await login(data);
-      console.log(res);
-
-      await authenticationUser(res.data);
-      await push(routes.home);
+      authenticationUser(res.data);
+      successHandler(res.message);
+      replace(routes.home);
     } catch (error) {
-      console.log(error);
+      errorHandler(error);
     }
   };
 

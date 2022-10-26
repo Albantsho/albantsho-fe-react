@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense, useEffect, useState } from "react";
+import { DotLoader } from "react-spinners";
 
 const MarketScriptChips = dynamic(
   () =>
@@ -35,15 +36,12 @@ const ScriptInfoPage = () => {
   const [loading, setLoading] = useState(true);
   const { getScript } = useMarketplaceApi();
   const router = useRouter();
-  console.log("🚀 ~ file: [id].tsx ~ line 38 ~ ScriptInfoPage ~ router", {
-    router,
-  });
 
   useEffect(() => {
     async function getScriptsDate() {
       try {
         const res = await getScript(router.query.id as string);
-        setScript(res.data);
+        setScript(res);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -72,7 +70,7 @@ const ScriptInfoPage = () => {
           </Suspense>
         </>
       ) : (
-        <h2>loading</h2>
+        <DotLoader color="#7953B5" className="mx-auto mt-10" />
       )}
     </>
   );
