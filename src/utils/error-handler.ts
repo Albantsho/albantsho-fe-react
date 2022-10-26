@@ -5,7 +5,11 @@ import { toast } from "react-toastify";
 const errorHandler = (error: unknown) => {
   if (axios.isAxiosError(error)) {
     const responseData = error.response?.data as IResponseError;
-    toast.error(responseData?.data?.email || responseData.message);
+    toast.error(
+      responseData?.data?.email ||
+        responseData?.message ||
+        "Something went wrong, Please try again"
+    );
     return;
   }
 

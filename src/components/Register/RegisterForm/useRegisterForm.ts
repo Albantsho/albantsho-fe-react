@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
-import successHandler from "utils/success-handler";
 import shallow from "zustand/shallow";
 import { registerSchema } from "./validation/register.validation";
 
@@ -63,7 +62,6 @@ const useRegisterForm = () => {
     try {
       setLoading(true);
       const res = await registerApi(data);
-      successHandler(res.message);
       authenticationUser(res.data);
       replace(routes.welcome);
       // replace(routes.verifyEmail);
