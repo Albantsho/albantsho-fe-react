@@ -57,6 +57,10 @@ const useRegisterForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
 
   const onSubmit = async (data: IRegisterFormValues) => {
+    console.log(
+      "🚀 ~ file: useRegisterForm.ts ~ line 61 ~ onSubmit ~ data",
+      data
+    );
     try {
       setLoading(true);
       const res = await registerApi(data);

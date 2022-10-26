@@ -1,8 +1,7 @@
 import useNotificationsApi from "apis/Notifications.api";
 import { useState } from "react";
 
-const useMobileNavMobile = () => {
-  const [open, setOpen] = useState(false);
+const useDashboardNavOnDesktop = () => {
   const [notificationList, setNotificationList] = useState([]);
   const { getUserInformation } = useNotificationsApi();
 
@@ -11,16 +10,6 @@ const useMobileNavMobile = () => {
     setNotificationList(res.data);
   };
 
-  const handleToggleDrawer = (open: boolean) => () => {
-    setOpen(open);
-  };
-
-  return {
-    open,
-    handleToggleDrawer,
-    notificationList,
-    getNotifications,
-  };
+  return { getNotifications, notificationList };
 };
-
-export default useMobileNavMobile;
+export default useDashboardNavOnDesktop;

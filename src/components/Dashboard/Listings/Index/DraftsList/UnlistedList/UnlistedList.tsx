@@ -1,8 +1,7 @@
-import { Button, Chip, Divider, Paper, Typography } from "@mui/material";
-import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
 import beautySmall from "@assets/images/beauty-small.jpg";
-import React from "react";
+import { Button, Chip, Divider, Paper, Typography } from "@mui/material";
+import { IProduct } from "interfaces/product";
+import React, { Dispatch, SetStateAction } from "react";
 
 const UnlistedItems = [
   {
@@ -49,9 +48,10 @@ const UnlistedItems = [
 
 interface IProps {
   setOpenRelistScript: Dispatch<SetStateAction<boolean>>;
+  unListedScripts: IProduct[];
 }
 
-const UnlistedList = ({ setOpenRelistScript }: IProps) => {
+const UnlistedList = ({ setOpenRelistScript, unListedScripts }: IProps) => {
   return (
     <Paper elevation={0} className="mt-4 sm:mt-6 bg-white shadow-primary">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
@@ -71,20 +71,17 @@ const UnlistedList = ({ setOpenRelistScript }: IProps) => {
         <Typography></Typography>
       </div>
       <div className="px-5 xl:px-14 overflow-hidden">
-        {UnlistedItems.map((script, index) => (
+        {unListedScripts.map((script, index) => (
           <React.Fragment key={script.id}>
             <div
               data-aos="fade-up"
               className="flex py-6 items-center sm:justify-between xl:justify-start"
             >
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-14 lg:max-w-[445px] ">
-                <Image
-                  width="64"
-                  height="64"
-                  className="rounded-md flex-shrink-0"
+                <img
+                  className="rounded-md flex-shrink-0 w-16 h-16"
                   loading="lazy"
-                  src={script.image}
-                  alt={script.title}
+                  src={script.script_image}
                 />
 
                 <div className="flex-grow sm:max-w-[271px] min-w-[170px] ">
@@ -95,7 +92,7 @@ const UnlistedList = ({ setOpenRelistScript }: IProps) => {
                     {script.title}
                   </Typography>
                   <Typography variant="caption" className="text-stone-800">
-                    {script.description}
+                    {script.script_themes}
                   </Typography>
                 </div>
                 <Button
@@ -113,7 +110,7 @@ const UnlistedList = ({ setOpenRelistScript }: IProps) => {
               <div className="hidden md:flex lg:hidden xl:flex gap-4 justify-start  flex-col items-center md:items-center lg:items-end xl:items-start xl:ml-2">
                 <div className="xl:min-w-[138px]">
                   <Chip
-                    label={script.scriptType}
+                    label={script.script_format}
                     className=" py-5 px-4  rounded-md bg-tinted-100/80 text-neutral-800 w-fit"
                   />
                 </div>

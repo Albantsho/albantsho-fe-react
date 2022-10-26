@@ -1,23 +1,7 @@
 import { AppBar, Toolbar, type AppBarProps } from "@mui/material";
 import { useMemo } from "react";
-import { RiDownloadLine } from "react-icons/ri";
-import routes from "routes/routes";
 import DashboardNavOnDesktop from "./DesktopNav/DashboardNavOnDesktop";
 import DashboardNavOnMobile from "./MobileNav/DashboardNavOnMobile";
-import Deposit from "@assets/icons/deposit.svg";
-import { TbArrowsSort } from "react-icons/tb";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
-
-const walletLinks = [
-  { title: "Withdraw", href: routes.withdrawWallet, icon: RiDownloadLine },
-  { title: "Deposit", href: routes.depositWallet, icon: Deposit },
-  {
-    title: "Transaction History",
-    href: routes.transactionHistoryWallet,
-    icon: TbArrowsSort,
-  },
-  { title: "Help", href: routes.helpWallet, icon: AiOutlineQuestionCircle },
-];
 
 const DashboardNav = ({ color = "transparent", ...props }: AppBarProps) => {
   const isTransparent = useMemo(() => color === "transparent", [color]);
@@ -31,14 +15,13 @@ const DashboardNav = ({ color = "transparent", ...props }: AppBarProps) => {
       {...props}
     >
       <Toolbar
+        data-aos="fade-down"
+        data-aos-duration="300"
         className="py-3 lg:py-4 px-5 sm:px-10  mx-auto w-full justify-between"
         component="nav"
       >
         <DashboardNavOnDesktop />
-        <DashboardNavOnMobile
-          walletLinks={walletLinks}
-          isTransparent={isTransparent}
-        />
+        <DashboardNavOnMobile isTransparent={isTransparent} />
       </Toolbar>
     </AppBar>
   );

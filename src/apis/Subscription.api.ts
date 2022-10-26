@@ -1,4 +1,5 @@
-import useUserStore from "app/user.store";
+import { useUserStore } from "app/user.store";
+import shallow from "zustand/shallow";
 import api from "./configs/axios.config";
 
 interface ISubscriptions {
@@ -7,7 +8,19 @@ interface ISubscriptions {
 }
 
 const useSubscriptionApi = (controller?: AbortController) => {
-  const { token } = useUserStore((state) => state.user);
+  const useUser = () => {
+    const { user } = useUserStore(
+      (store) => ({
+        user: store.user,
+      }),
+      shallow
+    );
+    return { user };
+  };
+
+  const {
+    user: { token },
+  } = useUser();
 
   return {
     async subscription(payload: ISubscriptions) {

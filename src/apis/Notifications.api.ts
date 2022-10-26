@@ -1,8 +1,21 @@
-import useUserStore from "app/user.store";
+import { useUserStore } from "app/user.store";
+import shallow from "zustand/shallow";
 import api from "./configs/axios.config";
 
 const useNotificationsApi = (controller?: AbortController) => {
-  const { token } = useUserStore((state) => state.user);
+  const useUser = () => {
+    const { user } = useUserStore(
+      (store) => ({
+        user: store.user,
+      }),
+      shallow
+    );
+    return { user };
+  };
+
+  const {
+    user: { token },
+  } = useUser();
 
   return {
     async getUserInformation() {

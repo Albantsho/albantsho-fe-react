@@ -19,7 +19,7 @@ import { AiFillInstagram, AiOutlineClose } from "react-icons/ai";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import ProfileMenu from "../../ProfileMenu/ProfileMenu";
 import alert from "@assets/images/alert.png";
-import useMobileNavDashboard from "./useMobileNavMobile";
+import useMobileNavMobile from "./useMobileNavMobile";
 import ProfileLogo from "../assets/profile-logo.svg";
 import Link from "next/link";
 import type { IconType } from "react-icons/lib";
@@ -34,7 +34,8 @@ interface IProps {
 }
 
 const ProfileNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
-  const { handleToggleDrawer, open } = useMobileNavDashboard();
+  const { handleToggleDrawer, open, getNotifications, notificationList } =
+    useMobileNavMobile();
   const { push, route } = useRouter();
 
   return (
@@ -48,8 +49,11 @@ const ProfileNavOnMobile = ({ walletLinks, isTransparent }: IProps) => {
           Dashboard
         </Button>
       </Link>
-      <IconButton className="ml-auto mr-4 sm:mr-7 mt-1 self-center max-h-[31px]">
-        <Badge badgeContent={1} color="error">
+      <IconButton
+        onClick={getNotifications}
+        className="ml-auto mr-4 sm:mr-7 mt-1 self-center max-h-[31px]"
+      >
+        <Badge badgeContent={notificationList.length} color="error">
           <div>
             <Image src={alert} alt="alert" />
           </div>

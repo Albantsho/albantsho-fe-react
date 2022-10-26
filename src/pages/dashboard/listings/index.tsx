@@ -3,13 +3,15 @@ import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/DashboardSearch";
 import ClosedList from "components/Dashboard/Listings/Index/ClosedList/ClosedList";
 import DraftsList from "components/Dashboard/Listings/Index/DraftsList/DraftsList";
-import OpeningLists from "components/Dashboard/Listings/Index/OpeningList/OpeningLists";
+import OpeningList from "components/Dashboard/Listings/Index/OpeningList/OpeningList";
 import TabButtons from "components/Dashboard/Listings/Index/TabButtons/TabButtons";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
+import { DotLoader } from "react-spinners";
 import { NextPageWithLayout } from "../../_app";
-import dynamic from "next/dynamic";
+import useListings from "./useListings";
 
 const AddScriptToCompletedModal = dynamic(
   () =>
@@ -34,10 +36,18 @@ const UnListingItemModal = dynamic(
 );
 
 const Listings: NextPageWithLayout = () => {
-  const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
-  const [openRelistScript, setOpenRelistScript] = useState<boolean>(false);
-  const [openAddToScript, setOpenAddToScript] = useState<boolean>(false);
-  const [openUnListingItem, setOpenUnListingItem] = useState<boolean>(false);
+  const {
+    loading,
+    openAddToScript,
+    openCreateScript,
+    openRelistScript,
+    openUnListingItem,
+    scripts,
+    setOpenAddToScript,
+    setOpenCreateScript,
+    setOpenRelistScript,
+    setOpenUnListingItem,
+  } = useListings();
   const { query } = useRouter();
 
   return (
@@ -45,51 +55,62 @@ const Listings: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Listings </title>
       </Head>
-      <TabButtons />
-      <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
-      <Suspense fallback={null}>
-        <CreateScriptModal
-          openCreateScript={openCreateScript}
-          setOpenCreateScript={setOpenCreateScript}
-        />
-      </Suspense>
-      {(!query.tab || query.tab === "opening-list") && (
+
+      {loading && scripts.length === 0 ? (
+        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+      ) : (
         <>
-          <OpeningLists setOpenUnListingItem={setOpenUnListingItem} />
+          <TabButtons />
+          <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
           <Suspense fallback={null}>
-            <UnListingItemModal
-              openUnListingItem={openUnListingItem}
-              setOpenUnListingItem={setOpenUnListingItem}
+            <CreateScriptModal
+              openCreateScript={openCreateScript}
+              setOpenCreateScript={setOpenCreateScript}
             />
           </Suspense>
+          {(!query.tab || query.tab === "opening-list") && (
+            <>
+              <OpeningList
+                scripts={scripts}
+                setOpenUnListingItem={setOpenUnListingItem}
+              />
+              <Suspense fallback={null}>
+                <UnListingItemModal
+                  openUnListingItem={openUnListingItem}
+                  setOpenUnListingItem={setOpenUnListingItem}
+                />
+              </Suspense>
+            </>
+          )}
+          {query.tab === "drafts" && (
+            <>
+              <DraftsList
+                scripts={scripts}
+                setOpenAddToScript={setOpenAddToScript}
+                setOpenRelistScript={setOpenRelistScript}
+              />
+              <Suspense fallback={null}>
+                <AddScriptToCompletedModal
+                  openAddToScript={openAddToScript}
+                  setOpenAddToScript={setOpenAddToScript}
+                />
+                <RelistScriptModal
+                  openRelistScript={openRelistScript}
+                  setOpenRelistScript={setOpenRelistScript}
+                />
+              </Suspense>
+            </>
+          )}
+          {query.tab === "closed-list" && <ClosedList scripts={scripts} />}
+          <Fab
+            onClick={() => setOpenCreateScript(true)}
+            color="primary"
+            className=" block md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
+          >
+            +
+          </Fab>
         </>
       )}
-      {query.tab === "drafts" && (
-        <>
-          <DraftsList
-            setOpenAddToScript={setOpenAddToScript}
-            setOpenRelistScript={setOpenRelistScript}
-          />
-          <Suspense fallback={null}>
-            <AddScriptToCompletedModal
-              openAddToScript={openAddToScript}
-              setOpenAddToScript={setOpenAddToScript}
-            />
-            <RelistScriptModal
-              openRelistScript={openRelistScript}
-              setOpenRelistScript={setOpenRelistScript}
-            />
-          </Suspense>
-        </>
-      )}
-      {query.tab === "closed-list" && <ClosedList />}
-      <Fab
-        onClick={() => setOpenCreateScript(true)}
-        color="primary"
-        className=" block md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
-      >
-        +
-      </Fab>
     </>
   );
 };

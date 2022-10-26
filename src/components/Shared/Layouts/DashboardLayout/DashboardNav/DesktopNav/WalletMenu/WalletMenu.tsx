@@ -15,9 +15,22 @@ import deposit from "@assets/icons/deposit.svg";
 import wallet from "@assets/icons/wallet.svg";
 import { useState } from "react";
 import routes from "routes/routes";
+import { useUserStore } from "app/user.store";
+import shallow from "zustand/shallow";
+
+const useUser = () => {
+  const { user } = useUserStore(
+    (store) => ({
+      user: store.user,
+    }),
+    shallow
+  );
+  return { user };
+};
 
 const WalletMenu = () => {
   const { push } = useRouter();
+  const { user } = useUser();
   const [openWalletMenu, setOpenWalletMenu] = useState<null | HTMLElement>(
     null
   );
@@ -75,46 +88,50 @@ const WalletMenu = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem
-          className="px-6 py-3"
-          onClick={() => push(`${routes.withdrawWallet}`)}
-        >
-          <ListItemIcon>
-            <SvgIcon
-              fontSize="inherit"
-              className="text-primary-700"
-              inheritViewBox
-              component={RiDownloadLine}
-            />
-          </ListItemIcon>
-          <ListItemText
-            primaryTypographyProps={{
-              className: "text-primary-700 futura font-normal leading-normal",
-            }}
+        {user.user_type === "user" && (
+          <MenuItem
+            className="px-6 py-3"
+            onClick={() => push(`${routes.withdrawWallet}`)}
           >
-            Withdraw
-          </ListItemText>
-        </MenuItem>
-        <MenuItem
-          className="px-6 py-3"
-          onClick={() => push(`${routes.depositWallet}`)}
-        >
-          <ListItemIcon>
-            <SvgIcon
-              fontSize="inherit"
-              className="text-primary-700"
-              inheritViewBox
-              component={deposit}
-            />
-          </ListItemIcon>
-          <ListItemText
-            primaryTypographyProps={{
-              className: "text-primary-700 futura font-normal leading-normal",
-            }}
+            <ListItemIcon>
+              <SvgIcon
+                fontSize="inherit"
+                className="text-primary-700"
+                inheritViewBox
+                component={RiDownloadLine}
+              />
+            </ListItemIcon>
+            <ListItemText
+              primaryTypographyProps={{
+                className: "text-primary-700 futura font-normal leading-normal",
+              }}
+            >
+              Withdraw
+            </ListItemText>
+          </MenuItem>
+        )}
+        {user.user_type !== "user" && (
+          <MenuItem
+            className="px-6 py-3"
+            onClick={() => push(`${routes.depositWallet}`)}
           >
-            Deposit
-          </ListItemText>
-        </MenuItem>
+            <ListItemIcon>
+              <SvgIcon
+                fontSize="inherit"
+                className="text-primary-700"
+                inheritViewBox
+                component={deposit}
+              />
+            </ListItemIcon>
+            <ListItemText
+              primaryTypographyProps={{
+                className: "text-primary-700 futura font-normal leading-normal",
+              }}
+            >
+              Deposit
+            </ListItemText>
+          </MenuItem>
+        )}
         <MenuItem
           className="px-6 py-3"
           onClick={() => push(`${routes.transactionHistoryWallet}`)}

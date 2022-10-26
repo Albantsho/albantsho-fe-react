@@ -16,6 +16,15 @@ const nextConfig = {
     });
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/dashboard',
+        destination: '/dashboard/listings',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import React from "react";
+import { IProduct } from "interfaces/product";
 
 const uncompletedList = [
   {
@@ -56,9 +57,13 @@ const uncompletedList = [
 
 interface IProps {
   setOpenAddToScript: Dispatch<SetStateAction<boolean>>;
+  unCompletedScripts: IProduct[];
 }
 
-const UncompletedList = ({ setOpenAddToScript }: IProps) => {
+const UncompletedList = ({
+  setOpenAddToScript,
+  unCompletedScripts,
+}: IProps) => {
   return (
     <Paper elevation={0} className="mt-4 sm:mt-6 shadow-primary bg-white">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
@@ -78,7 +83,7 @@ const UncompletedList = ({ setOpenAddToScript }: IProps) => {
         <Typography></Typography>
       </div>
       <div className="px-5 xl:px-14 overflow-hidden">
-        {uncompletedList.map((listItem, index) => (
+        {unCompletedScripts.map((listItem, index) => (
           <React.Fragment key={listItem.id}>
             <div
               data-aos="fade-up"
@@ -86,23 +91,21 @@ const UncompletedList = ({ setOpenAddToScript }: IProps) => {
             >
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-14 lg:max-w-[445px] ">
                 <div className="flex gap-3 items-end sm:items-start">
-                  <Image
-                    width="64"
-                    height="64"
-                    className="rounded-md flex-shrink-0"
+                  <img
+                    className="rounded-md flex-shrink-0 w-16 h-16"
                     loading="lazy"
-                    src={listItem.image}
+                    src={listItem.script_image}
                     alt={listItem.title}
                   />
 
                   <Tooltip title="Progress">
                     <Chip
-                      label={`${listItem.progress}`}
+                      label={`${20}% done`}
                       className="bg-success-50 px-1 flex-shrink font-xs font-semibold sm:hidden text-success-500"
                     />
                   </Tooltip>
                 </div>
-                <div className="flex-grow sm:max-w-[271px] min-w-[170px] ">
+                <div className="flex-grow sm:w-[271px] min-w-[170px] ">
                   <Typography
                     variant="body1"
                     className="futura font-semibold text-primary-700"
@@ -110,7 +113,7 @@ const UncompletedList = ({ setOpenAddToScript }: IProps) => {
                     {listItem.title}
                   </Typography>
                   <Typography variant="caption" className="text-stone-800">
-                    {listItem.description}
+                    {listItem.script_themes}
                   </Typography>
                 </div>
                 <Button
@@ -127,13 +130,13 @@ const UncompletedList = ({ setOpenAddToScript }: IProps) => {
               </div>
               <div className="hidden md:flex lg:hidden xl:flex gap-4 justify-start  flex-col items-center md:items-center lg:items-end xl:items-start xl:ml-2">
                 <Chip
-                  label={listItem.progress}
+                  label={`${20}% done`}
                   className="py-5 px-4 hidden md:flex rounded-md bg-success-50 text-success-500"
                 />
               </div>
               <div className="sm:min-w-[116px] justify-end xl:py-10 sm:pr-0 items-center hidden flex-col gap-2 sm:flex xl:ml-auto">
                 <Chip
-                  label={listItem.progress}
+                  label={`${20}% done`}
                   className="py-5 px-4 w-full md:hidden lg:flex xl:hidden rounded-md bg-success-50 text-success-500"
                 />
                 <Button

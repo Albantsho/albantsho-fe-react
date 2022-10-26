@@ -13,11 +13,22 @@ import CustomInput from "@shared/CustomInput/CustomInput";
 import camera from "./assets/camera.svg";
 import pencil from "../assets/pencil.svg";
 import { useState } from "react";
-import useUserStore from "app/user.store";
+import { useUserStore } from "app/user.store";
+import shallow from "zustand/shallow";
+
+const useUser = () => {
+  const { user } = useUserStore(
+    (store) => ({
+      user: store.user,
+    }),
+    shallow
+  );
+  return { user };
+};
 
 const BasicPersonalInformation = () => {
   const [availableChangeValue, setAvailableChangeValue] = useState(true);
-  const user = useUserStore((state) => state.user);
+  const { user } = useUser();
 
   return (
     <div>

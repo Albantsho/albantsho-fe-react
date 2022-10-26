@@ -1,3 +1,4 @@
+import beautySmall from "@assets/images/beauty-small.jpg";
 import {
   Chip,
   Divider,
@@ -8,13 +9,13 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import { IProduct } from "interfaces/product";
 import Image from "next/image";
-import beautySmall from "@assets/images/beauty-small.jpg";
-import { IoIosMore } from "react-icons/io";
-import { Dispatch, SetStateAction, useState } from "react";
 import Link from "next/link";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
+import { IoIosMore } from "react-icons/io";
 import routes from "routes/routes";
+import useOpeningList from "./useOpeningList";
 
 const listScripts = [
   {
@@ -66,17 +67,22 @@ const listScripts = [
 
 interface IProps {
   setOpenUnListingItem: Dispatch<SetStateAction<boolean>>;
+  scripts: IProduct[];
 }
 
-const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
-  const [openMenuItem, setOpenMenuItem] = useState<null | HTMLElement>(null);
-  const open = Boolean(openMenuItem);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setOpenMenuItem(event.currentTarget);
-  };
-  const handleClose = () => {
-    setOpenMenuItem(null);
-  };
+const OpeningList = ({ setOpenUnListingItem, scripts }: IProps) => {
+  const {
+    handleCloseMenuItem,
+    handleOpenMenuItem,
+    openMenu,
+    openMenuItem,
+    setOpenMenuItem,
+  } = useOpeningList();
+
+  const openedScripts = scripts.filter(
+    (script) => script.script_market_status === "open"
+  );
+
   return (
     <Paper elevation={0} className="mt-4 bg-white mb-16 shadow-primary">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
@@ -101,7 +107,7 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
         </Typography>
       </div>
       <div className="px-5 xl:px-14 overflow-hidden">
-        {listScripts.map((script) => (
+        {openedScripts.map((script, index) => (
           <React.Fragment key={script.id}>
             <div
               data-aos="zoom-in"
@@ -110,26 +116,24 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
               <div className="flex flex-col sm:flex-row sm:mr-10 md:mr-6 lg:mr-8 gap-y-1 gap-x-3 xl:gap-5 sm:w-auto xl:mr-12 lg:max-w-[445px] 2xl:max-w-[425px] 2xl:mr-[65px]">
                 <div className="flex gap-3">
                   <div className="flex-shrink-0 mt-1">
-                    <Image
-                      className="rounded-md w-full h-full"
-                      loading="lazy"
-                      src={script.image}
-                      alt={script.title}
+                    <img
+                      className="rounded-md  w-16 h-16"
+                      src={script.script_image}
                     />
                   </div>
                   <Tooltip title="Bids">
                     <div
                       className={`${
-                        script.bids === 0
+                        script.market_bid_script.length === 0
                           ? "text-gray-300 border border-gray-300"
                           : "text-success-500 border border-success-500"
                       } w-9 h-9 flex justify-center sm:hidden self-center items-center  border rounded-full`}
                     >
-                      {script.bids}
+                      {script.market_bid_script.length}
                     </div>
                   </Tooltip>
                 </div>
-                <div className="sm:max-w-[271px]">
+                <div className="w-full sm:w-[271px] flex-1">
                   <Typography
                     variant="body1"
                     className="futura font-semibold text-primary-700"
@@ -137,27 +141,30 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                     {script.title}
                   </Typography>
                   <Typography variant="caption" className="text-stone-800">
-                    {script.description}
+                    {script.script_themes}
                   </Typography>
                 </div>
               </div>
               <Chip
-                className="py-5 px-4 hidden md:flex lg:hidden xl:flex self-center 2xl:mr-36 md:mr-10 bg-tinted-100/60 rounded-md  text-neutral-800"
-                label={script.type}
+                className="py-5 px-4 hidden md:flex lg:hidden xl:flex self-center 2xl:mr-36 md:mr-10 min-w-[146px] bg-tinted-100/60 rounded-md  text-neutral-800"
+                label={script.script_format}
               />
               <Tooltip title="Bids">
                 <div
                   className={`${
-                    script.bids === 0
+                    script.market_bid_script.length === 0
                       ? "text-gray-300 border border-gray-300"
                       : "text-success-500 border border-success-500"
                   } w-9 h-9 justify-center hidden sm:flex self-center lg:mr-auto lg:ml-0 xl:ml-10  md:ml-auto items-center  border rounded-full`}
                 >
-                  {script.bids}
+                  {script.market_bid_script.length}
                 </div>
               </Tooltip>
               <div className="flex self-center sm:ml-auto justify-center items-center">
-                <IconButton className="max-h-[46px]" onClick={handleClick}>
+                <IconButton
+                  className="max-h-[46px]"
+                  onClick={handleOpenMenuItem}
+                >
                   <IoIosMore className="text-3xl mt-1 sm:mt-0 text-primary-700" />
                 </IconButton>
                 <Menu
@@ -169,8 +176,8 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                   }}
                   className="shadow-none"
                   anchorEl={openMenuItem}
-                  open={open}
-                  onClose={handleClose}
+                  open={openMenu}
+                  onClose={handleCloseMenuItem}
                   anchorOrigin={{
                     vertical: "bottom",
                     horizontal: "center",
@@ -193,7 +200,7 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                           px: "25px",
                           py: 2,
                         }}
-                        onClick={handleClose}
+                        onClick={handleCloseMenuItem}
                       >
                         View Script
                       </MenuItem>
@@ -217,7 +224,7 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
                 </Menu>
               </div>
             </div>
-            {script.id < listScripts.length && (
+            {index < openedScripts.length - 1 && (
               <Divider className="hidden sm:flex" />
             )}
           </React.Fragment>
@@ -227,4 +234,4 @@ const OpeningLists = ({ setOpenUnListingItem }: IProps) => {
   );
 };
 
-export default OpeningLists;
+export default OpeningList;
