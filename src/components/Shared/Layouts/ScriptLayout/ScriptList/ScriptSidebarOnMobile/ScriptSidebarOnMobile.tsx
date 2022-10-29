@@ -5,7 +5,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import useScriptLayout from "../../useScriptLayout";
+import { SyntheticEvent, useState } from "react";
 import Comment from "../assets/comment.svg";
 import Document from "../assets/document.svg";
 import Export from "../assets/export.svg";
@@ -19,11 +19,18 @@ const routesArray = [
 ];
 
 const ScriptSidebarOnMobile = () => {
-  const { activeRoute, handleActiveRoute } = useScriptLayout();
+  const [activeRoute, setActiveRoute] = useState(0);
   const { query } = useRouter();
 
+  const handleActiveRoute = (
+    event: SyntheticEvent<Element, Event>,
+    newValue: number
+  ) => {
+    setActiveRoute(newValue);
+  };
+
   return (
-    <div className=" lg:hidden">
+    <div className="lg:hidden">
       <BottomNavigation
         showLabels
         value={activeRoute}

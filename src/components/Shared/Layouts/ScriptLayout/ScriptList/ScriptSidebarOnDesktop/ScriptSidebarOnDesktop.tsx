@@ -11,12 +11,10 @@ import {
   SvgIcon,
 } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
-import useScriptLayout from "../../useScriptLayout";
 import Comment from "../assets/comment.svg";
 import Document from "../assets/document.svg";
 import Export from "../assets/export.svg";
@@ -33,16 +31,26 @@ const listRoutes2 = [
 
 const drawerWidth = 340;
 
-interface IProps {
-  handleOpenCompleteDrawer: (value: number, route: string) => () => void;
-  openCompleteDrawer: boolean;
-}
+const ScriptSidebarOnDesktop = () => {
+  const { query, push } = useRouter();
+  const [openCompleteDrawer, setOpenCompleteDrawer] = useState(true);
+  console.log(openCompleteDrawer);
 
-const ScriptSidebarOnDesktop = ({
-  handleOpenCompleteDrawer,
-  openCompleteDrawer,
-}: IProps) => {
-  const { query } = useRouter();
+  const handleOpenCompleteDrawer = (value: number, route: string) => () => {
+    if (query.tab !== route.split("=")[1]) {
+      push(route);
+      setOpenCompleteDrawer(false);
+      console.log("one option");
+
+      return;
+    }
+    if (query.tab === route.split("=")[1]) {
+      setOpenCompleteDrawer((prevState) => !prevState);
+      push("");
+      console.log("two option");
+      return;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-primary-900">
@@ -115,7 +123,7 @@ const ScriptSidebarOnDesktop = ({
               </ListItemButton>
             </ListItem>
           ))}
-          <Divider className="my-10" />
+          <Divider className="my-10 bg-gray-400" />
           {listRoutes2.map((item) => (
             <ListItem
               disablePadding
