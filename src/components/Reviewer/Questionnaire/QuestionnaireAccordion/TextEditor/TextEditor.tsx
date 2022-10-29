@@ -29,6 +29,7 @@ const TextEditor = () => {
         <DesktopToolbar />
         <EditorDrawer />
         <Editable
+          className="isolation-auto -z-0"
           placeholder="Add comment..."
           spellCheck
           autoFocus

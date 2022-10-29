@@ -23,11 +23,11 @@ const MobileToolbar = () => {
   return (
     <div
       ref={ref}
-      className="absolute bottom-0 rounded-br-xl rounded-bl-xl right-0 left-0 shadow-primary bg-primary-50 flex gap-2 px-2 py-2 lg:hidden h-14"
+      className="absolute bottom-0 rounded-br-xl rounded-bl-xl right-0 left-0 shadow-primary bg-primary-50 flex gap-2 px-2 py-2 lg:hidden h-14 z-50"
     >
       <MarkButton format="bold" icon={BsTypeBold} />
-      <MarkButton format="italic" icon={FiItalic} />
       <ColorButton />
+      <MarkButton format="italic" icon={FiItalic} />
       {width! > 190 && (
         <MarkButton format="underline" icon={AiOutlineUnderline} />
       )}

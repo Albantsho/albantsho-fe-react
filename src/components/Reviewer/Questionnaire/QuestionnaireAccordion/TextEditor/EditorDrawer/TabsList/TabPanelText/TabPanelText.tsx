@@ -24,7 +24,7 @@ const TabPanelText = () => {
 
   return (
     <TabPanel className="min-h-[400px]" value="0">
-      <div className="flex justify-between gap-4">
+      <div className="flex justify-between gap-1 sm:gap-3">
         <MarkButton format="bold" icon={BsTypeBold} />
         <MarkButton format="italic" icon={FiItalic} />
         <ColorButton />

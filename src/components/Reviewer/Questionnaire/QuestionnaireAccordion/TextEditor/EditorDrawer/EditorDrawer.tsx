@@ -14,7 +14,10 @@ const EditorDrawer = () => {
   } = useEditorDrawer();
 
   return (
-    <div className="w-full flex justify-end gap-2 mb-4 lg:hidden sticky top-0">
+    <div
+      style={{ position: "-webkit-sticky" }}
+      className="w-full flex justify-end gap-2 mb-4 lg:hidden sticky -top-1"
+    >
       <Button
         onClick={handleUndoButton}
         className={`lg:hidden w-10 h-10 min-w-[40px]`}

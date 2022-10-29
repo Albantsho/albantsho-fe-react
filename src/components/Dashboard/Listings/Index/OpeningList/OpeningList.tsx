@@ -199,7 +199,7 @@ const OpeningList = ({ setOpenUnListingItem, scripts }: IProps) => {
                           px: "25px",
                           py: 2,
                         }}
-                        onClick={handleCloseMenuItem}
+                        // onClick={handleCloseMenuItem}
                       >
                         View Script
                       </MenuItem>
