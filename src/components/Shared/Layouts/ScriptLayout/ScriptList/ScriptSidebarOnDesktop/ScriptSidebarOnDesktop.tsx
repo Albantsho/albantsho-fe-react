@@ -11,10 +11,12 @@ import {
   SvgIcon,
 } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
+import routes from "routes/routes";
 import Comment from "../assets/comment.svg";
 import Document from "../assets/document.svg";
 import Export from "../assets/export.svg";
@@ -34,40 +36,41 @@ const drawerWidth = 340;
 const ScriptSidebarOnDesktop = () => {
   const { query, push } = useRouter();
   const [openCompleteDrawer, setOpenCompleteDrawer] = useState(true);
-  console.log(openCompleteDrawer);
 
   const handleOpenCompleteDrawer = (value: number, route: string) => () => {
     if (query.tab !== route.split("=")[1]) {
       push(route);
       setOpenCompleteDrawer(false);
-      console.log("one option");
-
       return;
     }
     if (query.tab === route.split("=")[1]) {
       setOpenCompleteDrawer((prevState) => !prevState);
-      push("");
-      console.log("two option");
+      push("/script");
       return;
     }
   };
 
   return (
-    <div className="min-h-screen bg-primary-900">
+    <div
+      data-aos="fade-right"
+      data-aos-duration="300"
+      className="min-h-screen bg-primary-900 overflow-hidden"
+    >
       <Drawer
         sx={{
           width: openCompleteDrawer ? drawerWidth : 120,
-          transition: "all 0.4s ease-in-out",
+          transition: "all 0.4s ease-in",
+          overflow: "hidden",
           "& .MuiDrawer-paper": {
             width: openCompleteDrawer ? drawerWidth : 120,
             boxSizing: "border-box",
-            transition: "all 0.4s ease-in-out",
             backgroundColor: "#573195",
             padding: "38px 20px",
             color: "#fff",
             position: "sticky",
             top: 0,
             display: { xs: "none", lg: "block" },
+            border: "none",
           },
           position: "sticky",
           top: 0,
@@ -80,14 +83,18 @@ const ScriptSidebarOnDesktop = () => {
         {openCompleteDrawer ? (
           <Logo color="primary" className="text-white ml-3 mb-5" />
         ) : (
-          <SvgIcon
-            component={MiniLogo}
-            className="text-white ml-6 mb-5"
-            inheritViewBox
-          />
+          <Link href={`${routes.home}`} passHref>
+            <a>
+              <SvgIcon
+                component={MiniLogo}
+                className="text-white ml-6 mb-8"
+                inheritViewBox
+                fontSize="large"
+              />
+            </a>
+          </Link>
         )}
-
-        <List className="space-y-4">
+        <List className="">
           {listRoutes1.map((item) => (
             <ListItem
               disablePadding
@@ -98,11 +105,12 @@ const ScriptSidebarOnDesktop = () => {
                 },
                 width: !openCompleteDrawer ? "72px" : "100%",
                 height: !openCompleteDrawer ? "72px" : "100%",
+                boxSizing: "content-box",
               }}
               className={`${
                 item.route.split("=")[1] === query.tab &&
                 "border-l-4 border-secondary-500 bg-primary-700"
-              } rounded-sm`}
+              } rounded-sm mb-4`}
             >
               <ListItemButton
                 onClick={handleOpenCompleteDrawer(item.value, item.route)}
@@ -123,7 +131,7 @@ const ScriptSidebarOnDesktop = () => {
               </ListItemButton>
             </ListItem>
           ))}
-          <Divider className="my-10 bg-gray-400" />
+          <Divider className="my-14 bg-gray-400" />
           {listRoutes2.map((item) => (
             <ListItem
               disablePadding
@@ -134,11 +142,12 @@ const ScriptSidebarOnDesktop = () => {
                 },
                 width: !openCompleteDrawer ? "72px" : "100%",
                 height: !openCompleteDrawer ? "72px" : "100%",
+                boxSizing: "content-box",
               }}
               className={`${
                 item.route.split("=")[1] === query.tab &&
                 "border-l-4 border-secondary-500 bg-primary-700"
-              } rounded-sm`}
+              } rounded-sm mb-4`}
             >
               <ListItemButton
                 onClick={handleOpenCompleteDrawer(item.value, item.route)}

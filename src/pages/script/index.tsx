@@ -39,7 +39,7 @@ const Script: NextPageWithLayout = () => {
         <title>Albantsho || Script </title>
       </Head>
       {query.tab && (
-        <div className="max-w-xs w-full bg-white pt-11 px-6 space-y-4 overflow-y-scroll min-h-screen hidden lg:block">
+        <div className="max-w-sm w-full bg-white pt-11 px-6 space-y-4 overflow-y-scroll h-screen hidden lg:block">
           {query.tab === "scenes" && <ScenesList />}
           {query.tab === "comment" && <CommentList />}
           {query.tab === "export" && <ExportFile />}

@@ -15,7 +15,7 @@ const ScriptNav = ({ color = "transparent", ...props }: AppBarProps) => {
       {...props}
     >
       <Toolbar
-        className="py-3 lg:py-4 px-5 sm:px-10  mx-auto w-full justify-between"
+        className="pt-2 pb-3 lg:pb-4 lg:pt-3 px-5 sm:px-10  mx-auto w-full justify-between"
         component="nav"
       >
         <ScriptNavOnDesktop />
