@@ -3,6 +3,10 @@ import {
   BottomNavigationAction,
   SvgIcon,
 } from "@mui/material";
+import CommentModal from "components/Script/CommentList/CommentModal/CommentModal";
+import ExportFileModal from "components/Script/ExportFile/ExportFileModal/ExportFileModal";
+import ScenesListModal from "components/Script/ScenesList/ScenesListModal/ScenesListModal";
+import ScriptDocumentModal from "components/Script/ScriptDocument/ScriptDocumentModal/ScriptDocumentModal";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useState } from "react";
@@ -20,7 +24,18 @@ const routesArray = [
 
 const ScriptSidebarOnMobile = () => {
   const [activeRoute, setActiveRoute] = useState(0);
+  const [openExportModal, setOpenExportModal] = useState(false);
+  const [openScenesModal, setOpenScenesModal] = useState(false);
+  const [openCommentsModal, setOpenCommentsModal] = useState(false);
+  const [openDocumentModal, setOpenDocumentModal] = useState(false);
   const { query } = useRouter();
+
+  const handleShowModal = (value: number) => () => {
+    value === 1 && setOpenScenesModal(true);
+    value === 2 && setOpenCommentsModal(true);
+    value === 3 && setOpenExportModal(true);
+    value === 4 && setOpenDocumentModal(true);
+  };
 
   const handleActiveRoute = (
     event: SyntheticEvent<Element, Event>,
@@ -30,11 +45,11 @@ const ScriptSidebarOnMobile = () => {
   };
 
   return (
-    <div className="lg:hidden">
+    <div className="grid">
       <BottomNavigation
         showLabels
         value={activeRoute}
-        className="bg-primary-900 w-full min-h-[65px] flex justify-evenly text-white sm:px-8"
+        className="bg-primary-900 lg:hidden min-h-[65px] no-scrollbar overflow-x-scroll text-white w-full"
         onChange={handleActiveRoute}
       >
         {routesArray.map((item) => {
@@ -42,6 +57,7 @@ const ScriptSidebarOnMobile = () => {
             <Link href={`${item.route}`} key={item.title}>
               <BottomNavigationAction
                 showLabel
+                onClick={handleShowModal(item.value)}
                 sx={{
                   "&:hover": {
                     backgroundColor: "#6842A5",
@@ -72,6 +88,22 @@ const ScriptSidebarOnMobile = () => {
           );
         })}
       </BottomNavigation>
+      <ExportFileModal
+        openExportModal={openExportModal}
+        setOpenExportModal={setOpenExportModal}
+      />
+      <ScenesListModal
+        openScenesModal={openScenesModal}
+        setOpenScenesModal={setOpenScenesModal}
+      />
+      <CommentModal
+        openCommentsModal={openCommentsModal}
+        setOpenCommentsModal={setOpenCommentsModal}
+      />
+      <ScriptDocumentModal
+        openDocumentModal={openDocumentModal}
+        setOpenDocumentModal={setOpenDocumentModal}
+      />
     </div>
   );
 };

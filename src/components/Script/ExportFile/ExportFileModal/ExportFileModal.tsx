@@ -1,17 +1,26 @@
 import { IconButton, Modal, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import { useRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
-const ExportFileModal = () => {
-  const { query, push } = useRouter();
+interface IProps {
+  openExportModal: boolean;
+  setOpenExportModal: Dispatch<SetStateAction<boolean>>;
+}
 
-  const handleCloseExportFile = () => push("/script");
+const ExportFileModal = ({ openExportModal, setOpenExportModal }: IProps) => {
+  const { push } = useRouter();
+
+  const handleCloseExportFile = () => {
+    push("/script");
+    setOpenExportModal(false);
+  };
 
   return (
     <Modal
       className="px-5 lg:hidden"
-      open={true}
+      open={openExportModal}
       onClose={handleCloseExportFile}
     >
       <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-xs mx-auto py-14 xl:py-20 rounded-lg">
