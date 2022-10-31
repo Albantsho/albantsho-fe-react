@@ -16,7 +16,6 @@ const useMarketplaceApi = (controller?: AbortController) => {
   const {
     user: { token },
   } = useUser();
-
   return {
     async getScripts() {
       const res = await api.get("/market", {
@@ -41,7 +40,7 @@ const useMarketplaceApi = (controller?: AbortController) => {
     },
 
     async getScript(id: string) {
-      const res = await api.get(`/market/${id}`, {
+      const res = await api.get(`/script/details/${id}`, {
         signal: controller?.signal,
         headers: {
           Authorization: `Bearer ${token}`,

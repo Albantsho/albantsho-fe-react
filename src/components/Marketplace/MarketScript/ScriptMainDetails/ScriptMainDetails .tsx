@@ -4,6 +4,7 @@ import {
   AccordionSummary,
   Typography,
 } from "@mui/material";
+import parse from "html-react-parser";
 import { IProduct } from "interfaces/product";
 import { BiChevronDown } from "react-icons/bi";
 
@@ -12,6 +13,7 @@ interface IProps {
 }
 
 const ScriptMainDetails = ({ script }: IProps) => {
+  const parsedData = parse(script.script_content_snippet);
   return (
     <div className="px-5 sm:px-10 py-10  md:max-w-3xl mx-auto max-w-screen-md">
       <Accordion
@@ -39,8 +41,10 @@ const ScriptMainDetails = ({ script }: IProps) => {
             LOGLINE
           </Typography>
         </AccordionSummary>
-        <AccordionDetails className="px-5 sm:px-10 bg-tinted-50/60">
-          {script.script_content_html}
+        <AccordionDetails className="px-5 sm:px-10 py-5 bg-tinted-50/60">
+          <article className="prose lg:prose-lg prose-h1:text-primary-700">
+            {parsedData}
+          </article>
         </AccordionDetails>
       </Accordion>
     </div>

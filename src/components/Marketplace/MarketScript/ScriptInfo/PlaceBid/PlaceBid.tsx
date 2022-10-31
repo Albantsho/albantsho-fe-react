@@ -1,8 +1,16 @@
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import BidsApi from "apis/Bids.api";
+import useMarketplaceApi from "apis/Marketplace.api";
 import { IProduct } from "interfaces/product";
-import { Dispatch, SetStateAction } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
 
 interface IProps {
   setOpenBidSuccessful: Dispatch<SetStateAction<boolean>>;
@@ -10,7 +18,27 @@ interface IProps {
 }
 
 const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
-  const handleOpenBidSuccessful = () => setOpenBidSuccessful(true);
+  const [bidValue, setBidValue] = useState("");
+  const { createBid } = BidsApi();
+
+  const handleBidValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBidValue(e.target.value);
+  };
+
+  const handleOpenBidSuccessful = async () => {
+    try {
+      if (bidValue) {
+        const res = await createBid({
+          amount: +bidValue,
+          script_basic_id: script.script_id,
+        });
+
+        setOpenBidSuccessful(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex gap-6 mt-4 rounded-md py-6 px-5 sm:py-12 sm:px-6 lg:px-8 xl:px-12 xl:py-8 sm:mt-10 md:gap-6 flex-col bg-tinted-50/60 flex-1 w-full">
       <div className="flex flex-col">
@@ -27,6 +55,8 @@ const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
       </div>
       <div className="flex sm:flex-col gap-3 sm:gap-6 -mt-1 xl:mt-0 md:flex-row flex-wrap">
         <CustomInput
+          value={bidValue}
+          onChange={handleBidValue}
           InputProps={{ classes: { input: "bg-white rounded-lg" } }}
           className="flex-1 min-w-[170px] sm:min-w-[210px] max-w-xs sm:max-w-md text-tinted-200"
           variant="outlined"

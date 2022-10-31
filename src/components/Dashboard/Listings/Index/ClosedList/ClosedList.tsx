@@ -164,7 +164,7 @@ const ClosedList = ({ scripts }: IProps) => {
                 variant="body1"
                 className=" text-neutral-700 font-medium"
               >
-                1/12/2022
+                {new Date(listItem.created_at).toLocaleDateString()}
               </Typography>
             </TableCell>
           </TableRow>

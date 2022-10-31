@@ -36,6 +36,9 @@ const BidsApi = (controller?: AbortController) => {
     async createBid(payload: ICreateBid) {
       const res = await api.post("/market/bid", payload, {
         signal: controller?.signal,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       return res.data;

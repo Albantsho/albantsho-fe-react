@@ -13,13 +13,7 @@ const Heading = ({ script }: IProps) => {
   return (
     <div className="flex flex-col  md:flex-row lg:flex-col xl:flex-row gap-10 lg:gap-6 xl:gap-10">
       <div className="self-center md:self-start lg:self-center xl:self-start">
-        <Image
-          width={300}
-          height={300}
-          src={script.script_image}
-          className="rounded-xl"
-          alt="beauty"
-        />
+        <img src={script.script_image} className="rounded-xl" alt="beauty" />
       </div>
       <div className="flex-shrink lg:flex-grow-0  mx-auto md:mx-0 lg:mx-auto xl:mx-0">
         <div className="flex mb-3 md:mb-5 flex-wrap items-center gap-x-6 gap-y-2">

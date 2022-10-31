@@ -35,7 +35,7 @@ const ScriptSlug: NextPageWithLayout = () => {
     async function getScriptsDate() {
       try {
         const res = await getScript(router.query.id as string);
-        setScript(res);
+        setScript(res.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
