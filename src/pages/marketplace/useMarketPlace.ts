@@ -1,6 +1,6 @@
 import useMarketplaceApi from "apis/Marketplace.api";
 import { IProduct } from "interfaces/product";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useMarketPlace = () => {
   const [scripts, setScripts] = useState<Array<IProduct>>([]);

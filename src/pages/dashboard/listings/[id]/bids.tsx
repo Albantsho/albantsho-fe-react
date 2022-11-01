@@ -4,10 +4,9 @@ import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/Das
 import TabButtons from "components/Dashboard/Listings/Index/TabButtons/TabButtons";
 import Bids from "components/Dashboard/Listings/OpenListingInfo/Bids/Bids";
 import Head from "next/head";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { NextPageWithLayout } from "../../../_app";
 import dynamic from "next/dynamic";
-import useMarketplaceApi from "apis/Marketplace.api";
 
 const AcceptOfferModal = dynamic(
   () => import("@shared/Modals/AcceptOfferModal/AcceptOfferModal")

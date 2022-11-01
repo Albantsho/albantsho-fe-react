@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { IMarketBidScript } from "./market-bid-script";
 
 export interface IProduct {

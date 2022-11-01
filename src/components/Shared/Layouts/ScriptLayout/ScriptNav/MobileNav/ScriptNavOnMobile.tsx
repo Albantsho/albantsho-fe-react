@@ -6,7 +6,6 @@ import Image from "next/image";
 import { AiFillInstagram, AiOutlineClose } from "react-icons/ai";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import ProfileMenu from "../../../../ProfileMenu/ProfileMenu";
-import AddCollaborator from "../AddCollaborator/AddCollaborator";
 import useMobileNavDashboard from "./useMobileNavDashboard";
 
 interface IProps {
@@ -19,8 +18,7 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
   return (
     <div className="flex items-center lg:hidden w-full">
       <Logo className={isTransparent ? "text-white" : "text-primary-main"} />
-      <AddCollaborator />
-      <IconButton className=" mx-7 mt-1 self-center max-h-[31px]">
+      <IconButton className="ml-auto mx-7 mt-1 self-center max-h-[31px]">
         <Badge badgeContent={1} color="error">
           <div>
             <Image src={alert} alt="alert" />

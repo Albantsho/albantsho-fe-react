@@ -61,6 +61,39 @@ export interface ITableCell {
   children: CustomText[];
 }
 
+interface IHeading {
+  type: "heading";
+  children: CustomText[];
+}
+interface IAction {
+  type: "action";
+  children: CustomText[];
+}
+interface ICharacter {
+  type: "character";
+  children: CustomText[];
+}
+interface IDialogue {
+  type: "dialogue";
+  children: CustomText[];
+}
+interface IParentethical {
+  type: "parentethical";
+  children: CustomText[];
+}
+interface ITransition {
+  type: "transition";
+  children: CustomText[];
+}
+interface IShot {
+  type: "shot";
+  children: CustomText[];
+}
+interface IGeneral {
+  type: "general";
+  children: CustomText[];
+}
+
 export type CustomElement =
   | ITypography
   | IBlockQuote
@@ -72,7 +105,15 @@ export type CustomElement =
   | ITable
   | ITableRow
   | ITableCell
-  | IEmail;
+  | IEmail
+  | IHeading
+  | IAction
+  | ICharacter
+  | IDialogue
+  | IParentethical
+  | ITransition
+  | IShot
+  | IGeneral;
 
 export interface CustomText {
   text: string;
@@ -81,6 +122,7 @@ export interface CustomText {
   underline?: boolean;
   color?: string;
   code?: boolean;
+  heading?: boolean;
 }
 
 export type IEditor = BaseEditor & ReactEditor & HistoryEditor;

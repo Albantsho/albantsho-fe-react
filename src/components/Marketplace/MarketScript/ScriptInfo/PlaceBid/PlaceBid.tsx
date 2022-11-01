@@ -2,15 +2,8 @@ import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import BidsApi from "apis/Bids.api";
-import useMarketplaceApi from "apis/Marketplace.api";
 import { IProduct } from "interfaces/product";
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  Dispatch,
-  SetStateAction,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface IProps {
   setOpenBidSuccessful: Dispatch<SetStateAction<boolean>>;

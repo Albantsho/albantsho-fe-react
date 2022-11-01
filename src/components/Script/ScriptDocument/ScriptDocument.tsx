@@ -48,9 +48,11 @@ const ScriptDocument = () => {
       </ButtonGroup>
       {activeButton === 0 && (
         <>
-          <Typography className="futura font-medium">Title</Typography>
+          <Typography className="futura font-medium mb-1">Title</Typography>
           <CustomInput variant="outlined" fullWidth />
-          <Typography className="futura font-medium">Tagline</Typography>
+          <Typography className="futura font-medium mt-2 mb-1">
+            Tagline
+          </Typography>
           <CustomInput variant="outlined" fullWidth />
         </>
       )}

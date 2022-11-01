@@ -1,7 +1,5 @@
-import { Chip, Icon, Typography } from "@mui/material";
 import ReviewedIcon from "@assets/icons/reviewed.svg";
-import Image from "next/image";
-import beauty from "@assets/images/beauty.jpg";
+import { Chip, Icon, Typography } from "@mui/material";
 import CustomRating from "@shared/CustomRating/CustomRating";
 import { IProduct } from "interfaces/product";
 
