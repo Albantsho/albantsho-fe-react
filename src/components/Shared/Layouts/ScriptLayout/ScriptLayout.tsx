@@ -8,7 +8,7 @@ interface IProps {
 
 const ScriptLayout = ({ children }: IProps) => {
   return (
-    <main className="flex bg-[#f6f8fc] overflow-hidden">
+    <main className="flex bg-tinted-50/50 overflow-hidden">
       <ScriptSidebarOnDesktop />
 
       <div data-aos="fade-top" data-aos-duration="300" className="flex-1">

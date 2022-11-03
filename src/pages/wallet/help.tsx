@@ -44,10 +44,10 @@ const Help: NextPageWithLayout = () => {
           />
         </div>
         <Btn className="py-3 px-6">Send</Btn>
-        <Divider className="my-3 sm:my-5 md:my-8 lg:my-12" />
+        <Divider className="my-3 sm:my-5 lg:my-12" />
         <Typography
           variant="h4"
-          className="text-primary-700 futura font-medium md:mb-4"
+          className="text-primary-700 futura leading-normal font-medium md:mb-4"
         >
           FAQs
         </Typography>

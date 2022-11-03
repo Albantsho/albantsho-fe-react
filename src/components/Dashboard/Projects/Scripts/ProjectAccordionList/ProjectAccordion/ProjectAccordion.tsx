@@ -16,6 +16,7 @@ import addTitleIcon from "./assets/add-title-icon.png";
 import Image from "next/image";
 import { useState } from "react";
 import CustomButtonScripts from "./CustomButtonScripts/CustomButtonScripts";
+import routes from "routes/routes";
 
 interface IProps {
   title: string;
@@ -24,9 +25,9 @@ interface IProps {
 }
 
 const buttonsProjects = [
-  { title: "ABSTRACT", image: addAbstractIcon, link: "/abstract?step=1" },
-  { title: "TITLE", image: addTitleIcon, link: "/abstract" },
-  { title: "SCRIPT", image: addScriptIcon, link: "/script_page" },
+  { title: "ABSTRACT", image: addAbstractIcon, link: routes.abstract },
+  { title: "TITLE", image: addTitleIcon, link: routes.titleScript },
+  { title: "SCRIPT", image: addScriptIcon, link: routes.scriptsDashboard },
 ];
 
 const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {

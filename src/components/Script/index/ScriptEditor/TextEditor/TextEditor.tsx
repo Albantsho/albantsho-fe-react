@@ -80,6 +80,12 @@ const TextEditor = () => {
       >
         <Slate editor={editor} value={initialValue}>
           <Editable
+            onTouchStart={(e) => {
+              console.log({ e });
+            }}
+            onTouchEnd={(e) => {
+              console.log({ e });
+            }}
             className="isolation-auto -z-0"
             spellCheck
             autoFocus

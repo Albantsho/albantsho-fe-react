@@ -49,7 +49,7 @@ const DashboardSidebarOnDesktop = () => {
   const { user } = useUser();
 
   return (
-    <div className="min-h-screen bg-primary-900">
+    <div className="min-h-screen relative bg-primary-900">
       <Drawer
         sx={{
           width: drawerWidth,
@@ -146,7 +146,7 @@ const DashboardSidebarOnDesktop = () => {
             ))}
         </List>
       </Drawer>
-      <div className="fixed text-white hidden lg:flex gap-6  justify-start bottom-8 left-[90px]">
+      <div className="absolute text-white hidden lg:flex gap-6  justify-start bottom-8 left-[90px]">
         <IconButton
           href="https://www.twitter.com/albantsho"
           target="_blank"

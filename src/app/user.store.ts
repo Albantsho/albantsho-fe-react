@@ -52,18 +52,25 @@ export const initializeStore = (preloadedState = {}) => {
       combine(
         { ...getDefaultInitialState(), ...preloadedState },
         (set, get) => ({
-          authenticationUser: (user: IUser) => {
-            set({ ...set, user });
-            get().user = user;
+          authenticationUser: (user?: IUser) => {
+            if (user) {
+              set({ ...set, user });
+              return;
+            } else {
+              get().user;
+            }
           },
-          logOutUser: () => {
-            localStorage.removeItem("user");
-          },
+          logOutUser: () => localStorage.removeItem("user"),
         })
       ),
       {
         name: "user",
-        getStorage: () => localStorage,
+        getStorage: () => ({
+          // Returning a promise from getItem is necessary to avoid issues with hydration
+          getItem: async (name: string) => localStorage.getItem(name),
+          setItem: (name: string, value) => localStorage.setItem(name, value),
+          removeItem: (name: string) => localStorage.removeItem(name),
+        }),
       }
     )
   );
