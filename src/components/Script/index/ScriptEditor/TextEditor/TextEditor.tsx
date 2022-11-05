@@ -1,27 +1,34 @@
-import { ButtonGroup, Tooltip, IconButton, SvgIcon } from "@mui/material";
-import { CustomElement, IEditor } from "interfaces/slate";
-import { useMemo, useState } from "react";
-import { RiFileUserLine } from "react-icons/ri";
+import { Dispatch, MutableRefObject, SetStateAction, useMemo } from "react";
 import { createEditor } from "slate";
 import { withHistory } from "slate-history";
-import { Editable, Slate, withReact } from "slate-react";
+import { Slate, Editable, withReact } from "slate-react";
 import ChangeFormatMenuList from "../ChangeFormatMenuList/ChangeFormatMenuList";
 import EditorElement from "./EditorElement/EditorElement";
-import BookMarkIcon from "../assets/book-mark.svg";
+import { CustomElement, IEditor } from "interfaces/slate";
 
 const initialValue: CustomElement[] = [
   { type: "typography", variant: "body1", children: [{ text: "" }] },
 ];
 
-const TextEditor = () => {
+interface IProps {
+  stepLinks: MutableRefObject<HTMLDivElement[]>;
+  setContextMenu: Dispatch<
+    SetStateAction<{
+      mouseX: number;
+      mouseY: number;
+    } | null>
+  >;
+  contextMenu: {
+    mouseX: number;
+    mouseY: number;
+  } | null;
+}
+
+const TextEditor = ({ setContextMenu, contextMenu, stepLinks }: IProps) => {
   const editor: IEditor = useMemo(
     () => withHistory(withReact(createEditor())),
     []
   );
-  const [contextMenu, setContextMenu] = useState<{
-    mouseX: number;
-    mouseY: number;
-  } | null>(null);
 
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -40,63 +47,26 @@ const TextEditor = () => {
   };
 
   return (
-    <div className="relative">
-      <ButtonGroup className="absolute flex flex-col -right-14 top-10">
-        <Tooltip
-          classes={{
-            tooltip: "bg-black",
-            tooltipPlacementLeft: "bg-black",
-          }}
-          title="Act Structure"
-          placement="left"
-        >
-          <IconButton
-            disableRipple
-            className="bg-white text-primary-700 rounded-none w-12 h-12"
-          >
-            <RiFileUserLine />
-          </IconButton>
-        </Tooltip>
-        <Tooltip
-          classes={{
-            tooltip: "bg-black",
-            tooltipPlacementLeft: "bg-black",
-          }}
-          title="Character Bible"
-          placement="left"
-        >
-          <IconButton
-            disableRipple
-            className="bg-white text-primary-700 rounded-none w-12 h-12"
-          >
-            <SvgIcon inheritViewBox component={BookMarkIcon} />
-          </IconButton>
-        </Tooltip>
-      </ButtonGroup>
-      <div
-        onContextMenu={handleContextMenu}
-        style={{ cursor: "context-menu" }}
-        className="bg-white w-full max-w-3xl mx-auto mt-10 p-14"
-      >
-        <Slate editor={editor} value={initialValue}>
-          <Editable
-            onTouchStart={(e) => {
-              console.log({ e });
-            }}
-            onTouchEnd={(e) => {
-              console.log({ e });
-            }}
-            className="isolation-auto -z-0"
-            spellCheck
-            autoFocus
-            renderElement={(props) => <EditorElement {...props} />}
-          />
-          <ChangeFormatMenuList
-            contextMenu={contextMenu}
-            handleCloseContextMenu={handleCloseContextMenu}
-          />
-        </Slate>
-      </div>
+    <div
+      onContextMenu={handleContextMenu}
+      style={{ cursor: "context-menu" }}
+      className="bg-white w-full max-w-3xl mx-auto mt-10 p-14"
+      ref={(elm: HTMLDivElement) =>
+        (stepLinks.current = [...stepLinks.current, elm])
+      }
+    >
+      <Slate editor={editor} value={initialValue}>
+        <Editable
+          className="isolation-auto -z-0"
+          spellCheck
+          autoFocus
+          renderElement={(props) => <EditorElement {...props} />}
+        />
+        <ChangeFormatMenuList
+          contextMenu={contextMenu}
+          handleCloseContextMenu={handleCloseContextMenu}
+        />
+      </Slate>
     </div>
   );
 };

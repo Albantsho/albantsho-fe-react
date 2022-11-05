@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import TextEditor from "./TextEditor/TextEditor";
+import TextEditorList from "./TextEditor/TextEditorList";
 
 const ScriptEditor = () => {
   return (
@@ -9,7 +9,7 @@ const ScriptEditor = () => {
           LONG MAN OF LONG BEACH
         </Typography>
       </div>
-      <TextEditor />
+      <TextEditorList />
     </div>
   );
 };

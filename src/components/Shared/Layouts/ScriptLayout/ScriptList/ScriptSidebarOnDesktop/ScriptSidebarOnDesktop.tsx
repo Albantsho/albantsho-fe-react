@@ -54,28 +54,32 @@ const ScriptSidebarOnDesktop = () => {
     <div
       data-aos="fade-right"
       data-aos-duration="300"
-      className="min-h-screen bg-primary-900 overflow-hidden"
+      className="min-h-screen bg-primary-900"
     >
       <Drawer
         sx={{
+          minHeight: "100vh",
           width: openCompleteDrawer ? drawerWidth : 120,
           transition: "all 0.4s ease-in",
           overflow: "hidden",
           "& .MuiDrawer-paper": {
+            minHeight: "100vh",
             width: openCompleteDrawer ? drawerWidth : 120,
             boxSizing: "border-box",
-            backgroundColor: "#573195",
             padding: "38px 20px",
             color: "#fff",
             position: "sticky",
             top: 0,
-            display: { xs: "none", lg: "block" },
+            backgroundColor: "#573195",
+            display: { xs: "none", lg: "flex" },
+            flexDirection: "column",
             border: "none",
           },
           position: "sticky",
           top: 0,
           backgroundColor: "#573195",
-          display: { xs: "none", lg: "block" },
+          display: { xs: "none", lg: "flex" },
+          flexDirection: "column",
         }}
         variant="permanent"
         anchor="left"
@@ -94,7 +98,7 @@ const ScriptSidebarOnDesktop = () => {
             </a>
           </Link>
         )}
-        <List className="">
+        <List>
           {listRoutes1.map((item) => (
             <ListItem
               disablePadding
@@ -169,56 +173,56 @@ const ScriptSidebarOnDesktop = () => {
             </ListItem>
           ))}
         </List>
+        {openCompleteDrawer && (
+          <div className="mt-auto self-center text-white hidden lg:flex gap-6  justify-start pt-3">
+            <IconButton
+              href="https://www.twitter.com/albantsho"
+              target="_blank"
+              color="inherit"
+              sx={{
+                "&.MuiButtonBase-root": {
+                  border: "1px solid #fff",
+                  borderRadius: "100%",
+                  width: "32px",
+                  height: "32px",
+                },
+              }}
+            >
+              <FaTwitter />
+            </IconButton>
+            <IconButton
+              href="https://www.facebook.com/albantsho"
+              target="_blank"
+              color="inherit"
+              sx={{
+                "&.MuiButtonBase-root": {
+                  border: "1px solid #fff",
+                  borderRadius: "100%",
+                  width: "32px",
+                  height: "32px",
+                },
+              }}
+            >
+              <FaFacebookF className="p-[2px]" />
+            </IconButton>
+            <IconButton
+              href="https://www.instagram.com/albantsho/"
+              target="_blank"
+              color="inherit"
+              sx={{
+                "&.MuiButtonBase-root": {
+                  border: "1px solid #fff",
+                  borderRadius: "100%",
+                  width: "32px",
+                  height: "32px",
+                },
+              }}
+            >
+              <AiFillInstagram />
+            </IconButton>
+          </div>
+        )}
       </Drawer>
-      {openCompleteDrawer && (
-        <div className="absolute text-white hidden lg:flex gap-6  justify-start bottom-8 left-[90px]">
-          <IconButton
-            href="https://www.twitter.com/albantsho"
-            target="_blank"
-            color="inherit"
-            sx={{
-              "&.MuiButtonBase-root": {
-                border: "1px solid #fff",
-                borderRadius: "100%",
-                width: "32px",
-                height: "32px",
-              },
-            }}
-          >
-            <FaTwitter />
-          </IconButton>
-          <IconButton
-            href="https://www.facebook.com/albantsho"
-            target="_blank"
-            color="inherit"
-            sx={{
-              "&.MuiButtonBase-root": {
-                border: "1px solid #fff",
-                borderRadius: "100%",
-                width: "32px",
-                height: "32px",
-              },
-            }}
-          >
-            <FaFacebookF className="p-[2px]" />
-          </IconButton>
-          <IconButton
-            href="https://www.instagram.com/albantsho/"
-            target="_blank"
-            color="inherit"
-            sx={{
-              "&.MuiButtonBase-root": {
-                border: "1px solid #fff",
-                borderRadius: "100%",
-                width: "32px",
-                height: "32px",
-              },
-            }}
-          >
-            <AiFillInstagram />
-          </IconButton>
-        </div>
-      )}
     </div>
   );
 };

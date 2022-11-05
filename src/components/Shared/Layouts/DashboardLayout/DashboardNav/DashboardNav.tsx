@@ -8,6 +8,8 @@ const DashboardNav = ({ color = "transparent", ...props }: AppBarProps) => {
 
   return (
     <AppBar
+      data-aos="fade-down"
+      data-aos-duration="300"
       className="shadow-primary"
       position="absolute"
       elevation={0}
@@ -15,8 +17,6 @@ const DashboardNav = ({ color = "transparent", ...props }: AppBarProps) => {
       {...props}
     >
       <Toolbar
-        data-aos="fade-down"
-        data-aos-duration="300"
         className="py-3 lg:py-4 px-5 sm:px-10  mx-auto w-full justify-between"
         component="nav"
       >

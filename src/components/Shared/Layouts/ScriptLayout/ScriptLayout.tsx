@@ -8,16 +8,15 @@ interface IProps {
 
 const ScriptLayout = ({ children }: IProps) => {
   return (
-    <main className="flex bg-tinted-50/50 overflow-hidden">
+    <main className="flex bg-tinted-50/50">
       <ScriptSidebarOnDesktop />
-
       <div data-aos="fade-top" data-aos-duration="300" className="flex-1">
         <ScriptNav color="inherit" position="static" />
         <ScriptSidebarOnMobile />
         <div
           data-aos="fade-left"
           data-aos-duration="300"
-          className="pt-3 flex-1  px-5 lg:px-0 max-w-screen-2xl flex lg:gap-7"
+          className="pt-3 flex-1 px-5 sm:px-10 max-w-screen-2xl flex lg:gap-7"
         >
           {children}
         </div>
