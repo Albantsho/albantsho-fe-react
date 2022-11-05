@@ -43,6 +43,11 @@ const routes = {
   withdrawSuccessfulWallet: "/wallet/withdraw-successful",
   depositWallet: "/wallet/deposit",
   titleScript: "title",
+  blogsAdminDashboard: `/admin/blogs`,
+  blogsAdminDashboardTabs: (query: string) => `/admin/blogs${query}`,
+  usersAdminDashboard: `/admin/users`,
+  userAdminDashboard: (id: string) => `/admin/users/${id}`,
+  reviewersAdminDashboard: `/admin/reviewers`,
 };
 
 export default routes;

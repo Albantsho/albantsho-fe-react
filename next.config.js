@@ -28,6 +28,11 @@ const nextConfig = {
         destination: '/wallet/help',
         permanent: false,
       },
+      {
+        source: '/admin',
+        destination: '/admin/blogs',
+        permanent: false,
+      },
     ];
   },
 };
