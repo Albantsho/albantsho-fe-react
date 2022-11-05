@@ -1,17 +1,16 @@
 import { Fab } from "@mui/material";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
+import ArchiveBlogsList from "components/Admin/Blogs/Index/ArchiveBlogsList/ArchiveBlogsList";
 import LiveBlogsList from "components/Admin/Blogs/Index/LiveBlogsList/LiveBlogsList";
 import TabButtons from "components/Admin/Blogs/Index/TabButtons/TabButtons";
+import TrashBlogsList from "components/Admin/Blogs/Index/TrashBlogsList/TrashBlogsList";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { NextPageWithLayout } from "../../_app";
 
 const BlogsPage: NextPageWithLayout = () => {
   const { query } = useRouter();
-  const [openAddNewBlog, setOpenAddNewBlog] = useState(false);
-  const handleOpenAddNewBlog = () => setOpenAddNewBlog(true);
 
   return (
     <>
@@ -19,22 +18,14 @@ const BlogsPage: NextPageWithLayout = () => {
         <title>Albantsho || Admin Blogs </title>
       </Head>
       <TabButtons />
-      <AdminDashboardSearch setOpenAddNewBlog={setOpenAddNewBlog} />
-      {(!query.tab || query.tab === "live-blogs") && (
-        <>
-          <h1>live-blogs</h1>
-        </>
-      )}
-      {query.tab === "archive" && (
-        <>
-          <h1>archive</h1>
-        </>
-      )}
-      {query.tab === "trash" && <h1>trash</h1>}
-      <LiveBlogsList />
+      <AdminDashboardSearch />
+      {(!query.tab || query.tab === "live-blogs") && <LiveBlogsList />}
+      {query.tab === "archive" && <ArchiveBlogsList />}
+      {query.tab === "trash" && <TrashBlogsList />}
+
       <Fab
         color="primary"
-        onClick={handleOpenAddNewBlog}
+        href="/admin/blogs/add-blog/2"
         className="block md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
       >
         +

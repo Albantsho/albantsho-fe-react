@@ -1,19 +1,9 @@
 import Btn from "@shared/Btn/Btn";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
 import { RiSearch2Line } from "react-icons/ri";
 
-interface IProps {
-  setOpenAddNewBlog: Dispatch<SetStateAction<boolean>>;
-}
-
-const AdminDashboardSearch = ({ setOpenAddNewBlog }: IProps) => {
+const AdminDashboardSearch = () => {
   const { route } = useRouter();
-  console.log(
-    "🚀 ~ file: AminDashboardSearch.tsx ~ line 12 ~ AdminDashboardSearch ~ route",
-    route
-  );
-  const handleOpenAddNewBlog = () => setOpenAddNewBlog(true);
 
   return (
     <div className="flex justify-start text-primary-700 items-center mt-5">
@@ -29,7 +19,7 @@ const AdminDashboardSearch = ({ setOpenAddNewBlog }: IProps) => {
       {route === "/admin/blogs" && (
         <div className="hidden  md:block md:justify-center xl:flex-end">
           <Btn
-            onClick={handleOpenAddNewBlog}
+            href="/admin/blogs/add-blog/2"
             className="ml-auto  py-3 px-6"
             size="large"
           >

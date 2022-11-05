@@ -1,10 +1,9 @@
 import { IconButton, SvgIcon, Typography } from "@mui/material";
-import MoveBlogToArchiveListModal from "@shared/Modals/MoveBlogToArchiveListModal/MoveBlogToArchiveListModal";
 import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
-import { CiFolderOn } from "react-icons/ci";
+import { BsCursor } from "react-icons/bs";
 import { TfiTrash } from "react-icons/tfi";
 
 interface IProps {
@@ -16,16 +15,12 @@ interface IProps {
   };
 }
 
-const LiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
+const ArchiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
-    useState(false);
-  const [openMoveBlogToArchiveListModal, setOpenMoveBlogToArchiveListModal] =
     useState(false);
 
   const handleOpenMoveBlogToTrashList = () =>
     setOpenMoveBlogToTrashListModal(true);
-  const handleOpenMoveBlogToArchiveList = () =>
-    setOpenMoveBlogToArchiveListModal(true);
 
   return (
     <>
@@ -56,12 +51,12 @@ const LiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
               component={AiOutlineEdit}
             />
           </IconButton>
-          <IconButton onClick={handleOpenMoveBlogToArchiveList} color="primary">
+          <IconButton color="primary">
             <SvgIcon
               inheritViewBox
               fontSize="medium"
               className="text-primary-700"
-              component={CiFolderOn}
+              component={BsCursor}
             />
           </IconButton>
           <IconButton onClick={handleOpenMoveBlogToTrashList} color="primary">
@@ -78,12 +73,8 @@ const LiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
         setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
         openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
       />
-      <MoveBlogToArchiveListModal
-        setOpenMoveBlogToArchiveListModal={setOpenMoveBlogToArchiveListModal}
-        openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}
-      />
     </>
   );
 };
 
-export default LiveBlog;
+export default ArchiveBlog;
