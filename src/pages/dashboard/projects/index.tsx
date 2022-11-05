@@ -51,7 +51,7 @@ const Projects: NextPageWithLayout = () => {
         <Fab
           color="primary"
           onClick={handleOpen}
-          className=" block md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
+          className="block md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
         >
           +
         </Fab>
