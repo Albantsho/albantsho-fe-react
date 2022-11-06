@@ -42,11 +42,11 @@ const RestoreBlogFromTrashListModal = ({
             <Image src={moveImage} alt="add blog to move" />
           </div>
           <Typography
-            className="text-center max-w-[278px] mt-2 lg:mt-5 leading-normal font-normal"
+            className="text-center max-w-md mt-2 lg:mt-5 leading-7 font-normal"
             color="primary.700"
             variant="h6"
           >
-            You’ll be archiving this post. Do you want to proceed?
+            This blog will be restored by to live blogs. Do you want to proceed?
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn

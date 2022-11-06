@@ -15,7 +15,7 @@ const BlogsPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Admin Blogs </title>
+        <title>Albantsho || Admin Blogs</title>
       </Head>
       <TabButtons />
       <AdminDashboardSearch />

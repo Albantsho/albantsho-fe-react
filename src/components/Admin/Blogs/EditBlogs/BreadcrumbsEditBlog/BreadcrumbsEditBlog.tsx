@@ -53,7 +53,7 @@ const BreadcrumbsEditBlog = () => {
         >
           {breadcrumbs}
         </Breadcrumbs>
-        <div className="ml-auto flex md:self-start lg:self-center xl:self-start">
+        <div className="ml-auto flex sm:gap-3 items-center">
           <IconButton onClick={handleOpenMoveBlogToArchiveList} color="primary">
             <SvgIcon
               inheritViewBox

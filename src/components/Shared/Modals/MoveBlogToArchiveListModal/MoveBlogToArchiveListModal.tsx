@@ -30,7 +30,7 @@ const MoveBlogToArchiveListModal = ({
         mountOnEnter
         unmountOnExit
       >
-        <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-2xl mx-auto flex flex-col items-center py-12 rounded-lg">
+        <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-2xl mx-auto flex flex-col items-center py-12 lg:py-16 rounded-lg">
           <IconButton
             onClick={handleCloseMoveBlogToArchiveListModal}
             className="absolute top-5 right-5"
@@ -42,7 +42,7 @@ const MoveBlogToArchiveListModal = ({
             <Image src={moveImage} alt="add blog to move" />
           </div>
           <Typography
-            className="text-center max-w-[278px] mt-2 lg:mt-5 leading-normal font-normal"
+            className="text-center max-w-xs mt-2 lg:mt-5 leading-7 font-normal"
             color="primary.700"
             variant="h6"
           >

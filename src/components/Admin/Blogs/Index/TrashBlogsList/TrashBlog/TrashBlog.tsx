@@ -51,7 +51,7 @@ const TrashBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
             </Typography>
           </div>
         </div>
-        <div className="ml-auto flex md:self-start lg:self-center xl:self-start">
+        <div className="ml-auto flex md:self-start lg:self-center xl:self-start gap-3 md:gap-1">
           <IconButton
             onClick={handleOpenRestoreBlogFromTrashListModal}
             color="primary"

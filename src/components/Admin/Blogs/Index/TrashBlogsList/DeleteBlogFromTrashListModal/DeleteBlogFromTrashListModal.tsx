@@ -37,7 +37,7 @@ const DeleteBlogFromTrashListModal = ({
             <Image src={Trash} alt="add blog to trash" />
           </div>
           <Typography
-            className="text-center max-w-[351px] mt-2 lg:mt-5 leading-normal font-normal"
+            className="text-center max-w-md leading-7 mt-2 lg:mt-5 font-normal"
             color="primary.700"
             variant="h6"
           >
