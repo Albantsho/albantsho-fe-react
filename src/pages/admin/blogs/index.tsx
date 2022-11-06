@@ -18,7 +18,7 @@ const BlogsPage: NextPageWithLayout = () => {
         <title>Albantsho || Admin Blogs</title>
       </Head>
       <TabButtons />
-      <AdminDashboardSearch />
+      <AdminDashboardSearch placeholder="Search for blog by title" />
       {(!query.tab || query.tab === "live-blogs") && <LiveBlogsList />}
       {query.tab === "archive" && <ArchiveBlogsList />}
       {query.tab === "trash" && <TrashBlogsList />}

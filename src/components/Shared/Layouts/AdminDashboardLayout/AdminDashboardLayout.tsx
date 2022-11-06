@@ -16,7 +16,7 @@ const AdminDashboardLayout = ({ children }: IProps) => {
         <div
           data-aos="fade-left"
           data-aos-duration="300"
-          className="px-5 pt-2 lg:pt-14 flex-1 sm:px-10 max-w-screen-2xl"
+          className="px-5 pt-2 lg:pt-5 flex-1 sm:px-10 max-w-screen-2xl"
         >
           {children}
         </div>

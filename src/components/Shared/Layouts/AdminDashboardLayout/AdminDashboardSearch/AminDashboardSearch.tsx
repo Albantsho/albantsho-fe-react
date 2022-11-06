@@ -2,7 +2,11 @@ import Btn from "@shared/Btn/Btn";
 import { useRouter } from "next/router";
 import { RiSearch2Line } from "react-icons/ri";
 
-const AdminDashboardSearch = () => {
+interface IProps {
+  placeholder: string;
+}
+
+const AdminDashboardSearch = ({ placeholder }: IProps) => {
   const { route } = useRouter();
 
   return (
@@ -11,7 +15,7 @@ const AdminDashboardSearch = () => {
         <div className="flex items-center shadow-primary bg-white py-2 px-5 rounded-md gap-2 flex-1 md:flex-grow-0 md:min-w-[350px] md:w-auto">
           <RiSearch2Line className="text-gray-400 text-2xl md:mr-1" />
           <input
-            placeholder="Search for blog by title"
+            placeholder={placeholder}
             className=" outline-none border-none  placeholder:text-gray-400 text-base text-gray-600 w-full"
           />
         </div>
