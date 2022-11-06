@@ -18,8 +18,8 @@ const OneUser = ({ user: { name, role, status, id } }: IProps) => {
   return (
     <Link href={routes.userAdminDashboard(`${id}`)} passHref>
       <a>
-        <div className="rounded-lg shadow-primary bg-white p-4 flex items-center">
-          <div className="flex-1 gap-4 flex items-center">
+        <div className="rounded-lg w-full min-h-[180px] sm:min-h-min justify-center items-center shadow-primary bg-white p-4 flex sm:items-center flex-col sm:flex-row gap-y-3">
+          <div className="flex-1 gap-4 flex items-center justify-between sm:justify-start flex-col sm:flex-row">
             <div className="w-12 h-12 flex justify-center items-center bg-tinted-50 rounded-lg">
               <SvgIcon
                 fontSize="small"
@@ -30,18 +30,18 @@ const OneUser = ({ user: { name, role, status, id } }: IProps) => {
             </div>
             <Typography
               variant="h6"
-              className="futura font-medium text-primary-700 leading-none"
+              className="futura font-medium text-primary-700 sm:w-64 leading-none"
             >
               {name}
             </Typography>
             <Typography
               variant="h6"
-              className="futura font-medium text-primary-700 ml-auto leading-none text-start min-w-[80px]"
+              className="futura font-medium text-primary-700  leading-none text-center sm:text-start min-w-[80px]"
             >
               {role}
             </Typography>
           </div>
-          <div className="flex-1 flex justify-end items-end">
+          <div className="flex sm:justify-end">
             {status === "Block" ? (
               <SvgIcon
                 fontSize="small"

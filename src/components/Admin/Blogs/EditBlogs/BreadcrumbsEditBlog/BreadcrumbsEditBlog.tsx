@@ -10,7 +10,7 @@ import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/Mo
 import { useState } from "react";
 import { CiFolderOn } from "react-icons/ci";
 import { TfiTrash } from "react-icons/tfi";
-import PathIcon from "../../assets/path-icon.svg";
+import PathIcon from "@assets/icons/path-icon.svg";
 
 const BreadcrumbsEditBlog = () => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =

@@ -1,17 +1,21 @@
 import { Breadcrumbs, Link, SvgIcon, Typography } from "@mui/material";
 import PathIcon from "@assets/icons/path-icon.svg";
 
-const BreadcrumbsAddBlogEntry = () => {
+interface IProps {
+  name?: string;
+}
+
+const BreadcrumbsUserInfo = ({ name }: IProps) => {
   const breadcrumbs = [
     <Link
       underline="hover"
       key="1"
       color="inherit"
-      href="/admin/blogs"
+      href="/admin/users"
       className="text-gray-300 font-normal mr-2 sm:mr-6"
       variant="h5"
     >
-      Blogs
+      User List
     </Link>,
     <Typography
       key="2"
@@ -19,7 +23,7 @@ const BreadcrumbsAddBlogEntry = () => {
       variant="h5"
       color="primary.main"
     >
-      New Blog
+      {name ? name : ""}
     </Typography>,
   ];
 
@@ -35,4 +39,4 @@ const BreadcrumbsAddBlogEntry = () => {
   );
 };
 
-export default BreadcrumbsAddBlogEntry;
+export default BreadcrumbsUserInfo;
