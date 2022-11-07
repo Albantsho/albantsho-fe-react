@@ -106,6 +106,7 @@ const AssignedRequests = () => {
       <TableBody className="px-6 xl:px-14 overflow-hidden">
         {listCurrentRequests.map((script) => (
           <TableRow
+            data-aos-anchor-placement="top-bottom"
             data-aos="fade-up"
             sx={{
               "& td, & th": {
@@ -180,7 +181,7 @@ const AssignedRequests = () => {
             >
               <Chip
                 label={script.type}
-                className="py-5 px-4 hidden sm:flex md:hidden lg:flex xl:hidden rounded-md bg-primary-700  text-white"
+                className="py-5 px-4 hidden sm:flex md:hidden lg:flex xl:hidden rounded-md bg-primary-700 w-full text-white"
               />
               <div className="flex gap-2 items-center xl:ml-auto">
                 <Avatar className="w-8 h-8">J</Avatar>

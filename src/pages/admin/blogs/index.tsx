@@ -7,6 +7,7 @@ import TabButtons from "components/Admin/Blogs/Index/TabButtons/TabButtons";
 import TrashBlogsList from "components/Admin/Blogs/Index/TrashBlogsList/TrashBlogsList";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import routes from "routes/routes";
 import { NextPageWithLayout } from "../../_app";
 
 const BlogsPage: NextPageWithLayout = () => {
@@ -25,8 +26,8 @@ const BlogsPage: NextPageWithLayout = () => {
 
       <Fab
         color="primary"
-        href="/admin/blogs/add-blog/2"
-        className="block md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
+        href={routes.createBlogAdminDashboard("1")}
+        className="flex items-center justify-center md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
       >
         +
       </Fab>

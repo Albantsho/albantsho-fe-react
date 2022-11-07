@@ -50,7 +50,7 @@ const listBlogs = [
 
 const LiveBlogsList = () => {
   return (
-    <div className="mt-4 pb-14 flex flex-col gap-4">
+    <div className="mt-4 pb-14 flex flex-col gap-4 overflow-hidden">
       {listBlogs.length > 0 ? (
         <>
           {listBlogs.map((blog) => (

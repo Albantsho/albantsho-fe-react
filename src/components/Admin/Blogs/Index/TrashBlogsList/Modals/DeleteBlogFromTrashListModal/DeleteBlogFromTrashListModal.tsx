@@ -25,7 +25,7 @@ const DeleteBlogFromTrashListModal = ({
       onClose={handleCloseDeleteBlogFromTrashListModal}
     >
       <Grow in={openDeleteBlogFromTrashListModal}>
-        <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-2xl mx-auto flex flex-col items-center py-12 rounded-lg">
+        <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-xl lg:max-w-2xl mx-auto flex flex-col items-center py-12 lg:py-24 rounded-lg">
           <IconButton
             onClick={handleCloseDeleteBlogFromTrashListModal}
             className="absolute top-5 right-5"

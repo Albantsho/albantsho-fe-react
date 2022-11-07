@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsCursor } from "react-icons/bs";
 import { TfiTrash } from "react-icons/tfi";
+import routes from "routes/routes";
 
 interface IProps {
   blog: {
@@ -15,7 +16,9 @@ interface IProps {
   };
 }
 
-const ArchiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
+const ArchiveBlog = ({
+  blog: { image, blogDescription, title, id },
+}: IProps) => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
     useState(false);
 
@@ -24,7 +27,11 @@ const ArchiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
 
   return (
     <>
-      <div className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start">
+      <div
+        data-aos="fade-up"
+        data-aos-anchor-placement="top-bottom"
+        className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start"
+      >
         <div className="flex gap-3 lg:gap-6">
           <div className="max-w-[76px] rounded-md w-full flex max-h-[76px] bg-tinted-50/50 justify-center items-center">
             <Image width={27} height={34} src={image} alt={title} />
@@ -43,7 +50,10 @@ const ArchiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
           </div>
         </div>
         <div className="ml-auto flex md:self-start lg:self-center xl:self-start gap-3 md:gap-1">
-          <IconButton href="/admin/blogs/edit-blog/2" color="primary">
+          <IconButton
+            href={routes.editBlogAdminDashboard(`${id}`)}
+            color="primary"
+          >
             <SvgIcon
               inheritViewBox
               fontSize="medium"

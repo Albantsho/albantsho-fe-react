@@ -2,8 +2,8 @@ import { IconButton, SvgIcon, Typography } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import { TfiTrash } from "react-icons/tfi";
-import DeleteBlogFromTrashListModal from "../DeleteBlogFromTrashListModal/DeleteBlogFromTrashListModal";
-import RestoreBlogFromTrashListModal from "../RestoreBlogFromTrashListModal/RestoreBlogFromTrashListModal";
+import DeleteBlogFromTrashListModal from "../Modals/DeleteBlogFromTrashListModal/DeleteBlogFromTrashListModal";
+import RestoreBlogFromTrashListModal from "../Modals/RestoreBlogFromTrashListModal/RestoreBlogFromTrashListModal";
 import RefreshIcon from "./assets/refresh-icon.svg";
 
 interface IProps {
@@ -33,7 +33,11 @@ const TrashBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
 
   return (
     <>
-      <div className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start">
+      <div
+        data-aos="fade-up"
+        data-aos-anchor-placement="top-bottom"
+        className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start"
+      >
         <div className="flex gap-3 lg:gap-6">
           <div className="max-w-[76px] rounded-md w-full flex max-h-[76px] bg-tinted-50/50 justify-center items-center">
             <Image width={27} height={34} src={image} alt={title} />

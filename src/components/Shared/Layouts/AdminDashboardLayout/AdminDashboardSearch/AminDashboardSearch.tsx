@@ -1,6 +1,7 @@
 import Btn from "@shared/Btn/Btn";
 import { useRouter } from "next/router";
 import { RiSearch2Line } from "react-icons/ri";
+import routes from "routes/routes";
 
 interface IProps {
   placeholder: string;
@@ -23,7 +24,7 @@ const AdminDashboardSearch = ({ placeholder }: IProps) => {
       {route === "/admin/blogs" && (
         <div className="hidden  md:block md:justify-center xl:flex-end">
           <Btn
-            href="/admin/blogs/add-blog/2"
+            href={routes.createBlogAdminDashboard("1")}
             className="ml-auto  py-3 px-6"
             size="large"
           >

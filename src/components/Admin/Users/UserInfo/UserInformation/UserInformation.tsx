@@ -185,11 +185,11 @@ const UserInformation = ({ user }: IProps) => {
               />
             </div>
           </div>
-          <div className="flex gap-2 sm:gap-4">
+          <div className="flex gap-2 sm:gap-4 flex-wrap w-full">
             {user && user?.status === "Freeze" ? (
               <Button
                 variant="outlined"
-                className="py-2 px-3 lg:py-3 lg:px-6"
+                className="py-2 px-3 lg:py-3 lg:px-6 flex-1 min-w-[180px] sm:flex-grow-0"
                 color="primary"
                 startIcon={
                   <SvgIcon fontSize="small" component={SlLike} inheritViewBox />
@@ -200,7 +200,7 @@ const UserInformation = ({ user }: IProps) => {
             ) : (
               <Button
                 variant="outlined"
-                className="py-2 px-3 lg:py-3 lg:px-6"
+                className="py-2 px-3 lg:py-3 lg:px-6 flex-1 min-w-[180px] sm:flex-grow-0"
                 color="primary"
                 onClick={handleOpenFreezingUserModal}
                 startIcon={
@@ -217,7 +217,7 @@ const UserInformation = ({ user }: IProps) => {
             {user && user?.status === "Block" ? (
               <Button
                 variant="outlined"
-                className="py-2 px-3 lg:py-3 lg:px-6"
+                className="py-2 px-3 lg:py-3 lg:px-6 flex-1 min-w-[180px] sm:flex-grow-0"
                 color="success"
                 startIcon={
                   <SvgIcon
@@ -232,7 +232,7 @@ const UserInformation = ({ user }: IProps) => {
             ) : (
               <Button
                 variant="outlined"
-                className="py-2 px-3 lg:py-3 lg:px-6"
+                className="py-2 px-3 lg:py-3 lg:px-6 flex-1 min-w-[180px] sm:flex-grow-0"
                 color="error"
                 onClick={handleOpenBlockingUserModal}
                 startIcon={

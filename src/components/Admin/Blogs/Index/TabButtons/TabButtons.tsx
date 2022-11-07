@@ -50,7 +50,7 @@ const TabButtons = () => {
             marginRight: { md: 1 },
             px: { xs: 1.5, md: 6 },
           }}
-          className={`text-gray-600 futura text-lg 2xl:text-xl font-medium`}
+          className="text-gray-600 max-w-[180px] w-full futura text-lg 2xl:text-xl font-medium"
           label={item.label}
         />
       ))}

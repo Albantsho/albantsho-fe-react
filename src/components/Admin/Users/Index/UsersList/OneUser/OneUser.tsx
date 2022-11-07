@@ -18,7 +18,11 @@ const OneUser = ({ user: { name, role, status, id } }: IProps) => {
   return (
     <Link href={routes.userAdminDashboard(`${id}`)} passHref>
       <a>
-        <div className="rounded-lg w-full min-h-[180px] sm:min-h-min justify-center items-center shadow-primary bg-white p-4 flex sm:items-center flex-col sm:flex-row gap-y-3">
+        <div
+          data-aos="fade-up"
+          data-aos-anchor-placement="top-bottom"
+          className="rounded-lg w-full min-h-[180px] sm:min-h-min justify-center items-center shadow-primary bg-white p-4 flex sm:items-center flex-col sm:flex-row gap-y-3"
+        >
           <div className="flex-1 gap-4 flex items-center justify-between sm:justify-start flex-col sm:flex-row">
             <div className="w-12 h-12 flex justify-center items-center bg-tinted-50 rounded-lg">
               <SvgIcon

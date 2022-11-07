@@ -21,7 +21,7 @@ const allUsersList: Array<{
 const AllUsersList = () => {
   return (
     <Box
-      className="gap-4 mt-8 mb-16 grid sm:flex sm:flex-col"
+      className="gap-4 mt-8 mb-16 grid sm:flex sm:flex-col overflow-hidden"
       gridTemplateColumns={{
         xs: "repeat(auto-fill, minmax(200px, auto))",
       }}

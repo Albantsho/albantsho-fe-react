@@ -30,7 +30,7 @@ const MoveBlogToArchiveListModal = ({
         mountOnEnter
         unmountOnExit
       >
-        <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-2xl mx-auto flex flex-col items-center py-12 lg:py-16 rounded-lg">
+        <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-xl lg:max-w-2xl mx-auto flex flex-col items-center py-12 lg:py-16 rounded-lg">
           <IconButton
             onClick={handleCloseMoveBlogToArchiveListModal}
             className="absolute top-5 right-5"

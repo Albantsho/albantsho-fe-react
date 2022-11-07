@@ -45,6 +45,8 @@ const routes = {
   titleScript: "title",
   blogsAdminDashboard: `/admin/blogs`,
   blogsAdminDashboardTabs: (query: string) => `/admin/blogs${query}`,
+  editBlogAdminDashboard: (id: string) => `/admin/blogs/edit-blog/${id}`,
+  createBlogAdminDashboard: (id: string) => `/admin/blogs/edit-blog/${id}`,
   usersAdminDashboard: `/admin/users`,
   userAdminDashboard: (id: string) => `/admin/users/${id}`,
   reviewersAdminDashboard: `/admin/reviewers`,

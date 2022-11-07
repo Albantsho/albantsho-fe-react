@@ -29,7 +29,11 @@ const LiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
 
   return (
     <>
-      <div className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start">
+      <div
+        data-aos="fade-up"
+        data-aos-anchor-placement="top-bottom"
+        className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start"
+      >
         <div className="flex gap-3 lg:gap-6">
           <div className="max-w-[76px] rounded-md w-full flex max-h-[76px] bg-tinted-50/50 justify-center items-center">
             <Image width={27} height={34} src={image} alt={title} />
