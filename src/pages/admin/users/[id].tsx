@@ -31,7 +31,7 @@ const InformationUserPage: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Admin User information</title>
       </Head>
-      <div className="bg-white shadow-primary rounded-lg pt-4 lg:pt-8 pb-10 lg:pb-24 px-5 lg:px-14">
+      <div className="bg-white shadow-primary rounded-lg pt-4 lg:pt-8 pb-10 lg:pb-24 px-5 lg:px-14 max-w-5xl">
         <BreadcrumbsUserInfo name={foundedUser?.name} />
         <Divider className="mt-2 lg:mt-6 mb-6 lg:mb-11" />
         <UserInformation user={foundedUser} />

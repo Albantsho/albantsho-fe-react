@@ -7,6 +7,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import Image from "next/image";
@@ -78,7 +79,7 @@ const AssignedRequests = () => {
                 px: { xs: 0, sm: 2 },
               },
             }}
-            className="w-28 xl:flex-0 flex-[0.5] md:flex-[0.4] xl:pl-0 xl:pb-8 pb-5 pt-0 hidden sm:flex"
+            className="w-28 xl:flex-0 flex-[0.35] lg:hidden xl:flex xl:pl-0 xl:pb-8 pb-5 pt-0 hidden md:flex xl:flex-0"
           >
             <Typography
               variant="h6"
@@ -91,7 +92,7 @@ const AssignedRequests = () => {
             sx={{
               "&.MuiTableCell-root": {},
             }}
-            className="flex-[0.4] md:flex-[0.35] xl:pb-8 pb-5 pt-0 hidden sm:flex"
+            className="flex-[0.35] xl:pb-8 pb-5 pt-0 hidden md:flex lg:hidden xl:flex xl:justify-end xl:pr-16"
           >
             <Typography
               variant="h6"
@@ -119,8 +120,8 @@ const AssignedRequests = () => {
               scope="script"
               className="flex flex-1 py-4 pl-0 flex-col sm:flex-row  sm:py-6 xl:py-10 items-start sm:items-center xl:max-w-lg gap-4 sm:gap-8"
             >
-              <div className="flex flex-col sm:flex-row sm:gap-4">
-                <div className="mt-1">
+              <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
+                <div className="mt-1 flex items-end gap-1 ">
                   <Image
                     width={64}
                     height={64}
@@ -130,12 +131,19 @@ const AssignedRequests = () => {
                     src={script.image}
                     alt={script.title}
                   />
-                  {/* <Chip
-                    className="bg-primary-50 text-primary-700"
-                    label={script.reviewer}
-                  /> */}
+                  <Chip
+                    className="sm:hidden py-5 px-4  rounded-lg text-white bg-primary-700"
+                    label={script.type}
+                  />
                 </div>
-
+                <div className="sm:hidden flex gap-1 items-center">
+                  <Avatar className="w-8 h-8">J</Avatar>
+                  <Tooltip title={script.reviewer}>
+                    <Typography variant="body1">
+                      {script.reviewer.substring(0, 13)}
+                    </Typography>
+                  </Tooltip>
+                </div>
                 <div className="flex-grow sm:max-w-[360px]">
                   <Typography
                     variant="body1"
@@ -148,18 +156,14 @@ const AssignedRequests = () => {
                   </Typography>
                 </div>
               </div>
-              <Chip
-                className="sm:hidden py-5 px-4  rounded-lg text-white bg-primary-700"
-                label={script.type}
-              />
             </TableCell>
             <TableCell
               sx={{
                 "&.MuiTableCell-root": {
-                  px: { xs: 0, sm: 2 },
+                  px: { xs: 0, md: 0 },
                 },
               }}
-              className="hidden py-4 min-w-[150px] sm:py-6 xl:py-10 sm:flex flex-[0.45] items-center"
+              className="hidden py-4 min-w-[150px] md:py-6 xl:py-10 md:flex lg:hidden xl:flex flex-[0.4] items-center"
             >
               <Chip
                 label={script.type}
@@ -169,13 +173,24 @@ const AssignedRequests = () => {
             <TableCell
               sx={{
                 "&.MuiTableCell-root": {
-                  px: { xs: 0, sm: 2 },
+                  px: { xs: 0 },
                 },
               }}
-              className="hidden py-4 sm:py-6 xl:py-10 sm:flex flex-[0.35] items-center"
+              className="hidden py-4 sm:py-6 xl:py-10 sm:flex flex-[0.35] md:flex-[0.4] justify-center flex-col md:items-center gap-2"
             >
-              <Avatar className="w-8 h-8 mr-1 md:mr-2">J</Avatar>
-              <Typography variant="body1">{script.reviewer}</Typography>
+              <Chip
+                label={script.type}
+                className="py-5 px-4 hidden sm:flex md:hidden lg:flex xl:hidden rounded-md bg-primary-700  text-white"
+              />
+              <div className="flex gap-2 items-center xl:ml-auto">
+                <Avatar className="w-8 h-8">J</Avatar>
+                <Tooltip title={script.reviewer}>
+                  <Typography variant="body1">
+                    {script.reviewer.substring(0, 8)}
+                    {script.reviewer.length > 8 && "..."}
+                  </Typography>
+                </Tooltip>
+              </div>
             </TableCell>
           </TableRow>
         ))}

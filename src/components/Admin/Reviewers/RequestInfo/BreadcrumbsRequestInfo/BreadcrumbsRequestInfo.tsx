@@ -19,7 +19,7 @@ const BreadcrumbsRequestInfo = ({ title }: IProps) => {
     </Link>,
     <Typography
       key="2"
-      className="font-normal sm:ml-4"
+      className="font-normal sm:ml-4 leading-normal"
       variant="h5"
       color="primary.main"
     >

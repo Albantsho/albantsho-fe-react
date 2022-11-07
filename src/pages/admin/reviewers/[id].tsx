@@ -60,7 +60,7 @@ const InformationReviewPage: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Admin Add blog</title>
       </Head>
-      <div className="bg-white shadow-primary rounded-lg pt-4 lg:pt-8 pb-20 lg:pb-24 px-5 lg:px-14">
+      <div className="bg-white shadow-primary rounded-lg pt-4 lg:pt-8 pb-20 lg:pb-24 px-5 lg:px-14 max-w-5xl">
         <BreadcrumbsRequestInfo title={foundedRequest?.title} />
         <Divider className="mt-2 lg:mt-6 mb-6 lg:mb-11" />
         <OneRequest requestInfo={foundedRequest} />
