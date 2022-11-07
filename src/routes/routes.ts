@@ -48,6 +48,8 @@ const routes = {
   usersAdminDashboard: `/admin/users`,
   userAdminDashboard: (id: string) => `/admin/users/${id}`,
   reviewersAdminDashboard: `/admin/reviewers`,
+  reviewerAdminDashboard: (id: string) => `/admin/reviewers/${id}`,
+  reviewersAdminDashboardTabs: (query: string) => `/admin/reviewers${query}`,
 };
 
 export default routes;

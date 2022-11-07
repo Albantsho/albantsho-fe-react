@@ -29,7 +29,7 @@ const InformationUserPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Admin Add blog</title>
+        <title>Albantsho || Admin User information</title>
       </Head>
       <div className="bg-white shadow-primary rounded-lg pt-4 lg:pt-8 pb-10 lg:pb-24 px-5 lg:px-14">
         <BreadcrumbsUserInfo name={foundedUser?.name} />
