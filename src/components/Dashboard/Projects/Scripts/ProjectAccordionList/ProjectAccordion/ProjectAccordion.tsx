@@ -4,6 +4,8 @@ import {
   AccordionSummary,
   Chip,
   IconButton,
+  Menu,
+  MenuItem,
   SvgIcon,
   Typography,
 } from "@mui/material";
@@ -32,6 +34,20 @@ const buttonsProjects = [
 
 const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
   const [expanded, setExpanded] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const openProjectAccordionMenu = Boolean(anchorEl);
+  const handleOpenProjectAccordionMenu = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.stopPropagation();
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseProjectAccordionMenu = (
+    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>
+  ) => {
+    event.stopPropagation();
+    setAnchorEl(null);
+  };
 
   return (
     <Accordion
@@ -75,9 +91,36 @@ const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
           />
         </div>
         <div className="flex ml-auto  gap-4 items-center">
-          <IconButton>
+          <IconButton onClick={handleOpenProjectAccordionMenu}>
             <IoIosMore className=" text-3xl text-primary-700" />
           </IconButton>
+          <Menu
+            sx={{ "& .MuiMenu-list": { width: "170px", py: 0 } }}
+            anchorEl={anchorEl}
+            open={openProjectAccordionMenu}
+            onClose={handleCloseProjectAccordionMenu}
+            anchorOrigin={{
+              vertical: "center",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            <MenuItem
+              className="hover:text-primary-700 hover:bg-tinted-50/50 py-3 px-10"
+              onClick={handleCloseProjectAccordionMenu}
+            >
+              Archive
+            </MenuItem>
+            <MenuItem
+              className="hover:text-primary-700 hover:bg-tinted-50/50 py-3 px-10"
+              onClick={handleCloseProjectAccordionMenu}
+            >
+              Delete
+            </MenuItem>
+          </Menu>
           <SvgIcon
             sx={{
               transition: "all 0.3s linear",

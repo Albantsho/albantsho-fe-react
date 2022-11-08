@@ -78,12 +78,12 @@ const UncompletedList = ({
         >
           Progress
         </Typography>
-        <Typography></Typography>
       </div>
       <div className="px-5 xl:px-14 overflow-hidden">
         {unCompletedScripts.map((listItem, index) => (
           <React.Fragment key={listItem.id}>
             <div
+              data-aos-anchor-placement="top-bottom"
               data-aos="fade-up"
               className="flex py-6 items-center sm:justify-between xl:justify-start"
             >

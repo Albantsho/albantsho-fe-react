@@ -96,6 +96,7 @@ const ClosedList = ({ scripts }: IProps) => {
         {closedScripts.map((listItem) => (
           <TableRow
             data-aos="fade-right"
+            data-aos-anchor-placement="top-bottom"
             key={listItem.id}
             sx={{
               "& td, & th": {

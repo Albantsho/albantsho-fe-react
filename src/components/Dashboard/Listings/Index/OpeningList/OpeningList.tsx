@@ -109,6 +109,7 @@ const OpeningList = ({ setOpenUnListingItem, scripts }: IProps) => {
         {openedScripts.map((script, index) => (
           <React.Fragment key={script.id}>
             <div
+              data-aos-anchor-placement="top-bottom"
               data-aos="zoom-in"
               className="flex flex-col sm:flex-row py-6 xl:py-10 sm:justify-start  md:justify-end 2xl:justify-start"
             >

@@ -75,6 +75,7 @@ const UnlistedList = ({ setOpenRelistScript, unListedScripts }: IProps) => {
           <React.Fragment key={script.id}>
             <div
               data-aos="fade-up"
+              data-aos-anchor-placement="top-bottom"
               className="flex py-6 items-center sm:justify-between xl:justify-start"
             >
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-14 lg:max-w-[445px] ">

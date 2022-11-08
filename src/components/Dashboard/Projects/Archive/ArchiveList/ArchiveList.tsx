@@ -95,6 +95,7 @@ const ArchiveList = ({ setOpenUnArchive }: IProps) => {
         {listScripts.map((script) => (
           <TableRow
             data-aos="fade-up"
+            data-aos-anchor-placement="top-bottom"
             sx={{
               "& td, & th": {
                 borderBottom: { xs: 0, sm: "1px solid #DCD8E4" },

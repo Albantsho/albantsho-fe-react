@@ -69,6 +69,7 @@ const ScriptsList = () => {
         {listScripts.map((script, index) => (
           <React.Fragment key={script.id}>
             <div
+              data-aos-anchor-placement="top-bottom"
               data-aos="fade-up"
               className="flex py-6 xl:py-10 items-center sm:justify-between md:justify-end 2xl:justify-start"
             >
