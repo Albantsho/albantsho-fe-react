@@ -1,3 +1,4 @@
+import PathIcon from "@assets/icons/path-icon.svg";
 import {
   Breadcrumbs,
   IconButton,
@@ -8,9 +9,8 @@ import {
 import MoveBlogToArchiveListModal from "@shared/Modals/MoveBlogToArchiveListModal/MoveBlogToArchiveListModal";
 import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
 import { useState } from "react";
-import { CiFolderOn } from "react-icons/ci";
+import { MdOutlineFolder } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
-import PathIcon from "@assets/icons/path-icon.svg";
 
 const BreadcrumbsEditBlog = () => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
@@ -59,7 +59,7 @@ const BreadcrumbsEditBlog = () => {
               inheritViewBox
               fontSize="medium"
               className="text-primary-700"
-              component={CiFolderOn}
+              component={MdOutlineFolder}
             />
           </IconButton>
           <IconButton onClick={handleOpenMoveBlogToTrashList} color="primary">

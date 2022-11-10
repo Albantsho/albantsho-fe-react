@@ -4,7 +4,7 @@ import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/Mo
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
-import { CiFolderOn } from "react-icons/ci";
+import { MdOutlineFolder } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
 
 interface IProps {
@@ -65,7 +65,7 @@ const LiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
               inheritViewBox
               fontSize="medium"
               className="text-primary-700"
-              component={CiFolderOn}
+              component={MdOutlineFolder}
             />
           </IconButton>
           <IconButton onClick={handleOpenMoveBlogToTrashList} color="primary">

@@ -6,8 +6,8 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
+import TextEditor from "@shared/TextEditor/TextEditor";
 import { BiChevronDown } from "react-icons/bi";
-import TextEditor from "./TextEditor/TextEditor";
 
 interface IProps {
   title: string;

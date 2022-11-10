@@ -88,12 +88,7 @@ const AssignedRequests = () => {
               Script Type
             </Typography>
           </TableCell>
-          <TableCell
-            sx={{
-              "&.MuiTableCell-root": {},
-            }}
-            className="flex-[0.35] xl:pb-8 pb-5 pt-0 hidden md:flex lg:hidden xl:flex xl:justify-end xl:pr-16"
-          >
+          <TableCell className="flex-[0.35] xl:pb-8 pb-5 pt-0 hidden md:flex lg:hidden xl:flex xl:justify-end xl:pr-16">
             <Typography
               variant="h6"
               className="futura font-medium text-primary-700"

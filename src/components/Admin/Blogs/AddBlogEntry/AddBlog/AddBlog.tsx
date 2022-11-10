@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import TextEditor from "components/Reviewer/Questionnaire/QuestionnaireAccordion/TextEditor/TextEditor";
+import TextEditor from "@shared/TextEditor/TextEditor";
 
 const AddBlog = () => {
   return (

@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import TextEditor from "components/Reviewer/Questionnaire/QuestionnaireAccordion/TextEditor/TextEditor";
+import TextEditor from "@shared/TextEditor/TextEditor";
 
 const EditBlog = () => {
   return (
@@ -50,7 +50,7 @@ const EditBlog = () => {
         </Typography>
       </label>
       <TextEditor />
-      <div className="mt-6 lg:mt-10 space-x-2 lg:space-x-6">
+      <div className="mt-6 lg:mt-10 flex gap-2 lg:gap-6">
         <Button
           disableElevation
           className="px-4 py-2 lg:py-3 lg:px-6"
