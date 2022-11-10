@@ -30,8 +30,8 @@ const useResetPasswordForm = () => {
 
   const onSubmit = async (data: IAuthResetPassword) => {
     try {
-      const res = await resetPassword({ password: data.password });
-      successHandler(res.message);
+      // const res = await resetPassword({ newPassword: data.password });
+      // successHandler(res.message);
       replace("/login");
     } catch (error) {
       errorHandler(error);

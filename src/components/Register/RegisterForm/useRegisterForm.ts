@@ -10,17 +10,18 @@ import shallow from "zustand/shallow";
 import { registerSchema } from "./validation/register.validation";
 
 interface IRegisterFormValues {
-  full_name: string;
+  fullname: string;
   email: string;
   password: string;
   country: string;
   user_type: "user" | "producer";
   portfolio?: string;
   production_company_name?: string;
+  gender: string;
 }
 
 const useRegisterForm = () => {
-  const { register: registerApi } = useAuthApi();
+  const { signup } = useAuthApi();
   const [loading, setLoading] = useState(false);
   const { replace } = useRouter();
   const useUser = () => {
@@ -43,7 +44,7 @@ const useRegisterForm = () => {
     formState: { errors },
   } = useForm<IRegisterFormValues>({
     defaultValues: {
-      full_name: "",
+      fullname: "",
       email: "",
       country: "Nigeria",
       password: "",
@@ -61,7 +62,7 @@ const useRegisterForm = () => {
   const onSubmit = async (data: IRegisterFormValues) => {
     try {
       setLoading(true);
-      const res = await registerApi(data);
+      const res = await signup(data);
       authenticationUser(res.data);
       replace(routes.welcome);
       // replace(routes.verifyEmail);

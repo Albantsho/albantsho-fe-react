@@ -12,11 +12,12 @@ import successHandler from "utils/success-handler";
 interface IAuthLogin {
   email: string;
   password: string;
+  rememberMe: boolean;
 }
 
 const useLoginForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
-  const { login } = useAuthApi();
+  const { signin } = useAuthApi();
   const { replace } = useRouter();
   const useUser = () => {
     const { authenticationUser } = useUserStore(
@@ -43,7 +44,7 @@ const useLoginForm = () => {
 
   const onSubmit = async (data: IAuthLogin) => {
     try {
-      const res = await login(data);
+      const res = await signin(data);
       authenticationUser(res.data);
       successHandler(res.message);
       replace(routes.home);

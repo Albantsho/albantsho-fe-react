@@ -11,7 +11,7 @@ interface IAuthForgetPassword {
 }
 
 const useForgetPassword = () => {
-  const { forgetPassword } = useAuthApi();
+  const { resetPasswordEmail: forgetPassword } = useAuthApi();
   const { replace } = useRouter();
   const {
     register,
@@ -23,7 +23,7 @@ const useForgetPassword = () => {
 
   const onSubmit = async (data: IAuthForgetPassword) => {
     try {
-      const res = await forgetPassword(data);
+      const res = await forgetPassword(data.email);
       successHandler(res.message);
       replace("/reset-password");
     } catch (error) {

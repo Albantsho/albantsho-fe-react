@@ -49,8 +49,8 @@ const RegisterForm = () => {
             Full Name
           </Typography>
           <CustomInput
-            error={Boolean(errors.full_name) || false}
-            {...register("full_name")}
+            error={Boolean(errors.fullname) || false}
+            {...register("fullname")}
             id="full-name"
             variant="outlined"
             size="medium"
@@ -74,7 +74,7 @@ const RegisterForm = () => {
                 fontSize: "16px",
               },
             }}
-            helperText={errors.full_name?.message}
+            helperText={errors.fullname?.message}
           />
         </div>
 

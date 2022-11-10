@@ -42,7 +42,9 @@ const useVerifyEmail = () => {
     e.preventDefault();
     try {
       const res = await emailVerify({
-        otp: Object.values(formValues).join(""),
+        email: "",
+        code: Object.values(formValues).join(""),
+        rememberMe: false,
       });
       successHandler(res.message);
       replace(routes.home);

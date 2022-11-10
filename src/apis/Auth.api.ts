@@ -2,18 +2,53 @@ import { useUserStore } from "app/user.store";
 import shallow from "zustand/shallow";
 import api from "./configs/axios.config";
 interface IRegisterPayload {
-  full_name: string;
+  fullname: string;
   email: string;
   password: string;
   country: string;
   user_type: "user" | "producer";
   portfolio?: string;
   production_company_name?: string;
+  gender: string;
 }
 
 interface ILoginPayload {
   email: string;
   password: string;
+  rememberMe: boolean;
+}
+
+interface IEmailVerifyOtp {
+  email: string;
+  code: string;
+  rememberMe: boolean;
+}
+
+interface IResetpasswordPayload {
+  newPassword: string;
+  reset_password_token: string;
+}
+
+interface IUpdateUserInformationPayload {
+  fullname: string;
+  image: string;
+}
+
+interface IUpdateWithdrawUserInformationPayload {
+  bank_name: string;
+  bank_account_name: string;
+  bank_account_number: string;
+}
+
+interface IUserRestrictionPayload {
+  freeze: boolean;
+  block: boolean;
+}
+
+interface IGetAllUserOrReviewerPayload {
+  page: number;
+  limit: string;
+  search: string;
 }
 
 const useAuthApi = (controller?: AbortController) => {
@@ -32,24 +67,24 @@ const useAuthApi = (controller?: AbortController) => {
   } = useUser();
 
   return {
-    async register(payload: IRegisterPayload) {
-      const res = await api.post("/authentication/register", payload, {
+    async signup(payload: IRegisterPayload) {
+      const res = await api.post("/user/signup", payload, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async login(payload: ILoginPayload) {
-      const res = await api.post("/authentication/login", payload, {
+    async signin(payload: ILoginPayload) {
+      const res = await api.post("/user/signin", payload, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async resetPassword(payload: object) {
-      const res = await api.post("/profile/password-reset", payload, {
+    async emailVerify(payload: IEmailVerifyOtp) {
+      const res = await api.post("/user/verify-otp", payload, {
         signal: controller?.signal,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -59,16 +94,106 @@ const useAuthApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async forgetPassword(payload: object) {
-      const res = await api.post("/authentication/reset-password", payload, {
+    async logoutUser() {
+      const res = await api.post("/user/logout", {
+        signal: controller?.signal,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return res.data;
+    },
+
+    async resetPasswordEmail(email: string) {
+      const res = await api.post("/user/reset-password-email", email, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async emailVerify(payload: object) {
-      const res = await api.post("/verification", payload, {
+    async resetPassword(payload: IResetpasswordPayload) {
+      const res = await api.post("/user/reset-password", payload, {
+        signal: controller?.signal,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return res.data;
+    },
+
+    async updateUserInformation(payload: IUpdateUserInformationPayload) {
+      const res = await api.patch("/user/profile/update", payload, {
+        signal: controller?.signal,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return res.data;
+    },
+
+    async updateUserWithdrawInformation(
+      payload: IUpdateWithdrawUserInformationPayload
+    ) {
+      const res = await api.post("/user/profile/withdraw/update", payload, {
+        signal: controller?.signal,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return res.data;
+    },
+
+    async updateUserRestriction(payload: IUserRestrictionPayload, id: string) {
+      const res = await api.patch(`/user/update/restriction/${id}`, payload, {
+        signal: controller?.signal,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return res.data;
+    },
+
+    async getAllUser(payload: IGetAllUserOrReviewerPayload) {
+      const res = await api.get("/user/all/users", {
+        signal: controller?.signal,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return res.data;
+    },
+
+    async getUserProfile(id: string) {
+      const res = await api.get(`/user/profile/${id}`, {
+        signal: controller?.signal,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return res.data;
+    },
+
+    async getAdminProfile() {
+      const res = await api.get("/user/me/profile/", {
+        signal: controller?.signal,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return res.data;
+    },
+
+    async getAllReviewers(payload: IGetAllUserOrReviewerPayload) {
+      const res = await api.get("/user/all/users", {
         signal: controller?.signal,
         headers: {
           Authorization: `Bearer ${token}`,
