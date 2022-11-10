@@ -14,10 +14,10 @@ interface IRegisterFormValues {
   email: string;
   password: string;
   country: string;
-  user_type: "user" | "producer";
+  user_type: "writer" | "producer";
   portfolio?: string;
   production_company_name?: string;
-  gender: string;
+  gender: "mail" | "fimale";
 }
 
 const useRegisterForm = () => {
@@ -48,9 +48,8 @@ const useRegisterForm = () => {
       email: "",
       country: "Nigeria",
       password: "",
-      portfolio: "",
-      production_company_name: "",
-      user_type: "user",
+      user_type: "writer",
+      gender: "fimale",
     },
     resolver: yupResolver(registerSchema),
   });
@@ -63,8 +62,9 @@ const useRegisterForm = () => {
     try {
       setLoading(true);
       const res = await signup(data);
+      console.log(res);
       authenticationUser(res.data);
-      replace(routes.welcome);
+      // replace(routes.welcome);
       // replace(routes.verifyEmail);
     } catch (error) {
       errorHandler(error);
@@ -72,6 +72,7 @@ const useRegisterForm = () => {
       setLoading(false);
     }
   };
+
   const HandleAcceptTermsAndCondition = () => {
     setAcceptTermsAndCondition((prevState) => !prevState);
   };

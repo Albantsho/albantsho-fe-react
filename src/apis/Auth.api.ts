@@ -6,10 +6,10 @@ interface IRegisterPayload {
   email: string;
   password: string;
   country: string;
-  user_type: "user" | "producer";
+  user_type: "writer" | "producer";
   portfolio?: string;
   production_company_name?: string;
-  gender: string;
+  gender: "mail" | "fimale";
 }
 
 interface ILoginPayload {

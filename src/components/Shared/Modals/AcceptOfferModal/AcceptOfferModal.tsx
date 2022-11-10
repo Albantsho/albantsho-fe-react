@@ -1,7 +1,7 @@
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
-import BidsApi from "apis/Bids.api";
+import useScripBidApi from "apis/ScripBid.api";
 import { IMarketBidScript } from "interfaces/market-bid-script";
 import { IProduct } from "interfaces/product";
 import Image from "next/image";
@@ -22,12 +22,13 @@ const AcceptOfferModal = ({
   auction,
   script,
 }: IProps) => {
-  const { acceptBid } = BidsApi();
+  const { acceptBid } = useScripBidApi();
 
   const handleCloseAcceptOffer = () => setOpenAcceptOffer(false);
   const acceptOfferFunc =
     (script_basic_id: string, amount: number) => async () => {
-      const res = await acceptBid({ script_basic_id, amount });
+      ("");
+      // const res = await acceptBid({ script_basic_id, amount });
     };
 
   return (

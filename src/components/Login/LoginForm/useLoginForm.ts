@@ -44,6 +44,8 @@ const useLoginForm = () => {
 
   const onSubmit = async (data: IAuthLogin) => {
     try {
+      console.log(data);
+
       const res = await signin(data);
       authenticationUser(res.data);
       successHandler(res.message);

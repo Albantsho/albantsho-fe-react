@@ -3,12 +3,15 @@ import NotShowIcon from "@assets/icons/not-show-password.svg";
 import PasswordIcon from "@assets/icons/password.svg";
 import ShowIcon from "@assets/icons/show-password.svg";
 import {
+  Button,
   Checkbox,
   FormControlLabel,
   FormGroup,
   IconButton,
   InputAdornment,
   MenuItem,
+  Radio,
+  RadioGroup,
   SvgIcon,
   Typography,
 } from "@mui/material";
@@ -172,6 +175,29 @@ const RegisterForm = () => {
         <div className="w-full mt-3 lg:mt-7 flex flex-col">
           <Typography
             variant="h6"
+            component="label"
+            className="text-purple-700 leading-normal font-normal mb-2 futura"
+          >
+            Gender
+          </Typography>
+          <RadioGroup
+            defaultValue="femail"
+            {...register("gender")}
+            className="flex flex-row gap-2"
+          >
+            <FormControlLabel
+              value="femail"
+              control={<Radio />}
+              label="Female"
+            />
+            <FormControlLabel value="mail" control={<Radio />} label="Male" />
+            {/* <FormControlLabel value="other" control={<Radio />} label="Other" /> */}
+          </RadioGroup>
+        </div>
+
+        <div className="w-full mt-3 lg:mt-7 flex flex-col">
+          <Typography
+            variant="h6"
             htmlFor="country"
             component="label"
             className="text-purple-700 leading-normal font-normal mb-2 futura"
@@ -263,7 +289,7 @@ const RegisterForm = () => {
                 }}
                 helperText={errors.user_type?.message}
               >
-                <MenuItem value="user">I’m a writer</MenuItem>
+                <MenuItem value="writer">I’m a writer</MenuItem>
                 <MenuItem value="producer">I’m a producer</MenuItem>
               </CustomInput>
             )}
@@ -370,16 +396,15 @@ const RegisterForm = () => {
             Get Started
           </Btn>
         </div>
-
-        <div className="flex justify-center mt-3 lg:mt-7 lg:hidden">
-          <Typography className="text-grey-400 text-center mb-2 futura">
-            Already have an account?
-            <Link href={`${routes.signin}`} passHref>
-              <a className="text-success-500 ml-2">Sign in</a>
-            </Link>
-          </Typography>
-        </div>
       </form>
+      <div className="flex justify-center mt-3 lg:mt-7 lg:hidden">
+        <Typography className="text-grey-400 text-center mb-2 futura">
+          Already have an account?
+          <Link href={`${routes.signin}`} passHref>
+            <a className="text-success-500 ml-2">Sign in</a>
+          </Link>
+        </Typography>
+      </div>
     </div>
   );
 };

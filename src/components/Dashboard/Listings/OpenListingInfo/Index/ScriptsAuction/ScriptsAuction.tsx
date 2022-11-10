@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import AcceptOfferModal from "@shared/Modals/AcceptOfferModal/AcceptOfferModal";
-import BidsApi from "apis/Bids.api";
+import useScripBidApi from "apis/ScripBid.api";
 import { IProduct } from "interfaces/product";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -35,7 +35,7 @@ interface IProps {
 
 const ScriptsAuction = ({ script }: IProps) => {
   const { query, push } = useRouter();
-  const { rejectBid } = BidsApi();
+  const { rejectBid } = useScripBidApi();
   const [openAcceptOffer, setOpenAcceptOffer] = useState<boolean>(false);
 
   const handleOpenAcceptOfferModal = (
@@ -47,7 +47,7 @@ const ScriptsAuction = ({ script }: IProps) => {
 
   const rejectOfferFunc =
     (script_basic_id: string, amount: number) => async () => {
-      await rejectBid({ script_basic_id, amount });
+      ("");
     };
 
   return (

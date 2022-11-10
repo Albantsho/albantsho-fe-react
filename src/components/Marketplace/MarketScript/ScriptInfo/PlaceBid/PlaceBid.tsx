@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import BidsApi from "apis/Bids.api";
+import useScripBidApi from "apis/ScripBid.api";
 import { IProduct } from "interfaces/product";
 import { Dispatch, SetStateAction, useState } from "react";
 
@@ -12,7 +12,7 @@ interface IProps {
 
 const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
   const [bidValue, setBidValue] = useState("");
-  const { createBid } = BidsApi();
+  const { createBid } = useScripBidApi();
 
   const handleBidValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBidValue(e.target.value);
@@ -20,14 +20,13 @@ const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
 
   const handleOpenBidSuccessful = async () => {
     try {
-      if (bidValue) {
-        const res = await createBid({
-          amount: +bidValue,
-          script_basic_id: script.script_id,
-        });
+      // if (bidValue) {
+      //   const res = await createBid({
+      //     amount: +bidValue,
 
-        setOpenBidSuccessful(true);
-      }
+      //   });
+      // }
+      setOpenBidSuccessful(true);
     } catch (error) {
       console.log(error);
     }

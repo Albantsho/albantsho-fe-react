@@ -2,7 +2,7 @@ import * as Yup from "yup";
 import countryList from "config/country-list.json";
 
 export const registerSchema = Yup.object({
-  full_name: Yup.string()
+  fullname: Yup.string()
     .required()
     .min(3)
     .matches(/^\s*[\S]+(\s[\S]+)+\s*$/gms, "Please enter your full name.")
@@ -16,7 +16,7 @@ export const registerSchema = Yup.object({
     )
     .label("Password"),
   country: Yup.string().required().oneOf(Object.values(countryList)),
-  user_type: Yup.string().required().oneOf(["producer", "user"]),
+  user_type: Yup.string().required().oneOf(["producer", "writer"]),
   portfolio: Yup.string()
     .url()
     .when("user_type", {
@@ -32,4 +32,5 @@ export const registerSchema = Yup.object({
       otherwise: (schema) => schema.notRequired(),
     })
     .label("Company name"),
-}).required();
+  gender: Yup.string().required(),
+});
