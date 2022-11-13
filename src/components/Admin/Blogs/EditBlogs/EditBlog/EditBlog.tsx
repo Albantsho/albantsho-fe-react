@@ -1,8 +1,35 @@
 import { Button, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import TextEditor from "@shared/TextEditor/TextEditor";
+import useWeblogApi from "apis/Weblog.api";
+import { ChangeEvent, useState } from "react";
+import type { Descendant } from "slate";
 
 const EditBlog = () => {
+  const [textEditorValue, setTextEditorValue] = useState<Array<Descendant>>();
+  const [blogValues, setBlogValues] = useState({ title: "", description: "" });
+  const { createNewWeblog, updateWeblog } = useWeblogApi();
+
+  const handleBlogValues = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    console.log(e.target.name);
+
+    setBlogValues({ ...blogValues, [e.target.name]: e.target.value });
+    console.log(blogValues);
+  };
+
+  const createNewBlog = async () => {
+    const res = await updateWeblog(
+      {
+        title: blogValues.title,
+        description: blogValues.description,
+        content: textEditorValue?.toString(),
+      },
+      "1"
+    );
+  };
+
   return (
     <div>
       <label htmlFor="blog-title">
@@ -49,7 +76,7 @@ const EditBlog = () => {
           Body<span className="text-error-700">*</span>
         </Typography>
       </label>
-      <TextEditor />
+      <TextEditor setTextEditorValue={setTextEditorValue} />
       <div className="mt-6 lg:mt-10 flex gap-2 lg:gap-6">
         <Button
           disableElevation

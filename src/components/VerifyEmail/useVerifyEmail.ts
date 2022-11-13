@@ -1,11 +1,29 @@
 import useAuthApi from "apis/Auth.api";
+import useUserStore from "app/user.store";
 import { useRouter } from "next/router";
 import React, { FormEvent, useRef, useState } from "react";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
+import shallow from "zustand/shallow";
+
+// const useUser = () => {
+//   const { user, verifyUser } = useUserStore(
+//     (store) => ({
+//       user: store.user,
+//       verifyUser: store.verifyUser,
+//     }),
+//     shallow
+//   );
+//   return { user, verifyUser };
+// };
 
 const useVerifyEmail = () => {
+  const { user } = useUserStore.getState();
+  const setAccessToken = useUserStore((state) => state.setAccessToken);
+  // const { setItem } = useUserStore.persist
+  //   .getOptions(() => user)
+  //   .getStorage(() => "user");
   const { replace } = useRouter();
   const { emailVerify } = useAuthApi();
   const inputs = useRef<HTMLInputElement[]>([]);
@@ -16,7 +34,6 @@ const useVerifyEmail = () => {
     2: "",
     3: "",
     4: "",
-    5: "",
   });
   let targetTime = 120000000 + new Date().getTime();
 
@@ -31,7 +48,7 @@ const useVerifyEmail = () => {
       const { value } = event.target as unknown as EventTarget &
         HTMLInputElement;
       // INFO: Auto focus next or previous input
-      if (index < 5 && value) {
+      if (index < 4 && value) {
         inputs.current[index + 1].focus();
       } else if (index !== 0 && !value) {
         inputs.current[index - 1].focus();
@@ -41,14 +58,22 @@ const useVerifyEmail = () => {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
+      console.log(user.email);
+      // console.log(setItem());
+
       const res = await emailVerify({
-        email: "",
+        email: user.email,
         code: Object.values(formValues).join(""),
-        rememberMe: false,
       });
+      console.log(res);
+
+      setAccessToken(res.data.accessToken);
+
       successHandler(res.message);
       replace(routes.home);
     } catch (error) {
+      console.log(error);
+
       errorHandler(error);
     }
   };

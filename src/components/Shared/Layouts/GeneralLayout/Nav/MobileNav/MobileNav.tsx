@@ -10,7 +10,8 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
-import { useUserStore } from "app/user.store";
+import useUserStore from "app/user.store";
+// import { useUserStore } from "app/user.store";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
@@ -22,19 +23,20 @@ interface IProps {
   isTransparent: boolean;
 }
 
-const useUser = () => {
-  const { user } = useUserStore(
-    (store) => ({
-      user: store.user,
-    }),
-    shallow
-  );
-  return { user };
-};
+// const useUser = () => {
+//   const { user } = useUserStore(
+//     (store) => ({
+//       user: store.user,
+//     }),
+//     shallow
+//   );
+//   return { user };
+// };
 
 const MobileNav = ({ links, isTransparent }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNav();
-  const { user } = useUser();
+  // const { user } = useUser();
+  const user = useUserStore((state) => state.user);
 
   return (
     <div className="flex items-center lg:hidden">

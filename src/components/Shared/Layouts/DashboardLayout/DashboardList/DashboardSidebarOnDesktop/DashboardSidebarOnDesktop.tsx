@@ -8,19 +8,16 @@ import {
   ListItemText,
 } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
-import projects from "../assets/projects.png";
-import reviews from "../assets/reviews.png";
-import listings from "../assets/listings.png";
-import scripts from "../assets/scripts.png";
 import Image from "next/image";
-import { FaFacebookF } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { AiFillInstagram } from "react-icons/ai";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { AiFillInstagram } from "react-icons/ai";
+import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import routes from "routes/routes";
-import shallow from "zustand/shallow";
-import { useUserStore } from "app/user.store";
+import listings from "../assets/listings.png";
+import projects from "../assets/projects.png";
+import reviews from "../assets/reviews.png";
+import scripts from "../assets/scripts.png";
 
 const listRoutes = [
   { route: routes.projectsDashboard, title: "Projects", icon: projects },
@@ -34,19 +31,8 @@ const listRoutes2 = [
 
 const drawerWidth = 340;
 
-const useUser = () => {
-  const { user } = useUserStore(
-    (store) => ({
-      user: store.user,
-    }),
-    shallow
-  );
-  return { user };
-};
-
 const DashboardSidebarOnDesktop = () => {
   const { route } = useRouter();
-  const { user } = useUser();
 
   return (
     <div
@@ -83,7 +69,7 @@ const DashboardSidebarOnDesktop = () => {
         <Logo color="primary" className="text-white ml-3 mb-5" />
 
         <List className="space-y-4 h-full">
-          {user.user_type === "user" &&
+          {/* {user.user_type === "user" &&
             listRoutes.map((item) => (
               <ListItem
                 disablePadding
@@ -117,8 +103,9 @@ const DashboardSidebarOnDesktop = () => {
                   </ListItemButton>
                 </Link>
               </ListItem>
-            ))}
-          {user.user_type === "producer" &&
+            ))} */}
+          {
+            // user.user_type === "producer" &&
             listRoutes2.map((item) => (
               <ListItem
                 disablePadding
@@ -152,7 +139,8 @@ const DashboardSidebarOnDesktop = () => {
                   </ListItemButton>
                 </Link>
               </ListItem>
-            ))}
+            ))
+          }
         </List>
         <div className="mt-auto self-center text-white hidden lg:flex gap-6  justify-start pt-3">
           <IconButton

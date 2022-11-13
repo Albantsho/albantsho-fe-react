@@ -26,11 +26,15 @@ const CutDownTimer = ({ targetData }: IProps) => {
     );
   return (
     <>
-      <Typography className=" text-warning-500 font-normal mb-6 futura">
+      <Typography className="text-warning-500 font-normal mb-6 futura">
         {minutes}:{seconds}
       </Typography>
 
-      <Button disableRipple className="mb-6 futura hover:bg-transparent">
+      <Button
+        disableRipple
+        disabled
+        className="mb-6 futura hover:bg-transparent"
+      >
         Resend code
       </Button>
     </>

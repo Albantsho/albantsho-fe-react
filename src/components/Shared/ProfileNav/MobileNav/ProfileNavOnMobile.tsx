@@ -55,7 +55,7 @@ const walletLinksForProducer = [
 ];
 
 const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
-  const { handleToggleDrawer, open, getNotifications, notificationList, user } =
+  const { handleToggleDrawer, open, getNotifications, notificationList } =
     useMobileNavMobile();
   const { push, route } = useRouter();
 
@@ -134,7 +134,8 @@ const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
               primary="Balance:$20,000"
             />
           </ListItem>
-          {user.user_type === "user" &&
+          {
+            // user.user_type === "user" &&
             walletLinksForWriter.map((walletLink) => (
               <ListItem disablePadding className="py-1" key={walletLink.title}>
                 <ListItemButton
@@ -162,8 +163,9 @@ const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
                   </ListItemText>
                 </ListItemButton>
               </ListItem>
-            ))}
-          {user.user_type === "producer" &&
+            ))
+          }
+          {/* {user.user_type === "producer" &&
             walletLinksForProducer.map((walletLink) => (
               <ListItem disablePadding className="py-1" key={walletLink.title}>
                 <ListItemButton
@@ -191,7 +193,7 @@ const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
                   </ListItemText>
                 </ListItemButton>
               </ListItem>
-            ))}
+            ))} */}
         </List>
 
         <div className="fixed text-primary-700 flex gap-6 right-[75px] bottom-8">

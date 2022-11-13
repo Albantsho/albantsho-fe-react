@@ -1,3 +1,5 @@
+import deposit from "@assets/icons/deposit.svg";
+import wallet from "@assets/icons/wallet.svg";
 import {
   Button,
   ListItemIcon,
@@ -7,30 +9,16 @@ import {
   SvgIcon,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { IoIosMore } from "react-icons/io";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
-import deposit from "@assets/icons/deposit.svg";
-import wallet from "@assets/icons/wallet.svg";
-import { useState } from "react";
 import routes from "routes/routes";
-import { useUserStore } from "app/user.store";
-import shallow from "zustand/shallow";
-
-const useUser = () => {
-  const { user } = useUserStore(
-    (store) => ({
-      user: store.user,
-    }),
-    shallow
-  );
-  return { user };
-};
 
 const WalletMenu = () => {
   const { push } = useRouter();
-  const { user } = useUser();
+
   const [openWalletMenu, setOpenWalletMenu] = useState<null | HTMLElement>(
     null
   );
@@ -88,7 +76,7 @@ const WalletMenu = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {user.user_type === "user" && (
+        {/* {user.user_type === "user" && (
           <MenuItem
             className="px-6 py-3"
             onClick={() => push(`${routes.withdrawWallet}`)}
@@ -109,8 +97,9 @@ const WalletMenu = () => {
               Withdraw
             </ListItemText>
           </MenuItem>
-        )}
-        {user.user_type === "producer" && (
+        )} */}
+        {
+          // user.user_type === "producer" &&
           <MenuItem
             className="px-6 py-3"
             onClick={() => push(`${routes.depositWallet}`)}
@@ -131,7 +120,7 @@ const WalletMenu = () => {
               Deposit
             </ListItemText>
           </MenuItem>
-        )}
+        }
         <MenuItem
           className="px-6 py-3"
           onClick={() => push(`${routes.transactionHistoryWallet}`)}

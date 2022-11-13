@@ -6,11 +6,10 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import { useUserStore } from "app/user.store";
 import { useRouter } from "next/router";
 import { AiFillCaretDown } from "react-icons/ai";
 import routes from "routes/routes";
-import shallow from "zustand/shallow";
+
 import useProfileMenu from "./useProfileMenu";
 
 interface IProps {
@@ -18,19 +17,6 @@ interface IProps {
 }
 
 const ProfileMenu = ({ isMobile }: IProps) => {
-  const useUser = () => {
-    const { user, logOutUser } = useUserStore(
-      (store) => ({
-        user: store.user,
-        logOutUser: store.logOutUser,
-      }),
-      shallow
-    );
-    return { user, logOutUser };
-  };
-
-  const { user, logOutUser } = useUser();
-
   const {
     handleCloseProfileMenu,
     handleOpenMenu,
@@ -52,7 +38,7 @@ const ProfileMenu = ({ isMobile }: IProps) => {
           component="p"
           className="text-primary-700 futura font-medium mr-3"
         >
-          {user.full_name}
+          {/* {user.full_name} */}
         </Typography>
         <Avatar src="/assets/images/profile.jpg" />
         <AiFillCaretDown
@@ -95,10 +81,10 @@ const ProfileMenu = ({ isMobile }: IProps) => {
               variant="h6"
               className="text-primary-700 futura font-medium leading-normal -mb-2"
             >
-              {user.full_name}
+              {/* {user.full_name} */}
             </Typography>
             <Typography variant="caption" className="text-neutral-800 ">
-              {user.email}
+              {/* {user.email} */}
             </Typography>
           </ListItemText>
         </MenuItem>
@@ -143,7 +129,7 @@ const ProfileMenu = ({ isMobile }: IProps) => {
           </ListItemText>
         </MenuItem>
         <MenuItem
-          onClick={logOutUser}
+          // onClick={logOutUser}
           TouchRippleProps={{ className: "text-error-700" }}
           className="px-6 py-4 hover:bg-error-50"
         >

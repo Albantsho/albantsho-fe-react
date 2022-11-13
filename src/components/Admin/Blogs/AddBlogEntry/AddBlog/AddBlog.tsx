@@ -1,8 +1,38 @@
 import { Button, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import TextEditor from "@shared/TextEditor/TextEditor";
+import useWeblogApi from "apis/Weblog.api";
+import { ChangeEvent, useState } from "react";
+import type { Descendant } from "slate";
 
 const AddBlog = () => {
+  const [textEditorValue, setTextEditorValue] = useState<Array<Descendant>>();
+  const [blogValues, setBlogValues] = useState({ title: "", description: "" });
+  const { createNewWeblog } = useWeblogApi();
+
+  const handleBlogValues = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    console.log(e.target.name);
+
+    setBlogValues({ ...blogValues, [e.target.name]: e.target.value });
+    console.log(blogValues);
+  };
+
+  const createNewBlog = async () => {
+    const res = await createNewWeblog({
+      title: blogValues.title,
+      description: blogValues.description,
+      content: textEditorValue?.toString() || "hi",
+      image: "",
+    });
+  };
+
+  // console.log(
+  //   "🚀 ~ file: AddBlog.tsx ~ line 9 ~ AddBlog ~ textEditorValue",
+  //   textEditorValue
+  // );
+
   return (
     <div>
       <label htmlFor="blog-title">
@@ -14,6 +44,9 @@ const AddBlog = () => {
         </Typography>
       </label>
       <CustomInput
+        value={blogValues.title}
+        onChange={handleBlogValues}
+        name="title"
         fullWidth
         id="blog-title"
         variant="outlined"
@@ -31,6 +64,9 @@ const AddBlog = () => {
         </Typography>
       </label>
       <CustomInput
+        value={blogValues.description}
+        onChange={handleBlogValues}
+        name="description"
         fullWidth
         multiline
         rows={3}
@@ -49,9 +85,10 @@ const AddBlog = () => {
           Body<span className="text-error-700">*</span>
         </Typography>
       </label>
-      <TextEditor />
+      <TextEditor setTextEditorValue={setTextEditorValue} />
       <div className="mt-6 lg:mt-10 space-x-2 lg:space-x-6">
         <Button
+          onClick={createNewBlog}
           disableElevation
           className="px-4 py-2 lg:py-3 lg:px-6"
           variant="contained"

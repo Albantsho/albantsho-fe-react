@@ -45,7 +45,7 @@ const VerifyEmail = () => {
           </Typography>
           <form onSubmit={onSubmit}>
             <div className="flex gap-3 mt-7 mb-4 justify-center flex-wrap lg:flex-nowrap">
-              {Array.from(new Array(6)).map((_, index) => (
+              {Array.from(new Array(5)).map((_, index) => (
                 <CustomInput
                   value={formValues[index]}
                   variant="outlined"

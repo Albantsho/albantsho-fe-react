@@ -1,3 +1,4 @@
+import wallet from "@assets/icons/wallet.svg";
 import {
   Avatar,
   Card,
@@ -11,29 +12,14 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-import wallet from "@assets/icons/wallet.svg";
+import { useRouter } from "next/router";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
-import deposit from "@assets/icons/deposit.svg";
-import { useRouter } from "next/router";
 import routes from "routes/routes";
-import { useUserStore } from "app/user.store";
-import shallow from "zustand/shallow";
-
-const useUser = () => {
-  const { user } = useUserStore(
-    (store) => ({
-      user: store.user,
-    }),
-    shallow
-  );
-  return { user };
-};
 
 const WalletCard = () => {
   const { push, route } = useRouter();
-  const { user } = useUser();
 
   return (
     <Card
@@ -50,7 +36,7 @@ const WalletCard = () => {
             variant="body1"
             className="text-primary-700 futura font-medium"
           >
-            {user.full_name}
+            {/* {user.full_name} */}
           </Typography>
           <Chip
             title="$20,000"
@@ -62,7 +48,8 @@ const WalletCard = () => {
         </div>
         <Divider className="mt-6 mb-4 hidden md:block" />
         <List className="md:mb-2 hidden md:flex flex-col gap-y-2">
-          {user.user_type === "user" && (
+          {
+            // user.user_type === "user" &&
             <ListItemButton
               TouchRippleProps={{ className: "text-primary-main" }}
               className="hover:bg-primary-50/25"
@@ -86,8 +73,8 @@ const WalletCard = () => {
                 Withdraw
               </ListItemText>
             </ListItemButton>
-          )}
-          {user.user_type !== "user" && (
+          }
+          {/* {user.user_type !== "user" && (
             <ListItemButton
               TouchRippleProps={{ className: "text-primary-main" }}
               className="hover:bg-primary-50/25"
@@ -111,7 +98,7 @@ const WalletCard = () => {
                 Deposit
               </ListItemText>
             </ListItemButton>
-          )}
+          )} */}
           <ListItemButton
             TouchRippleProps={{ className: "text-primary-main" }}
             className="hover:bg-primary-50/25"

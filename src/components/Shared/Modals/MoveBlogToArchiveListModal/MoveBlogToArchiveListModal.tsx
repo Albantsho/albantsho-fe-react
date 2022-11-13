@@ -1,6 +1,7 @@
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import useWeblogApi from "apis/Weblog.api";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -9,14 +10,30 @@ import moveImage from "./assets/move-image.png";
 interface IProps {
   openMoveBlogToArchiveListModal: boolean;
   setOpenMoveBlogToArchiveListModal: Dispatch<SetStateAction<boolean>>;
+  weblogId: string;
 }
 
 const MoveBlogToArchiveListModal = ({
   openMoveBlogToArchiveListModal,
   setOpenMoveBlogToArchiveListModal,
+  weblogId,
 }: IProps) => {
+  const { updateWeblog } = useWeblogApi();
+
   const handleCloseMoveBlogToArchiveListModal = () =>
     setOpenMoveBlogToArchiveListModal(false);
+
+  const handleMoveBlogToTrashList = async () => {
+    try {
+      const res = await updateWeblog({ archive: true }, weblogId);
+      console.log(
+        "🚀 ~ file: MoveBlogToTrashListModal.tsx ~ line 29 ~ handleMoveBlogToTrashList ~ res",
+        res
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Modal

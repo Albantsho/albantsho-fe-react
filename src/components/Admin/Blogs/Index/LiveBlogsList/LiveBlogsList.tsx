@@ -48,7 +48,7 @@ const listBlogs = [
   },
 ];
 
-const LiveBlogsList = () => {
+const LiveBlogsList = ({ liveBlogs }: any) => {
   return (
     <div className="mt-4 pb-14 flex flex-col gap-4 overflow-hidden">
       {listBlogs.length > 0 ? (

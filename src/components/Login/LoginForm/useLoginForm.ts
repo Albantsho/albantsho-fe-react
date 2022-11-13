@@ -1,14 +1,13 @@
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "./validation/login.validation";
 import useAuthApi from "apis/Auth.api";
-import { useState } from "react";
+import useUserStore from "app/user.store";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import routes from "routes/routes";
-import { useUserStore } from "app/user.store";
-import shallow from "zustand/shallow";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
+import { loginSchema } from "./validation/login.validation";
 interface IAuthLogin {
   email: string;
   password: string;
@@ -19,17 +18,11 @@ const useLoginForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
   const { signin } = useAuthApi();
   const { replace } = useRouter();
-  const useUser = () => {
-    const { authenticationUser } = useUserStore(
-      (store) => ({
-        authenticationUser: store.authenticationUser,
-      }),
-      shallow
-    );
-    return { authenticationUser };
-  };
+  const { authenticationUser, setAccessToken } = useUserStore((state) => ({
+    authenticationUser: state.authenticationUser,
+    setAccessToken: state.setAccessToken,
+  }));
 
-  const { authenticationUser } = useUser();
   const {
     register,
     handleSubmit,
@@ -46,8 +39,9 @@ const useLoginForm = () => {
     try {
       console.log(data);
 
-      const res = await signin(data);
-      authenticationUser(res.data);
+      const res = await signin({ ...data, rememberMe: true });
+      authenticationUser(res.data.user);
+      setAccessToken(res.data.accessToken);
       successHandler(res.message);
       replace(routes.home);
     } catch (error) {

@@ -79,10 +79,12 @@ const LiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
         </div>
       </div>
       <MoveBlogToTrashListModal
+        weblogId={"weblogId"}
         setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
         openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
       />
       <MoveBlogToArchiveListModal
+        weblogId={"weblogId"}
         setOpenMoveBlogToArchiveListModal={setOpenMoveBlogToArchiveListModal}
         openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}
       />

@@ -1,11 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useAuthApi from "apis/Auth.api";
-import { useUserStore } from "app/user.store";
+import useUserStore from "app/user.store";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
+import { useStore } from "zustand";
 import shallow from "zustand/shallow";
 import { registerSchema } from "./validation/register.validation";
 
@@ -17,24 +18,26 @@ interface IRegisterFormValues {
   user_type: "writer" | "producer";
   portfolio?: string;
   production_company_name?: string;
-  gender: "mail" | "fimale";
+  gender: "mail" | "female";
 }
 
 const useRegisterForm = () => {
   const { signup } = useAuthApi();
   const [loading, setLoading] = useState(false);
   const { replace } = useRouter();
-  const useUser = () => {
-    const { authenticationUser } = useUserStore(
-      (store) => ({
-        authenticationUser: store.authenticationUser,
-      }),
-      shallow
-    );
-    return { authenticationUser };
-  };
+  // const useUser = () => {
+  //   const { authenticationUser } = useUserStore(
+  //     (store) => ({
+  //       authenticationUser: store.authenticationUser,
+  //     }),
+  //     shallow
+  //   );
+  //   return { authenticationUser };
+  // };
 
-  const { authenticationUser } = useUser();
+  // const { authenticationUser } = useUser();
+
+  const authenticationUser = useUserStore((state) => state.authenticationUser);
 
   const {
     register,
@@ -49,7 +52,7 @@ const useRegisterForm = () => {
       country: "Nigeria",
       password: "",
       user_type: "writer",
-      gender: "fimale",
+      gender: "female",
     },
     resolver: yupResolver(registerSchema),
   });
@@ -60,13 +63,17 @@ const useRegisterForm = () => {
 
   const onSubmit = async (data: IRegisterFormValues) => {
     try {
+      console.log(data);
+
       setLoading(true);
       const res = await signup(data);
       console.log(res);
-      authenticationUser(res.data);
+      authenticationUser(res.data.user);
       // replace(routes.welcome);
-      // replace(routes.verifyEmail);
+      replace(routes.verifyEmail);
     } catch (error) {
+      console.log(error);
+
       errorHandler(error);
     } finally {
       setLoading(false);

@@ -1,6 +1,6 @@
-import { useUserStore } from "app/user.store";
-import shallow from "zustand/shallow";
-import api from "./configs/axios.config";
+// import { useUserStore } from "app/user.store";
+// import shallow from "zustand/shallow";
+import api, { apiPrivate } from "./configs/axios.config";
 interface IRegisterPayload {
   fullname: string;
   email: string;
@@ -9,7 +9,7 @@ interface IRegisterPayload {
   user_type: "writer" | "producer";
   portfolio?: string;
   production_company_name?: string;
-  gender: "mail" | "fimale";
+  gender: "mail" | "female";
 }
 
 interface ILoginPayload {
@@ -21,7 +21,6 @@ interface ILoginPayload {
 interface IEmailVerifyOtp {
   email: string;
   code: string;
-  rememberMe: boolean;
 }
 
 interface IResetpasswordPayload {
@@ -52,19 +51,19 @@ interface IGetAllUserOrReviewerPayload {
 }
 
 const useAuthApi = (controller?: AbortController) => {
-  const useUser = () => {
-    const { user } = useUserStore(
-      (store) => ({
-        user: store.user,
-      }),
-      shallow
-    );
-    return { user };
-  };
+  // const useUser = () => {
+  //   const { user } = useUserStore(
+  //     (store) => ({
+  //       user: store.user,
+  //     }),
+  //     shallow
+  //   );
+  //   return { user };
+  // };
 
-  const {
-    user: { token },
-  } = useUser();
+  // const {
+  //   user: { token },
+  // } = useUser();
 
   return {
     async signup(payload: IRegisterPayload) {
@@ -84,12 +83,7 @@ const useAuthApi = (controller?: AbortController) => {
     },
 
     async emailVerify(payload: IEmailVerifyOtp) {
-      const res = await api.post("/user/verify-otp", payload, {
-        signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await api.post("/user/verify-otp", payload);
 
       return res.data;
     },
@@ -97,9 +91,9 @@ const useAuthApi = (controller?: AbortController) => {
     async logoutUser() {
       const res = await api.post("/user/logout", {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
       });
 
       return res.data;
@@ -116,9 +110,9 @@ const useAuthApi = (controller?: AbortController) => {
     async resetPassword(payload: IResetpasswordPayload) {
       const res = await api.post("/user/reset-password", payload, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
       });
 
       return res.data;
@@ -127,9 +121,9 @@ const useAuthApi = (controller?: AbortController) => {
     async updateUserInformation(payload: IUpdateUserInformationPayload) {
       const res = await api.patch("/user/profile/update", payload, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
       });
 
       return res.data;
@@ -140,9 +134,9 @@ const useAuthApi = (controller?: AbortController) => {
     ) {
       const res = await api.post("/user/profile/withdraw/update", payload, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
       });
 
       return res.data;
@@ -151,9 +145,9 @@ const useAuthApi = (controller?: AbortController) => {
     async updateUserRestriction(payload: IUserRestrictionPayload, id: string) {
       const res = await api.patch(`/user/update/restriction/${id}`, payload, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
       });
 
       return res.data;
@@ -162,9 +156,9 @@ const useAuthApi = (controller?: AbortController) => {
     async getAllUser(payload: IGetAllUserOrReviewerPayload) {
       const res = await api.get("/user/all/users", {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
       });
 
       return res.data;
@@ -173,9 +167,9 @@ const useAuthApi = (controller?: AbortController) => {
     async getUserProfile(id: string) {
       const res = await api.get(`/user/profile/${id}`, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
       });
 
       return res.data;
@@ -184,9 +178,9 @@ const useAuthApi = (controller?: AbortController) => {
     async getAdminProfile() {
       const res = await api.get("/user/me/profile/", {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
       });
 
       return res.data;
@@ -195,9 +189,17 @@ const useAuthApi = (controller?: AbortController) => {
     async getAllReviewers(payload: IGetAllUserOrReviewerPayload) {
       const res = await api.get("/user/all/users", {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${token}`,
+        // },
+      });
+
+      return res.data;
+    },
+
+    async refreshToken() {
+      const res = await apiPrivate.post("/user/refresh", undefined, {
+        withCredentials: true,
       });
 
       return res.data;

@@ -1,36 +1,66 @@
 import { Fab } from "@mui/material";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
+import useWeblogApi from "apis/Weblog.api";
 import ArchiveBlogsList from "components/Admin/Blogs/Index/ArchiveBlogsList/ArchiveBlogsList";
 import LiveBlogsList from "components/Admin/Blogs/Index/LiveBlogsList/LiveBlogsList";
 import TabButtons from "components/Admin/Blogs/Index/TabButtons/TabButtons";
 import TrashBlogsList from "components/Admin/Blogs/Index/TrashBlogsList/TrashBlogsList";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { DotLoader } from "react-spinners";
 import routes from "routes/routes";
 import { NextPageWithLayout } from "../../_app";
 
 const BlogsPage: NextPageWithLayout = () => {
   const { query } = useRouter();
+  const { getAllWeblogsForAdmin } = useWeblogApi();
+  const [allBlogs, setAllBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function getAllWeblogs() {
+      try {
+        const res = await getAllWeblogsForAdmin();
+        console.log(res);
+        setAllBlogs(res.data);
+        setLoading(false);
+      } catch (error) {
+        // console.log(error);
+
+        ("");
+      }
+    }
+    getAllWeblogs();
+  }, []);
 
   return (
     <>
       <Head>
         <title>Albantsho || Admin Blogs</title>
       </Head>
-      <TabButtons />
-      <AdminDashboardSearch placeholder="Search for blog by title" />
-      {(!query.tab || query.tab === "live-blogs") && <LiveBlogsList />}
-      {query.tab === "archive" && <ArchiveBlogsList />}
-      {query.tab === "trash" && <TrashBlogsList />}
+      {loading && allBlogs.length === 0 ? (
+        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+      ) : (
+        <>
+          <TabButtons />
+          <AdminDashboardSearch placeholder="Search for blog by title" />
+          {(!query.tab || query.tab === "live-blogs") && (
+            <LiveBlogsList liveBlogs={allBlogs} />
+          )}
+          {query.tab === "archive" && <ArchiveBlogsList />}
+          {query.tab === "trash" && <TrashBlogsList />}
 
-      <Fab
-        color="primary"
-        href={routes.createBlogAdminDashboard("1")}
-        className="flex items-center justify-center md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
-      >
-        +
-      </Fab>
+          <Fab
+            color="primary"
+            href={routes.createBlogAdminDashboard}
+            className="flex items-center justify-center md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
+          >
+            +
+          </Fab>
+        </>
+      )}
     </>
   );
 };

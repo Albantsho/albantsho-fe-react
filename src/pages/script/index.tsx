@@ -1,4 +1,5 @@
 import ScriptLayout from "@shared/Layouts/ScriptLayout/ScriptLayout";
+import useUserStore from "app/user.store";
 import CommentList from "components/Script/CommentList/CommentList";
 import ExportFile from "components/Script/ExportFile/ExportFile";
 import ScriptEditor from "components/Script/index/ScriptEditor/ScriptEditor";
@@ -10,6 +11,9 @@ import { NextPageWithLayout } from "pages/_app";
 
 const Script: NextPageWithLayout = () => {
   const { query } = useRouter();
+
+  const user = useUserStore((state) => state.user);
+  console.log("🚀 ~ file: index.tsx ~ line 16 ~ user", user);
 
   return (
     <>

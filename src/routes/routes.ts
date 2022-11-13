@@ -46,7 +46,7 @@ const routes = {
   blogsAdminDashboard: `/admin/blogs`,
   blogsAdminDashboardTabs: (query: string) => `/admin/blogs${query}`,
   editBlogAdminDashboard: (id: string) => `/admin/blogs/edit-blog/${id}`,
-  createBlogAdminDashboard: (id: string) => `/admin/blogs/edit-blog/${id}`,
+  createBlogAdminDashboard: "/admin/blogs/add-blog",
   usersAdminDashboard: `/admin/users`,
   userAdminDashboard: (id: string) => `/admin/users/${id}`,
   reviewersAdminDashboard: `/admin/reviewers`,

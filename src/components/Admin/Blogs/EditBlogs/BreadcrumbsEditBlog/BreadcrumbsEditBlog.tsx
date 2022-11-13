@@ -73,10 +73,12 @@ const BreadcrumbsEditBlog = () => {
         </div>
       </div>
       <MoveBlogToTrashListModal
+        weblogId={""}
         setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
         openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
       />
       <MoveBlogToArchiveListModal
+        weblogId={"weblogId"}
         setOpenMoveBlogToArchiveListModal={setOpenMoveBlogToArchiveListModal}
         openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}
       />

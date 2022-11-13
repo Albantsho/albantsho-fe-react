@@ -1,5 +1,3 @@
-import { useUserStore } from "app/user.store";
-import shallow from "zustand/shallow";
 import api from "./configs/axios.config";
 
 interface IUpdateReviewPayload {
@@ -19,27 +17,10 @@ interface IAssignReviewRequestToReviewerPayload {
 }
 
 const useReviewsApi = (controller?: AbortController) => {
-  const useUser = () => {
-    const { user } = useUserStore(
-      (store) => ({
-        user: store.user,
-      }),
-      shallow
-    );
-    return { user };
-  };
-
-  const {
-    user: { token },
-  } = useUser();
-
   return {
     async createNewReview(payload: object) {
       const res = await api.post("/review/create", payload, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -48,9 +29,6 @@ const useReviewsApi = (controller?: AbortController) => {
     async deleteReview(id: string) {
       const res = await api.delete(`/review/delete/${id}`, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -59,9 +37,6 @@ const useReviewsApi = (controller?: AbortController) => {
     async completingReview(payload: object, reviewId: string) {
       const res = await api.patch(`/review/complete/${reviewId}`, payload, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -70,9 +45,6 @@ const useReviewsApi = (controller?: AbortController) => {
     async sendReviewToWriterEmail(payload: object, reviewId: string) {
       const res = await api.patch(`/review/send/email/${reviewId}`, payload, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -81,9 +53,6 @@ const useReviewsApi = (controller?: AbortController) => {
     async getAllReviews() {
       const res = await api.get("/review/all", {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -92,9 +61,6 @@ const useReviewsApi = (controller?: AbortController) => {
     async getOneReview(reviewId: string) {
       const res = await api.get(`/review/${reviewId}`, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -103,9 +69,6 @@ const useReviewsApi = (controller?: AbortController) => {
     async updateReview(payload: IUpdateReviewPayload, reviewId: string) {
       const res = await api.patch(`/review/update/${reviewId}`, payload, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -114,9 +77,6 @@ const useReviewsApi = (controller?: AbortController) => {
     async getAllRequestedReviews() {
       const res = await api.get("/review/requests", {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -125,9 +85,6 @@ const useReviewsApi = (controller?: AbortController) => {
     async getAssignedRequestedReviews() {
       const res = await api.get("/review/request/assigned", {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -136,9 +93,6 @@ const useReviewsApi = (controller?: AbortController) => {
     async getCompletedRequestedReviews() {
       const res = await api.get("/review/request/completed", {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -147,9 +101,6 @@ const useReviewsApi = (controller?: AbortController) => {
     async getAllReviewerTasks() {
       const res = await api.get("/review/my/tasks", {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -160,9 +111,6 @@ const useReviewsApi = (controller?: AbortController) => {
     ) {
       const res = await api.post("/review/assign", payload, {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;
@@ -171,9 +119,6 @@ const useReviewsApi = (controller?: AbortController) => {
     async getWriterReviewRequests() {
       const res = await api.get("/review/scripts", {
         signal: controller?.signal,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       return res.data;

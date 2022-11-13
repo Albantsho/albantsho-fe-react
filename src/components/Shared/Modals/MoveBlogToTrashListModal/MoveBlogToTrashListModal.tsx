@@ -1,6 +1,7 @@
 import { Grow, IconButton, Modal, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import useWeblogApi from "apis/Weblog.api";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -9,14 +10,30 @@ import Trash from "./assets/trash.png";
 interface IProps {
   openMoveBlogToTrashListModal: boolean;
   setOpenMoveBlogToTrashListModal: Dispatch<SetStateAction<boolean>>;
+  weblogId: string;
 }
 
 const MoveBlogToTrashListModal = ({
   openMoveBlogToTrashListModal,
   setOpenMoveBlogToTrashListModal,
+  weblogId,
 }: IProps) => {
+  const { updateWeblog } = useWeblogApi();
+
   const handleCloseMoveBlogToTrashListModal = () =>
     setOpenMoveBlogToTrashListModal(false);
+
+  const handleMoveBlogToTrashList = async () => {
+    try {
+      const res = await updateWeblog({ trash: true }, weblogId);
+      console.log(
+        "🚀 ~ file: MoveBlogToTrashListModal.tsx ~ line 29 ~ handleMoveBlogToTrashList ~ res",
+        res
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Modal
@@ -45,6 +62,7 @@ const MoveBlogToTrashListModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
+              onClick={handleMoveBlogToTrashList}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"
             >

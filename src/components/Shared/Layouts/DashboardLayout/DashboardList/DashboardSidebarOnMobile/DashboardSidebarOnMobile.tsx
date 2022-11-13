@@ -1,14 +1,12 @@
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import routes from "routes/routes";
+import listings from "../assets/listings.png";
 import projects from "../assets/projects.png";
 import reviews from "../assets/reviews.png";
-import listings from "../assets/listings.png";
 import scripts from "../assets/scripts.png";
-import Image from "next/image";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import routes from "routes/routes";
-import { useUserStore } from "app/user.store";
-import shallow from "zustand/shallow";
 
 const routesArray = [
   { route: routes.projectsDashboard, title: "Projects", icon: projects },
@@ -19,20 +17,9 @@ const routesArray2 = [
   { route: routes.scriptsDashboard, title: "Scripts", icon: scripts },
 ];
 
-const useUser = () => {
-  const { user } = useUserStore(
-    (store) => ({
-      user: store.user,
-    }),
-    shallow
-  );
-  return { user };
-};
-
 const DashboardSidebarOnMobile = () => {
   const [activeRoute, setActiveRoute] = useState(0);
   const { route, push } = useRouter();
-  const { user } = useUser();
 
   return (
     <div className=" lg:hidden">
@@ -44,7 +31,8 @@ const DashboardSidebarOnMobile = () => {
           setActiveRoute(newValue);
         }}
       >
-        {user.user_type === "user" &&
+        {
+          // user.user_type === "user" &&
           routesArray.map((item) => {
             return (
               <BottomNavigationAction
@@ -76,8 +64,9 @@ const DashboardSidebarOnMobile = () => {
                 icon={<Image loading="lazy" src={item.icon} alt={item.title} />}
               />
             );
-          })}
-        {user.user_type === "producer" &&
+          })
+        }
+        {/* {user.user_type === "producer" &&
           routesArray2.map((item) => {
             return (
               <BottomNavigationAction
@@ -109,7 +98,7 @@ const DashboardSidebarOnMobile = () => {
                 icon={<Image loading="lazy" src={item.icon} alt={item.title} />}
               />
             );
-          })}
+          })} */}
       </BottomNavigation>
     </div>
   );

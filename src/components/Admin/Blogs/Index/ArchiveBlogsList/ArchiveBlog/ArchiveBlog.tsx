@@ -80,6 +80,7 @@ const ArchiveBlog = ({
         </div>
       </div>
       <MoveBlogToTrashListModal
+        weblogId=""
         setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
         openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
       />

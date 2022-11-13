@@ -1,4 +1,5 @@
-import api from "./configs/axios.config";
+import useAxiosPrivate from "hooks/useAxiosPrivate";
+import api, { apiPrivate } from "./configs/axios.config";
 
 interface ICreateNewWeblogPayload {
   title: string;
@@ -17,6 +18,8 @@ interface IUpdateWeblogPayload {
 }
 
 const useWeblogApi = (controller?: AbortController) => {
+  const axiosPrivate = useAxiosPrivate();
+
   return {
     async createNewWeblog(payload: ICreateNewWeblogPayload) {
       const res = await api.post("/weblog/create", payload, {
@@ -59,7 +62,7 @@ const useWeblogApi = (controller?: AbortController) => {
     },
 
     async getAllWeblogsForAdmin() {
-      const res = await api.get("/weblog/admin/all", {
+      const res = await axiosPrivate.get("/weblog/admin/all", {
         signal: controller?.signal,
       });
 

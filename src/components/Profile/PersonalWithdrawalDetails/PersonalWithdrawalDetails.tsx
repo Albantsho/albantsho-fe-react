@@ -10,25 +10,12 @@ import {
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Image from "next/image";
+import { useState } from "react";
 import pencil from "../assets/pencil.svg";
 import bank from "./assets/bank.png";
-import { useState } from "react";
-import { useUserStore } from "app/user.store";
-import shallow from "zustand/shallow";
 
 const PersonalWithdrawalDetails = () => {
   const [availableChangeValue, setAvailableChangeValue] = useState(true);
-  const useUser = () => {
-    const { user } = useUserStore(
-      (store) => ({
-        user: store.user,
-      }),
-      shallow
-    );
-    return { user };
-  };
-
-  const { user } = useUser();
 
   return (
     <div>
@@ -60,7 +47,7 @@ const PersonalWithdrawalDetails = () => {
               id="account-name"
               variant="outlined"
               size="small"
-              defaultValue={user.full_name}
+              // defaultValue={user.full_name}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -99,7 +86,7 @@ const PersonalWithdrawalDetails = () => {
               id="account-number"
               variant="outlined"
               size="small"
-              defaultValue={user.bank_account}
+              // defaultValue={user.bank_account}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -140,9 +127,9 @@ const PersonalWithdrawalDetails = () => {
               id="bank"
               variant="outlined"
               size="small"
-              defaultValue={user.bank_name}
+              // defaultValue={user.bank_name}
             >
-              <MenuItem value={user.bank_name}>
+              <MenuItem>
                 <ListItemText className="text-primary-700">
                   Guaranty Trust Bank
                 </ListItemText>
