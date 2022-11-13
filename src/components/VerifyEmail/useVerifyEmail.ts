@@ -5,29 +5,14 @@ import React, { FormEvent, useRef, useState } from "react";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
-import shallow from "zustand/shallow";
-
-// const useUser = () => {
-//   const { user, verifyUser } = useUserStore(
-//     (store) => ({
-//       user: store.user,
-//       verifyUser: store.verifyUser,
-//     }),
-//     shallow
-//   );
-//   return { user, verifyUser };
-// };
 
 const useVerifyEmail = () => {
   const { user } = useUserStore.getState();
+  const [countDownKey, setCountDownKey] = useState(1);
   const setAccessToken = useUserStore((state) => state.setAccessToken);
-  // const { setItem } = useUserStore.persist
-  //   .getOptions(() => user)
-  //   .getStorage(() => "user");
   const { replace } = useRouter();
-  const { emailVerify } = useAuthApi();
+  const { emailVerify, resendCode } = useAuthApi();
   const inputs = useRef<HTMLInputElement[]>([]);
-  const [resendCode, setResendCode] = useState(false);
   const [formValues, setFormValues] = useState<{ [key: number]: string }>({
     0: "",
     1: "",
@@ -35,7 +20,6 @@ const useVerifyEmail = () => {
     3: "",
     4: "",
   });
-  let targetTime = 120000000 + new Date().getTime();
 
   const handleChange =
     (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,9 +62,15 @@ const useVerifyEmail = () => {
     }
   };
 
-  const handleResendCode = () => {
-    targetTime = 120000000 + new Date().getTime();
-    setResendCode(true);
+  const handleResendCode = async () => {
+    try {
+      const res = await resendCode({ email: user.email });
+      console.log(res);
+
+      setCountDownKey((prevState) => prevState + 1);
+    } catch (error) {
+      errorHandler(error);
+    }
   };
 
   return {
@@ -90,7 +80,7 @@ const useVerifyEmail = () => {
     formValues,
     handleAutoFocus,
     handleResendCode,
-    targetTime,
+    countDownKey,
   };
 };
 

@@ -1,6 +1,6 @@
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
-import AssignedRequests from "components/Admin/Reviewers/Index/AssignedRequests/AssignedRequests";
+import AssignedOrCompletedRequests from "components/Admin/Reviewers/Index/AssignedOrCompletedRequests/AssignedOrCompletedRequests";
 import CurrentRequestsList from "components/Admin/Reviewers/Index/CurrentRequestsList/CurrentRequestsList";
 import TabButtons from "components/Admin/Reviewers/Index/TabButtons/TabButtons";
 import Head from "next/head";
@@ -13,7 +13,7 @@ const ReviewersPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Admin Reviewers </title>
+        <title>Albantsho || Admin Reviewers</title>
       </Head>
       <TabButtons />
       <AdminDashboardSearch placeholder="Search for script" />
@@ -21,8 +21,8 @@ const ReviewersPage: NextPageWithLayout = () => {
       {(!query.tab || query.tab === "current-requests") && (
         <CurrentRequestsList />
       )}
-      {query.tab === "assigned-requests" && <AssignedRequests />}
-      {query.tab === "completed-requests" && <AssignedRequests />}
+      {query.tab === "assigned-requests" && <AssignedOrCompletedRequests />}
+      {query.tab === "completed-requests" && <AssignedOrCompletedRequests />}
     </>
   );
 };

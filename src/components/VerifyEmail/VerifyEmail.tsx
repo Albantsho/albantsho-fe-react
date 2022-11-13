@@ -1,12 +1,17 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Image from "next/image";
 import Link from "next/link";
+import Countdown, { zeroPad } from "react-countdown";
 import routes from "routes/routes";
 import bell from "./assets/bell.png";
-import CutDownTimer from "./CutDownTimer/CutDownTimer";
 import useVerifyEmail from "./useVerifyEmail";
+
+interface ITimeProps {
+  minutes: number;
+  seconds: number;
+}
 
 const VerifyEmail = () => {
   const {
@@ -15,8 +20,17 @@ const VerifyEmail = () => {
     inputs,
     formValues,
     handleAutoFocus,
-    targetTime,
+    handleResendCode,
+    countDownKey,
   } = useVerifyEmail();
+
+  const renderer = ({ minutes, seconds }: ITimeProps) => {
+    return (
+      <span className="text-warning-500 text-sm lg:text-base">
+        {zeroPad(minutes)}:{zeroPad(seconds)}
+      </span>
+    );
+  };
 
   return (
     <div className="overflow-hidden">
@@ -47,6 +61,7 @@ const VerifyEmail = () => {
             <div className="flex gap-3 mt-7 mb-4 justify-center flex-wrap lg:flex-nowrap">
               {Array.from(new Array(5)).map((_, index) => (
                 <CustomInput
+                  autoComplete="one-time-code"
                   value={formValues[index]}
                   variant="outlined"
                   type="tel"
@@ -71,7 +86,24 @@ const VerifyEmail = () => {
             </div>
 
             <div className="mt-3 flex flex-wrap justify-between items-center">
-              <CutDownTimer targetData={targetTime} />
+              <Typography className="text-gray-500 font-normal mb-6 futura">
+                <Countdown
+                  autoStart
+                  key={countDownKey}
+                  precision={2}
+                  zeroPadTime={2}
+                  zeroPadDays={2}
+                  date={Date.now() + 1200000}
+                  renderer={renderer}
+                />
+              </Typography>
+              <Button
+                onClick={handleResendCode}
+                disableRipple
+                className="mb-6 futura hover:bg-transparent text-base text-[#5D5FEF]"
+              >
+                Resend code
+              </Button>
             </div>
 
             <div className="justify-center  flex">

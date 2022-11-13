@@ -28,11 +28,6 @@ const AddBlog = () => {
     });
   };
 
-  // console.log(
-  //   "🚀 ~ file: AddBlog.tsx ~ line 9 ~ AddBlog ~ textEditorValue",
-  //   textEditorValue
-  // );
-
   return (
     <div>
       <label htmlFor="blog-title">

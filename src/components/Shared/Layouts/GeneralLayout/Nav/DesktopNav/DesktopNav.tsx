@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
-import useUserStore from "app/user.store";
 import Link from "next/link";
 import routes from "routes/routes";
 import useDesktopNav from "./useDesktopNav";

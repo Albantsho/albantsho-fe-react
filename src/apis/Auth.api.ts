@@ -1,5 +1,3 @@
-// import { useUserStore } from "app/user.store";
-// import shallow from "zustand/shallow";
 import api, { apiPrivate } from "./configs/axios.config";
 interface IRegisterPayload {
   fullname: string;
@@ -23,6 +21,9 @@ interface IEmailVerifyOtp {
   code: string;
 }
 
+interface IResendCode {
+  email: string;
+}
 interface IResetpasswordPayload {
   newPassword: string;
   reset_password_token: string;
@@ -51,20 +52,6 @@ interface IGetAllUserOrReviewerPayload {
 }
 
 const useAuthApi = (controller?: AbortController) => {
-  // const useUser = () => {
-  //   const { user } = useUserStore(
-  //     (store) => ({
-  //       user: store.user,
-  //     }),
-  //     shallow
-  //   );
-  //   return { user };
-  // };
-
-  // const {
-  //   user: { token },
-  // } = useUser();
-
   return {
     async signup(payload: IRegisterPayload) {
       const res = await api.post("/user/signup", payload, {
@@ -84,6 +71,12 @@ const useAuthApi = (controller?: AbortController) => {
 
     async emailVerify(payload: IEmailVerifyOtp) {
       const res = await api.post("/user/verify-otp", payload);
+
+      return res.data;
+    },
+
+    async resendCode(payload: IResendCode) {
+      const res = await api.post("/user/resend-otp", payload);
 
       return res.data;
     },

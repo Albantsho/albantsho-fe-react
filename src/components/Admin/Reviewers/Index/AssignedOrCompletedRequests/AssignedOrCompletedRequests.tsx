@@ -60,7 +60,7 @@ const listCurrentRequests = [
   },
 ];
 
-const AssignedRequests = () => {
+const AssignedOrCompletedRequests = () => {
   return (
     <Table className="mt-4 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
@@ -195,4 +195,4 @@ const AssignedRequests = () => {
   );
 };
 
-export default AssignedRequests;
+export default AssignedOrCompletedRequests;
