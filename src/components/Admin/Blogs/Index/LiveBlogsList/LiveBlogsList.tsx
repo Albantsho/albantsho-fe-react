@@ -1,3 +1,4 @@
+import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
 import blogIcon from "../assets/blog-icon.png";
 import emptyBlogs from "../assets/empty-blogs.png";
@@ -48,13 +49,19 @@ const listBlogs = [
   },
 ];
 
-const LiveBlogsList = ({ liveBlogs }: any) => {
+interface IProps {
+  liveBlogs: IWeblog[];
+}
+
+const LiveBlogsList = ({ liveBlogs }: IProps) => {
+  console.log(liveBlogs);
+
   return (
     <div className="mt-4 pb-14 flex flex-col gap-4 overflow-hidden">
-      {listBlogs.length > 0 ? (
+      {liveBlogs.length > 0 ? (
         <>
-          {listBlogs.map((blog) => (
-            <LiveBlog blog={blog} key={blog.id} />
+          {liveBlogs.map((blog) => (
+            <LiveBlog blog={blog} key={blog._id} />
           ))}
         </>
       ) : (

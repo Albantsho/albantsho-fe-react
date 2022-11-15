@@ -13,7 +13,6 @@ const Script: NextPageWithLayout = () => {
   const { query } = useRouter();
 
   const user = useUserStore((state) => state.user);
-  console.log("🚀 ~ file: index.tsx ~ line 16 ~ user", user);
 
   return (
     <>

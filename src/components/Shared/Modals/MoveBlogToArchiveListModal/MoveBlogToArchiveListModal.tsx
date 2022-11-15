@@ -23,13 +23,14 @@ const MoveBlogToArchiveListModal = ({
   const handleCloseMoveBlogToArchiveListModal = () =>
     setOpenMoveBlogToArchiveListModal(false);
 
-  const handleMoveBlogToTrashList = async () => {
+  const handleMoveBlogToArchiveList = async () => {
     try {
       const res = await updateWeblog({ archive: true }, weblogId);
       console.log(
-        "🚀 ~ file: MoveBlogToTrashListModal.tsx ~ line 29 ~ handleMoveBlogToTrashList ~ res",
+        "🚀 ~ file: MoveBlogToArchiveListModal.tsx ~ line 29 ~ handleMoveBlogToArchiveList ~ res",
         res
       );
+      setOpenMoveBlogToArchiveListModal(false);
     } catch (error) {
       console.log(error);
     }
@@ -67,6 +68,7 @@ const MoveBlogToArchiveListModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
+              onClick={handleMoveBlogToArchiveList}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"
             >

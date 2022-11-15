@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import routes from "routes/routes";
 
 const routesArray = [
-  { route: "?tab=live-blogs", label: "Live Blogs" },
-  { route: "?tab=archive", label: "Archive" },
-  { route: "?tab=trash", label: "Trash" },
+  { route: "", label: "Live Blogs" },
+  { route: "?archive=true", label: "Archive" },
+  { route: "?trash=true", label: "Trash" },
 ];
 
 const TabButtons = () => {
@@ -18,11 +18,14 @@ const TabButtons = () => {
   };
 
   useEffect(() => {
-    !query.tab || query.tab === "live-blogs"
-      ? setActiveLinkIndex(0)
-      : query.tab === "archive"
-      ? setActiveLinkIndex(1)
-      : setActiveLinkIndex(2);
+    // !query.tab || query.tab === "live-blogs"
+    //   ? setActiveLinkIndex(0)
+    //   : query.tab === "archive"
+    //   ? setActiveLinkIndex(1)
+    //   : setActiveLinkIndex(2);
+    if (!query.archive || !query.trash) setActiveLinkIndex(0);
+    if (query && query.archive) setActiveLinkIndex(1);
+    if (query && query.trash) setActiveLinkIndex(2);
   }, [query]);
 
   return (

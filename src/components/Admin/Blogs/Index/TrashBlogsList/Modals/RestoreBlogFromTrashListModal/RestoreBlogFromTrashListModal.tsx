@@ -1,6 +1,7 @@
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import useWeblogApi from "apis/Weblog.api";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -9,14 +10,28 @@ import moveImage from "./assets/move-image.png";
 interface IProps {
   openRestoreBlogFromTrashListModal: boolean;
   setOpenRestoreBlogFromTrashListModal: Dispatch<SetStateAction<boolean>>;
+  weblogId: string;
 }
 
 const RestoreBlogFromTrashListModal = ({
   openRestoreBlogFromTrashListModal,
   setOpenRestoreBlogFromTrashListModal,
+  weblogId,
 }: IProps) => {
+  const { updateWeblog } = useWeblogApi();
+
   const handleCloseRestoreBlogFromTrashListModal = () =>
     setOpenRestoreBlogFromTrashListModal(false);
+
+  const handleRestoreWeblogFromTrashList = async () => {
+    try {
+      const res = await updateWeblog({ trash: false }, weblogId);
+      console.log(res);
+      handleCloseRestoreBlogFromTrashListModal();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Modal
@@ -50,6 +65,7 @@ const RestoreBlogFromTrashListModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
+              onClick={handleRestoreWeblogFromTrashList}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"
             >

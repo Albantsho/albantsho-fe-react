@@ -8,11 +8,16 @@ import {
 } from "@mui/material";
 import MoveBlogToArchiveListModal from "@shared/Modals/MoveBlogToArchiveListModal/MoveBlogToArchiveListModal";
 import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
+import { IWeblog } from "interfaces/weblog";
 import { useState } from "react";
 import { MdOutlineFolder } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
 
-const BreadcrumbsEditBlog = () => {
+interface IProps {
+  oneWeblog: IWeblog;
+}
+
+const BreadcrumbsEditBlog = ({ oneWeblog }: IProps) => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
     useState(false);
   const [openMoveBlogToArchiveListModal, setOpenMoveBlogToArchiveListModal] =
@@ -40,7 +45,7 @@ const BreadcrumbsEditBlog = () => {
       variant="h5"
       color="primary.main"
     >
-      Edit Blog
+      {oneWeblog.title}
     </Typography>,
   ];
 
@@ -73,12 +78,12 @@ const BreadcrumbsEditBlog = () => {
         </div>
       </div>
       <MoveBlogToTrashListModal
-        weblogId={""}
+        weblogId={oneWeblog._id}
         setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
         openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
       />
       <MoveBlogToArchiveListModal
-        weblogId={"weblogId"}
+        weblogId={oneWeblog._id}
         setOpenMoveBlogToArchiveListModal={setOpenMoveBlogToArchiveListModal}
         openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}
       />

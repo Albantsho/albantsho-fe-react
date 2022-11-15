@@ -44,7 +44,7 @@ export interface IEmail {
 
 export interface IImage {
   type: "image";
-  url: string;
+  url: string | ArrayBuffer | null;
   children: CustomText[];
 }
 export interface ITable {

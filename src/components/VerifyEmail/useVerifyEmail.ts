@@ -9,7 +9,10 @@ import successHandler from "utils/success-handler";
 const useVerifyEmail = () => {
   const { user } = useUserStore.getState();
   const [countDownKey, setCountDownKey] = useState(1);
-  const setAccessToken = useUserStore((state) => state.setAccessToken);
+  const { setAccessToken, authenticationUser } = useUserStore((state) => ({
+    setAccessToken: state.setAccessToken,
+    authenticationUser: state.authenticationUser,
+  }));
   const { replace } = useRouter();
   const { emailVerify, resendCode } = useAuthApi();
   const inputs = useRef<HTMLInputElement[]>([]);
@@ -42,16 +45,16 @@ const useVerifyEmail = () => {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      console.log(user.email);
-      // console.log(setItem());
-
       const res = await emailVerify({
         email: user.email,
         code: Object.values(formValues).join(""),
       });
       console.log(res);
 
-      setAccessToken(res.data.accessToken);
+      setAccessToken(
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzcyMGU3ZTllNDhmM2Q5MzBmMmU3NDkiLCJpYXQiOjE2Njg0MTkzMDYsImV4cCI6MTY4NTY5OTMwNn0.UgJ7XxtjSNceq3G9lgJPlzcZT9Fph3Ne8a_w_uyl7tM"
+      );
+      authenticationUser(res.data.user);
 
       successHandler(res.message);
       replace(routes.home);
@@ -65,7 +68,6 @@ const useVerifyEmail = () => {
   const handleResendCode = async () => {
     try {
       const res = await resendCode({ email: user.email });
-      console.log(res);
 
       setCountDownKey((prevState) => prevState + 1);
     } catch (error) {

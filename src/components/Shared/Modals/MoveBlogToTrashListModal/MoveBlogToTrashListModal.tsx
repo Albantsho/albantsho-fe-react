@@ -30,6 +30,7 @@ const MoveBlogToTrashListModal = ({
         "🚀 ~ file: MoveBlogToTrashListModal.tsx ~ line 29 ~ handleMoveBlogToTrashList ~ res",
         res
       );
+      setOpenMoveBlogToTrashListModal(false);
     } catch (error) {
       console.log(error);
     }

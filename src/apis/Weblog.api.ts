@@ -5,14 +5,14 @@ interface ICreateNewWeblogPayload {
   title: string;
   description: string;
   content: string;
-  image: string;
+  image: string | File;
 }
 
 interface IUpdateWeblogPayload {
   title?: string;
   description?: string;
   content?: string;
-  image?: string;
+  image?: string | File;
   archive?: boolean;
   trash?: boolean;
 }
@@ -22,23 +22,29 @@ const useWeblogApi = (controller?: AbortController) => {
 
   return {
     async createNewWeblog(payload: ICreateNewWeblogPayload) {
-      const res = await api.post("/weblog/create", payload, {
+      const res = await axiosPrivate.post("/weblog/create", payload, {
         signal: controller?.signal,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       return res.data;
     },
 
     async updateWeblog(payload: IUpdateWeblogPayload, id: string) {
-      const res = await api.patch(`/weblog/update/${id}`, payload, {
+      const res = await axiosPrivate.patch(`/weblog/update/${id}`, payload, {
         signal: controller?.signal,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       return res.data;
     },
 
     async deleteWeblog(id: string) {
-      const res = await api.delete(`/weblog/delete/${id}`, {
+      const res = await axiosPrivate.delete(`/weblog/delete/${id}`, {
         signal: controller?.signal,
       });
 
@@ -54,15 +60,15 @@ const useWeblogApi = (controller?: AbortController) => {
     },
 
     async getWeblog(id: string) {
-      const res = await api.get(`/weblog/${id}`, {
+      const res = await axiosPrivate.get(`/weblog/${id}`, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async getAllWeblogsForAdmin() {
-      const res = await axiosPrivate.get("/weblog/admin/all", {
+    async getAllWeblogsForAdmin(query?: string) {
+      const res = await axiosPrivate.get(`/weblog/admin/all?${query}`, {
         signal: controller?.signal,
       });
 

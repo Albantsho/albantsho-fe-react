@@ -1,4 +1,5 @@
 import { IconButton, SvgIcon, Typography } from "@mui/material";
+import { IWeblog } from "interfaces/weblog";
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import { TfiTrash } from "react-icons/tfi";
@@ -7,15 +8,10 @@ import RestoreBlogFromTrashListModal from "../Modals/RestoreBlogFromTrashListMod
 import RefreshIcon from "./assets/refresh-icon.svg";
 
 interface IProps {
-  blog: {
-    id: number;
-    title: string;
-    image: StaticImageData;
-    blogDescription: string;
-  };
+  blog: IWeblog;
 }
 
-const TrashBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
+const TrashBlog = ({ blog: { media, description, title, _id } }: IProps) => {
   const [
     openDeleteBlogFromTrashListModal,
     setOpenDeleteBlogFromTrashListModal,
@@ -40,7 +36,12 @@ const TrashBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
       >
         <div className="flex gap-3 lg:gap-6">
           <div className="max-w-[76px] rounded-md w-full flex max-h-[76px] bg-tinted-50/50 justify-center items-center">
-            <Image width={27} height={34} src={image} alt={title} />
+            <img
+              width={27}
+              height={34}
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${media}`}
+              alt={title}
+            />
           </div>
           <div className="sm:max-w-xl sm:w-full leading-none">
             <Typography
@@ -51,7 +52,7 @@ const TrashBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
               {title}
             </Typography>
             <Typography variant="caption" className="leading-4">
-              {blogDescription}
+              {description}
             </Typography>
           </div>
         </div>
@@ -81,12 +82,14 @@ const TrashBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
         </div>
       </div>
       <DeleteBlogFromTrashListModal
+        weblogId={_id}
         setOpenDeleteBlogFromTrashListModal={
           setOpenDeleteBlogFromTrashListModal
         }
         openDeleteBlogFromTrashListModal={openDeleteBlogFromTrashListModal}
       />
       <RestoreBlogFromTrashListModal
+        weblogId={_id}
         setOpenRestoreBlogFromTrashListModal={
           setOpenRestoreBlogFromTrashListModal
         }

@@ -78,9 +78,9 @@ const withNewFeatures = (editor: IEditor) => {
           n.type === "image",
       });
 
-      if (table || image) {
-        return;
-      }
+      if (table) return;
+
+      if (image) return;
     }
 
     insertBreak();

@@ -6,34 +6,34 @@ import ArchiveBlogsList from "components/Admin/Blogs/Index/ArchiveBlogsList/Arch
 import LiveBlogsList from "components/Admin/Blogs/Index/LiveBlogsList/LiveBlogsList";
 import TabButtons from "components/Admin/Blogs/Index/TabButtons/TabButtons";
 import TrashBlogsList from "components/Admin/Blogs/Index/TrashBlogsList/TrashBlogsList";
+import { IWeblog } from "interfaces/weblog";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import routes from "routes/routes";
 import { NextPageWithLayout } from "../../_app";
+import queryString from "query-string";
 
 const BlogsPage: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { getAllWeblogsForAdmin } = useWeblogApi();
-  const [allBlogs, setAllBlogs] = useState([]);
+  const [allBlogs, setAllBlogs] = useState<Array<IWeblog>>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getAllWeblogs() {
       try {
-        const res = await getAllWeblogsForAdmin();
-        console.log(res);
-        setAllBlogs(res.data);
+        const res = await getAllWeblogsForAdmin(queryString.stringify(query));
+        console.log(res.data.weblogs);
+        setAllBlogs(res.data.weblogs);
         setLoading(false);
       } catch (error) {
-        // console.log(error);
-
-        ("");
+        console.log(error);
       }
     }
     getAllWeblogs();
-  }, []);
+  }, [query!]);
 
   return (
     <>
@@ -46,11 +46,11 @@ const BlogsPage: NextPageWithLayout = () => {
         <>
           <TabButtons />
           <AdminDashboardSearch placeholder="Search for blog by title" />
-          {(!query.tab || query.tab === "live-blogs") && (
+          {!query.archive && !query.trash && (
             <LiveBlogsList liveBlogs={allBlogs} />
           )}
-          {query.tab === "archive" && <ArchiveBlogsList />}
-          {query.tab === "trash" && <TrashBlogsList />}
+          {query.archive && <ArchiveBlogsList archiveBlogs={allBlogs} />}
+          {query.trash && <TrashBlogsList trashBlogs={allBlogs} />}
 
           <Fab
             color="primary"

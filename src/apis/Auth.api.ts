@@ -1,3 +1,4 @@
+import useAxiosPrivate from "hooks/useAxiosPrivate";
 import api, { apiPrivate } from "./configs/axios.config";
 interface IRegisterPayload {
   fullname: string;
@@ -52,6 +53,8 @@ interface IGetAllUserOrReviewerPayload {
 }
 
 const useAuthApi = (controller?: AbortController) => {
+  const axiosPrivate = useAxiosPrivate();
+
   return {
     async signup(payload: IRegisterPayload) {
       const res = await api.post("/user/signup", payload, {
@@ -146,8 +149,8 @@ const useAuthApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAllUser(payload: IGetAllUserOrReviewerPayload) {
-      const res = await api.get("/user/all/users", {
+    async getAllUser(payload?: IGetAllUserOrReviewerPayload) {
+      const res = await axiosPrivate.get("/user/all/users", {
         signal: controller?.signal,
         // headers: {
         //   Authorization: `Bearer ${token}`,
@@ -185,14 +188,6 @@ const useAuthApi = (controller?: AbortController) => {
         // headers: {
         //   Authorization: `Bearer ${token}`,
         // },
-      });
-
-      return res.data;
-    },
-
-    async refreshToken() {
-      const res = await apiPrivate.post("/user/refresh", undefined, {
-        withCredentials: true,
       });
 
       return res.data;

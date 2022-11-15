@@ -26,20 +26,18 @@ const useUserStore = create<IUserState>()(
       authenticationUser: (user: IUser) => set((state) => ({ ...state, user })),
       setAccessToken: (accessToken: string) =>
         set((state) => {
-          console.log(accessToken);
-
           return { ...state, accessToken };
         }),
     }),
     {
       name: "user",
       getStorage: () => localStorage,
-      partialize: (state) =>
-        Object.fromEntries(
-          Object.entries(state).filter(
-            ([key]) => !["accessToken"].includes(key)
-          )
-        ),
+      // partialize: (state) =>
+      //   Object.fromEntries(
+      //     Object.entries(state).filter(
+      //       ([key]) => !["accessToken"].includes(key)
+      //     )
+      //   ),
       // onRehydrateStorage: (state) => {
       //   console.log("hydration starts");
 

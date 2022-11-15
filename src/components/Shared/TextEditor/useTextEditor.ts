@@ -37,7 +37,7 @@ const useTextEditor = ({ editor }: IProps) => {
       match: (n) => Editor.isBlock(editor, n) && n.type === "table",
     });
 
-    if (e.key === "Backspace") {
+    if (e.key === "Backspace" || e.key === "Delete") {
       const { selection } = editor;
 
       if (

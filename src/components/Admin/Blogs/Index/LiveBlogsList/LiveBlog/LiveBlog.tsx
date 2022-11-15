@@ -1,6 +1,7 @@
 import { IconButton, SvgIcon, Typography } from "@mui/material";
 import MoveBlogToArchiveListModal from "@shared/Modals/MoveBlogToArchiveListModal/MoveBlogToArchiveListModal";
 import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
+import { IWeblog } from "interfaces/weblog";
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -8,15 +9,10 @@ import { MdOutlineFolder } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
 
 interface IProps {
-  blog: {
-    id: number;
-    title: string;
-    image: StaticImageData;
-    blogDescription: string;
-  };
+  blog: IWeblog;
 }
 
-const LiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
+const LiveBlog = ({ blog: { _id, title, description, media } }: IProps) => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
     useState(false);
   const [openMoveBlogToArchiveListModal, setOpenMoveBlogToArchiveListModal] =
@@ -36,7 +32,12 @@ const LiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
       >
         <div className="flex gap-3 lg:gap-6">
           <div className="max-w-[76px] rounded-md w-full flex max-h-[76px] bg-tinted-50/50 justify-center items-center">
-            <Image width={27} height={34} src={image} alt={title} />
+            <img
+              width={27}
+              height={34}
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${media}`}
+              alt={title}
+            />
           </div>
           <div className="sm:max-w-xl sm:w-full leading-none">
             <Typography
@@ -47,12 +48,12 @@ const LiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
               {title}
             </Typography>
             <Typography variant="caption" className="leading-4">
-              {blogDescription}
+              {description}
             </Typography>
           </div>
         </div>
         <div className="ml-auto flex md:self-start lg:self-center xl:self-start gap-3 md:gap-1">
-          <IconButton href="/admin/blogs/edit-blog/2" color="primary">
+          <IconButton href={`/admin/blogs/edit-blog/${_id}`} color="primary">
             <SvgIcon
               inheritViewBox
               fontSize="medium"
@@ -79,12 +80,12 @@ const LiveBlog = ({ blog: { image, blogDescription, title } }: IProps) => {
         </div>
       </div>
       <MoveBlogToTrashListModal
-        weblogId={"weblogId"}
+        weblogId={_id}
         setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
         openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
       />
       <MoveBlogToArchiveListModal
-        weblogId={"weblogId"}
+        weblogId={_id}
         setOpenMoveBlogToArchiveListModal={setOpenMoveBlogToArchiveListModal}
         openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}
       />

@@ -23,7 +23,7 @@ const useImageButton = () => {
     if (ext) return imageExtensions.includes(ext);
   };
 
-  const insertImage = (url: string) => {
+  const insertImage = (url: string | ArrayBuffer | null) => {
     const text = { text: "" };
     const image: IImage[] = [{ type: "image", url, children: [text] }];
     Transforms.insertNodes(editor, image);
@@ -65,7 +65,17 @@ const useImageButton = () => {
     if (table) return;
     if (e.target.files) {
       const url = URL.createObjectURL(e.target.files[0]);
-      url && insertImage(url);
+      const reader = new FileReader();
+
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => {
+        console.log(reader.result);
+
+        insertImage(reader.result);
+        // setImageValue(reader.result);
+        console.log(imageValue);
+      };
+      // url && insertImage(url);
       setAnchorEl(null);
       handleCloseImageList();
       handleCloseListImageButton();

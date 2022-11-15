@@ -41,7 +41,9 @@ const useLoginForm = () => {
 
       const res = await signin({ ...data, rememberMe: true });
       authenticationUser(res.data.user);
-      setAccessToken(res.data.accessToken);
+      setAccessToken(
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzcyMGU3ZTllNDhmM2Q5MzBmMmU3NDkiLCJpYXQiOjE2Njg0MTkzMDYsImV4cCI6MTY4NTY5OTMwNn0.UgJ7XxtjSNceq3G9lgJPlzcZT9Fph3Ne8a_w_uyl7tM"
+      );
       successHandler(res.message);
       replace(routes.home);
     } catch (error) {

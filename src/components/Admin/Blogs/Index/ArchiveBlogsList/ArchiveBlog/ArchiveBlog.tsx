@@ -1,6 +1,7 @@
 import { IconButton, SvgIcon, Typography } from "@mui/material";
 import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
-import Image, { StaticImageData } from "next/image";
+import { IWeblog } from "interfaces/weblog";
+import Image from "next/image";
 import { useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsCursor } from "react-icons/bs";
@@ -8,17 +9,10 @@ import { TfiTrash } from "react-icons/tfi";
 import routes from "routes/routes";
 
 interface IProps {
-  blog: {
-    id: number;
-    title: string;
-    image: StaticImageData;
-    blogDescription: string;
-  };
+  blog: IWeblog;
 }
 
-const ArchiveBlog = ({
-  blog: { image, blogDescription, title, id },
-}: IProps) => {
+const ArchiveBlog = ({ blog: { media, description, title, _id } }: IProps) => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
     useState(false);
 
@@ -34,7 +28,12 @@ const ArchiveBlog = ({
       >
         <div className="flex gap-3 lg:gap-6">
           <div className="max-w-[76px] rounded-md w-full flex max-h-[76px] bg-tinted-50/50 justify-center items-center">
-            <Image width={27} height={34} src={image} alt={title} />
+            <img
+              width={27}
+              height={34}
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${media}`}
+              alt={title}
+            />
           </div>
           <div className="sm:max-w-xl sm:w-full leading-none">
             <Typography
@@ -45,13 +44,13 @@ const ArchiveBlog = ({
               {title}
             </Typography>
             <Typography variant="caption" className="leading-4">
-              {blogDescription}
+              {description}
             </Typography>
           </div>
         </div>
         <div className="ml-auto flex md:self-start lg:self-center xl:self-start gap-3 md:gap-1">
           <IconButton
-            href={routes.editBlogAdminDashboard(`${id}`)}
+            href={routes.editBlogAdminDashboard(`${_id}`)}
             color="primary"
           >
             <SvgIcon
@@ -80,7 +79,7 @@ const ArchiveBlog = ({
         </div>
       </div>
       <MoveBlogToTrashListModal
-        weblogId=""
+        weblogId={_id}
         setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
         openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
       />

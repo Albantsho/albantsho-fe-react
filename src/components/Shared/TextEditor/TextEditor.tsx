@@ -11,15 +11,12 @@ import MobileToolbar from "./Toolbars/MobileToolbar/MobileToolbar";
 import withNewFeatures from "./plugins/withNewFeatures";
 import useTextEditor from "./useTextEditor";
 
-const initialValue: CustomElement[] = [
-  { type: "typography", variant: "body1", children: [{ text: "" }] },
-];
-
 interface IProps {
   setTextEditorValue: Dispatch<SetStateAction<Descendant[] | undefined>>;
+  initialValue: CustomElement[];
 }
 
-const TextEditor = ({ setTextEditorValue }: IProps) => {
+const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
   const editor = useMemo(
     () => withHistory(withNewFeatures(withReact(createEditor()))),
     []
