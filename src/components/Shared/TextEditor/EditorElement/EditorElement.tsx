@@ -1,4 +1,3 @@
-import { Link, Typography } from "@mui/material";
 import { type RenderElementProps } from "slate-react";
 import ImageComponent from "./ImageComponent/ImageComponent";
 import TableComponent from "./TableComponent/TableComponent";
@@ -9,19 +8,55 @@ const EditorElement = ({
   element,
 }: RenderElementProps) => {
   switch (element.type) {
-    case "typography":
+    case "headOne":
       return (
-        <Typography
-          {...attributes}
-          variant={element.variant}
-          className="leading-normal"
-        >
+        <h1 style={{ fontSize: "36px" }} {...attributes}>
           {children}
-        </Typography>
+        </h1>
+      );
+    case "headTwo":
+      return (
+        <h2 style={{ fontSize: "30px" }} {...attributes}>
+          {children}
+        </h2>
+      );
+    case "headThree":
+      return (
+        <h3 style={{ fontSize: "26px" }} {...attributes}>
+          {children}
+        </h3>
+      );
+    case "headFour":
+      return (
+        <h4 style={{ fontSize: "24px" }} {...attributes}>
+          {children}
+        </h4>
+      );
+    case "headFive":
+      return (
+        <h5 style={{ fontSize: "22px" }} {...attributes}>
+          {children}
+        </h5>
+      );
+    case "headSix":
+      return (
+        <h6 style={{ fontSize: "20px" }} {...attributes}>
+          {children}
+        </h6>
+      );
+    case "paragraph":
+      return (
+        <p style={{ fontSize: "16px" }} {...attributes}>
+          {children}
+        </p>
       );
     case "link":
       return (
-        <Link underline="always" {...attributes} href={element.url}>
+        <a
+          style={{ textDecorationLine: "underline", color: "#7953B5" }}
+          {...attributes}
+          href={element.url}
+        >
           <span contentEditable={false} style={{ fontSize: 0 }}>
             ${String.fromCodePoint(160) /* Non-breaking space */}
           </span>
@@ -29,12 +64,12 @@ const EditorElement = ({
           <span contentEditable={false} style={{ fontSize: 0 }}>
             ${String.fromCodePoint(160) /* Non-breaking space */}
           </span>
-        </Link>
+        </a>
       );
     case "email":
       return (
-        <Link
-          className="text-primary-700 block"
+        <a
+          style={{ textDecorationLine: "underline", color: "#7953B5" }}
           {...attributes}
           href={`mailto:${element.email}`}
         >
@@ -45,7 +80,7 @@ const EditorElement = ({
           <span contentEditable={false} style={{ fontSize: 0 }}>
             ${String.fromCodePoint(160) /* Non-breaking space */}
           </span>
-        </Link>
+        </a>
       );
     case "image":
       return (
@@ -57,13 +92,19 @@ const EditorElement = ({
       return <li {...attributes}>{children}</li>;
     case "bulletList":
       return (
-        <ul {...attributes} className="list-disc list-inside">
+        <ul
+          {...attributes}
+          style={{ listStyleType: "disc", listStylePosition: "inside" }}
+        >
           {children}
         </ul>
       );
     case "numberList":
       return (
-        <ol {...attributes} className="list-decimal list-inside">
+        <ol
+          {...attributes}
+          style={{ listStyleType: "decimal", listStylePosition: "inside" }}
+        >
           {children}
         </ol>
       );
@@ -71,7 +112,11 @@ const EditorElement = ({
       return (
         <blockquote
           {...attributes}
-          className=" border-l-4 py-[6px] pl-2 rounded-sm"
+          style={{
+            borderLeftWidth: "4px",
+            padding: "6px 2px",
+            borderRadius: "2px",
+          }}
         >
           {children}
         </blockquote>
@@ -87,7 +132,15 @@ const EditorElement = ({
     case "tableCell":
       return (
         <td
-          className="border-2  rounded-md text-start align-top py-2 px-4 min-w-[200px] max-w-xs"
+          style={{
+            borderWidth: "2px",
+            borderRadius: "6px",
+            textAlign: "start",
+            verticalAlign: "top",
+            padding: "8px 16px",
+            minWidth: "200px",
+            maxWidth: "320px",
+          }}
           {...attributes}
         >
           {children}
@@ -95,7 +148,11 @@ const EditorElement = ({
       );
 
     default:
-      return <Typography {...attributes}>{children}</Typography>;
+      return (
+        <p style={{ fontSize: "16px" }} {...attributes}>
+          {children}
+        </p>
+      );
   }
 };
 

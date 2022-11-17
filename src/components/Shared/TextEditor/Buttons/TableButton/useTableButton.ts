@@ -50,7 +50,7 @@ const useTableButton = () => {
     Transforms.insertNodes(editor, table);
     Transforms.insertNodes(
       editor,
-      [{ type: "typography", children: [{ text: "" }] }],
+      [{ type: "paragraph", children: [{ text: "" }] }],
       { mode: "highest" }
     );
 

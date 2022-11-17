@@ -1,11 +1,33 @@
-import { type TypographyProps } from "@mui/system";
 import type { BaseEditor } from "slate";
 import type { ReactEditor } from "slate-react";
 import type { HistoryEditor } from "slate-history";
 
-interface ITypography {
-  type: "typography";
-  variant?: TypographyProps["variant"];
+interface IHeadOne {
+  type: "headOne";
+  children: CustomText[];
+}
+interface IHeadTwo {
+  type: "headTwo";
+  children: CustomText[];
+}
+interface IHeadThree {
+  type: "headThree";
+  children: CustomText[];
+}
+interface IHeadFour {
+  type: "headFour";
+  children: CustomText[];
+}
+interface IHeadFive {
+  type: "headFive";
+  children: CustomText[];
+}
+interface IHeadSix {
+  type: "headSix";
+  children: CustomText[];
+}
+interface IParagraph {
+  type: "paragraph";
   children: CustomText[];
 }
 
@@ -94,7 +116,13 @@ interface IGeneral {
 }
 
 export type CustomElement =
-  | ITypography
+  | IHeadOne
+  | IHeadTwo
+  | IHeadThree
+  | IHeadFour
+  | IHeadFive
+  | IHeadSix
+  | IParagraph
   | IBlockQuote
   | IImage
   | IBulletList

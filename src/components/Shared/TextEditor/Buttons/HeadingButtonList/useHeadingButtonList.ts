@@ -1,4 +1,3 @@
-import type { TypographyProps } from "@mui/material";
 import { CustomElement } from "interfaces/slate";
 import { useRef, useState } from "react";
 import { useSlate } from "slate-react";
@@ -7,17 +6,16 @@ import useBlockButton from "../../hooks/useBlockButton";
 interface IListButtons {
   format: CustomElement["type"];
   option: string;
-  variant: TypographyProps["variant"];
 }
 
 const listButtons: IListButtons[] = [
-  { format: "typography", option: "Normal Text", variant: "body1" },
-  { format: "typography", option: "Heading 1", variant: "h1" },
-  { format: "typography", option: "Heading 2", variant: "h2" },
-  { format: "typography", option: "Heading 3", variant: "h3" },
-  { format: "typography", option: "Heading 4", variant: "h4" },
-  { format: "typography", option: "Heading 5", variant: "h5" },
-  { format: "typography", option: "Heading 6", variant: "h6" },
+  { format: "paragraph", option: "Normal Text" },
+  { format: "headOne", option: "Heading 1" },
+  { format: "headTwo", option: "Heading 2" },
+  { format: "headThree", option: "Heading 3" },
+  { format: "headFour", option: "Heading 4" },
+  { format: "headFive", option: "Heading 5" },
+  { format: "headSix", option: "Heading 6" },
 ];
 
 const useHeadingButtonList = () => {
@@ -28,15 +26,10 @@ const useHeadingButtonList = () => {
   const editor = useSlate();
 
   const handleMenuItemClick =
-    (
-      index: number,
-      variant: TypographyProps["variant"],
-      format: CustomElement["type"]
-    ) =>
-    () => {
+    (index: number, format: CustomElement["type"]) => () => {
       setSelectedIndex(index);
       setOpenListHeadingButton(false);
-      toggleBlock(editor, format, variant);
+      toggleBlock(editor, format);
     };
 
   const handleToggleListHeadingButton = () =>

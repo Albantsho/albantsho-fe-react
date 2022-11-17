@@ -33,7 +33,10 @@ const TableComponent = ({
         className="relative mb-2 w-full flex shadow-sm overflow-scroll no-scrollbar"
         onContextMenu={handleContextMenu}
       >
-        <table className="border-collapse flex-1" {...attributes}>
+        <table
+          style={{ borderCollapse: "collapse", flex: "1 1 0%" }}
+          {...attributes}
+        >
           <tbody>{children}</tbody>
         </table>
         <Menu
@@ -126,7 +129,11 @@ const TableComponent = ({
       </div>
     );
   } else {
-    return <Typography {...attributes}>{children}</Typography>;
+    return (
+      <p style={{ fontSize: "16px" }} {...attributes}>
+        {children}
+      </p>
+    );
   }
 };
 

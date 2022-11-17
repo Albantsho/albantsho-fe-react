@@ -17,7 +17,7 @@ interface IProps {
 
 const QuestionnaireAccordion = ({ title, description }: IProps) => {
   const initialValue: CustomElement[] = [
-    { type: "typography", variant: "body1", children: [{ text: "" }] },
+    { type: "paragraph", children: [{ text: "" }] },
   ];
 
   return (

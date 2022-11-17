@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { CustomElement } from "interfaces/slate";
-import type { TypographyProps } from "@mui/material";
 import useBlockButton from "../hooks/useBlockButton";
-
 import { useSlate } from "slate-react";
 import { HistoryEditor } from "slate-history";
 import useHeadingButtonList from "../Buttons/HeadingButtonList/useHeadingButtonList";
@@ -16,14 +14,9 @@ const useEditorDrawer = () => {
   const { setSelectedIndex } = useHeadingButtonList();
 
   const handleListItemClick =
-    (
-      index: number,
-      variant: TypographyProps["variant"],
-      format: CustomElement["type"]
-    ) =>
-    () => {
+    (index: number, format: CustomElement["type"]) => () => {
       setSelectedIndex(index);
-      toggleBlock(editor, format, variant);
+      toggleBlock(editor, format);
       handleCloseOpenDrawer();
       handleCloseHeadingList();
     };

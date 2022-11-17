@@ -19,17 +19,11 @@ interface IProps {
   titleInDrawer?: string;
 }
 
-const BlockButton = ({
-  format,
-  icon,
-  variant,
-  inDrawer,
-  titleInDrawer,
-}: IProps) => {
+const BlockButton = ({ format, icon, inDrawer, titleInDrawer }: IProps) => {
   const editor = useSlate();
   const { isBlockActive, toggleBlock } = useBlockButton();
   const isActive = isBlockActive(editor, format);
-  const handleFormatElement = () => toggleBlock(editor, format, variant);
+  const handleFormatElement = () => toggleBlock(editor, format);
 
   return (
     <>

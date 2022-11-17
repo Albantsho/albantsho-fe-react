@@ -33,7 +33,7 @@ const useAddBlog = () => {
   const { push } = useRouter();
 
   let initialValue: CustomElement[] = [
-    { type: "typography", variant: "body1", children: [{ text: "" }] },
+    { type: "paragraph", children: [{ text: "" }] },
   ];
 
   const onSubmit = async (data: IAddWeblogFormValues) => {
@@ -51,9 +51,7 @@ const useAddBlog = () => {
       console.log(res);
       push("/admin/blogs");
       setTextEditorValue("");
-      initialValue = [
-        { type: "typography", variant: "body1", children: [{ text: "" }] },
-      ];
+      initialValue = [{ type: "paragraph", children: [{ text: "" }] }];
     } catch (error) {
       console.log(error);
       errorHandler(error);

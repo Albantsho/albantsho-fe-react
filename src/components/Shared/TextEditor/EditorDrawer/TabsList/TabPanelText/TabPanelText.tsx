@@ -54,7 +54,7 @@ const TabPanelText = () => {
         </ListItemButton>
         <Collapse in={openHeadingList}>
           <List disablePadding>
-            {listButtons.map(({ format, option, variant }, index) => (
+            {listButtons.map(({ format, option }, index) => (
               <ListItemButton
                 className="text-gray-500 hover:bg-primary-50/25 max-h-[40px]"
                 TouchRippleProps={{ className: "text-primary-main" }}
@@ -79,9 +79,7 @@ const TabPanelText = () => {
                 }}
                 key={index}
               >
-                <ListItemText
-                  onClick={handleListItemClick(index, variant, format)}
-                >
+                <ListItemText onClick={handleListItemClick(index, format)}>
                   {option}
                 </ListItemText>
               </ListItemButton>

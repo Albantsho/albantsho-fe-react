@@ -1,7 +1,6 @@
 import escapeHTML from "escape-html";
 import { CustomElement } from "interfaces/slate";
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
-import { useResizeDetector } from "react-resize-detector";
+import { Dispatch, SetStateAction, useMemo } from "react";
 import { createEditor, Element, Text, type Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { Editable, Slate, withReact } from "slate-react";
@@ -64,10 +63,8 @@ const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
         switch (node.type) {
           case "blockquote":
             return `<blockquote>${children}</blockquote>`;
-          case "typography":
-            return `<Typography variant={${escapeHTML(
-              node.variant
-            )}}>${children}</Typography>`;
+          case "headOne":
+            return `<Typography>${children}</Typography>`;
           case "numberList":
             return `<ol className="list-decimal list-inside">${children}</ol>`;
           case "bulletList":

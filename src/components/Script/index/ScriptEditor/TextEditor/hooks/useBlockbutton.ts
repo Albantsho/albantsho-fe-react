@@ -1,15 +1,10 @@
-import type { TypographyProps } from "@mui/material";
 import { CustomElement, IEditor } from "interfaces/slate";
 import { Editor, Element as SlateElement, Transforms } from "slate";
 
 const LIST_TYPES = ["action"];
 
 const useBlockButton = () => {
-  const isBlockActive = (
-    editor: IEditor,
-    format: CustomElement["type"],
-    variant?: TypographyProps["variant"]
-  ) => {
+  const isBlockActive = (editor: IEditor, format: CustomElement["type"]) => {
     const { selection } = editor;
     if (!selection) return false;
 
@@ -17,14 +12,14 @@ const useBlockButton = () => {
       Editor.nodes(editor, {
         at: Editor.unhangRange(editor, selection),
         match: (n) => {
-          if (variant) {
-            return (
-              !Editor.isEditor(n) &&
-              SlateElement.isElement(n) &&
-              n.type === "typography" &&
-              n.variant === variant
-            );
-          }
+          // if (variant) {
+          //   return (
+          //     !Editor.isEditor(n) &&
+          //     SlateElement.isElement(n) &&
+          //     n.type === "typography" &&
+          //     n.variant === variant
+          //   );
+          // }
           return (
             !Editor.isEditor(n) &&
             SlateElement.isElement(n) &&
@@ -50,7 +45,7 @@ const useBlockButton = () => {
     });
 
     Transforms.setNodes<SlateElement>(editor, {
-      type: isActive ? "typography" : isList ? "typography" : format,
+      type: isActive ? "paragraph" : isList ? "paragraph" : format,
     });
 
     if (!isActive && isList) {

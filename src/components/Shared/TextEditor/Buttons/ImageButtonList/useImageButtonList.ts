@@ -28,7 +28,7 @@ const useImageButton = () => {
     const image: IImage[] = [{ type: "image", url, children: [text] }];
     Transforms.insertNodes(editor, image);
     Transforms.insertNodes(editor, [
-      { type: "typography", children: [{ text: "" }] },
+      { type: "paragraph", children: [{ text: "" }] },
     ]);
   };
 

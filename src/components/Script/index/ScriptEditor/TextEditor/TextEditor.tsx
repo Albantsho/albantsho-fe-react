@@ -7,7 +7,7 @@ import EditorElement from "./EditorElement/EditorElement";
 import { CustomElement, IEditor } from "interfaces/slate";
 
 const initialValue: CustomElement[] = [
-  { type: "typography", variant: "body1", children: [{ text: "" }] },
+  { type: "paragraph", children: [{ text: "" }] },
 ];
 
 interface IProps {

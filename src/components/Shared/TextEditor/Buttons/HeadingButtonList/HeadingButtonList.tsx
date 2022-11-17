@@ -67,7 +67,7 @@ const HeadingButtonList = () => {
             <Paper>
               <ClickAwayListener onClickAway={handleCloseListHeadingButton}>
                 <MenuList disablePadding id="split-button-menu" autoFocusItem>
-                  {listButtons.map(({ format, option, variant }, index) => {
+                  {listButtons.map(({ format, option }, index) => {
                     return (
                       <MenuItem
                         key={index}
@@ -92,8 +92,8 @@ const HeadingButtonList = () => {
                             fontWeight: "bold",
                           },
                         }}
-                        selected={isBlockActive(editor, format, variant)}
-                        onClick={handleMenuItemClick(index, variant, format)}
+                        selected={isBlockActive(editor, format)}
+                        onClick={handleMenuItemClick(index, format)}
                       >
                         {option}
                       </MenuItem>

@@ -1,16 +1,6 @@
-import {
-  Button,
-  ButtonGroup,
-  IconButton,
-  SvgIcon,
-  Typography,
-} from "@mui/material";
+import { Button, ButtonGroup, SvgIcon } from "@mui/material";
 import { useState } from "react";
-import { CiAlignLeft, CiAlignRight, CiAlignCenterV } from "react-icons/ci";
-import { IoIosResize } from "react-icons/io";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { useResizeDetector } from "react-resize-detector";
-import { Transforms } from "slate";
+import { CiAlignCenterV, CiAlignLeft, CiAlignRight } from "react-icons/ci";
 import {
   ReactEditor,
   useFocused,
@@ -18,8 +8,6 @@ import {
   useSlate,
   type RenderElementProps,
 } from "slate-react";
-import useResize from "./useResize";
-import { Resizable } from "re-resizable";
 
 const ImageComponent = ({
   attributes,
@@ -31,8 +19,6 @@ const ImageComponent = ({
   const selected = useSelected();
   const focused = useFocused();
   const [positionImage, setPositionImage] = useState(0);
-  const { ref, width } = useResizeDetector();
-  const { size, onMouseDown } = useResize();
 
   const handleStartJustifyImage = () => setPositionImage(0);
   const handleCenterJustifyImage = () => setPositionImage(1);
@@ -42,16 +28,8 @@ const ImageComponent = ({
     return (
       <div {...attributes}>
         <div style={{ opacity: 0 }}>{children}</div>
-        {/* <div ref={ref}> */}
         <div
           contentEditable={false}
-          style={{
-            // width: `${size.width}px`,
-            // height: `${size.height}px`,
-            // maxWidth: `${width}px`,
-            resize: "both",
-            overflow: "auto",
-          }}
           className={`relative flex justify-center rounded-lg min-w-[135px] min-h-[135px] text-gray-300 ${
             selected
               ? "shadow-sm border pt-10 border-gray-300 duration-200 ease-in"
@@ -67,22 +45,13 @@ const ImageComponent = ({
           `}
         >
           <img
-            style={{ resize: "both", overflow: "auto" }}
-            className="w-fit h-fit"
+            style={{
+              width: "fit-content",
+              height: "fit-content",
+            }}
             alt=""
             src={element.url as string}
           />
-          {/* <button
-              onMouseDown={onMouseDown}
-              className={`${
-                selected ? "flex" : "hidden"
-              } bottom-0 -right-2 absolute bg-transparent cursor-nwse-resize`}
-            >
-              <IoIosResize
-                style={{ rotate: "90deg", fontSize: "20px" }}
-                fontSize="16px"
-              />
-            </button> */}
           <ButtonGroup
             color="inherit"
             className={`${
@@ -103,11 +72,14 @@ const ImageComponent = ({
             />
           </ButtonGroup>
         </div>
-        {/* </div> */}
       </div>
     );
   } else {
-    return <Typography {...attributes}>{children}</Typography>;
+    return (
+      <p style={{ fontSize: "16px" }} {...attributes}>
+        {children}
+      </p>
+    );
   }
 };
 
