@@ -6,8 +6,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
-import { useStore } from "zustand";
-import shallow from "zustand/shallow";
 import { registerSchema } from "./validation/register.validation";
 
 interface IRegisterFormValues {
@@ -25,17 +23,6 @@ const useRegisterForm = () => {
   const { signup } = useAuthApi();
   const [loading, setLoading] = useState(false);
   const { replace } = useRouter();
-  // const useUser = () => {
-  //   const { authenticationUser } = useUserStore(
-  //     (store) => ({
-  //       authenticationUser: store.authenticationUser,
-  //     }),
-  //     shallow
-  //   );
-  //   return { authenticationUser };
-  // };
-
-  // const { authenticationUser } = useUser();
 
   const authenticationUser = useUserStore((state) => state.authenticationUser);
 

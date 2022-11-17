@@ -191,8 +191,6 @@ const RegisterForm = () => {
               control={<Radio />}
               label="Female"
             />
-
-            {/* <FormControlLabel value="other" control={<Radio />} label="Other" /> */}
           </RadioGroup>
         </div>
 

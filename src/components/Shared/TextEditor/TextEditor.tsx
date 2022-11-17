@@ -14,7 +14,7 @@ import MobileToolbar from "./Toolbars/MobileToolbar/MobileToolbar";
 import useTextEditor from "./useTextEditor";
 
 interface IProps {
-  setTextEditorValue?: Dispatch<SetStateAction<string>>;
+  setTextEditorValue?: Dispatch<SetStateAction<string | undefined>>;
   initialValue: CustomElement[];
 }
 

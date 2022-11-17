@@ -6,7 +6,6 @@ import { CustomElement } from "interfaces/slate";
 import { IWeblog } from "interfaces/weblog";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
-import type { Descendant } from "slate";
 import { jsx } from "slate-hyperscript";
 
 interface IProps {
@@ -14,7 +13,9 @@ interface IProps {
 }
 
 const EditBlog = ({ oneWeblog }: IProps) => {
-  const [textEditorValue, setTextEditorValue] = useState<string>("");
+  const [textEditorValue, setTextEditorValue] = useState<string | undefined>(
+    ""
+  );
   const [blogValues, setBlogValues] = useState({
     title: oneWeblog.title,
     description: oneWeblog.description,
@@ -130,89 +131,9 @@ const EditBlog = ({ oneWeblog }: IProps) => {
     } else {
       return children;
     }
-    // switch (el.nodeName) {
-    //   case "BODY":
-    //     return jsx("fragment", {}, children);
-    //   case "BR":
-    //     return "\n";
-    //   case "BLOCKQUOTE": {
-    //     return jsx("element", { type: "blockquote" }, children);
-    //   }
-    //   case "SPAN": {
-    //     console.log(children);
-    //     return jsx(
-    //       "element",
-    //       {
-    //         type: "link",
-    //         url: el
-    //           .getAttribute("href")
-    //           ?.substring(1, el.getAttribute("href")?.length - 1),
-    //       },
-    //       children
-    //     );
-    //   }
-    //   case "A": {
-    //     return jsx(
-    //       "element",
-    //       {
-    //         type: "email",
-    //         email: el
-    //           .getAttribute("href")
-    //           ?.substring(1, el.getAttribute("href")?.length - 1),
-    //       },
-    //       children
-    //     );
-    //   }
-    //   case "TYPOGRAPHY": {
-    //     return jsx(
-    //       "element",
-    //       {
-    //         type: "typography",
-    //         variant: el
-    //           .getAttribute("variant")
-    //           ?.substring(1, el.getAttribute("variant")?.length - 1),
-    //       },
-    //       children
-    //     );
-    //   }
-    //   case "UL": {
-    //     return jsx("element", { type: "bulletList" }, children);
-    //   }
-    //   case "OL": {
-    //     return jsx("element", { type: "numberList" }, children);
-    //   }
-    //   case "LI": {
-    //     return jsx("element", { type: "listItem" }, children);
-    //   }
-    //   case "IMG": {
-    //     return jsx(
-    //       "element",
-    //       {
-    //         type: "image",
-    //         url: el
-    //           .getAttribute("src")
-    //           ?.substring(1, el.getAttribute("src")?.length - 1),
-    //       },
-    //       children
-    //     );
-    //   }
-    //   case "TABLE": {
-    //     return jsx("element", { type: "table" }, children);
-    //   }
-    //   case "TR": {
-    //     return jsx("element", { type: "tableRow" }, children);
-    //   }
-    //   case "TD": {
-    //     return jsx("element", { type: "tableCell" }, children);
-    //   }
-    //   default:
-    //     return children;
-    // }
   };
   deserialize(document.body);
   const initialValue: CustomElement[] = deserialize(document.body);
-
-  // console.log(deserialize(document.body));
 
   useEffect(() => {
     setBlogValues({

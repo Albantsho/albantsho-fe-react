@@ -45,7 +45,7 @@ const EmojiButton = () => {
         {openEmojiPicker && (
           <div className="w-20 !z-[100000000] absolute top-8 right-[115px] lg:right-24">
             <EmojiPicker
-              width={matches ? 350 : 245}
+              width={matches ? 320 : 245}
               onEmojiClick={selectEmoji}
             />
           </div>

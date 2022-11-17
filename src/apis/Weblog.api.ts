@@ -4,7 +4,7 @@ import api, { apiPrivate } from "./configs/axios.config";
 interface ICreateNewWeblogPayload {
   title: string;
   description: string;
-  content: string;
+  content: string | undefined;
   image: string | File;
 }
 
