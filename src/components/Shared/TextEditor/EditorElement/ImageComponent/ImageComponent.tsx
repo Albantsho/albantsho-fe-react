@@ -43,23 +43,20 @@ const ImageComponent = ({
       <div {...attributes}>
         <div style={{ opacity: 0 }}>{children}</div>
         {/* <div ref={ref}> */}
-        <Resizable className="mb-auto w-fit h-fit" bounds="parent">
-          <div
-            contentEditable={false}
-            style={
-              {
-                // width: `${size.width}px`,
-                // height: `${size.height}px`,
-                // maxWidth: `${width}px`,
-                // resize: "both",
-                // overflow: "auto",
-              }
-            }
-            className={`relative flex justify-center rounded-lg min-w-[135px] min-h-[135px] text-gray-300 ${
-              selected
-                ? "shadow-sm border pt-10 border-gray-300 duration-200 ease-in"
-                : "none duration-200 p-1 ease-in"
-            }
+        <div
+          contentEditable={false}
+          style={{
+            // width: `${size.width}px`,
+            // height: `${size.height}px`,
+            // maxWidth: `${width}px`,
+            resize: "both",
+            overflow: "auto",
+          }}
+          className={`relative flex justify-center rounded-lg min-w-[135px] min-h-[135px] text-gray-300 ${
+            selected
+              ? "shadow-sm border pt-10 border-gray-300 duration-200 ease-in"
+              : "none duration-200 p-1 ease-in"
+          }
           ${
             positionImage === 0
               ? "mr-auto"
@@ -68,14 +65,14 @@ const ImageComponent = ({
               : "ml-auto"
           }
           `}
-          >
-            <img
-              // style={{ resize: "both", overflow: "auto" }}
-              className="w-fit h-fit"
-              alt=""
-              src={element.url as string}
-            />
-            {/* <button
+        >
+          <img
+            style={{ resize: "both", overflow: "auto" }}
+            className="w-fit h-fit"
+            alt=""
+            src={element.url as string}
+          />
+          {/* <button
               onMouseDown={onMouseDown}
               className={`${
                 selected ? "flex" : "hidden"
@@ -86,27 +83,26 @@ const ImageComponent = ({
                 fontSize="16px"
               />
             </button> */}
-            <ButtonGroup
-              color="inherit"
-              className={`${
-                selected ? "flex" : "hidden"
-              } top-0 absolute w-full max-w-[135px]`}
-            >
-              <Button
-                onClick={handleStartJustifyImage}
-                startIcon={<SvgIcon component={CiAlignLeft} />}
-              />
-              <Button
-                onClick={handleCenterJustifyImage}
-                startIcon={<SvgIcon component={CiAlignCenterV} />}
-              />
-              <Button
-                onClick={handleEndJustifyImage}
-                startIcon={<SvgIcon component={CiAlignRight} />}
-              />
-            </ButtonGroup>
-          </div>
-        </Resizable>
+          <ButtonGroup
+            color="inherit"
+            className={`${
+              selected ? "flex" : "hidden"
+            } top-0 absolute w-full max-w-[135px]`}
+          >
+            <Button
+              onClick={handleStartJustifyImage}
+              startIcon={<SvgIcon component={CiAlignLeft} />}
+            />
+            <Button
+              onClick={handleCenterJustifyImage}
+              startIcon={<SvgIcon component={CiAlignCenterV} />}
+            />
+            <Button
+              onClick={handleEndJustifyImage}
+              startIcon={<SvgIcon component={CiAlignRight} />}
+            />
+          </ButtonGroup>
+        </div>
         {/* </div> */}
       </div>
     );

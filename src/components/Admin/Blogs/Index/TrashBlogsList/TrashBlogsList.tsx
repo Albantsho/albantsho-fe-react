@@ -1,10 +1,13 @@
+import useWeblogApi from "apis/Weblog.api";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import blogIcon from "../assets/blog-icon.png";
 import emptyBlogs from "../assets/empty-blogs.png";
 import TrashBlog from "./TrashBlog/TrashBlog";
+import queryString from "query-string";
 
 const listBlogs = [
   {
@@ -56,24 +59,39 @@ interface IProps {
 }
 
 const TrashBlogsList = ({ trashBlogs }: IProps) => {
-  const [trashBlogList, setTrashBlogList] = useState<null | Array<IWeblog>>(
-    null
-  );
+  const [trashBlogList, setTrashBlogList] = useState<Array<IWeblog>>([]);
+  const [loading, setLoading] = useState(true);
+  const { query } = useRouter();
+  const { getAllWeblogsForAdmin } = useWeblogApi();
 
   useEffect(() => {
-    setTrashBlogList(trashBlogs);
-  }, [trashBlogs]);
+    async function getAllWeblogs() {
+      try {
+        const res = await getAllWeblogsForAdmin(queryString.stringify(query));
+        console.log(res.data.weblogs);
+        setTrashBlogList(res.data.weblogs);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getAllWeblogs();
+  }, [query!]);
 
   return (
     <div className="mt-4 pb-14 flex flex-col gap-4 overflow-hidden">
-      {trashBlogList === null ? (
+      {loading ? (
         <DotLoader color="#7953B5" className="mx-auto mt-10" />
       ) : (
         <>
           {trashBlogList.length > 0 ? (
             <>
               {trashBlogList.map((blog) => (
-                <TrashBlog blog={blog} key={blog._id} />
+                <TrashBlog
+                  setTrashBlogList={setTrashBlogList}
+                  blog={blog}
+                  key={blog._id}
+                />
               ))}
             </>
           ) : (

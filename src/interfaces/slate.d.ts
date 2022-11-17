@@ -32,7 +32,6 @@ interface IListItem {
 export interface ILink {
   type: "link";
   url?: string;
-  email?: string;
   children: CustomText[];
 }
 

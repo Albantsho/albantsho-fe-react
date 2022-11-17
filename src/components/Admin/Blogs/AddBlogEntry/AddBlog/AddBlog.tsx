@@ -5,14 +5,13 @@ import useWeblogApi from "apis/Weblog.api";
 import { CustomElement } from "interfaces/slate";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
-import type { Descendant } from "slate";
 
 let initialValue: CustomElement[] = [
   { type: "typography", variant: "body1", children: [{ text: "" }] },
 ];
 
 const AddBlog = () => {
-  const [textEditorValue, setTextEditorValue] = useState<Array<Descendant>>();
+  const [textEditorValue, setTextEditorValue] = useState<string>("hi");
   const [blogValues, setBlogValues] = useState({ title: "", description: "" });
   const [imageValue, setImageValue] = useState<File | string>("");
   const { createNewWeblog } = useWeblogApi();
@@ -27,17 +26,7 @@ const AddBlog = () => {
   const handleGetPicture = (e: ChangeEvent<HTMLInputElement>) => {
     try {
       if (e.target.files) {
-        console.log(e.target.files[0]);
-        // const reader = new FileReader();
         setImageValue(e.target.files[0]);
-        // reader.readAsDataURL(e.target.files[0]);
-        // reader.onload = () => {
-        //   setImageValue(reader.result);
-        //   console.log(imageValue);
-        // };
-        // console.log(reader);
-
-        console.log(imageValue);
       } else {
         alert("Image not found");
       }
@@ -48,25 +37,30 @@ const AddBlog = () => {
 
   const createNewBlog = async () => {
     try {
-      console.log(imageValue);
-
+      console.log(textEditorValue);
       const res = await createNewWeblog({
         title: blogValues.title,
         description: blogValues.description,
-        content: textEditorValue?.toString() || "hi",
+        content: textEditorValue,
         image: imageValue,
       });
+      console.log(res);
 
+      // setBlogValues({ title: "", description: "" });
+      // setTextEditorValue("");
+      // initialValue = [
+      //   { type: "typography", variant: "body1", children: [{ text: "" }] },
+      // ];
+      // setImageValue("");
+    } catch (error) {
+      console.log(error);
+    } finally {
       setBlogValues({ title: "", description: "" });
-      setTextEditorValue([]);
+      setTextEditorValue("");
       initialValue = [
         { type: "typography", variant: "body1", children: [{ text: "" }] },
       ];
       setImageValue("");
-      console.log(res);
-      console.log("success");
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -140,6 +134,7 @@ const AddBlog = () => {
             hidden
             name="script"
             accept="image/*"
+            max={1}
           />
           <div className="mx-auto flex justify-center items-center"></div>
           <Typography

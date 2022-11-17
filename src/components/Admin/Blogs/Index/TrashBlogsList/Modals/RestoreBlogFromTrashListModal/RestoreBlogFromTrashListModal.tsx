@@ -2,6 +2,7 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useWeblogApi from "apis/Weblog.api";
+import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -11,12 +12,14 @@ interface IProps {
   openRestoreBlogFromTrashListModal: boolean;
   setOpenRestoreBlogFromTrashListModal: Dispatch<SetStateAction<boolean>>;
   weblogId: string;
+  setTrashBlogList: Dispatch<SetStateAction<IWeblog[]>>;
 }
 
 const RestoreBlogFromTrashListModal = ({
   openRestoreBlogFromTrashListModal,
   setOpenRestoreBlogFromTrashListModal,
   weblogId,
+  setTrashBlogList,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
 
@@ -26,6 +29,9 @@ const RestoreBlogFromTrashListModal = ({
   const handleRestoreWeblogFromTrashList = async () => {
     try {
       const res = await updateWeblog({ trash: false }, weblogId);
+      setTrashBlogList((prevState) =>
+        prevState.filter((blog) => blog._id !== weblogId)
+      );
       console.log(res);
       handleCloseRestoreBlogFromTrashListModal();
     } catch (error) {

@@ -34,7 +34,7 @@ const EditorElement = ({
     case "email":
       return (
         <Link
-          underline="always"
+          className="text-primary-700 block"
           {...attributes}
           href={`mailto:${element.email}`}
         >

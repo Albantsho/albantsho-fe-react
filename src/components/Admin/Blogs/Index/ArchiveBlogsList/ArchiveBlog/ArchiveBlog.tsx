@@ -27,10 +27,9 @@ const ArchiveBlog = ({ blog: { media, description, title, _id } }: IProps) => {
         className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start"
       >
         <div className="flex gap-3 lg:gap-6">
-          <div className="max-w-[76px] rounded-md w-full flex max-h-[76px] bg-tinted-50/50 justify-center items-center">
+          <div className="max-w-[76px] sm:w-[76px] rounded-md w-full flex max-h-[76px] sm:h-[76px] bg-tinted-50/50 justify-center items-center">
             <img
-              width={27}
-              height={34}
+              className="w-7 h-9"
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${media}`}
               alt={title}
             />

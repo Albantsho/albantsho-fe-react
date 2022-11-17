@@ -1,7 +1,7 @@
 import { IconButton, SvgIcon, Typography } from "@mui/material";
 import { IWeblog } from "interfaces/weblog";
 import Image, { StaticImageData } from "next/image";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { TfiTrash } from "react-icons/tfi";
 import DeleteBlogFromTrashListModal from "../Modals/DeleteBlogFromTrashListModal/DeleteBlogFromTrashListModal";
 import RestoreBlogFromTrashListModal from "../Modals/RestoreBlogFromTrashListModal/RestoreBlogFromTrashListModal";
@@ -9,9 +9,13 @@ import RefreshIcon from "./assets/refresh-icon.svg";
 
 interface IProps {
   blog: IWeblog;
+  setTrashBlogList: Dispatch<SetStateAction<IWeblog[]>>;
 }
 
-const TrashBlog = ({ blog: { media, description, title, _id } }: IProps) => {
+const TrashBlog = ({
+  blog: { media, description, title, _id },
+  setTrashBlogList,
+}: IProps) => {
   const [
     openDeleteBlogFromTrashListModal,
     setOpenDeleteBlogFromTrashListModal,
@@ -82,6 +86,7 @@ const TrashBlog = ({ blog: { media, description, title, _id } }: IProps) => {
         </div>
       </div>
       <DeleteBlogFromTrashListModal
+        setTrashBlogList={setTrashBlogList}
         weblogId={_id}
         setOpenDeleteBlogFromTrashListModal={
           setOpenDeleteBlogFromTrashListModal
@@ -89,6 +94,7 @@ const TrashBlog = ({ blog: { media, description, title, _id } }: IProps) => {
         openDeleteBlogFromTrashListModal={openDeleteBlogFromTrashListModal}
       />
       <RestoreBlogFromTrashListModal
+        setTrashBlogList={setTrashBlogList}
         weblogId={_id}
         setOpenRestoreBlogFromTrashListModal={
           setOpenRestoreBlogFromTrashListModal

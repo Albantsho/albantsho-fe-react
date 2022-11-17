@@ -32,7 +32,7 @@ const LinkButton = ({ inDrawer }: IProps) => {
         <>
           <IconButton
             color={isLinkActive() ? "primary" : "default"}
-            className="w-10 h-10 hidden large"
+            className="w-10 h-10 hidden large lg:flex"
             onClick={handleOpenAddLinkModal}
           >
             <SvgIcon

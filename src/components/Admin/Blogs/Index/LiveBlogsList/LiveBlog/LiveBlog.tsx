@@ -3,16 +3,20 @@ import MoveBlogToArchiveListModal from "@shared/Modals/MoveBlogToArchiveListModa
 import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
 import { IWeblog } from "interfaces/weblog";
 import Image, { StaticImageData } from "next/image";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineFolder } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
 
 interface IProps {
   blog: IWeblog;
+  setLiveBlogList: Dispatch<SetStateAction<IWeblog[]>>;
 }
 
-const LiveBlog = ({ blog: { _id, title, description, media } }: IProps) => {
+const LiveBlog = ({
+  blog: { _id, title, description, media },
+  setLiveBlogList,
+}: IProps) => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
     useState(false);
   const [openMoveBlogToArchiveListModal, setOpenMoveBlogToArchiveListModal] =
@@ -31,10 +35,9 @@ const LiveBlog = ({ blog: { _id, title, description, media } }: IProps) => {
         className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start"
       >
         <div className="flex gap-3 lg:gap-6">
-          <div className="max-w-[76px] rounded-md w-full flex max-h-[76px] bg-tinted-50/50 justify-center items-center">
+          <div className="min-w-[76px] rounded-md flex h-[76px]  bg-tinted-50/50 justify-center items-center">
             <img
-              width={27}
-              height={34}
+              className="w-7 h-9"
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${media}`}
               alt={title}
             />
@@ -80,6 +83,7 @@ const LiveBlog = ({ blog: { _id, title, description, media } }: IProps) => {
         </div>
       </div>
       <MoveBlogToTrashListModal
+        setLiveBlogList={setLiveBlogList}
         weblogId={_id}
         setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
         openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}

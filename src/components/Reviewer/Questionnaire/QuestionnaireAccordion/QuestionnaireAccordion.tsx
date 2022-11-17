@@ -8,9 +8,7 @@ import {
 } from "@mui/material";
 import TextEditor from "@shared/TextEditor/TextEditor";
 import { CustomElement } from "interfaces/slate";
-import { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
-import type { Descendant } from "slate";
 
 interface IProps {
   title: string;
@@ -18,8 +16,6 @@ interface IProps {
 }
 
 const QuestionnaireAccordion = ({ title, description }: IProps) => {
-  const [textEditorValue, setTextEditorValue] = useState<Array<Descendant>>();
-
   const initialValue: CustomElement[] = [
     { type: "typography", variant: "body1", children: [{ text: "" }] },
   ];
@@ -57,10 +53,7 @@ const QuestionnaireAccordion = ({ title, description }: IProps) => {
         </div>
       </AccordionSummary>
       <AccordionDetails className="rounded-lg px-0 pb-6 md:pb-9 lg:pb-12">
-        <TextEditor
-          initialValue={initialValue}
-          setTextEditorValue={setTextEditorValue}
-        />
+        <TextEditor initialValue={initialValue} />
         <div className="flex py-6 gap-x-5 flex-nowrap justify-center sm:justify-start">
           <Button
             disableElevation

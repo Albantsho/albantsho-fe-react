@@ -5,15 +5,16 @@ import useWeblogApi from "apis/Weblog.api";
 import { CustomElement } from "interfaces/slate";
 import { IWeblog } from "interfaces/weblog";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import type { Descendant } from "slate";
+import { jsx } from "slate-hyperscript";
 
 interface IProps {
   oneWeblog: IWeblog;
 }
 
 const EditBlog = ({ oneWeblog }: IProps) => {
-  const [textEditorValue, setTextEditorValue] = useState<Array<Descendant>>();
+  const [textEditorValue, setTextEditorValue] = useState<string>("");
   const [blogValues, setBlogValues] = useState({
     title: oneWeblog.title,
     description: oneWeblog.description,
@@ -21,7 +22,204 @@ const EditBlog = ({ oneWeblog }: IProps) => {
   const [imageValue, setImageValue] = useState<File | string>(oneWeblog.media);
   const { updateWeblog } = useWeblogApi();
   const { back } = useRouter();
-  const initialValue: CustomElement[] = oneWeblog.content;
+  const document = new DOMParser().parseFromString(
+    oneWeblog.content,
+    "text/html"
+  );
+  const deserialize = (
+    el: any,
+    markAttributes = {
+      bold: false,
+      italic: false,
+      underline: false,
+      code: false,
+      color: "black",
+    }
+  ): any => {
+    if (el.nodeType === Node.TEXT_NODE) {
+      return jsx("text", markAttributes, el.textContent);
+    } else if (el.nodeType !== Node.ELEMENT_NODE) {
+      return null;
+    }
+
+    const nodeAttributes = { ...markAttributes };
+
+    const color = el
+      .getAttribute("style")
+      ?.substring(8, el.getAttribute("style")?.length ? -1 : -20);
+
+    if (typeof color === "string") {
+      nodeAttributes.color = color;
+    }
+
+    // define attributes for text nodes
+    if (el.nodeName === "STRONG") {
+      nodeAttributes.bold = true;
+    } else if (el.nodeName === "EM") {
+      nodeAttributes.italic = true;
+    } else if (el.nodeName === "U") {
+      nodeAttributes.underline = true;
+    } else if (el.nodeName === "CODE") {
+      nodeAttributes.underline = true;
+    }
+
+    const children = Array.from(el.childNodes)
+      .map((node) => deserialize(node, nodeAttributes))
+      .flat();
+
+    if (children.length === 0) {
+      children.push(jsx("text", nodeAttributes, ""));
+    }
+    console.log(children);
+
+    // console.log(el.getAttribute("className"));
+    // console.log(el.getAttribute("style"));
+    if (el.nodeName === "BODY") {
+      return jsx("fragment", {}, children);
+    } else if (el.nodeName === "BR") {
+      return "\n";
+    } else if (el.nodeName === "BLOCKQUOTE") {
+      return jsx("element", { type: "blockquote" }, children);
+    } else if (el.nodeName === "LINK") {
+      // console.log(children);
+      console.log(el.textContent);
+      return jsx(
+        "element",
+        {
+          type: "link",
+          variant: el
+            .getAttribute("href")
+            ?.substring(1, el.getAttribute("href")?.length ? -1 : -20),
+        },
+        children
+      );
+    } else if (el.nodeName === "TYPOGRAPHY") {
+      console.log(el.textContent);
+
+      return jsx(
+        "element",
+        {
+          type: "typography",
+          variant: el
+            .getAttribute("variant")
+            ?.substring(1, el.getAttribute("variant")?.length ? -1 : -20),
+        },
+        children
+      );
+    } else if (el.nodeName === "UL") {
+      return jsx("element", { type: "bulletList" }, children);
+    } else if (el.nodeName === "LI") {
+      return jsx("element", { type: "listItem" }, children);
+    } else if (el.nodeName === "IMG") {
+      return jsx(
+        "element",
+        {
+          type: "image",
+          url: el
+            .getAttribute("src")
+            ?.substring(1, el.getAttribute("src")?.length ? -1 : -20),
+        },
+        children
+      );
+    } else if (el.nodeName === "TABLE") {
+      return jsx("element", { type: "table" }, children);
+    } else if (el.nodeName === "TR") {
+      return jsx("element", { type: "tableRow" }, children);
+    } else if (el.nodeName === "TD") {
+      return jsx("element", { type: "tableCell" }, children);
+    } else {
+      return children;
+    }
+    // switch (el.nodeName) {
+    //   case "BODY":
+    //     return jsx("fragment", {}, children);
+    //   case "BR":
+    //     return "\n";
+    //   case "BLOCKQUOTE": {
+    //     return jsx("element", { type: "blockquote" }, children);
+    //   }
+    //   case "SPAN": {
+    //     console.log(children);
+    //     return jsx(
+    //       "element",
+    //       {
+    //         type: "link",
+    //         url: el
+    //           .getAttribute("href")
+    //           ?.substring(1, el.getAttribute("href")?.length - 1),
+    //       },
+    //       children
+    //     );
+    //   }
+    //   case "A": {
+    //     return jsx(
+    //       "element",
+    //       {
+    //         type: "email",
+    //         email: el
+    //           .getAttribute("href")
+    //           ?.substring(1, el.getAttribute("href")?.length - 1),
+    //       },
+    //       children
+    //     );
+    //   }
+    //   case "TYPOGRAPHY": {
+    //     return jsx(
+    //       "element",
+    //       {
+    //         type: "typography",
+    //         variant: el
+    //           .getAttribute("variant")
+    //           ?.substring(1, el.getAttribute("variant")?.length - 1),
+    //       },
+    //       children
+    //     );
+    //   }
+    //   case "UL": {
+    //     return jsx("element", { type: "bulletList" }, children);
+    //   }
+    //   case "OL": {
+    //     return jsx("element", { type: "numberList" }, children);
+    //   }
+    //   case "LI": {
+    //     return jsx("element", { type: "listItem" }, children);
+    //   }
+    //   case "IMG": {
+    //     return jsx(
+    //       "element",
+    //       {
+    //         type: "image",
+    //         url: el
+    //           .getAttribute("src")
+    //           ?.substring(1, el.getAttribute("src")?.length - 1),
+    //       },
+    //       children
+    //     );
+    //   }
+    //   case "TABLE": {
+    //     return jsx("element", { type: "table" }, children);
+    //   }
+    //   case "TR": {
+    //     return jsx("element", { type: "tableRow" }, children);
+    //   }
+    //   case "TD": {
+    //     return jsx("element", { type: "tableCell" }, children);
+    //   }
+    //   default:
+    //     return children;
+    // }
+  };
+  deserialize(document.body);
+  const initialValue: CustomElement[] = deserialize(document.body);
+
+  // console.log(deserialize(document.body));
+
+  useEffect(() => {
+    setBlogValues({
+      title: oneWeblog.title,
+      description: oneWeblog.description,
+    });
+  }, []);
 
   const handleBlogValues = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -63,7 +261,6 @@ const EditBlog = ({ oneWeblog }: IProps) => {
       </label>
       <CustomInput
         fullWidth
-        defaultValue={oneWeblog.title}
         value={blogValues.title}
         name="title"
         onChange={handleBlogValues}
@@ -85,7 +282,6 @@ const EditBlog = ({ oneWeblog }: IProps) => {
       <CustomInput
         fullWidth
         multiline
-        defaultValue={oneWeblog.description}
         value={blogValues.description}
         name="description"
         onChange={handleBlogValues}

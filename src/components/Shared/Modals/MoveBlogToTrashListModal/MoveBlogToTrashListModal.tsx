@@ -2,6 +2,7 @@ import { Grow, IconButton, Modal, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useWeblogApi from "apis/Weblog.api";
+import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -11,12 +12,14 @@ interface IProps {
   openMoveBlogToTrashListModal: boolean;
   setOpenMoveBlogToTrashListModal: Dispatch<SetStateAction<boolean>>;
   weblogId: string;
+  setLiveBlogList?: Dispatch<SetStateAction<IWeblog[]>>;
 }
 
 const MoveBlogToTrashListModal = ({
   openMoveBlogToTrashListModal,
   setOpenMoveBlogToTrashListModal,
   weblogId,
+  setLiveBlogList,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
 
@@ -30,6 +33,11 @@ const MoveBlogToTrashListModal = ({
         "🚀 ~ file: MoveBlogToTrashListModal.tsx ~ line 29 ~ handleMoveBlogToTrashList ~ res",
         res
       );
+      if (setLiveBlogList) {
+        setLiveBlogList((prevState) =>
+          prevState.filter((blog) => blog._id !== weblogId)
+        );
+      }
       setOpenMoveBlogToTrashListModal(false);
     } catch (error) {
       console.log(error);

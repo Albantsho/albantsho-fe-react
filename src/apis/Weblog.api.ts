@@ -59,7 +59,7 @@ const useWeblogApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getWeblog(id: string) {
+    async getWeblog(id: string | string[]) {
       const res = await axiosPrivate.get(`/weblog/${id}`, {
         signal: controller?.signal,
       });

@@ -1,10 +1,13 @@
+import useWeblogApi from "apis/Weblog.api";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import blogIcon from "../assets/blog-icon.png";
 import emptyBlogs from "../assets/empty-blogs.png";
 import ArchiveBlog from "./ArchiveBlog/ArchiveBlog";
+import queryString from "query-string";
 
 const listBlogs = [
   {
@@ -56,18 +59,30 @@ interface IProps {
 }
 
 const ArchiveBlogsList = ({ archiveBlogs }: IProps) => {
-  const [archiveBlogList, setArchiveBlogList] = useState<null | Array<IWeblog>>(
-    null
-  );
+  const [archiveBlogList, setArchiveBlogList] = useState<Array<IWeblog>>([]);
+
+  const [loading, setLoading] = useState(true);
+  const { query } = useRouter();
+  const { getAllWeblogsForAdmin } = useWeblogApi();
 
   useEffect(() => {
-    setArchiveBlogList(archiveBlogs);
-  }, [archiveBlogs]);
+    async function getAllWeblogs() {
+      try {
+        const res = await getAllWeblogsForAdmin(queryString.stringify(query));
+        console.log(res.data.weblogs);
+        setArchiveBlogList(res.data.weblogs);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getAllWeblogs();
+  }, [query!]);
 
   return (
     <div className="mt-4 pb-14 flex flex-col gap-4 overflow-hidden">
       <>
-        {archiveBlogList === null ? (
+        {loading ? (
           <DotLoader color="#7953B5" className="mx-auto mt-10" />
         ) : (
           <>
