@@ -1,3 +1,4 @@
+import { Link } from "@mui/material";
 import { type RenderElementProps } from "slate-react";
 import ImageComponent from "./ImageComponent/ImageComponent";
 import TableComponent from "./TableComponent/TableComponent";
@@ -50,13 +51,9 @@ const EditorElement = ({
           {children}
         </p>
       );
-    case "link":
+    case "link": {
       return (
-        <a
-          style={{ textDecorationLine: "underline", color: "#7953B5" }}
-          {...attributes}
-          href={element.url}
-        >
+        <a {...attributes} href={element.url}>
           <span contentEditable={false} style={{ fontSize: 0 }}>
             ${String.fromCodePoint(160) /* Non-breaking space */}
           </span>
@@ -66,20 +63,11 @@ const EditorElement = ({
           </span>
         </a>
       );
+    }
     case "email":
       return (
-        <a
-          style={{ textDecorationLine: "underline", color: "#7953B5" }}
-          {...attributes}
-          href={`mailto:${element.email}`}
-        >
-          <span contentEditable={false} style={{ fontSize: 0 }}>
-            ${String.fromCodePoint(160) /* Non-breaking space */}
-          </span>
+        <a {...attributes} href={`mailto:${element.email}`}>
           {children}
-          <span contentEditable={false} style={{ fontSize: 0 }}>
-            ${String.fromCodePoint(160) /* Non-breaking space */}
-          </span>
         </a>
       );
     case "image":

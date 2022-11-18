@@ -11,7 +11,6 @@ interface IProps {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   wrapEmailFunction: () => void;
-  unWrapEmailFunction: () => void;
 }
 
 const AddEmailModal = ({
@@ -20,7 +19,6 @@ const AddEmailModal = ({
   emailValue,
   changeEmailValue,
   wrapEmailFunction,
-  unWrapEmailFunction,
 }: IProps) => {
   return (
     <Modal
@@ -70,15 +68,6 @@ const AddEmailModal = ({
               className="py-3 px-5"
             >
               Enter Email
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={unWrapEmailFunction}
-              size="large"
-              color="warning"
-              className="py-3 px-5"
-            >
-              UnLink Email
             </Button>
           </div>
         </div>

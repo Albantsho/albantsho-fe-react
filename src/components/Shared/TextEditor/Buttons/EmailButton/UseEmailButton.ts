@@ -8,7 +8,7 @@ const useEmailButton = () => {
   const [openAddEmail, setOpenAddEmail] = useState(false);
   const [emailValue, setEmailValue] = useState("");
 
-  const isLinkActive = () => {
+  const isEmailActive = () => {
     const [email] = Editor.nodes(editor, {
       match: (n) =>
         !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "email",
@@ -17,33 +17,35 @@ const useEmailButton = () => {
     return !!email;
   };
 
-  const unwrapLink = () => {
+  const unwrapEmail = () => {
     Transforms.unwrapNodes(editor, {
       match: (n) =>
         !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "email",
     });
   };
 
-  const wrapLink = (emailUrl: string) => {
+  const wrapEmailLink = (emailUrl: string) => {
     if (!editor.selection) return;
-    if (isLinkActive()) {
-      unwrapLink();
+    if (isEmailActive()) {
+      unwrapEmail();
       return;
     }
     const { selection } = editor;
     const isCollapsed = selection && Range.isCollapsed(selection);
-    const link: IEmail = {
+    const email: IEmail = {
       type: "email",
       email: emailUrl,
       children: isCollapsed ? [{ text: emailUrl }] : [],
     };
+
     if (isCollapsed) {
-      Transforms.insertNodes(editor, link);
+      Transforms.insertNodes(editor, email);
     } else {
-      Transforms.wrapNodes(editor, link, { split: true });
+      Transforms.wrapNodes(editor, email, { split: true });
       Transforms.collapse(editor, { edge: "end" });
     }
   };
+
   const handleOpenAddEmailModal = () => setOpenAddEmail(true);
 
   const handleCloseAddEmailModal = () => setOpenAddEmail(false);
@@ -51,20 +53,20 @@ const useEmailButton = () => {
   const changeEmailValue = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setEmailValue(e.target.value);
+
   const wrapEmailFunction = () => {
-    wrapLink(emailValue);
+    wrapEmailLink(emailValue);
     setEmailValue("");
     handleCloseAddEmailModal();
   };
 
   const unWrapEmailFunction = () => {
-    wrapLink(emailValue);
+    wrapEmailLink(emailValue);
     setEmailValue("");
-    handleCloseAddEmailModal();
   };
 
   return {
-    isLinkActive,
+    isEmailActive,
     openAddEmail,
     handleCloseAddEmailModal,
     handleOpenAddEmailModal,

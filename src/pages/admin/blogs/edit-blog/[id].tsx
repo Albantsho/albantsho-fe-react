@@ -13,7 +13,6 @@ import { DotLoader } from "react-spinners";
 const EditBlogPage: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { getWeblog } = useWeblogApi();
-  const [loading, setLoading] = useState(true);
   const [oneWeblog, setOneWeblog] = useState<IWeblog | null>(null);
 
   useEffect(() => {
@@ -26,13 +25,11 @@ const EditBlogPage: NextPageWithLayout = () => {
         console.log("renderer");
         if (query.id !== undefined) {
           const res = await getWeblog(query.id);
-          setLoading(false);
           console.log(
             "🚀 ~ file: [id].tsx ~ line 33 ~ getWeblogFunc ~ res",
             res
           );
           setOneWeblog(res.data.weblog);
-          console.log(oneWeblog);
         }
       } catch (error) {
         console.log(error);
@@ -51,7 +48,7 @@ const EditBlogPage: NextPageWithLayout = () => {
       {oneWeblog === null ? (
         <DotLoader color="#7953B5" className="mx-auto mt-10" />
       ) : (
-        <div className="bg-white shadow-primary min-h-full rounded-lg pt-4 lg:pt-8 pb-10 lg:pb-24 px-5 lg:px-14">
+        <div className="bg-white shadow-primary min-h-full rounded-lg pt-4 lg:pt-8 pb-10 lg:pb-24 px-5 lg:px-14 my-16">
           <BreadcrumbsEditBlog oneWeblog={oneWeblog} />
           <Divider className="mt-2 lg:mt-6 mb-6 lg:mb-10" />
           <EditBlog oneWeblog={oneWeblog} />

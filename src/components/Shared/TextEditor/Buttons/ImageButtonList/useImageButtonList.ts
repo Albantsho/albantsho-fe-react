@@ -64,15 +64,15 @@ const useImageButton = () => {
   const handleGetPicture = (e: ChangeEvent<HTMLInputElement>) => {
     if (table) return;
     if (e.target.files) {
-      const url = URL.createObjectURL(e.target.files[0]);
+      // const url = URL.createObjectURL(e.target.files[0]);
       const reader = new FileReader();
 
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = () => {
         console.log(reader.result);
-
-        insertImage(reader.result);
-        // setImageValue(reader.result);
+        const url = window.decodeURI(reader.result as string);
+        insertImage(url);
+        setImageValue(url);
         console.log(imageValue);
       };
       // url && insertImage(url);

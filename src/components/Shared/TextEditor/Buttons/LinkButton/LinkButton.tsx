@@ -30,58 +30,81 @@ const LinkButton = ({ inDrawer }: IProps) => {
     <>
       {!inDrawer ? (
         <>
-          <IconButton
-            color={isLinkActive() ? "primary" : "default"}
-            className="w-10 h-10 hidden large lg:flex"
-            onClick={handleOpenAddLinkModal}
-          >
-            <SvgIcon
-              component={isLinkActive() ? BiUnlink : BsLink45Deg}
-              inheritViewBox
-            />
-          </IconButton>
-          <Button
-            className={`${
-              isLinkActive()
-                ? "bg-primary-700 text-white hover:text-primary-700"
-                : "text-primary-700"
-            } lg:hidden w-full h-10 min-w-[40px]`}
-            onClick={handleOpenAddLinkModal}
-          >
-            <SvgIcon
-              component={isLinkActive() ? BiUnlink : BsLink45Deg}
-              inheritViewBox
-            />
-          </Button>
+          {isLinkActive() ? (
+            <IconButton
+              color="primary"
+              className="w-10 h-10 hidden large lg:flex"
+              onClick={unWrapLinkFunction}
+            >
+              <SvgIcon component={BiUnlink} inheritViewBox />
+            </IconButton>
+          ) : (
+            <IconButton
+              color="default"
+              className="w-10 h-10 hidden large lg:flex"
+              onClick={handleOpenAddLinkModal}
+            >
+              <SvgIcon component={BsLink45Deg} inheritViewBox />
+            </IconButton>
+          )}
+          {isLinkActive() ? (
+            <Button
+              className="bg-primary-700 text-white hover:text-primary-700
+              lg:hidden w-full h-10 min-w-[40px]"
+              onClick={unWrapLinkFunction}
+            >
+              <SvgIcon component={BiUnlink} inheritViewBox />
+            </Button>
+          ) : (
+            <Button
+              className="text-primary-700 lg:hidden w-full h-10 min-w-[40px]"
+              onClick={handleOpenAddLinkModal}
+            >
+              <SvgIcon component={BsLink45Deg} inheritViewBox />
+            </Button>
+          )}
         </>
       ) : (
-        <ListItemButton
-          onClick={handleOpenAddLinkModal}
-          TouchRippleProps={{ className: "text-primary-main" }}
-          className={`${
-            isLinkActive()
-              ? "bg-primary-700 text-white hover:text-primary-700"
-              : "bg-transparent text-gray-500"
-          }  hover:bg-primary-50/50 max-h-[40px]`}
-        >
-          <SvgIcon
-            component={isLinkActive() ? BiUnlink : BsLink45Deg}
-            inheritViewBox
-          />
-          <ListItemText
-            primaryTypographyProps={{
-              variant: "h6",
-              className: "font-medium futura leading-normal",
-            }}
-            className="pl-4"
-          >
-            Link
-          </ListItemText>
-        </ListItemButton>
+        <>
+          {isLinkActive() ? (
+            <ListItemButton
+              onClick={unWrapLinkFunction}
+              TouchRippleProps={{ className: "text-primary-main" }}
+              className="bg-primary-700 text-white hover:text-primary-700
+              hover:bg-primary-50/50 max-h-[40px]"
+            >
+              <SvgIcon component={BiUnlink} inheritViewBox />
+              <ListItemText
+                primaryTypographyProps={{
+                  variant: "h6",
+                  className: "font-medium futura leading-normal",
+                }}
+                className="pl-4"
+              >
+                unLink
+              </ListItemText>
+            </ListItemButton>
+          ) : (
+            <ListItemButton
+              onClick={handleOpenAddLinkModal}
+              TouchRippleProps={{ className: "text-primary-main" }}
+              className="bg-transparent text-gray-500 hover:bg-primary-50/50 max-h-[40px]"
+            >
+              <SvgIcon component={BsLink45Deg} inheritViewBox />
+              <ListItemText
+                primaryTypographyProps={{
+                  variant: "h6",
+                  className: "font-medium futura leading-normal",
+                }}
+                className="pl-4"
+              >
+                Link
+              </ListItemText>
+            </ListItemButton>
+          )}
+        </>
       )}
-
       <AddLinkModal
-        unWrapLinkFunction={unWrapLinkFunction}
         wrapLinkFunction={wrapLinkFunction}
         openAddLink={openAddLink}
         handleCloseAddLinkModal={handleCloseAddLinkModal}

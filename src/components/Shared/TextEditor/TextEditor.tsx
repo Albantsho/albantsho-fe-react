@@ -34,66 +34,113 @@ const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
     const serialize = (node: INode | Descendant): string | undefined => {
       if (Text.isText(node)) {
         let string = escapeHTML(node.text);
-        if (node.bold) {
-          string = `<strong style={{color:${
-            node.color ? node.color : "black"
-          }}} >${string}</strong>`;
+        if (node.bold && node.underline && node.italic && node.code) {
+          string = `<code style=color:${
+            node.color ? node.color + ";" : "black;"
+          }><u><em><strong>${string}</strong></em></u></code>`;
+        } else if (node.bold && node.underline && node.italic) {
+          string = `<u style=color:${
+            node.color ? node.color + ";" : "black;"
+          }><em><strong>${string}</strong></em></u>`;
+        } else if (node.bold && node.underline && node.code) {
+          string = `<code style=color:${
+            node.color ? node.color + ";" : "black;"
+          }}><u><strong>${string}</strong></u></code>`;
+        } else if (node.bold && node.italic && node.code) {
+          string = `<code style=color:${
+            node.color ? node.color + ";" : "black;"
+          }><em><strong>${string}</strong></em></code>`;
+        } else if (node.underline && node.italic && node.code) {
+          string = `<code style=color:${
+            node.color ? node.color + ";" : "black;"
+          }><u><em>${string}</em></u></code>`;
+        } else if (node.underline && node.code) {
+          string = `<code style=color:${
+            node.color ? node.color + ";" : "black;"
+          }><u>${string}</u></code>`;
+        } else if (node.italic && node.code) {
+          string = `<code style=color:${
+            node.color ? node.color + ";" : "black;"
+          }><em>${string}</em></code>`;
+        } else if (node.bold && node.code) {
+          string = `<code style=color:${
+            node.color ? node.color + ";" : "black;"
+          }><strong>${string}</strong></code>`;
+        } else if (node.italic && node.underline) {
+          string = `<u style=color:${
+            node.color ? node.color + ";" : "black;"
+          }><em>${string}</em></u>`;
+        } else if (node.bold && node.underline) {
+          string = `<u style=color:${
+            node.color ? node.color + ";" : "black;"
+          }><strong>${string}</strong></u>`;
+        } else if (node.bold && node.italic) {
+          string = `<em style=color:${
+            node.color ? node.color + ";" : "black;"
+          }><strong>${string}</strong></em>`;
+        } else if (node.bold) {
+          string = `<strong style=color:${
+            node.color ? node.color + ";" : "black;"
+          }>${string}</strong>`;
         } else if (node.underline) {
-          string = `<u style={{color:${
-            node.color ? node.color : "black"
-          }}}>${string}</u>`;
+          string = `<u style=color:${
+            node.color ? node.color + ";" : "black;"
+          }>${string}</u>`;
         } else if (node.code) {
-          string = `<code style={{color:${
-            node.color ? node.color : "black"
-          }}}>${string}</code>`;
+          string = `<code style=color:${
+            node.color ? node.color + ";" : "black;"
+          }>${string}</code>`;
         } else if (node.italic) {
-          string = `<em style={{color:${
-            node.color ? node.color : "black"
-          }}}>${string}</em>`;
+          string = `<em style=color:${
+            node.color ? node.color + ";" : "black;"
+          }>${string}</em>`;
         }
-        // else {
-        //   string = `<span style={{color:${
-        //     node.color ? node.color : "black"
-        //   }}>${string}</span>`;
-        // }
+
         return string;
       }
       const children = node.children.map((n) => serialize(n)).join("");
       if (Element.isElement(node)) {
         switch (node.type) {
           case "blockquote":
-            return `<blockquote>${children}</blockquote>`;
+            return `<blockquote style=border-left-width:4px;padding:6px 2px;border-radius: 2px;>${children}</blockquote>`;
           case "headOne":
-            return `<Typography>${children}</Typography>`;
+            return `<h1 style="font-size:36px;">${children}</h1>`;
+          case "headTwo":
+            return `<h2 style="font-size:30px;">${children}</h2>`;
+          case "headThree":
+            return `<h3 style="font-size:26px;">${children}</h3>`;
+          case "headFour":
+            return `<h4 style="font-size:24px;">${children}</h4>`;
+          case "headFive":
+            return `<h5 style="font-size:22px;">${children}</h5>`;
+          case "headSix":
+            return `<h6 style="font-size:20px;">${children}</h6>`;
+          case "paragraph":
+            return `<p style="font-size:16px;">${children}</p>`;
           case "numberList":
-            return `<ol className="list-decimal list-inside">${children}</ol>`;
+            return `<ol style="list-style-type:decimal;list-style-position:inside;">${children}</ol>`;
           case "bulletList":
-            return `<ul className="list-disc list-inside">${children}</ul>`;
+            return `<ul style="list-style-type:disc;list-style-position:inside;">${children}</ul>`;
           case "listItem":
             return `<li>${children}</li>`;
           case "email":
-            return `<a underline="always" href={mailto:${escapeHTML(
+            return `<a style={{textDecorationLine:"underline",textDecorationColor: "inherit",color:"inherit"}}href={mailto:${escapeHTML(
               node.email
             )}}>${children}</a>`;
           case "link": {
-            console.log(children);
-
-            return `<Link underline="always" href={${escapeHTML(
+            return `<a style={{textDecorationLine:"underline",textDecorationColor:"inherit",color:"inherit"}}href={${escapeHTML(
               node.url
-            )}}>${children}</Link>`;
+            )}}>${children}</a>`;
           }
           case "table":
-            return `<table className="border-collapse flex-1"><tbody>${children}</tbody></table>`;
+            return `<table style={{borderCollapse:"collapse",flex:"1 1 0%"}}><tbody>${children}</tbody></table>`;
           case "tableRow":
             return `<tr>${children}</tr>`;
           case "tableCell":
-            return `<td className="border-2 rounded-md text-start align-top py-2 px-4 min-w-[200px] max-w-xs">${children.trim()}</td>`;
+            return `<td style={{borderWidth:"2px",borderRadius:"6px",textAlign:"start",verticalAlign:"top",padding:"8px 16px",minWidth:"200px",maxWidth:"320px"}}>${children.trim()}</td>`;
           case "image":
-            return `<img
-              alt=""
-              src={${escapeHTML(node.url as string)}}
-            />`;
-
+            return `<img style={{width:"fit-content",height:"auto"}}
+            alt="" src={${escapeHTML(node.url as string)}}/>`;
           default:
             return children;
         }
@@ -113,7 +160,7 @@ const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
         <EditorDrawer />
         <Editable
           className="isolation-auto -z-0"
-          placeholder="Add comment..."
+          placeholder="Add text..."
           spellCheck
           autoFocus
           onKeyDown={handleKeyDown}
@@ -127,17 +174,3 @@ const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
 };
 
 export default TextEditor;
-
-// className={`relative flex justify-center rounded-lg min-w-[135px] min-h-[135px] text-gray-300 ${
-//   selected
-//     ? "shadow-sm border pt-10 border-gray-300 duration-200 ease-in"
-//     : "none duration-200 p-1 ease-in"
-// }
-// ${
-//   positionImage === 0
-//     ? "mr-auto"
-//     : positionImage === 1
-//     ? "mx-auto"
-//     : "ml-auto"
-// }
-// `}

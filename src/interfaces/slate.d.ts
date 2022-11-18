@@ -53,7 +53,7 @@ interface IListItem {
 
 export interface ILink {
   type: "link";
-  url?: string;
+  url: string;
   children: CustomText[];
 }
 

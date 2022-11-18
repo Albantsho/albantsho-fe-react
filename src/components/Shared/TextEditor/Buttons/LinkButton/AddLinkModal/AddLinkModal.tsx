@@ -11,7 +11,6 @@ interface IProps {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   wrapLinkFunction: () => void;
-  unWrapLinkFunction: () => void;
 }
 
 const AddLinkModal = ({
@@ -20,7 +19,6 @@ const AddLinkModal = ({
   linkValue,
   changeLinkValue,
   wrapLinkFunction,
-  unWrapLinkFunction,
 }: IProps) => {
   return (
     <Modal
@@ -66,15 +64,6 @@ const AddLinkModal = ({
               className="py-3 px-5"
             >
               Enter Link
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={unWrapLinkFunction}
-              size="large"
-              color="warning"
-              className="py-3 px-5"
-            >
-              UnLink Link
             </Button>
           </div>
         </div>

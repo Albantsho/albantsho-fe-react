@@ -1,177 +1,30 @@
+import { LoadingButton } from "@mui/lab";
 import { Button, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import TextEditor from "@shared/TextEditor/TextEditor";
-import useWeblogApi from "apis/Weblog.api";
-import { CustomElement } from "interfaces/slate";
 import { IWeblog } from "interfaces/weblog";
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useState } from "react";
-import { jsx } from "slate-hyperscript";
+import { ChangeEvent } from "react";
+import useEditBlog from "./useEditBlog";
 
 interface IProps {
   oneWeblog: IWeblog;
 }
 
 const EditBlog = ({ oneWeblog }: IProps) => {
-  const [textEditorValue, setTextEditorValue] = useState<string | undefined>(
-    ""
-  );
-  const [blogValues, setBlogValues] = useState({
-    title: oneWeblog.title,
-    description: oneWeblog.description,
-  });
-  const [imageValue, setImageValue] = useState<File | string>(oneWeblog.media);
-  const { updateWeblog } = useWeblogApi();
+  const {
+    initialValue,
+    errors,
+    handleSubmit,
+    loading,
+    onSubmit,
+    register,
+    setTextEditorValue,
+  } = useEditBlog({ oneWeblog });
   const { back } = useRouter();
-  const document = new DOMParser().parseFromString(
-    oneWeblog.content,
-    "text/html"
-  );
-  const deserialize = (
-    el: any,
-    markAttributes = {
-      bold: false,
-      italic: false,
-      underline: false,
-      code: false,
-      color: "black",
-    }
-  ): any => {
-    if (el.nodeType === Node.TEXT_NODE) {
-      return jsx("text", markAttributes, el.textContent);
-    } else if (el.nodeType !== Node.ELEMENT_NODE) {
-      return null;
-    }
-
-    const nodeAttributes = { ...markAttributes };
-
-    const color = el
-      .getAttribute("style")
-      ?.substring(8, el.getAttribute("style")?.length ? -1 : -20);
-
-    if (typeof color === "string") {
-      nodeAttributes.color = color;
-    }
-
-    // define attributes for text nodes
-    if (el.nodeName === "STRONG") {
-      nodeAttributes.bold = true;
-    } else if (el.nodeName === "EM") {
-      nodeAttributes.italic = true;
-    } else if (el.nodeName === "U") {
-      nodeAttributes.underline = true;
-    } else if (el.nodeName === "CODE") {
-      nodeAttributes.underline = true;
-    }
-
-    const children = Array.from(el.childNodes)
-      .map((node) => deserialize(node, nodeAttributes))
-      .flat();
-
-    if (children.length === 0) {
-      children.push(jsx("text", nodeAttributes, ""));
-    }
-    console.log(children);
-
-    // console.log(el.getAttribute("className"));
-    // console.log(el.getAttribute("style"));
-    if (el.nodeName === "BODY") {
-      return jsx("fragment", {}, children);
-    } else if (el.nodeName === "BR") {
-      return "\n";
-    } else if (el.nodeName === "BLOCKQUOTE") {
-      return jsx("element", { type: "blockquote" }, children);
-    } else if (el.nodeName === "LINK") {
-      // console.log(children);
-      console.log(el.textContent);
-      return jsx(
-        "element",
-        {
-          type: "link",
-          variant: el
-            .getAttribute("href")
-            ?.substring(1, el.getAttribute("href")?.length ? -1 : -20),
-        },
-        children
-      );
-    } else if (el.nodeName === "TYPOGRAPHY") {
-      console.log(el.textContent);
-
-      return jsx(
-        "element",
-        {
-          type: "typography",
-          variant: el
-            .getAttribute("variant")
-            ?.substring(1, el.getAttribute("variant")?.length ? -1 : -20),
-        },
-        children
-      );
-    } else if (el.nodeName === "UL") {
-      return jsx("element", { type: "bulletList" }, children);
-    } else if (el.nodeName === "LI") {
-      return jsx("element", { type: "listItem" }, children);
-    } else if (el.nodeName === "IMG") {
-      return jsx(
-        "element",
-        {
-          type: "image",
-          url: el
-            .getAttribute("src")
-            ?.substring(1, el.getAttribute("src")?.length ? -1 : -20),
-        },
-        children
-      );
-    } else if (el.nodeName === "TABLE") {
-      return jsx("element", { type: "table" }, children);
-    } else if (el.nodeName === "TR") {
-      return jsx("element", { type: "tableRow" }, children);
-    } else if (el.nodeName === "TD") {
-      return jsx("element", { type: "tableCell" }, children);
-    } else {
-      return children;
-    }
-  };
-  deserialize(document.body);
-  const initialValue: CustomElement[] = deserialize(document.body);
-
-  useEffect(() => {
-    setBlogValues({
-      title: oneWeblog.title,
-      description: oneWeblog.description,
-    });
-  }, []);
-
-  const handleBlogValues = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setBlogValues({ ...blogValues, [e.target.name]: e.target.value });
-  };
-
-  const handleGetPicture = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setImageValue(e.target.files[0]);
-    } else {
-      alert("Image not found");
-    }
-  };
-
-  const updateBlog = async () => {
-    const res = await updateWeblog(
-      {
-        title: blogValues.title,
-        description: blogValues.description,
-        content: textEditorValue?.toString(),
-        image: imageValue,
-      },
-      oneWeblog._id
-    );
-
-    console.log(res);
-  };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="blog-title">
         <Typography
           variant="body1"
@@ -182,15 +35,21 @@ const EditBlog = ({ oneWeblog }: IProps) => {
       </label>
       <CustomInput
         fullWidth
-        value={blogValues.title}
-        name="title"
-        onChange={handleBlogValues}
+        error={Boolean(errors.title) || false}
+        {...register("title")}
         id="blog-title"
         variant="outlined"
         size="small"
         sx={{
           "& .MuiOutlinedInput-input": { py: 1.5 },
+          "& .MuiFormHelperText-root": {
+            mt: "8px",
+            mx: 0,
+            color: "red",
+            fontSize: "16px",
+          },
         }}
+        helperText={errors.title?.message}
       />
       <label htmlFor="blog-description">
         <Typography
@@ -203,16 +62,22 @@ const EditBlog = ({ oneWeblog }: IProps) => {
       <CustomInput
         fullWidth
         multiline
-        value={blogValues.description}
-        name="description"
-        onChange={handleBlogValues}
+        error={Boolean(errors.description) || false}
+        {...register("description")}
         rows={3}
         id="blog-description"
         variant="outlined"
         size="small"
         sx={{
           "& .MuiOutlinedInput-input": { py: 1.5 },
+          "& .MuiFormHelperText-root": {
+            mt: "8px",
+            mx: 0,
+            color: "red",
+            fontSize: "16px",
+          },
         }}
+        helperText={errors.description?.message}
       />
       <label>
         <Typography
@@ -226,21 +91,23 @@ const EditBlog = ({ oneWeblog }: IProps) => {
         initialValue={initialValue}
         setTextEditorValue={setTextEditorValue}
       />
-      <div className="my-5 mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center">
-        <form className="relative py-2 px-4 w-full flex justify-center items-center flex-col">
+      <div className="my-10">
+        <div className="mb-1 mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center relative py-2 px-4 w-full">
           <label
             className="absolute cursor-pointer inset-0"
             htmlFor="add-image"
           ></label>
           <input
-            onChange={handleGetPicture}
+            {...register("image")}
+            className="opacity-0"
             type="file"
             id="add-image"
             hidden
-            name="script"
+            name="image"
             accept="image/*"
+            max={1}
           />
-          <div className="mx-auto flex justify-center items-center"></div>
+
           <Typography
             variant="h6"
             color="primary.700"
@@ -248,17 +115,22 @@ const EditBlog = ({ oneWeblog }: IProps) => {
           >
             Upload Image
           </Typography>
-        </form>
+        </div>
+        {errors.image && (
+          <span className="text-error-700">{errors.image?.message}</span>
+        )}
       </div>
+
       <div className="mt-6 lg:mt-10 flex gap-2 lg:gap-6">
-        <Button
-          onClick={updateBlog}
+        <LoadingButton
+          type="submit"
           disableElevation
+          loading={loading}
           className="px-4 py-2 lg:py-3 lg:px-6"
           variant="contained"
         >
           Save and update
-        </Button>
+        </LoadingButton>
         <Button
           onClick={back}
           className="px-4 py-2 lg:py-3 lg:px-6"
@@ -267,7 +139,7 @@ const EditBlog = ({ oneWeblog }: IProps) => {
           Cancel
         </Button>
       </div>
-    </div>
+    </form>
   );
 };
 

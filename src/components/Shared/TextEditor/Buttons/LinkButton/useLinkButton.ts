@@ -16,6 +16,7 @@ const useLinkButton = () => {
 
     return !!link;
   };
+
   const unwrapLink = () => {
     Transforms.unwrapNodes(editor, {
       match: (n) =>
@@ -58,10 +59,10 @@ const useLinkButton = () => {
     setLinkValue("");
     handleCloseAddLinkModal();
   };
+
   const unWrapLinkFunction = () => {
     wrapLink(linkValue);
     setLinkValue("");
-    handleCloseAddLinkModal();
   };
 
   return {

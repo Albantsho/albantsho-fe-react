@@ -1,6 +1,5 @@
 import { LoadingButton } from "@mui/lab";
-import { Button, ButtonGroup, Typography } from "@mui/material";
-import Btn from "@shared/Btn/Btn";
+import { Button, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import TextEditor from "@shared/TextEditor/TextEditor";
 import { useRouter } from "next/router";
@@ -10,12 +9,9 @@ const AddBlog = () => {
   const { back } = useRouter();
   const {
     onSubmit,
-
     initialValue,
     setTextEditorValue,
-
     loading,
-
     errors,
     register,
     handleSubmit,
@@ -89,39 +85,41 @@ const AddBlog = () => {
         initialValue={initialValue}
         setTextEditorValue={setTextEditorValue}
       />
-      <div className="mt-5 mb-1 mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center relative py-2 px-4 w-full">
-        <label
-          className="absolute cursor-pointer inset-0"
-          htmlFor="add-image"
-        ></label>
-        <input
-          {...register("image")}
-          className="opacity-0"
-          type="file"
-          id="add-image"
-          hidden
-          name="image"
-          accept="image/*"
-          max={1}
-        />
+      <div className="my-10">
+        <div className="mb-1 mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center relative py-2 px-4 w-full">
+          <label
+            className="absolute cursor-pointer inset-0"
+            htmlFor="add-image"
+          ></label>
+          <input
+            {...register("image")}
+            className="opacity-0"
+            type="file"
+            id="add-image"
+            hidden
+            name="image"
+            accept="image/*"
+            max={1}
+          />
 
-        <Typography
-          variant="h6"
-          color="primary.700"
-          className="futura font-semibold text-center leading-normal"
-        >
-          Upload Image
-        </Typography>
+          <Typography
+            variant="h6"
+            color="primary.700"
+            className="futura font-semibold text-center leading-normal"
+          >
+            Upload Image
+          </Typography>
+        </div>
+        {errors.image && (
+          <span className="text-error-700">{errors.image?.message}</span>
+        )}
       </div>
-      {errors.image && (
-        <span className="text-error-700">{errors.image?.message}</span>
-      )}
 
       <div className="mt-6 lg:mt-10 space-x-2 lg:space-x-6">
         <LoadingButton
           type="submit"
           disableElevation
-          // loading={loading}
+          loading={loading}
           className="px-4 py-2 lg:py-3 lg:px-6"
           variant="contained"
         >

@@ -17,6 +17,7 @@ const EmojiButton = () => {
   const editor = useSlate();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const matchesForHeight = useMediaQuery(theme.breakpoints.up("lg"));
 
   const handleOpenEmojiPicker = () =>
     setOpenEmojiPicker((prevState) => !prevState);
@@ -43,8 +44,9 @@ const EmojiButton = () => {
           <SvgIcon component={BsEmojiSmile} inheritViewBox />
         </Button>
         {openEmojiPicker && (
-          <div className="w-20 !z-[100000000] absolute top-8 right-[115px] lg:right-24">
+          <div className="w-20 !z-[100000000] absolute -top-2 lg:top-8 right-[115px] lg:right-24">
             <EmojiPicker
+              height={matchesForHeight ? 450 : 320}
               width={matches ? 320 : 245}
               onEmojiClick={selectEmoji}
             />

@@ -16,7 +16,7 @@ interface IProps {
 
 const EmailButton = ({ inDrawer }: IProps) => {
   const {
-    isLinkActive,
+    isEmailActive,
     changeEmailValue,
     emailValue,
     handleCloseAddEmailModal,
@@ -30,61 +30,83 @@ const EmailButton = ({ inDrawer }: IProps) => {
     <>
       {!inDrawer ? (
         <>
-          <IconButton
-            color={isLinkActive() ? "primary" : "default"}
-            className="w-10 h-10 hidden lg:flex"
-            onClick={handleOpenAddEmailModal}
-          >
-            <SvgIcon
-              component={isLinkActive() ? BiUnlink : MdAlternateEmail}
-              inheritViewBox
-            />
-          </IconButton>
-          <Button
-            className={`${
-              isLinkActive()
-                ? "bg-primary-700 text-white hover:text-primary-700"
-                : "text-primary-700"
-            } lg:hidden w-full h-10 min-w-[40px]`}
-            onClick={handleOpenAddEmailModal}
-          >
-            <SvgIcon
-              component={isLinkActive() ? BiUnlink : MdAlternateEmail}
-              inheritViewBox
-            />
-          </Button>
+          {isEmailActive() ? (
+            <IconButton
+              color="primary"
+              className="w-10 h-10 hidden lg:flex"
+              onClick={unWrapEmailFunction}
+            >
+              <SvgIcon component={BiUnlink} inheritViewBox />
+            </IconButton>
+          ) : (
+            <IconButton
+              color="default"
+              className="w-10 h-10 hidden lg:flex"
+              onClick={handleOpenAddEmailModal}
+            >
+              <SvgIcon component={MdAlternateEmail} inheritViewBox />
+            </IconButton>
+          )}
+          {isEmailActive() ? (
+            <Button
+              className="bg-primary-700 text-white hover:text-primary-700 lg:hidden w-full h-10 min-w-[40px]"
+              onClick={unWrapEmailFunction}
+            >
+              <SvgIcon component={BiUnlink} inheritViewBox />
+            </Button>
+          ) : (
+            <Button
+              className="text-primary-700 lg:hidden w-full h-10 min-w-[40px]"
+              onClick={handleOpenAddEmailModal}
+            >
+              <SvgIcon component={MdAlternateEmail} inheritViewBox />
+            </Button>
+          )}
         </>
       ) : (
-        <ListItemButton
-          onClick={handleOpenAddEmailModal}
-          TouchRippleProps={{ className: "text-primary-main" }}
-          className={`${
-            isLinkActive()
-              ? "bg-primary-700 text-white hover:text-primary-700"
-              : "bg-transparent text-gray-500"
-          }  hover:bg-primary-50/50 max-h-[40px]`}
-        >
-          <SvgIcon
-            component={isLinkActive() ? BiUnlink : MdAlternateEmail}
-            inheritViewBox
-          />
-          <ListItemText
-            primaryTypographyProps={{
-              variant: "h6",
-              className: "font-medium futura leading-normal",
-            }}
-            className="pl-4"
-          >
-            Email
-          </ListItemText>
-        </ListItemButton>
+        <>
+          {isEmailActive() ? (
+            <ListItemButton
+              onClick={unWrapEmailFunction}
+              TouchRippleProps={{ className: "text-primary-main" }}
+              className="bg-primary-700 text-white hover:text-primary-700 hover:bg-primary-50/50 max-h-[40px]"
+            >
+              <SvgIcon component={BiUnlink} inheritViewBox />
+              <ListItemText
+                primaryTypographyProps={{
+                  variant: "h6",
+                  className: "font-medium futura leading-normal",
+                }}
+                className="pl-4"
+              >
+                unLink Email
+              </ListItemText>
+            </ListItemButton>
+          ) : (
+            <ListItemButton
+              onClick={handleOpenAddEmailModal}
+              TouchRippleProps={{ className: "text-primary-main" }}
+              className="bg-transparent text-gray-500 hover:bg-primary-50/50 max-h-[40px]"
+            >
+              <SvgIcon component={MdAlternateEmail} inheritViewBox />
+              <ListItemText
+                primaryTypographyProps={{
+                  variant: "h6",
+                  className: "font-medium futura leading-normal",
+                }}
+                className="pl-4"
+              >
+                Email
+              </ListItemText>
+            </ListItemButton>
+          )}
+        </>
       )}
       <AddEmailModal
         changeEmailValue={changeEmailValue}
         emailValue={emailValue}
         handleCloseAddEmailModal={handleCloseAddEmailModal}
         openAddEmail={openAddEmail}
-        unWrapEmailFunction={unWrapEmailFunction}
         wrapEmailFunction={wrapEmailFunction}
       />
     </>

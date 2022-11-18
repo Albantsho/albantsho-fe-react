@@ -1,11 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
 import useWeblogApi from "apis/Weblog.api";
 import { CustomElement } from "interfaces/slate";
-import { ChangeEvent, useState } from "react";
-import { addBlogSchema } from "./validation/addBlog.validate";
-import errorHandler from "utils/error-handler";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import errorHandler from "utils/error-handler";
+import { addBlogSchema } from "./validation/addBlog.validate";
 
 interface IAddWeblogFormValues {
   title: string;
@@ -37,8 +37,6 @@ const useAddBlog = () => {
   ];
 
   const onSubmit = async (data: IAddWeblogFormValues) => {
-    console.log(data);
-    console.log(data.image[0]);
     try {
       setLoading(true);
       console.log(textEditorValue);
