@@ -1,8 +1,7 @@
 import { IconButton, SvgIcon, Typography } from "@mui/material";
 import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
 import { IWeblog } from "interfaces/weblog";
-import Image from "next/image";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsCursor } from "react-icons/bs";
 import { TfiTrash } from "react-icons/tfi";
@@ -10,9 +9,13 @@ import routes from "routes/routes";
 
 interface IProps {
   blog: IWeblog;
+  setArchiveBlogList: Dispatch<SetStateAction<IWeblog[]>>;
 }
 
-const ArchiveBlog = ({ blog: { media, description, title, _id } }: IProps) => {
+const ArchiveBlog = ({
+  blog: { media, description, title, _id },
+  setArchiveBlogList,
+}: IProps) => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
     useState(false);
 
@@ -78,6 +81,7 @@ const ArchiveBlog = ({ blog: { media, description, title, _id } }: IProps) => {
         </div>
       </div>
       <MoveBlogToTrashListModal
+        setLiveBlogList={setArchiveBlogList}
         weblogId={_id}
         setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
         openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}

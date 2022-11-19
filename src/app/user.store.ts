@@ -38,19 +38,6 @@ const useUserStore = create<IUserState>()(
       //       ([key]) => !["accessToken"].includes(key)
       //     )
       //   ),
-      // onRehydrateStorage: (state) => {
-      //   console.log("hydration starts");
-
-      //   // optional
-      //   return (state, error) => {
-      //     console.log(state);
-      //     if (error) {
-      //       console.log("an error happened during hydration", error);
-      //     } else {
-      //       console.log("hydration finished");
-      //     }
-      //   };
-      // },
     }
   )
 );

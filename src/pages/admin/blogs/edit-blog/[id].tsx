@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
+import errorHandler from "utils/error-handler";
 
 const EditBlogPage: NextPageWithLayout = () => {
   const { query } = useRouter();
@@ -16,23 +17,14 @@ const EditBlogPage: NextPageWithLayout = () => {
   const [oneWeblog, setOneWeblog] = useState<IWeblog | null>(null);
 
   useEffect(() => {
-    console.log("hi");
-
     async function getWeblogFunc() {
       try {
-        console.log(query.id);
-
-        console.log("renderer");
         if (query.id !== undefined) {
           const res = await getWeblog(query.id);
-          console.log(
-            "🚀 ~ file: [id].tsx ~ line 33 ~ getWeblogFunc ~ res",
-            res
-          );
           setOneWeblog(res.data.weblog);
         }
       } catch (error) {
-        console.log(error);
+        errorHandler(error);
       }
     }
 

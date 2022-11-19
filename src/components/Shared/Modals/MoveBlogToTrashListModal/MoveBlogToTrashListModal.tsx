@@ -4,8 +4,11 @@ import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useWeblogApi from "apis/Weblog.api";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
 import Trash from "./assets/trash.png";
 
 interface IProps {
@@ -22,25 +25,23 @@ const MoveBlogToTrashListModal = ({
   setLiveBlogList,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
+  const { query, push } = useRouter();
 
   const handleCloseMoveBlogToTrashListModal = () =>
     setOpenMoveBlogToTrashListModal(false);
 
   const handleMoveBlogToTrashList = async () => {
     try {
-      const res = await updateWeblog({ trash: true }, weblogId);
-      console.log(
-        "🚀 ~ file: MoveBlogToTrashListModal.tsx ~ line 29 ~ handleMoveBlogToTrashList ~ res",
-        res
-      );
+      await updateWeblog({ trash: true }, weblogId);
       if (setLiveBlogList) {
         setLiveBlogList((prevState) =>
           prevState.filter((blog) => blog._id !== weblogId)
         );
       }
       setOpenMoveBlogToTrashListModal(false);
+      if (query.id) push(routes.blogsAdminDashboard);
     } catch (error) {
-      console.log(error);
+      errorHandler(error);
     }
   };
 

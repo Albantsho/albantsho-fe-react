@@ -2,62 +2,58 @@ import useWeblogApi from "apis/Weblog.api";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import blogIcon from "../assets/blog-icon.png";
+import errorHandler from "utils/error-handler";
 import emptyBlogs from "../assets/empty-blogs.png";
 import LiveBlog from "./LiveBlog/LiveBlog";
 
-const listBlogs = [
-  {
-    id: 1,
-    title: "Blog Title",
-    image: blogIcon,
-    blogDescription:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-  },
-  {
-    id: 2,
-    title: "Blog Title",
-    image: blogIcon,
-    blogDescription:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-  },
-  {
-    id: 3,
-    title: "Blog Title",
-    image: blogIcon,
-    blogDescription:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-  },
-  {
-    id: 4,
-    title: "Blog Title",
-    image: blogIcon,
-    blogDescription:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-  },
-  {
-    id: 5,
-    title: "Blog Title",
-    image: blogIcon,
-    blogDescription:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-  },
-  {
-    id: 6,
-    title: "Blog Title",
-    image: blogIcon,
-    blogDescription:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
-  },
-];
+// const listBlogs = [
+//   {
+//     id: 1,
+//     title: "Blog Title",
+//     image: blogIcon,
+//     blogDescription:
+//       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
+//   },
+//   {
+//     id: 2,
+//     title: "Blog Title",
+//     image: blogIcon,
+//     blogDescription:
+//       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
+//   },
+//   {
+//     id: 3,
+//     title: "Blog Title",
+//     image: blogIcon,
+//     blogDescription:
+//       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
+//   },
+//   {
+//     id: 4,
+//     title: "Blog Title",
+//     image: blogIcon,
+//     blogDescription:
+//       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
+//   },
+//   {
+//     id: 5,
+//     title: "Blog Title",
+//     image: blogIcon,
+//     blogDescription:
+//       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
+//   },
+//   {
+//     id: 6,
+//     title: "Blog Title",
+//     image: blogIcon,
+//     blogDescription:
+//       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.",
+//   },
+// ];
 
-interface IProps {
-  liveBlogs: IWeblog[];
-}
-
-const LiveBlogsList = ({ liveBlogs }: IProps) => {
+const LiveBlogsList = () => {
   const [liveBlogList, setLiveBlogList] = useState<Array<IWeblog>>([]);
   const [loading, setLoading] = useState(true);
   const { query } = useRouter();
@@ -67,11 +63,10 @@ const LiveBlogsList = ({ liveBlogs }: IProps) => {
     async function getAllWeblogs() {
       try {
         const res = await getAllWeblogsForAdmin();
-        console.log(res.data.weblogs);
         setLiveBlogList(res.data.weblogs);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        errorHandler(error);
       }
     }
     getAllWeblogs();

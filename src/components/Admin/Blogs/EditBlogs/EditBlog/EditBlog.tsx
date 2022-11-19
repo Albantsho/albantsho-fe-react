@@ -4,7 +4,6 @@ import CustomInput from "@shared/CustomInput/CustomInput";
 import TextEditor from "@shared/TextEditor/TextEditor";
 import { IWeblog } from "interfaces/weblog";
 import { useRouter } from "next/router";
-import { ChangeEvent } from "react";
 import useEditBlog from "./useEditBlog";
 
 interface IProps {

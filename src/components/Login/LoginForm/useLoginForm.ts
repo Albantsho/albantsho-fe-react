@@ -37,8 +37,6 @@ const useLoginForm = () => {
 
   const onSubmit = async (data: IAuthLogin) => {
     try {
-      console.log(data);
-
       const res = await signin({ ...data, rememberMe: true });
       authenticationUser(res.data.user);
       setAccessToken(

@@ -1,11 +1,10 @@
 import { Divider } from "@mui/material";
-import React from "react";
-import { AiFillExclamationCircle } from "react-icons/ai";
-import { BsTypeBold, BsCode } from "react-icons/bs";
-import { FiItalic, FiMoreHorizontal } from "react-icons/fi";
+import { AiFillExclamationCircle, AiOutlineUnderline } from "react-icons/ai";
+import { BsCode, BsTypeBold } from "react-icons/bs";
+import { FiItalic } from "react-icons/fi";
 import {
-  MdOutlineFormatListNumbered,
   MdFormatListBulleted,
+  MdOutlineFormatListNumbered,
 } from "react-icons/md";
 import BlockButton from "../../Buttons/BlockButton/BlockButton";
 import ColorButton from "../../Buttons/ColorButton/ColorButton";
@@ -20,12 +19,12 @@ import TableButton from "../../Buttons/TableButton/TableButton";
 
 const DesktopToolbar = () => {
   return (
-    <div className="lg:flex gap-[6.5px] mb-8 hidden sticky top-0 z-50 flex-wrap">
+    <div className="lg:flex gap-[3px] mb-8 hidden sticky top-0 z-50 flex-wrap">
       <HeadingButtonList />
       <Divider orientation="vertical" />
       <MarkButton format="bold" icon={BsTypeBold} />
       <MarkButton format="italic" icon={FiItalic} />
-      <MarkButton format="underline" icon={FiMoreHorizontal} />
+      <MarkButton format="underline" icon={AiOutlineUnderline} />
       <Divider orientation="vertical" />
       <ColorButton />
       <Divider orientation="vertical" />

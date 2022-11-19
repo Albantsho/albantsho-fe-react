@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import useMarketplaceApi from "apis/Marketplace.api";
 import { IProduct } from "interfaces/product";
 import { DotLoader } from "react-spinners";
+import errorHandler from "utils/error-handler";
 
 const AuctionsScripts = dynamic(
   () =>
@@ -38,7 +39,7 @@ const ScriptSlug: NextPageWithLayout = () => {
         setScript(res.data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        errorHandler(error);
       }
     }
     getScriptsDate();

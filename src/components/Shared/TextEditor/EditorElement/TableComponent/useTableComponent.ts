@@ -2,6 +2,7 @@ import { ITableCell, ITableRow } from "interfaces/slate";
 import { useState } from "react";
 import { Editor, Path, Transforms } from "slate";
 import { useSlate } from "slate-react";
+import errorHandler from "utils/error-handler";
 
 const useTableComponent = () => {
   const [contextMenu, setContextMenu] = useState<{
@@ -73,7 +74,7 @@ const useTableComponent = () => {
         );
       }
     } catch (error) {
-      console.log(error);
+      errorHandler(error);
     }
     handleClose();
   };
@@ -102,7 +103,7 @@ const useTableComponent = () => {
         match: (n) => Editor.isBlock(editor, n) && n.type === "tableRow",
       });
     } catch (error) {
-      console.log(error);
+      errorHandler(error);
     }
     handleClose();
   };
@@ -135,7 +136,7 @@ const useTableComponent = () => {
         });
       }
     } catch (error) {
-      console.log(error);
+      errorHandler(error);
     }
     handleClose();
   };

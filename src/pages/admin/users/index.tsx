@@ -5,6 +5,7 @@ import useAuthApi from "apis/Auth.api";
 import AllUsersList from "components/Admin/Users/Index/UsersList/AllUsersList";
 import Head from "next/head";
 import { useEffect } from "react";
+import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../_app";
 
 const UsersPage: NextPageWithLayout = () => {
@@ -15,9 +16,7 @@ const UsersPage: NextPageWithLayout = () => {
       try {
         const res = await getAllUser();
       } catch (error) {
-        console.log(error);
-
-        ("");
+        errorHandler(error);
       }
     }
     getAllUsersFunc();

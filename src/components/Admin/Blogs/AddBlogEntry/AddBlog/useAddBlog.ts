@@ -39,19 +39,16 @@ const useAddBlog = () => {
   const onSubmit = async (data: IAddWeblogFormValues) => {
     try {
       setLoading(true);
-      console.log(textEditorValue);
-      const res = await createNewWeblog({
+      await createNewWeblog({
         title: data.title,
         description: data.description,
         content: textEditorValue,
         image: data.image[0],
       });
-      console.log(res);
       push("/admin/blogs");
       setTextEditorValue("");
       initialValue = [{ type: "paragraph", children: [{ text: "" }] }];
     } catch (error) {
-      console.log(error);
       errorHandler(error);
     } finally {
       setLoading(false);

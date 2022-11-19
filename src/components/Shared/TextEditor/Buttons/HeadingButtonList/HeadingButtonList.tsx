@@ -37,7 +37,7 @@ const HeadingButtonList = () => {
             fontWeight: "600",
           },
         }}
-        className="text-gray-500 h-8"
+        className="text-gray-500 h-8 my-auto"
         ref={anchorRef}
         onClick={handleToggleListHeadingButton}
         endIcon={

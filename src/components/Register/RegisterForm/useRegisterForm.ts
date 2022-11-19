@@ -56,8 +56,6 @@ const useRegisterForm = () => {
       // replace(routes.welcome);
       replace(routes.verifyEmail);
     } catch (error) {
-      console.log(error);
-
       errorHandler(error);
     } finally {
       setLoading(false);

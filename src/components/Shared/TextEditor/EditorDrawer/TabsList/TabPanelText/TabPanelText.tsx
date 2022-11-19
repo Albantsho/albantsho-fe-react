@@ -7,6 +7,7 @@ import {
   ListItemText,
   SvgIcon,
 } from "@mui/material";
+import { AiOutlineUnderline } from "react-icons/ai";
 import { BsCode, BsTypeBold } from "react-icons/bs";
 import { FiItalic } from "react-icons/fi";
 import { MdExpandLess, MdOutlineExpandMore } from "react-icons/md";
@@ -24,12 +25,13 @@ const TabPanelText = () => {
 
   return (
     <TabPanel className="min-h-[400px]" value="0">
-      <div className="flex justify-between gap-1 sm:gap-3">
+      <div className="flex justify-between gap-[1px] sm:gap-3">
         <MarkButton format="bold" icon={BsTypeBold} />
         <MarkButton format="italic" icon={FiItalic} />
         <ColorButton />
         <EmojiButton />
         <MarkButton format="code" icon={BsCode} />
+        <MarkButton format="underline" icon={AiOutlineUnderline} />
       </div>
       <Divider className="my-2" />
       <List>

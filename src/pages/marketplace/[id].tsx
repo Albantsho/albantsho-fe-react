@@ -8,6 +8,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
+import errorHandler from "utils/error-handler";
 
 const MarketScriptChips = dynamic(
   () =>
@@ -44,7 +45,7 @@ const ScriptInfoPage = () => {
         setScript(res.data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        errorHandler(error);
       }
     }
     getScriptsDate();

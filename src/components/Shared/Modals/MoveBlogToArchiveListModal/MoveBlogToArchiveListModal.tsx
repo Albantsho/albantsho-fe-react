@@ -2,37 +2,46 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useWeblogApi from "apis/Weblog.api";
+import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
 import moveImage from "./assets/move-image.png";
 
 interface IProps {
   openMoveBlogToArchiveListModal: boolean;
   setOpenMoveBlogToArchiveListModal: Dispatch<SetStateAction<boolean>>;
   weblogId: string;
+  setLiveBlogList?: Dispatch<SetStateAction<IWeblog[]>>;
 }
 
 const MoveBlogToArchiveListModal = ({
   openMoveBlogToArchiveListModal,
   setOpenMoveBlogToArchiveListModal,
   weblogId,
+  setLiveBlogList,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
+  const { query, push } = useRouter();
 
   const handleCloseMoveBlogToArchiveListModal = () =>
     setOpenMoveBlogToArchiveListModal(false);
 
   const handleMoveBlogToArchiveList = async () => {
     try {
-      const res = await updateWeblog({ archive: true }, weblogId);
-      console.log(
-        "🚀 ~ file: MoveBlogToArchiveListModal.tsx ~ line 29 ~ handleMoveBlogToArchiveList ~ res",
-        res
-      );
+      await updateWeblog({ archive: true }, weblogId);
+      if (setLiveBlogList) {
+        setLiveBlogList((prevState) =>
+          prevState.filter((blog) => blog._id !== weblogId)
+        );
+      }
       setOpenMoveBlogToArchiveListModal(false);
+      if (query.id) push(routes.blogsAdminDashboard);
     } catch (error) {
-      console.log(error);
+      errorHandler(error);
     }
   };
 

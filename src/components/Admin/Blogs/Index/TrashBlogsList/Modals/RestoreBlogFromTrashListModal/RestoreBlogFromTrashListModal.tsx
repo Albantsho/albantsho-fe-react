@@ -6,6 +6,7 @@ import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import errorHandler from "utils/error-handler";
 import moveImage from "./assets/move-image.png";
 
 interface IProps {
@@ -28,14 +29,13 @@ const RestoreBlogFromTrashListModal = ({
 
   const handleRestoreWeblogFromTrashList = async () => {
     try {
-      const res = await updateWeblog({ trash: false }, weblogId);
+      await updateWeblog({ trash: false }, weblogId);
       setTrashBlogList((prevState) =>
         prevState.filter((blog) => blog._id !== weblogId)
       );
-      console.log(res);
       handleCloseRestoreBlogFromTrashListModal();
     } catch (error) {
-      console.log(error);
+      errorHandler(error);
     }
   };
 

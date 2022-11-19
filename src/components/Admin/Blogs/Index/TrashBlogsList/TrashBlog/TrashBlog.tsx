@@ -1,6 +1,5 @@
 import { IconButton, SvgIcon, Typography } from "@mui/material";
 import { IWeblog } from "interfaces/weblog";
-import Image, { StaticImageData } from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import { TfiTrash } from "react-icons/tfi";
 import DeleteBlogFromTrashListModal from "../Modals/DeleteBlogFromTrashListModal/DeleteBlogFromTrashListModal";
@@ -39,7 +38,7 @@ const TrashBlog = ({
         className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start"
       >
         <div className="flex gap-3 lg:gap-6">
-          <div className="max-w-[76px] rounded-md w-full flex max-h-[76px] bg-tinted-50/50 justify-center items-center">
+          <div className="min-w-[76px] rounded-md flex h-[76px]  bg-tinted-50/50 justify-center items-center">
             <img
               width={27}
               height={34}

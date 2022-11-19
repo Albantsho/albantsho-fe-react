@@ -49,8 +49,6 @@ const useVerifyEmail = () => {
         email: user.email,
         code: Object.values(formValues).join(""),
       });
-      console.log(res);
-
       setAccessToken(
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzcyMGU3ZTllNDhmM2Q5MzBmMmU3NDkiLCJpYXQiOjE2Njg0MTkzMDYsImV4cCI6MTY4NTY5OTMwNn0.UgJ7XxtjSNceq3G9lgJPlzcZT9Fph3Ne8a_w_uyl7tM"
       );
@@ -59,8 +57,6 @@ const useVerifyEmail = () => {
       successHandler(res.message);
       replace(routes.home);
     } catch (error) {
-      console.log(error);
-
       errorHandler(error);
     }
   };

@@ -2,7 +2,6 @@ import { IconButton, SvgIcon, Typography } from "@mui/material";
 import MoveBlogToArchiveListModal from "@shared/Modals/MoveBlogToArchiveListModal/MoveBlogToArchiveListModal";
 import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
 import { IWeblog } from "interfaces/weblog";
-import Image, { StaticImageData } from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineFolder } from "react-icons/md";
@@ -89,6 +88,7 @@ const LiveBlog = ({
         openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
       />
       <MoveBlogToArchiveListModal
+        setLiveBlogList={setLiveBlogList}
         weblogId={_id}
         setOpenMoveBlogToArchiveListModal={setOpenMoveBlogToArchiveListModal}
         openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}

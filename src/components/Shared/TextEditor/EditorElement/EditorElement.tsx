@@ -11,49 +11,49 @@ const EditorElement = ({
   switch (element.type) {
     case "headOne":
       return (
-        <h1 style={{ fontSize: "36px" }} {...attributes}>
+        <h1 style={element.style} className="text-4xl" {...attributes}>
           {children}
         </h1>
       );
     case "headTwo":
       return (
-        <h2 style={{ fontSize: "30px" }} {...attributes}>
+        <h2 style={element.style} className="text-3xl" {...attributes}>
           {children}
         </h2>
       );
     case "headThree":
       return (
-        <h3 style={{ fontSize: "26px" }} {...attributes}>
+        <h3 style={element.style} className="text-[26px]" {...attributes}>
           {children}
         </h3>
       );
     case "headFour":
       return (
-        <h4 style={{ fontSize: "24px" }} {...attributes}>
+        <h4 style={element.style} className="text-2xl" {...attributes}>
           {children}
         </h4>
       );
     case "headFive":
       return (
-        <h5 style={{ fontSize: "22px" }} {...attributes}>
+        <h5 style={element.style} className="text-[22px]" {...attributes}>
           {children}
         </h5>
       );
     case "headSix":
       return (
-        <h6 style={{ fontSize: "20px" }} {...attributes}>
+        <h6 style={element.style} className="text-xl" {...attributes}>
           {children}
         </h6>
       );
     case "paragraph":
       return (
-        <p style={{ fontSize: "16px" }} {...attributes}>
+        <p style={element.style} className="text-base" {...attributes}>
           {children}
         </p>
       );
     case "link": {
       return (
-        <a {...attributes} href={element.url}>
+        <a style={element.style} {...attributes} href={element.url}>
           <span contentEditable={false} style={{ fontSize: 0 }}>
             ${String.fromCodePoint(160) /* Non-breaking space */}
           </span>
@@ -66,7 +66,11 @@ const EditorElement = ({
     }
     case "email":
       return (
-        <a {...attributes} href={`mailto:${element.email}`}>
+        <a
+          style={element.style}
+          {...attributes}
+          href={`mailto:${element.email}`}
+        >
           {children}
         </a>
       );
@@ -77,12 +81,17 @@ const EditorElement = ({
         </ImageComponent>
       );
     case "listItem":
-      return <li {...attributes}>{children}</li>;
+      return (
+        <li style={element.style} {...attributes}>
+          {children}
+        </li>
+      );
     case "bulletList":
       return (
         <ul
           {...attributes}
-          style={{ listStyleType: "disc", listStylePosition: "inside" }}
+          className="list-disc list-inside"
+          style={element.style}
         >
           {children}
         </ul>
@@ -91,7 +100,8 @@ const EditorElement = ({
       return (
         <ol
           {...attributes}
-          style={{ listStyleType: "decimal", listStylePosition: "inside" }}
+          className="list-decimal list-inside"
+          style={element.style}
         >
           {children}
         </ol>
@@ -100,11 +110,8 @@ const EditorElement = ({
       return (
         <blockquote
           {...attributes}
-          style={{
-            borderLeftWidth: "4px",
-            padding: "6px 2px",
-            borderRadius: "2px",
-          }}
+          style={element.style}
+          className="border-l-4 py-[6px] px-[2px]"
         >
           {children}
         </blockquote>
@@ -116,19 +123,16 @@ const EditorElement = ({
         </TableComponent>
       );
     case "tableRow":
-      return <tr {...attributes}>{children}</tr>;
+      return (
+        <tr style={element.style} {...attributes}>
+          {children}
+        </tr>
+      );
     case "tableCell":
       return (
         <td
-          style={{
-            borderWidth: "2px",
-            borderRadius: "6px",
-            textAlign: "start",
-            verticalAlign: "top",
-            padding: "8px 16px",
-            minWidth: "200px",
-            maxWidth: "320px",
-          }}
+          style={element.style}
+          className="border-2 rounded-md text-start align-top py-2 px-4 min-w-[200px] max-w-xs"
           {...attributes}
         >
           {children}

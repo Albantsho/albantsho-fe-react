@@ -34,7 +34,8 @@ const TableComponent = ({
         onContextMenu={handleContextMenu}
       >
         <table
-          style={{ borderCollapse: "collapse", flex: "1 1 0%" }}
+          style={element.style}
+          className="border-collapse flex-1"
           {...attributes}
         >
           <tbody>{children}</tbody>

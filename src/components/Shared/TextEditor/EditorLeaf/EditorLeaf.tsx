@@ -7,7 +7,10 @@ const EditorLeaf = ({ attributes, children, leaf }: RenderLeafProps) => {
   if (leaf.code) children = <code>{children}</code>;
 
   return (
-    <span style={{ color: leaf?.color }} {...attributes}>
+    <span
+      style={{ color: leaf?.color ? leaf?.color : undefined }}
+      {...attributes}
+    >
       {children}
     </span>
   );
