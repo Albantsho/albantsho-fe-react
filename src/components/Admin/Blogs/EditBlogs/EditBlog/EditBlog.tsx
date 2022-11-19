@@ -106,7 +106,11 @@ const EditBlog = ({ oneWeblog }: IProps) => {
             accept="image/*"
             max={1}
           />
-
+          <div className="absolute left-0 w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
+            <img
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${oneWeblog.media}`}
+            />
+          </div>
           <Typography
             variant="h6"
             color="primary.700"

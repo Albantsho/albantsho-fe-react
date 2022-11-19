@@ -244,7 +244,7 @@ const useEditBlog = ({
           title: data.title,
           description: data.description,
           content: textEditorValue,
-          image: data.image[0],
+          image: data.image && data.image[0],
         },
         _id
       );

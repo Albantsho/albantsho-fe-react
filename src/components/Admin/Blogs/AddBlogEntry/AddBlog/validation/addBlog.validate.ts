@@ -9,7 +9,7 @@ export const addBlogSchema = Yup.object({
     })
     .test("fileSize", "The file is to large", (value) => {
       if (value[0]) {
-        return value && value[0].size <= 500000;
+        return value && value[0].size <= 2000000;
       }
     }),
 });

@@ -11,43 +11,43 @@ const EditorElement = ({
   switch (element.type) {
     case "headOne":
       return (
-        <h1 style={element.style} className="text-4xl" {...attributes}>
+        <h1 style={{ ...element.style, fontSize: "36px" }} {...attributes}>
           {children}
         </h1>
       );
     case "headTwo":
       return (
-        <h2 style={element.style} className="text-3xl" {...attributes}>
+        <h2 style={{ ...element.style, fontSize: "30px" }} {...attributes}>
           {children}
         </h2>
       );
     case "headThree":
       return (
-        <h3 style={element.style} className="text-[26px]" {...attributes}>
+        <h3 style={{ ...element.style, fontSize: "26px" }} {...attributes}>
           {children}
         </h3>
       );
     case "headFour":
       return (
-        <h4 style={element.style} className="text-2xl" {...attributes}>
+        <h4 style={{ ...element.style, fontSize: "24px" }} {...attributes}>
           {children}
         </h4>
       );
     case "headFive":
       return (
-        <h5 style={element.style} className="text-[22px]" {...attributes}>
+        <h5 style={{ ...element.style, fontSize: "22px" }} {...attributes}>
           {children}
         </h5>
       );
     case "headSix":
       return (
-        <h6 style={element.style} className="text-xl" {...attributes}>
+        <h6 style={{ ...element.style, fontSize: "20px" }} {...attributes}>
           {children}
         </h6>
       );
     case "paragraph":
       return (
-        <p style={element.style} className="text-base" {...attributes}>
+        <p style={{ ...element.style, fontSize: "16px" }} {...attributes}>
           {children}
         </p>
       );
@@ -90,8 +90,11 @@ const EditorElement = ({
       return (
         <ul
           {...attributes}
-          className="list-disc list-inside"
-          style={element.style}
+          style={{
+            ...element.style,
+            listStyleType: "disc",
+            listStylePosition: "inside",
+          }}
         >
           {children}
         </ul>
@@ -101,7 +104,11 @@ const EditorElement = ({
         <ol
           {...attributes}
           className="list-decimal list-inside"
-          style={element.style}
+          style={{
+            ...element.style,
+            listStyleType: "decimal",
+            listStylePosition: "inside",
+          }}
         >
           {children}
         </ol>
@@ -110,8 +117,11 @@ const EditorElement = ({
       return (
         <blockquote
           {...attributes}
-          style={element.style}
-          className="border-l-4 py-[6px] px-[2px]"
+          style={{
+            ...element.style,
+            borderLeftWidth: "4px",
+            padding: "6px 2px",
+          }}
         >
           {children}
         </blockquote>
@@ -131,8 +141,16 @@ const EditorElement = ({
     case "tableCell":
       return (
         <td
-          style={element.style}
-          className="border-2 rounded-md text-start align-top py-2 px-4 min-w-[200px] max-w-xs"
+          style={{
+            ...element.style,
+            borderWidth: "2px",
+            borderRadius: "6px",
+            textAlign: "start",
+            verticalAlign: "top",
+            padding: "8px 16px",
+            minWidth: "200px",
+            maxWidth: "320px",
+          }}
           {...attributes}
         >
           {children}

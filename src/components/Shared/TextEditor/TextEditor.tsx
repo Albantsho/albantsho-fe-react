@@ -1,4 +1,3 @@
-import useImageStore from "app/image.store";
 import escapeHTML from "escape-html";
 import { CustomElement } from "interfaces/slate";
 import { Dispatch, SetStateAction, useMemo } from "react";
@@ -28,10 +27,6 @@ const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
     []
   );
   const { handleKeyDown } = useTextEditor({ editor });
-  const { imagePosition, imageSize } = useImageStore((state) => ({
-    imageSize: state.imageSize,
-    imagePosition: state.imagePosition,
-  }));
 
   const handleChangeEditor = (element: Descendant[]) => {
     const node = { children: element };
@@ -72,6 +67,7 @@ const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
 
         return string;
       }
+
       const children = node.children.map((n) => serialize(n)).join("");
       if (Element.isElement(node)) {
         switch (node.type) {
@@ -138,15 +134,10 @@ const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
             const color = node.children.map((node) => node.color);
             return `<td style="border-width:2px;border-radius:6px;text-align:start;vertical-align:top;padding:8px 16px;min-width:200px;max-width:320px;color:${color[0]};">${children}</td>`;
           }
-          case "image":
-            return `<img style="width:${imageSize.width}px;height:${
-              imageSize.height
-            }px;${imagePosition === 0 ? "margin-right:auto;" : ""}${
-              imagePosition === 2 ? "margin-left:auto;" : ""
-            }${
-              imagePosition === 1 ? "margin-left:auto;margin-right:auto;" : ""
-            }"
+          case "image": {
+            return `<img style="width:fit-content;height:auto;"
             alt="" src="${escapeHTML(node.url as string)}" />`;
+          }
           default:
             return children;
         }

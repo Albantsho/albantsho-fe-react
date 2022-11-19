@@ -1,8 +1,9 @@
 import { Button, ButtonGroup, SvgIcon } from "@mui/material";
-import useImageStore from "app/image.store";
+import useMarkButton from "@shared/TextEditor/hooks/useMarkButton";
 import { useState } from "react";
 import { CiAlignCenterV, CiAlignLeft, CiAlignRight } from "react-icons/ci";
 import { MdPhotoSizeSelectLarge } from "react-icons/md";
+import { Editor } from "slate";
 import {
   ReactEditor,
   useFocused,
@@ -21,53 +22,52 @@ const ImageComponent = ({
   const path = ReactEditor.findPath(editor, element);
   const selected = useSelected();
   const focused = useFocused();
+  const [positionImage, setPositionImage] = useState(0);
   const [openSetImageSize, setOpenSetImageSize] = useState(false);
-  const [imageSizeValue, setImageSizeValue] = useState({
+  const [imageSize, setImageSize] = useState({
     width: "",
     height: "",
   });
-
-  const { imagePosition, imageSize, setImagePosition, setImageSize } =
-    useImageStore((state) => ({
-      imageSize: state.imageSize,
-      imagePosition: state.imagePosition,
-      setImageSize: state.setImageSize,
-      setImagePosition: state.setImagePosition,
-    }));
+  const [size, setSize] = useState({
+    width: "",
+    height: "",
+  });
 
   const handleChangeImageSize = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const result = e.target.value.replace(/\D/g, "");
-    setImageSizeValue({
-      ...imageSizeValue,
+    setImageSize({
+      ...imageSize,
       [e.target.name]: result,
     });
   };
   const setImageSizeFunc = () => {
-    setImageSizeValue({
-      width: imageSizeValue.width,
-      height: imageSizeValue.height,
-    });
-    setImageSize({
-      width: imageSizeValue.width,
-      height: imageSizeValue.height,
-    });
+    setSize({ width: imageSize.width, height: imageSize.height });
     handleCloseSetImageSize();
-    setImageSizeValue({ width: "", height: "" });
+    setImageSize({ width: "", height: "" });
   };
   const handleOpenSetImageSize = () => setOpenSetImageSize(true);
   const handleCloseSetImageSize = () => setOpenSetImageSize(false);
-  const handleStartJustifyImage = () => setImagePosition(0);
-  const handleCenterJustifyImage = () => setImagePosition(1);
-  const handleEndJustifyImage = () => setImagePosition(2);
+  const handleStartJustifyImage = () => {
+    setPositionImage(0);
+  };
+  const handleCenterJustifyImage = () => {
+    setPositionImage(1);
+  };
+  const handleEndJustifyImage = () => {
+    setPositionImage(2);
+  };
 
   if (element.type === "image") {
     return (
       <div {...attributes} className="overflow-auto h-full">
         <div style={{ opacity: 0 }}>{children}</div>
         <div
-          style={element.style}
+          style={{
+            width: size.width ? `${size.width}px` : "195px",
+            height: size.height ? `${size.height}px` : "195px",
+          }}
           contentEditable={false}
           className={`relative flex justify-center rounded-lg min-w-[195px] min-h-[195px] max-w-4xl text-gray-300 ${
             selected
@@ -75,16 +75,12 @@ const ImageComponent = ({
               : "none duration-200 p-1 ease-in"
           }
           ${
-            imagePosition === 0
+            positionImage === 0
               ? "mr-auto"
-              : imagePosition === 1
+              : positionImage === 1
               ? "mx-auto"
-              : imagePosition === 2
-              ? "ml-auto"
-              : ""
+              : "ml-auto"
           }
-          ${imageSize.width ? `w-[${imageSize.width}px]` : "w-[195px]"}
-          ${imageSize.height ? `w-[${imageSize.height}px]` : "h-[195px]"}
           `}
         >
           <img className="w-fit h-auto" alt="" src={element.url as string} />
@@ -113,7 +109,7 @@ const ImageComponent = ({
           </ButtonGroup>
         </div>
         <SetImageSizeModal
-          imageSizeValues={imageSizeValue}
+          imageSizeValues={imageSize}
           handleChangeValueImageSize={handleChangeImageSize}
           setImageSizeFunc={setImageSizeFunc}
           handleCloseSetImageSize={handleCloseSetImageSize}
