@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { IUserInformation } from "interfaces/user";
 import OneUser from "./OneUser/OneUser";
 
 const allUsersList: Array<{
@@ -18,7 +19,11 @@ const allUsersList: Array<{
   { id: 9, name: "Ryan Dokidis", role: "Producer" },
 ];
 
-const AllUsersList = () => {
+interface IProps {
+  usersList: IUserInformation[];
+}
+
+const AllUsersList = ({ usersList }: IProps) => {
   return (
     <Box
       className="gap-4 mt-8 mb-16 grid sm:flex sm:flex-col overflow-hidden"
@@ -26,8 +31,8 @@ const AllUsersList = () => {
         xs: "repeat(auto-fill, minmax(200px, auto))",
       }}
     >
-      {allUsersList.map((user) => (
-        <OneUser key={user.id} user={user} />
+      {usersList.map((user) => (
+        <OneUser key={user._id} user={user} />
       ))}
     </Box>
   );

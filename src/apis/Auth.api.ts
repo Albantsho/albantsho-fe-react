@@ -42,8 +42,8 @@ interface IUpdateWithdrawUserInformationPayload {
 }
 
 interface IUserRestrictionPayload {
-  freeze: boolean;
-  block: boolean;
+  freeze?: boolean;
+  block?: boolean;
 }
 
 interface IGetAllUserOrReviewerPayload {
@@ -139,12 +139,16 @@ const useAuthApi = (controller?: AbortController) => {
     },
 
     async updateUserRestriction(payload: IUserRestrictionPayload, id: string) {
-      const res = await api.patch(`/user/update/restriction/${id}`, payload, {
-        signal: controller?.signal,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
-      });
+      const res = await axiosPrivate.patch(
+        `/user/update/restriction/${id}`,
+        payload,
+        {
+          signal: controller?.signal,
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
+        }
+      );
 
       return res.data;
     },
@@ -160,8 +164,8 @@ const useAuthApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getUserProfile(id: string) {
-      const res = await api.get(`/user/profile/${id}`, {
+    async getUserProfile(id: string | string[]) {
+      const res = await axiosPrivate.get(`/user/profile/${id}`, {
         signal: controller?.signal,
         // headers: {
         //   Authorization: `Bearer ${token}`,

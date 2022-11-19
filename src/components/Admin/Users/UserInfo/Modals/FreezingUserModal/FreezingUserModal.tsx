@@ -1,21 +1,37 @@
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import useAuthApi from "apis/Auth.api";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import errorHandler from "utils/error-handler";
 import disLikeImage from "./assets/dis-like.png";
 
 interface IProps {
   openFreezingUserModal: boolean;
   setOpenFreezingUserModal: Dispatch<SetStateAction<boolean>>;
+  id: string;
 }
 
 const FreezingUserModal = ({
   openFreezingUserModal,
   setOpenFreezingUserModal,
+  id,
 }: IProps) => {
+  const { updateUserRestriction } = useAuthApi();
+
   const handleCloseFreezingUserModal = () => setOpenFreezingUserModal(false);
+
+  const freezeUser = async () => {
+    try {
+      const res = await updateUserRestriction({ freeze: true }, id);
+      console.log(res);
+      handleCloseFreezingUserModal();
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
 
   return (
     <Modal
@@ -57,6 +73,7 @@ const FreezingUserModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
+              onClick={freezeUser}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"
             >

@@ -2,7 +2,7 @@ import { Breadcrumbs, Link, SvgIcon, Typography } from "@mui/material";
 import PathIcon from "@assets/icons/path-icon.svg";
 
 interface IProps {
-  name?: string;
+  name: string;
 }
 
 const BreadcrumbsUserInfo = ({ name }: IProps) => {
@@ -23,7 +23,7 @@ const BreadcrumbsUserInfo = ({ name }: IProps) => {
       variant="h5"
       color="primary.main"
     >
-      {name ? name : ""}
+      {name}
     </Typography>,
   ];
 

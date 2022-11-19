@@ -229,6 +229,7 @@ const useEditBlog = ({
       if (stringStyles !== null) {
         styles = getStyleObjectFromString(stringStyles);
       }
+
       return jsx("element", { type: "tableCell", style: styles }, children);
     } else {
       return children;

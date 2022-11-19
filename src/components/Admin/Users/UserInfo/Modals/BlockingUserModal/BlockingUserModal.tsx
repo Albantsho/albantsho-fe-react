@@ -1,21 +1,37 @@
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import useAuthApi from "apis/Auth.api";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import errorHandler from "utils/error-handler";
 import blockImage from "./assets/block.png";
 
 interface IProps {
   openBlockingUserModal: boolean;
   setOpenBlockingUserModal: Dispatch<SetStateAction<boolean>>;
+  id: string;
 }
 
 const BlockingUserModal = ({
   openBlockingUserModal,
   setOpenBlockingUserModal,
+  id,
 }: IProps) => {
+  const { updateUserRestriction } = useAuthApi();
+
   const handleCloseBlockingUserModal = () => setOpenBlockingUserModal(false);
+
+  const blockUser = async () => {
+    try {
+      const res = await updateUserRestriction({ block: true }, id);
+      console.log(res);
+      handleCloseBlockingUserModal();
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
 
   return (
     <Modal
@@ -57,6 +73,7 @@ const BlockingUserModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
+              onClick={blockUser}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"
             >

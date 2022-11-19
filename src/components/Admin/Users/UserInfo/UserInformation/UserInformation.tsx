@@ -1,28 +1,38 @@
 import { Avatar, Button, SvgIcon, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import { IUserFullInformation } from "interfaces/user";
 import { useState } from "react";
 import { MdNotInterested } from "react-icons/md";
 import { SlDislike, SlLike } from "react-icons/sl";
 import BlockingUserModal from "../Modals/BlockingUserModal/BlockingUserModal";
 import FreezingUserModal from "../Modals/FreezingUserModal/FreezingUserModal";
-
+import countryList from "config/country-list.json";
+import Image from "next/image";
 interface IProps {
-  user:
-    | {
-        id: number;
-        name: string;
-        role: string;
-        status?: "Freeze" | "Block" | undefined;
-      }
-    | undefined;
+  user: IUserFullInformation;
 }
 
-const UserInformation = ({ user }: IProps) => {
+const UserInformation = ({
+  user: {
+    _id,
+    block,
+    country,
+    email,
+    freeze,
+    fullname,
+    sold_scripts,
+    user_type,
+  },
+}: IProps) => {
   const [openBlockingUserModal, setOpenBlockingUserModal] = useState(false);
   const [openFreezingUserModal, setOpenFreezingUserModal] = useState(false);
 
   const handleOpenBlockingUserModal = () => setOpenBlockingUserModal(true);
   const handleOpenFreezingUserModal = () => setOpenFreezingUserModal(true);
+
+  const countryUser = Object.entries(countryList).find(
+    (countryFlag) => countryFlag[1] === country
+  );
 
   return (
     <>
@@ -34,7 +44,7 @@ const UserInformation = ({ user }: IProps) => {
               src="./assets/user-photo.jpg"
               sx={{ width: 96, height: 96 }}
             />
-            {user?.status === "Block" && (
+            {block && (
               <SvgIcon
                 className="bg-white absolute rounded-full top-3 -right-1"
                 color="error"
@@ -42,7 +52,7 @@ const UserInformation = ({ user }: IProps) => {
                 component={MdNotInterested}
               />
             )}
-            {user?.status === "Freeze" && (
+            {freeze && (
               <SvgIcon
                 className="bg-primary-700 absolute p-1 w-6 h-6 text-white rounded-full top-3 -right-1"
                 inheritViewBox
@@ -50,7 +60,7 @@ const UserInformation = ({ user }: IProps) => {
               />
             )}
           </div>
-          {user?.status === "Block" && (
+          {block && (
             <Typography className="text-error-700 text-center" variant="body1">
               This user is currently blocked
             </Typography>
@@ -68,17 +78,12 @@ const UserInformation = ({ user }: IProps) => {
                   Fullname
                 </Typography>
               </label>
-              <CustomInput
-                fullWidth
-                defaultValue={user?.name}
+              <div
                 id="full-name"
-                variant="outlined"
-                size="small"
-                sx={{
-                  "& .MuiOutlinedInput-input": { py: 1.5 },
-                }}
-                className="min-w-[180px]"
-              />
+                className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
+              >
+                <Typography className="leading-normal">{fullname}</Typography>
+              </div>
             </div>
             <div className="flex-1">
               <label htmlFor="email-address">
@@ -89,16 +94,12 @@ const UserInformation = ({ user }: IProps) => {
                   Email Address
                 </Typography>
               </label>
-              <CustomInput
-                fullWidth
+              <div
                 id="email-address"
-                variant="outlined"
-                size="small"
-                sx={{
-                  "& .MuiOutlinedInput-input": { py: 1.5 },
-                }}
-                className="min-w-[180px]"
-              />
+                className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
+              >
+                <Typography className="leading-normal">{email}</Typography>
+              </div>
             </div>
           </div>
           <div className="flex justify-between gap-x-6 gap-y-2 items-center flex-wrap mb-5">
@@ -111,16 +112,20 @@ const UserInformation = ({ user }: IProps) => {
                   Country
                 </Typography>
               </label>
-              <CustomInput
-                fullWidth
+              <div
                 id="country"
-                variant="outlined"
-                size="small"
-                sx={{
-                  "& .MuiOutlinedInput-input": { py: 1.5 },
-                }}
-                className="min-w-[180px]"
-              />
+                className="min-w-[180px] p-3 border border-gray-300 rounded-lg flex gap-1"
+              >
+                {countryUser && (
+                  <Image
+                    width={37}
+                    height={21}
+                    src={`https://flagcdn.com/w40/${countryUser[0]}.png`}
+                    alt={`${countryUser[1]} flag`}
+                  />
+                )}
+                <Typography className="leading-normal">{country}</Typography>
+              </div>
             </div>
             <div className="flex-1">
               <label htmlFor="gender">
@@ -131,16 +136,12 @@ const UserInformation = ({ user }: IProps) => {
                   Gender
                 </Typography>
               </label>
-              <CustomInput
-                fullWidth
+              <div
                 id="gender"
-                variant="outlined"
-                size="small"
-                sx={{
-                  "& .MuiOutlinedInput-input": { py: 1.5 },
-                }}
-                className="min-w-[180px]"
-              />
+                className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
+              >
+                <Typography className="leading-normal">{"gender"}</Typography>
+              </div>
             </div>
           </div>
           <div className="flex justify-between gap-x-6 gap-y-2 items-center flex-wrap mb-8 lg:mb-11">
@@ -153,16 +154,12 @@ const UserInformation = ({ user }: IProps) => {
                   Category
                 </Typography>
               </label>
-              <CustomInput
-                fullWidth
+              <div
                 id="category"
-                variant="outlined"
-                size="small"
-                sx={{
-                  "& .MuiOutlinedInput-input": { py: 1.5 },
-                }}
-                className="min-w-[180px]"
-              />
+                className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
+              >
+                <Typography className="leading-normal">{user_type}</Typography>
+              </div>
             </div>
             <div className="flex-1">
               <label htmlFor="scripts-sold">
@@ -173,20 +170,18 @@ const UserInformation = ({ user }: IProps) => {
                   Scripts sold
                 </Typography>
               </label>
-              <CustomInput
-                fullWidth
+              <div
                 id="scripts-sold"
-                variant="outlined"
-                size="small"
-                sx={{
-                  "& .MuiOutlinedInput-input": { py: 1.5 },
-                }}
-                className="min-w-[180px]"
-              />
+                className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
+              >
+                <Typography className="leading-normal">
+                  {sold_scripts}
+                </Typography>
+              </div>
             </div>
           </div>
           <div className="flex gap-2 sm:gap-4 flex-wrap w-full">
-            {user && user?.status === "Freeze" ? (
+            {freeze ? (
               <Button
                 variant="outlined"
                 className="py-2 px-3 lg:py-3 lg:px-6 flex-1 min-w-[180px] sm:flex-grow-0"
@@ -214,7 +209,7 @@ const UserInformation = ({ user }: IProps) => {
                 Freeze user
               </Button>
             )}
-            {user && user?.status === "Block" ? (
+            {block ? (
               <Button
                 variant="outlined"
                 className="py-2 px-3 lg:py-3 lg:px-6 flex-1 min-w-[180px] sm:flex-grow-0"
@@ -250,10 +245,12 @@ const UserInformation = ({ user }: IProps) => {
         </div>
       </div>
       <BlockingUserModal
+        id={_id}
         setOpenBlockingUserModal={setOpenBlockingUserModal}
         openBlockingUserModal={openBlockingUserModal}
       />
       <FreezingUserModal
+        id={_id}
         setOpenFreezingUserModal={setOpenFreezingUserModal}
         openFreezingUserModal={openFreezingUserModal}
       />
