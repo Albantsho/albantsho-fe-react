@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["picsum.photos", "flagcdn.com", process.env.NEXT_PUBLIC_API_BASE_URL],
+    domains: ["picsum.photos", "flagcdn.com", `${process.env.NEXT_PUBLIC_API_BASE_URL.substring(7)}`],
   },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find(

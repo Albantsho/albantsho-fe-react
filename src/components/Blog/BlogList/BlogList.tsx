@@ -1,7 +1,12 @@
 import { Box } from "@mui/material";
+import { IWeblog } from "interfaces/weblog";
 import BlogCard from "../BlogCard/BlogCard";
 
-const BlogList = () => {
+interface IProps {
+  blogList: IWeblog[];
+}
+
+const BlogList = ({ blogList }: IProps) => {
   return (
     <div className="max-w-screen-2xl w-full px-5 sm:px-10">
       <Box
@@ -11,7 +16,10 @@ const BlogList = () => {
           md: "repeat(auto-fill, minmax(350px, auto))",
         }}
       >
-        {Array.from(new Array(6)).map((_, i) => (
+        {blogList.map((blog) => (
+          <BlogCard key={blog._id} post={blog} />
+        ))}
+        {/* {Array.from(new Array(6)).map((_, i) => (
           <BlogCard
             key={i}
             post={{
@@ -20,7 +28,7 @@ const BlogList = () => {
               desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo in tempore atque incidunt maiores! Consectetur",
             }}
           />
-        ))}
+        ))} */}
       </Box>
     </div>
   );

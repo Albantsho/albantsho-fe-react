@@ -18,6 +18,7 @@ const routes = {
   termsAndCondition: "/terms-and-conditions",
   verifyEmail: "/verify-email",
   blog: "/blog",
+  oneBlog: (blogId: string) => `/blog/${blogId}`,
   iDraft: "/iDraft",
   iDraftTermsAndConditions: "/iDraft/terms-and-conditions",
   marketplace: "/marketplace",

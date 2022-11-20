@@ -1,18 +1,70 @@
 import { Typography } from "@mui/material";
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
+import useWeblogApi from "apis/Weblog.api";
+import { IWeblog } from "interfaces/weblog";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { DotLoader } from "react-spinners";
+import errorHandler from "utils/error-handler";
+import parse from "html-react-parser";
 
 const BlogPost = () => {
+  const { query } = useRouter();
+  const { getWeblog } = useWeblogApi();
+  const [oneWeblog, setOneWeblog] = useState<IWeblog | null>(null);
+
+  useEffect(() => {
+    async function getOneWeblogFunc() {
+      try {
+        if (query.id !== undefined) {
+          const res = await getWeblog(query.id);
+          console.log(res);
+          setOneWeblog(res.data.weblog);
+          console.log(oneWeblog);
+        }
+      } catch (error) {
+        errorHandler(error);
+      }
+    }
+
+    getOneWeblogFunc();
+  }, [query.id!]);
+
   return (
     <>
       <Head>
         {/* TODO: Change the title later */}
-        <title>Albantsho || Blog Post</title>
+        <title>Albantsho || {oneWeblog?.title}</title>
       </Head>
       <Nav color="inherit" position="static" />
-      <Image
+      {oneWeblog === null ? (
+        <DotLoader color="#7953B5" className="mx-auto mt-10 mb-[100vh]" />
+      ) : (
+        <>
+          <Image
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${oneWeblog.media}`}
+            alt={oneWeblog.title}
+            width="1920"
+            height="500"
+            className="object-cover object-center"
+          />
+          <div className="py-6 md:py-14 max-w-screen-lg mx-auto px-5 sm:px-10">
+            <Typography
+              variant="h3"
+              className="leading-normal mb-2 md:mb-14 md:text-center"
+              color="primary.main"
+            >
+              {oneWeblog.title}
+            </Typography>
+
+            {oneWeblog.content && parse(oneWeblog.content)}
+          </div>
+        </>
+      )}
+      {/* <Image
         src={"https://picsum.photos/1920/1080"}
         alt=""
         width="1920"
@@ -75,7 +127,7 @@ const BlogPost = () => {
           ratione quia illo debitis ad quis ullam perspiciatis repellendus
           similique officiis iste.
         </Typography>
-      </div>
+      </div> */}
       <Footer />
     </>
   );
