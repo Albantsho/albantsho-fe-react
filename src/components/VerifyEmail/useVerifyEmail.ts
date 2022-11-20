@@ -51,8 +51,9 @@ const useVerifyEmail = () => {
         email: user.email,
         code: Object.values(formValues).join(""),
       });
+
       setAccessToken(
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzcyMGU3ZTllNDhmM2Q5MzBmMmU3NDkiLCJpYXQiOjE2Njg0MTkzMDYsImV4cCI6MTY4NTY5OTMwNn0.UgJ7XxtjSNceq3G9lgJPlzcZT9Fph3Ne8a_w_uyl7tM"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzc5ZDBmZTMzZWQ0NWRjM2QyMjZiZjgiLCJpYXQiOjE2Njg5Mjc3NjQsImV4cCI6MTY4NjIwNzc2NH0.fnqFc9uEEX-EVBztamaFxeleEPXdNRxldTQPSCoSEJY"
       );
       authenticationUser(res.data.user);
 
@@ -67,8 +68,7 @@ const useVerifyEmail = () => {
 
   const handleResendCode = async () => {
     try {
-      const res = await resendCode({ email: user.email });
-
+      await resendCode({ email: user.email });
       setCountDownKey((prevState) => prevState + 1);
     } catch (error) {
       errorHandler(error);

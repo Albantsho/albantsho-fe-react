@@ -3,6 +3,7 @@ import useAuthApi from "apis/Auth.api";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
 import { resetPasswordSchema } from "./validation/resetPassword.validation";
@@ -16,7 +17,7 @@ const useResetPasswordForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
   const [loading, setLoading] = useState(false);
   const { resetPassword } = useAuthApi();
-  const { replace } = useRouter();
+  const { replace, query } = useRouter();
   const {
     register,
     handleSubmit,
@@ -31,10 +32,15 @@ const useResetPasswordForm = () => {
 
   const onSubmit = async (data: IAuthResetPassword) => {
     try {
-      setLoading(true);
-      // const res = await resetPassword({ newPassword: data.password });
+      if (typeof query.reset_password_token === "string") {
+        setLoading(true);
+        await resetPassword({
+          newPassword: data.password,
+          reset_password_token: query.reset_password_token,
+        });
+        replace(routes.signin);
+      }
       // successHandler(res.message);
-      replace("/login");
     } catch (error) {
       errorHandler(error);
     } finally {

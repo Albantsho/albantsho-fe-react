@@ -96,9 +96,13 @@ const useAuthApi = (controller?: AbortController) => {
     },
 
     async resetPasswordEmail(email: string) {
-      const res = await api.post("/user/reset-password-email", email, {
-        signal: controller?.signal,
-      });
+      const res = await api.post(
+        "/user/reset-password-email",
+        { email },
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
@@ -106,9 +110,6 @@ const useAuthApi = (controller?: AbortController) => {
     async resetPassword(payload: IResetpasswordPayload) {
       const res = await api.post("/user/reset-password", payload, {
         signal: controller?.signal,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
       });
 
       return res.data;

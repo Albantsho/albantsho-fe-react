@@ -1,4 +1,4 @@
-import { Avatar, Button, SvgIcon, Typography } from "@mui/material";
+import { Avatar, Button, SvgIcon, Tooltip, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IUserFullInformation } from "interfaces/user";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -29,7 +29,7 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
 
   const unFreezeUser = async () => {
     try {
-      const res = await updateUserRestriction({ freeze: false }, user._id);
+      await updateUserRestriction({ freeze: false }, user._id);
 
       setOneUser({ ...user, freeze: false });
     } catch (error) {
@@ -38,7 +38,7 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
   };
   const unBlockUser = async () => {
     try {
-      const res = await updateUserRestriction({ block: false }, user._id);
+      await updateUserRestriction({ block: false }, user._id);
 
       setOneUser({ ...user, block: false });
     } catch (error) {
@@ -52,8 +52,8 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
         <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
           <div className="relative w-fit">
             <Avatar
-              alt="Remy Sharp"
-              src="./assets/user-photo.jpg"
+              alt={user.fullname}
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
               sx={{ width: 96, height: 96 }}
             />
             {user.block && (
@@ -110,9 +110,13 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
               </label>
               <div
                 id="email-address"
-                className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
+                className="min-w-[180px] p-3 border border-gray-300 rounded-lg overflow-hidden grid"
               >
-                <Typography className="leading-normal">{user.email}</Typography>
+                <Tooltip title={user.email}>
+                  <Typography className="leading-normal overflow-ellipsis whitespace-nowrap overflow-hidden">
+                    {user.email}
+                  </Typography>
+                </Tooltip>
               </div>
             </div>
           </div>
@@ -156,7 +160,9 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
                 id="gender"
                 className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
               >
-                <Typography className="leading-normal">{"gender"}</Typography>
+                <Typography className="leading-normal">
+                  {user.gender}
+                </Typography>
               </div>
             </div>
           </div>

@@ -52,8 +52,6 @@ const useRegisterForm = () => {
     try {
       setLoading(true);
       const res = await signup(data);
-      console.log(res);
-
       authenticationUser(res.data.user);
       // replace(routes.welcome);
       replace(routes.verifyEmail);

@@ -3,6 +3,7 @@ import useAuthApi from "apis/Auth.api";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
 import { forgetPasswordSchema } from "./validation/forgetPassword.validation";
@@ -12,7 +13,7 @@ interface IAuthForgetPassword {
 }
 
 const useForgetPassword = () => {
-  const { resetPasswordEmail: forgetPassword } = useAuthApi();
+  const { resetPasswordEmail } = useAuthApi();
   const [loading, setLoading] = useState(false);
   const { replace } = useRouter();
   const {
@@ -26,9 +27,9 @@ const useForgetPassword = () => {
   const onSubmit = async (data: IAuthForgetPassword) => {
     try {
       setLoading(true);
-      const res = await forgetPassword(data.email);
+      const res = await resetPasswordEmail(data.email);
       successHandler(res.message);
-      replace("/reset-password");
+      replace(routes.resetPassword(res.data.randomString));
     } catch (error) {
       errorHandler(error);
     } finally {

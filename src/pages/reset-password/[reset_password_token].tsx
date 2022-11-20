@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
 import ResetPassword from "components/ResetPassword/ResetPasswordForm/ResetPasswordForm";
-import { NextPageWithLayout } from "./_app";
+import { NextPageWithLayout } from "../_app";
 import AuthenticationNavbar from "@shared/Layouts/AuthenticationLayout/AuthenticationNavbar/AuthenticationNavbar";
 
 const ResetPasswordPage: NextPageWithLayout = () => {

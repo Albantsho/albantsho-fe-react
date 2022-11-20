@@ -10,7 +10,8 @@ const routes = {
   privacyPolicy: "/privacy-policy",
   profile: "/profile",
   resetPasswordConfirmation: "/reset-password-confirmation",
-  resetPassword: "/reset-password",
+  resetPassword: (resetPasswordToken: string) =>
+    `/reset-password/${resetPasswordToken}`,
   scriptWriting: "/script-writing",
   signin: "/login",
   register: "/register",
