@@ -1,3 +1,4 @@
+import useAxiosPrivate from "hooks/useAxiosPrivate";
 import api from "./configs/axios.config";
 
 interface ICreateNewScriptPayload {
@@ -44,9 +45,11 @@ interface IGiveRateToScriptPayload {
 }
 
 const useScriptsApi = (controller?: AbortController) => {
+  const axiosPrivate = useAxiosPrivate();
+
   return {
     async createNewScript(payload: ICreateNewScriptPayload) {
-      const res = await api.post("/script/create", payload, {
+      const res = await axiosPrivate.post("/script/create", payload, {
         signal: controller?.signal,
       });
 
