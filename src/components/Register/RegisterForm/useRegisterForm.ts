@@ -16,7 +16,7 @@ interface IRegisterFormValues {
   user_type: "writer" | "producer";
   portfolio?: string;
   production_company_name?: string;
-  gender: "mail" | "female";
+  gender: "male" | "female";
 }
 
 const useRegisterForm = () => {
@@ -39,7 +39,7 @@ const useRegisterForm = () => {
       country: "Nigeria",
       password: "",
       user_type: "writer",
-      gender: "female",
+      gender: "male",
     },
     resolver: yupResolver(registerSchema),
   });
@@ -52,6 +52,8 @@ const useRegisterForm = () => {
     try {
       setLoading(true);
       const res = await signup(data);
+      console.log(res);
+
       authenticationUser(res.data.user);
       // replace(routes.welcome);
       replace(routes.verifyEmail);

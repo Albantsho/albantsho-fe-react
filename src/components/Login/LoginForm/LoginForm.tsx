@@ -25,6 +25,9 @@ const LoginForm = () => {
     errors,
     typePasswordInput,
     handleTypeInputPassword,
+    rememberMe,
+    handleChangeRememberMe,
+    loading,
   } = useLoginForm();
 
   return (
@@ -128,7 +131,8 @@ const LoginForm = () => {
                     style={{
                       transform: "scale(1.2)",
                     }}
-                    defaultChecked
+                    onChange={handleChangeRememberMe}
+                    checked={rememberMe}
                     color="success"
                   />
                 }
@@ -144,6 +148,7 @@ const LoginForm = () => {
         </div>
         <div className="justify-center lg:justify-start flex mt-7">
           <Btn
+            loading={loading}
             type="submit"
             size="large"
             className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"

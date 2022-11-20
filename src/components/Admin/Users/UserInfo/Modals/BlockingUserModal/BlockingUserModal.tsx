@@ -2,6 +2,7 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useAuthApi from "apis/Auth.api";
+import { IUserFullInformation } from "interfaces/user";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -11,13 +12,15 @@ import blockImage from "./assets/block.png";
 interface IProps {
   openBlockingUserModal: boolean;
   setOpenBlockingUserModal: Dispatch<SetStateAction<boolean>>;
-  id: string;
+  setOneUser: Dispatch<SetStateAction<IUserFullInformation | null>>;
+  user: IUserFullInformation;
 }
 
 const BlockingUserModal = ({
   openBlockingUserModal,
   setOpenBlockingUserModal,
-  id,
+  setOneUser,
+  user,
 }: IProps) => {
   const { updateUserRestriction } = useAuthApi();
 
@@ -25,8 +28,8 @@ const BlockingUserModal = ({
 
   const blockUser = async () => {
     try {
-      const res = await updateUserRestriction({ block: true }, id);
-      console.log(res);
+      const res = await updateUserRestriction({ block: true }, user._id);
+      setOneUser({ ...user, block: true });
       handleCloseBlockingUserModal();
     } catch (error) {
       errorHandler(error);

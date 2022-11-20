@@ -9,7 +9,8 @@ import routes from "routes/routes";
 import useForgetPassword from "./useForgetPassword";
 
 const ForgetPassword = () => {
-  const { register, handleSubmit, onSubmit, errors } = useForgetPassword();
+  const { register, handleSubmit, onSubmit, errors, loading } =
+    useForgetPassword();
   return (
     <div className="overflow-hidden">
       <div
@@ -80,6 +81,7 @@ const ForgetPassword = () => {
 
           <div className="justify-center lg:justify-start flex mt-6 lg:mt-12">
             <Btn
+              loading={loading}
               type="submit"
               size="large"
               className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"

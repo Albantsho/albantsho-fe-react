@@ -14,6 +14,7 @@ interface IAuthResetPassword {
 
 const useResetPasswordForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { resetPassword } = useAuthApi();
   const { replace } = useRouter();
   const {
@@ -30,11 +31,14 @@ const useResetPasswordForm = () => {
 
   const onSubmit = async (data: IAuthResetPassword) => {
     try {
+      setLoading(true);
       // const res = await resetPassword({ newPassword: data.password });
       // successHandler(res.message);
       replace("/login");
     } catch (error) {
       errorHandler(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,6 +49,7 @@ const useResetPasswordForm = () => {
     errors,
     handleTypeInputPassword,
     typePasswordInput,
+    loading,
   };
 };
 

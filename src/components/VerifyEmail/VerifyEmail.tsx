@@ -22,6 +22,7 @@ const VerifyEmail = () => {
     handleAutoFocus,
     handleResendCode,
     countDownKey,
+    loading,
   } = useVerifyEmail();
 
   const renderer = ({ minutes, seconds }: ITimeProps) => {
@@ -108,6 +109,7 @@ const VerifyEmail = () => {
 
             <div className="justify-center  flex">
               <Btn
+                loading={loading}
                 disabled={
                   !Object.values(formValues).every((item) => Boolean(item))
                 }

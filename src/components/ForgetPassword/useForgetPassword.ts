@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useAuthApi from "apis/Auth.api";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
@@ -12,6 +13,7 @@ interface IAuthForgetPassword {
 
 const useForgetPassword = () => {
   const { resetPasswordEmail: forgetPassword } = useAuthApi();
+  const [loading, setLoading] = useState(false);
   const { replace } = useRouter();
   const {
     register,
@@ -23,15 +25,18 @@ const useForgetPassword = () => {
 
   const onSubmit = async (data: IAuthForgetPassword) => {
     try {
+      setLoading(true);
       const res = await forgetPassword(data.email);
       successHandler(res.message);
       replace("/reset-password");
     } catch (error) {
       errorHandler(error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return { register, onSubmit, handleSubmit, errors };
+  return { register, onSubmit, handleSubmit, errors, loading };
 };
 
 export default useForgetPassword;

@@ -1,29 +1,22 @@
 import { Avatar, Button, SvgIcon, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IUserFullInformation } from "interfaces/user";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { MdNotInterested } from "react-icons/md";
 import { SlDislike, SlLike } from "react-icons/sl";
 import BlockingUserModal from "../Modals/BlockingUserModal/BlockingUserModal";
 import FreezingUserModal from "../Modals/FreezingUserModal/FreezingUserModal";
 import countryList from "config/country-list.json";
 import Image from "next/image";
+import useAuthApi from "apis/Auth.api";
+import errorHandler from "utils/error-handler";
 interface IProps {
   user: IUserFullInformation;
+  setOneUser: Dispatch<SetStateAction<IUserFullInformation | null>>;
 }
 
-const UserInformation = ({
-  user: {
-    _id,
-    block,
-    country,
-    email,
-    freeze,
-    fullname,
-    sold_scripts,
-    user_type,
-  },
-}: IProps) => {
+const UserInformation = ({ user, setOneUser }: IProps) => {
+  const { updateUserRestriction } = useAuthApi();
   const [openBlockingUserModal, setOpenBlockingUserModal] = useState(false);
   const [openFreezingUserModal, setOpenFreezingUserModal] = useState(false);
 
@@ -31,8 +24,27 @@ const UserInformation = ({
   const handleOpenFreezingUserModal = () => setOpenFreezingUserModal(true);
 
   const countryUser = Object.entries(countryList).find(
-    (countryFlag) => countryFlag[1] === country
+    (countryFlag) => countryFlag[1] === user.country
   );
+
+  const unFreezeUser = async () => {
+    try {
+      const res = await updateUserRestriction({ freeze: false }, user._id);
+
+      setOneUser({ ...user, freeze: false });
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+  const unBlockUser = async () => {
+    try {
+      const res = await updateUserRestriction({ block: false }, user._id);
+
+      setOneUser({ ...user, block: false });
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
 
   return (
     <>
@@ -44,7 +56,7 @@ const UserInformation = ({
               src="./assets/user-photo.jpg"
               sx={{ width: 96, height: 96 }}
             />
-            {block && (
+            {user.block && (
               <SvgIcon
                 className="bg-white absolute rounded-full top-3 -right-1"
                 color="error"
@@ -52,7 +64,7 @@ const UserInformation = ({
                 component={MdNotInterested}
               />
             )}
-            {freeze && (
+            {user.freeze && (
               <SvgIcon
                 className="bg-primary-700 absolute p-1 w-6 h-6 text-white rounded-full top-3 -right-1"
                 inheritViewBox
@@ -60,7 +72,7 @@ const UserInformation = ({
               />
             )}
           </div>
-          {block && (
+          {user.block && (
             <Typography className="text-error-700 text-center" variant="body1">
               This user is currently blocked
             </Typography>
@@ -82,7 +94,9 @@ const UserInformation = ({
                 id="full-name"
                 className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
               >
-                <Typography className="leading-normal">{fullname}</Typography>
+                <Typography className="leading-normal">
+                  {user.fullname}
+                </Typography>
               </div>
             </div>
             <div className="flex-1">
@@ -98,7 +112,7 @@ const UserInformation = ({
                 id="email-address"
                 className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
               >
-                <Typography className="leading-normal">{email}</Typography>
+                <Typography className="leading-normal">{user.email}</Typography>
               </div>
             </div>
           </div>
@@ -124,7 +138,9 @@ const UserInformation = ({
                     alt={`${countryUser[1]} flag`}
                   />
                 )}
-                <Typography className="leading-normal">{country}</Typography>
+                <Typography className="leading-normal">
+                  {user.country}
+                </Typography>
               </div>
             </div>
             <div className="flex-1">
@@ -158,7 +174,9 @@ const UserInformation = ({
                 id="category"
                 className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
               >
-                <Typography className="leading-normal">{user_type}</Typography>
+                <Typography className="leading-normal">
+                  {user.user_type}
+                </Typography>
               </div>
             </div>
             <div className="flex-1">
@@ -175,14 +193,15 @@ const UserInformation = ({
                 className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
               >
                 <Typography className="leading-normal">
-                  {sold_scripts}
+                  {user.sold_scripts}
                 </Typography>
               </div>
             </div>
           </div>
           <div className="flex gap-2 sm:gap-4 flex-wrap w-full">
-            {freeze ? (
+            {user.freeze ? (
               <Button
+                onClick={unFreezeUser}
                 variant="outlined"
                 className="py-2 px-3 lg:py-3 lg:px-6 flex-1 min-w-[180px] sm:flex-grow-0"
                 color="primary"
@@ -209,8 +228,9 @@ const UserInformation = ({
                 Freeze user
               </Button>
             )}
-            {block ? (
+            {user.block ? (
               <Button
+                onClick={unBlockUser}
                 variant="outlined"
                 className="py-2 px-3 lg:py-3 lg:px-6 flex-1 min-w-[180px] sm:flex-grow-0"
                 color="success"
@@ -245,12 +265,14 @@ const UserInformation = ({
         </div>
       </div>
       <BlockingUserModal
-        id={_id}
+        user={user}
+        setOneUser={setOneUser}
         setOpenBlockingUserModal={setOpenBlockingUserModal}
         openBlockingUserModal={openBlockingUserModal}
       />
       <FreezingUserModal
-        id={_id}
+        user={user}
+        setOneUser={setOneUser}
         setOpenFreezingUserModal={setOpenFreezingUserModal}
         openFreezingUserModal={openFreezingUserModal}
       />

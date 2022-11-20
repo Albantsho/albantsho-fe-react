@@ -32,5 +32,4 @@ export const registerSchema = Yup.object({
       otherwise: (schema) => schema.notRequired(),
     })
     .label("Company name"),
-  gender: Yup.string().required(),
 });

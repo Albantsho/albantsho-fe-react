@@ -8,7 +8,7 @@ interface IRegisterPayload {
   user_type: "writer" | "producer";
   portfolio?: string;
   production_company_name?: string;
-  gender: "mail" | "female";
+  gender: "male" | "female";
 }
 
 interface ILoginPayload {

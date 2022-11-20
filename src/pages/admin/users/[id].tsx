@@ -22,7 +22,6 @@ const InformationUserPage: NextPageWithLayout = () => {
       try {
         if (query.id !== undefined) {
           const res = await getUserProfile(query.id);
-          console.log(res);
           setOneUser(res.data.user);
         }
       } catch (error) {
@@ -45,7 +44,7 @@ const InformationUserPage: NextPageWithLayout = () => {
         <div className="bg-white shadow-primary rounded-lg pt-4 lg:pt-8 pb-10 lg:pb-24 px-5 lg:px-14 max-w-5xl">
           <BreadcrumbsUserInfo name={oneUser.fullname} />
           <Divider className="mt-2 lg:mt-6 mb-6 lg:mb-11" />
-          <UserInformation user={oneUser} />
+          <UserInformation user={oneUser} setOneUser={setOneUser} />
         </div>
       )}
     </>

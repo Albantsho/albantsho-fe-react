@@ -181,11 +181,11 @@ const RegisterForm = () => {
             Gender
           </Typography>
           <RadioGroup
-            defaultValue="female"
+            defaultValue="male"
             {...register("gender")}
             className="flex flex-row gap-2"
           >
-            <FormControlLabel value="mail" control={<Radio />} label="Male" />
+            <FormControlLabel value="male" control={<Radio />} label="Male" />
             <FormControlLabel
               value="female"
               control={<Radio />}

@@ -2,6 +2,7 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useAuthApi from "apis/Auth.api";
+import { IUserFullInformation } from "interfaces/user";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -11,13 +12,15 @@ import disLikeImage from "./assets/dis-like.png";
 interface IProps {
   openFreezingUserModal: boolean;
   setOpenFreezingUserModal: Dispatch<SetStateAction<boolean>>;
-  id: string;
+  setOneUser: Dispatch<SetStateAction<IUserFullInformation | null>>;
+  user: IUserFullInformation;
 }
 
 const FreezingUserModal = ({
   openFreezingUserModal,
   setOpenFreezingUserModal,
-  id,
+  setOneUser,
+  user,
 }: IProps) => {
   const { updateUserRestriction } = useAuthApi();
 
@@ -25,8 +28,8 @@ const FreezingUserModal = ({
 
   const freezeUser = async () => {
     try {
-      const res = await updateUserRestriction({ freeze: true }, id);
-      console.log(res);
+      const res = await updateUserRestriction({ freeze: true }, user._id);
+      setOneUser({ ...user, freeze: true });
       handleCloseFreezingUserModal();
     } catch (error) {
       errorHandler(error);

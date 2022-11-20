@@ -9,6 +9,7 @@ import successHandler from "utils/success-handler";
 const useVerifyEmail = () => {
   const { user } = useUserStore.getState();
   const [countDownKey, setCountDownKey] = useState(1);
+  const [loading, setLoading] = useState(false);
   const { setAccessToken, authenticationUser } = useUserStore((state) => ({
     setAccessToken: state.setAccessToken,
     authenticationUser: state.authenticationUser,
@@ -45,6 +46,7 @@ const useVerifyEmail = () => {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const res = await emailVerify({
         email: user.email,
         code: Object.values(formValues).join(""),
@@ -58,6 +60,8 @@ const useVerifyEmail = () => {
       replace(routes.home);
     } catch (error) {
       errorHandler(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,6 +83,7 @@ const useVerifyEmail = () => {
     handleAutoFocus,
     handleResendCode,
     countDownKey,
+    loading,
   };
 };
 

@@ -17,6 +17,7 @@ const ResetPassword = () => {
     errors,
     handleTypeInputPassword,
     typePasswordInput,
+    loading,
   } = useResetPasswordForm();
   return (
     <div className="overflow-hidden">
@@ -124,6 +125,7 @@ const ResetPassword = () => {
 
           <div className="justify-center flex mt-10 lg:mt-24">
             <Btn
+              loading={loading}
               type="submit"
               size="large"
               className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"

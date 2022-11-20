@@ -21,7 +21,6 @@ const UsersPage: NextPageWithLayout = () => {
         setLoading(true);
         const res = await getAllUser();
         setUsersList(res.data.users);
-        console.log(res);
         setLoading(false);
       } catch (error) {
         errorHandler(error);

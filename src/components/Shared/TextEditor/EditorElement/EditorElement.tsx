@@ -1,4 +1,3 @@
-import { Link } from "@mui/material";
 import { type RenderElementProps } from "slate-react";
 import ImageComponent from "./ImageComponent/ImageComponent";
 import TableComponent from "./TableComponent/TableComponent";
