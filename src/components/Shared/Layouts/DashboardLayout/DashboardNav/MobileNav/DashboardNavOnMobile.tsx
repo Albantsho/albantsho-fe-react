@@ -14,6 +14,7 @@ import {
   SvgIcon,
 } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
+import useUserStore from "app/user.store";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Deposit from "pages/wallet/deposit";
@@ -57,6 +58,7 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
   const { handleToggleDrawer, open, getNotifications, notificationList } =
     useMobileNavDashboard();
   const { push } = useRouter();
+  const user = useUserStore((state) => state.user);
 
   return (
     <div className="flex items-center lg:hidden w-full">
@@ -125,8 +127,7 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
               primary="Balance:$20,000"
             />
           </ListItem>
-          {
-            // user.user_type === "user" &&
+          {user.user_type === "writer" &&
             walletLinksForWriter.map((walletLink) => (
               <ListItem disablePadding className="py-1" key={walletLink.title}>
                 <ListItemButton
@@ -153,10 +154,9 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
                   </ListItemText>
                 </ListItemButton>
               </ListItem>
-            ))
-          }
+            ))}
 
-          {/* {user.user_type === "producer" &&
+          {user.user_type === "producer" &&
             walletLinksForProducer.map((walletLink) => (
               <ListItem disablePadding className="py-1" key={walletLink.title}>
                 <ListItemButton
@@ -183,7 +183,7 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
                   </ListItemText>
                 </ListItemButton>
               </ListItem>
-            ))} */}
+            ))}
         </List>
 
         <div className="fixed text-primary-700 flex gap-6 right-[75px] bottom-8">

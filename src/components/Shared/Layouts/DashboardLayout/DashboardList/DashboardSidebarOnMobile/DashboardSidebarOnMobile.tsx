@@ -1,4 +1,5 @@
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import useUserStore from "app/user.store";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -20,6 +21,7 @@ const routesArray2 = [
 const DashboardSidebarOnMobile = () => {
   const [activeRoute, setActiveRoute] = useState(0);
   const { route, push } = useRouter();
+  const user = useUserStore((state) => state.user);
 
   return (
     <div className=" lg:hidden">
@@ -31,8 +33,7 @@ const DashboardSidebarOnMobile = () => {
           setActiveRoute(newValue);
         }}
       >
-        {
-          // user.user_type === "user" &&
+        {user.user_type === "writer" &&
           routesArray.map((item) => {
             return (
               <BottomNavigationAction
@@ -64,9 +65,8 @@ const DashboardSidebarOnMobile = () => {
                 icon={<Image loading="lazy" src={item.icon} alt={item.title} />}
               />
             );
-          })
-        }
-        {/* {user.user_type === "producer" &&
+          })}
+        {user.user_type === "producer" &&
           routesArray2.map((item) => {
             return (
               <BottomNavigationAction
@@ -98,7 +98,7 @@ const DashboardSidebarOnMobile = () => {
                 icon={<Image loading="lazy" src={item.icon} alt={item.title} />}
               />
             );
-          })} */}
+          })}
       </BottomNavigation>
     </div>
   );

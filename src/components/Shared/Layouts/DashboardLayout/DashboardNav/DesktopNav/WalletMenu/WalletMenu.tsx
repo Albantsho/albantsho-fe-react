@@ -8,6 +8,7 @@ import {
   MenuItem,
   SvgIcon,
 } from "@mui/material";
+import useUserStore from "app/user.store";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
@@ -18,6 +19,7 @@ import routes from "routes/routes";
 
 const WalletMenu = () => {
   const { push } = useRouter();
+  const user = useUserStore((state) => state.user);
 
   const [openWalletMenu, setOpenWalletMenu] = useState<null | HTMLElement>(
     null
@@ -76,7 +78,7 @@ const WalletMenu = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {/* {user.user_type === "user" && (
+        {user.user_type === "writer" && (
           <MenuItem
             className="px-6 py-3"
             onClick={() => push(`${routes.withdrawWallet}`)}
@@ -97,9 +99,8 @@ const WalletMenu = () => {
               Withdraw
             </ListItemText>
           </MenuItem>
-        )} */}
-        {
-          // user.user_type === "producer" &&
+        )}
+        {user.user_type === "producer" && (
           <MenuItem
             className="px-6 py-3"
             onClick={() => push(`${routes.depositWallet}`)}
@@ -120,7 +121,7 @@ const WalletMenu = () => {
               Deposit
             </ListItemText>
           </MenuItem>
-        }
+        )}
         <MenuItem
           className="px-6 py-3"
           onClick={() => push(`${routes.transactionHistoryWallet}`)}

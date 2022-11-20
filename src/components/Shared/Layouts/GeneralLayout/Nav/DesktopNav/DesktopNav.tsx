@@ -29,7 +29,7 @@ const DesktopNav = ({ links, isTransparent }: IProps) => {
         ))}
       </div>
 
-      {user.fullname ? (
+      {user.active ? (
         <ProfileMenu />
       ) : (
         <Link href={`${routes.signin}`} passHref>

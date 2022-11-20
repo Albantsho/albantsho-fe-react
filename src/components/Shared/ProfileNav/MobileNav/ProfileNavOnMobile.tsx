@@ -15,6 +15,7 @@ import {
   ListItemText,
   SvgIcon,
 } from "@mui/material";
+import useUserStore from "app/user.store";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -58,6 +59,7 @@ const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
   const { handleToggleDrawer, open, getNotifications, notificationList } =
     useMobileNavMobile();
   const { push, route } = useRouter();
+  const user = useUserStore((state) => state.user);
 
   return (
     <div className="flex md:hidden w-full">
@@ -134,15 +136,14 @@ const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
               primary="Balance:$20,000"
             />
           </ListItem>
-          {
-            // user.user_type === "user" &&
+          {user.user_type === "writer" &&
             walletLinksForWriter.map((walletLink) => (
               <ListItem disablePadding className="py-1" key={walletLink.title}>
                 <ListItemButton
                   selected={route === walletLink.href}
                   TouchRippleProps={{ className: "text-primary-main" }}
                   className="px-2 rounded-md hover:bg-primary-50/25"
-                  onClick={() => push(`${walletLink.href}`)}
+                  onClick={() => push(walletLink.href)}
                 >
                   <ListItemIcon className="min-w-0 mr-3">
                     <SvgIcon
@@ -163,16 +164,15 @@ const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
                   </ListItemText>
                 </ListItemButton>
               </ListItem>
-            ))
-          }
-          {/* {user.user_type === "producer" &&
+            ))}
+          {user.user_type === "producer" &&
             walletLinksForProducer.map((walletLink) => (
               <ListItem disablePadding className="py-1" key={walletLink.title}>
                 <ListItemButton
                   selected={route === walletLink.href}
                   TouchRippleProps={{ className: "text-primary-main" }}
                   className="px-2 rounded-md hover:bg-primary-50/25"
-                  onClick={() => push(`${walletLink.href}`)}
+                  onClick={() => push(walletLink.href)}
                 >
                   <ListItemIcon className="min-w-0 mr-3">
                     <SvgIcon
@@ -193,7 +193,7 @@ const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
                   </ListItemText>
                 </ListItemButton>
               </ListItem>
-            ))} */}
+            ))}
         </List>
 
         <div className="fixed text-primary-700 flex gap-6 right-[75px] bottom-8">
