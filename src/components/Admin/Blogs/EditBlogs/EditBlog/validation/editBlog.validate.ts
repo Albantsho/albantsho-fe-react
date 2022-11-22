@@ -6,6 +6,8 @@ export const editBlogSchema = Yup.object({
   image: Yup.mixed().test("fileSize", "The file is to large", (value) => {
     if (value[0]) {
       return value && value[0].size <= 2000000;
+    } else {
+      return value;
     }
   }),
 });

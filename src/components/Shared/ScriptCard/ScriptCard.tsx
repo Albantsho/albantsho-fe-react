@@ -9,17 +9,20 @@ import {
   Typography,
   type CardProps,
 } from "@mui/material";
-import { IProduct } from "interfaces/product";
+import Btn from "@shared/Btn/Btn";
+import useUserStore from "app/user.store";
+import { IScript } from "interfaces/script";
 import Link from "next/link";
 import routes from "routes/routes";
 import ReviewedIcon from "./assets/reviewed.svg";
 
 interface IProps extends CardProps {
-  script: IProduct;
+  script: IScript;
 }
 
 const ScriptCard = (props: IProps) => {
   const { script, sx, ...cardProps } = props;
+  const user = useUserStore((state) => state.user);
 
   return (
     <Card
@@ -30,39 +33,35 @@ const ScriptCard = (props: IProps) => {
       }}
       {...cardProps}
     >
-      <Link href={routes.marketplaceOneScript(script.id)} passHref>
-        <a>
-          <CardMedia
-            component="img"
-            className="object-cover object-left w-full max-h-[250px]"
-            src={script.script_image}
-            loading="lazy"
-          />
-        </a>
+      <Link href={routes.marketplaceOneScript(script._id)} passHref>
+        <CardMedia
+          component="img"
+          className="object-cover object-left w-full max-h-[250px]"
+          // src={script.script_image}
+          loading="lazy"
+        />
       </Link>
 
       <CardContent className="py-6">
         <div className="flex flex-wrap gap-2">
-          <Chip label={script.script_format} sx={{ borderRadius: 1 }} />
+          <Chip label={script.primary_genre} sx={{ borderRadius: 1 }} />
         </div>
         <Rating readOnly defaultValue={4} className="sm:hidden mt-4" />
         <div className="flex justify-between mt-1 sm:mt-4 mb-2 gap-2">
-          <Link href={routes.marketplaceOneScript(script.id)} passHref>
-            <a>
-              <Typography
-                variant="h4"
-                color="primary.main"
-                className="futura font-normal leading-tight"
-              >
-                {script.title}
-              </Typography>
-            </a>
+          <Link href={routes.marketplaceOneScript(script._id)} passHref>
+            <Typography
+              variant="h4"
+              color="primary.main"
+              className="futura font-normal leading-tight"
+            >
+              {script.title}
+            </Typography>
           </Link>
           <Icon fontSize="large">
             <ReviewedIcon />
           </Icon>
         </div>
-        <Typography>{script.script_themes}</Typography>
+        <Typography>{script.description}</Typography>
         <Chip
           className="rounded mt-6"
           label={
@@ -76,12 +75,16 @@ const ScriptCard = (props: IProps) => {
         />
       </CardContent>
       <CardActions className="px-4 justify-between pb-6 pt-0 gap-3">
-        {/* {(!user.active || user.user_type === "producer") && (
+        {(!user.active || user.user_type === "producer") && (
           <Btn size="large" className="rounded-md">
             Place Bid
           </Btn>
-        )} */}
-        <Rating readOnly defaultValue={4} className="hidden sm:inline-flex" />
+        )}
+        <Rating
+          readOnly
+          defaultValue={+script.rate}
+          className="hidden sm:inline-flex"
+        />
       </CardActions>
     </Card>
   );

@@ -7,9 +7,10 @@ import Link from "next/link";
 import AccordionCustom from "./AccordionCustom/AccordionCustom";
 import routes from "routes/routes";
 import { IProduct } from "interfaces/product";
+import { IFullInformationScript } from "interfaces/script";
 
 interface IProps {
-  script: IProduct;
+  script: IFullInformationScript;
 }
 
 export default function MarketScriptAccordion({ script }: IProps) {

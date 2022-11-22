@@ -5,11 +5,11 @@ import {
   Typography,
 } from "@mui/material";
 import parse from "html-react-parser";
-import { IProduct } from "interfaces/product";
+import { IFullInformationScript } from "interfaces/script";
 import { BiChevronDown } from "react-icons/bi";
 
 interface IProps {
-  script: IProduct;
+  script: IFullInformationScript;
 }
 
 const ScriptMainDetails = ({ script }: IProps) => {

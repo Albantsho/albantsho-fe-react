@@ -187,24 +187,19 @@ const OpeningList = ({ setOpenUnListingItem, scripts }: IProps) => {
                     horizontal: "center",
                   }}
                 >
-                  <Link
-                    href={`${routes.listingsOneScript(script.id)}`}
-                    passHref
-                  >
-                    <a className="text-inherit">
-                      <MenuItem
-                        TouchRippleProps={{ className: "text-primary-main" }}
-                        className="w-full hover:bg-primary-50/25 hover:text-primary-500"
-                        sx={{
-                          fontSize: "14px",
-                          px: "25px",
-                          py: 2,
-                        }}
-                        // onClick={handleCloseMenuItem}
-                      >
-                        View Script
-                      </MenuItem>
-                    </a>
+                  <Link href={`${routes.listingsOneScript(script.id)}`}>
+                    <MenuItem
+                      TouchRippleProps={{ className: "text-primary-main" }}
+                      className="w-full hover:bg-primary-50/25 hover:text-primary-500"
+                      sx={{
+                        fontSize: "14px",
+                        px: "25px",
+                        py: 2,
+                      }}
+                      // onClick={handleCloseMenuItem}
+                    >
+                      View Script
+                    </MenuItem>
                   </Link>
                   <MenuItem
                     TouchRippleProps={{ className: "text-primary-main" }}

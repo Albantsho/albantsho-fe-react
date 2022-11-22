@@ -21,7 +21,7 @@ const Marketplace: NextPageWithLayout = () => {
         ) : (
           <>
             <MarketplaceTabs />
-            <MarketplaceProducts scripts={scripts} />
+            {/* <MarketplaceProducts scripts={scripts} /> */}
             <PaginationMarketList />
           </>
         )}

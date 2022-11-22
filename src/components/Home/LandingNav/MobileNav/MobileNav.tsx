@@ -7,7 +7,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  SvgIcon
+  SvgIcon,
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import useMobileNav from "@shared/Layouts/GeneralLayout/Nav/MobileNav/useMobileNav";
@@ -48,7 +48,7 @@ const MobileNav = ({ links }: IProps) => {
           </ListItem>
           {links.map(({ title, href }, i) => (
             <ListItem disablePadding key={i}>
-              <Link href={href} passHref>
+              <Link href={href} legacyBehavior>
                 <ListItemButton>
                   <ListItemText primary={title} />
                 </ListItemButton>

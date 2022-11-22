@@ -2,13 +2,13 @@ import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import useScripBidApi from "apis/ScripBid.api";
-import { IProduct } from "interfaces/product";
+import { IFullInformationScript } from "interfaces/script";
 import { Dispatch, SetStateAction, useState } from "react";
 import errorHandler from "utils/error-handler";
 
 interface IProps {
   setOpenBidSuccessful: Dispatch<SetStateAction<boolean>>;
-  script: IProduct;
+  script: IFullInformationScript;
 }
 
 const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {

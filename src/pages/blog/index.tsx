@@ -19,7 +19,6 @@ const Blog: NextPageWithLayout = () => {
         setLoading(true);
         const res = await getAllWeblogs();
         setBlogList(res.data.weblogs);
-        console.log(res.data.weblogs);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
@@ -35,7 +34,7 @@ const Blog: NextPageWithLayout = () => {
         <title>Albantsho || Blog</title>
       </Head>
       {loading ? (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <DotLoader color="#7953B5" className="mx-auto mt-10 mb-[100vh]" />
       ) : (
         <BlogList blogList={blogList} />
       )}

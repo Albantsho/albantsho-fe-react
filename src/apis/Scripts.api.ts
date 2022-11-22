@@ -96,16 +96,16 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAllScripts() {
-      const res = await api.get("/script/all", {
+    async getAllScripts(query: string) {
+      const res = await api.get(`/script/all?${query}`, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async getProducerAllScripts() {
-      const res = await api.get("/script/producer/all", {
+    async getProducerAllScripts(query: string) {
+      const res = await axiosPrivate.get(`/script/producer/all?${query}`, {
         signal: controller?.signal,
       });
 
@@ -113,7 +113,7 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async getScript(id: string) {
-      const res = await api.get(`/script/${id}`, {
+      const res = await axiosPrivate.get(`/script/${id}`, {
         signal: controller?.signal,
       });
 

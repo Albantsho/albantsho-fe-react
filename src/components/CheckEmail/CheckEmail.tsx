@@ -45,8 +45,8 @@ const CheckEmail = () => {
         <div className="mt-14 lg:hidden">
           <Typography className="text-grey-400 mb-1 futura">
             Already have an account?
-            <Link href={`${routes.signin}`} passHref>
-              <a className="text-success-500 ml-2">Sign in</a>
+            <Link href={`${routes.signin}`} className="text-success-500 ml-2">
+              Sign in
             </Link>
           </Typography>
         </div>

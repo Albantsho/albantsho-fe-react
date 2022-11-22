@@ -5,15 +5,13 @@ import routes from "routes/routes";
 
 const Logo = ({ sx, ...props }: SvgIconProps) => {
   return (
-    <Link href={`${routes.home}`} passHref>
-      <a>
-        <SvgIcon
-          inheritViewBox
-          component={LogoSvg}
-          sx={{ width: 120, height: 30, ...sx }}
-          {...props}
-        />
-      </a>
+    <Link href={`${routes.home}`}>
+      <SvgIcon
+        inheritViewBox
+        component={LogoSvg}
+        sx={{ width: 120, height: 30, ...sx }}
+        {...props}
+      />
     </Link>
   );
 };

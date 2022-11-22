@@ -125,7 +125,7 @@ const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
             )}">${children}</a>`;
           }
           case "table": {
-            return `<div style="overflow: scroll;-ms-overflow-style:none;scrollbar-width:none;"><table style="border-collapse:collapse;flex:1 1 0%;"><tbody>${children}</tbody></table></div>`;
+            return `<div style="overflow: auto;-ms-overflow-style:none;scrollbar-width:none;display:flex;"><table style="border-collapse:collapse;flex:1 1 0%;"><tbody>${children}</tbody></table></div>`;
           }
           case "tableRow": {
             return `<tr>${children}</tr>`;

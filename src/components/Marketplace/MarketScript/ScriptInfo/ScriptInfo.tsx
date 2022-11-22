@@ -2,13 +2,14 @@ import ReviewedIcon from "@assets/icons/reviewed.svg";
 import { Chip, Icon, Typography } from "@mui/material";
 import CustomRating from "@shared/CustomRating/CustomRating";
 import { IProduct } from "interfaces/product";
+import { IFullInformationScript } from "interfaces/script";
 import Image from "next/image";
 import { useState } from "react";
 import BidSuccessfulModal from "../BidSuccessfulModal/BidSuccessfulModal";
 import PlaceBid from "./PlaceBid/PlaceBid";
 
 interface IProps {
-  script: IProduct;
+  script: IFullInformationScript;
 }
 
 const ScriptInfo = ({ script }: IProps) => {
@@ -22,7 +23,7 @@ const ScriptInfo = ({ script }: IProps) => {
       <div className="flex-shrink w-full">
         <div className="flex mb-3 md:mb-5 items-center flex-wrap gap-6 sm:gap-10 md:gap-14">
           <Chip
-            label={script.script_format}
+            label={script.scriptFormat}
             className="bg-tinted-50/60 text-neutral-800"
             sx={{ borderRadius: 1 }}
           />

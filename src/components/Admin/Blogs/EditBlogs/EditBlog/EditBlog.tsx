@@ -3,6 +3,7 @@ import { Button, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import TextEditor from "@shared/TextEditor/TextEditor";
 import { IWeblog } from "interfaces/weblog";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import useEditBlog from "./useEditBlog";
 
@@ -107,7 +108,10 @@ const EditBlog = ({ oneWeblog }: IProps) => {
             max={1}
           />
           <div className="absolute left-0 w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
-            <img
+            <Image
+              alt={oneWeblog.title}
+              width={40}
+              height={40}
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${oneWeblog.media}`}
             />
           </div>

@@ -1,19 +1,31 @@
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import routes from "routes/routes";
+import { useRouter } from "next/router";
+
+const routesList = [
+  { id: 1, query: "", label: "Explore" },
+  { id: 2, query: "?sort=rate", label: "Top rated" },
+  { id: 3, query: "?sort=featured", label: "Featured" },
+  { id: 4, query: "?sort=trending", label: "Trending" },
+];
 
 const MarketplaceTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const { push, query } = useRouter();
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setActiveTab(newValue);
-  };
+  useEffect(() => {
+    if (query.sort === "rate") setActiveTab(1);
+    else if (query.sort === "featured") setActiveTab(2);
+    else if (query.sort === "trending") setActiveTab(3);
+    else setActiveTab(0);
+  }, [query]);
 
   return (
-    <div className="md:border-t border-b md:pl-4  border-gray-400 md:mt-8 w-full ">
+    <div className="md:border-t border-b md:pl-4  border-gray-400 md:mt-8 w-full">
       <Tabs
         value={activeTab}
-        onChange={handleChange}
         variant="scrollable"
         scrollButtons="auto"
         allowScrollButtonsMobile
@@ -24,10 +36,16 @@ const MarketplaceTabs = () => {
         }}
         className="-mb-[1px] md:ml-7 max-w-screen-2xl 2xl:mx-auto "
       >
-        <Tab className="md:text-xl md:mr-2 2xl:ml-8" label="Explore" />
-        <Tab className="md:text-xl md:mr-2 2xl:ml-8" label="Top rated" />
-        <Tab className="md:text-xl md:mr-2 2xl:ml-8" label="Featured" />
-        <Tab className="md:text-xl md:mr-2 2xl:ml-8" label="Trending" />
+        {routesList.map((route) => (
+          <Tab
+            key={route.id}
+            onClick={() => {
+              push(routes.marketplaceTabs(route.query));
+            }}
+            className="md:text-xl md:mr-2 2xl:ml-8"
+            label={route.label}
+          />
+        ))}
       </Tabs>
     </div>
   );

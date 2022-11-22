@@ -21,9 +21,7 @@ const BlogPost = () => {
       try {
         if (query.id !== undefined) {
           const res = await getWeblog(query.id);
-          console.log(res);
           setOneWeblog(res.data.weblog);
-          console.log(oneWeblog);
         }
       } catch (error) {
         errorHandler(error);
@@ -41,7 +39,9 @@ const BlogPost = () => {
       </Head>
       <Nav color="inherit" position="static" />
       {oneWeblog === null ? (
-        <DotLoader color="#7953B5" className="mx-auto mt-10 mb-[100vh]" />
+        <div className="min-h-screen flex items-center justify-center">
+          <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        </div>
       ) : (
         <>
           <Image
@@ -59,7 +59,6 @@ const BlogPost = () => {
             >
               {oneWeblog.title}
             </Typography>
-
             {oneWeblog.content && parse(oneWeblog.content)}
           </div>
         </>

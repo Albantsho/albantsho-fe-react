@@ -108,7 +108,7 @@ const ScriptsSearch = () => {
       </div>
 
       <div className="flex justify-center sm:justify-start">
-        <Link href={`${routes.reviewsPlans}`} passHref>
+        <Link href={`${routes.reviewsPlans}`}>
           <Btn disabled={!selectedStore} size="large">
             Next
           </Btn>

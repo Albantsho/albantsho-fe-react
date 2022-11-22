@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
-import { IProduct } from "interfaces/product";
+import { IScript } from "interfaces/script";
 
 interface IProps {
-  scripts: IProduct[];
+  scripts: IScript[];
 }
 
 const MarketplaceProducts = ({ scripts }: IProps) => {
@@ -15,7 +15,7 @@ const MarketplaceProducts = ({ scripts }: IProps) => {
       }}
     >
       {scripts.map((script) => (
-        <ScriptCard data-aos="fade-up" key={script.id} script={script} />
+        <ScriptCard data-aos="fade-up" key={script._id} script={script} />
       ))}
     </Box>
   );

@@ -1,6 +1,7 @@
 import { IconButton, SvgIcon, Typography } from "@mui/material";
 import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
 import { IWeblog } from "interfaces/weblog";
+import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsCursor } from "react-icons/bs";
@@ -31,8 +32,9 @@ const ArchiveBlog = ({
       >
         <div className="flex gap-3 lg:gap-6">
           <div className="max-w-[76px] sm:w-[76px] rounded-md w-full flex max-h-[76px] sm:h-[76px] bg-tinted-50/50 justify-center items-center">
-            <img
-              className="w-7 h-9"
+            <Image
+              width={27}
+              height={34}
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${media}`}
               alt={title}
             />

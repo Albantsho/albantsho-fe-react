@@ -24,7 +24,7 @@
     "html-react-parser": "^3.0.4",
     "image-extensions": "^1.1.0",
     "is-url": "^1.2.4",
-    "next": "12.2.5",
+    "next": "^13.0.4",
     "next-progress": "^2.2.0",
     "query-string": "^7.1.1",
     "re-resizable": "^6.9.9",

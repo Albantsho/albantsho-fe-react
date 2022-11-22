@@ -19,14 +19,14 @@ const StepsLines = ({ step }: IProps) => {
     <div className="overflow-scroll no-scrollbar max-w-full">
       <div className="mt-4 min-w-[570px] gap-2  md:justify-center mb-10 lg:mb-16  flex space-x-4">
         {Array.from(new Array(7)).map((_, i) => (
-          <Link key={i} href={`${routes.abstract}?step=${i + 1}`} passHref>
-            <a
-              ref={(elm) => stepLinks.current.push(elm as HTMLAnchorElement)}
-              className={`${
-                step === i + 1 ? "bg-success-500" : "bg-[#D9D9D9]"
-              }  h-1 flex-1 rounded-sm cursor-pointer`}
-            ></a>
-          </Link>
+          <Link
+            key={i}
+            href={`${routes.abstract}?step=${i + 1}`}
+            ref={(elm) => stepLinks.current.push(elm as HTMLAnchorElement)}
+            className={`${
+              step === i + 1 ? "bg-success-500" : "bg-[#D9D9D9]"
+            }  h-1 flex-1 rounded-sm cursor-pointer`}
+          ></Link>
         ))}
       </div>
     </div>

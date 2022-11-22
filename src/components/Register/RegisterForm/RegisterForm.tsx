@@ -374,8 +374,11 @@ const RegisterForm = () => {
               label={
                 <Typography variant="body1" className="text-grey-600  futura">
                   I accept the
-                  <Link href={`${routes.termsAndCondition}`} passHref>
-                    <a className="text-warning-500 ml-1">Terms & conditions</a>
+                  <Link
+                    href={`${routes.termsAndCondition}`}
+                    className="text-warning-500 ml-1"
+                  >
+                    Terms & conditions
                   </Link>
                 </Typography>
               }
@@ -399,8 +402,8 @@ const RegisterForm = () => {
       <div className="flex justify-center mt-3 lg:mt-7 lg:hidden">
         <Typography className="text-grey-400 text-center mb-2 futura">
           Already have an account?
-          <Link href={`${routes.signin}`} passHref>
-            <a className="text-success-500 ml-2">Sign in</a>
+          <Link href={`${routes.signin}`} className="text-success-500 ml-2">
+            Sign in
           </Link>
         </Typography>
       </div>

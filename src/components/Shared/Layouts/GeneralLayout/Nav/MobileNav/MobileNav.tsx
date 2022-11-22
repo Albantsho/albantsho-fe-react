@@ -15,7 +15,6 @@ import useUserStore from "app/user.store";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
-import shallow from "zustand/shallow";
 import useMobileNav from "./useMobileNav";
 
 interface IProps {

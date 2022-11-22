@@ -37,15 +37,16 @@ const IDraft: NextPageWithLayout = () => {
         <BenefitsIDraft />
         <EligibilityIDraft />
         <DeadLineIDraft />
-        <Link href={`${routes.iDraft}/terms-and-conditions`}>
-          <a className="text-gray-900">
-            <Typography
-              variant="h6"
-              className="font-semibold leading-normal text-center px-5"
-            >
-              TERMS AND CONDITIONS APPLY
-            </Typography>
-          </a>
+        <Link
+          href={`${routes.iDraft}/terms-and-conditions`}
+          className="text-gray-900"
+        >
+          <Typography
+            variant="h6"
+            className="font-semibold leading-normal text-center px-5"
+          >
+            TERMS AND CONDITIONS APPLY
+          </Typography>
         </Link>
         ;
         <Sponsors />

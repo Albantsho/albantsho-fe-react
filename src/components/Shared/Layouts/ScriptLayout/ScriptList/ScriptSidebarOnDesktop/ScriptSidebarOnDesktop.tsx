@@ -87,15 +87,13 @@ const ScriptSidebarOnDesktop = () => {
         {openCompleteDrawer ? (
           <Logo color="primary" className="text-white ml-3 mb-5" />
         ) : (
-          <Link href={`${routes.home}`} passHref>
-            <a>
-              <SvgIcon
-                component={MiniLogo}
-                className="text-white ml-6 mb-8"
-                inheritViewBox
-                fontSize="large"
-              />
-            </a>
+          <Link href={`${routes.home}`}>
+            <SvgIcon
+              component={MiniLogo}
+              className="text-white ml-6 mb-8"
+              inheritViewBox
+              fontSize="large"
+            />
           </Link>
         )}
         <List>

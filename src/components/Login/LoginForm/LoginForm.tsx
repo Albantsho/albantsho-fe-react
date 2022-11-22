@@ -140,8 +140,8 @@ const LoginForm = () => {
               />
             </FormGroup>
             <Typography className="leading-5 font-medium mb-1 futura">
-              <Link href={`${routes.forgetPassword}`} passHref>
-                <a className="text-blue-400">Forgot Password?</a>
+              <Link href={`${routes.forgetPassword}`} className="text-blue-400">
+                Forgot Password?
               </Link>
             </Typography>
           </div>
@@ -160,8 +160,12 @@ const LoginForm = () => {
       <div className="text-center mt-7 lg:hidden">
         <Typography className="text-grey-400 mb-1 futura">
           Don’t have an account yet?
-          <Link href={`${routes.register}`} passHref>
-            <a className="text-success-500 ml-2">Sign up</a>
+          <Link
+            href={`${routes.register}`}
+            passHref
+            className="text-success-500 ml-2"
+          >
+            Sign up
           </Link>
         </Typography>
       </div>

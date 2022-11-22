@@ -1,8 +1,8 @@
 import { Chip } from "@mui/material";
-import { IProduct } from "interfaces/product";
+import { IFullInformationScript } from "interfaces/script";
 
 interface IProps {
-  script: IProduct;
+  script: IFullInformationScript;
 }
 
 const MarketScriptChips = ({ script }: IProps) => {
@@ -12,7 +12,7 @@ const MarketScriptChips = ({ script }: IProps) => {
         <Chip
           size="medium"
           className="bg-tinted-50/60 px-1 py-5 sm:px-3 sm:py-5 text-sm"
-          label={script.story_format}
+          label={script.primary_genre}
         />
         <Chip
           size="medium"

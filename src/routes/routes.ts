@@ -22,6 +22,7 @@ const routes = {
   iDraft: "/iDraft",
   iDraftTermsAndConditions: "/iDraft/terms-and-conditions",
   marketplace: "/marketplace",
+  marketplaceTabs: (query: string) => `/marketplace${query}`,
   marketplaceOneScript: (id: string) => `/marketplace/${id}`,
   marketPlaceSubscriptionSuccessful: "/marketplace/subscription-successful",
   marketPlaceSubscription: "/marketplace/subscription",

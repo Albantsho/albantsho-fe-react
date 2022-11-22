@@ -1,8 +1,10 @@
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import useMarketplaceApi from "apis/Marketplace.api";
+import useScriptsApi from "apis/Scripts.api";
 import ScriptInfo from "components/Marketplace/MarketScript/ScriptInfo/ScriptInfo";
 import { IProduct } from "interfaces/product";
+import { IFullInformationScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -33,15 +35,15 @@ const RateToScript = dynamic(
 );
 
 const ScriptInfoPage = () => {
-  const [script, setScript] = useState<IProduct>();
+  const [script, setScript] = useState<IFullInformationScript>();
   const [loading, setLoading] = useState(true);
-  const { getScript } = useMarketplaceApi();
-  const router = useRouter();
+  const { getScript } = useScriptsApi();
+  const { query } = useRouter();
 
   useEffect(() => {
     async function getScriptsDate() {
       try {
-        const res = await getScript(router.query.id as string);
+        const res = await getScript(query.id as string);
         setScript(res.data);
         setLoading(false);
       } catch (error) {
@@ -49,7 +51,7 @@ const ScriptInfoPage = () => {
       }
     }
     getScriptsDate();
-  }, [router.query.id]);
+  }, [query.id]);
 
   return (
     <>

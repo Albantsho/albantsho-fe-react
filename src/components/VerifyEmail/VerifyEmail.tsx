@@ -125,8 +125,8 @@ const VerifyEmail = () => {
           <div className="text-center tlg:hidden mt-7">
             <Typography className="text-grey-400 leading-5 font-medium mb-1 futura">
               Already have an account?
-              <Link href={`${routes.signin}`} passHref>
-                <a className="text-success-500 ml-2">Sign in</a>
+              <Link href={`${routes.signin}`} className="text-success-500 ml-2">
+                Sign in
               </Link>
             </Typography>
           </div>

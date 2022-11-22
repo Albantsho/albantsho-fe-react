@@ -23,8 +23,7 @@ const useProfileMenu = () => {
 
   const logOutUserFunc = async () => {
     try {
-      const res = await logoutUser();
-      console.log(res);
+      await logoutUser();
       useUserStore.persist.clearStorage;
       replace(routes.home);
     } catch (error) {
