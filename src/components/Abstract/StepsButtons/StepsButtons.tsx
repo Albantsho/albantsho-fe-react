@@ -17,6 +17,7 @@ const StepsButtons = ({ step, setStep, setOpenSaveProgressModal }: IProps) => {
         <Link
           href={`${routes.abstract}?step=${step === 1 ? 7 : step - 1}`}
           passHref
+          legacyBehavior
         >
           <Button
             disabled={step === 1}
@@ -39,6 +40,7 @@ const StepsButtons = ({ step, setStep, setOpenSaveProgressModal }: IProps) => {
         <Link
           href={`${routes.abstract}?step=${step === 7 ? 1 : step + 1}`}
           passHref
+          legacyBehavior
         >
           <Button
             disabled={step === 7}
@@ -57,6 +59,7 @@ const StepsButtons = ({ step, setStep, setOpenSaveProgressModal }: IProps) => {
         <Link
           href={`${routes.abstract}?step=${step === 1 ? 7 : step - 1}`}
           passHref
+          legacyBehavior
         >
           <IconButton
             color="primary"
@@ -78,6 +81,7 @@ const StepsButtons = ({ step, setStep, setOpenSaveProgressModal }: IProps) => {
         <Link
           href={`${routes.abstract}?step=${step === 7 ? 1 : step + 1}`}
           passHref
+          legacyBehavior
         >
           <IconButton
             color="primary"

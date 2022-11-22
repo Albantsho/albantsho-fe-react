@@ -43,7 +43,7 @@ const SubscriptionSuccessful = () => {
           Subscription activated! you now have unlimited access to all scripts
           on the platform!
         </Typography>
-        <Link href={`${routes.marketplace}`} passHref>
+        <Link href={`${routes.marketplace.url}`} passHref>
           <Btn size="large" className="py-3 px-6">
             Back to marketplace
           </Btn>

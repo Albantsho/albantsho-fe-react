@@ -7,7 +7,7 @@ import MobileNav from "./MobileNav/MobileNav";
 
 const links = [
   { title: "About Us", href: routes.aboutUs },
-  { title: "Marketplace", href: routes.marketplace },
+  { title: "Marketplace", href: routes.marketplace.url },
   { title: "Education", href: "/education" },
   { title: "iDraft", href: routes.iDraft },
 ];

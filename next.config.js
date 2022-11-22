@@ -20,7 +20,7 @@ const nextConfig = {
     return [
       {
         source: '/dashboard',
-        destination: '/dashboard/listings',
+        destination: '/dashboard/writer/projects',
         permanent: false,
       },
       {
@@ -29,8 +29,8 @@ const nextConfig = {
         permanent: false,
       },
       {
-        source: '/admin',
-        destination: '/admin/blogs',
+        source: '/dashboard/admin',
+        destination: '/dashboard/admin/blogs',
         permanent: false,
       },
     ];

@@ -1,9 +1,7 @@
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
-import useMarketplaceApi from "apis/Marketplace.api";
 import useScriptsApi from "apis/Scripts.api";
 import ScriptInfo from "components/Marketplace/MarketScript/ScriptInfo/ScriptInfo";
-import { IProduct } from "interfaces/product";
 import { IFullInformationScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -51,6 +49,7 @@ const ScriptInfoPage = () => {
       }
     }
     getScriptsDate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query.id]);
 
   return (

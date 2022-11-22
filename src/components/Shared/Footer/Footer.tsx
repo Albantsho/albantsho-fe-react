@@ -52,34 +52,34 @@ const Footer = () => {
             </Typography>
           </div>
           <div className="flex flex-col gap-1">
-            <Link passHref href={`${routes.FAQs}`}>
+            <Link legacyBehavior href={`${routes.FAQs}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 FAQs
               </Button>
             </Link>
-            <Link passHref href={`${routes.privacyPolicy}`}>
+            <Link legacyBehavior href={`${routes.privacyPolicy}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Privacy Policy
               </Button>
             </Link>
-            <Link passHref href={`${routes.termsAndCondition}`}>
+            <Link legacyBehavior href={`${routes.termsAndCondition}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Terms and Conditions
               </Button>
             </Link>
           </div>
           <div className="flex flex-col gap-1">
-            <Link passHref href={`${routes.aboutUs}`}>
+            <Link legacyBehavior href={`${routes.aboutUs}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 About Us
               </Button>
             </Link>
-            <Link href={`${routes.scriptWriting}`} passHref>
+            <Link legacyBehavior href={`${routes.scriptWriting}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Script Writing
               </Button>
             </Link>
-            <Link href={`${routes.marketplace}`} passHref>
+            <Link legacyBehavior href={`${routes.marketplace.url}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Marketplace
               </Button>

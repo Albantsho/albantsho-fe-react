@@ -33,7 +33,11 @@ const ScriptCard = (props: IProps) => {
       }}
       {...cardProps}
     >
-      <Link href={routes.marketplaceOneScript(script._id)} passHref>
+      <Link
+        legacyBehavior
+        href={routes.marketplaceOneScript(script._id)}
+        passHref
+      >
         <CardMedia
           component="img"
           className="object-cover object-left w-full max-h-[250px]"
@@ -48,7 +52,11 @@ const ScriptCard = (props: IProps) => {
         </div>
         <Rating readOnly defaultValue={4} className="sm:hidden mt-4" />
         <div className="flex justify-between mt-1 sm:mt-4 mb-2 gap-2">
-          <Link href={routes.marketplaceOneScript(script._id)} passHref>
+          <Link
+            legacyBehavior
+            href={routes.marketplaceOneScript(script._id)}
+            passHref
+          >
             <Typography
               variant="h4"
               color="primary.main"

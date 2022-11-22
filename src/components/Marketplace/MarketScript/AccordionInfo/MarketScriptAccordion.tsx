@@ -40,7 +40,11 @@ export default function MarketScriptAccordion({ script }: IProps) {
                 You’re unable to view this content because you’re not
                 subscribed.
               </Typography>
-              <Link href={`${routes.marketplace}/subscription`} passHref>
+              <Link
+                href={`${routes.marketplace.url}/subscription`}
+                legacyBehavior
+                passHref
+              >
                 <Btn
                   size="large"
                   sx={{ padding: { xs: "6px 12px", md: "12px 24px" } }}

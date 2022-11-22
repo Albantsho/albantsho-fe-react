@@ -70,7 +70,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
         <List>
           {links.map(({ title, href }, i) => (
             <ListItem disablePadding key={i}>
-              <Link href={href} passHref>
+              <Link legacyBehavior href={href} passHref>
                 <ListItemButton
                   TouchRippleProps={{ className: "text-transparent" }}
                   className="px-5 hover:bg-primary-50/25"
@@ -84,7 +84,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
             <ProfileMenu />
           ) : (
             <div className="px-5 py-2">
-              <Link href={`${routes.signin}`} passHref>
+              <Link legacyBehavior href={`${routes.signin}`} passHref>
                 <Btn className="px-6 py-3">Sign In</Btn>
               </Link>
             </div>

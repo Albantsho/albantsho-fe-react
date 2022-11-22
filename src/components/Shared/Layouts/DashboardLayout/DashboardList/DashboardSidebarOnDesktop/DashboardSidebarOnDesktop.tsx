@@ -86,7 +86,12 @@ const DashboardSidebarOnDesktop = () => {
                   "border-l-4 border-secondary-500 bg-primary-700"
                 } rounded-sm`}
               >
-                <Link className="text-white" href={`${item.route}`} passHref>
+                <Link
+                  legacyBehavior
+                  className="text-white"
+                  href={`${item.route}`}
+                  passHref
+                >
                   <ListItemButton
                     sx={{
                       "&:hover": {
@@ -121,7 +126,12 @@ const DashboardSidebarOnDesktop = () => {
                   "border-l-4 border-secondary-500 bg-primary-700"
                 } rounded-sm`}
               >
-                <Link className="text-white" href={`${item.route}`} passHref>
+                <Link
+                  legacyBehavior
+                  className="text-white"
+                  href={`${item.route}`}
+                  passHref
+                >
                   <ListItemButton
                     sx={{
                       "&:hover": {

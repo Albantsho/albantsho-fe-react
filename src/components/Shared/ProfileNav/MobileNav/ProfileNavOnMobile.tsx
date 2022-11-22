@@ -63,7 +63,7 @@ const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
 
   return (
     <div className="flex md:hidden w-full">
-      <Link href="/dashboard/projects" passHref>
+      <Link legacyBehavior href="/dashboard/projects" passHref>
         <Button
           startIcon={<ProfileLogo className="w-5 h-5" />}
           className="hover:bg-transparent text-xl futura font-medium"

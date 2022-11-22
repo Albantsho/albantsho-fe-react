@@ -54,7 +54,7 @@ const ScriptSidebarOnMobile = () => {
       >
         {routesArray.map((item) => {
           return (
-            <Link href={`${item.route}`} key={item.title}>
+            <Link legacyBehavior href={`${item.route}`} key={item.title}>
               <BottomNavigationAction
                 showLabel
                 onClick={handleShowModal(item.value)}

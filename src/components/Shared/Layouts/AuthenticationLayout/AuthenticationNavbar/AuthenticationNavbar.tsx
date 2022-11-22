@@ -20,7 +20,7 @@ const AuthenticationNavbar = ({ text, link, buttonText }: IProps) => {
         <Typography variant="body1" className="font-normal text-gray-400">
           {text}
         </Typography>
-        <Link href={`/${link}`}>
+        <Link legacyBehavior href={`/${link}`}>
           <Button variant="outlined" size="large">
             {buttonText}
           </Button>

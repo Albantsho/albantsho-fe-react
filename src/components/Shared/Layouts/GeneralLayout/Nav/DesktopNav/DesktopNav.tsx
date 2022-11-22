@@ -17,7 +17,7 @@ const DesktopNav = ({ links, isTransparent }: IProps) => {
     <div className="lg:flex items-center w-full hidden">
       <div className="flex gap-12 text-white mx-10 flex-1 justify-center">
         {links.map(({ title, href }, i) => (
-          <Link href={href} passHref key={i}>
+          <Link href={href} passHref key={i} legacyBehavior>
             <Button
               color={isTransparent ? "inherit" : "primary"}
               size="large"
@@ -32,7 +32,7 @@ const DesktopNav = ({ links, isTransparent }: IProps) => {
       {user.active ? (
         <ProfileMenu />
       ) : (
-        <Link href={`${routes.signin}`} passHref>
+        <Link legacyBehavior href={`${routes.signin}`} passHref>
           <Btn size="large" className="py-4 px-7">
             Sign In
           </Btn>

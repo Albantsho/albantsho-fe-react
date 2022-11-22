@@ -87,7 +87,7 @@ const ScriptSidebarOnDesktop = () => {
         {openCompleteDrawer ? (
           <Logo color="primary" className="text-white ml-3 mb-5" />
         ) : (
-          <Link href={`${routes.home}`}>
+          <Link legacyBehavior href={`${routes.home}`}>
             <SvgIcon
               component={MiniLogo}
               className="text-white ml-6 mb-8"

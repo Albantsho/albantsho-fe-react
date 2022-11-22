@@ -29,7 +29,7 @@ const DesktopNav = ({ links }: IProps) => {
       />
       <div className="flex gap-12 text-white mx-10 flex-1 justify-center">
         {links.map(({ title, href }, i) => (
-          <Link href={href} key={i}>
+          <Link legacyBehavior href={href} key={i}>
             <Button color="inherit" size="large">
               {title}
             </Button>

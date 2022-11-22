@@ -78,7 +78,12 @@ const AdminDashboardSidebarOnDesktop = () => {
                 "border-l-4 border-secondary-500 bg-primary-700"
               } rounded-sm`}
             >
-              <Link className="text-white" href={`${listRoute.route}`} passHref>
+              <Link
+                legacyBehavior
+                className="text-white"
+                href={`${listRoute.route}`}
+                passHref
+              >
                 <ListItemButton
                   sx={{
                     "&:hover": {

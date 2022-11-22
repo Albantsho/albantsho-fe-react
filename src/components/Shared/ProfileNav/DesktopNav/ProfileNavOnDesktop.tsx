@@ -12,7 +12,7 @@ const ProfileNavOnDesktop = () => {
   return (
     <>
       <div className="md:flex px-1 flex-1 justify-between items-center hidden">
-        <Link href="/dashboard/projects" passHref>
+        <Link legacyBehavior href="/dashboard/projects" passHref>
           <Button
             startIcon={<ProfileLogo className="w-5 h-5" />}
             className="hover:bg-transparent text-xl futura font-medium"
