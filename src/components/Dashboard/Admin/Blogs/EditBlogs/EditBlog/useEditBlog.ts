@@ -125,15 +125,28 @@ const useEditBlog = ({
       if (stringStyles !== null) {
         styles = getStyleObjectFromString(stringStyles);
       }
-      return jsx(
-        "element",
-        {
-          type: "link",
-          style: styles,
-          url: el.getAttribute("href"),
-        },
-        children
-      );
+      const emailUrl = el.getAttribute("href").includes("mailto:");
+      if (emailUrl) {
+        return jsx(
+          "element",
+          {
+            type: "email",
+            style: styles,
+            email: el.getAttribute("href"),
+          },
+          children
+        );
+      } else {
+        return jsx(
+          "element",
+          {
+            type: "link",
+            style: styles,
+            url: el.getAttribute("href"),
+          },
+          children
+        );
+      }
     } else if (el.nodeName === "H1") {
       const stringStyles = el.getAttribute("style");
       let styles;

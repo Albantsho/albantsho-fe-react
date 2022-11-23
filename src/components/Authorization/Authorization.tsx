@@ -16,9 +16,7 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
     if (foundRoute?.mustAuthenticated === "no") {
       if (user.email_verified) {
         replace(routes.home.url);
-        if (foundRoute.url !== pathname) {
-          setLoading(false);
-        }
+        foundRoute.url !== pathname && setLoading(false);
       } else {
         setLoading(false);
         return;
@@ -26,18 +24,14 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
     } else if (foundRoute?.mustAuthenticated === "yes") {
       if (!user.email_verified) {
         replace(routes.signin.url);
-        if (foundRoute.url !== pathname) {
-          setLoading(false);
-        }
+        foundRoute.url !== pathname && setLoading(false);
       } else {
         const matchedRule = foundRoute.permission.find(
           (rule) => rule === user.user_type
         );
         if (!matchedRule) {
           replace(routes.home.url);
-          if (foundRoute.url !== pathname) {
-            setLoading(false);
-          }
+          foundRoute.url !== pathname && setLoading(false);
           return;
         }
         setLoading(false);
