@@ -176,6 +176,11 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["reviewer"],
   },
+  reviewerDashboardQuestionnaire: {
+    url: "/dashboard/reviewer/questionnaire",
+    mustAuthenticated: "yes",
+    permission: ["reviewer"],
+  },
   producerDashboard: {
     url: "/dashboard/producer",
     mustAuthenticated: "yes",

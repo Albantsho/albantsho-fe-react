@@ -5,8 +5,13 @@ const withNewFeatures = (editor: IEditor) => {
   const { isInline, isVoid, deleteBackward, insertBreak, deleteForward } =
     editor;
 
-  editor.isInline = (element) =>
-    ["link"].includes(element.type) || isInline(element);
+  editor.isInline = (element) => {
+    if (element.type === "link") {
+      return ["link"].includes(element.type) || isInline(element);
+    } else {
+      return ["email"].includes(element.type) || isInline(element);
+    }
+  };
 
   editor.isVoid = (element) => {
     return element.type === "image" ? true : isVoid(element);
