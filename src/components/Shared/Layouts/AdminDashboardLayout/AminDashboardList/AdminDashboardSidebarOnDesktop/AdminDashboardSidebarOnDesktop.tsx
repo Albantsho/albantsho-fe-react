@@ -16,10 +16,10 @@ import StarIcon from "../assets/star-icon.svg";
 import UserIcon from "../assets/user-icon.svg";
 
 const listRoutes = [
-  { route: routes.blogsAdminDashboard, title: "Blogs", icon: BlogIcon },
-  { route: routes.usersAdminDashboard, title: "Users", icon: UserIcon },
+  { route: routes.blogsAdminDashboard.url, title: "Blogs", icon: BlogIcon },
+  { route: routes.usersAdminDashboard.url, title: "Users", icon: UserIcon },
   {
-    route: routes.reviewersAdminDashboard,
+    route: routes.reviewersAdminDashboard.url,
     title: "Reviews",
     icon: StarIcon,
   },

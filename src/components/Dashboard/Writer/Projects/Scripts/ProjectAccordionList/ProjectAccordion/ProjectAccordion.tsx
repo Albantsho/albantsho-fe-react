@@ -27,9 +27,9 @@ interface IProps {
 }
 
 const buttonsProjects = [
-  { title: "ABSTRACT", image: addAbstractIcon, link: routes.abstract },
-  { title: "TITLE", image: addTitleIcon, link: routes.titleScript },
-  { title: "SCRIPT", image: addScriptIcon, link: routes.scriptsDashboard },
+  { title: "ABSTRACT", image: addAbstractIcon, link: routes.abstract.url },
+  { title: "TITLE", image: addTitleIcon, link: routes.titleScript.url },
+  { title: "SCRIPT", image: addScriptIcon, link: routes.producerDashboard.url },
 ];
 
 const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {

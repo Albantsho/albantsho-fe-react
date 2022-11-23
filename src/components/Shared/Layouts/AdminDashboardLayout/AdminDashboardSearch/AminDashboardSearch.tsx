@@ -24,7 +24,7 @@ const AdminDashboardSearch = ({ placeholder }: IProps) => {
       {route === "/admin/blogs" && (
         <div className="hidden  md:block md:justify-center xl:flex-end">
           <Btn
-            href={routes.createBlogAdminDashboard}
+            href={routes.createBlogAdminDashboard.url}
             className="ml-auto  py-3 px-6"
             size="large"
           >

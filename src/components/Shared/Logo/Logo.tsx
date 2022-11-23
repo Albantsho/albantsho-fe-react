@@ -5,7 +5,7 @@ import routes from "routes/routes";
 
 const Logo = ({ sx, ...props }: SvgIconProps) => {
   return (
-    <Link href={`${routes.home}`}>
+    <Link href={routes.home.url}>
       <SvgIcon
         inheritViewBox
         component={LogoSvg}

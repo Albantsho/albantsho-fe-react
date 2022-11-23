@@ -138,7 +138,10 @@ const ResetPassword = () => {
         <div className="text-center mt-7 lg:hidden">
           <Typography className="text-grey-400 mb-1 futura">
             Don’t have an account yet?
-            <Link href={`${routes.register}`} className="text-success-500 ml-2">
+            <Link
+              href={`${routes.register.url}`}
+              className="text-success-500 ml-2"
+            >
               Sign up
             </Link>
           </Typography>

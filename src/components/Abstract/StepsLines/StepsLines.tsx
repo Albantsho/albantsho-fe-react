@@ -21,7 +21,7 @@ const StepsLines = ({ step }: IProps) => {
         {Array.from(new Array(7)).map((_, i) => (
           <Link
             key={i}
-            href={`${routes.abstract}?step=${i + 1}`}
+            href={`${routes.abstract.url}?step=${i + 1}`}
             ref={(elm) => stepLinks.current.push(elm as HTMLAnchorElement)}
             className={`${
               step === i + 1 ? "bg-success-500" : "bg-[#D9D9D9]"

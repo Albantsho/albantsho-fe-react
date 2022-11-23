@@ -40,7 +40,7 @@ const MarketplaceTabs = () => {
           <Tab
             key={route.id}
             onClick={() => {
-              push(routes.marketplaceTabs(route.query));
+              push(routes.marketplaceTabs.url(route.query));
             }}
             className="md:text-xl md:mr-2 2xl:ml-8"
             label={route.label}

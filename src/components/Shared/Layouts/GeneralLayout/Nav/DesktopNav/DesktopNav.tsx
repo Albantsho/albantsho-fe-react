@@ -32,7 +32,7 @@ const DesktopNav = ({ links, isTransparent }: IProps) => {
       {user.active ? (
         <ProfileMenu />
       ) : (
-        <Link legacyBehavior href={`${routes.signin}`} passHref>
+        <Link legacyBehavior href={routes.signin.url} passHref>
           <Btn size="large" className="py-4 px-7">
             Sign In
           </Btn>

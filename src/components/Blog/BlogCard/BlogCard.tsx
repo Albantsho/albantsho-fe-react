@@ -4,7 +4,6 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  Link as MuiLink,
   Typography,
 } from "@mui/material";
 import { IWeblog } from "interfaces/weblog";
@@ -47,7 +46,7 @@ const BlogCard = ({ post }: IProps) => {
       </CardContent>
       <CardActions className="px-4 pb-4">
         <Link
-          href={routes.oneBlog(post._id)}
+          href={routes.oneBlog.dynamicUrl(post._id)}
           className="underline text-primary-700"
         >
           Read more

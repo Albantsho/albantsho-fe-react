@@ -19,7 +19,7 @@ const CurrentRequest = ({
   const { push } = useRouter();
 
   const openOneCurrentRequest = () =>
-    push(routes.reviewerAdminDashboard(`${id}`));
+    push(routes.reviewerAdminDashboard.dynamicUrl(`${id}`));
 
   return (
     <TableRow

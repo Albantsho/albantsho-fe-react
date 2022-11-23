@@ -55,8 +55,8 @@ const WalletCard = () => {
             <ListItemButton
               TouchRippleProps={{ className: "text-primary-main" }}
               className="hover:bg-primary-50/25"
-              selected={route === `${routes.withdrawWallet}`}
-              onClick={() => push(`${routes.withdrawWallet}`)}
+              selected={route === `${routes.withdrawWallet.url}`}
+              onClick={() => push(`${routes.withdrawWallet.url}`)}
             >
               <ListItemIcon
                 sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
@@ -80,8 +80,8 @@ const WalletCard = () => {
             <ListItemButton
               TouchRippleProps={{ className: "text-primary-main" }}
               className="hover:bg-primary-50/25"
-              selected={route === `${routes.depositWallet}`}
-              onClick={() => push(`${routes.depositWallet}`)}
+              selected={route === routes.depositWallet.url}
+              onClick={() => push(routes.depositWallet.url)}
             >
               <ListItemIcon
                 sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
@@ -104,8 +104,8 @@ const WalletCard = () => {
           <ListItemButton
             TouchRippleProps={{ className: "text-primary-main" }}
             className="hover:bg-primary-50/25"
-            selected={route === `${routes.transactionHistoryWallet}`}
-            onClick={() => push(`${routes.transactionHistoryWallet}`)}
+            selected={route === routes.transactionHistoryWallet.url}
+            onClick={() => push(routes.transactionHistoryWallet.url)}
           >
             <ListItemIcon
               sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
@@ -127,8 +127,8 @@ const WalletCard = () => {
           <ListItemButton
             TouchRippleProps={{ className: "text-primary-main" }}
             className="hover:bg-primary-50/25"
-            selected={route === `${routes.helpWallet}`}
-            onClick={() => push(`${routes.helpWallet}`)}
+            selected={route === routes.helpWallet.url}
+            onClick={() => push(routes.helpWallet.url)}
           >
             <ListItemIcon
               sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}

@@ -90,7 +90,7 @@ const ScriptsAuction = ({ script }: IProps) => {
                   <TableRow
                     key={auction.id}
                     onClick={() =>
-                      push(`${routes.listingsDashboard}/${query.id}/bids`)
+                      push(`${routes.listingsDashboard.url}/${query.id}/bids`)
                     }
                     sx={{
                       "&:nth-of-type(odd)": {

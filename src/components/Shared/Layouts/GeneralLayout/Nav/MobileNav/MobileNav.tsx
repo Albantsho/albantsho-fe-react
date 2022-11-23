@@ -84,7 +84,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
             <ProfileMenu />
           ) : (
             <div className="px-5 py-2">
-              <Link legacyBehavior href={`${routes.signin}`} passHref>
+              <Link legacyBehavior href={routes.signin.url} passHref>
                 <Btn className="px-6 py-3">Sign In</Btn>
               </Link>
             </div>

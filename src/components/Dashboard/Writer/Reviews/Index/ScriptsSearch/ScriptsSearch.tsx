@@ -108,7 +108,7 @@ const ScriptsSearch = () => {
       </div>
 
       <div className="flex justify-center sm:justify-start">
-        <Link legacyBehavior href={`${routes.reviewsPlans}`}>
+        <Link legacyBehavior href={routes.reviewsPlans.url}>
           <Btn disabled={!selectedStore} size="large">
             Next
           </Btn>

@@ -25,7 +25,7 @@ const useProfileMenu = () => {
     try {
       await logoutUser();
       useUserStore.persist.clearStorage;
-      replace(routes.home);
+      replace(routes.home.url);
     } catch (error) {
       errorHandler(error);
     }

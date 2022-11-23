@@ -74,7 +74,7 @@ const ProfileMenu = ({ isMobile }: IProps) => {
           divider
           color="primary"
           className="px-6 py-4 hover:bg-primary-50/25"
-          onClick={() => push(routes.profile)}
+          onClick={() => push(routes.profile.url)}
         >
           <ListItemAvatar>
             <Avatar src="/assets/images/profile.jpg" />
@@ -96,7 +96,7 @@ const ProfileMenu = ({ isMobile }: IProps) => {
           TouchRippleProps={{ className: "text-primary-main" }}
           divider
           className="px-6 py-4 hover:bg-primary-50/25"
-          onClick={() => push(routes.projectsDashboard)}
+          onClick={() => push(routes.projectsDashboard.url)}
         >
           <ListItemText
             primaryTypographyProps={{

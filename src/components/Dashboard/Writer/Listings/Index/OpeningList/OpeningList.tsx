@@ -189,7 +189,7 @@ const OpeningList = ({ setOpenUnListingItem, scripts }: IProps) => {
                 >
                   <Link
                     legacyBehavior
-                    href={`${routes.listingsOneScript(script.id)}`}
+                    href={`${routes.listingsOneScript.dynamicUrl(script.id)}`}
                   >
                     <MenuItem
                       TouchRippleProps={{ className: "text-primary-main" }}

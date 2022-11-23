@@ -29,11 +29,11 @@ const Projects: NextPageWithLayout = () => {
   const user = useUserStore((state) => state.user);
   const { push } = useRouter();
 
-  // useEffect(() => {
-  //   if (user.user_type === "writer") {
-  //     push("/dashboard/scripts");
-  //   }
-  // }, [pathname]);
+  useEffect(() => {
+    if (user.user_type === "producer") {
+      push("/dashboard/scripts");
+    }
+  }, [pathname]);
 
   return (
     <>

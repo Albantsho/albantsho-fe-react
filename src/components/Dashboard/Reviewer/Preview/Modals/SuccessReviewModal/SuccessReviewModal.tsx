@@ -49,7 +49,7 @@ const SuccessReviewModal = ({
           </Typography>
 
           <Btn
-            onClick={() => push(routes.projectsDashboard)}
+            onClick={() => push(routes.projectsDashboard.url)}
             size="medium"
             className="mt-4 sm:mt-6 py-3 px-6"
           >

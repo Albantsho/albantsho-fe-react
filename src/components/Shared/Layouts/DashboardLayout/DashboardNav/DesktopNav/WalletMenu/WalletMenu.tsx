@@ -81,7 +81,7 @@ const WalletMenu = () => {
         {user.user_type === "writer" && (
           <MenuItem
             className="px-6 py-3"
-            onClick={() => push(`${routes.withdrawWallet}`)}
+            onClick={() => push(`${routes.withdrawWallet.url}`)}
           >
             <ListItemIcon>
               <SvgIcon
@@ -103,7 +103,7 @@ const WalletMenu = () => {
         {user.user_type === "producer" && (
           <MenuItem
             className="px-6 py-3"
-            onClick={() => push(`${routes.depositWallet}`)}
+            onClick={() => push(routes.depositWallet.url)}
           >
             <ListItemIcon>
               <SvgIcon
@@ -124,7 +124,7 @@ const WalletMenu = () => {
         )}
         <MenuItem
           className="px-6 py-3"
-          onClick={() => push(`${routes.transactionHistoryWallet}`)}
+          onClick={() => push(routes.transactionHistoryWallet.url)}
         >
           <ListItemIcon>
             <SvgIcon
@@ -144,7 +144,7 @@ const WalletMenu = () => {
         </MenuItem>
         <MenuItem
           className="px-6 py-3"
-          onClick={() => push(`${routes.helpWallet}`)}
+          onClick={() => push(routes.helpWallet.url)}
         >
           <ListItemIcon>
             <SvgIcon

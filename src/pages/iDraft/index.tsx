@@ -38,7 +38,7 @@ const IDraft: NextPageWithLayout = () => {
         <EligibilityIDraft />
         <DeadLineIDraft />
         <Link
-          href={`${routes.iDraft}/terms-and-conditions`}
+          href={routes.iDraftTermsAndConditions.url}
           className="text-gray-900"
         >
           <Typography

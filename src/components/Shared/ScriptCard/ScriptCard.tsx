@@ -35,7 +35,7 @@ const ScriptCard = (props: IProps) => {
     >
       <Link
         legacyBehavior
-        href={routes.marketplaceOneScript(script._id)}
+        href={routes.marketplaceOneScript.dynamicUrl(script._id)}
         passHref
       >
         <CardMedia
@@ -54,7 +54,7 @@ const ScriptCard = (props: IProps) => {
         <div className="flex justify-between mt-1 sm:mt-4 mb-2 gap-2">
           <Link
             legacyBehavior
-            href={routes.marketplaceOneScript(script._id)}
+            href={routes.marketplaceOneScript.dynamicUrl(script._id)}
             passHref
           >
             <Typography

@@ -5,7 +5,7 @@ export interface IUser {
   email_verified: boolean;
   fullname: string;
   gender: "mail" | "female";
-  user_type?: "writer" | "producer";
+  user_type?: "writer" | "producer" | "admin" | "reviewer";
   portfolio: null | string;
   production_company_name: null | string;
 }

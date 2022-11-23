@@ -49,7 +49,7 @@ const useLoginForm = () => {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzc5ZDBmZTMzZWQ0NWRjM2QyMjZiZjgiLCJpYXQiOjE2Njg5Mjc3NjQsImV4cCI6MTY4NjIwNzc2NH0.fnqFc9uEEX-EVBztamaFxeleEPXdNRxldTQPSCoSEJY"
       );
       successHandler(res.message);
-      replace(routes.home);
+      replace(routes.home.url);
     } catch (error) {
       errorHandler(error);
     } finally {

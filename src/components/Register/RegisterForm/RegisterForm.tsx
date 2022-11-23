@@ -375,7 +375,7 @@ const RegisterForm = () => {
                 <Typography variant="body1" className="text-grey-600  futura">
                   I accept the
                   <Link
-                    href={`${routes.termsAndCondition}`}
+                    href={routes.termsAndCondition.url}
                     className="text-warning-500 ml-1"
                   >
                     Terms & conditions
@@ -402,7 +402,7 @@ const RegisterForm = () => {
       <div className="flex justify-center mt-3 lg:mt-7 lg:hidden">
         <Typography className="text-grey-400 text-center mb-2 futura">
           Already have an account?
-          <Link href={`${routes.signin}`} className="text-success-500 ml-2">
+          <Link href={`${routes.signin.url}`} className="text-success-500 ml-2">
             Sign in
           </Link>
         </Typography>

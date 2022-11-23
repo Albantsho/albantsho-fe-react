@@ -37,22 +37,22 @@ interface IProps {
 }
 
 const walletLinksForWriter = [
-  { title: "Withdraw", href: routes.withdrawWallet, icon: RiDownloadLine },
+  { title: "Withdraw", href: routes.withdrawWallet.url, icon: RiDownloadLine },
   {
     title: "Transaction History",
-    href: routes.transactionHistoryWallet,
+    href: routes.transactionHistoryWallet.url,
     icon: TbArrowsSort,
   },
-  { title: "Help", href: routes.helpWallet, icon: AiOutlineQuestionCircle },
+  { title: "Help", href: routes.helpWallet.url, icon: AiOutlineQuestionCircle },
 ];
 const walletLinksForProducer = [
-  { title: "Deposit", href: routes.depositWallet, icon: deposit },
+  { title: "Deposit", href: routes.depositWallet.url, icon: deposit },
   {
     title: "Transaction History",
-    href: routes.transactionHistoryWallet,
+    href: routes.transactionHistoryWallet.url,
     icon: TbArrowsSort,
   },
-  { title: "Help", href: routes.helpWallet, icon: AiOutlineQuestionCircle },
+  { title: "Help", href: routes.helpWallet.url, icon: AiOutlineQuestionCircle },
 ];
 
 const ProfileNavOnMobile = ({ isTransparent }: IProps) => {

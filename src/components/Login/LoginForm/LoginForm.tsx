@@ -140,7 +140,10 @@ const LoginForm = () => {
               />
             </FormGroup>
             <Typography className="leading-5 font-medium mb-1 futura">
-              <Link href={`${routes.forgetPassword}`} className="text-blue-400">
+              <Link
+                href={`${routes.forgetPassword.url}`}
+                className="text-blue-400"
+              >
                 Forgot Password?
               </Link>
             </Typography>
@@ -161,7 +164,7 @@ const LoginForm = () => {
         <Typography className="text-grey-400 mb-1 futura">
           Don’t have an account yet?
           <Link
-            href={`${routes.register}`}
+            href={routes.register.url}
             passHref
             className="text-success-500 ml-2"
           >

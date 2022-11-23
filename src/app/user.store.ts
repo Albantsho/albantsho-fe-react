@@ -26,9 +26,7 @@ const useUserStore = create<IUserState>()(
       accessToken: "",
       authenticationUser: (user: IUser) => set((state) => ({ ...state, user })),
       setAccessToken: (accessToken: string) =>
-        set((state) => {
-          return { ...state, accessToken };
-        }),
+        set((state) => ({ ...state, accessToken })),
     }),
     {
       name: "user",

@@ -52,29 +52,29 @@ const Footer = () => {
             </Typography>
           </div>
           <div className="flex flex-col gap-1">
-            <Link legacyBehavior href={`${routes.FAQs}`}>
+            <Link legacyBehavior href={routes.FAQs.url}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 FAQs
               </Button>
             </Link>
-            <Link legacyBehavior href={`${routes.privacyPolicy}`}>
+            <Link legacyBehavior href={routes.privacyPolicy.url}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Privacy Policy
               </Button>
             </Link>
-            <Link legacyBehavior href={`${routes.termsAndCondition}`}>
+            <Link legacyBehavior href={routes.termsAndCondition.url}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Terms and Conditions
               </Button>
             </Link>
           </div>
           <div className="flex flex-col gap-1">
-            <Link legacyBehavior href={`${routes.aboutUs}`}>
+            <Link legacyBehavior href={`${routes.aboutUs.url}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 About Us
               </Button>
             </Link>
-            <Link legacyBehavior href={`${routes.scriptWriting}`}>
+            <Link legacyBehavior href={routes.scriptWriting.url}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Script Writing
               </Button>

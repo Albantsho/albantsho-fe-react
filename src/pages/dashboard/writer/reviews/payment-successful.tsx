@@ -46,7 +46,7 @@ const PaymentSuccessful: NextPageWithLayout = () => {
           script has been reviewed. Please check your dashboard regularly to see
           the review status on your project.
         </Typography>
-        <Link legacyBehavior href={`${routes.reviewsDashboard}`} passHref>
+        <Link legacyBehavior href={routes.reviewsDashboard.url} passHref>
           <Btn size="large" className="py-3 px-6">
             Back to dashboard
           </Btn>

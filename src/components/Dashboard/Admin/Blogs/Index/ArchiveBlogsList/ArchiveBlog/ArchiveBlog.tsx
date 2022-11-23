@@ -54,7 +54,7 @@ const ArchiveBlog = ({
         </div>
         <div className="ml-auto flex md:self-start lg:self-center xl:self-start gap-3 md:gap-1">
           <IconButton
-            href={routes.editBlogAdminDashboard(`${_id}`)}
+            href={routes.editBlogAdminDashboard.dynamicUrl(`${_id}`)}
             color="primary"
           >
             <SvgIcon

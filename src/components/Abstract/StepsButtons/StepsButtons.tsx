@@ -15,7 +15,7 @@ const StepsButtons = ({ step, setStep, setOpenSaveProgressModal }: IProps) => {
     <>
       <div className="flex justify-between mt-20">
         <Link
-          href={`${routes.abstract}?step=${step === 1 ? 7 : step - 1}`}
+          href={`${routes.abstract.url}?step=${step === 1 ? 7 : step - 1}`}
           passHref
           legacyBehavior
         >
@@ -38,7 +38,7 @@ const StepsButtons = ({ step, setStep, setOpenSaveProgressModal }: IProps) => {
           Save & complete later
         </Button>
         <Link
-          href={`${routes.abstract}?step=${step === 7 ? 1 : step + 1}`}
+          href={`${routes.abstract.url}?step=${step === 7 ? 1 : step + 1}`}
           passHref
           legacyBehavior
         >
@@ -57,7 +57,7 @@ const StepsButtons = ({ step, setStep, setOpenSaveProgressModal }: IProps) => {
 
       <div className="flex md:hidden justify-center mt-4 gap-4 items-center">
         <Link
-          href={`${routes.abstract}?step=${step === 1 ? 7 : step - 1}`}
+          href={`${routes.abstract.url}?step=${step === 1 ? 7 : step - 1}`}
           passHref
           legacyBehavior
         >
@@ -79,7 +79,7 @@ const StepsButtons = ({ step, setStep, setOpenSaveProgressModal }: IProps) => {
         </div>
 
         <Link
-          href={`${routes.abstract}?step=${step === 7 ? 1 : step + 1}`}
+          href={`${routes.abstract.url}?step=${step === 7 ? 1 : step + 1}`}
           passHref
           legacyBehavior
         >

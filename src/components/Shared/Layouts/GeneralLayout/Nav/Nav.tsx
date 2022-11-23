@@ -6,10 +6,10 @@ import DesktopNav from "./DesktopNav/DesktopNav";
 import MobileNav from "./MobileNav/MobileNav";
 
 const links = [
-  { title: "About Us", href: routes.aboutUs },
+  { title: "About Us", href: routes.aboutUs.url },
   { title: "Marketplace", href: routes.marketplace.url },
-  { title: "Education", href: "/education" },
-  { title: "iDraft", href: routes.iDraft },
+  { title: "Education", href: routes.education.url },
+  { title: "iDraft", href: routes.iDraft.url },
 ];
 
 const Nav = ({ color = "transparent", ...props }: AppBarProps) => {

@@ -2,91 +2,69 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const { cookies, url } = req;
-  const refresh_token = cookies.get("refresh_token");
-
   // if (url.includes("/admin")) {
   //   if (!refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/login");
+  //     return NextResponse.redirect(routes.signin.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/dashboard")) {
+  // } else if (url.includes("/dashboard")) {
   //   if (!refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/login");
+  //     return NextResponse.redirect(routes.signin.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/marketplace")) {
+  // } else if (url.includes(routes.marketplace.url)) {
   //   if (!refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/login");
+  //     return NextResponse.redirect(routes.signin.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/profile")) {
+  // } else if (url.includes(routes.profile)) {
   //   if (!refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/login");
+  //     return NextResponse.redirect(routes.signin.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/abstract")) {
+  // } else if (url.includes(routes.abstract)) {
   //   if (!refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/login");
+  //     return NextResponse.redirect(routes.signin.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/wallet")) {
+  // } else if (url.includes(routes.wallet)) {
   //   if (!refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/login");
+  //     return NextResponse.redirect(routes.signin.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/script")) {
+  // } else if (url.includes(routes.script)) {
   //   if (!refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/login");
+  //     return NextResponse.redirect(routes.signin.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/reviewer")) {
-  //   if (!refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/login");
-  //   }
-  //   return NextResponse.next();
-  // }
-
-  // if (url.includes("/login")) {
+  // } else if (url.includes(routes.signin.url)) {
   //   if (refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/");
+  //     return NextResponse.redirect(routes.home.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/check-email")) {
+  // } else if (url.includes(routes.checkEmail)) {
   //   if (refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/");
+  //     return NextResponse.redirect(routes.home.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/register")) {
+  // } else if (url.includes(routes.register)) {
   //   if (refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/");
+  //     return NextResponse.redirect(routes.home.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/verify-email")) {
+  // } else if (url.includes(routes.verifyEmail)) {
   //   if (refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/");
+  //     return NextResponse.redirect(routes.home.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/reset-password-confirmation")) {
+  // } else if (url.includes(routes.resetPasswordConfirmation)) {
   //   if (refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/");
+  //     return NextResponse.redirect(routes.home.permission);
   //   }
   //   return NextResponse.next();
-  // }
-  // if (url.includes("/forget-password")) {
+  // } else if (url.includes(routes.forgetPassword)) {
   //   if (refresh_token) {
-  //     return NextResponse.redirect("http://localhost:3000/");
+  //     return NextResponse.redirect(routes.home.permission);
   //   }
   //   return NextResponse.next();
   // }

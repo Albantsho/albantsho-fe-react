@@ -53,8 +53,8 @@ const useRegisterForm = () => {
       setLoading(true);
       const res = await signup(data);
       authenticationUser(res.data.user);
-      // replace(routes.welcome);
-      replace(routes.verifyEmail);
+      // replace(routes.welcome.url);
+      replace(routes.verifyEmail.url);
     } catch (error) {
       errorHandler(error);
     } finally {

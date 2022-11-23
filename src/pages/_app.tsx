@@ -3,16 +3,17 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Authorization from "components/Authorization/Authorization";
 import type { NextPage } from "next";
 import NextProgress from "next-progress";
 import { AppProps } from "next/app";
 import { useEffect, useState } from "react";
+import { DotLoader } from "react-spinners";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "styles/globals.css";
 import theme from "styles/themes/theme";
 import createEmotionCache from "utils/create-emotion-cache";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { DotLoader } from "react-spinners";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -44,13 +45,15 @@ export default function MyApp(props: MyAppProps) {
           height="3px"
           options={{ showSpinner: false }}
         />
-        {isLoading ? (
-          <div className="min-h-screen flex items-center">
-            <DotLoader color="#7953B5" className="mx-auto mt-10" />
-          </div>
-        ) : (
-          getLayout(<Component {...pageProps} />)
-        )}
+        <Authorization>
+          {isLoading ? (
+            <div className="min-h-screen flex items-center">
+              <DotLoader color="#7953B5" className="mx-auto mt-10" />
+            </div>
+          ) : (
+            getLayout(<Component {...pageProps} />)
+          )}
+        </Authorization>
         <ToastContainer />
       </ThemeProvider>
     </CacheProvider>

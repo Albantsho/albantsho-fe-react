@@ -55,7 +55,7 @@ const WithdrawSuccessful: NextPageWithLayout = () => {
         </Typography>
 
         <div
-          onClick={() => push(routes.projectsDashboard)}
+          onClick={() => push(routes.projectsDashboard.url)}
           className="flex mt-4 sm:mt-6 md:my-8"
         >
           <Btn className="py-3 px-6 mx-auto">Back to dashboard</Btn>

@@ -47,7 +47,7 @@ const HeroSection = () => {
               Write better screenplays and be discovered by top producers to
               bring them to life.
             </Typography>
-            <Link href={`${routes.register}`}>
+            <Link href={`${routes.register.url}`}>
               <Button
                 size="large"
                 className="px-8 py-3"

@@ -29,7 +29,7 @@ const useForgetPassword = () => {
       setLoading(true);
       const res = await resetPasswordEmail(data.email);
       successHandler(res.message);
-      replace(routes.resetPassword(res.data.randomString));
+      replace(routes.resetPassword.url(res.data.randomString));
     } catch (error) {
       errorHandler(error);
     } finally {

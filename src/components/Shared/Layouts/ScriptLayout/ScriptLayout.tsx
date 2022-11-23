@@ -16,7 +16,7 @@ const ScriptLayout = ({ children }: IProps) => {
         <div
           data-aos="fade-left"
           data-aos-duration="300"
-          className="pt-3 lg:pt-5 flex-1 px-5 sm:px-10 max-w-screen-2xl"
+          className="pt-3 lg:pt-5 flex flex-1 px-5 sm:px-10 max-w-screen-2xl"
         >
           {children}
         </div>

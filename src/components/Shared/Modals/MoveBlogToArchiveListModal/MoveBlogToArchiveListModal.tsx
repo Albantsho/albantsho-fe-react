@@ -39,7 +39,7 @@ const MoveBlogToArchiveListModal = ({
         );
       }
       setOpenMoveBlogToArchiveListModal(false);
-      if (query.id) push(routes.blogsAdminDashboard);
+      if (query.id) push(routes.blogsAdminDashboard.url);
     } catch (error) {
       errorHandler(error);
     }

@@ -14,7 +14,7 @@ const OneUser = ({
   user: { _id, block, freeze, fullname, user_type },
 }: IProps) => {
   return (
-    <Link legacyBehavior href={routes.userAdminDashboard(`${_id}`)}>
+    <Link legacyBehavior href={routes.userAdminDashboard.dynamicUrl(`${_id}`)}>
       <div
         data-aos="fade-up"
         data-aos-anchor-placement="top-bottom"

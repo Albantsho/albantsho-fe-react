@@ -58,7 +58,7 @@ const useVerifyEmail = () => {
       authenticationUser(res.data.user);
 
       successHandler(res.message);
-      replace(routes.home);
+      replace(routes.home.url);
     } catch (error) {
       errorHandler(error);
     } finally {

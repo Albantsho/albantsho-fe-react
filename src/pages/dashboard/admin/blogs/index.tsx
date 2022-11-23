@@ -27,7 +27,7 @@ const BlogsPage: NextPageWithLayout = () => {
 
       <Fab
         color="primary"
-        href={routes.createBlogAdminDashboard}
+        href={routes.createBlogAdminDashboard.url}
         className="flex items-center justify-center md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
       >
         +
