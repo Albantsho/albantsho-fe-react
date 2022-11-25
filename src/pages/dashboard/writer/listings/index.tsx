@@ -41,19 +41,17 @@ const Listings: NextPageWithLayout = () => {
     openAddToScript,
     openCreateScript,
     openRelistScript,
-    openUnListingItem,
     scripts,
     setOpenAddToScript,
     setOpenCreateScript,
     setOpenRelistScript,
-    setOpenUnListingItem,
   } = useListings();
   const { query } = useRouter();
 
   return (
     <>
       <Head>
-        <title>Albantsho || Listings </title>
+        <title>Albantsho || Listings</title>
       </Head>
 
       {loading && scripts.length === 0 ? (
@@ -69,26 +67,15 @@ const Listings: NextPageWithLayout = () => {
             />
           </Suspense>
           {(!query.tab || query.tab === "opening-list") && (
-            <>
-              <OpeningList
-                scripts={scripts}
-                setOpenUnListingItem={setOpenUnListingItem}
-              />
-              <Suspense fallback={null}>
-                <UnListingItemModal
-                  openUnListingItem={openUnListingItem}
-                  setOpenUnListingItem={setOpenUnListingItem}
-                />
-              </Suspense>
-            </>
+            <OpeningList scripts={scripts} />
           )}
           {query.tab === "drafts" && (
             <>
-              <DraftsList
+              {/* <DraftsList
                 scripts={scripts}
                 setOpenAddToScript={setOpenAddToScript}
                 setOpenRelistScript={setOpenRelistScript}
-              />
+              /> */}
               <Suspense fallback={null}>
                 <AddScriptToCompletedModal
                   openAddToScript={openAddToScript}
@@ -101,7 +88,10 @@ const Listings: NextPageWithLayout = () => {
               </Suspense>
             </>
           )}
-          {query.tab === "closed-list" && <ClosedList scripts={scripts} />}
+          {
+            query.tab === "closed-list" && ""
+            // <ClosedList scripts={scripts} />
+          }
           <Fab
             onClick={() => setOpenCreateScript(true)}
             color="primary"

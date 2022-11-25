@@ -10,8 +10,14 @@ import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { useState } from "react";
 import { RiUploadLine } from "react-icons/ri";
+import { IAbstractFormValues } from "interfaces/abstract";
+import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
+interface IProps {
+  register: UseFormRegister<IAbstractFormValues>;
+  errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+}
 
-const WritersStatement = () => {
+const WritersStatement = ({ errors, register }: IProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -105,10 +111,19 @@ const WritersStatement = () => {
           </Typography>
         </label>
         <CustomInput
+          {...register("inspiration")}
+          error={Boolean(errors.inspiration) || false}
           sx={{
             "& ::placeholder": { color: "#B7B7B7 !important" },
             "& .MuiOutlinedInput-input": { py: 2 },
+            "& .MuiFormHelperText-root": {
+              mt: "8px",
+              mx: 0,
+              color: "red",
+              fontSize: "16px",
+            },
           }}
+          helperText={errors.inspiration?.message}
           multiline
           rows={3}
           placeholder="List a few things that inspired this story, could be other films,
@@ -130,10 +145,19 @@ const WritersStatement = () => {
           </Typography>
         </label>
         <CustomInput
+          {...register("motivation")}
+          error={Boolean(errors.motivation) || false}
           sx={{
             "& ::placeholder": { color: "#B7B7B7 !important" },
             "& .MuiOutlinedInput-input": { py: 2 },
+            "& .MuiFormHelperText-root": {
+              mt: "8px",
+              mx: 0,
+              color: "red",
+              fontSize: "16px",
+            },
           }}
+          helperText={errors.motivation?.message}
           multiline
           rows={3}
           placeholder="WHY TELL THIS STORY? What impact do you hope it would have on the audience?"

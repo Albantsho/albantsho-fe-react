@@ -5,7 +5,7 @@ interface IRegisterPayload {
   email: string;
   password: string;
   country: string;
-  user_type: "writer" | "producer";
+  user_type: "writer" | "producer" | "admin" | "reviewer";
   portfolio?: string;
   production_company_name?: string;
   gender: "male" | "female";
@@ -118,9 +118,6 @@ const useAuthApi = (controller?: AbortController) => {
     async updateUserInformation(payload: IUpdateUserInformationPayload) {
       const res = await api.patch("/user/profile/update", payload, {
         signal: controller?.signal,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
       });
 
       return res.data;

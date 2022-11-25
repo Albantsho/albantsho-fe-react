@@ -67,7 +67,7 @@ const ScriptInfoPage = () => {
               <MarketScriptAccordion script={script} />
             </div>
             <MainDetailsMarketScript script={script} />
-            <RateToScript />
+            <RateToScript id={script._id} />
             <Footer />
           </Suspense>
         </>

@@ -8,6 +8,24 @@ export interface IScript {
   script_verified: string;
 }
 
+export interface IWriterScript {
+  _id: string;
+  title: string;
+  description: string;
+  script_image: string;
+  primary_genre: string;
+  archive: boolean;
+}
+
+export interface IBidScript {
+  _id: string;
+  title: string;
+  description: string;
+  script_image: string;
+  primary_genre: string;
+  numberOfBids: number;
+}
+
 export interface IFullInformationScript {
   _id: string;
   authorId: string;

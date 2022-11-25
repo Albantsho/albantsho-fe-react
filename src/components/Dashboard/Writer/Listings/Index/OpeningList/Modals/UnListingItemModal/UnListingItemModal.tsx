@@ -1,21 +1,37 @@
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import useScriptsApi from "apis/Scripts.api";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import errorHandler from "utils/error-handler";
 import UnListingItem from "./assets/un-listing-item.png";
 
 interface IProps {
   openUnListingItem: boolean;
   setOpenUnListingItem: Dispatch<SetStateAction<boolean>>;
+  id: string;
 }
 
 const UnListingItemModal = ({
   openUnListingItem,
   setOpenUnListingItem,
+  id,
 }: IProps) => {
+  const { updateWriterListingScript } = useScriptsApi();
+
   const handleClose = () => setOpenUnListingItem(false);
+
+  const unListingScript = async () => {
+    try {
+      await updateWriterListingScript({ market: false }, id);
+      handleClose();
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
   return (
     <Modal className="px-5" open={openUnListingItem} onClose={handleClose}>
       <Slide
@@ -44,6 +60,7 @@ const UnListingItemModal = ({
           </Typography>
           <div className="flex gap-3 sm:gap-6">
             <Btn
+              onClick={unListingScript}
               size="large"
               className="py-3 px-5 md:px-3 rounded-lg md:py-4 text-white bg-primary-700"
             >

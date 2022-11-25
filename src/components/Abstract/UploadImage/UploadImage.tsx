@@ -3,8 +3,15 @@ import Image from "next/image";
 import uploadImage from "./assets/upload-image.png";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdOutlineDone } from "react-icons/md";
+import { IAbstractFormValues } from "interfaces/abstract";
+import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 
-const UploadImage = () => {
+interface IProps {
+  register: UseFormRegister<IAbstractFormValues>;
+  errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+}
+
+const UploadImage = ({ errors, register }: IProps) => {
   return (
     <>
       <Typography
@@ -21,12 +28,20 @@ const UploadImage = () => {
 
       <div className="md:px-10 md:py-16 space-y-5 md:shadow-md rounded-lg">
         <div className="max-w-[528px] mx-auto rounded-md border-2 border-dashed mb-5 overflow-hidden border-primary-300 flex justify-center items-center">
-          <form className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
+          <div className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
             <label
               className="absolute cursor-pointer inset-0"
               htmlFor="add-image"
             ></label>
-            <input type="file" id="add-image" hidden name="script" />
+            <input
+              {...register("image")}
+              name="image"
+              accept="image/*"
+              max={1}
+              type="file"
+              id="add-image"
+              hidden
+            />
             <div className="mx-auto flex justify-center items-center mb-5 md:mb-7">
               <Image src={uploadImage} alt="upload image" />
             </div>
@@ -41,7 +56,7 @@ const UploadImage = () => {
               variant="body1"
               className="text-neutral-700 text-center mb-2 md:mb-3"
             >
-              Drop your file here, or
+              Drop your image here, or
               <span className="text-primary-700 underline ml-1">browse</span>
             </Typography>
             <Typography
@@ -50,7 +65,10 @@ const UploadImage = () => {
             >
               Supports JPEG, JPEG2000, PNG
             </Typography>
-          </form>
+          </div>
+          {errors.image && (
+            <span className="text-error-700">{errors.image?.message}</span>
+          )}
         </div>
         <div className="max-w-[528px] relative py-6 mx-auto rounded-md border-2 border-dashed mb-5 px-8 overflow-hidden border-tinted-300  bg-tinted-50/50">
           <div className="mb-2 pr-5">

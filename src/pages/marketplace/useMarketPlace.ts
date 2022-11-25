@@ -1,11 +1,10 @@
-import useMarketplaceApi from "apis/Marketplace.api";
 import useScriptsApi from "apis/Scripts.api";
 import useUserStore from "app/user.store";
 import { IScript } from "interfaces/script";
+import { useRouter } from "next/router";
+import queryString from "query-string";
 import { useEffect, useState } from "react";
 import errorHandler from "utils/error-handler";
-import queryString from "query-string";
-import { useRouter } from "next/router";
 
 const useMarketPlace = () => {
   const user = useUserStore((state) => state.user);

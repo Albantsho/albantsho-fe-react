@@ -1,7 +1,13 @@
 import { Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import { IAbstractFormValues } from "interfaces/abstract";
+import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
+interface IProps {
+  register: UseFormRegister<IAbstractFormValues>;
+  errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+}
 
-const StoryStructure = () => {
+const StoryStructure = ({ errors, register }: IProps) => {
   return (
     <>
       <Typography
@@ -25,6 +31,8 @@ const StoryStructure = () => {
           </Typography>
         </label>
         <CustomInput
+          {...register("story_world")}
+          error={Boolean(errors.story_world) || false}
           placeholder="Where is this story domicile?"
           fullWidth
           id="story-world"
@@ -33,7 +41,14 @@ const StoryStructure = () => {
           sx={{
             "& ::placeholder": { color: "#B7B7B7 !important" },
             "& .MuiOutlinedInput-input": { py: 2 },
+            "& .MuiFormHelperText-root": {
+              mt: "8px",
+              mx: 0,
+              color: "red",
+              fontSize: "16px",
+            },
           }}
+          helperText={errors.story_world?.message}
         />
       </div>
 
@@ -47,11 +62,22 @@ const StoryStructure = () => {
           </Typography>
         </label>
         <CustomInput
+          {...register("act_structure")}
+          error={Boolean(errors.act_structure) || false}
           fullWidth
           id="act-structure"
           variant="outlined"
           size="small"
-          sx={{ "& .MuiOutlinedInput-input": { py: 2 } }}
+          sx={{
+            "& .MuiOutlinedInput-input": { py: 2 },
+            "& .MuiFormHelperText-root": {
+              mt: "8px",
+              mx: 0,
+              color: "red",
+              fontSize: "16px",
+            },
+          }}
+          helperText={errors.act_structure?.message}
         />
       </div>
     </>

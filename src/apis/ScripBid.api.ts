@@ -1,3 +1,4 @@
+import useAxiosPrivate from "hooks/useAxiosPrivate";
 import api from "./configs/axios.config";
 
 interface ICreateBid {
@@ -6,9 +7,11 @@ interface ICreateBid {
 }
 
 const useScripBidApi = (controller?: AbortController) => {
+  const axiosPrivate = useAxiosPrivate();
+
   return {
     async createBid(payload: ICreateBid) {
-      const res = await api.post("/bid/create", payload, {
+      const res = await axiosPrivate.post("/bid/create", payload, {
         signal: controller?.signal,
       });
 
@@ -16,39 +19,39 @@ const useScripBidApi = (controller?: AbortController) => {
     },
 
     async deleteBid(id: string) {
-      const res = await api.delete(`/bid/delete/${id}`, {
+      const res = await axiosPrivate.delete(`/bid/delete/${id}`, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async acceptBid(payload: object, id: string) {
-      const res = await api.post(`/bid/accept/${id}`, payload, {
+    async acceptBid(id: string) {
+      const res = await axiosPrivate.post(`/bid/accept/${id}`, undefined, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async rejectBid(payload: object, id: string) {
-      const res = await api.post(`/bid/reject/${id}`, payload, {
+    async rejectBid(id: string) {
+      const res = await axiosPrivate.post(`/bid/reject/${id}`, undefined, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async getAllBids() {
-      const res = await api.get("/bid/producer/all", {
+    async getAllBidsForProducer() {
+      const res = await axiosPrivate.get("/bid/producer/all", {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async getOneBid(id: string) {
-      const res = await api.get(`/bid/all/${id}`, {
+    async getAllBids(id: string) {
+      const res = await axiosPrivate.get(`/bid/all/${id}`, {
         signal: controller?.signal,
       });
 
@@ -56,7 +59,7 @@ const useScripBidApi = (controller?: AbortController) => {
     },
 
     async getBidScript(id: string) {
-      const res = await api.get(`/bid/${id}`, {
+      const res = await axiosPrivate.get(`/bid/${id}`, {
         signal: controller?.signal,
       });
 

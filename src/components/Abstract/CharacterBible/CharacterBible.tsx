@@ -1,7 +1,14 @@
 import { Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import { IAbstractFormValues } from "interfaces/abstract";
+import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 
-const CharacterBible = () => {
+interface IProps {
+  register: UseFormRegister<IAbstractFormValues>;
+  errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+}
+
+const CharacterBible = ({ errors, register }: IProps) => {
   return (
     <>
       <Typography
@@ -26,11 +33,20 @@ const CharacterBible = () => {
           </Typography>
         </label>
         <CustomInput
+          {...register("character_bible")}
+          error={Boolean(errors.character_bible) || false}
           size="small"
           sx={{
             "& .MuiOutlinedInput-input": { py: 2 },
             "& ::placeholder": { color: "#B7B7B7 !important" },
+            "& .MuiFormHelperText-root": {
+              mt: "8px",
+              mx: 0,
+              color: "red",
+              fontSize: "16px",
+            },
           }}
+          helperText={errors.character_bible?.message}
           multiline
           rows={3}
           placeholder="Tell us more about the characters in your script"

@@ -5,8 +5,21 @@ import {
   Autocomplete,
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import { IAbstractFormValues } from "interfaces/abstract";
 import React, { useState } from "react";
 import { AiFillInfoCircle } from "react-icons/ai";
+import type {
+  UseFormRegister,
+  FieldErrorsImpl,
+  Control,
+} from "react-hook-form";
+import { Controller } from "react-hook-form";
+
+interface IProps {
+  register: UseFormRegister<IAbstractFormValues>;
+  errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+  control: Control<IAbstractFormValues, any>;
+}
 
 const genresFilms = [
   { label: "Fantasy" },
@@ -14,19 +27,7 @@ const genresFilms = [
   { label: "Sci Fi" },
 ];
 
-const GeneralScriptProfile = () => {
-  const [statusScriptFormat, setStatusScriptFormat] = useState("Documentary");
-  const [statusStoryFormat, setStatusStoryFormat] = useState("HighConcept");
-  const handleChangeScriptFormat = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    setStatusScriptFormat(event.target.value);
-  };
-  const handleChangeStoryFormat = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    setStatusStoryFormat(event.target.value);
-  };
+const GeneralScriptProfile = ({ register, errors, control }: IProps) => {
   return (
     <>
       <Typography
@@ -50,26 +51,38 @@ const GeneralScriptProfile = () => {
               Script Format<span className="text-error-700">*</span>
             </Typography>
           </label>
-          <CustomInput
-            select
-            fullWidth
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
-              "& .MuiSvgIcon-root": { color: "#7953B5" },
-            }}
-            variant="outlined"
-            id="script-format"
-            defaultValue="AllScripts"
-            value={statusScriptFormat}
-            onChange={handleChangeScriptFormat}
-          >
-            <MenuItem value="Documentary">
-              <ListItemText className="text-primary-700">
-                Documentary
-              </ListItemText>
-            </MenuItem>
-          </CustomInput>
+          <Controller
+            name="script_type"
+            control={control}
+            render={({ field }) => (
+              <CustomInput
+                {...field}
+                error={Boolean(errors.script_type) || false}
+                select
+                fullWidth
+                size="small"
+                sx={{
+                  "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+                  "& .MuiSvgIcon-root": { color: "#7953B5" },
+                  "& .MuiFormHelperText-root": {
+                    mt: "8px",
+                    mx: 0,
+                    color: "red",
+                    fontSize: "16px",
+                  },
+                }}
+                helperText={errors.script_type?.message}
+                variant="outlined"
+                id="script-format"
+              >
+                <MenuItem value="Documentary">
+                  <ListItemText className="text-primary-700">
+                    Documentary
+                  </ListItemText>
+                </MenuItem>
+              </CustomInput>
+            )}
+          />
         </div>
         <div className="flex flex-1 items-start flex-col justify-start gap-2">
           <label htmlFor="story-script">
@@ -80,26 +93,38 @@ const GeneralScriptProfile = () => {
               Story Format<span className="text-error-700">*</span>
             </Typography>
           </label>
-          <CustomInput
-            select
-            fullWidth
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
-              "& .MuiSvgIcon-root": { color: "#7953B5" },
-            }}
-            variant="outlined"
-            id="story-format"
-            defaultValue="Documentary"
-            value={statusStoryFormat}
-            onChange={handleChangeStoryFormat}
-          >
-            <MenuItem value="HighConcept">
-              <ListItemText className="text-primary-700">
-                High Concept
-              </ListItemText>
-            </MenuItem>
-          </CustomInput>
+          <Controller
+            name="storyFormat"
+            control={control}
+            render={({ field }) => (
+              <CustomInput
+                {...field}
+                error={Boolean(errors.storyFormat) || false}
+                select
+                fullWidth
+                size="small"
+                sx={{
+                  "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+                  "& .MuiSvgIcon-root": { color: "#7953B5" },
+                  "& .MuiFormHelperText-root": {
+                    mt: "8px",
+                    mx: 0,
+                    color: "red",
+                    fontSize: "16px",
+                  },
+                }}
+                helperText={errors.storyFormat?.message}
+                variant="outlined"
+                id="story-format"
+              >
+                <MenuItem value="HighConcept">
+                  <ListItemText className="text-primary-700">
+                    High Concept
+                  </ListItemText>
+                </MenuItem>
+              </CustomInput>
+            )}
+          />
         </div>
       </div>
 
@@ -113,6 +138,8 @@ const GeneralScriptProfile = () => {
           </Typography>
         </label>
         <CustomInput
+          {...register("title")}
+          error={Boolean(errors.title) || false}
           fullWidth
           id="script-title"
           variant="outlined"
@@ -131,6 +158,11 @@ const GeneralScriptProfile = () => {
             </span>
           }
         />
+        {errors.title?.message && (
+          <span className="text-error-700 text-base">
+            {errors.title.message}
+          </span>
+        )}
       </div>
 
       <div className="flex gap-y-3 gap-x-5 md:gap-10 items-center flex-wrap mb-5">
@@ -143,24 +175,38 @@ const GeneralScriptProfile = () => {
               Genre (Primary)<span className="text-error-700">*</span>
             </Typography>
           </label>
-          <CustomInput
-            select
-            fullWidth
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
-              "& .MuiSvgIcon-root": { color: "#7953B5" },
-            }}
-            variant="outlined"
-            id="genre-script-primary"
-            defaultValue="AllScripts"
-            value={statusScriptFormat}
-            onChange={handleChangeScriptFormat}
-          >
-            <MenuItem value="Documentary">
-              <ListItemText className="text-primary-700">Sci Fi</ListItemText>
-            </MenuItem>
-          </CustomInput>
+          <Controller
+            name="primary_genre"
+            control={control}
+            render={({ field }) => (
+              <CustomInput
+                error={Boolean(errors.primary_genre) || false}
+                {...field}
+                select
+                fullWidth
+                size="small"
+                sx={{
+                  "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+                  "& .MuiSvgIcon-root": { color: "#7953B5" },
+                  "& .MuiFormHelperText-root": {
+                    mt: "8px",
+                    mx: 0,
+                    color: "red",
+                    fontSize: "16px",
+                  },
+                }}
+                helperText={errors.primary_genre?.message}
+                variant="outlined"
+                id="genre-script-primary"
+              >
+                <MenuItem value="Documentary">
+                  <ListItemText className="text-primary-700">
+                    Documentary
+                  </ListItemText>
+                </MenuItem>
+              </CustomInput>
+            )}
+          />
         </div>
         <div className="flex flex-1 items-start flex-col justify-start gap-2">
           <label htmlFor="genre-script-secondary">
@@ -171,24 +217,38 @@ const GeneralScriptProfile = () => {
               Genre (Secondary)<span className="text-error-700">*</span>
             </Typography>
           </label>
-          <CustomInput
-            select
-            fullWidth
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
-              "& .MuiSvgIcon-root": { color: "#7953B5" },
-            }}
-            variant="outlined"
-            id="genre-script-secondary"
-            defaultValue="Documentary"
-            value={statusStoryFormat}
-            onChange={handleChangeStoryFormat}
-          >
-            <MenuItem value="HighConcept">
-              <ListItemText className="text-primary-700">Romance</ListItemText>
-            </MenuItem>
-          </CustomInput>
+          <Controller
+            name="secondary_genre"
+            control={control}
+            render={({ field }) => (
+              <CustomInput
+                error={Boolean(errors.secondary_genre) || false}
+                {...field}
+                select
+                fullWidth
+                size="small"
+                sx={{
+                  "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+                  "& .MuiSvgIcon-root": { color: "#7953B5" },
+                  "& .MuiFormHelperText-root": {
+                    mt: "8px",
+                    mx: 0,
+                    color: "red",
+                    fontSize: "16px",
+                  },
+                }}
+                helperText={errors.secondary_genre?.message}
+                variant="outlined"
+                id="genre-script-secondary"
+              >
+                <MenuItem value="romance">
+                  <ListItemText className="text-primary-700">
+                    Romance
+                  </ListItemText>
+                </MenuItem>
+              </CustomInput>
+            )}
+          />
         </div>
       </div>
 
@@ -244,24 +304,36 @@ const GeneralScriptProfile = () => {
               Cast(Main)<span className="text-error-700">*</span>
             </Typography>
           </label>
-          <CustomInput
-            select
-            fullWidth
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
-              "& .MuiSvgIcon-root": { color: "#7953B5" },
-            }}
-            variant="outlined"
-            id="cast-script-primary"
-            defaultValue="AllScripts"
-            value={statusScriptFormat}
-            onChange={handleChangeScriptFormat}
-          >
-            <MenuItem value="Documentary">
-              <ListItemText className="text-primary-700">200</ListItemText>
-            </MenuItem>
-          </CustomInput>
+          <Controller
+            name="primary_cast"
+            control={control}
+            render={({ field }) => (
+              <CustomInput
+                {...field}
+                error={Boolean(errors.primary_cast) || false}
+                select
+                fullWidth
+                size="small"
+                sx={{
+                  "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+                  "& .MuiSvgIcon-root": { color: "#7953B5" },
+                  "& .MuiFormHelperText-root": {
+                    mt: "8px",
+                    mx: 0,
+                    color: "red",
+                    fontSize: "16px",
+                  },
+                }}
+                helperText={errors.primary_cast?.message}
+                variant="outlined"
+                id="cast-script-primary"
+              >
+                <MenuItem value="200">
+                  <ListItemText className="text-primary-700">200</ListItemText>
+                </MenuItem>
+              </CustomInput>
+            )}
+          />
         </div>
         <div className="flex flex-1 items-start flex-col justify-start gap-2">
           <label htmlFor="cast-script-secondary">
@@ -272,24 +344,36 @@ const GeneralScriptProfile = () => {
               Cast(Secondary)<span className="text-error-700">*</span>
             </Typography>
           </label>
-          <CustomInput
-            select
-            fullWidth
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
-              "& .MuiSvgIcon-root": { color: "#7953B5" },
-            }}
-            variant="outlined"
-            id="cast-script-secondary"
-            defaultValue="Documentary"
-            value={statusStoryFormat}
-            onChange={handleChangeStoryFormat}
-          >
-            <MenuItem value="HighConcept">
-              <ListItemText className="text-primary-700">50</ListItemText>
-            </MenuItem>
-          </CustomInput>
+          <Controller
+            name="secondary_cast"
+            control={control}
+            render={({ field }) => (
+              <CustomInput
+                {...field}
+                error={Boolean(errors.secondary_cast) || false}
+                select
+                fullWidth
+                size="small"
+                sx={{
+                  "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+                  "& .MuiSvgIcon-root": { color: "#7953B5" },
+                  "& .MuiFormHelperText-root": {
+                    mt: "8px",
+                    mx: 0,
+                    color: "red",
+                    fontSize: "16px",
+                  },
+                }}
+                helperText={errors.secondary_cast?.message}
+                variant="outlined"
+                id="cast-script-secondary"
+              >
+                <MenuItem value="50">
+                  <ListItemText className="text-primary-700">50</ListItemText>
+                </MenuItem>
+              </CustomInput>
+            )}
+          />
         </div>
       </div>
 
@@ -302,24 +386,36 @@ const GeneralScriptProfile = () => {
             Estimated Budget<span className="text-error-700">*</span>
           </Typography>
         </label>
-        <CustomInput
-          select
-          fullWidth
-          size="small"
-          variant="outlined"
-          sx={{
-            "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
-            "& .MuiSvgIcon-root": { color: "#7953B5" },
-          }}
-          id="budget-script"
-          defaultValue="AllScripts"
-          value={statusScriptFormat}
-          onChange={handleChangeScriptFormat}
-        >
-          <MenuItem value="Documentary">
-            <ListItemText className="text-primary-700">N1M-N3M</ListItemText>
-          </MenuItem>
-        </CustomInput>
+        <Controller
+          name="estimated_budger"
+          control={control}
+          render={({ field }) => (
+            <CustomInput
+              error={Boolean(errors.estimated_budger) || false}
+              {...field}
+              select
+              fullWidth
+              size="small"
+              variant="outlined"
+              sx={{
+                "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
+                "& .MuiSvgIcon-root": { color: "#7953B5" },
+                "& .MuiFormHelperText-root": {
+                  mt: "8px",
+                  mx: 0,
+                  color: "red",
+                  fontSize: "16px",
+                },
+              }}
+              helperText={errors.estimated_budger?.message}
+              id="budget-script"
+            >
+              <MenuItem value="high">
+                <ListItemText className="text-primary-700">High</ListItemText>
+              </MenuItem>
+            </CustomInput>
+          )}
+        />
       </div>
     </>
   );

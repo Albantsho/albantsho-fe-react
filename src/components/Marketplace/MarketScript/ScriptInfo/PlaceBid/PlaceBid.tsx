@@ -13,25 +13,29 @@ interface IProps {
 
 const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
   const [bidValue, setBidValue] = useState("");
-  const { createBid } = useScripBidApi();
-
+  const { createBid, deleteBid } = useScripBidApi();
   const handleBidValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBidValue(e.target.value);
+    const result = e.target.value.replace(/\D/g, "");
+    setBidValue(result);
   };
 
   const handleOpenBidSuccessful = async () => {
     try {
-      // if (bidValue) {
-      //   const res = await createBid({
-      //     amount: +bidValue,
-
-      //   });
-      // }
+      await createBid({ amount: +bidValue, scriptId: script._id });
       setOpenBidSuccessful(true);
     } catch (error) {
       errorHandler(error);
     }
   };
+
+  const handleCloseBidSuccessful = async () => {
+    try {
+      await deleteBid(script._id);
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
   return (
     <div className="flex gap-6 mt-4 rounded-md py-6 px-5 sm:py-12 sm:px-6 lg:px-8 xl:px-12 xl:py-8 sm:mt-10 md:gap-6 flex-col bg-tinted-50/60 flex-1 w-full">
       <div className="flex flex-col">
@@ -55,9 +59,18 @@ const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
           variant="outlined"
           size="small"
           placeholder="Enter Bid"
+          type="tel"
         />
         <Btn
           onClick={handleOpenBidSuccessful}
+          size="small"
+          className="mr-auto py-3 px-4"
+        >
+          Place Bid
+        </Btn>
+        <Btn
+          variant="outlined"
+          onClick={handleCloseBidSuccessful}
           size="small"
           className="mr-auto py-3 px-4"
         >

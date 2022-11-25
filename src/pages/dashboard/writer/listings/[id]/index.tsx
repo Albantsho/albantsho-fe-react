@@ -8,10 +8,11 @@ import { Suspense, useEffect, useState } from "react";
 import { NextPageWithLayout } from "../../../../_app";
 import { Fab } from "@mui/material";
 import { useRouter } from "next/router";
-import useMarketplaceApi from "apis/Marketplace.api";
+
 import { IProduct } from "interfaces/product";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
+import useScripBidApi from "apis/ScripBid.api";
 
 const AuctionsScripts = dynamic(
   () =>
@@ -27,23 +28,26 @@ const CreateScriptModal = dynamic(
 const ScriptSlug: NextPageWithLayout = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
 
-  const [script, setScript] = useState<IProduct>();
-  const [loading, setLoading] = useState(true);
-  const { getScript } = useMarketplaceApi();
-  const router = useRouter();
+  const [bidsList, setBidsList] = useState<Array<IBidForScript>>([]);
+  const [loading, setLoading] = useState(false);
+  const { getAllBids } = useScripBidApi();
+  const { query } = useRouter();
 
   useEffect(() => {
     async function getScriptsDate() {
       try {
-        const res = await getScript(router.query.id as string);
-        setScript(res.data);
-        setLoading(false);
+        if (typeof query.id === "string") {
+          setLoading(false);
+          const res = await getAllBids(query.id);
+          setBidsList(res.data.scriptBids);
+          setLoading(false);
+        }
       } catch (error) {
         errorHandler(error);
       }
     }
     getScriptsDate();
-  }, [router.query.id]);
+  }, [query.id]);
 
   return (
     <>
@@ -51,19 +55,19 @@ const ScriptSlug: NextPageWithLayout = () => {
         <title>Albantsho || Script Slug </title>
       </Head>
       <div className="min-h-screen">
-        {!loading && script ? (
+        {!loading ? (
           <>
             <TabButtons />
             <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
             <div className="py-8 md:py-12 xl:py-20  px-5 sm:px-10 xl:px-20  my-4 md:my-6 bg-white shadow-primary rounded-md">
-              <Heading script={script} />
+              <Heading />
               <Suspense fallback={null}>
                 <CreateScriptModal
                   openCreateScript={openCreateScript}
                   setOpenCreateScript={setOpenCreateScript}
                 />
 
-                <AuctionsScripts script={script} />
+                <AuctionsScripts bidsList={bidsList} />
               </Suspense>
             </div>
             <Fab

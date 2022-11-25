@@ -3,10 +3,14 @@ import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
 import UploadFile from "./assets/Upload-file.png";
 import { Dispatch, SetStateAction } from "react";
+import { IAbstractFormValues } from "interfaces/abstract";
+import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 
 interface IProps {
   activeButton: number;
   setActiveButton: Dispatch<SetStateAction<number>>;
+  register: UseFormRegister<IAbstractFormValues>;
+  errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
 }
 
 const UploadScriptFiles = ({ activeButton, setActiveButton }: IProps) => {
@@ -57,7 +61,7 @@ const UploadScriptFiles = ({ activeButton, setActiveButton }: IProps) => {
 
       <div className="md:px-10 py-10 md:py-16 space-y-5 md:shadow-md rounded-lg">
         <div className="max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center">
-          <form className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
+          <div className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
             <label
               className="absolute cursor-pointer inset-0"
               htmlFor="add-script"
@@ -80,10 +84,10 @@ const UploadScriptFiles = ({ activeButton, setActiveButton }: IProps) => {
               Drop your file here, or
               <span className="text-primary-700 underline ml-1">browse</span>
             </Typography>
-          </form>
+          </div>
         </div>
         <div className="max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center">
-          <form className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
+          <div className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
             <label
               className="absolute cursor-pointer inset-0"
               htmlFor="add-script"
@@ -106,7 +110,7 @@ const UploadScriptFiles = ({ activeButton, setActiveButton }: IProps) => {
               Drop your file here, or
               <span className="text-primary-700 underline ml-1">browse</span>
             </Typography>
-          </form>
+          </div>
         </div>
       </div>
     </>

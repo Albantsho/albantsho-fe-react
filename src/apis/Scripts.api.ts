@@ -22,7 +22,7 @@ interface IUpdateScriptPayload {
   image?: string;
   front_page?: string;
   by_line?: string;
-  conver_page?: string;
+  cover_page?: string;
   storyFormat?: string;
   primary_genre?: string;
   primary_cast?: string;
@@ -57,7 +57,7 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async addScriptTheme(payload: IAddThemeScriptPayload<string>, id: string) {
-      const res = await api.post(`/script/theme/add/${id}`, payload, {
+      const res = await axiosPrivate.post(`/script/theme/add/${id}`, payload, {
         signal: controller?.signal,
       });
 
@@ -65,7 +65,7 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async removeScriptTheme(id: string) {
-      const res = await api.delete(`/script/theme/remove/${id}`, {
+      const res = await axiosPrivate.delete(`/script/theme/remove/${id}`, {
         signal: controller?.signal,
       });
 
@@ -73,7 +73,7 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async updateScript(payload: IUpdateScriptPayload, id: string) {
-      const res = await api.post(`/script/update/${id}`, payload, {
+      const res = await axiosPrivate.post(`/script/update/${id}`, payload, {
         signal: controller?.signal,
       });
 
@@ -81,7 +81,7 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async verifyScript(payload: object, id: string) {
-      const res = await api.patch(`/script/verify/${id}`, {
+      const res = await axiosPrivate.patch(`/script/verify/${id}`, {
         signal: controller?.signal,
       });
 
@@ -89,7 +89,7 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async deleteScript(id: string) {
-      const res = await api.patch(`/script/delete/${id}`, {
+      const res = await axiosPrivate.patch(`/script/delete/${id}`, {
         signal: controller?.signal,
       });
 
@@ -129,15 +129,15 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async giveRateToScript(payload: IGiveRateToScriptPayload) {
-      const res = await api.post("/script/rate", payload, {
+      const res = await axiosPrivate.post("/script/rate", payload, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async getWriterAllScripts() {
-      const res = await api.get("/script/writer/all", {
+    async getWriterAllScripts(query?: string) {
+      const res = await axiosPrivate.get(`/script/writer/all?${query}`, {
         signal: controller?.signal,
       });
 
@@ -145,23 +145,31 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async updateWriterArchiveScript(payload: object, id: string) {
-      const res = await api.patch(`/script/update/archive/${id}`, payload, {
-        signal: controller?.signal,
-      });
+      const res = await axiosPrivate.patch(
+        `/script/update/archive/${id}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
-    async updateWriterListingScript(payload: object, id: string) {
-      const res = await api.patch(`/script/update/listing/${id}`, payload, {
-        signal: controller?.signal,
-      });
+    async updateWriterListingScript(payload: { market: boolean }, id: string) {
+      const res = await axiosPrivate.patch(
+        `/script/update/listing/${id}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
     async getWriterAllListingScripts() {
-      const res = await api.get("/script/writer/listing/all", {
+      const res = await axiosPrivate.get("/script/writer/listing/all", {
         signal: controller?.signal,
       });
 

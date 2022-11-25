@@ -5,14 +5,22 @@ import { Dispatch, SetStateAction } from "react";
 import pictureModalsSaves from "@assets/images/picture-modals-saves.png";
 import { AiOutlineClose } from "react-icons/ai";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import useScriptsApi from "apis/Scripts.api";
 
 interface IProps {
   openUnArchive: boolean;
   setOpenUnArchive: Dispatch<SetStateAction<boolean>>;
+  id: string;
 }
 
-const UnArchiveModal = ({ openUnArchive, setOpenUnArchive }: IProps) => {
+const UnArchiveModal = ({ openUnArchive, setOpenUnArchive, id }: IProps) => {
+  const { updateWriterArchiveScript } = useScriptsApi();
   const handleCloseUnArchive = () => setOpenUnArchive(false);
+
+  const unArchivingScript = async () => {
+    await updateWriterArchiveScript({ archive: false }, id);
+  };
+
   return (
     <Modal className="px-5" open={openUnArchive} onClose={handleCloseUnArchive}>
       <Zoom in={openUnArchive}>
@@ -42,6 +50,7 @@ const UnArchiveModal = ({ openUnArchive, setOpenUnArchive }: IProps) => {
             <Btn
               size="large"
               className="py-3 px-5 text-white bg-primary-700 rounded-lg"
+              onClick={unArchivingScript}
             >
               Proceed
             </Btn>

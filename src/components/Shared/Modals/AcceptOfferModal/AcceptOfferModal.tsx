@@ -2,7 +2,6 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScripBidApi from "apis/ScripBid.api";
-import { IMarketBidScript } from "interfaces/market-bid-script";
 import { IProduct } from "interfaces/product";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
@@ -13,7 +12,7 @@ interface IProps {
   openAcceptOffer: boolean;
   setOpenAcceptOffer: Dispatch<SetStateAction<boolean>>;
   script: IProduct;
-  auction: IMarketBidScript;
+  auction: IBidForScript;
 }
 
 const AcceptOfferModal = ({
@@ -25,11 +24,9 @@ const AcceptOfferModal = ({
   const { acceptBid } = useScripBidApi();
 
   const handleCloseAcceptOffer = () => setOpenAcceptOffer(false);
-  const acceptOfferFunc =
-    (script_basic_id: string, amount: number) => async () => {
-      ("");
-      // const res = await acceptBid({ script_basic_id, amount });
-    };
+  const acceptOfferFunc = (id: string) => async () => {
+    const res = await acceptBid(id);
+  };
 
   return (
     <Modal
@@ -72,7 +69,7 @@ const AcceptOfferModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-10 lg:mt-8">
             <Btn
-              onClick={acceptOfferFunc(auction.script_basic_id, auction.amount)}
+              onClick={acceptOfferFunc(auction._id)}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"
             >

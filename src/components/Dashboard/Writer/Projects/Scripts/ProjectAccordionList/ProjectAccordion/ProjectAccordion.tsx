@@ -19,6 +19,7 @@ import Image from "next/image";
 import { useState } from "react";
 import CustomButtonScripts from "./CustomButtonScripts/CustomButtonScripts";
 import routes from "routes/routes";
+import useScriptsApi from "apis/Scripts.api";
 
 interface IProps {
   title: string;
@@ -33,6 +34,7 @@ const buttonsProjects = [
 ];
 
 const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
+  const { updateWriterArchiveScript, deleteScript } = useScriptsApi();
   const [expanded, setExpanded] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openProjectAccordionMenu = Boolean(anchorEl);
@@ -47,6 +49,20 @@ const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
   ) => {
     event.stopPropagation();
     setAnchorEl(null);
+  };
+
+  const archivingScript = async (
+    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>
+  ) => {
+    await updateWriterArchiveScript({ archive: true }, "");
+
+    handleCloseProjectAccordionMenu(event);
+  };
+  const deletingScript = async (
+    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>
+  ) => {
+    await deleteScript("");
+    handleCloseProjectAccordionMenu(event);
   };
 
   return (
@@ -110,13 +126,13 @@ const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
           >
             <MenuItem
               className="hover:text-primary-700 hover:bg-tinted-50/50 py-3 px-10"
-              onClick={handleCloseProjectAccordionMenu}
+              onClick={archivingScript}
             >
               Archive
             </MenuItem>
             <MenuItem
               className="hover:text-primary-700 hover:bg-tinted-50/50 py-3 px-10"
-              onClick={handleCloseProjectAccordionMenu}
+              onClick={deletingScript}
             >
               Delete
             </MenuItem>

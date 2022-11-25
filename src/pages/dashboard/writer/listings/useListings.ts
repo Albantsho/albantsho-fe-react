@@ -1,21 +1,21 @@
-import useMarketplaceApi from "apis/Marketplace.api";
-import { IProduct } from "interfaces/product";
+import useScriptsApi from "apis/Scripts.api";
+import { IBidScript } from "interfaces/script";
 import { useEffect, useState } from "react";
 
 const useListings = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
   const [openRelistScript, setOpenRelistScript] = useState<boolean>(false);
   const [openAddToScript, setOpenAddToScript] = useState<boolean>(false);
-  const [openUnListingItem, setOpenUnListingItem] = useState<boolean>(false);
-  const [scripts, setScripts] = useState<Array<IProduct>>([]);
+
+  const [scripts, setScripts] = useState<Array<IBidScript>>([]);
   const [loading, setLoading] = useState(true);
-  const { getScripts } = useMarketplaceApi();
+  const { getWriterAllListingScripts } = useScriptsApi();
 
   useEffect(() => {
     async function getScriptsFunc() {
-      const res = await getScripts();
+      const res = await getWriterAllListingScripts();
 
-      setScripts(res.data);
+      setScripts(res.data.scripts);
       setLoading(false);
     }
     getScriptsFunc();
@@ -28,8 +28,6 @@ const useListings = () => {
     setOpenRelistScript,
     openAddToScript,
     setOpenAddToScript,
-    openUnListingItem,
-    setOpenUnListingItem,
     scripts,
     loading,
   };
