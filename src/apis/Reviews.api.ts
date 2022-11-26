@@ -1,4 +1,4 @@
-import api from "./configs/axios.config";
+import useAxiosPrivate from "hooks/useAxiosPrivate";
 
 interface IUpdateReviewPayload {
   introduction: string;
@@ -17,9 +17,11 @@ interface IAssignReviewRequestToReviewerPayload {
 }
 
 const useReviewsApi = (controller?: AbortController) => {
+  const axiosPrivate = useAxiosPrivate();
+
   return {
     async createNewReview(payload: object) {
-      const res = await api.post("/review/create", payload, {
+      const res = await axiosPrivate.post("/review/create", payload, {
         signal: controller?.signal,
       });
 
@@ -27,7 +29,7 @@ const useReviewsApi = (controller?: AbortController) => {
     },
 
     async deleteReview(id: string) {
-      const res = await api.delete(`/review/delete/${id}`, {
+      const res = await axiosPrivate.delete(`/review/delete/${id}`, {
         signal: controller?.signal,
       });
 
@@ -35,23 +37,31 @@ const useReviewsApi = (controller?: AbortController) => {
     },
 
     async completingReview(payload: object, reviewId: string) {
-      const res = await api.patch(`/review/complete/${reviewId}`, payload, {
-        signal: controller?.signal,
-      });
+      const res = await axiosPrivate.patch(
+        `/review/complete/${reviewId}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
     async sendReviewToWriterEmail(payload: object, reviewId: string) {
-      const res = await api.patch(`/review/send/email/${reviewId}`, payload, {
-        signal: controller?.signal,
-      });
+      const res = await axiosPrivate.patch(
+        `/review/send/email/${reviewId}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
     async getAllReviews() {
-      const res = await api.get("/review/all", {
+      const res = await axiosPrivate.get("/review/all", {
         signal: controller?.signal,
       });
 
@@ -59,7 +69,7 @@ const useReviewsApi = (controller?: AbortController) => {
     },
 
     async getOneReview(reviewId: string) {
-      const res = await api.get(`/review/${reviewId}`, {
+      const res = await axiosPrivate.get(`/review/${reviewId}`, {
         signal: controller?.signal,
       });
 
@@ -67,31 +77,35 @@ const useReviewsApi = (controller?: AbortController) => {
     },
 
     async updateReview(payload: IUpdateReviewPayload, reviewId: string) {
-      const res = await api.patch(`/review/update/${reviewId}`, payload, {
+      const res = await axiosPrivate.patch(
+        `/review/update/${reviewId}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data;
+    },
+
+    async getAllRequestedReviews(query?: string) {
+      const res = await axiosPrivate.get(`/review/requests?${query}`, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async getAllRequestedReviews() {
-      const res = await api.get("/review/requests", {
+    async getAssignedRequestedReviews(query?: string) {
+      const res = await axiosPrivate.get(`/review/request/assigned?${query}`, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async getAssignedRequestedReviews() {
-      const res = await api.get("/review/request/assigned", {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
-    async getCompletedRequestedReviews() {
-      const res = await api.get("/review/request/completed", {
+    async getCompletedRequestedReviews(query?: string) {
+      const res = await axiosPrivate.get(`/review/request/completed?${query}`, {
         signal: controller?.signal,
       });
 
@@ -99,7 +113,7 @@ const useReviewsApi = (controller?: AbortController) => {
     },
 
     async getAllReviewerTasks() {
-      const res = await api.get("/review/my/tasks", {
+      const res = await axiosPrivate.get("/review/my/tasks", {
         signal: controller?.signal,
       });
 
@@ -109,7 +123,7 @@ const useReviewsApi = (controller?: AbortController) => {
     async assignReviewRequestToReviewer(
       payload: IAssignReviewRequestToReviewerPayload
     ) {
-      const res = await api.post("/review/assign", payload, {
+      const res = await axiosPrivate.post("/review/assign", payload, {
         signal: controller?.signal,
       });
 
@@ -117,7 +131,7 @@ const useReviewsApi = (controller?: AbortController) => {
     },
 
     async getWriterReviewRequests() {
-      const res = await api.get("/review/scripts", {
+      const res = await axiosPrivate.get("/review/scripts", {
         signal: controller?.signal,
       });
 

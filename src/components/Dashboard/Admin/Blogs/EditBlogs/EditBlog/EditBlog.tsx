@@ -24,7 +24,11 @@ const EditBlog = ({ oneWeblog }: IProps) => {
   const { back } = useRouter();
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit, (e) => {
+        console.log("error", e);
+      })}
+    >
       <label htmlFor="blog-title">
         <Typography
           variant="body1"
@@ -91,30 +95,22 @@ const EditBlog = ({ oneWeblog }: IProps) => {
         initialValue={initialValue}
         setTextEditorValue={setTextEditorValue}
       />
-      <div className="my-10">
+      <div className="mt-10">
         <div className="mb-1 mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center relative py-2 px-4 w-full">
           <label
             className="absolute cursor-pointer inset-0"
-            htmlFor="add-image"
+            htmlFor="edit-image"
           ></label>
           <input
             {...register("image")}
             className="opacity-0"
             type="file"
-            id="add-image"
+            id="edit-image"
             hidden
             name="image"
             accept="image/*"
             max={1}
           />
-          <div className="absolute left-0 w-10 h-10 rounded-full overflow-hidden flex justify-center items-center">
-            <Image
-              alt={oneWeblog.title}
-              width={40}
-              height={40}
-              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${oneWeblog.media}`}
-            />
-          </div>
           <Typography
             variant="h6"
             color="primary.700"
@@ -127,7 +123,13 @@ const EditBlog = ({ oneWeblog }: IProps) => {
           <span className="text-error-700">{errors.image?.message}</span>
         )}
       </div>
-
+      <p className="mt-1">Previous image</p>
+      <Image
+        alt={oneWeblog.title}
+        width={200}
+        height={200}
+        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${oneWeblog.media}`}
+      />
       <div className="mt-6 lg:mt-10 flex gap-2 lg:gap-6">
         <LoadingButton
           type="submit"

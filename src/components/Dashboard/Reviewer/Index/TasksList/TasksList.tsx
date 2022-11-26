@@ -4,10 +4,7 @@ import beautySmall from "@assets/images/beauty-small.jpg";
 import Task from "./Task/Task";
 import React from "react";
 import dynamic from "next/dynamic";
-
-const DetailScriptModal = dynamic(
-  () => import("../DetailScriptModal/DetailScriptModal")
-);
+import { IReviewerTask } from "interfaces/reviews";
 
 const tasks = [
   {
@@ -47,9 +44,12 @@ const tasks = [
   },
 ];
 
-const TasksList = () => {
+interface IProps {
+  reviewerTaskList: IReviewerTask[];
+}
+
+const TasksList = ({ reviewerTaskList }: IProps) => {
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
-  const [openDetailScript, setOpenDetailScript] = useState(false);
 
   const activeLinkChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveLinkIndex(newValue);
@@ -94,20 +94,13 @@ const TasksList = () => {
           label="History"
         />
       </Tabs>
-      <Suspense fallback={null}>
-        <DetailScriptModal
-          openDetailScript={openDetailScript}
-          setOpenDetailScript={setOpenDetailScript}
-        />
-      </Suspense>
+
       <div className=" bg-white rounded-md shadow-sm flex flex-col overflow-hidden">
-        {tasks.map((task, index) => (
+        {reviewerTaskList.map((reviewerTask, index) => (
           <React.Fragment key={index}>
             <Task
-              image={task.image}
-              title={task.title}
-              description={task.description}
-              setOpenDetailScript={setOpenDetailScript}
+              reviewerTaskList={reviewerTaskList}
+              reviewerTask={reviewerTask}
             />
             {index < tasks.length - 1 && (
               <Divider className="hidden md:block" />

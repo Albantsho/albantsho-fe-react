@@ -1,20 +1,35 @@
-import { Button, Chip, Divider, Grow, Modal, Rating, Typography } from "@mui/material";
+import {
+  Button,
+  Chip,
+  Divider,
+  Grow,
+  Modal,
+  Rating,
+  Typography,
+} from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import { IReviewerTask } from "interfaces/reviews";
 import { Dispatch, SetStateAction } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 
 interface IProps {
   openDetailScript: boolean;
   setOpenDetailScript: Dispatch<SetStateAction<boolean>>;
+  reviewerTaskList: IReviewerTask[];
+  id: string;
 }
 
 const DetailScriptModal = ({
   openDetailScript,
   setOpenDetailScript,
+  reviewerTaskList,
+  id,
 }: IProps) => {
   const handleCloseUnArchive = () => {
     setOpenDetailScript(false);
   };
+
+  const oneTask = reviewerTaskList.find((reviewTask) => reviewTask._id === id);
 
   return (
     <Modal
@@ -29,7 +44,7 @@ const DetailScriptModal = ({
         >
           <div className="pb-8 px-5 sm:px-7 flex gap-3 items-stretch">
             <Button disableElevation className="py-2 px-4" variant="contained">
-              Type A
+              {oneTask?.review_plan}
             </Button>
             <Button
               className="py-2 px-4"
@@ -52,7 +67,7 @@ const DetailScriptModal = ({
                 variant="h6"
                 className="futura flex-1 font-medium text-primary-700 leading-normal"
               >
-                The Long Man of Long Beach
+                {oneTask?.title}
               </Typography>
             </div>
             <div className="flex items-center mb-8">
@@ -62,7 +77,10 @@ const DetailScriptModal = ({
               >
                 Genre:
               </Typography>
-              <Chip className="py-3 px-4 rounded-md" label="Tv pilot" />
+              <Chip
+                className="py-3 px-4 rounded-md"
+                label={oneTask?.primary_genre}
+              />
             </div>
             <div className="flex items-center mb-8">
               <Typography
@@ -75,7 +93,7 @@ const DetailScriptModal = ({
                 variant="h6"
                 className="futura  font-medium w-[120px] text-neutral-800"
               >
-                23-04-22
+                {oneTask && new Date(oneTask.createdAt).toLocaleDateString()}
               </Typography>
             </div>
             <div className="flex items-center mb-8">
@@ -85,9 +103,17 @@ const DetailScriptModal = ({
               >
                 Rating:
               </Typography>
-              <Rating/>
+              <Rating value={oneTask?.rate} />
             </div>
-            <Btn className="w-full  py-3">Begin review</Btn>
+            {!oneTask?.review ? (
+              <Btn className="w-full py-3">Begin review</Btn>
+            ) : oneTask.review.complete ? (
+              <Btn color="success" className="w-full py-3">
+                Completed
+              </Btn>
+            ) : (
+              <Btn className="w-full py-3">Continue review</Btn>
+            )}
           </div>
         </div>
       </Grow>

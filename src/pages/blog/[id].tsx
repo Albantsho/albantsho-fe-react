@@ -29,12 +29,13 @@ const BlogPost = () => {
     }
 
     getOneWeblogFunc();
-  }, [query.id!]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query.id]);
 
   return (
     <>
       <Head>
-        {/* TODO: Change the title later */}
         <title>Albantsho || {oneWeblog?.title}</title>
       </Head>
       <Nav color="inherit" position="static" />
@@ -47,8 +48,8 @@ const BlogPost = () => {
           <Image
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${oneWeblog.media}`}
             alt={oneWeblog.title}
-            width="1920"
-            height="500"
+            width={1920}
+            height={500}
             className="object-cover object-center"
           />
           <div className="py-6 md:py-14 max-w-screen-lg mx-auto px-5 sm:px-10">

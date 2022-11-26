@@ -26,6 +26,8 @@ const Blog: NextPageWithLayout = () => {
     }
 
     getAllWeblogsFunc();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -162,23 +162,17 @@ const useAuthApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getUserProfile(id: string | string[]) {
-      const res = await axiosPrivate.get(`/user/profile/${id}`, {
+    async getUserProfile() {
+      const res = await axiosPrivate.get("/user/me/profile", {
         signal: controller?.signal,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
       });
 
       return res.data;
     },
 
-    async getAdminProfile() {
-      const res = await api.get("/user/me/profile/", {
+    async getUserProfileForAdmin(id: string | string[]) {
+      const res = await api.get(`/user/profile/${id}`, {
         signal: controller?.signal,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
       });
 
       return res.data;

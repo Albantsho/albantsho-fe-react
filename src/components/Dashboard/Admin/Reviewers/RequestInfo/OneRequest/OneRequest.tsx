@@ -33,7 +33,7 @@ interface IGenresFilmsOptionType {
   label: string;
 }
 
-const genresFilms = [
+const listReviewers = [
   { label: "Kurt Jarvis" },
   { label: "Kurt Jarvis" },
   { label: "Orlando Kidd" },
@@ -155,7 +155,7 @@ const OneRequest = ({ requestInfo }: IProps) => {
               ): void => {
                 setSelectedGenresFilm(newValue);
               }}
-              options={genresFilms}
+              options={listReviewers}
               getOptionLabel={(option) => option.label}
               renderOption={(props, option) => (
                 <ListItem

@@ -4,6 +4,7 @@ import { CustomElement } from "interfaces/slate";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import { addBlogSchema } from "./validation/addBlog.validate";
 
@@ -30,7 +31,7 @@ const useAddBlog = () => {
     ""
   );
   const { createNewWeblog } = useWeblogApi();
-  const { push } = useRouter();
+  const { replace } = useRouter();
 
   let initialValue: CustomElement[] = [
     { type: "paragraph", children: [{ text: "" }] },
@@ -45,7 +46,7 @@ const useAddBlog = () => {
         content: textEditorValue,
         image: data.image[0],
       });
-      push("/admin/blogs");
+      replace(routes.blogsAdminDashboard.url);
       setTextEditorValue("");
       initialValue = [{ type: "paragraph", children: [{ text: "" }] }];
     } catch (error) {

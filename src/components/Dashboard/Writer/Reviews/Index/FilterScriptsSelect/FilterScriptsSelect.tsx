@@ -7,22 +7,38 @@ import {
   type SelectChangeEvent,
   SvgIcon,
 } from "@mui/material";
+import { useRouter } from "next/router";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdDone } from "react-icons/md";
+import routes from "routes/routes";
 const menuItems = [
-  { value: "AllScript", name: "All scripts" },
-  { value: "InReview", name: "In review" },
-  { value: "Reviewed", name: "Reviewed" },
+  { query: "", value: "AllScript", name: "All scripts" },
+  { query: "?reviewed=false", value: "InReview", name: "In review" },
+  { query: "?reviewed=true", value: "Reviewed", name: "Reviewed" },
 ];
 
 const FilterScriptsSelect = () => {
   const [statusSelectInput, setStatusSelectInput] = useState("AllScript");
+  const { push, query } = useRouter();
+
   const handleChangeStatusSelectInput = (
     event: SelectChangeEvent<string>
   ): void => {
     setStatusSelectInput(event.target.value);
   };
+
+  const filterScripts = (selectedQuery: string) => () => {
+    push(routes.reviewsFilterScripts.dynamicUrl(selectedQuery));
+  };
+
+  useEffect(() => {
+    !query.reviewed
+      ? setStatusSelectInput("AllScript")
+      : query.reviewed === "true"
+      ? setStatusSelectInput("Reviewed")
+      : setStatusSelectInput("InReview");
+  }, [query]);
 
   return (
     <div className="my-4 md:mt-20 md:mb-6 overflow-hidden">
@@ -48,6 +64,7 @@ const FilterScriptsSelect = () => {
         >
           {menuItems.map((item) => (
             <MenuItem
+              onClick={filterScripts(item.query)}
               TouchRippleProps={{ className: "text-primary-main" }}
               className="w-full hover:bg-primary-50/25"
               sx={{

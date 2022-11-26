@@ -151,6 +151,12 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
+  reviewsFilterScripts: {
+    url: "/dashboard/writer/reviews",
+    dynamicUrl: (query: string) => `/dashboard/writer/reviews${query}`,
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
   reviewsPaymentSuccessful: {
     url: "/dashboard/writer/reviews/payment-successful",
     mustAuthenticated: "yes",

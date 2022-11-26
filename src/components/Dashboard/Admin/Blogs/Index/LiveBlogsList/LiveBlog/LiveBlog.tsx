@@ -7,6 +7,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineFolder } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
+import routes from "routes/routes";
 
 interface IProps {
   blog: IWeblog;
@@ -57,7 +58,10 @@ const LiveBlog = ({
           </div>
         </div>
         <div className="ml-auto flex md:self-start lg:self-center xl:self-start gap-3 md:gap-1">
-          <IconButton href={`/admin/blogs/edit-blog/${_id}`} color="primary">
+          <IconButton
+            href={routes.editBlogAdminDashboard.dynamicUrl(_id)}
+            color="primary"
+          >
             <SvgIcon
               inheritViewBox
               fontSize="medium"

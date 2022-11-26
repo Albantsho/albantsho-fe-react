@@ -1,9 +1,27 @@
 import ProfileNav from "@shared/ProfileNav/ProfileNav";
+import useAuthApi from "apis/Auth.api";
 import BasicPersonalInformation from "components/Profile/BasicInfoPerson/BasicPersonalInformation";
 import PersonalWithdrawalDetails from "components/Profile/PersonalWithdrawalDetails/PersonalWithdrawalDetails";
 import Head from "next/head";
+import { useEffect, useState } from "react";
+import errorHandler from "utils/error-handler";
 
 const Profile = () => {
+  const { getUserProfile } = useAuthApi();
+  const [first, setfirst] = useState();
+
+  useEffect(() => {
+    async function getUserProfileFunc() {
+      try {
+        const res = await getUserProfile();
+      } catch (error) {
+        errorHandler(error);
+      }
+    }
+
+    getUserProfileFunc();
+  }, []);
+
   return (
     <>
       <Head>

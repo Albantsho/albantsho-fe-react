@@ -1,6 +1,6 @@
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
-import AssignedOrCompletedRequests from "components/Dashboard/Admin/Reviewers/Index/AssignedOrCompletedRequests/AssignedOrCompletedRequests";
+import AssignedRequestsList from "components/Dashboard/Admin/Reviewers/Index/AssignedRequestsList/AssignedRequestsList";
 import CurrentRequestsList from "components/Dashboard/Admin/Reviewers/Index/CurrentRequestsList/CurrentRequestsList";
 import TabButtons from "components/Dashboard/Admin/Reviewers/Index/TabButtons/TabButtons";
 import Head from "next/head";
@@ -21,8 +21,8 @@ const ReviewersPage: NextPageWithLayout = () => {
       {(!query.tab || query.tab === "current-requests") && (
         <CurrentRequestsList />
       )}
-      {query.tab === "assigned-requests" && <AssignedOrCompletedRequests />}
-      {query.tab === "completed-requests" && <AssignedOrCompletedRequests />}
+      {query.tab === "assigned-requests" && <AssignedRequestsList />}
+      {query.tab === "completed-requests" && <AssignedRequestsList />}
     </>
   );
 };

@@ -46,7 +46,7 @@ const useLoginForm = () => {
       const res = await signin({ ...data, rememberMe });
       authenticationUser(res.data.user);
       setAccessToken(
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzc5ZDBmZTMzZWQ0NWRjM2QyMjZiZjgiLCJpYXQiOjE2Njg5Mjc3NjQsImV4cCI6MTY4NjIwNzc2NH0.fnqFc9uEEX-EVBztamaFxeleEPXdNRxldTQPSCoSEJY"
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzgxYWM2NzIyZGU4OTQzZTNjOWQzM2IiLCJ1c2VyX3R5cGUiOiJ3cml0ZXIiLCJpYXQiOjE2Njk0NDI3MDAsImV4cCI6MTY4NjcyMjcwMH0.VzpZtGX_nLQFaoPDj_S9t-Nr20RaNbTtCJcdHmKGims"
       );
       successHandler(res.message);
       replace(routes.home.url);

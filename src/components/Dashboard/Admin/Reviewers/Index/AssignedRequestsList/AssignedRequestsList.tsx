@@ -8,11 +8,11 @@ import {
   Typography,
 } from "@mui/material";
 import useReviewsApi from "apis/Reviews.api";
-import { ICurrentRequest } from "interfaces/reviews";
+import { IAssignedOrCompletedRequest } from "interfaces/reviews";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
-import CurrentRequest from "./CurrentRequest/CurrentRequest";
+import AssignedOrCompletedRequest from "./AssignedOrCompletedRequest/AssignedOrCompletedRequest";
 
 const listCurrentRequests = [
   {
@@ -22,6 +22,7 @@ const listCurrentRequests = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
     type: "Type A",
+    reviewer: "Jane Doe",
   },
   {
     id: 2,
@@ -30,6 +31,7 @@ const listCurrentRequests = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
     type: "Type B",
+    reviewer: "Kurt Jarvis",
   },
   {
     id: 3,
@@ -38,6 +40,7 @@ const listCurrentRequests = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
     type: "Type A",
+    reviewer: "Jane Doe",
   },
   {
     id: 4,
@@ -46,6 +49,7 @@ const listCurrentRequests = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
     type: "Type A",
+    reviewer: "Maxwell Blackwell cqw df wqeqe",
   },
   {
     id: 5,
@@ -54,30 +58,30 @@ const listCurrentRequests = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
     type: "Type B",
+    reviewer: "Orlando Kidd",
   },
 ];
 
-const CurrentRequestsList = () => {
-  const [currentRequestsList, setCurrentRequestsList] = useState<
-    Array<ICurrentRequest>
+const AssignedRequestsList = () => {
+  const [assignedRequestList, setAssignedRequestList] = useState<
+    Array<IAssignedOrCompletedRequest>
   >([]);
   const [loading, setLoading] = useState(false);
-  const { getAllReviews } = useReviewsApi();
+  const { getAssignedRequestedReviews } = useReviewsApi();
 
   useEffect(() => {
-    async function getReviewsFunc() {
+    async function getAssignedReviewsFunc() {
       try {
-        setCurrentRequestsList([]);
+        setAssignedRequestList([]);
         setLoading(true);
-        const res = await getAllReviews();
-        setCurrentRequestsList(res.data.scriptBid);
+        const res = await getAssignedRequestedReviews();
+        setAssignedRequestList(res.data.scriptBid);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
       }
     }
-
-    getReviewsFunc();
+    getAssignedReviewsFunc();
   }, []);
 
   return (
@@ -102,7 +106,7 @@ const CurrentRequestsList = () => {
                     px: { xs: 0, sm: 2 },
                   },
                 }}
-                className="w-28 xl:flex-0 flex-[0.5] md:flex-[0.45] xl:pl-0 xl:pb-8 pb-5 pt-0 hidden sm:flex"
+                className="w-28 xl:flex-0 flex-[0.35] lg:hidden xl:flex xl:pl-0 xl:pb-8 pb-5 pt-0 hidden md:flex xl:flex-0"
               >
                 <Typography
                   variant="h6"
@@ -111,11 +115,19 @@ const CurrentRequestsList = () => {
                   Script Type
                 </Typography>
               </TableCell>
+              <TableCell className="flex-[0.35] xl:pb-8 pb-5 pt-0 hidden md:flex lg:hidden xl:flex xl:justify-end xl:pr-16">
+                <Typography
+                  variant="h6"
+                  className="futura font-medium text-primary-700"
+                >
+                  Reviewer
+                </Typography>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody className="px-6 xl:px-14 overflow-hidden">
-            {currentRequestsList.map((request) => (
-              <CurrentRequest request={request} key={request._id} />
+            {assignedRequestList.map((script) => (
+              <AssignedOrCompletedRequest script={script} key={script._id} />
             ))}
           </TableBody>
         </Table>
@@ -124,4 +136,4 @@ const CurrentRequestsList = () => {
   );
 };
 
-export default CurrentRequestsList;
+export default AssignedRequestsList;

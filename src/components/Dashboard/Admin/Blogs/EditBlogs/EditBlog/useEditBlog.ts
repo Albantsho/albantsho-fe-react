@@ -9,6 +9,7 @@ import { jsx } from "slate-hyperscript";
 import errorHandler from "utils/error-handler";
 import { editBlogSchema } from "./validation/editBlog.validate";
 import { getStyleObjectFromString } from "utils/formatter";
+import routes from "routes/routes";
 
 interface IEditWeblogFormValues {
   title: string;
@@ -40,7 +41,7 @@ const useEditBlog = ({
   );
   const htmlContent = new DOMParser().parseFromString(content, "text/html");
   const { updateWeblog } = useWeblogApi();
-  const { push } = useRouter();
+  const { replace } = useRouter();
 
   interface IMarkAttributes {
     bold?: boolean;
@@ -98,6 +99,14 @@ const useEditBlog = ({
       }
 
       nodeAttributes.underline = true;
+    } else {
+      const color = el.getAttribute("style");
+      if (color !== null) {
+        nodeAttributes.color = color.substring(
+          6,
+          el.getAttribute("style").length - 1
+        );
+      }
     }
 
     const children = Array.from(el.childNodes)
@@ -258,11 +267,11 @@ const useEditBlog = ({
           title: data.title,
           description: data.description,
           content: textEditorValue,
-          image: data.image && data.image[0],
+          image: data.image[0] && data.image[0],
         },
         _id
       );
-      push("/admin/blogs");
+      replace(routes.blogsAdminDashboard.url);
       setTextEditorValue("");
       initialValue = [{ type: "paragraph", children: [{ text: "" }] }];
     } catch (error) {

@@ -1,25 +1,27 @@
 import { Chip, TableCell, TableRow, Typography } from "@mui/material";
-import Image, { StaticImageData } from "next/image";
+import { ICurrentRequest } from "interfaces/reviews";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import routes from "routes/routes";
 
 interface IProps {
-  request: {
-    id: number;
-    image: StaticImageData;
-    title: string;
-    description: string;
-    type: string;
-  };
+  request: ICurrentRequest;
 }
 
 const CurrentRequest = ({
-  request: { description, id, image, title, type },
+  request: {
+    description,
+    _id,
+    script_image,
+    title,
+    primary_genre,
+    review_plan,
+  },
 }: IProps) => {
   const { push } = useRouter();
 
   const openOneCurrentRequest = () =>
-    push(routes.reviewerAdminDashboard.dynamicUrl(`${id}`));
+    push(routes.reviewerAdminDashboard.dynamicUrl(_id));
 
   return (
     <TableRow
@@ -46,7 +48,7 @@ const CurrentRequest = ({
               layout="fixed"
               className="rounded-md "
               loading="lazy"
-              src={image}
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script_image}`}
               alt={title}
             />
           </div>
@@ -65,7 +67,7 @@ const CurrentRequest = ({
         </div>
         <Chip
           className="sm:hidden py-5 px-4  rounded-lg text-white bg-primary-700"
-          label={type}
+          label={review_plan}
         />
       </TableCell>
       <TableCell
@@ -77,7 +79,7 @@ const CurrentRequest = ({
         className="hidden py-4  sm:py-6 xl:py-10 sm:flex flex-[0.45] items-center xl:flex-[0.4]"
       >
         <Chip
-          label={type}
+          label={review_plan}
           className="py-5 px-4 md:ml-3 hidden sm:flex rounded-md bg-primary-700  text-white"
         />
       </TableCell>

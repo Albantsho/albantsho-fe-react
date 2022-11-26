@@ -2,6 +2,7 @@ import { Button, Chip, Divider, Paper, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import beautySmall from "@assets/images/beauty-small.jpg";
+import { IWriterReview } from "interfaces/reviews";
 
 const listScripts = [
   {
@@ -46,7 +47,11 @@ const listScripts = [
   },
 ];
 
-const ScriptsList = () => {
+interface IProps {
+  reviewsList: IWriterReview[];
+}
+
+const ScriptsList = ({ reviewsList }: IProps) => {
   return (
     <Paper elevation={0} className="mt-4 bg-white mb-16 shadow-primary">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
@@ -66,8 +71,8 @@ const ScriptsList = () => {
         <Typography></Typography>
       </div>
       <div className="px-5 xl:px-14 overflow-hidden">
-        {listScripts.map((script, index) => (
-          <React.Fragment key={script.id}>
+        {reviewsList.map((script, index) => (
+          <React.Fragment key={script._id}>
             <div
               data-aos-anchor-placement="top-bottom"
               data-aos="fade-up"
@@ -81,14 +86,14 @@ const ScriptsList = () => {
                       height="72"
                       className="rounded-md"
                       loading="lazy"
-                      src={script.image}
+                      src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
                       alt={script.title}
                     />
                   </div>
                   <Chip
-                    label={script.status}
+                    label={script.reviewed ? "Reviewed" : "In Review"}
                     className={`${
-                      script.status === "Reviewed"
+                      script.reviewed
                         ? "text-success-500 bg-success-300/20"
                         : "text-warning-500 bg-warning-300/20"
                     } text-sm  rounded-sm sm:hidden mb-1 w-full max-w-[100px] self-end py-5 `}
@@ -105,7 +110,7 @@ const ScriptsList = () => {
                     {script.description}
                   </Typography>
                 </div>
-                {script.status === "Reviewed" && (
+                {script.reviewed && (
                   <Button
                     variant="text"
                     sx={{
@@ -123,14 +128,14 @@ const ScriptsList = () => {
               </div>
               <div className="hidden sm:flex sm:min-w-[100px] md:w-1/2 gap-4 justify-start  flex-col items-center md:items-center lg:items-end xl:items-start xl:ml-2">
                 <Chip
-                  label={script.status}
+                  label={script.reviewed ? "Reviewed" : "In Review"}
                   className={`${
-                    script.status === "Reviewed"
+                    script.reviewed
                       ? "text-success-500 bg-success-300/20"
                       : "text-warning-500 bg-warning-300/20"
                   }  py-5  hidden sm:flex  rounded-sm text-center  max-w-[101px] w-full`}
                 />
-                {script.status === "Reviewed" && (
+                {script.reviewed && (
                   <Button
                     className="md:hidden lg:block xl:hidden"
                     variant="text"
@@ -146,7 +151,7 @@ const ScriptsList = () => {
                 )}
               </div>
               <div className="sm:min-w-[116px] justify-end xl:py-10 sm:pr-0 items-center hidden md:flex lg:hidden xl:flex">
-                {script.status === "Reviewed" && (
+                {script.reviewed && (
                   <Button
                     variant="text"
                     sx={{
@@ -161,7 +166,7 @@ const ScriptsList = () => {
                 )}
               </div>
             </div>
-            {index < listScripts.length - 1 && (
+            {index < reviewsList.length - 1 && (
               <Divider className="hidden sm:flex" />
             )}
           </React.Fragment>

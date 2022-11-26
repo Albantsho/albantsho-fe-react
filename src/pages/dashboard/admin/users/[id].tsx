@@ -15,13 +15,13 @@ import errorHandler from "utils/error-handler";
 const InformationUserPage: NextPageWithLayout = () => {
   const [oneUser, setOneUser] = useState<IUserFullInformation | null>(null);
   const { query } = useRouter();
-  const { getUserProfile } = useAuthApi();
+  const { getUserProfileForAdmin } = useAuthApi();
 
   useEffect(() => {
     async function getUserFunc() {
       try {
         if (query.id !== undefined) {
-          const res = await getUserProfile(query.id);
+          const res = await getUserProfileForAdmin(query.id);
           setOneUser(res.data.user);
         }
       } catch (error) {
