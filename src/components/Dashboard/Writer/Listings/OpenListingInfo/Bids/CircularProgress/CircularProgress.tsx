@@ -1,64 +1,53 @@
-import Box from "@mui/material/Box";
-import CircularProgress, {
-  type CircularProgressProps,
-} from "@mui/material/CircularProgress";
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
+import { IBidForScript } from "interfaces/bid";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
-function CircularProgressFunction(props: CircularProgressProps) {
-  return (
-    <Box sx={{ position: "relative" }}>
-      <CircularProgress
-        variant="determinate"
-        sx={{ color: "#D9D9D9" }}
-        thickness={2}
-        {...props}
-        value={100}
-      />
-      <CircularProgress
-        variant="determinate"
-        value={25}
-        disableShrink
-        sx={{
-          color: "#03B76F",
-          position: "absolute",
-          left: 0,
-        }}
-        thickness={2}
-        {...props}
-      />
-    </Box>
-  );
+interface IProps {
+  bid: IBidForScript;
 }
 
-export default function CustomizedProgressBars() {
+const hourSeconds = 3600;
+const daySeconds = 86400;
+
+const renderTime = (dimension: string, time: number) => {
+  return (
+    <div className="flex justify-center items-center">
+      <Typography variant="h6" className="text-black">
+        {time}
+        {dimension}
+      </Typography>
+    </div>
+  );
+};
+
+const getTimeHours = (time: number) => ((time % daySeconds) / hourSeconds) | 0;
+
+export default function CustomizedProgressBars({ bid }: IProps) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("md"));
+  const startTime = new Date(bid.updatedAt).getTime() / 1000; // use UNIX timestamp in seconds
+  const endTime =
+    new Date(bid.expire_date).getTime() + new Date(bid.updatedAt).getTime(); // use UNIX timestamp in seconds
+
+  const remainingTime = endTime - startTime;
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        position: "relative",
-        display: "inline-block",
-      }}
+    <CountdownCircleTimer
+      isPlaying
+      strokeWidth={6}
+      size={matches ? 150 : 80}
+      colors="#03B76F"
+      duration={daySeconds}
+      initialRemainingTime={remainingTime % daySeconds}
+      onComplete={(totalElapsedTime) => ({
+        shouldRepeat: remainingTime - totalElapsedTime > hourSeconds,
+      })}
     >
-      <CircularProgressFunction size={matches ? 169 : 89} value={24} />
-      <Box
-        sx={{
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          position: "absolute",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Typography variant="h4" className="font-semibold text-neutral-800">
-          24
-        </Typography>
-      </Box>
-    </Box>
+      {({ elapsedTime, color }) => (
+        <span style={{ color }}>
+          {renderTime("h", getTimeHours(daySeconds - elapsedTime))}
+        </span>
+      )}
+    </CountdownCircleTimer>
   );
 }

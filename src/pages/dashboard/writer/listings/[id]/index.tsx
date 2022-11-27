@@ -13,6 +13,7 @@ import errorHandler from "utils/error-handler";
 import useScripBidApi from "apis/ScripBid.api";
 import useScriptsApi from "apis/Scripts.api";
 import { IFullInformationScript } from "interfaces/script";
+import { IBidForScript } from "interfaces/bid";
 
 const AuctionsScripts = dynamic(
   () =>

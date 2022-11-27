@@ -10,12 +10,12 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import countryList from "config/country-list.json";
 import { IUserProfile } from "interfaces/user";
+import Image from "next/image";
 import pencil from "../assets/pencil.svg";
 import camera from "./assets/camera.svg";
 import useBasicPersonalInformation from "./useBasicPersonalInformation";
-import countryList from "config/country-list.json";
-import Image from "next/image";
 
 interface IProps {
   userProfile: IUserProfile[];

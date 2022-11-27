@@ -1,4 +1,4 @@
-interface IBidForScript {
+export interface IBidForScript {
   _id: string;
   userId: string;
   scriptId: string;
@@ -8,6 +8,7 @@ interface IBidForScript {
   active: boolean;
   expired: boolean;
   paid: boolean;
+  expire_date?: string;
   createdAt: string;
   updatedAt: string;
 }

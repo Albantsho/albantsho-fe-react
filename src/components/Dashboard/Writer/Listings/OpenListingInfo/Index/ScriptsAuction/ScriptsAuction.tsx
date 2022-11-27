@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import AcceptOfferModal from "@shared/Modals/AcceptOfferModal/AcceptOfferModal";
 import useScripBidApi from "apis/ScripBid.api";
+import { IBidForScript } from "interfaces/bid";
 import { IProduct } from "interfaces/product";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -89,7 +90,9 @@ const ScriptsAuction = ({ bidsList }: IProps) => {
                 <TableRow
                   key={auction._id}
                   onClick={() =>
-                    push(`${routes.listingsDashboard.url}/${query.id}/bids`)
+                    push(
+                      `${routes.listingsDashboard.url}/${query.id}/bids/${auction._id}`
+                    )
                   }
                   sx={{
                     "&:nth-of-type(odd)": {

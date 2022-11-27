@@ -21,6 +21,7 @@ const Profile = () => {
         console.log(res);
 
         setUserProfile(res.data.profile);
+        console.log(new Date(userProfile[0].createdAt).getTime());
         setLoading(false);
       } catch (error) {
         errorHandler(error);

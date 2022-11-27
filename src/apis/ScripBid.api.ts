@@ -50,8 +50,8 @@ const useScripBidApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAllBids(id: string) {
-      const res = await axiosPrivate.get(`/bid/all/${id}`, {
+    async getAllBids(bidId: string) {
+      const res = await axiosPrivate.get(`/bid/all/${bidId}`, {
         signal: controller?.signal,
       });
 
