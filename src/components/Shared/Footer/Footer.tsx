@@ -1,4 +1,5 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
+import CustomInput from "@shared/CustomInput/CustomInput";
 import Logo from "@shared/Logo/Logo";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
@@ -21,7 +22,7 @@ const Footer = () => {
             Get the latest news, explainers, script reviews, story spotlights,
             and more, delivered freshly in your inbox.
           </Typography>
-          {/* <div className="flex gap-5 flex-wrap justify-center mt-5">
+          <div className="flex gap-5 flex-wrap justify-center mt-5">
             <CustomInput
               className="max-w-[260px] w-full"
               variant="outlined"
@@ -35,7 +36,7 @@ const Footer = () => {
             <Button color="inherit" variant="outlined" size="large">
               Subscribe
             </Button>
-          </div> */}
+          </div>
         </div>
         <Box
           gridTemplateColumns={{ sm: "repeat(2, auto)", lg: "repeat(4, auto)" }}

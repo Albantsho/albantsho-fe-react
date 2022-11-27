@@ -1,7 +1,9 @@
 import { Button, IconButton, InputAdornment, SvgIcon } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import useUserStore from "app/user.store";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
+import routes from "routes/routes";
 import UserIcon from "../assets/user.svg";
 
 interface IProps {
@@ -9,6 +11,8 @@ interface IProps {
 }
 
 const DesktopNav = ({ links }: IProps) => {
+  const user = useUserStore((state) => state.user);
+
   return (
     <>
       <CustomInput
@@ -29,7 +33,7 @@ const DesktopNav = ({ links }: IProps) => {
       />
       <div className="flex gap-12 text-white mx-10 flex-1 justify-center">
         {links.map(({ title, href }, i) => (
-          <Link legacyBehavior href={href} key={i}>
+          <Link href={href} passHref legacyBehavior key={i}>
             <Button color="inherit" size="large">
               {title}
             </Button>
@@ -40,9 +44,13 @@ const DesktopNav = ({ links }: IProps) => {
         <IconButton color="inherit">
           <SvgIcon component={UserIcon} inheritViewBox sx={{ fontSize: 32 }} />
         </IconButton>
-        <Button className="rounded-lg" color="inherit" variant="outlined">
-          Sign In
-        </Button>
+        {!user.email_verified && (
+          <Link href={routes.signin.url} passHref>
+            <Button className="rounded-lg" color="inherit" variant="outlined">
+              Sign In
+            </Button>
+          </Link>
+        )}
       </div>
     </>
   );

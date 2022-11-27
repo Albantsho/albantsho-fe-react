@@ -76,7 +76,7 @@ export interface IFullInformationScript {
   market: boolean;
   rate: string;
   rate_count: string;
-  theme: string;
+  theme: string[];
   subScriptions: string;
   bought: boolean;
   createdAt: string;

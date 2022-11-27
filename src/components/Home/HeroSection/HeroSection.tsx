@@ -1,5 +1,6 @@
 import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
+import useUserStore from "app/user.store";
 import Link from "next/link";
 import { animated, useSpring } from "react-spring";
 import routes from "routes/routes";
@@ -9,6 +10,7 @@ const AnimatedScriptCard = animated(ScriptCard);
 
 const HeroSection = () => {
   const lgScreen = useMediaQuery("(min-width: 1024px)");
+  const user = useUserStore((state) => state.user);
 
   const titleAnim = useSpring({
     from: { x: -100, opacity: 0 },
@@ -47,30 +49,32 @@ const HeroSection = () => {
               Write better screenplays and be discovered by top producers to
               bring them to life.
             </Typography>
-            <Link href={`${routes.register.url}`}>
-              <Button
-                size="large"
-                className="px-8 py-3"
-                variant="contained"
-                color="secondary"
-                disableElevation
-                sx={{
-                  fontSize: 16,
-                  bgcolor: "transparent",
-                  background:
-                    "linear-gradient(180deg, #FFAF19 0%, #FFD368 100%)",
-                  borderRadius: 2,
-                  "&:hover": {
-                    color: "secondary.main",
-                    background: "transparent",
-                    border: "1px solid",
-                    borderColor: "secondary.main",
-                  },
-                }}
-              >
-                Join the tribe
-              </Button>
-            </Link>
+            {!user.email_verified && (
+              <Link legacyBehavior passHref href={routes.register.url}>
+                <Button
+                  size="large"
+                  className="px-8 py-3"
+                  variant="contained"
+                  color="secondary"
+                  disableElevation
+                  sx={{
+                    fontSize: 16,
+                    bgcolor: "transparent",
+                    background:
+                      "linear-gradient(180deg, #FFAF19 0%, #FFD368 100%)",
+                    borderRadius: 2,
+                    "&:hover": {
+                      color: "secondary.main",
+                      background: "transparent",
+                      border: "1px solid",
+                      borderColor: "secondary.main",
+                    },
+                  }}
+                >
+                  Join the tribe
+                </Button>
+              </Link>
+            )}
           </animated.div>
           {/* {lgScreen && (
             <AnimatedScriptCard
@@ -80,12 +84,7 @@ const HeroSection = () => {
                 maxWidth: 395,
                 boxShadow: "0px 35px 60px 0px #0000004D",
               }}
-              script={{
-                title: "Black Onion",
-                script_themes:
-                  "One platform sets out to enable better stories one script at a time.",
-                script_image: "/assets/images/julie.jpg",
-              }}
+              // script={}
             />
           )} */}
         </div>
