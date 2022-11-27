@@ -91,8 +91,12 @@ const ArchiveList = ({ setListScripts, listScripts }: IProps) => {
         </TableRow>
       </TableHead>
       <TableBody className="px-6 xl:px-14 overflow-hidden">
-        {listScriptsP.map((script) => (
-          <ArchiveScript key={script.id} script={script} />
+        {listScripts.map((script) => (
+          <ArchiveScript
+            key={script._id}
+            setListScripts={setListScripts}
+            script={script}
+          />
         ))}
       </TableBody>
     </Table>

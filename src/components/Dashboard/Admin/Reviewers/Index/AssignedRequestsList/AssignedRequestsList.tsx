@@ -1,4 +1,3 @@
-import beautySmall from "@assets/images/beauty-small.jpg";
 import {
   Table,
   TableBody,
@@ -14,54 +13,6 @@ import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import AssignedOrCompletedRequest from "./AssignedOrCompletedRequest/AssignedOrCompletedRequest";
 
-const listCurrentRequests = [
-  {
-    id: 1,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Type A",
-    reviewer: "Jane Doe",
-  },
-  {
-    id: 2,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Type B",
-    reviewer: "Kurt Jarvis",
-  },
-  {
-    id: 3,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Type A",
-    reviewer: "Jane Doe",
-  },
-  {
-    id: 4,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Type A",
-    reviewer: "Maxwell Blackwell cqw df wqeqe",
-  },
-  {
-    id: 5,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Type B",
-    reviewer: "Orlando Kidd",
-  },
-];
-
 const AssignedRequestsList = () => {
   const [assignedRequestList, setAssignedRequestList] = useState<
     Array<IAssignedOrCompletedRequest>
@@ -75,13 +26,15 @@ const AssignedRequestsList = () => {
         setAssignedRequestList([]);
         setLoading(true);
         const res = await getAssignedRequestedReviews();
-        setAssignedRequestList(res.data.scriptBid);
+        setAssignedRequestList(res.data.scripts);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
       }
     }
     getAssignedReviewsFunc();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

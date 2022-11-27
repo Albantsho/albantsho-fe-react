@@ -8,11 +8,11 @@ import { Suspense, useEffect, useState } from "react";
 import { NextPageWithLayout } from "../../../../_app";
 import { Fab } from "@mui/material";
 import { useRouter } from "next/router";
-
-import { IProduct } from "interfaces/product";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import useScripBidApi from "apis/ScripBid.api";
+import useScriptsApi from "apis/Scripts.api";
+import { IFullInformationScript } from "interfaces/script";
 
 const AuctionsScripts = dynamic(
   () =>
@@ -27,10 +27,11 @@ const CreateScriptModal = dynamic(
 
 const ScriptSlug: NextPageWithLayout = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
-
+  const [script, setScript] = useState<IFullInformationScript>();
   const [bidsList, setBidsList] = useState<Array<IBidForScript>>([]);
   const [loading, setLoading] = useState(false);
   const { getAllBids } = useScripBidApi();
+  const { getScript } = useScriptsApi();
   const { query } = useRouter();
 
   useEffect(() => {
@@ -39,7 +40,10 @@ const ScriptSlug: NextPageWithLayout = () => {
         if (typeof query.id === "string") {
           setLoading(false);
           const res = await getAllBids(query.id);
+          const scriptRes = await getScript(query.id);
+
           setBidsList(res.data.scriptBids);
+          setScript(scriptRes.data.script);
           setLoading(false);
         }
       } catch (error) {
@@ -47,20 +51,22 @@ const ScriptSlug: NextPageWithLayout = () => {
       }
     }
     getScriptsDate();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query.id]);
 
   return (
     <>
       <Head>
-        <title>Albantsho || Script Slug </title>
+        <title>Albantsho || Script Slug</title>
       </Head>
       <div className="min-h-screen">
-        {!loading ? (
+        {!loading && script ? (
           <>
             <TabButtons />
             <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
             <div className="py-8 md:py-12 xl:py-20  px-5 sm:px-10 xl:px-20  my-4 md:my-6 bg-white shadow-primary rounded-md">
-              <Heading />
+              <Heading script={script} />
               <Suspense fallback={null}>
                 <CreateScriptModal
                   openCreateScript={openCreateScript}

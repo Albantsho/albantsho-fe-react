@@ -9,22 +9,21 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-import { IoIosMore } from "react-icons/io";
+import useScriptsApi from "apis/Scripts.api";
+import { IWriterScript } from "interfaces/script";
+import Image from "next/image";
+import { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
-import accordionIcon from "./assets/accordion-icon.png";
+import { IoIosMore } from "react-icons/io";
+import routes from "routes/routes";
 import addAbstractIcon from "./assets/add-abstract-icon.png";
 import addScriptIcon from "./assets/add-script-icon.png";
 import addTitleIcon from "./assets/add-title-icon.png";
-import Image from "next/image";
-import { useState } from "react";
 import CustomButtonScripts from "./CustomButtonScripts/CustomButtonScripts";
-import routes from "routes/routes";
-import useScriptsApi from "apis/Scripts.api";
 
 interface IProps {
-  title: string;
-  storyAbout: string;
-  type: string;
+  script: IWriterScript;
+  setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
 }
 
 const buttonsProjects = [
@@ -33,11 +32,12 @@ const buttonsProjects = [
   { title: "SCRIPT", image: addScriptIcon, link: routes.producerDashboard.url },
 ];
 
-const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
+const ProjectAccordion = ({ script, setListScripts }: IProps) => {
   const { updateWriterArchiveScript, deleteScript } = useScriptsApi();
   const [expanded, setExpanded] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openProjectAccordionMenu = Boolean(anchorEl);
+
   const handleOpenProjectAccordionMenu = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -51,19 +51,25 @@ const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
     setAnchorEl(null);
   };
 
-  const archivingScript = async (
-    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>
-  ) => {
-    await updateWriterArchiveScript({ archive: true }, "");
+  const archivingScript =
+    (id: string) =>
+    async (event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>) => {
+      await updateWriterArchiveScript({ archive: true }, id);
+      setListScripts((prevState) =>
+        prevState.filter((script) => script._id !== id)
+      );
+      handleCloseProjectAccordionMenu(event);
+    };
 
-    handleCloseProjectAccordionMenu(event);
-  };
-  const deletingScript = async (
-    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>
-  ) => {
-    await deleteScript("");
-    handleCloseProjectAccordionMenu(event);
-  };
+  const deletingScript =
+    (id: string) =>
+    async (event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>) => {
+      await deleteScript(id);
+      setListScripts((prevState) =>
+        prevState.filter((script) => script._id !== id)
+      );
+      handleCloseProjectAccordionMenu(event);
+    };
 
   return (
     <Accordion
@@ -88,21 +94,25 @@ const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
       >
         <div className="flex flex-col  sm:flex-row flex-1    gap-x-4 gap-y-3 sm:gap-y-0 xl:pr-20">
           <div className="flex justify-center w-[72px] h-[72px] items-center self-start  bg-tinted-100/60 rounded-md">
-            <Image loading="lazy" src={accordionIcon} alt={title} />
+            <Image
+              loading="lazy"
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
+              alt={script.title}
+            />
           </div>
           <div className="sm:max-w-[280px]   flex-1 self-start leading-none">
             <Typography
               variant="h6"
               className="futura leading-normal text-primary-700 font-semibold"
             >
-              {title}
+              {script.title}
             </Typography>
             <Typography variant="caption" className=" text-neutral-600">
-              {storyAbout}
+              {script.description}
             </Typography>
           </div>
           <Chip
-            label={type}
+            label={script.primary_genre}
             className="hidden rounded-md  md:ml-6 xl:ml-24  self-center py-5 px-5 bg-tinted-100/60 text-neutral-800 md:flex lg:hidden xl:flex"
           />
         </div>
@@ -126,13 +136,13 @@ const ProjectAccordion = ({ title, storyAbout, type }: IProps) => {
           >
             <MenuItem
               className="hover:text-primary-700 hover:bg-tinted-50/50 py-3 px-10"
-              onClick={archivingScript}
+              onClick={archivingScript(script._id)}
             >
               Archive
             </MenuItem>
             <MenuItem
               className="hover:text-primary-700 hover:bg-tinted-50/50 py-3 px-10"
-              onClick={deletingScript}
+              onClick={deletingScript(script._id)}
             >
               Delete
             </MenuItem>

@@ -9,16 +9,29 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import { IUserProfile } from "interfaces/user";
 import Image from "next/image";
-import { useState } from "react";
 import pencil from "../assets/pencil.svg";
 import bank from "./assets/bank.png";
+import usePersonalWithdrawalDetails from "./usePersonalWithdrawalDetails";
 
-const PersonalWithdrawalDetails = () => {
-  const [availableChangeValue, setAvailableChangeValue] = useState(true);
+interface IProps {
+  userProfile: IUserProfile[];
+}
+
+const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
+  const {
+    availableChangeValue,
+    errors,
+    handleSubmit,
+    loading,
+    onSubmit,
+    register,
+    updateInformationBankAccess,
+  } = usePersonalWithdrawalDetails({ userProfile });
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Typography variant="h4" className="futura font-medium text-primary-700">
         Withdrawal Details
       </Typography>
@@ -41,20 +54,18 @@ const PersonalWithdrawalDetails = () => {
               </Typography>
             </label>
             <CustomInput
-              disabled={availableChangeValue}
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
+              error={Boolean(errors.bank_account_name) || false}
+              {...register("bank_account_name")}
+              disabled={!availableChangeValue}
               fullWidth
               id="account-name"
               variant="outlined"
               size="small"
-              // defaultValue={user.full_name}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      onClick={() =>
-                        setAvailableChangeValue(!availableChangeValue)
-                      }
+                      onClick={updateInformationBankAccess}
                       color="primary"
                     >
                       <SvgIcon
@@ -65,8 +76,18 @@ const PersonalWithdrawalDetails = () => {
                     </IconButton>
                   </InputAdornment>
                 ),
-                readOnly: availableChangeValue,
+                readOnly: !availableChangeValue,
               }}
+              sx={{
+                "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
+                "& .MuiFormHelperText-root": {
+                  mt: "8px",
+                  mx: 0,
+                  color: "red",
+                  fontSize: "16px",
+                },
+              }}
+              helperText={errors.bank_account_name?.message}
             />
           </div>
           <div>
@@ -79,21 +100,19 @@ const PersonalWithdrawalDetails = () => {
               </Typography>
             </label>
             <CustomInput
-              disabled={availableChangeValue}
+              error={Boolean(errors.bank_account_number) || false}
+              {...register("bank_account_number")}
+              disabled={!availableChangeValue}
               className="disabled:text-red-700"
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="account-number"
               variant="outlined"
               size="small"
-              // defaultValue={user.bank_account}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      onClick={() =>
-                        setAvailableChangeValue(!availableChangeValue)
-                      }
+                      onClick={updateInformationBankAccess}
                       color="primary"
                     >
                       <SvgIcon
@@ -104,8 +123,18 @@ const PersonalWithdrawalDetails = () => {
                     </IconButton>
                   </InputAdornment>
                 ),
-                readOnly: availableChangeValue,
+                readOnly: !availableChangeValue,
               }}
+              sx={{
+                "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
+                "& .MuiFormHelperText-root": {
+                  mt: "8px",
+                  mx: 0,
+                  color: "red",
+                  fontSize: "16px",
+                },
+              }}
+              helperText={errors.bank_account_number?.message}
             />
           </div>
           <div>
@@ -127,7 +156,6 @@ const PersonalWithdrawalDetails = () => {
               id="bank"
               variant="outlined"
               size="small"
-              // defaultValue={user.bank_name}
             >
               <MenuItem>
                 <ListItemText className="text-primary-700">
@@ -146,6 +174,7 @@ const PersonalWithdrawalDetails = () => {
               </Typography>
             </label>
             <CustomInput
+              InputProps={{ readOnly: true }}
               sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="USDT"
@@ -153,12 +182,16 @@ const PersonalWithdrawalDetails = () => {
               size="small"
             />
           </div>
-          <Btn className="mt-2 xl:mt-8 py-3 px-6 mr-auto md:mr-0 md:ml-auto">
+          <Btn
+            type="submit"
+            loading={loading}
+            className="mt-2 xl:mt-8 py-3 px-6 mr-auto md:mr-0 md:ml-auto"
+          >
             Save and Update
           </Btn>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

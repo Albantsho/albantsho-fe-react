@@ -42,7 +42,7 @@ const ScriptInfoPage = () => {
     async function getScriptsDate() {
       try {
         const res = await getScript(query.id as string);
-        setScript(res.data);
+        setScript(res.data.script);
         setLoading(false);
       } catch (error) {
         errorHandler(error);

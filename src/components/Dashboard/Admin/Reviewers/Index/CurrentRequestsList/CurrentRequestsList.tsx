@@ -1,4 +1,3 @@
-import beautySmall from "@assets/images/beauty-small.jpg";
 import {
   Table,
   TableBody,
@@ -14,49 +13,6 @@ import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import CurrentRequest from "./CurrentRequest/CurrentRequest";
 
-const listCurrentRequests = [
-  {
-    id: 1,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Type A",
-  },
-  {
-    id: 2,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Type B",
-  },
-  {
-    id: 3,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Type A",
-  },
-  {
-    id: 4,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Type A",
-  },
-  {
-    id: 5,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Type B",
-  },
-];
-
 const CurrentRequestsList = () => {
   const [currentRequestsList, setCurrentRequestsList] = useState<
     Array<ICurrentRequest>
@@ -70,7 +26,9 @@ const CurrentRequestsList = () => {
         setCurrentRequestsList([]);
         setLoading(true);
         const res = await getAllReviews();
-        setCurrentRequestsList(res.data.scriptBid);
+        console.log(res);
+
+        setCurrentRequestsList(res.data.scripts);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
@@ -78,6 +36,8 @@ const CurrentRequestsList = () => {
     }
 
     getReviewsFunc();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -10,32 +10,63 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import { useState } from "react";
+import { IUserProfile } from "interfaces/user";
 import pencil from "../assets/pencil.svg";
 import camera from "./assets/camera.svg";
+import useBasicPersonalInformation from "./useBasicPersonalInformation";
+import countryList from "config/country-list.json";
+import Image from "next/image";
 
-const BasicPersonalInformation = () => {
-  const [availableChangeValue, setAvailableChangeValue] = useState(true);
+interface IProps {
+  userProfile: IUserProfile[];
+}
+
+const BasicPersonalInformation = ({ userProfile }: IProps) => {
+  const {
+    availableChangeValue,
+    updateInformationUserAccess,
+    errors,
+    handleSubmit,
+    onSubmit,
+    register,
+    loading,
+  } = useBasicPersonalInformation({ userProfile });
+  const countryUser = Object.entries(countryList).find(
+    (countryFlag) => countryFlag[1] === userProfile[0].country
+  );
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Typography variant="h4" className="futura font-medium text-primary-700">
         Basic Info
       </Typography>
       <Divider />
       <div className="flex flex-col md:mt-8 py-8 gap-3 gap-y-8 md:items-start  md:flex-row md:gap-x-20">
-        <div className="relative mx-auto">
-          <Avatar
-            src="/assets/images/profile.jpg"
-            sx={{ width: { xs: 100, md: 180 }, height: { xs: 100, md: 180 } }}
-          />
-          <IconButton
-            component="label"
-            className="bg-white absolute -bottom-1 -right-1 md:bottom-0 md:right-0  md:w-14 md:h-14 shadow-md hover:bg-white"
-          >
-            <input hidden accept="image/*" type="file" />
-            <SvgIcon component={camera} inheritViewBox />
-          </IconButton>
+        <div className="flex flex-col mx-auto gap-2">
+          <div className="relative mx-auto">
+            <Avatar
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${userProfile[0].image}`}
+              sx={{ width: { xs: 100, md: 180 }, height: { xs: 100, md: 180 } }}
+            />
+            <IconButton
+              component="label"
+              className="bg-white absolute -bottom-1 -right-1 md:bottom-0 md:right-0  md:w-14 md:h-14 shadow-md hover:bg-white"
+            >
+              <input
+                {...register("image")}
+                className="opacity-0"
+                type="file"
+                hidden
+                name="image"
+                accept="image/*"
+                max={1}
+              />
+              <SvgIcon component={camera} inheritViewBox />
+            </IconButton>
+          </div>
+          {errors.image && (
+            <span className="text-error-700">{errors.image?.message}</span>
+          )}
         </div>
         <div className="gap-y-5 md:gap-y-6 flex flex-col md:flex-1">
           <div>
@@ -48,20 +79,18 @@ const BasicPersonalInformation = () => {
               </Typography>
             </label>
             <CustomInput
-              disabled={availableChangeValue}
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
+              error={Boolean(errors.first_name) || false}
+              {...register("first_name")}
+              disabled={!availableChangeValue}
               fullWidth
               id="first-name"
               variant="outlined"
-              // defaultValue={user.full_name.split(" ")[0]}
               size="small"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      onClick={() =>
-                        setAvailableChangeValue(!availableChangeValue)
-                      }
+                      onClick={updateInformationUserAccess}
                       color="primary"
                     >
                       <SvgIcon
@@ -72,8 +101,18 @@ const BasicPersonalInformation = () => {
                     </IconButton>
                   </InputAdornment>
                 ),
-                readOnly: availableChangeValue,
+                readOnly: !availableChangeValue,
               }}
+              sx={{
+                "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
+                "& .MuiFormHelperText-root": {
+                  mt: "8px",
+                  mx: 0,
+                  color: "red",
+                  fontSize: "16px",
+                },
+              }}
+              helperText={errors.first_name?.message}
             />
           </div>
           <div>
@@ -86,20 +125,18 @@ const BasicPersonalInformation = () => {
               </Typography>
             </label>
             <CustomInput
-              disabled={availableChangeValue}
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
+              error={Boolean(errors.last_name) || false}
+              {...register("last_name")}
+              disabled={!availableChangeValue}
               fullWidth
               id="last-name"
               variant="outlined"
-              // defaultValue={user.full_name.split(" ")[1]}
               size="small"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
-                      onClick={() =>
-                        setAvailableChangeValue(!availableChangeValue)
-                      }
+                      onClick={updateInformationUserAccess}
                       color="primary"
                     >
                       <SvgIcon
@@ -110,8 +147,18 @@ const BasicPersonalInformation = () => {
                     </IconButton>
                   </InputAdornment>
                 ),
-                readOnly: availableChangeValue,
+                readOnly: !availableChangeValue,
               }}
+              sx={{
+                "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
+                "& .MuiFormHelperText-root": {
+                  mt: "8px",
+                  mx: 0,
+                  color: "red",
+                  fontSize: "16px",
+                },
+              }}
+              helperText={errors.last_name?.message}
             />
           </div>
           <div>
@@ -124,10 +171,11 @@ const BasicPersonalInformation = () => {
               </Typography>
             </label>
             <CustomInput
+              InputProps={{ readOnly: true }}
               sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
               fullWidth
               id="email"
-              // defaultValue={user.email}
+              defaultValue={userProfile[0].email}
               variant="outlined"
               size="small"
             />
@@ -142,6 +190,7 @@ const BasicPersonalInformation = () => {
               </Typography>
             </label>
             <CustomInput
+              InputProps={{ readOnly: true }}
               select
               sx={{
                 "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
@@ -160,18 +209,30 @@ const BasicPersonalInformation = () => {
                 className="w-full hover:bg-primary-50/25"
                 value="Nigeria"
               >
+                {countryUser && (
+                  <Image
+                    width={37}
+                    height={21}
+                    src={`https://flagcdn.com/w40/${countryUser[0]}.png`}
+                    alt={`${countryUser[1]} flag`}
+                  />
+                )}
                 <ListItemText className="text-primary-700">
-                  Nigeria
+                  {userProfile[0].country}
                 </ListItemText>
               </MenuItem>
             </CustomInput>
           </div>
-          <Btn className="mt-2  xl:mt-5 py-3 px-6 mr-auto md:mr-0 md:ml-auto">
+          <Btn
+            loading={loading}
+            type="submit"
+            className="mt-2  xl:mt-5 py-3 px-6 mr-auto md:mr-0 md:ml-auto"
+          >
             Save and Update
           </Btn>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

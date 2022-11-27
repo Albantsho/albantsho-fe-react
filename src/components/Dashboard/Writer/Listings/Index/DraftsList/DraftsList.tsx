@@ -7,16 +7,10 @@ import UncompletedList from "./UncompletedList/UncompletedList";
 const UnlistedList = dynamic(() => import("./UnlistedList/UnlistedList"));
 
 interface IProps {
-  setOpenAddToScript: Dispatch<SetStateAction<boolean>>;
-  setOpenRelistScript: Dispatch<SetStateAction<boolean>>;
   scripts: IProduct[];
 }
 
-const DraftsList = ({
-  setOpenRelistScript,
-  setOpenAddToScript,
-  scripts,
-}: IProps) => {
+const DraftsList = ({ scripts }: IProps) => {
   const unListedScripts = scripts.filter(
     (script) => script.script_listed === false
   );
@@ -35,10 +29,7 @@ const DraftsList = ({
           Uncompleted Listings
         </Typography>
       </div>
-      <UncompletedList
-        unCompletedScripts={unCompletedScripts}
-        setOpenAddToScript={setOpenAddToScript}
-      />
+      <UncompletedList unCompletedScripts={unCompletedScripts} />
       <div className="bg-white p-3 inline-block rounded-md mt-10 px-6 shadow-primary">
         <Typography
           variant="h6"
@@ -49,10 +40,7 @@ const DraftsList = ({
         </Typography>
       </div>
       <Suspense fallback={null}>
-        <UnlistedList
-          unListedScripts={unListedScripts}
-          setOpenRelistScript={setOpenRelistScript}
-        />
+        <UnlistedList unListedScripts={unListedScripts} />
       </Suspense>
     </div>
   );

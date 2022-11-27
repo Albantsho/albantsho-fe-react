@@ -7,6 +7,7 @@ import Head from "next/head";
 import { Suspense, useState } from "react";
 import { NextPageWithLayout } from "../../../../_app";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 const AcceptOfferModal = dynamic(
   () => import("@shared/Modals/AcceptOfferModal/AcceptOfferModal")
@@ -18,11 +19,13 @@ const CreateScriptModal = dynamic(
 const BidsPage: NextPageWithLayout = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
   const [openAcceptOffer, setOpenAcceptOffer] = useState<boolean>(false);
+  const { query } = useRouter();
+  console.log(query);
 
   return (
     <>
       <Head>
-        <title>Albantsho || Bids </title>
+        <title>Albantsho || Bids</title>
       </Head>
       <TabButtons />
       <DashboardSearch setOpenCreateScript={setOpenCreateScript} />

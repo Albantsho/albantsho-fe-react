@@ -14,10 +14,7 @@ export interface IAssignedOrCompletedRequest {
   script_image: string;
   review_plan: string;
   primary_genre: string;
-  reviewer: {
-    id: string;
-    fullname: string;
-  };
+  reviewer: IReviewer;
 }
 
 export interface IReviewerTask {
@@ -40,4 +37,9 @@ export interface IWriterReview {
   description: string;
   script_image: string;
   reviewed: boolean;
+}
+
+export interface IReviewer {
+  id: string;
+  fullname: string;
 }

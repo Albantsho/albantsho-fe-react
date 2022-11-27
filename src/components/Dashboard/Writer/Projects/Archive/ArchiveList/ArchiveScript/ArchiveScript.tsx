@@ -1,20 +1,19 @@
-import { TableRow, TableCell, Typography, Button, Chip } from "@mui/material";
+import { Button, Chip, TableCell, TableRow, Typography } from "@mui/material";
+import { IWriterScript } from "interfaces/script";
+import dynamic from "next/dynamic";
 import Image, { StaticImageData } from "next/image";
-import script from "next/script";
-import { useState } from "react";
-import UnArchiveModal from "../../UnArchiveModal/UnArchiveModal";
+import { Suspense, useState } from "react";
+
+const UnArchiveModal = dynamic(
+  () => import("../../UnArchiveModal/UnArchiveModal")
+);
 
 interface IProps {
-  script: {
-    id: number;
-    image: StaticImageData;
-    title: string;
-    description: string;
-    type: string;
-  };
+  script: IWriterScript;
+  setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
 }
 
-const ArchiveScript = ({ script }: IProps) => {
+const ArchiveScript = ({ script, setListScripts }: IProps) => {
   const [openUnArchive, setOpenUnArchive] = useState<boolean>(false);
   const handleOpenUnArchive = () => setOpenUnArchive(true);
 
@@ -30,7 +29,6 @@ const ArchiveScript = ({ script }: IProps) => {
           "&:last-child td, &:last-child th": { border: 0 },
         }}
         className="flex flex-1"
-        key={script.id}
       >
         <TableCell
           scope="script"
@@ -42,9 +40,9 @@ const ArchiveScript = ({ script }: IProps) => {
                 width={64}
                 height={64}
                 layout="fixed"
-                className="rounded-md "
+                className="rounded-md"
                 loading="lazy"
-                src={script.image}
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
                 alt={script.title}
               />
             </div>
@@ -84,7 +82,7 @@ const ArchiveScript = ({ script }: IProps) => {
           className="hidden py-4  sm:py-6 xl:py-10 md:flex lg:hidden xl:flex flex-[0.55] items-center"
         >
           <Chip
-            label={script.type}
+            label={script.primary_genre}
             className=" py-5 px-4 md:ml-3 hidden md:flex rounded-md bg-tinted-100/60  text-neutral-800"
           />
         </TableCell>
@@ -105,17 +103,19 @@ const ArchiveScript = ({ script }: IProps) => {
               border: "1px solid #7953B5",
               borderRadius: 1.5,
             }}
-            className=""
           >
             Unarchive
           </Button>
         </TableCell>
       </TableRow>
-      <UnArchiveModal
-        id={`${script.id}`}
-        openUnArchive={openUnArchive}
-        setOpenUnArchive={setOpenUnArchive}
-      />
+      <Suspense fallback={null}>
+        <UnArchiveModal
+          id={script._id}
+          openUnArchive={openUnArchive}
+          setOpenUnArchive={setOpenUnArchive}
+          setListScripts={setListScripts}
+        />
+      </Suspense>
     </>
   );
 };

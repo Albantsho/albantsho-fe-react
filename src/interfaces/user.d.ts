@@ -1,10 +1,12 @@
+import { IWallet } from "./wallet";
+
 export interface IUser {
   active: boolean;
   country: string;
   email: string;
   email_verified: boolean;
   fullname: string;
-  gender: "mail" | "female";
+  gender: "male" | "female";
   user_type?: "writer" | "producer" | "admin" | "reviewer";
   portfolio: null | string;
   production_company_name: null | string;
@@ -21,12 +23,37 @@ export interface IUserInformation {
 export interface IUserFullInformation {
   _id: string;
   fullname: string;
-  user_type: string;
+  user_type: "writer" | "producer" | "admin" | "reviewer";
   freeze: boolean;
   block: boolean;
   email: string;
   sold_scripts: number;
   country: string;
-  gender: string;
+  gender: "male" | "female";
   image: null | string;
+}
+
+export interface IUserProfile {
+  _id: string;
+  email: string;
+  fullname: string;
+  director_application: boolean;
+  director_approval: boolean;
+  user_type: "writer" | "producer" | "admin" | "reviewer";
+  country: string;
+  production_company_name: null | string;
+  portfolio: null | string;
+  verification_status: boolean;
+  bank_name: string | null;
+  bank_account_name: string | null;
+  bank_account_number: string | null;
+  subscription_count: number | null;
+  freeze: boolean;
+  block: boolean;
+  sold_scripts: number;
+  gender: "male" | "female";
+  image: string | null;
+  createdAt: string;
+  updatedAt: string;
+  wallet: IWallet[];
 }

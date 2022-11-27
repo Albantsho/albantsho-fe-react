@@ -20,6 +20,8 @@ const UsersPage: NextPageWithLayout = () => {
       try {
         setLoading(true);
         const res = await getAllUser();
+        console.log(res);
+
         setUsersList(res.data.users);
         setLoading(false);
       } catch (error) {
@@ -27,6 +29,8 @@ const UsersPage: NextPageWithLayout = () => {
       }
     }
     getAllUsersFunc();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

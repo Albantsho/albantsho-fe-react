@@ -1,7 +1,6 @@
 import { Divider } from "@mui/material";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import useAuthApi from "apis/Auth.api";
-import useUserStore from "app/user.store";
 import BreadcrumbsUserInfo from "components/Dashboard/Admin/Users/UserInfo/BreadcrumbsUserInfo/BreadcrumbsUserInfo";
 import UserInformation from "components/Dashboard/Admin/Users/UserInfo/UserInformation/UserInformation";
 import { IUserFullInformation } from "interfaces/user";
@@ -30,7 +29,9 @@ const InformationUserPage: NextPageWithLayout = () => {
     }
 
     getUserFunc();
-  }, [query.id!]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query.id]);
 
   return (
     <>

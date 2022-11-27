@@ -139,12 +139,12 @@ const routes = {
   projectsDashboard: {
     url: `/dashboard/writer/projects`,
     mustAuthenticated: "yes",
-    permission: ["writer"],
+    permission: ["writer", "admin"],
   },
   projectsDashboardTabs: {
     url: (query: string) => `/dashboard/writer/projects${query}`,
     mustAuthenticated: "yes",
-    permission: ["writer"],
+    permission: ["writer", "admin"],
   },
   reviewsDashboard: {
     url: "/dashboard/writer/reviews",

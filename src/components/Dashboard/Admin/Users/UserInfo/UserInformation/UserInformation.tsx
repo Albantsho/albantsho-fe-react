@@ -1,15 +1,14 @@
 import { Avatar, Button, SvgIcon, Tooltip, Typography } from "@mui/material";
-import CustomInput from "@shared/CustomInput/CustomInput";
+import useAuthApi from "apis/Auth.api";
+import countryList from "config/country-list.json";
 import { IUserFullInformation } from "interfaces/user";
+import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
 import { MdNotInterested } from "react-icons/md";
 import { SlDislike, SlLike } from "react-icons/sl";
+import errorHandler from "utils/error-handler";
 import BlockingUserModal from "../Modals/BlockingUserModal/BlockingUserModal";
 import FreezingUserModal from "../Modals/FreezingUserModal/FreezingUserModal";
-import countryList from "config/country-list.json";
-import Image from "next/image";
-import useAuthApi from "apis/Auth.api";
-import errorHandler from "utils/error-handler";
 interface IProps {
   user: IUserFullInformation;
   setOneUser: Dispatch<SetStateAction<IUserFullInformation | null>>;

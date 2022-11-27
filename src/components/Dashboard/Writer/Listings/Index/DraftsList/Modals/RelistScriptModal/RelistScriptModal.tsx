@@ -1,21 +1,39 @@
+import pictureModalsSaves from "@assets/images/picture-modals-saves.png";
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import pictureModalsSaves from "@assets/images/picture-modals-saves.png";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import useScriptsApi from "apis/Scripts.api";
+import Image from "next/image";
+import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import errorHandler from "utils/error-handler";
 
 interface IProps {
   openRelistScript: boolean;
-  setOpenRelistScript: Dispatch<SetStateAction<boolean>>;
+  setOpenRelistScript: React.Dispatch<React.SetStateAction<boolean>>;
+  id: string;
 }
 
 const RelistScriptModal = ({
   openRelistScript,
   setOpenRelistScript,
+  id,
 }: IProps) => {
+  const { updateWriterListingScript } = useScriptsApi();
+  const [loading, setLoading] = useState(false);
+
   const handleCloseRelistScript = () => setOpenRelistScript(false);
+
+  const reListScriptToMarketplace = async () => {
+    try {
+      setLoading(true);
+      await updateWriterListingScript({ market: true }, id);
+    } catch (error) {
+      errorHandler(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Modal
       className="px-5"
@@ -46,8 +64,10 @@ const RelistScriptModal = ({
           </Typography>
           <div className="flex gap-3 sm:gap-6">
             <Btn
+              onClick={reListScriptToMarketplace}
               size="large"
               className="py-3 px-5 rounded-lg text-white bg-primary-700"
+              loading={loading}
             >
               Proceed
             </Btn>

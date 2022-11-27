@@ -18,7 +18,7 @@ const useUserStore = create<IUserState>()(
         email: "",
         email_verified: false,
         fullname: "",
-        gender: "mail",
+        gender: "male",
         user_type: "writer",
         portfolio: null,
         production_company_name: null,

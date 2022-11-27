@@ -74,7 +74,7 @@ const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
           size="small"
           className="mr-auto py-3 px-4"
         >
-          Place Bid
+          Withdraw Bid
         </Btn>
       </div>
     </div>

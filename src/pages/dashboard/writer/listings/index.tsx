@@ -13,39 +13,13 @@ import { DotLoader } from "react-spinners";
 import { NextPageWithLayout } from "../../../_app";
 import useListings from "./useListings";
 
-const AddScriptToCompletedModal = dynamic(
-  () =>
-    import(
-      "components/Dashboard/Writer/Listings/Index/DraftsList/Modals/AddScriptToCompletedModal/AddScriptToCompletedModal"
-    )
-);
-const RelistScriptModal = dynamic(
-  () =>
-    import(
-      "components/Dashboard/Writer/Listings/Index/DraftsList/Modals/RelistScriptModal/RelistScriptModal"
-    )
-);
 const CreateScriptModal = dynamic(
   () => import("@shared/Modals/CreateScriptModal/CreateScriptModal")
 );
-const UnListingItemModal = dynamic(
-  () =>
-    import(
-      "components/Dashboard/Writer/Listings/Index/OpeningList/Modals/UnListingItemModal/UnListingItemModal"
-    )
-);
 
 const Listings: NextPageWithLayout = () => {
-  const {
-    loading,
-    openAddToScript,
-    openCreateScript,
-    openRelistScript,
-    scripts,
-    setOpenAddToScript,
-    setOpenCreateScript,
-    setOpenRelistScript,
-  } = useListings();
+  const { loading, openCreateScript, scripts, setOpenCreateScript } =
+    useListings();
   const { query } = useRouter();
 
   return (
@@ -73,19 +47,7 @@ const Listings: NextPageWithLayout = () => {
             <>
               {/* <DraftsList
                 scripts={scripts}
-                setOpenAddToScript={setOpenAddToScript}
-                setOpenRelistScript={setOpenRelistScript}
               /> */}
-              <Suspense fallback={null}>
-                <AddScriptToCompletedModal
-                  openAddToScript={openAddToScript}
-                  setOpenAddToScript={setOpenAddToScript}
-                />
-                <RelistScriptModal
-                  openRelistScript={openRelistScript}
-                  setOpenRelistScript={setOpenRelistScript}
-                />
-              </Suspense>
             </>
           )}
           {

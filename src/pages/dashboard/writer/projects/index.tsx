@@ -1,26 +1,20 @@
+import { Fab } from "@mui/material";
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/DashboardSearch";
-import Head from "next/head";
-import { NextPageWithLayout } from "../../../_app";
-import { useRouter } from "next/router";
-import ArchiveList from "components/Dashboard/Writer/Projects/Archive/ArchiveList/ArchiveList";
-import { useEffect, useState } from "react";
-import { Fab } from "@mui/material";
-import TabButtons from "components/Dashboard/Writer/Projects/TabButtons/TabButtons";
-import ProjectAccordionList from "components/Dashboard/Writer/Projects/Scripts/ProjectAccordionList/ProjectAccordionList";
-import dynamic from "next/dynamic";
-import useUserStore from "app/user.store";
 import useScriptsApi from "apis/Scripts.api";
-import errorHandler from "utils/error-handler";
+import ArchiveList from "components/Dashboard/Writer/Projects/Archive/ArchiveList/ArchiveList";
+import ProjectAccordionList from "components/Dashboard/Writer/Projects/Scripts/ProjectAccordionList/ProjectAccordionList";
+import TabButtons from "components/Dashboard/Writer/Projects/TabButtons/TabButtons";
 import { IWriterScript } from "interfaces/script";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
+import errorHandler from "utils/error-handler";
+import { NextPageWithLayout } from "../../../_app";
+import querystring from "query-string";
 
-const UnArchiveModal = dynamic(
-  () =>
-    import(
-      "components/Dashboard/Writer/Projects/Archive/UnArchiveModal/UnArchiveModal"
-    )
-);
 const CreateScriptModal = dynamic(
   () => import("@shared/Modals/CreateScriptModal/CreateScriptModal")
 );
@@ -28,7 +22,6 @@ const CreateScriptModal = dynamic(
 const Projects: NextPageWithLayout = () => {
   const [listScripts, setListScripts] = useState<Array<IWriterScript>>([]);
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
-
   const [loading, setLoading] = useState<boolean>(false);
   const { query } = useRouter();
   const { getWriterAllScripts } = useScriptsApi();
@@ -40,14 +33,18 @@ const Projects: NextPageWithLayout = () => {
       try {
         setListScripts([]);
         setLoading(true);
-        const res = await getWriterAllScripts();
+        const res = await getWriterAllScripts(querystring.stringify(query));
+
         setListScripts(res.data.scripts);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
+        console.log(error);
       }
     }
     getWriterAllScriptsFunc();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return (

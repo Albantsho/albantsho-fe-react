@@ -32,7 +32,7 @@ interface IResetpasswordPayload {
 
 interface IUpdateUserInformationPayload {
   fullname: string;
-  image: string;
+  image: File;
 }
 
 interface IUpdateWithdrawUserInformationPayload {
@@ -116,7 +116,7 @@ const useAuthApi = (controller?: AbortController) => {
     },
 
     async updateUserInformation(payload: IUpdateUserInformationPayload) {
-      const res = await api.patch("/user/profile/update", payload, {
+      const res = await axiosPrivate.patch("/user/profile/update", payload, {
         signal: controller?.signal,
       });
 
@@ -126,12 +126,16 @@ const useAuthApi = (controller?: AbortController) => {
     async updateUserWithdrawInformation(
       payload: IUpdateWithdrawUserInformationPayload
     ) {
-      const res = await api.post("/user/profile/withdraw/update", payload, {
-        signal: controller?.signal,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
-      });
+      const res = await axiosPrivate.post(
+        "/user/profile/withdraw/update",
+        payload,
+        {
+          signal: controller?.signal,
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
+        }
+      );
 
       return res.data;
     },
@@ -178,8 +182,8 @@ const useAuthApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAllReviewers(payload: IGetAllUserOrReviewerPayload) {
-      const res = await api.get("/user/all/users", {
+    async getAllReviewers(query?: string) {
+      const res = await api.get(`/user/all/reviewers?${query}`, {
         signal: controller?.signal,
         // headers: {
         //   Authorization: `Bearer ${token}`,

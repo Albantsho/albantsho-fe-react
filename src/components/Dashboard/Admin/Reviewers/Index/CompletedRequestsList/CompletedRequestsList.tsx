@@ -26,13 +26,15 @@ const CompletedRequestsList = () => {
         setCompletedRequestList([]);
         setLoading(true);
         const res = await getCompletedRequestedReviews();
-        setCompletedRequestList(res.data.scriptBid);
+        setCompletedRequestList(res.data.scripts);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
       }
     }
     getCompletedReviewsFunc();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

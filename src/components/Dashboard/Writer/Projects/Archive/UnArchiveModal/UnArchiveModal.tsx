@@ -6,19 +6,29 @@ import pictureModalsSaves from "@assets/images/picture-modals-saves.png";
 import { AiOutlineClose } from "react-icons/ai";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScriptsApi from "apis/Scripts.api";
+import { IWriterScript } from "interfaces/script";
 
 interface IProps {
   openUnArchive: boolean;
   setOpenUnArchive: Dispatch<SetStateAction<boolean>>;
+  setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
   id: string;
 }
 
-const UnArchiveModal = ({ openUnArchive, setOpenUnArchive, id }: IProps) => {
+const UnArchiveModal = ({
+  openUnArchive,
+  setOpenUnArchive,
+  id,
+  setListScripts,
+}: IProps) => {
   const { updateWriterArchiveScript } = useScriptsApi();
   const handleCloseUnArchive = () => setOpenUnArchive(false);
 
   const unArchivingScript = async () => {
     await updateWriterArchiveScript({ archive: false }, id);
+    setListScripts((prevState) =>
+      prevState.filter((script) => script._id !== id)
+    );
   };
 
   return (
