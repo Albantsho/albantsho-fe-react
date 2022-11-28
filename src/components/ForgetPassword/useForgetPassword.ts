@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
-import successHandler from "utils/success-handler";
 import { forgetPasswordSchema } from "./validation/forgetPassword.validation";
 
 interface IAuthForgetPassword {
@@ -28,7 +27,6 @@ const useForgetPassword = () => {
     try {
       setLoading(true);
       const res = await resetPasswordEmail(data.email);
-      successHandler(res.message);
       replace(routes.resetPassword.url(res.data.randomString));
     } catch (error) {
       errorHandler(error);

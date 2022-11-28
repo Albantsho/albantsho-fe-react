@@ -1,4 +1,4 @@
-import api, { apiPrivate } from "apis/configs/axios.config";
+import { apiPrivate } from "apis/configs/axios.config";
 import useUserStore from "app/user.store";
 import { useEffect } from "react";
 
@@ -25,15 +25,11 @@ const useAxiosPrivate = () => {
         const prevRequest = error?.config;
         if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;
-          const response = await api.post("/user/refresh", undefined, {
-            withCredentials: true,
-          });
-
-          setAccessToken(response.data.accessToken);
-
+          const response = await apiPrivate.post("/user/refresh", {});
+          setAccessToken(response.data.data.accessToken);
           prevRequest.headers[
             "Authorization"
-          ] = `Bearer ${response.data.accessToken}`;
+          ] = `Bearer ${response.data.data.accessToken}`;
           return apiPrivate(prevRequest);
         }
         return Promise.reject(error);

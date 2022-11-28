@@ -42,11 +42,9 @@ const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
     setAvailableChangeValue(!availableChangeValue);
 
   const onSubmit = async (data: IUpdateWithdrawalFormValues) => {
-    console.log(data);
     try {
       setLoading(true);
       const res = await updateUserWithdrawInformation(data);
-      console.log(res);
       setAvailableChangeValue(false);
     } catch (error) {
       errorHandler(error);

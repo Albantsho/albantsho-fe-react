@@ -46,12 +46,6 @@ interface IUserRestrictionPayload {
   block?: boolean;
 }
 
-interface IGetAllUserOrReviewerPayload {
-  page: number;
-  limit: string;
-  search: string;
-}
-
 const useAuthApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
@@ -65,7 +59,7 @@ const useAuthApi = (controller?: AbortController) => {
     },
 
     async signin(payload: ILoginPayload) {
-      const res = await api.post("/user/signin", payload, {
+      const res = await apiPrivate.post("/user/signin", payload, {
         signal: controller?.signal,
       });
 
@@ -73,23 +67,23 @@ const useAuthApi = (controller?: AbortController) => {
     },
 
     async emailVerify(payload: IEmailVerifyOtp) {
-      const res = await api.post("/user/verify-otp", payload);
+      const res = await apiPrivate.post("/user/verify-otp", payload, {
+        signal: controller?.signal,
+      });
 
       return res.data;
     },
 
     async resendCode(payload: IResendCode) {
-      const res = await api.post("/user/resend-otp", payload);
-
+      const res = await api.post("/user/resend-otp", payload, {
+        signal: controller?.signal,
+      });
       return res.data;
     },
 
     async logoutUser() {
       const res = await api.post("/user/logout", {
         signal: controller?.signal,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
       });
 
       return res.data;
@@ -131,9 +125,6 @@ const useAuthApi = (controller?: AbortController) => {
         payload,
         {
           signal: controller?.signal,
-          // headers: {
-          //   Authorization: `Bearer ${token}`,
-          // },
         }
       );
 
@@ -146,22 +137,19 @@ const useAuthApi = (controller?: AbortController) => {
         payload,
         {
           signal: controller?.signal,
-          // headers: {
-          //   Authorization: `Bearer ${token}`,
-          // },
         }
       );
 
       return res.data;
     },
 
-    async getAllUser(payload?: IGetAllUserOrReviewerPayload) {
-      const res = await axiosPrivate.get("/user/all/users", {
-        signal: controller?.signal,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
-      });
+    async getAllUser(searchQuery?: string) {
+      const res = await axiosPrivate.get(
+        `/user/all/users?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
@@ -185,9 +173,6 @@ const useAuthApi = (controller?: AbortController) => {
     async getAllReviewers(query?: string) {
       const res = await api.get(`/user/all/reviewers?${query}`, {
         signal: controller?.signal,
-        // headers: {
-        //   Authorization: `Bearer ${token}`,
-        // },
       });
 
       return res.data;

@@ -17,7 +17,11 @@ const useMarketPlace = () => {
     async function getScriptsFunc() {
       try {
         setLoading(true);
-        if (!user || user.user_type === "writer") {
+        if (
+          !user ||
+          user.user_type === "writer" ||
+          user.user_type === "admin"
+        ) {
           const res = await getAllScripts(queryString.stringify(query));
           setScripts(res.data.scripts);
           setLoading(false);

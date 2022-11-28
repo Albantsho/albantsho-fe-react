@@ -5,9 +5,10 @@ import routes from "routes/routes";
 
 interface IProps {
   placeholder: string;
+  handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const AdminDashboardSearch = ({ placeholder }: IProps) => {
+const AdminDashboardSearch = ({ placeholder, handleSearch }: IProps) => {
   const { route } = useRouter();
 
   return (
@@ -16,6 +17,7 @@ const AdminDashboardSearch = ({ placeholder }: IProps) => {
         <div className="flex items-center shadow-primary bg-white py-2 px-5 rounded-md gap-2 flex-1 md:flex-grow-0 md:min-w-[350px] md:w-auto">
           <RiSearch2Line className="text-gray-400 text-2xl md:mr-1" />
           <input
+            onChange={handleSearch}
             placeholder={placeholder}
             className=" outline-none border-none  placeholder:text-gray-400 text-base text-gray-600 w-full"
           />

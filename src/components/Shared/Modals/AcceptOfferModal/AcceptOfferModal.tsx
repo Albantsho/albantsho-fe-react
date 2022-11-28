@@ -2,6 +2,7 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScripBidApi from "apis/ScripBid.api";
+import { IBidForScript } from "interfaces/bid";
 import { IProduct } from "interfaces/product";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";

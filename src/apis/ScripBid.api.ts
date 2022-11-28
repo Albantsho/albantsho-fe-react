@@ -1,5 +1,4 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
-import api from "./configs/axios.config";
 
 interface ICreateBid {
   scriptId: string;

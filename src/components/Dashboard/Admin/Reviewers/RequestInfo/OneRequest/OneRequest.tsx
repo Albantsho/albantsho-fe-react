@@ -11,11 +11,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import Btn from "@shared/Btn/Btn";
+import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import useReviewsApi from "apis/Reviews.api";
 import { IReviewer } from "interfaces/reviews";
 import { IFullInformationScript } from "interfaces/script";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import errorHandler from "utils/error-handler";
 
 interface IProps {
   script: IFullInformationScript;
@@ -25,6 +30,7 @@ interface IProps {
 interface IReviewersListOptionType {
   inputValue?: string;
   fullname: string;
+  id: string;
 }
 
 const filterOptions = createFilterOptions({
@@ -33,8 +39,23 @@ const filterOptions = createFilterOptions({
 });
 
 const OneRequest = ({ reviewersList, script }: IProps) => {
+  const { assignReviewRequestToReviewer } = useReviewsApi();
   const [selectedReviewer, setSelectedReviewer] =
     useState<IReviewersListOptionType | null>(null);
+  const { back } = useRouter();
+
+  const assignedReviewToReviewer = async () => {
+    try {
+      if (selectedReviewer?.id) {
+        const res = await assignReviewRequestToReviewer({
+          scriptId: script._id,
+          userId: selectedReviewer?.id,
+        });
+      }
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
 
   return (
     <div>
@@ -130,7 +151,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
           renderOption={(props, option) => (
             <ListItem
               disablePadding
-              key={option.fullname}
+              key={option.id}
               {...props}
               className={` px-2 sm:px-4 md:px-6`}
               sx={{ "&:last-child": { border: 0 } }}
@@ -178,6 +199,16 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
             />
           )}
         />
+      </div>
+      <div className="mt-8 flex items-stretch  gap-3">
+        <Btn
+          size="large"
+          className="py-3 px-5 rounded-lg  text-white bg-primary-700"
+          onClick={assignedReviewToReviewer}
+        >
+          Assign Review
+        </Btn>
+        <CancelBtn onClick={() => back()} />
       </div>
     </div>
   );

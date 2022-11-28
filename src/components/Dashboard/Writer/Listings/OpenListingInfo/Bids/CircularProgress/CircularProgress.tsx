@@ -27,7 +27,8 @@ export default function CustomizedProgressBars({ bid }: IProps) {
   const matches = useMediaQuery(theme.breakpoints.up("md"));
   const startTime = new Date(bid.updatedAt).getTime() / 1000; // use UNIX timestamp in seconds
   const endTime =
-    new Date(bid.expire_date).getTime() + new Date(bid.updatedAt).getTime(); // use UNIX timestamp in seconds
+    new Date(bid.expire_date ? bid.expire_date : 0).getTime() +
+    new Date(bid.updatedAt).getTime(); // use UNIX timestamp in seconds
 
   const remainingTime = endTime - startTime;
 

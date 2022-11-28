@@ -29,7 +29,7 @@ const DesktopNav = ({ links, isTransparent }: IProps) => {
         ))}
       </div>
 
-      {user.active ? (
+      {user.email_verified ? (
         <ProfileMenu />
       ) : (
         <Link legacyBehavior href={routes.signin.url} passHref>

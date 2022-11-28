@@ -6,7 +6,6 @@ import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
-import successHandler from "utils/success-handler";
 import { loginSchema } from "./validation/login.validation";
 interface IAuthLogin {
   email: string;
@@ -45,10 +44,9 @@ const useLoginForm = () => {
       setLoading(true);
       const res = await signin({ ...data, rememberMe });
       authenticationUser(res.data.user);
-      setAccessToken(
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzgxYWM2NzIyZGU4OTQzZTNjOWQzM2IiLCJ1c2VyX3R5cGUiOiJ3cml0ZXIiLCJpYXQiOjE2Njk0NDI3MDAsImV4cCI6MTY4NjcyMjcwMH0.VzpZtGX_nLQFaoPDj_S9t-Nr20RaNbTtCJcdHmKGims"
-      );
-      successHandler(res.message);
+      console.log(res);
+
+      setAccessToken(res.data.accessToken);
       replace(routes.home.url);
     } catch (error) {
       errorHandler(error);

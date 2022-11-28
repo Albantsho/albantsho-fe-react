@@ -39,7 +39,6 @@ const Projects: NextPageWithLayout = () => {
         setLoading(false);
       } catch (error) {
         errorHandler(error);
-        console.log(error);
       }
     }
     getWriterAllScriptsFunc();

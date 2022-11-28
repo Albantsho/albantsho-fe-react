@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 import { IReviewerTask } from "interfaces/reviews";
 import dynamic from "next/dynamic";
-import Image, { StaticImageData } from "next/image";
-import { Dispatch, SetStateAction, Suspense, useState } from "react";
+import Image from "next/image";
+import { Suspense, useState } from "react";
 
 const DetailScriptModal = dynamic(
   () => import("../../DetailScriptModal/DetailScriptModal")
@@ -10,21 +10,31 @@ const DetailScriptModal = dynamic(
 
 interface IProps {
   reviewerTask: IReviewerTask;
-  reviewerTaskList: IReviewerTask[];
+  setSelectedScriptId: React.Dispatch<React.SetStateAction<string>>;
+  selectedScriptId: string;
 }
 
-const Task = ({ reviewerTask, reviewerTaskList }: IProps) => {
+const Task = ({
+  reviewerTask,
+  setSelectedScriptId,
+  selectedScriptId,
+}: IProps) => {
   const [openDetailScript, setOpenDetailScript] = useState(false);
+
+  const handleSelectedScript = () => {
+    setOpenDetailScript(true);
+    setSelectedScriptId(reviewerTask._id);
+  };
 
   return (
     <>
       <div
         data-aos-anchor-placement="top-bottom"
         data-aos="fade-up"
-        onClick={() => {
-          setOpenDetailScript(true);
-        }}
-        className="flex flex-1 cursor-pointer  items-center hover:bg-primary-50/40 flex-wrap sm:flex-nowrap gap-y-2 gap-x-2 py-5 sm:py-6 lg:py-9 px-5 sm:px-6 lg:px-12"
+        onClick={handleSelectedScript}
+        className={`${
+          selectedScriptId ? "bg-primary-50/40" : "bg-white"
+        } flex flex-1 cursor-pointer  items-center hover:bg-primary-50/40 flex-wrap sm:flex-nowrap gap-y-2 gap-x-2 py-5 sm:py-6 lg:py-9 px-5 sm:px-6 lg:px-12`}
       >
         <div className="flex-shrink-0 -mb-2">
           <Image
@@ -46,11 +56,9 @@ const Task = ({ reviewerTask, reviewerTaskList }: IProps) => {
           </Typography>
         </div>
       </div>
-
       <Suspense fallback={null}>
         <DetailScriptModal
-          id={reviewerTask._id}
-          reviewerTaskList={reviewerTaskList}
+          reviewerTask={reviewerTask}
           openDetailScript={openDetailScript}
           setOpenDetailScript={setOpenDetailScript}
         />

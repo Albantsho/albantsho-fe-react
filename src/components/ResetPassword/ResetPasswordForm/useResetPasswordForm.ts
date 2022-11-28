@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
-import successHandler from "utils/success-handler";
 import { resetPasswordSchema } from "./validation/resetPassword.validation";
 
 interface IAuthResetPassword {
@@ -40,7 +39,6 @@ const useResetPasswordForm = () => {
         });
         replace(routes.signin.url);
       }
-      // successHandler(res.message);
     } catch (error) {
       errorHandler(error);
     } finally {

@@ -11,12 +11,12 @@ import routes from "routes/routes";
 
 interface IProps {
   blog: IWeblog;
-  setLiveBlogList: Dispatch<SetStateAction<IWeblog[]>>;
+  setBlogList: Dispatch<SetStateAction<IWeblog[]>>;
 }
 
 const LiveBlog = ({
   blog: { _id, title, description, media },
-  setLiveBlogList,
+  setBlogList,
 }: IProps) => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
     useState(false);
@@ -36,14 +36,14 @@ const LiveBlog = ({
         className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start"
       >
         <div className="flex gap-3 lg:gap-6">
-          <div className="min-w-[76px] rounded-md flex h-[76px]  bg-tinted-50/50 justify-center items-center">
-            <Image
-              width={27}
-              height={34}
-              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${media}`}
-              alt={title}
-            />
-          </div>
+          <Image
+            className="rounded-lg min-h-[76px]"
+            width={76}
+            height={76}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${media}`}
+            alt={title}
+          />
+
           <div className="sm:max-w-xl sm:w-full leading-none">
             <Typography
               gutterBottom
@@ -88,13 +88,13 @@ const LiveBlog = ({
         </div>
       </div>
       <MoveBlogToTrashListModal
-        setLiveBlogList={setLiveBlogList}
+        setBlogList={setBlogList}
         weblogId={_id}
         setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
         openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
       />
       <MoveBlogToArchiveListModal
-        setLiveBlogList={setLiveBlogList}
+        setBlogList={setBlogList}
         weblogId={_id}
         setOpenMoveBlogToArchiveListModal={setOpenMoveBlogToArchiveListModal}
         openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}

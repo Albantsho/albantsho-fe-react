@@ -1,7 +1,24 @@
 import { Chip, Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import useReviewsApi from "apis/Reviews.api";
+import { useState } from "react";
+import errorHandler from "utils/error-handler";
 
 const Summary = () => {
+  const [loading, setLoading] = useState(false);
+  const { createNewReview } = useReviewsApi();
+
+  const createReviewForScript = async () => {
+    try {
+      setLoading(true);
+      const res = await createNewReview({ scriptId: "" });
+    } catch (error) {
+      errorHandler(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="pb-9 lg:pb-16 bg-white rounded-md px-5">
       <Divider className="lg:mx-5 2xl:mx-20" />
@@ -51,7 +68,12 @@ const Summary = () => {
             </div>
           </div>
         </div>
-        <Btn className="mt-4 py-3 px-7 xl:m12" size="large">
+        <Btn
+          loading={loading}
+          onClick={createReviewForScript}
+          className="mt-4 py-3 px-7 xl:m12"
+          size="large"
+        >
           Proceed to pay
         </Btn>
       </div>

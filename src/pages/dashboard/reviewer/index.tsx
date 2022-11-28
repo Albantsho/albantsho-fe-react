@@ -1,6 +1,5 @@
 import ProfileNav from "@shared/ProfileNav/ProfileNav";
 import useReviewsApi from "apis/Reviews.api";
-import ScriptCart from "components/Dashboard/Reviewer/Index/ScriptCart/ScriptCart";
 import TasksList from "components/Dashboard/Reviewer/Index/TasksList/TasksList";
 import { IReviewerTask } from "interfaces/reviews";
 import Head from "next/head";
@@ -28,6 +27,8 @@ const Reviewer = () => {
     }
 
     getAllReviewerTasksFunc();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -40,10 +41,7 @@ const Reviewer = () => {
         {loading ? (
           <DotLoader color="#7953B5" className="mx-auto mt-10" />
         ) : (
-          <>
-            <TasksList reviewerTaskList={reviewerTaskList} />
-            <ScriptCart />
-          </>
+          <TasksList reviewerTaskList={reviewerTaskList} />
         )}
       </div>
     </>

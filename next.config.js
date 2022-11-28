@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ["picsum.photos", "flagcdn.com", "server.albantsho.com"],
+    domains: ["picsum.photos", "flagcdn.com", "server.albantsho.com", "localhost"],
   },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find(

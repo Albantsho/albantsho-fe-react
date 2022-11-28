@@ -38,14 +38,12 @@ const useBasicPersonalInformation = ({ userProfile }: IProps) => {
     setAvailableChangeValue(!availableChangeValue);
 
   const onSubmit = async (data: IUpdateProfileFormValues) => {
-    console.log(data);
     try {
       setLoading(true);
       const res = await updateUserInformation({
         fullname: `${data.first_name}${data.last_name}`,
         image: data.image[0],
       });
-      console.log(res);
       setAvailableChangeValue(false);
     } catch (error) {
       errorHandler(error);

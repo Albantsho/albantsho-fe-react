@@ -20,7 +20,7 @@ const useReviewsApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
   return {
-    async createNewReview(payload: object) {
+    async createNewReview(payload: { scriptId: string }) {
       const res = await axiosPrivate.post("/review/create", payload, {
         signal: controller?.signal,
       });
@@ -88,26 +88,35 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAllRequestedReviews(query?: string) {
-      const res = await axiosPrivate.get(`/review/requests?${query}`, {
-        signal: controller?.signal,
-      });
+    async getAllRequestedReviews(searchQuery?: string) {
+      const res = await axiosPrivate.get(
+        `/review/requests?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
-    async getAssignedRequestedReviews(query?: string) {
-      const res = await axiosPrivate.get(`/review/request/assigned?${query}`, {
-        signal: controller?.signal,
-      });
+    async getAssignedRequestedReviews(searchQuery?: string) {
+      const res = await axiosPrivate.get(
+        `/review/request/assigned?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
-    async getCompletedRequestedReviews(query?: string) {
-      const res = await axiosPrivate.get(`/review/request/completed?${query}`, {
-        signal: controller?.signal,
-      });
+    async getCompletedRequestedReviews(searchQuery?: string) {
+      const res = await axiosPrivate.get(
+        `/review/request/completed?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },

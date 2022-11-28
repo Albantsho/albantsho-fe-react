@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import React, { FormEvent, useRef, useState } from "react";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
-import successHandler from "utils/success-handler";
 
 const useVerifyEmail = () => {
   const { user } = useUserStore.getState();
@@ -52,12 +51,8 @@ const useVerifyEmail = () => {
         code: Object.values(formValues).join(""),
       });
 
-      setAccessToken(
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzgxYWM2NzIyZGU4OTQzZTNjOWQzM2IiLCJ1c2VyX3R5cGUiOiJ3cml0ZXIiLCJpYXQiOjE2Njk0NDI3MDAsImV4cCI6MTY4NjcyMjcwMH0.VzpZtGX_nLQFaoPDj_S9t-Nr20RaNbTtCJcdHmKGims"
-      );
+      setAccessToken(res.data.accessToken);
       authenticationUser(res.data.user);
-
-      successHandler(res.message);
       replace(routes.home.url);
     } catch (error) {
       errorHandler(error);

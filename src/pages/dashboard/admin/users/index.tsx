@@ -14,13 +14,17 @@ const UsersPage: NextPageWithLayout = () => {
   const { getAllUser } = useAuthApi();
   const [loading, setLoading] = useState(false);
   const [usersList, setUsersList] = useState<IUserInformation[] | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
 
   useEffect(() => {
     async function getAllUsersFunc() {
       try {
         setLoading(true);
-        const res = await getAllUser();
-        console.log(res);
+        const res = await getAllUser(searchQuery);
 
         setUsersList(res.data.users);
         setLoading(false);
@@ -46,7 +50,10 @@ const UsersPage: NextPageWithLayout = () => {
           >
             User List
           </Typography>
-          <AdminDashboardSearch placeholder="Search" />
+          <AdminDashboardSearch
+            placeholder="Search"
+            handleSearch={handleSearch}
+          />
           <AllUsersList usersList={usersList} />
         </>
       ) : (

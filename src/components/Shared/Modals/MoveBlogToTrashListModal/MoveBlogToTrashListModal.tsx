@@ -15,14 +15,14 @@ interface IProps {
   openMoveBlogToTrashListModal: boolean;
   setOpenMoveBlogToTrashListModal: Dispatch<SetStateAction<boolean>>;
   weblogId: string;
-  setLiveBlogList?: Dispatch<SetStateAction<IWeblog[]>>;
+  setBlogList?: React.Dispatch<React.SetStateAction<IWeblog[]>>;
 }
 
 const MoveBlogToTrashListModal = ({
   openMoveBlogToTrashListModal,
   setOpenMoveBlogToTrashListModal,
   weblogId,
-  setLiveBlogList,
+  setBlogList,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
   const { query, push } = useRouter();
@@ -33,8 +33,8 @@ const MoveBlogToTrashListModal = ({
   const handleMoveBlogToTrashList = async () => {
     try {
       await updateWeblog({ trash: true }, weblogId);
-      if (setLiveBlogList) {
-        setLiveBlogList((prevState) =>
+      if (setBlogList) {
+        setBlogList((prevState) =>
           prevState.filter((blog) => blog._id !== weblogId)
         );
       }

@@ -24,11 +24,7 @@ const EditBlog = ({ oneWeblog }: IProps) => {
   const { back } = useRouter();
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit, (e) => {
-        console.log("error", e);
-      })}
-    >
+    <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="blog-title">
         <Typography
           variant="body1"

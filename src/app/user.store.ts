@@ -31,12 +31,12 @@ const useUserStore = create<IUserState>()(
     {
       name: "user",
       getStorage: () => localStorage,
-      // partialize: (state) =>
-      //   Object.fromEntries(
-      //     Object.entries(state).filter(
-      //       ([key]) => !["accessToken"].includes(key)
-      //     )
-      //   ),
+      partialize: (state) =>
+        Object.fromEntries(
+          Object.entries(state).filter(
+            ([key]) => !["accessToken"].includes(key)
+          )
+        ),
     }
   )
 );

@@ -13,14 +13,14 @@ interface IProps {
   openDeleteBlogFromTrashListModal: boolean;
   setOpenDeleteBlogFromTrashListModal: Dispatch<SetStateAction<boolean>>;
   weblogId: string;
-  setTrashBlogList: Dispatch<SetStateAction<IWeblog[]>>;
+  setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
 }
 
 const DeleteBlogFromTrashListModal = ({
   openDeleteBlogFromTrashListModal,
   setOpenDeleteBlogFromTrashListModal,
   weblogId,
-  setTrashBlogList,
+  setBlogList,
 }: IProps) => {
   const { deleteWeblog } = useWeblogApi();
 
@@ -30,7 +30,7 @@ const DeleteBlogFromTrashListModal = ({
   const deleteBlogFromTrashList = async () => {
     try {
       await deleteWeblog(weblogId);
-      setTrashBlogList((prevState) =>
+      setBlogList((prevState) =>
         prevState.filter((blog) => blog._id !== weblogId)
       );
       handleCloseDeleteBlogFromTrashListModal();

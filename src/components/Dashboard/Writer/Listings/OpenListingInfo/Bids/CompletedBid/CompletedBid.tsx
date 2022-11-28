@@ -1,5 +1,4 @@
 import { Typography } from "@mui/material";
-import CircularStatic from "../CircularProgress/CircularProgress";
 
 const CompletedBid = () => {
   return (
@@ -9,11 +8,8 @@ const CompletedBid = () => {
           className="max-w-[350px] md:max-w-full text-success-500 font-normal"
           variant="h6"
         >
-          Buyer has 24hours to make the payment for your script
+          Script has successfully being sold!
         </Typography>
-      </div>
-      <div className="my-8 md:my-16  mx-auto w-[100px] md:w-[200px]">
-        <CircularStatic />
       </div>
     </div>
   );

@@ -13,20 +13,23 @@ import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import CurrentRequest from "./CurrentRequest/CurrentRequest";
 
-const CurrentRequestsList = () => {
+interface IProps {
+  searchQuery: string;
+}
+
+const CurrentRequestsList = ({ searchQuery }: IProps) => {
   const [currentRequestsList, setCurrentRequestsList] = useState<
     Array<ICurrentRequest>
   >([]);
   const [loading, setLoading] = useState(false);
-  const { getAllReviews } = useReviewsApi();
+  const { getAllRequestedReviews } = useReviewsApi();
 
   useEffect(() => {
     async function getReviewsFunc() {
       try {
         setCurrentRequestsList([]);
         setLoading(true);
-        const res = await getAllReviews();
-        console.log(res);
+        const res = await getAllRequestedReviews(searchQuery);
 
         setCurrentRequestsList(res.data.scripts);
         setLoading(false);
@@ -38,7 +41,7 @@ const CurrentRequestsList = () => {
     getReviewsFunc();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [searchQuery]);
 
   return (
     <>

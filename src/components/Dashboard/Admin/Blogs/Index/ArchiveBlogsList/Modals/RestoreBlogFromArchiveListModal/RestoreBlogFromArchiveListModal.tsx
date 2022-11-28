@@ -12,15 +12,15 @@ import errorHandler from "utils/error-handler";
 import moveImage from "./assets/move-image.png";
 
 interface IProps {
-  openMoveBlogToArchiveListModal: boolean;
-  setOpenMoveBlogToArchiveListModal: Dispatch<SetStateAction<boolean>>;
+  openRestoreBlogFromArchiveListModal: boolean;
+  setRestoreBlogFromArchiveListModal: Dispatch<SetStateAction<boolean>>;
   weblogId: string;
   setBlogList?: React.Dispatch<React.SetStateAction<IWeblog[]>>;
 }
 
-const MoveBlogToArchiveListModal = ({
-  openMoveBlogToArchiveListModal,
-  setOpenMoveBlogToArchiveListModal,
+const RestoreBlogFromArchiveListModal = ({
+  openRestoreBlogFromArchiveListModal,
+  setRestoreBlogFromArchiveListModal,
   weblogId,
   setBlogList,
 }: IProps) => {
@@ -28,17 +28,17 @@ const MoveBlogToArchiveListModal = ({
   const { query, push } = useRouter();
 
   const handleCloseMoveBlogToArchiveListModal = () =>
-    setOpenMoveBlogToArchiveListModal(false);
+    setRestoreBlogFromArchiveListModal(false);
 
   const handleMoveBlogToArchiveList = async () => {
     try {
-      await updateWeblog({ archive: true }, weblogId);
+      await updateWeblog({ archive: false }, weblogId);
       if (setBlogList) {
         setBlogList((prevState) =>
           prevState.filter((blog) => blog._id !== weblogId)
         );
       }
-      setOpenMoveBlogToArchiveListModal(false);
+      setRestoreBlogFromArchiveListModal(false);
       if (query.id) push(routes.blogsAdminDashboard.url);
     } catch (error) {
       errorHandler(error);
@@ -48,12 +48,12 @@ const MoveBlogToArchiveListModal = ({
   return (
     <Modal
       className="px-5"
-      open={openMoveBlogToArchiveListModal}
+      open={openRestoreBlogFromArchiveListModal}
       onClose={handleCloseMoveBlogToArchiveListModal}
     >
       <Slide
         direction="up"
-        in={openMoveBlogToArchiveListModal}
+        in={openRestoreBlogFromArchiveListModal}
         mountOnEnter
         unmountOnExit
       >
@@ -73,7 +73,7 @@ const MoveBlogToArchiveListModal = ({
             color="primary.700"
             variant="h6"
           >
-            You’ll be archiving this post. Do you want to proceed?
+            You’ll be Unarchiving this post. Do you want to proceed?
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
@@ -91,4 +91,4 @@ const MoveBlogToArchiveListModal = ({
   );
 };
 
-export default MoveBlogToArchiveListModal;
+export default RestoreBlogFromArchiveListModal;

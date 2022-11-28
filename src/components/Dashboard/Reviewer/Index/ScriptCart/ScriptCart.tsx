@@ -9,9 +9,21 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomRating from "@shared/CustomRating/CustomRating";
+import { IReviewerTask } from "interfaces/reviews";
+import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
+import routes from "routes/routes";
 
-const ScriptCart = () => {
+interface IProps {
+  selectedScriptId: string;
+  reviewerTaskList: IReviewerTask[];
+}
+
+const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
+  const selectedScript = reviewerTaskList.find(
+    (reviewerTask) => reviewerTask._id === selectedScriptId
+  );
+
   return (
     <Card
       data-aos="fade-left"
@@ -20,7 +32,7 @@ const ScriptCart = () => {
     >
       <CardActions className="px-5 py-0 space-x-3 lg:space-x-6">
         <Button disableElevation className="py-[10px] px-4" variant="contained">
-          Type A
+          {selectedScript?.review_plan}
         </Button>
         <Button
           className="py-[10px] px-4"
@@ -43,7 +55,7 @@ const ScriptCart = () => {
             variant="h6"
             className="futura flex-1 font-medium text-primary-700 leading-normal"
           >
-            The Long Man of Long Beach
+            {selectedScript?.title}
           </Typography>
         </div>
         <div className="flex items-center mb-8">
@@ -53,7 +65,10 @@ const ScriptCart = () => {
           >
             Genre:
           </Typography>
-          <Chip className="py-3 px-4 rounded-md" label="Tv pilot" />
+          <Chip
+            className="py-3 px-4 rounded-md"
+            label={selectedScript?.primary_genre}
+          />
         </div>
         <div className="flex items-center mb-8">
           <Typography
@@ -66,7 +81,8 @@ const ScriptCart = () => {
             variant="h6"
             className="futura font-medium text-neutral-800"
           >
-            23-04-22
+            {selectedScript?.createdAt &&
+              new Date(selectedScript?.createdAt).toLocaleDateString()}
           </Typography>
         </div>
         <div className="flex items-center mb-8">
@@ -76,10 +92,36 @@ const ScriptCart = () => {
           >
             Rating:
           </Typography>
-          <CustomRating name="half-rating" defaultValue={4.5} precision={0.5} />
+          <CustomRating
+            name="half-rating"
+            readOnly
+            defaultValue={selectedScript?.rate}
+            precision={0.5}
+          />
         </div>
-
-        <Btn className="w-full  py-3 rounded-lg">Begin review</Btn>
+        {!selectedScript?.review ? (
+          <Link
+            href={routes.reviewerDashboardQuestionnaire.dynamicUrl(
+              selectedScript?._id as string
+            )}
+            passHref
+          >
+            <Btn className="w-full py-3 rounded-lg">Begin review</Btn>
+          </Link>
+        ) : selectedScript?.review.complete ? (
+          <Btn color="success" className="w-full py-3 rounded-lg">
+            Completed
+          </Btn>
+        ) : (
+          <Link
+            href={routes.reviewerDashboardPreview.dynamicUrl(
+              selectedScript?._id as string
+            )}
+            passHref
+          >
+            <Btn className="w-full py-3 rounded-lg">Continue review</Btn>
+          </Link>
+        )}
       </CardContent>
     </Card>
   );

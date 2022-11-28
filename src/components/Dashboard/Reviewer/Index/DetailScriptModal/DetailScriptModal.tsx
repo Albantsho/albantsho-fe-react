@@ -9,27 +9,24 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import { IReviewerTask } from "interfaces/reviews";
-import { Dispatch, SetStateAction } from "react";
+import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
+import routes from "routes/routes";
 
 interface IProps {
   openDetailScript: boolean;
-  setOpenDetailScript: Dispatch<SetStateAction<boolean>>;
-  reviewerTaskList: IReviewerTask[];
-  id: string;
+  setOpenDetailScript: React.Dispatch<React.SetStateAction<boolean>>;
+  reviewerTask: IReviewerTask;
 }
 
 const DetailScriptModal = ({
   openDetailScript,
   setOpenDetailScript,
-  reviewerTaskList,
-  id,
+  reviewerTask,
 }: IProps) => {
   const handleCloseUnArchive = () => {
     setOpenDetailScript(false);
   };
-
-  const oneTask = reviewerTaskList.find((reviewTask) => reviewTask._id === id);
 
   return (
     <Modal
@@ -39,12 +36,10 @@ const DetailScriptModal = ({
       onClose={handleCloseUnArchive}
     >
       <Grow in={openDetailScript} mountOnEnter unmountOnExit>
-        <div
-          className={`bg-white  w-full mt-12 max-w-lg mx-auto py-8 rounded-lg`}
-        >
+        <div className="bg-white  w-full mt-12 max-w-lg mx-auto py-8 rounded-lg">
           <div className="pb-8 px-5 sm:px-7 flex gap-3 items-stretch">
             <Button disableElevation className="py-2 px-4" variant="contained">
-              {oneTask?.review_plan}
+              {reviewerTask.review_plan}
             </Button>
             <Button
               className="py-2 px-4"
@@ -67,7 +62,7 @@ const DetailScriptModal = ({
                 variant="h6"
                 className="futura flex-1 font-medium text-primary-700 leading-normal"
               >
-                {oneTask?.title}
+                {reviewerTask.title}
               </Typography>
             </div>
             <div className="flex items-center mb-8">
@@ -79,7 +74,7 @@ const DetailScriptModal = ({
               </Typography>
               <Chip
                 className="py-3 px-4 rounded-md"
-                label={oneTask?.primary_genre}
+                label={reviewerTask.primary_genre}
               />
             </div>
             <div className="flex items-center mb-8">
@@ -93,7 +88,7 @@ const DetailScriptModal = ({
                 variant="h6"
                 className="futura  font-medium w-[120px] text-neutral-800"
               >
-                {oneTask && new Date(oneTask.createdAt).toLocaleDateString()}
+                {new Date(reviewerTask.createdAt).toLocaleDateString()}
               </Typography>
             </div>
             <div className="flex items-center mb-8">
@@ -103,16 +98,26 @@ const DetailScriptModal = ({
               >
                 Rating:
               </Typography>
-              <Rating value={oneTask?.rate} />
+              <Rating value={reviewerTask.rate} />
             </div>
-            {!oneTask?.review ? (
-              <Btn className="w-full py-3">Begin review</Btn>
-            ) : oneTask.review.complete ? (
+            {!reviewerTask.review ? (
+              <Link
+                href={routes.reviewerDashboardQuestionnaire.dynamicUrl("")}
+                passHref
+              >
+                <Btn className="w-full py-3">Begin review</Btn>
+              </Link>
+            ) : reviewerTask.review.complete ? (
               <Btn color="success" className="w-full py-3">
                 Completed
               </Btn>
             ) : (
-              <Btn className="w-full py-3">Continue review</Btn>
+              <Link
+                href={routes.reviewerDashboardPreview.dynamicUrl("")}
+                passHref
+              >
+                <Btn className="w-full py-3">Continue review</Btn>
+              </Link>
             )}
           </div>
         </div>

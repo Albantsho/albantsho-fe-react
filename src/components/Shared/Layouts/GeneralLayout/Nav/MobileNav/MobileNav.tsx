@@ -22,19 +22,8 @@ interface IProps {
   isTransparent: boolean;
 }
 
-// const useUser = () => {
-//   const { user } = useUserStore(
-//     (store) => ({
-//       user: store.user,
-//     }),
-//     shallow
-//   );
-//   return { user };
-// };
-
 const MobileNav = ({ links, isTransparent }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNav();
-  // const { user } = useUser();
   const user = useUserStore((state) => state.user);
 
   return (
@@ -80,7 +69,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
               </Link>
             </ListItem>
           ))}
-          {user.active ? (
+          {user.email_verified ? (
             <ProfileMenu />
           ) : (
             <div className="px-5 py-2">

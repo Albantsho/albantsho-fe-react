@@ -114,13 +114,13 @@ const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
           }
           case "email": {
             const color = node.children.map((node) => node.color);
-            return `<a style="text-decoration-line:underline;text-decoration-color:${color};color:${color};" href="mailto:${escapeHTML(
+            return `<a target="_blank" style="text-decoration-line:underline;text-decoration-color:${color};color:${color};" href="mailto:${escapeHTML(
               node.email
             )}">${children}</a>`;
           }
           case "link": {
             const color = node.children.map((node) => node.color);
-            return `<a style="text-decoration-line:underline;text-decoration-color:${color};color:${color};" href="${escapeHTML(
+            return `<a target="_blank" style="text-decoration-line:underline;text-decoration-color:${color};color:${color};" href="${escapeHTML(
               node.url
             )}">${children}</a>`;
           }

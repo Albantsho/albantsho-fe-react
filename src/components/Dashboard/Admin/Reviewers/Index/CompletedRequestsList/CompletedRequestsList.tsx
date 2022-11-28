@@ -13,7 +13,11 @@ import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import AssignedOrCompletedRequest from "../AssignedRequestsList/AssignedOrCompletedRequest/AssignedOrCompletedRequest";
 
-const CompletedRequestsList = () => {
+interface IProps {
+  searchQuery: string;
+}
+
+const CompletedRequestsList = ({ searchQuery }: IProps) => {
   const [completedRequestList, setCompletedRequestList] = useState<
     Array<IAssignedOrCompletedRequest>
   >([]);
@@ -25,7 +29,7 @@ const CompletedRequestsList = () => {
       try {
         setCompletedRequestList([]);
         setLoading(true);
-        const res = await getCompletedRequestedReviews();
+        const res = await getCompletedRequestedReviews(searchQuery);
         setCompletedRequestList(res.data.scripts);
         setLoading(false);
       } catch (error) {
@@ -35,7 +39,7 @@ const CompletedRequestsList = () => {
     getCompletedReviewsFunc();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [searchQuery]);
 
   return (
     <>
