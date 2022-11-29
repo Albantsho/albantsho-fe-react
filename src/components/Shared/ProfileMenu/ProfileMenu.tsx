@@ -96,7 +96,15 @@ const ProfileMenu = ({ isMobile }: IProps) => {
           TouchRippleProps={{ className: "text-primary-main" }}
           divider
           className="px-6 py-4 hover:bg-primary-50/25"
-          onClick={() => push(routes.projectsDashboard.url)}
+          onClick={() => {
+            user.user_type === "writer"
+              ? push(routes.writerDashboard.url)
+              : user.user_type === "producer"
+              ? push(routes.producerDashboard.url)
+              : user.user_type === "admin"
+              ? push(routes.adminDashboard.url)
+              : push(routes.reviewerDashboard.url);
+          }}
         >
           <ListItemText
             primaryTypographyProps={{

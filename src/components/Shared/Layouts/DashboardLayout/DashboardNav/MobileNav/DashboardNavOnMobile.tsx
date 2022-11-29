@@ -162,7 +162,7 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
                 <ListItemButton
                   TouchRippleProps={{ className: "text-primary-main" }}
                   className="px-2 rounded-md hover:bg-primary-50/25"
-                  onClick={() => push(`${walletLink.href}`)}
+                  onClick={() => push(walletLink.href)}
                 >
                   <ListItemIcon className="min-w-0 mr-3">
                     <SvgIcon
