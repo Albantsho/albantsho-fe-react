@@ -45,7 +45,7 @@ const DesktopNav = ({ links }: IProps) => {
           <SvgIcon component={UserIcon} inheritViewBox sx={{ fontSize: 32 }} />
         </IconButton>
         {!user.email_verified && (
-          <Link href={routes.signin.url} passHref>
+          <Link href={routes.signin.url} legacyBehavior passHref>
             <Button className="rounded-lg" color="inherit" variant="outlined">
               Sign In
             </Button>

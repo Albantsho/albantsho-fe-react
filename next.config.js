@@ -19,11 +19,6 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/dashboard',
-        destination: '/dashboard/admin/blogs',
-        permanent: false,
-      },
-      {
         source: '/dashboard/writer',
         destination: '/dashboard/writer/projects',
         permanent: false,

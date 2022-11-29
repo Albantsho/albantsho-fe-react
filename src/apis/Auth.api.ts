@@ -82,7 +82,7 @@ const useAuthApi = (controller?: AbortController) => {
     },
 
     async logoutUser() {
-      const res = await api.post("/user/logout", {
+      const res = await axiosPrivate.post("/user/logout", {
         signal: controller?.signal,
       });
 

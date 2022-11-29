@@ -120,6 +120,11 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer", "producer", "admin", "reviewer"],
   },
+  dashboard: {
+    url: "/dashboard",
+    mustAuthenticated: "yes",
+    permission: ["writer", "producer", "admin", "reviewer"],
+  },
   writerDashboard: {
     url: "/dashboard/writer",
     mustAuthenticated: "yes",
@@ -144,12 +149,12 @@ const routes = {
   projectsDashboard: {
     url: `/dashboard/writer/projects`,
     mustAuthenticated: "yes",
-    permission: ["writer", "admin"],
+    permission: ["writer"],
   },
   projectsDashboardTabs: {
     url: (query: string) => `/dashboard/writer/projects${query}`,
     mustAuthenticated: "yes",
-    permission: ["writer", "admin"],
+    permission: ["writer"],
   },
   reviewsDashboard: {
     url: "/dashboard/writer/reviews",

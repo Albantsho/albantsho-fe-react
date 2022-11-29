@@ -12,6 +12,7 @@ const useProfileMenu = () => {
   const openProfile = Boolean(openProfileMenu);
   const { logoutUser } = useAuthApi();
   const { replace } = useRouter();
+  const logOutUser = useUserStore((state) => state.logOutUser);
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setOpenProfileMenu(event.currentTarget);
@@ -24,9 +25,13 @@ const useProfileMenu = () => {
   const logOutUserFunc = async () => {
     try {
       await logoutUser();
-      useUserStore.persist.clearStorage;
-      replace(routes.home.url);
+      logOutUser();
+      useUserStore.persist.clearStorage();
+      setTimeout(() => {
+        replace(routes.home.url);
+      }, 1);
     } catch (error) {
+      console.log(error);
       errorHandler(error);
     }
   };
