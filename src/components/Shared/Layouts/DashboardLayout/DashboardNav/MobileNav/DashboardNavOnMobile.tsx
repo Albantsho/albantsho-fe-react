@@ -17,7 +17,7 @@ import Logo from "@shared/Logo/Logo";
 import useUserStore from "app/user.store";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Deposit from "pages/wallet/deposit";
+import Deposit from "@assets/icons/deposit.svg";
 import {
   AiFillInstagram,
   AiOutlineClose,

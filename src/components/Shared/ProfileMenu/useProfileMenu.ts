@@ -31,7 +31,6 @@ const useProfileMenu = () => {
         replace(routes.home.url);
       }, 1);
     } catch (error) {
-      console.log(error);
       errorHandler(error);
     }
   };
