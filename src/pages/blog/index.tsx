@@ -4,7 +4,6 @@ import BlogList from "components/Blog/BlogList/BlogList";
 import { IWeblog } from "interfaces/weblog";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../_app";
 
@@ -35,11 +34,8 @@ const Blog: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Blog</title>
       </Head>
-      {loading ? (
-        <DotLoader color="#7953B5" className="mx-auto mt-10 mb-[100vh]" />
-      ) : (
-        <BlogList blogList={blogList} />
-      )}
+
+      <BlogList loading={loading} blogList={blogList} />
     </>
   );
 };

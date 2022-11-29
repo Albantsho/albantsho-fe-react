@@ -13,13 +13,6 @@ import routes from "routes/routes";
 interface IProps {
   post: IWeblog;
 }
-// interface IProps {
-//   post: {
-//     image: string;
-//     title: string;
-//     desc: string;
-//   };
-// }
 
 const BlogCard = ({ post }: IProps) => {
   return (
@@ -31,6 +24,7 @@ const BlogCard = ({ post }: IProps) => {
         loading="lazy"
         component="img"
         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${post.media}`}
+        className="max-h-[250px] object-center"
       />
       <CardHeader
         className="pb-0"

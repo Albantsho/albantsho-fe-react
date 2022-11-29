@@ -53,7 +53,13 @@ const useVerifyEmail = () => {
 
       setAccessToken(res.data.accessToken);
       authenticationUser(res.data.user);
-      replace(routes.home.url);
+      res.data.user.user_type === "writer"
+        ? replace(routes.writerDashboard.url)
+        : res.data.user.user_type === "producer"
+        ? replace(routes.producerDashboard.url)
+        : res.data.user.user_type === "admin"
+        ? replace(routes.adminDashboard.url)
+        : replace(routes.reviewerDashboard.url);
     } catch (error) {
       errorHandler(error);
     } finally {

@@ -7,7 +7,7 @@ import TabButtons from "components/Dashboard/Admin/Blogs/Index/TabButtons/TabBut
 import TrashBlogsList from "components/Dashboard/Admin/Blogs/Index/TrashBlogsList/TrashBlogsList";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
@@ -15,6 +15,7 @@ import queryString from "query-string";
 import { IWeblog } from "interfaces/weblog";
 import useWeblogApi from "apis/Weblog.api";
 import { DotLoader } from "react-spinners";
+import debounce from "lodash/debounce";
 
 const BlogsPage: NextPageWithLayout = () => {
   const { query } = useRouter();
@@ -23,26 +24,30 @@ const BlogsPage: NextPageWithLayout = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { getAllWeblogsForAdmin } = useWeblogApi();
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value.trim());
-  };
+  const handleSearch = useCallback(
+    debounce(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value.trim());
+      },
+      2000,
+      { leading: false }
+    ),
+    [searchQuery]
+  );
 
   useEffect(() => {
     async function getAllWeblogs() {
       try {
         setBlogList([]);
         setLoading(true);
-
         const res = await getAllWeblogsForAdmin(
           queryString.stringify(query),
           searchQuery
         );
-
         setBlogList(res.data.weblogs);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
-        console.log(error);
       }
     }
     getAllWeblogs();

@@ -2,6 +2,7 @@ import { LoadingButton } from "@mui/lab";
 import { Button, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import TextEditor from "@shared/TextEditor/TextEditor";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import useAddBlog from "./useAddBlog";
 
@@ -15,6 +16,8 @@ const AddBlog = () => {
     errors,
     register,
     handleSubmit,
+    handlePreviewImageValue,
+    previewImageValue,
   } = useAddBlog();
 
   return (
@@ -85,7 +88,7 @@ const AddBlog = () => {
         initialValue={initialValue}
         setTextEditorValue={setTextEditorValue}
       />
-      <div className="my-10">
+      <div className="mt-10 mb-8">
         <div className="mb-1 mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center relative py-2 px-4 w-full">
           <label
             className="absolute cursor-pointer inset-0"
@@ -93,6 +96,7 @@ const AddBlog = () => {
           ></label>
           <input
             {...register("image")}
+            onInput={handlePreviewImageValue}
             className="opacity-0"
             type="file"
             id="add-image"
@@ -114,6 +118,17 @@ const AddBlog = () => {
           <span className="text-error-700">{errors.image?.message}</span>
         )}
       </div>
+      {previewImageValue && (
+        <div className="w-[150px] h-[150px] mx-auto">
+          <Image
+            width={150}
+            height={150}
+            className="w-[150px] h-[150px]"
+            src={previewImageValue}
+            alt="preview image"
+          />
+        </div>
+      )}
 
       <div className="mt-6 lg:mt-10 space-x-2 lg:space-x-6">
         <LoadingButton

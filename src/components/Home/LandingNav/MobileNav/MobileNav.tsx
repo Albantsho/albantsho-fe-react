@@ -11,8 +11,10 @@ import {
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import useMobileNav from "@shared/Layouts/GeneralLayout/Nav/MobileNav/useMobileNav";
+import useUserStore from "app/user.store";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
+import routes from "routes/routes";
 
 interface IProps {
   links: { title: string; href: string }[];
@@ -20,6 +22,7 @@ interface IProps {
 
 const MobileNav = ({ links }: IProps) => {
   const { handleToggleDrawer, open } = useMobileNav();
+  const user = useUserStore((state) => state.user);
 
   return (
     <>
@@ -55,11 +58,13 @@ const MobileNav = ({ links }: IProps) => {
               </Link>
             </ListItem>
           ))}
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="Sign In" />
-            </ListItemButton>
-          </ListItem>
+          {!user.email_verified && (
+            <ListItem disablePadding>
+              <ListItemButton href={routes.signin.url}>
+                <ListItemText primary="Sign In" />
+              </ListItemButton>
+            </ListItem>
+          )}
         </List>
       </Drawer>
     </>

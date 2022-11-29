@@ -120,6 +120,11 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer", "producer", "admin", "reviewer"],
   },
+  writerDashboard: {
+    url: "/dashboard/writer",
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
   listingsDashboard: {
     url: "/dashboard/writer/listings",
     mustAuthenticated: "yes",

@@ -20,6 +20,8 @@ const EditBlog = ({ oneWeblog }: IProps) => {
     onSubmit,
     register,
     setTextEditorValue,
+    handlePreviewImageValue,
+    previewImageValue,
   } = useEditBlog({ oneWeblog });
   const { back } = useRouter();
 
@@ -91,7 +93,7 @@ const EditBlog = ({ oneWeblog }: IProps) => {
         initialValue={initialValue}
         setTextEditorValue={setTextEditorValue}
       />
-      <div className="mt-10">
+      <div className="mt-10 mb-8">
         <div className="mb-1 mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center relative py-2 px-4 w-full">
           <label
             className="absolute cursor-pointer inset-0"
@@ -99,6 +101,7 @@ const EditBlog = ({ oneWeblog }: IProps) => {
           ></label>
           <input
             {...register("image")}
+            onInput={handlePreviewImageValue}
             className="opacity-0"
             type="file"
             id="edit-image"
@@ -119,13 +122,28 @@ const EditBlog = ({ oneWeblog }: IProps) => {
           <span className="text-error-700">{errors.image?.message}</span>
         )}
       </div>
-      <p className="mt-1">Previous image</p>
-      <Image
-        alt={oneWeblog.title}
-        width={200}
-        height={200}
-        src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${oneWeblog.media}`}
-      />
+      {previewImageValue ? (
+        <div className="w-[150px] h-[150px] mx-auto">
+          <Image
+            width={150}
+            height={150}
+            alt="preview image"
+            className="h-[150px] min-w-[150px]"
+            src={previewImageValue}
+          />
+        </div>
+      ) : (
+        <div className="w-[150px] h-[150px] mx-auto">
+          <Image
+            width={150}
+            height={150}
+            alt={oneWeblog.title}
+            className="h-[150px] min-w-[150px]"
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${oneWeblog.media}`}
+          />
+        </div>
+      )}
+
       <div className="mt-6 lg:mt-10 flex gap-2 lg:gap-6">
         <LoadingButton
           type="submit"

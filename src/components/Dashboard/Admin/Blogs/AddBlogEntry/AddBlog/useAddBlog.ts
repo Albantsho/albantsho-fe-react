@@ -30,6 +30,7 @@ const useAddBlog = () => {
   const [textEditorValue, setTextEditorValue] = useState<string | undefined>(
     ""
   );
+  const [previewImageValue, setPreviewImageValue] = useState("");
   const { createNewWeblog } = useWeblogApi();
   const { replace } = useRouter();
 
@@ -56,6 +57,19 @@ const useAddBlog = () => {
     }
   };
 
+  const handlePreviewImageValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => {
+        const url = window.decodeURI(reader.result as string);
+        setPreviewImageValue(url);
+      };
+    } else {
+      alert("Image not found");
+    }
+  };
+
   return {
     initialValue,
     onSubmit,
@@ -64,6 +78,8 @@ const useAddBlog = () => {
     handleSubmit,
     errors,
     loading,
+    previewImageValue,
+    handlePreviewImageValue,
   };
 };
 

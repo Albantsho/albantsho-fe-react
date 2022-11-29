@@ -21,6 +21,14 @@ interface IProps {
   oneWeblog: IWeblog;
 }
 
+interface IMarkAttributes {
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  code?: boolean;
+  color?: string;
+}
+
 const useEditBlog = ({
   oneWeblog: { title, description, _id, content },
 }: IProps) => {
@@ -36,6 +44,7 @@ const useEditBlog = ({
     resolver: yupResolver(editBlogSchema),
   });
   const [loading, setLoading] = useState(false);
+  const [previewImageValue, setPreviewImageValue] = useState("");
   const [textEditorValue, setTextEditorValue] = useState<string | undefined>(
     ""
   );
@@ -43,13 +52,18 @@ const useEditBlog = ({
   const { updateWeblog } = useWeblogApi();
   const { replace } = useRouter();
 
-  interface IMarkAttributes {
-    bold?: boolean;
-    italic?: boolean;
-    underline?: boolean;
-    code?: boolean;
-    color?: string;
-  }
+  const handlePreviewImageValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => {
+        const url = window.decodeURI(reader.result as string);
+        setPreviewImageValue(url);
+      };
+    } else {
+      alert("Image not found");
+    }
+  };
 
   const deserialize = (el: any, markAttributes: IMarkAttributes = {}): any => {
     if (el.nodeType === Node.TEXT_NODE) {
@@ -289,6 +303,8 @@ const useEditBlog = ({
     handleSubmit,
     errors,
     loading,
+    previewImageValue,
+    handlePreviewImageValue,
   };
 };
 

@@ -12,7 +12,7 @@ interface IUpdateWeblogPayload {
   title?: string;
   description?: string;
   content?: string;
-  image?: string | File;
+  image?: File;
   archive?: boolean;
   trash?: boolean;
 }
@@ -52,7 +52,7 @@ const useWeblogApi = (controller?: AbortController) => {
     },
 
     async getAllWeblogs() {
-      const res = await api.get("/weblog/all", {
+      const res = await api.get("/weblog/all?limit=1&page=2", {
         signal: controller?.signal,
       });
 
@@ -68,9 +68,12 @@ const useWeblogApi = (controller?: AbortController) => {
     },
 
     async getAllWeblogsForAdmin(query?: string, search?: string) {
-      const res = await axiosPrivate.get(`/weblog/admin/all?${query}`, {
-        signal: controller?.signal,
-      });
+      const res = await axiosPrivate.get(
+        `/weblog/admin/all?${query}&search=${search}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },

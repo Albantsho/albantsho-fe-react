@@ -180,18 +180,29 @@ const RegisterForm = () => {
           >
             Gender
           </Typography>
-          <RadioGroup
-            defaultValue="male"
-            {...register("gender")}
-            className="flex flex-row gap-2"
-          >
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
-          </RadioGroup>
+          <Controller
+            name="gender"
+            control={control}
+            render={({ field }) => (
+              <RadioGroup
+                {...field}
+                id="gender"
+                defaultValue="male"
+                className="flex flex-row gap-2"
+              >
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  label="Male"
+                />
+                <FormControlLabel
+                  value="female"
+                  control={<Radio />}
+                  label="Female"
+                />
+              </RadioGroup>
+            )}
+          />
         </div>
 
         <div className="w-full mt-3 lg:mt-7 flex flex-col">

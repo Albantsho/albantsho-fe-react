@@ -15,7 +15,14 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
 
     if (foundRoute?.mustAuthenticated === "no") {
       if (user.email_verified) {
-        replace(routes.home.url);
+        user.user_type === "admin"
+          ? replace(routes.adminDashboard.url)
+          : user.user_type === "writer"
+          ? replace(routes.writerDashboard.url)
+          : user.user_type === "producer"
+          ? replace(routes.producerDashboard.url)
+          : replace(routes.reviewerDashboard.url);
+        "/dashboard/producer" !== pathname && setLoading(false);
         foundRoute.url !== pathname && setLoading(false);
       } else {
         setLoading(false);
@@ -44,6 +51,7 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
       setLoading(false);
       return;
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [urlRoutes]);
 

@@ -39,7 +39,7 @@ const ArchiveBlog = ({
       >
         <div className="flex gap-3 lg:gap-6">
           <Image
-            className="rounded-lg min-h-[76px]"
+            className="rounded-lg h-[76px]"
             width={76}
             height={76}
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${media}`}
@@ -49,7 +49,7 @@ const ArchiveBlog = ({
             <Typography
               gutterBottom
               variant="h6"
-              className="text-primary-700 futura font-medium leading-none"
+              className="text-primary-700 futura font-medium leading-none break-words"
             >
               {title}
             </Typography>
