@@ -52,7 +52,7 @@ const useWeblogApi = (controller?: AbortController) => {
     },
 
     async getAllWeblogs() {
-      const res = await api.get("/weblog/all?limit=1&page=2", {
+      const res = await api.get("/weblog/all", {
         signal: controller?.signal,
       });
 
