@@ -43,3 +43,27 @@ export interface IReviewer {
   id: string;
   fullname: string;
 }
+
+export interface IReviewTypeA {
+  introduction: string;
+  plot: string;
+  character: string;
+  genre_and_story_structure: string;
+  dialogue: string;
+  story_quality: string;
+  suggestions: string;
+}
+
+export interface IReviewTypeB {
+  introduction: string;
+  plot: string;
+  character: string;
+  genre_and_story_structure: string;
+  dialogue: string;
+  story_quality: string;
+  world_building: string;
+  script_formatting: string;
+  writer_voice: string;
+  authenticity_feedback: string;
+  suggestions: string;
+}

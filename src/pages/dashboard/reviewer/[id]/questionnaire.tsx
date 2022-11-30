@@ -3,23 +3,14 @@ import Btn from "@shared/Btn/Btn";
 import Logo from "@shared/Logo/Logo";
 import ProfileNav from "@shared/ProfileNav/ProfileNav";
 import Head from "next/head";
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
 
-const AccordionQuestionnaire = dynamic(
-  () =>
-    import(
-      "components/Dashboard/Reviewer/Questionnaire/QuestionnaireAccordion/QuestionnaireAccordion"
-    )
-);
-const RatingQuestionnaire = dynamic(
-  () =>
-    import(
-      "components/Dashboard/Reviewer/Questionnaire/QuestionnaireRating/QuestionnaireRating"
-    )
-);
+import AccordionQuestionnaire from "components/Dashboard/Reviewer/Questionnaire/QuestionnaireAccordion/QuestionnaireAccordion";
 
-const listQuestionnaireAccordion = [
+import RatingQuestionnaire from "components/Dashboard/Reviewer/Questionnaire/QuestionnaireRating/QuestionnaireRating";
+import { useState } from "react";
+import type { IReviewTypeA, IReviewTypeB } from "interfaces/reviews";
+
+const listQuestionnaireAccordionTypeA = [
   { title: "INTRODUCTION" },
   { title: "Plot" },
   { title: "Character(s)" },
@@ -35,12 +26,67 @@ const listQuestionnaireAccordion = [
     description: "your final thoughts and suggestions",
   },
 ];
+const listQuestionnaireAccordionTypeB = [
+  { title: "INTRODUCTION" },
+  { title: "Plot" },
+  { title: "Character(s)" },
+  { title: "Genre tropes and Story structure" },
+  { title: "Dialogue" },
+  {
+    title: "Story quality",
+    description:
+      "how relevant is this story concept and what is unique or not about its approach to the ide",
+  },
+  {
+    title: "World-building",
+    description: "how authentic and real is the world-building",
+  },
+  {
+    title: "Script formatting & Editing",
+    description:
+      "how well are the scripting conventions creatively utilized? Reference scene or page numbers",
+  },
+  {
+    title: "Writer’s Voice",
+    description: "What’s unique or not about  the writing style",
+  },
+  { title: "Authenticity feedback" },
+  { title: "Opening  and closing image" },
+  {
+    title: "Suggestions",
+    description: "your final thoughts and suggestions",
+  },
+];
 
 const Questionnaire = () => {
+  const [countRate, setCountRate] = useState<number | null>(2);
+  const [reviewTypeAValues, setReviewTypeAValues] = useState<IReviewTypeA>({
+    introduction: "",
+    plot: "",
+    character: "",
+    genre_and_story_structure: "",
+    dialogue: "",
+    story_quality: "",
+    suggestions: "",
+  });
+  const [reviewTypeBValues, setReviewTypeBValues] = useState<IReviewTypeB>({
+    introduction: "",
+    plot: "",
+    character: "",
+    genre_and_story_structure: "",
+    dialogue: "",
+    story_quality: "",
+    world_building: "",
+    script_formatting: "",
+    writer_voice: "",
+    authenticity_feedback: "",
+    suggestions: "",
+  });
+
   return (
     <>
       <Head>
-        <title>Albantsho || Questionnaire </title>
+        <title>Albantsho || Questionnaire</title>
       </Head>
       <ProfileNav color="inherit" position="static" />
       <div className="py-6 md:py-6 lg:py-8 gap-6 bg-[#f6f8fc] px-5 sm:px-10 space-y-6 overflow-hidden">
@@ -78,16 +124,17 @@ const Questionnaire = () => {
         </div>
 
         <div className="rounded-lg text-center max-w-5xl mx-auto space-y-6">
-          <Suspense fallback={null}>
-            {listQuestionnaireAccordion.map((accordionTitle) => (
-              <AccordionQuestionnaire
-                key={accordionTitle.title}
-                title={accordionTitle.title}
-                description={accordionTitle.description}
-              />
-            ))}
-            <RatingQuestionnaire />
-          </Suspense>
+          {listQuestionnaireAccordionTypeA.map((accordionTitle) => (
+            <AccordionQuestionnaire
+              key={accordionTitle.title}
+              title={accordionTitle.title}
+              description={accordionTitle.description}
+            />
+          ))}
+          <RatingQuestionnaire
+            countRate={countRate}
+            setCountRate={setCountRate}
+          />
           <Btn fullWidth className="mt-6 py-4 rounded-lg">
             COMPLETE REVIEW
           </Btn>

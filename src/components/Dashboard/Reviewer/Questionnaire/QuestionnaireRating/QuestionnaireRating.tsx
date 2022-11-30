@@ -10,6 +10,11 @@ import CustomRating from "@shared/CustomRating/CustomRating";
 import { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 
+interface IProps {
+  countRate: number | null;
+  setCountRate: React.Dispatch<React.SetStateAction<number | null>>;
+}
+
 const labels: { [index: string]: string } = {
   1: "- IMPROVE!",
   2: "- FAIR!",
@@ -22,8 +27,7 @@ function getLabelText(value: number) {
   return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
 }
 
-const QuestionnaireRating = () => {
-  const [countRate, setCountRate] = useState<number | null>(2);
+const QuestionnaireRating = ({ setCountRate, countRate }: IProps) => {
   const [hoverRate, setHoverRate] = useState(-1);
 
   return (
