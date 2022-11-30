@@ -3,11 +3,11 @@ import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import useScripBidApi from "apis/ScripBid.api";
 import { IFullInformationScript } from "interfaces/script";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import errorHandler from "utils/error-handler";
 
 interface IProps {
-  setOpenBidSuccessful: Dispatch<SetStateAction<boolean>>;
+  setOpenBidSuccessful: React.Dispatch<React.SetStateAction<boolean>>;
   script: IFullInformationScript;
 }
 

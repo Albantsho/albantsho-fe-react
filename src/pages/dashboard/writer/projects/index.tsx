@@ -64,12 +64,10 @@ const Projects: NextPageWithLayout = () => {
             />
           )}
           {query.tab === "archives" && (
-            <>
-              <ArchiveList
-                listScripts={listScripts}
-                setListScripts={setListScripts}
-              />
-            </>
+            <ArchiveList
+              listScripts={listScripts}
+              setListScripts={setListScripts}
+            />
           )}
           <CreateScriptModal
             openCreateScript={openCreateScript}

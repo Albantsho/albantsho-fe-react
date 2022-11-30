@@ -2,12 +2,11 @@ import { Grow, IconButton, Modal } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import { Dispatch, SetStateAction } from "react";
 import { AiFillInfoCircle, AiOutlineClose } from "react-icons/ai";
 import useCreateScriptModal from "./useCreateScriptModal";
 interface IProps {
   openCreateScript: boolean;
-  setOpenCreateScript: Dispatch<SetStateAction<boolean>>;
+  setOpenCreateScript: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CreateScriptModal = ({

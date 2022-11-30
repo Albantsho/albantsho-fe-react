@@ -3,7 +3,7 @@ import MoveBlogToArchiveListModal from "@shared/Modals/MoveBlogToArchiveListModa
 import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineFolder } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
@@ -11,7 +11,7 @@ import routes from "routes/routes";
 
 interface IProps {
   blog: IWeblog;
-  setBlogList: Dispatch<SetStateAction<IWeblog[]>>;
+  setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
 }
 
 const LiveBlog = ({

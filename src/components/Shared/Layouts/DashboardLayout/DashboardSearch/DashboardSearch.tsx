@@ -1,12 +1,11 @@
 import { IconButton } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
-import { RiSearch2Line } from "react-icons/ri";
 import { BsArrowLeftShort } from "react-icons/bs";
+import { RiSearch2Line } from "react-icons/ri";
 
 interface IProps {
-  setOpenCreateScript: Dispatch<SetStateAction<boolean>>;
+  setOpenCreateScript: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DashboardSearch = ({ setOpenCreateScript }: IProps) => {

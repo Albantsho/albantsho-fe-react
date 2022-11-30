@@ -3,14 +3,13 @@ import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScriptsApi from "apis/Scripts.api";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import errorHandler from "utils/error-handler";
 import UnListingItem from "./assets/un-listing-item.png";
 
 interface IProps {
   openUnListingItem: boolean;
-  setOpenUnListingItem: Dispatch<SetStateAction<boolean>>;
+  setOpenUnListingItem: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
 }
 

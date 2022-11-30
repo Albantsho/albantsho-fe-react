@@ -1,16 +1,15 @@
+import pictureModalsSaves from "@assets/images/picture-modals-saves.png";
 import { IconButton, Modal, Typography, Zoom } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
-import pictureModalsSaves from "@assets/images/picture-modals-saves.png";
-import { AiOutlineClose } from "react-icons/ai";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScriptsApi from "apis/Scripts.api";
 import { IWriterScript } from "interfaces/script";
+import Image from "next/image";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface IProps {
   openUnArchive: boolean;
-  setOpenUnArchive: Dispatch<SetStateAction<boolean>>;
+  setOpenUnArchive: React.Dispatch<React.SetStateAction<boolean>>;
   setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
   id: string;
 }

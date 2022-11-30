@@ -1,19 +1,19 @@
-import { Dispatch, MutableRefObject, SetStateAction, useMemo } from "react";
+import { CustomElement, IEditor } from "interfaces/slate";
+import { useMemo } from "react";
 import { createEditor } from "slate";
 import { withHistory } from "slate-history";
-import { Slate, Editable, withReact } from "slate-react";
+import { Editable, Slate, withReact } from "slate-react";
 import ChangeFormatMenuList from "../ChangeFormatMenuList/ChangeFormatMenuList";
 import EditorElement from "./EditorElement/EditorElement";
-import { CustomElement, IEditor } from "interfaces/slate";
 
 const initialValue: CustomElement[] = [
   { type: "paragraph", children: [{ text: "" }] },
 ];
 
 interface IProps {
-  stepLinks: MutableRefObject<HTMLDivElement[]>;
-  setContextMenu: Dispatch<
-    SetStateAction<{
+  stepLinks: React.MutableRefObject<HTMLDivElement[]>;
+  setContextMenu: React.Dispatch<
+    React.SetStateAction<{
       mouseX: number;
       mouseY: number;
     } | null>

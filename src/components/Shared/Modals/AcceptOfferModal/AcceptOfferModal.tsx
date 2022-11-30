@@ -5,13 +5,12 @@ import useScripBidApi from "apis/ScripBid.api";
 import { IBidForScript } from "interfaces/bid";
 import { IProduct } from "interfaces/product";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import acceptOffer from "./assets/accept-offer.png";
 
 interface IProps {
   openAcceptOffer: boolean;
-  setOpenAcceptOffer: Dispatch<SetStateAction<boolean>>;
+  setOpenAcceptOffer: React.Dispatch<React.SetStateAction<boolean>>;
   script: IProduct;
   auction: IBidForScript;
 }

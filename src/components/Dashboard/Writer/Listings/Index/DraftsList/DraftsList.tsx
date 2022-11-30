@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { IProduct } from "interfaces/product";
 import dynamic from "next/dynamic";
-import { Dispatch, SetStateAction, Suspense } from "react";
+import { Suspense } from "react";
 import UncompletedList from "./UncompletedList/UncompletedList";
 
 const UnlistedList = dynamic(() => import("./UnlistedList/UnlistedList"));

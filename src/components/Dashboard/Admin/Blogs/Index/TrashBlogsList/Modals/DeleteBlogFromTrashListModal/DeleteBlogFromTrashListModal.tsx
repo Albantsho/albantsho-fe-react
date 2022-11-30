@@ -4,14 +4,15 @@ import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useWeblogApi from "apis/Weblog.api";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import errorHandler from "utils/error-handler";
 import Trash from "./assets/trash.png";
 
 interface IProps {
   openDeleteBlogFromTrashListModal: boolean;
-  setOpenDeleteBlogFromTrashListModal: Dispatch<SetStateAction<boolean>>;
+  setOpenDeleteBlogFromTrashListModal: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
   weblogId: string;
   setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
 }

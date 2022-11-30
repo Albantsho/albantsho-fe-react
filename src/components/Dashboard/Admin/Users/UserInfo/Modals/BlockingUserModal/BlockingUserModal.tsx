@@ -4,15 +4,14 @@ import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useAuthApi from "apis/Auth.api";
 import { IUserFullInformation } from "interfaces/user";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import errorHandler from "utils/error-handler";
 import blockImage from "./assets/block.png";
 
 interface IProps {
   openBlockingUserModal: boolean;
-  setOpenBlockingUserModal: Dispatch<SetStateAction<boolean>>;
-  setOneUser: Dispatch<SetStateAction<IUserFullInformation | null>>;
+  setOpenBlockingUserModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setOneUser: React.Dispatch<React.SetStateAction<IUserFullInformation | null>>;
   user: IUserFullInformation;
 }
 

@@ -1,6 +1,6 @@
 import { Pagination, useMediaQuery, useTheme } from "@mui/material";
 
-const PaginationMarketList = () => {
+const CustomPaginationComponent = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -26,4 +26,4 @@ const PaginationMarketList = () => {
   );
 };
 
-export default PaginationMarketList;
+export default CustomPaginationComponent;

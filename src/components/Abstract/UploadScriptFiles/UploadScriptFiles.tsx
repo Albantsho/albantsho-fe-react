@@ -1,14 +1,13 @@
 import { ButtonGroup, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import Image from "next/image";
-import UploadFile from "./assets/Upload-file.png";
-import { Dispatch, SetStateAction } from "react";
 import { IAbstractFormValues } from "interfaces/abstract";
+import Image from "next/image";
 import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
+import UploadFile from "./assets/Upload-file.png";
 
 interface IProps {
   activeButton: number;
-  setActiveButton: Dispatch<SetStateAction<number>>;
+  setActiveButton: React.Dispatch<React.SetStateAction<number>>;
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
 }

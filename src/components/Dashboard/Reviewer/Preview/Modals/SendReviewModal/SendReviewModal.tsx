@@ -1,13 +1,12 @@
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
-import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
 interface IProps {
   openSendReview: boolean;
-  setOpenSendReview: Dispatch<SetStateAction<boolean>>;
-  setOpenSuccessReview: Dispatch<SetStateAction<boolean>>;
+  setOpenSendReview: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenSuccessReview: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SendReviewModal = ({

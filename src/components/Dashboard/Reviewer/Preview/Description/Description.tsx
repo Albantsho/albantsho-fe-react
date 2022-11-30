@@ -1,11 +1,10 @@
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import { Dispatch, SetStateAction } from "react";
-import React from "react";
 import CustomRating from "@shared/CustomRating/CustomRating";
+import React from "react";
 
 interface IProps {
-  setOpenSendReview: Dispatch<SetStateAction<boolean>>;
+  setOpenSendReview: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const listTitles = [

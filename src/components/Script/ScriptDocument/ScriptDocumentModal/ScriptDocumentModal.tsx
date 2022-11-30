@@ -1,12 +1,11 @@
 import { IconButton, Modal } from "@mui/material";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import ScriptDocument from "../ScriptDocument";
 
 interface IProps {
   openDocumentModal: boolean;
-  setOpenDocumentModal: Dispatch<SetStateAction<boolean>>;
+  setOpenDocumentModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ScriptDocumentModal = ({

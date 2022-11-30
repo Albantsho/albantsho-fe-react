@@ -1,13 +1,12 @@
-import { Grow, IconButton, Modal, Typography } from "@mui/material";
-import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import success from "@assets/images/success.png";
+import { Grow, IconButton, Modal, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
 interface IProps {
-  setOpenSuccessReview: Dispatch<SetStateAction<boolean>>;
+  setOpenSuccessReview: React.Dispatch<React.SetStateAction<boolean>>;
   openSuccessReview: boolean;
 }
 

@@ -1,10 +1,10 @@
+import CustomPaginationComponent from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
 import { IWriterScript } from "interfaces/script";
-import { Dispatch, SetStateAction } from "react";
 import ProjectAccordion from "./ProjectAccordion/ProjectAccordion";
 
 interface IProps {
   listScripts: IWriterScript[];
-  setListScripts: Dispatch<SetStateAction<IWriterScript[]>>;
+  setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
 }
 
 const ProjectAccordionList = ({ setListScripts, listScripts }: IProps) => {
@@ -19,6 +19,7 @@ const ProjectAccordionList = ({ setListScripts, listScripts }: IProps) => {
           />
         );
       })}
+      <CustomPaginationComponent />
     </div>
   );
 };

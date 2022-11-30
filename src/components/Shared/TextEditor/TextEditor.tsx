@@ -1,6 +1,6 @@
 import escapeHTML from "escape-html";
 import { CustomElement } from "interfaces/slate";
-import { Dispatch, SetStateAction, useMemo } from "react";
+import { useMemo } from "react";
 import { createEditor, Element, Text, type Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { Editable, Slate, withReact } from "slate-react";
@@ -13,7 +13,7 @@ import MobileToolbar from "./Toolbars/MobileToolbar/MobileToolbar";
 import useTextEditor from "./useTextEditor";
 
 interface IProps {
-  setTextEditorValue?: Dispatch<SetStateAction<string | undefined>>;
+  setTextEditorValue?: React.Dispatch<React.SetStateAction<string | undefined>>;
   initialValue: CustomElement[];
 }
 

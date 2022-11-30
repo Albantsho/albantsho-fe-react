@@ -1,13 +1,12 @@
+import success from "@assets/images/success.png";
 import { Button, Grow, IconButton, Modal, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
-import success from "@assets/images/success.png";
-import { Dispatch, SetStateAction } from "react";
 
 interface IProps {
   openSaveProgressModal: boolean;
-  setOpenSaveProgressModal: Dispatch<SetStateAction<boolean>>;
+  setOpenSaveProgressModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SaveProgressScriptModal = ({

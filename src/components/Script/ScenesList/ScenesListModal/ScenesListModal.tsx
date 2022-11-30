@@ -1,12 +1,11 @@
 import { Divider, IconButton, Modal, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import ScenesList from "../ScenesList";
 
 interface IProps {
   openScenesModal: boolean;
-  setOpenScenesModal: Dispatch<SetStateAction<boolean>>;
+  setOpenScenesModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ScenesListModal = ({ openScenesModal, setOpenScenesModal }: IProps) => {

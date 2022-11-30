@@ -1,14 +1,7 @@
 import beautySmall from "@assets/images/beauty-small.jpg";
-import {
-  Button,
-  Chip,
-  Divider,
-  Paper,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Divider, Paper, Typography } from "@mui/material";
 import { IProduct } from "interfaces/product";
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import UncompletedScript from "./UncompletedScript/UncompletedScript";
 
 const uncompletedList = [

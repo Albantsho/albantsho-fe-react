@@ -1,14 +1,13 @@
+import pictureModalsSaves from "@assets/images/picture-modals-saves.png";
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import pictureModalsSaves from "@assets/images/picture-modals-saves.png";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import Image from "next/image";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface IProps {
   openAddToScript: boolean;
-  setOpenAddToScript: Dispatch<SetStateAction<boolean>>;
+  setOpenAddToScript: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AddScriptToCompletedModal = ({

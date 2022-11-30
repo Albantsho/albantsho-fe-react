@@ -12,10 +12,9 @@ import {
   Typography,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import { AiOutlineSearch } from "react-icons/ai";
-import { Dispatch, SetStateAction } from "react";
 import { IAbstractFormValues } from "interfaces/abstract";
 import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const results = [
   { title: "The Long Man of Long Beach" },
@@ -30,7 +29,7 @@ const results = [
 
 interface IProps {
   activeButton: number;
-  setActiveButton: Dispatch<SetStateAction<number>>;
+  setActiveButton: React.Dispatch<React.SetStateAction<number>>;
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
 }

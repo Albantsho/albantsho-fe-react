@@ -1,7 +1,7 @@
 import { IconButton, SvgIcon, Typography } from "@mui/material";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { TfiTrash } from "react-icons/tfi";
 import DeleteBlogFromTrashListModal from "../Modals/DeleteBlogFromTrashListModal/DeleteBlogFromTrashListModal";
 import RestoreBlogFromTrashListModal from "../Modals/RestoreBlogFromTrashListModal/RestoreBlogFromTrashListModal";
@@ -9,7 +9,7 @@ import RefreshIcon from "./assets/refresh-icon.svg";
 
 interface IProps {
   blog: IWeblog;
-  setBlogList: Dispatch<SetStateAction<IWeblog[]>>;
+  setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
 }
 
 const TrashBlog = ({

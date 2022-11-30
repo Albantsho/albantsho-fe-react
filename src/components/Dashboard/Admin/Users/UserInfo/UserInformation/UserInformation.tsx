@@ -3,7 +3,7 @@ import useAuthApi from "apis/Auth.api";
 import countryList from "config/country-list.json";
 import { IUserFullInformation } from "interfaces/user";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { MdNotInterested } from "react-icons/md";
 import { SlDislike, SlLike } from "react-icons/sl";
 import errorHandler from "utils/error-handler";
@@ -11,7 +11,7 @@ import BlockingUserModal from "../Modals/BlockingUserModal/BlockingUserModal";
 import FreezingUserModal from "../Modals/FreezingUserModal/FreezingUserModal";
 interface IProps {
   user: IUserFullInformation;
-  setOneUser: Dispatch<SetStateAction<IUserFullInformation | null>>;
+  setOneUser: React.Dispatch<React.SetStateAction<IUserFullInformation | null>>;
 }
 
 const UserInformation = ({ user, setOneUser }: IProps) => {

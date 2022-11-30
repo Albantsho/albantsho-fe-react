@@ -5,7 +5,6 @@ import useWeblogApi from "apis/Weblog.api";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
@@ -13,7 +12,9 @@ import Trash from "./assets/trash.png";
 
 interface IProps {
   openMoveBlogToTrashListModal: boolean;
-  setOpenMoveBlogToTrashListModal: Dispatch<SetStateAction<boolean>>;
+  setOpenMoveBlogToTrashListModal: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
   weblogId: string;
   setBlogList?: React.Dispatch<React.SetStateAction<IWeblog[]>>;
 }

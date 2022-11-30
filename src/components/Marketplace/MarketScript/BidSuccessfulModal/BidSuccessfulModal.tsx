@@ -1,10 +1,9 @@
+import success from "@assets/images/success.png";
 import { Fade, IconButton, Modal, Typography } from "@mui/material";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import success from "@assets/images/success.png";
 interface IProps {
-  setOpenBidSuccessful: Dispatch<SetStateAction<boolean>>;
+  setOpenBidSuccessful: React.Dispatch<React.SetStateAction<boolean>>;
   openBidSuccessful: boolean;
 }
 

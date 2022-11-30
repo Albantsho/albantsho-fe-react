@@ -1,7 +1,7 @@
 import MarketplaceLayout from "@shared/Layouts/MarketplaceLayout/MarketplaceLayout";
 import MarketplaceProducts from "components/Marketplace/Index/MarketplaceProducts/MarketplaceProducts";
 import MarketplaceTabs from "components/Marketplace/Index/MarketplaceTabs/MarketplaceTabs";
-import PaginationMarketList from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
+import CustomPaginationComponent from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
 import Head from "next/head";
 import { DotLoader } from "react-spinners";
 import { NextPageWithLayout } from "../_app";
@@ -22,7 +22,7 @@ const Marketplace: NextPageWithLayout = () => {
           <>
             <MarketplaceTabs />
             <MarketplaceProducts scripts={scripts} />
-            <PaginationMarketList />
+            <CustomPaginationComponent />
           </>
         )}
       </div>

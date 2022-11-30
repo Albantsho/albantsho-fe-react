@@ -2,7 +2,7 @@ import { IconButton, SvgIcon, Typography } from "@mui/material";
 import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsCursor } from "react-icons/bs";
 import { TfiTrash } from "react-icons/tfi";
@@ -11,7 +11,7 @@ import RestoreBlogFromArchiveListModal from "../Modals/RestoreBlogFromArchiveLis
 
 interface IProps {
   blog: IWeblog;
-  setBlogList: Dispatch<SetStateAction<IWeblog[]>>;
+  setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
 }
 
 const ArchiveBlog = ({

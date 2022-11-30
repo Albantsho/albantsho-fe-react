@@ -1,13 +1,12 @@
 import { Button, IconButton } from "@mui/material";
 import Link from "next/link";
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
-import { Dispatch, SetStateAction } from "react";
 import routes from "routes/routes";
 
 interface IProps {
   step: number;
-  setStep: Dispatch<SetStateAction<number>>;
-  setOpenSaveProgressModal: Dispatch<SetStateAction<boolean>>;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+  setOpenSaveProgressModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const StepsButtons = ({ step, setStep, setOpenSaveProgressModal }: IProps) => {

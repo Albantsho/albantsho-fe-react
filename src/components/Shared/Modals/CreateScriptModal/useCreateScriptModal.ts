@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useScriptsApi from "apis/Scripts.api";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import errorHandler from "utils/error-handler";
 import { createScriptSchema } from "./validation/createScript.validation";
@@ -10,7 +10,7 @@ interface ICreateScript {
   tagline: string;
 }
 interface IProps {
-  setOpenCreateScript: Dispatch<SetStateAction<boolean>>;
+  setOpenCreateScript: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {

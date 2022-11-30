@@ -1,4 +1,3 @@
-import beautySmall from "@assets/images/beauty-small.jpg";
 import {
   Table,
   TableBody,
@@ -8,55 +7,11 @@ import {
   Typography,
 } from "@mui/material";
 import { IWriterScript } from "interfaces/script";
-import { Dispatch, SetStateAction } from "react";
 import ArchiveScript from "./ArchiveScript/ArchiveScript";
-
-const listScriptsP = [
-  {
-    id: 1,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Tv Pilot",
-  },
-  {
-    id: 2,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Tv Pilot",
-  },
-  {
-    id: 3,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Tv Pilot",
-  },
-  {
-    id: 4,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Tv Pilot",
-  },
-  {
-    id: 5,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Tv Pilot",
-  },
-];
 
 interface IProps {
   listScripts: IWriterScript[];
-  setListScripts: Dispatch<SetStateAction<IWriterScript[]>>;
+  setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
 }
 
 const ArchiveList = ({ setListScripts, listScripts }: IProps) => {

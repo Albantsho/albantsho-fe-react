@@ -1,12 +1,11 @@
 import { IconButton, Modal } from "@mui/material";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import ExportFile from "../ExportFile";
 
 interface IProps {
   openExportModal: boolean;
-  setOpenExportModal: Dispatch<SetStateAction<boolean>>;
+  setOpenExportModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ExportFileModal = ({ openExportModal, setOpenExportModal }: IProps) => {

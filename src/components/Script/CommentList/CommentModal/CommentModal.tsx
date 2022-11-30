@@ -1,12 +1,11 @@
 import { Divider, IconButton, Modal, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import CommentList from "../CommentList";
 
 interface IProps {
   openCommentsModal: boolean;
-  setOpenCommentsModal: Dispatch<SetStateAction<boolean>>;
+  setOpenCommentsModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CommentModal = ({ openCommentsModal, setOpenCommentsModal }: IProps) => {
