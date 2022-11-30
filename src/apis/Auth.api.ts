@@ -145,7 +145,7 @@ const useAuthApi = (controller?: AbortController) => {
 
     async getAllUser(searchQuery?: string) {
       const res = await axiosPrivate.get(
-        `/user/all/users?search=${searchQuery}`,
+        `/user/all/users?limit=6&search=${searchQuery}`,
         {
           signal: controller?.signal,
         }

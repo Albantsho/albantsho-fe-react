@@ -4,8 +4,9 @@ import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDash
 import useAuthApi from "apis/Auth.api";
 import AllUsersList from "components/Dashboard/Admin/Users/Index/UsersList/AllUsersList";
 import { IUserInformation } from "interfaces/user";
+import { debounce } from "lodash";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
@@ -16,9 +17,16 @@ const UsersPage: NextPageWithLayout = () => {
   const [usersList, setUsersList] = useState<IUserInformation[] | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value.toLowerCase());
-  };
+  const handleSearch = useCallback(
+    debounce(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value.trim());
+      },
+      2000,
+      { leading: false }
+    ),
+    [searchQuery]
+  );
 
   useEffect(() => {
     async function getAllUsersFunc() {
@@ -35,7 +43,7 @@ const UsersPage: NextPageWithLayout = () => {
     getAllUsersFunc();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [handleSearch]);
 
   return (
     <>

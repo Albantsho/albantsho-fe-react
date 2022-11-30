@@ -1,5 +1,13 @@
-import { Button, IconButton, InputAdornment, SvgIcon } from "@mui/material";
+import {
+  Button,
+  Fade,
+  IconButton,
+  InputAdornment,
+  SvgIcon,
+  Tooltip,
+} from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
 import useUserStore from "app/user.store";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -40,18 +48,30 @@ const DesktopNav = ({ links }: IProps) => {
           </Link>
         ))}
       </div>
-      <div className="flex gap-10 text-white">
-        <IconButton color="inherit">
-          <SvgIcon component={UserIcon} inheritViewBox sx={{ fontSize: 32 }} />
-        </IconButton>
-        {!user.email_verified && (
+      {user.email_verified && <ProfileMenu />}
+      {!user.email_verified && (
+        <div className="flex gap-9 text-white">
+          <Tooltip
+            TransitionComponent={Fade}
+            TransitionProps={{ timeout: 600 }}
+            arrow
+            title="Please first login"
+          >
+            <IconButton color="inherit">
+              <SvgIcon
+                component={UserIcon}
+                inheritViewBox
+                sx={{ fontSize: 32 }}
+              />
+            </IconButton>
+          </Tooltip>
           <Link href={routes.signin.url} legacyBehavior passHref>
             <Button className="rounded-lg" color="inherit" variant="outlined">
               Sign In
             </Button>
           </Link>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };
