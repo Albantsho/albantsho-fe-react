@@ -1,7 +1,6 @@
 import type { BaseEditor } from "slate";
 import type { ReactEditor } from "slate-react";
 import type { HistoryEditor } from "slate-history";
-
 interface IHeadOne {
   type: "headOne";
   style?: object;
@@ -27,11 +26,11 @@ interface IHeadFive {
   style?: object;
   children: CustomText[];
 }
-interface IHeadSix {
-  type: "headSix";
-  style?: object;
-  children: CustomText[];
-}
+// interface IHeadSix {
+//   type: "headSix";
+//   style?: object;
+//   children: CustomText[];
+// }
 interface IParagraph {
   type: "paragraph";
   style?: object;
@@ -101,35 +100,57 @@ export interface ITableCell {
 
 interface IHeading {
   type: "heading";
+  id?: string;
   children: CustomText[];
 }
 interface IAction {
   type: "action";
+  id?: string;
   children: CustomText[];
 }
 interface ICharacter {
   type: "character";
+  id?: string;
   children: CustomText[];
 }
 interface IDialogue {
   type: "dialogue";
+  id?: string;
   children: CustomText[];
 }
+
 interface IParentethical {
   type: "parentethical";
+  id?: string;
   children: CustomText[];
 }
 interface ITransition {
   type: "transition";
+  id?: string;
   children: CustomText[];
 }
 interface IShot {
   type: "shot";
+  id?: string;
   children: CustomText[];
 }
 interface IGeneral {
   type: "general";
+  id?: string;
   children: CustomText[];
+}
+interface IPage {
+  type: "page";
+  children:
+    | IHeading[]
+    | IAction[]
+    | ICharacter[]
+    | IDialogue[]
+    | IParentethical[]
+    | ITransition[]
+    | IShot[]
+    | IGeneral[]
+    | IParagraph[];
 }
 
 export type CustomElement =
@@ -138,7 +159,7 @@ export type CustomElement =
   | IHeadThree
   | IHeadFour
   | IHeadFive
-  | IHeadSix
+  // | IHeadSix
   | IParagraph
   | IBlockQuote
   | IImage
@@ -157,7 +178,8 @@ export type CustomElement =
   | IParentethical
   | ITransition
   | IShot
-  | IGeneral;
+  | IGeneral
+  | IPage;
 
 export interface CustomText {
   text: string;

@@ -1,29 +1,22 @@
 import { ButtonGroup, IconButton, SvgIcon, Tooltip } from "@mui/material";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { RiFileUserLine } from "react-icons/ri";
-import { useResizeDetector } from "react-resize-detector";
 import BookMarkIcon from "../assets/book-mark.svg";
 import TextEditor from "./TextEditor";
 
-const TextEditorList = () => {
+interface IProps {
+  setTextEditorValue?: React.Dispatch<React.SetStateAction<string | undefined>>;
+}
+
+const TextEditorList = ({ setTextEditorValue }: IProps) => {
   const [contextMenu, setContextMenu] = useState<{
     mouseX: number;
     mouseY: number;
   } | null>(null);
-  const { ref, height } = useResizeDetector();
-
-  const [numberOfPage, setNumberOfPage] = useState(1);
-  const stepLinks = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    if (stepLinks.current[stepLinks.current.length - 1].clientHeight >= 765) {
-      setNumberOfPage((prevState) => prevState + 1);
-    }
-  }, [height]);
 
   return (
-    <div ref={ref} className="relative">
+    <div className="relative">
       <ButtonGroup className="absolute flex flex-col -right-14 top-10">
         <Tooltip
           classes={{
@@ -56,14 +49,11 @@ const TextEditorList = () => {
           </IconButton>
         </Tooltip>
       </ButtonGroup>
-      {Array.from(new Array(numberOfPage)).map((_, i) => (
-        <TextEditor
-          contextMenu={contextMenu}
-          setContextMenu={setContextMenu}
-          stepLinks={stepLinks}
-          key={i}
-        />
-      ))}
+      <TextEditor
+        setTextEditorValue={setTextEditorValue}
+        contextMenu={contextMenu}
+        setContextMenu={setContextMenu}
+      />
     </div>
   );
 };

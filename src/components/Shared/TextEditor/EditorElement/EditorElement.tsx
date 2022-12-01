@@ -38,12 +38,12 @@ const EditorElement = ({
           {children}
         </h5>
       );
-    case "headSix":
-      return (
-        <h6 style={{ ...element.style, fontSize: "20px" }} {...attributes}>
-          {children}
-        </h6>
-      );
+    // case "headSix":
+    //   return (
+    //     <h6 style={{ ...element.style, fontSize: "20px" }} {...attributes}>
+    //       {children}
+    //     </h6>
+    //   );
     case "paragraph":
       return (
         <p style={{ ...element.style, fontSize: "16px" }} {...attributes}>

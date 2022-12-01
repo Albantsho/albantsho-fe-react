@@ -1,17 +1,22 @@
+import escapeHTML from "escape-html";
 import { CustomElement, IEditor } from "interfaces/slate";
 import { useMemo } from "react";
-import { createEditor } from "slate";
+import { createEditor, Element, Text, type Descendant } from "slate";
 import { withHistory } from "slate-history";
 import { Editable, Slate, withReact } from "slate-react";
 import ChangeFormatMenuList from "../ChangeFormatMenuList/ChangeFormatMenuList";
 import EditorElement from "./EditorElement/EditorElement";
+import withNewFeatures from "./plugins/withNewFeatures";
 
 const initialValue: CustomElement[] = [
-  { type: "paragraph", children: [{ text: "" }] },
+  {
+    type: "page",
+    children: [{ type: "heading", children: [{ text: "" }] }],
+  },
 ];
 
 interface IProps {
-  stepLinks: React.MutableRefObject<HTMLDivElement[]>;
+  setTextEditorValue?: React.Dispatch<React.SetStateAction<string | undefined>>;
   setContextMenu: React.Dispatch<
     React.SetStateAction<{
       mouseX: number;
@@ -24,9 +29,17 @@ interface IProps {
   } | null;
 }
 
-const TextEditor = ({ setContextMenu, contextMenu, stepLinks }: IProps) => {
+interface INode {
+  children: Descendant[];
+}
+
+const TextEditor = ({
+  setContextMenu,
+  contextMenu,
+  setTextEditorValue,
+}: IProps) => {
   const editor: IEditor = useMemo(
-    () => withHistory(withReact(createEditor())),
+    () => withNewFeatures(withHistory(withReact(createEditor()))),
     []
   );
 
@@ -46,18 +59,70 @@ const TextEditor = ({ setContextMenu, contextMenu, stepLinks }: IProps) => {
     setContextMenu(null);
   };
 
+  const handleChangeEditor = (element: Descendant[]) => {
+    const node = { children: element };
+    const serialize = (node: INode | Descendant): string | undefined => {
+      if (Text.isText(node)) {
+        const string = escapeHTML(node.text);
+        return string;
+      }
+
+      const children = node.children.map((n) => serialize(n)).join("");
+      if (Element.isElement(node)) {
+        switch (node.type) {
+          case "heading": {
+            return `<h6 itemID="heading" style="font-weight:700;padding:0 40px;font-size:20px;line-height:28px;margin-bottom:25px;color:black;position:relative;width:100%;text-transform:uppercase;">${children}</h6>`;
+          }
+          case "action": {
+            return `<p itemID="action" style="width:100%;
+            padding:0 40px;position:relative;color:black;margin-bottom:25px;">${children}</p>`;
+          }
+          case "character": {
+            return `<p itemID="character" style="padding:0 40px;margin-bottom:25px;text-align:start;position:relative;width:60%;text-transform:uppercase;color:black;margin-left:auto;">${children}</p>`;
+          }
+          case "dialogue": {
+            return `<p itemID="dialogue" style="padding:0 40px;margin-bottom:25px;text-align:start;position:relative;width:60%;color:black;margin-left:auto;margin-right:auto;">${children}</p>`;
+          }
+          case "parentethical": {
+            return `<p itemID="parentethical" style="color:black;padding:0 16px;margin-bottom:25px;max-width:40%;width:fit-content;margin-left:auto;margin-right:auto;border-radius:6px;position:relative;">${children}</p>`;
+          }
+          case "transition": {
+            return `<p itemID="transition" style="margin-bottom:25px; padding:0 40px;color;black;position:relative;text-align:end;text-transform:uppercase;">${children}</p>`;
+          }
+          case "shot": {
+            return `<p itemID="shot" style=" padding:0 40px;margin-bottom:25px;color:black;position:relative;line-height:16px;text-transform:uppercase;">${children}</p>`;
+          }
+          case "general": {
+            return `<p itemID="general" style="margin-bottom:25px;padding:0 40px;color;black;position:relative;">${children}</p>`;
+          }
+
+          // case "page": {
+          //   return `<div style="position:relative;marginLeft:auto;marginRight:auto;marginTop:40px;marginBottom:40px;height:1056px;padding:40px 56px;background:white;">${children}</div>`;
+          // }
+          case "paragraph": {
+            return `<p style="margin-bottom:3px;">${children}</p>`;
+          }
+          default:
+            return children;
+        }
+      }
+    };
+
+    const value = serialize(node);
+
+    if (value !== undefined && setTextEditorValue !== undefined)
+      setTextEditorValue(value);
+  };
+
   return (
     <div
       onContextMenu={handleContextMenu}
       style={{ cursor: "context-menu" }}
-      className="bg-white w-full max-w-3xl mx-auto mt-10 p-14"
-      ref={(elm: HTMLDivElement) =>
-        (stepLinks.current = [...stepLinks.current, elm])
-      }
+      className="bg-tinted-50/25 w-full max-w-3xl mx-auto"
     >
-      <Slate editor={editor} value={initialValue}>
+      <Slate onChange={handleChangeEditor} editor={editor} value={initialValue}>
         <Editable
-          className="isolation-auto -z-0"
+          className="isolation-auto -z-0 break-words"
           spellCheck
           autoFocus
           renderElement={(props) => <EditorElement {...props} />}

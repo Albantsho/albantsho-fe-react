@@ -86,9 +86,9 @@ const HeadingButtonList = () => {
                                 ? "20px"
                                 : option === "Heading 5"
                                 ? "18px"
-                                : option === "Heading 6"
-                                ? "16px"
-                                : "16px",
+                                : // : option === "Heading 6"
+                                  // ? "16px"
+                                  "16px",
                             fontWeight: "bold",
                           },
                         }}

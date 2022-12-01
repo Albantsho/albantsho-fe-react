@@ -24,6 +24,7 @@
     "html-react-parser": "^3.0.4",
     "image-extensions": "^1.1.0",
     "is-url": "^1.2.4",
+    "jspdf": "^2.5.1",
     "lodash": "^4.17.21",
     "next": "^13.0.4",
     "next-progress": "^2.2.0",

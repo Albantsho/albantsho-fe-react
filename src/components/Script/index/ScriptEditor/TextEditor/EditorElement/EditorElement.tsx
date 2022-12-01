@@ -1,4 +1,3 @@
-import { SvgIcon, Typography } from "@mui/material";
 import { BsCameraVideoFill, BsFillChatLeftDotsFill } from "react-icons/bs";
 import { FaPlay, FaUser } from "react-icons/fa";
 import { SiAsana } from "react-icons/si";
@@ -16,114 +15,272 @@ const EditorElement = ({
   switch (element.type) {
     case "heading":
       return (
-        <Typography
-          variant="h6"
-          className="font-bold px-10 mb-4 text-black relative  w-fit mx-auto"
+        <h6
+          {...attributes}
+          itemID={element.id}
+          style={{
+            fontWeight: 700,
+            padding: "0 40px",
+            fontSize: "20px",
+            lineHeight: "28px",
+            marginBottom: "16px",
+            color: "black",
+            position: "relative",
+            width: "100%",
+            textTransform: "uppercase",
+          }}
         >
-          <SvgIcon
-            className="absolute left-0 top-[6px] bottom-0"
-            inheritViewBox
-            component={PhotoIcon}
-          />
+          <span
+            style={{
+              position: "absolute",
+              left: "0",
+              top: "3px",
+              bottom: "3px",
+              width: "24px",
+              height: "20",
+            }}
+          >
+            <PhotoIcon />
+          </span>
           {children}
-        </Typography>
+        </h6>
       );
     case "action":
       return (
-        <Typography className="pl-10 relative mb-4">
-          <SvgIcon
-            className="text-gray-300 absolute left-0 top-1 bottom-0"
-            inheritViewBox
-            fontSize="small"
-            component={FaPlay}
+        <p
+          {...attributes}
+          itemID={element.id}
+          style={{
+            width: "100%",
+            padding: "0 40px",
+            position: "relative",
+            marginBottom: "16px",
+          }}
+        >
+          <FaPlay
+            style={{
+              position: "absolute",
+              left: "0",
+              top: "4px",
+              bottom: "0",
+              width: "24px",
+              height: "20",
+              color: "#DCD8E4",
+            }}
           />
           {children}
-        </Typography>
+        </p>
       );
     case "character":
       return (
-        <Typography
-          className={`font-bold px-10 mb-4 text-center relative w-fit mx-auto text-black`}
+        <p
+          {...attributes}
+          itemID={element.id}
+          style={{
+            padding: "0px 40px",
+            marginBottom: "16px",
+            textAlign: "start",
+            position: "relative",
+            width: "60%",
+            textTransform: "uppercase",
+            color: "black",
+            marginLeft: "auto",
+          }}
         >
-          <SvgIcon
-            className="text-gray-300 absolute left-0 top-0 bottom-0"
-            inheritViewBox
-            component={FaUser}
+          <FaUser
+            style={{
+              position: "absolute",
+              left: "0",
+              top: "4px",
+              bottom: "0",
+              width: "24px",
+              height: "20",
+              color: "#DCD8E4",
+            }}
           />
           {children}
-        </Typography>
+        </p>
       );
     case "dialogue":
       return (
-        <Typography className="pl-10 py-4 relative">
-          <SvgIcon
-            fontSize="small"
-            className="text-gray-300 absolute left-0 top-5 bottom-0"
-            inheritViewBox
-            component={BsFillChatLeftDotsFill}
+        <p
+          {...attributes}
+          itemID={element.id}
+          style={{
+            padding: "0px 40px",
+            marginBottom: "16px",
+            textAlign: "start",
+            position: "relative",
+            width: "60%",
+            color: "black",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <BsFillChatLeftDotsFill
+            style={{
+              color: "#DCD8E4",
+              position: "absolute",
+              left: "0",
+              top: "4px",
+              bottom: "0",
+              width: "24px",
+              height: "20",
+            }}
           />
-          <p className="max-w-md mx-auto w-full">{children}</p>
-        </Typography>
+          {children}
+        </p>
       );
     case "parentethical":
       return (
-        <Typography
-          className={`font-bold text-black px-4 mb-4 w-fit mx-auto rounded-md relative`}
+        <p
+          {...attributes}
+          itemID={element.id}
+          style={{
+            color: "black",
+            padding: "0 16px",
+            marginBottom: "16px",
+            width: "fit-content",
+            maxWidth: "40%",
+            marginLeft: "auto",
+            marginRight: "auto",
+            borderRadius: "6px",
+            position: "relative",
+          }}
         >
-          <SvgIcon
-            className="absolute left-0 top-[2px] bottom-0 min-w-[0px] flex"
-            fontSize="small"
-            inheritViewBox
-            component={LeftParenthesesIcon}
-          />
+          <span
+            style={{
+              position: "absolute",
+              left: "0",
+              top: "2px",
+              width: "6px",
+              height: "16px",
+            }}
+          >
+            <LeftParenthesesIcon />
+          </span>
           {children}
-          <SvgIcon
-            className="absolute right-0 top-[2px] bottom-0 min-w-[0px] flex"
-            fontSize="small"
-            inheritViewBox
-            component={RightParenthesesIcon}
-          />
-        </Typography>
+          <span
+            style={{
+              position: "absolute",
+              right: "0",
+              bottom: "7px",
+              width: "7.5px",
+              height: "16px",
+            }}
+          >
+            <RightParenthesesIcon />
+          </span>
+        </p>
       );
     case "transition":
       return (
-        <Typography className={`font-bold mb-4 pl-10 text-black relative`}>
-          <SvgIcon
-            className="text-gray-300 absolute left-0 top-0 bottom-0"
-            inheritViewBox
-            component={TransitionIcon}
-          />
+        <p
+          {...attributes}
+          itemID={element.id}
+          style={{
+            marginBottom: "16px",
+            padding: "0 40px",
+            color: "black",
+            position: "relative",
+            textAlign: "end",
+            textTransform: "uppercase",
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              left: "0",
+              top: "0",
+              bottom: "0",
+              width: "24px",
+              height: "20",
+            }}
+          >
+            <TransitionIcon />
+          </span>
           {children}
-        </Typography>
+        </p>
       );
     case "shot":
       return (
-        <Typography className={`font-bold pl-10 mb-4 text-black relative`}>
-          <SvgIcon
-            className="text-gray-300 absolute left-0 top-0 bottom-0"
-            inheritViewBox
-            component={BsCameraVideoFill}
+        <p
+          {...attributes}
+          itemID={element.id}
+          style={{
+            padding: "0 40px",
+            marginBottom: "16px",
+            color: "black",
+            position: "relative",
+            lineHeight: "16px",
+            textTransform: "uppercase",
+          }}
+        >
+          <BsCameraVideoFill
+            style={{
+              color: "#DCD8E4",
+              position: "absolute",
+              left: "0",
+              top: "0",
+              bottom: "0",
+              width: "24px",
+              height: "20px",
+            }}
           />
           {children}
-        </Typography>
+        </p>
       );
     case "general":
       return (
-        <Typography className={`font-bold pl-10 mb-4 text-black relative`}>
-          <SvgIcon
-            className="text-gray-300 absolute left-0 top-0 bottom-0"
-            inheritViewBox
-            component={SiAsana}
+        <p
+          {...attributes}
+          itemID={element.id}
+          style={{
+            padding: "0 40px",
+            marginBottom: "16px",
+            color: "black",
+            position: "relative",
+          }}
+        >
+          <SiAsana
+            style={{
+              color: "#DCD8E4",
+              position: "absolute",
+              left: "0",
+              top: "0",
+              bottom: "0",
+              width: "24px",
+              height: "20px",
+            }}
           />
           {children}
-        </Typography>
+        </p>
       );
+    case "page": {
+      return (
+        <div
+          {...attributes}
+          style={{
+            position: "relative",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "40px",
+            marginBottom: "40px",
+            height: "842px",
+            padding: "40px 56px",
+            background: "#fff",
+          }}
+        >
+          {children}
+        </div>
+      );
+    }
 
     default:
       return (
-        <Typography className="mb-3" {...attributes}>
+        <p style={{ marginBottom: "3px", width: "100%" }} {...attributes}>
           {children}
-        </Typography>
+        </p>
       );
   }
 };

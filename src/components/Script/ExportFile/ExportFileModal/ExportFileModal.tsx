@@ -6,9 +6,14 @@ import ExportFile from "../ExportFile";
 interface IProps {
   openExportModal: boolean;
   setOpenExportModal: React.Dispatch<React.SetStateAction<boolean>>;
+  textEditorValue: string | undefined;
 }
 
-const ExportFileModal = ({ openExportModal, setOpenExportModal }: IProps) => {
+const ExportFileModal = ({
+  openExportModal,
+  setOpenExportModal,
+  textEditorValue,
+}: IProps) => {
   const { push } = useRouter();
 
   const handleCloseExportFile = () => {
@@ -30,7 +35,7 @@ const ExportFileModal = ({ openExportModal, setOpenExportModal }: IProps) => {
         >
           <AiOutlineClose />
         </IconButton>
-        <ExportFile />
+        <ExportFile textEditorValue={textEditorValue} />
       </div>
     </Modal>
   );

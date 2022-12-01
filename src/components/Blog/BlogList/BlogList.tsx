@@ -26,17 +26,21 @@ const BlogList = ({ blogList, loading }: IProps) => {
                 sx={{ boxShadow: " 0px 2px 7px rgba(117, 88, 162, 0.15)" }}
               >
                 <Skeleton
-                  sx={{ height: 190 }}
+                  sx={{ height: 250 }}
                   animation="wave"
                   variant="rectangular"
                 />
                 <Skeleton
+                  className="mx-5"
                   animation="wave"
-                  height={10}
+                  height={20}
                   width="60%"
                   style={{ marginBottom: 6, marginTop: 6 }}
                 />
-                <Skeleton animation="wave" height={10} />
+                <Skeleton className="mx-5" animation="wave" height={15} />
+                <Skeleton className="mx-5" animation="wave" height={15} />
+                <Skeleton className="mx-5" animation="wave" height={15} />
+                <Skeleton className="mx-5 mb-5" animation="wave" height={15} />
               </Card>
             ))
           : blogList.map((blog) => <BlogCard key={blog._id} post={blog} />)}

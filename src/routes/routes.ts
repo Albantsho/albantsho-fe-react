@@ -304,8 +304,8 @@ const routes = {
   },
   script: {
     url: "/script",
-    mustAuthenticated: "yes",
-    permission: ["writer"],
+    mustAuthenticated: "no",
+    permission: [],
   },
 };
 

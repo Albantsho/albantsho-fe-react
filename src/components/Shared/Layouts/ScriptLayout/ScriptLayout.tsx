@@ -1,5 +1,4 @@
 import ScriptSidebarOnDesktop from "./ScriptList/ScriptSidebarOnDesktop/ScriptSidebarOnDesktop";
-import ScriptSidebarOnMobile from "./ScriptList/ScriptSidebarOnMobile/ScriptSidebarOnMobile";
 import ScriptNav from "./ScriptNav/ScriptNav";
 
 interface IProps {
@@ -12,14 +11,7 @@ const ScriptLayout = ({ children }: IProps) => {
       <ScriptSidebarOnDesktop />
       <div data-aos="fade-top" data-aos-duration="300" className="flex-1">
         <ScriptNav color="inherit" position="static" />
-        <ScriptSidebarOnMobile />
-        <div
-          data-aos="fade-left"
-          data-aos-duration="300"
-          className="pt-3 lg:pt-5 flex flex-1 px-5 sm:px-10 max-w-screen-2xl"
-        >
-          {children}
-        </div>
+        {children}
       </div>
     </main>
   );

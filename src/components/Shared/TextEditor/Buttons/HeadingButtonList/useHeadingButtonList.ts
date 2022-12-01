@@ -15,7 +15,7 @@ const listButtons: IListButtons[] = [
   { format: "headThree", option: "Heading 3" },
   { format: "headFour", option: "Heading 4" },
   { format: "headFive", option: "Heading 5" },
-  { format: "headSix", option: "Heading 6" },
+  // { format: "headSix", option: "Heading 6" },
 ];
 
 const useHeadingButtonList = () => {

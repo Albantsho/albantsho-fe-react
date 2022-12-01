@@ -95,10 +95,10 @@ const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
             const color = node.children.map((node) => node.color);
             return `<h5 style="font-size:22px;color:${color[0]};">${children}</h5>`;
           }
-          case "headSix": {
-            const color = node.children.map((node) => node.color);
-            return `<h6 style="font-size:20px;color:${color[0]};">${children}</h6>`;
-          }
+          // case "headSix": {
+          //   const color = node.children.map((node) => node.color);
+          //   return `<h6 style="font-size:20px;color:${color[0]};">${children}</h6>`;
+          // }
           case "paragraph": {
             const color = node.children.map((node) => node.color);
             return `<p style="font-size:16px;color:${color[0]};">${children}</p>`;

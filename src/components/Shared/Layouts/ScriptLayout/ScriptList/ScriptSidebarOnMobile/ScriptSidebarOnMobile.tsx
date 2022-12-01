@@ -22,7 +22,11 @@ const routesArray = [
   { route: "?tab=document", title: "Document", icon: Document, value: 4 },
 ];
 
-const ScriptSidebarOnMobile = () => {
+interface IProps {
+  textEditorValue: string | undefined;
+}
+
+const ScriptSidebarOnMobile = ({ textEditorValue }: IProps) => {
   const [activeRoute, setActiveRoute] = useState(0);
   const [openExportModal, setOpenExportModal] = useState(false);
   const [openScenesModal, setOpenScenesModal] = useState(false);
@@ -89,6 +93,7 @@ const ScriptSidebarOnMobile = () => {
         })}
       </BottomNavigation>
       <ExportFileModal
+        textEditorValue={textEditorValue}
         openExportModal={openExportModal}
         setOpenExportModal={setOpenExportModal}
       />
