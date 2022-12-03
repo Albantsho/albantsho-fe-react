@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
 import { Suspense } from "react";
 import CharacterBible from "../CharacterBible/CharacterBible";
 import GeneralScriptProfile from "../GeneralScriptProfile/GeneralScriptProfile";
@@ -21,7 +20,6 @@ const SaveProgressScriptModal = dynamic(
 );
 
 const Abstract = () => {
-  const { query } = useRouter();
   const {
     activeButton,
     openSaveProgressModal,
@@ -34,51 +32,46 @@ const Abstract = () => {
     register,
     onSubmit,
     control,
+    publishScript,
+    updateScript,
   } = useAbstract();
 
   return (
     <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <StepsLines step={step} />
-        {(Number(query.step) === 1 || !query.step) && (
-          <GeneralScriptProfile
-            control={control}
-            register={register}
-            errors={errors}
-          />
-        )}
-        {Number(query.step) === 2 && (
-          <StoryLine register={register} errors={errors} />
-        )}
-        {Number(query.step) === 3 && (
-          <StoryStructure register={register} errors={errors} />
-        )}
-        {Number(query.step) === 4 && (
-          <CharacterBible register={register} errors={errors} />
-        )}
-        {Number(query.step) === 5 && (
-          <WritersStatement register={register} errors={errors} />
-        )}
-        {Number(query.step) === 6 && activeButton === 0 && (
+        <StepsLines setStep={setStep} step={step} />
+        <GeneralScriptProfile
+          step={step}
+          control={control}
+          register={register}
+          errors={errors}
+        />
+        <StoryLine step={step} register={register} errors={errors} />
+        <StoryStructure step={step} register={register} errors={errors} />
+        <CharacterBible step={step} register={register} errors={errors} />
+        <WritersStatement step={step} register={register} errors={errors} />
+        {activeButton === 0 && (
           <UploadScript
+            step={step}
             activeButton={activeButton}
             setActiveButton={setActiveButton}
             register={register}
             errors={errors}
           />
         )}
-        {Number(query.step) === 6 && activeButton === 1 && (
+        {activeButton === 1 && (
           <UploadScriptFiles
+            step={step}
             activeButton={activeButton}
             setActiveButton={setActiveButton}
             register={register}
             errors={errors}
           />
         )}
-        {Number(query.step) === 7 && (
-          <UploadImage register={register} errors={errors} />
-        )}
+        <UploadImage step={step} register={register} errors={errors} />
         <StepsButtons
+          publishScript={publishScript}
+          updateScript={updateScript}
           setOpenSaveProgressModal={setOpenSaveProgressModal}
           step={step}
           setStep={setStep}

@@ -7,11 +7,12 @@ import { AiFillInfoCircle } from "react-icons/ai";
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+  step: number;
 }
 
-const StoryLine = ({ register, errors }: IProps) => {
+const StoryLine = ({ register, errors, step }: IProps) => {
   return (
-    <>
+    <div className={`${step === 2 ? "block" : "hidden"}`}>
       <Typography
         variant="h5"
         color="primary.700"
@@ -135,7 +136,7 @@ const StoryLine = ({ register, errors }: IProps) => {
           </span>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

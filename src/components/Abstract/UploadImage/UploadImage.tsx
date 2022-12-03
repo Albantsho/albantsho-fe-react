@@ -9,11 +9,12 @@ import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+  step: number;
 }
 
-const UploadImage = ({ errors, register }: IProps) => {
+const UploadImage = ({ errors, register, step }: IProps) => {
   return (
-    <>
+    <div className={`${step === 7 ? "block" : "hidden"}`}>
       <Typography
         variant="h5"
         color="primary.700"
@@ -66,10 +67,10 @@ const UploadImage = ({ errors, register }: IProps) => {
               Supports JPEG, JPEG2000, PNG
             </Typography>
           </div>
-          {errors.image && (
-            <span className="text-error-700">{errors.image?.message}</span>
-          )}
         </div>
+        {errors.image && (
+          <span className="text-error-700 ">{errors.image?.message}</span>
+        )}
         <div className="max-w-[528px] relative py-6 mx-auto rounded-md border-2 border-dashed mb-5 px-8 overflow-hidden border-tinted-300  bg-tinted-50/50">
           <div className="mb-2 pr-5">
             <Typography variant="body1" color="primary.700">
@@ -109,7 +110,7 @@ const UploadImage = ({ errors, register }: IProps) => {
           </IconButton>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

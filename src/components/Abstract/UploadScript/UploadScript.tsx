@@ -32,6 +32,7 @@ interface IProps {
   setActiveButton: React.Dispatch<React.SetStateAction<number>>;
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+  step: number;
 }
 
 interface ResultsOptionType {
@@ -44,9 +45,9 @@ const filterOptions = createFilterOptions({
   stringify: (option: ResultsOptionType) => option.title,
 });
 
-const UploadScript = ({ activeButton, setActiveButton }: IProps) => {
+const UploadScript = ({ activeButton, setActiveButton, step }: IProps) => {
   return (
-    <>
+    <div className={`${step === 6 ? "block" : "hidden"}`}>
       <Typography
         variant="h5"
         color="primary.700"
@@ -154,7 +155,7 @@ const UploadScript = ({ activeButton, setActiveButton }: IProps) => {
           Write new script
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 

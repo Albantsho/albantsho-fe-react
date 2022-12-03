@@ -1,24 +1,25 @@
 import {
+  Autocomplete,
   ListItemText,
   MenuItem,
   Typography,
-  Autocomplete,
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IAbstractFormValues } from "interfaces/abstract";
-import React, { useState } from "react";
-import { AiFillInfoCircle } from "react-icons/ai";
+import React from "react";
 import type {
-  UseFormRegister,
-  FieldErrorsImpl,
   Control,
+  FieldErrorsImpl,
+  UseFormRegister,
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
+import { AiFillInfoCircle } from "react-icons/ai";
 
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   control: Control<IAbstractFormValues, any>;
+  step: number;
 }
 
 const genresFilms = [
@@ -27,9 +28,9 @@ const genresFilms = [
   { label: "Sci Fi" },
 ];
 
-const GeneralScriptProfile = ({ register, errors, control }: IProps) => {
+const GeneralScriptProfile = ({ register, errors, control, step }: IProps) => {
   return (
-    <>
+    <div className={`${step === 1 ? "block" : "hidden"}`}>
       <Typography
         variant="h5"
         color="primary.700"
@@ -74,8 +75,9 @@ const GeneralScriptProfile = ({ register, errors, control }: IProps) => {
                 helperText={errors.script_type?.message}
                 variant="outlined"
                 id="script-format"
+                defaultValue="documentary"
               >
-                <MenuItem value="Documentary">
+                <MenuItem value="documentary">
                   <ListItemText className="text-primary-700">
                     Documentary
                   </ListItemText>
@@ -116,8 +118,9 @@ const GeneralScriptProfile = ({ register, errors, control }: IProps) => {
                 helperText={errors.storyFormat?.message}
                 variant="outlined"
                 id="story-format"
+                defaultValue="highConcept"
               >
-                <MenuItem value="HighConcept">
+                <MenuItem value="highConcept">
                   <ListItemText className="text-primary-700">
                     High Concept
                   </ListItemText>
@@ -198,8 +201,9 @@ const GeneralScriptProfile = ({ register, errors, control }: IProps) => {
                 helperText={errors.primary_genre?.message}
                 variant="outlined"
                 id="genre-script-primary"
+                defaultValue="documentary"
               >
-                <MenuItem value="Documentary">
+                <MenuItem value="documentary">
                   <ListItemText className="text-primary-700">
                     Documentary
                   </ListItemText>
@@ -240,6 +244,7 @@ const GeneralScriptProfile = ({ register, errors, control }: IProps) => {
                 helperText={errors.secondary_genre?.message}
                 variant="outlined"
                 id="genre-script-secondary"
+                defaultValue="romance"
               >
                 <MenuItem value="romance">
                   <ListItemText className="text-primary-700">
@@ -261,34 +266,44 @@ const GeneralScriptProfile = ({ register, errors, control }: IProps) => {
             Themes<span className="text-error-500 my-auto">*</span>
           </Typography>
         </label>
-        <Autocomplete
-          multiple
-          id="select-script"
-          sx={{
-            "& .MuiChip-label": { color: "#7953B5" },
-            "& .MuiSvgIcon-root": { color: "#BCA9DA !important" },
-            mb: 1,
-          }}
-          options={genresFilms}
-          getOptionLabel={(option) => option.label}
-          defaultValue={[genresFilms[1]]}
-          renderInput={(params) => (
-            <CustomInput
-              {...params}
-              variant="outlined"
+        <Controller
+          name="theme"
+          control={control}
+          render={({ field: { onChange } }) => (
+            <Autocomplete
+              multiple
+              id="select-script"
               sx={{
-                "& .MuiInputBase-root": { py: "10px !important" },
-                "& .MuiFormHelperText-root": {
-                  mx: 0,
-                  color: "#5D5FEF",
-                },
+                "& .MuiChip-label": { color: "#7953B5" },
+                "& .MuiSvgIcon-root": { color: "#BCA9DA !important" },
+                mb: 1,
               }}
-              helperText={
-                <span className="flex items-center gap-2">
-                  <AiFillInfoCircle className="text-xl" />
-                  Understanding screenplay themes
-                </span>
-              }
+              options={genresFilms}
+              getOptionLabel={(option) => option.label}
+              defaultValue={[genresFilms[1]]}
+              onChange={(_, data) => {
+                onChange(data);
+                return data;
+              }}
+              renderInput={(params) => (
+                <CustomInput
+                  {...params}
+                  variant="outlined"
+                  sx={{
+                    "& .MuiInputBase-root": { py: "10px !important" },
+                    "& .MuiFormHelperText-root": {
+                      mx: 0,
+                      color: "#5D5FEF",
+                    },
+                  }}
+                  helperText={
+                    <span className="flex items-center gap-2">
+                      <AiFillInfoCircle className="text-xl" />
+                      Understanding screenplay themes
+                    </span>
+                  }
+                />
+              )}
             />
           )}
         />
@@ -326,6 +341,7 @@ const GeneralScriptProfile = ({ register, errors, control }: IProps) => {
                 }}
                 helperText={errors.primary_cast?.message}
                 variant="outlined"
+                defaultValue="200"
                 id="cast-script-primary"
               >
                 <MenuItem value="200">
@@ -367,6 +383,7 @@ const GeneralScriptProfile = ({ register, errors, control }: IProps) => {
                 helperText={errors.secondary_cast?.message}
                 variant="outlined"
                 id="cast-script-secondary"
+                defaultValue="50"
               >
                 <MenuItem value="50">
                   <ListItemText className="text-primary-700">50</ListItemText>
@@ -408,16 +425,23 @@ const GeneralScriptProfile = ({ register, errors, control }: IProps) => {
                 },
               }}
               helperText={errors.estimated_budger?.message}
+              defaultValue="high"
               id="budget-script"
             >
               <MenuItem value="high">
                 <ListItemText className="text-primary-700">High</ListItemText>
               </MenuItem>
+              <MenuItem value="medium">
+                <ListItemText className="text-primary-700">Medium</ListItemText>
+              </MenuItem>
+              <MenuItem value="low">
+                <ListItemText className="text-primary-700">Low</ListItemText>
+              </MenuItem>
             </CustomInput>
           )}
         />
       </div>
-    </>
+    </div>
   );
 };
 

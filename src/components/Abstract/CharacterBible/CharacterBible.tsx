@@ -6,11 +6,12 @@ import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+  step: number;
 }
 
-const CharacterBible = ({ errors, register }: IProps) => {
+const CharacterBible = ({ errors, register, step }: IProps) => {
   return (
-    <>
+    <div className={`${step === 4 ? "block" : "hidden"}`}>
       <Typography
         variant="h5"
         color="primary.700"
@@ -55,7 +56,7 @@ const CharacterBible = ({ errors, register }: IProps) => {
           variant="outlined"
         />
       </div>
-    </>
+    </div>
   );
 };
 

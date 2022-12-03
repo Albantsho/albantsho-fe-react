@@ -81,7 +81,7 @@ const routes = {
   },
   abstract: {
     url: "/abstract",
-    mustAuthenticated: "yes",
+    mustAuthenticated: "no",
     permission: ["writer"],
   },
   profile: {

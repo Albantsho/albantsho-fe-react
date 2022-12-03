@@ -1,16 +1,15 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { abstractSchema } from "./validation/abstract.validation";
-import { useForm } from "react-hook-form";
 import { IAbstractFormValues } from "interfaces/abstract";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { abstractSchema } from "./validation/abstract.validation";
 
 const useAbstract = () => {
   const [step, setStep] = useState(1);
   const [openSaveProgressModal, setOpenSaveProgressModal] = useState(false);
   const [activeButton, setActiveButton] = useState<number>(0);
-  const { query } = useRouter();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const [publish, setPublish] = useState(false);
 
   const {
     register,
@@ -18,18 +17,24 @@ const useAbstract = () => {
     control,
     formState: { errors },
   } = useForm<IAbstractFormValues>({
-    defaultValues: {},
-    resolver: yupResolver(abstractSchema),
+    defaultValues: {
+      script_type: "documentary",
+      storyFormat: "highConcept",
+      primary_genre: "documentary",
+      secondary_genre: "romance",
+      primary_cast: "200",
+      secondary_cast: "50",
+      estimated_budger: "high",
+      theme: ["love"],
+    },
+    resolver: yupResolver(abstractSchema(publish)),
   });
 
-  useEffect(() => {
-    {
-      query.step ? setStep(Number(query.step)) : setStep(1);
-    }
-  }, [query]);
+  const publishScript = () => setPublish(true);
+  const updateScript = () => setPublish(false);
 
-  const onSubmit = () => {
-    ("");
+  const onSubmit = (data: IAbstractFormValues) => {
+    console.log(data);
   };
 
   return {
@@ -44,6 +49,8 @@ const useAbstract = () => {
     handleSubmit,
     onSubmit,
     control,
+    publishScript,
+    updateScript,
   };
 };
 

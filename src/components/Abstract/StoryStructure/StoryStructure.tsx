@@ -5,11 +5,12 @@ import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+  step: number;
 }
 
-const StoryStructure = ({ errors, register }: IProps) => {
+const StoryStructure = ({ errors, register, step }: IProps) => {
   return (
-    <>
+    <div className={`${step === 3 ? "block" : "hidden"}`}>
       <Typography
         variant="h5"
         color="primary.700"
@@ -80,7 +81,7 @@ const StoryStructure = ({ errors, register }: IProps) => {
           helperText={errors.act_structure?.message}
         />
       </div>
-    </>
+    </div>
   );
 };
 

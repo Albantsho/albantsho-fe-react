@@ -15,13 +15,14 @@ import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+  step: number;
 }
 
-const WritersStatement = ({ errors, register }: IProps) => {
+const WritersStatement = ({ errors, register, step }: IProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <>
+    <div className={`${step === 5 ? "block" : "hidden"}`}>
       <Typography
         variant="h5"
         color="primary.700"
@@ -167,7 +168,7 @@ const WritersStatement = ({ errors, register }: IProps) => {
           size="small"
         />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -12,10 +12,10 @@ export interface IAbstractFormValues {
   log_line: string;
   synopsis: string;
   story_world: string;
-  act_structure: string;
+  act_structure?: string;
   character_bible: string;
   inspiration: string;
   motivation: string;
-  copyright: string;
-  image: FileList;
+  // copyright: string;
+  image: File;
 }
