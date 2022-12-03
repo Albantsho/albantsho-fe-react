@@ -7,8 +7,8 @@ interface IProps {
 
 const ScriptEditor = ({ setTextEditorValue }: IProps) => {
   return (
-    <div className="w-full flex flex-col mx-auto xl:max-w-4xl">
-      <div className="bg-white w-full max-w-3xl mx-auto py-14">
+    <div className="w-full flex flex-col mx-auto max-w-[800px] xl:px-10">
+      <div className="bg-white w-full  mx-auto py-14">
         <Typography className="text-center futura font-bold">
           LONG MAN OF LONG BEACH
         </Typography>

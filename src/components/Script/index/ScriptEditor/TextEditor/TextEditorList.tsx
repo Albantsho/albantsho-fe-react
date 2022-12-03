@@ -2,22 +2,23 @@ import { ButtonGroup, IconButton, SvgIcon, Tooltip } from "@mui/material";
 
 import { useState } from "react";
 import { RiFileUserLine } from "react-icons/ri";
+import { useResizeDetector } from "react-resize-detector";
 import BookMarkIcon from "../assets/book-mark.svg";
 import TextEditor from "./TextEditor";
 
 interface IProps {
   setTextEditorValue?: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
-
 const TextEditorList = ({ setTextEditorValue }: IProps) => {
+  const { ref, width } = useResizeDetector();
   const [contextMenu, setContextMenu] = useState<{
     mouseX: number;
     mouseY: number;
   } | null>(null);
 
   return (
-    <div className="relative">
-      <ButtonGroup className="absolute flex flex-col -right-14 top-10">
+    <div ref={ref}>
+      <ButtonGroup className="relative ml-auto hidden xl:flex w-min flex-col -right-16 top-[135px]">
         <Tooltip
           classes={{
             tooltip: "bg-black",
@@ -50,6 +51,7 @@ const TextEditorList = ({ setTextEditorValue }: IProps) => {
         </Tooltip>
       </ButtonGroup>
       <TextEditor
+        width={width}
         setTextEditorValue={setTextEditorValue}
         contextMenu={contextMenu}
         setContextMenu={setContextMenu}

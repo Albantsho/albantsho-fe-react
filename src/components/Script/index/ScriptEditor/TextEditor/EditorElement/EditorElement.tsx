@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@mui/material";
 import { BsCameraVideoFill, BsFillChatLeftDotsFill } from "react-icons/bs";
 import { FaPlay, FaUser } from "react-icons/fa";
 import { SiAsana } from "react-icons/si";
@@ -12,6 +13,8 @@ const EditorElement = ({
   children,
   element,
 }: RenderElementProps) => {
+  const matches = useMediaQuery("(min-width:500px)");
+
   switch (element.type) {
     case "heading":
       return (
@@ -265,9 +268,9 @@ const EditorElement = ({
             marginLeft: "auto",
             marginRight: "auto",
             marginTop: "40px",
-            marginBottom: "40px",
+            marginBottom: "30px",
             height: "842px",
-            padding: "40px 56px",
+            padding: matches ? "40px 56px" : "16px 24px",
             background: "#fff",
           }}
         >

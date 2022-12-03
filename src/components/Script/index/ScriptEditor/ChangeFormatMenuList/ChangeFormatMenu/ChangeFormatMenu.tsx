@@ -28,7 +28,7 @@ const ChangeFormatMenu = ({
   return (
     <MenuItem
       key={menuItem.id}
-      className="text-white hover:bg-primary-700 justify-between rounded-md mb-1"
+      className="text-white hover:bg-primary-700 justify-between rounded-md mb-1 mx-h-[37px]"
       onClick={handleAddText}
     >
       {menuItem.text}

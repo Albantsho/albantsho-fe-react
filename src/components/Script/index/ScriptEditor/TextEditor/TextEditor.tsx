@@ -27,6 +27,7 @@ interface IProps {
     mouseX: number;
     mouseY: number;
   } | null;
+  width: number | undefined;
 }
 
 interface INode {
@@ -37,6 +38,7 @@ const TextEditor = ({
   setContextMenu,
   contextMenu,
   setTextEditorValue,
+  width,
 }: IProps) => {
   const editor: IEditor = useMemo(
     () => withNewFeatures(withHistory(withReact(createEditor()))),
@@ -95,10 +97,6 @@ const TextEditor = ({
           case "general": {
             return `<p itemID="general" style="margin-bottom:25px;padding:0 40px;color;black;position:relative;">${children}</p>`;
           }
-
-          // case "page": {
-          //   return `<div style="position:relative;marginLeft:auto;marginRight:auto;marginTop:40px;marginBottom:40px;height:1056px;padding:40px 56px;background:white;">${children}</div>`;
-          // }
           case "paragraph": {
             return `<p style="margin-bottom:3px;">${children}</p>`;
           }
@@ -117,8 +115,8 @@ const TextEditor = ({
   return (
     <div
       onContextMenu={handleContextMenu}
-      style={{ cursor: "context-menu" }}
-      className="bg-tinted-50/25 w-full max-w-3xl mx-auto"
+      style={{ cursor: "context-menu", maxWidth: `${width! - 2}px` }}
+      className="bg-tinted-50/25 w-full mx-auto"
     >
       <Slate onChange={handleChangeEditor} editor={editor} value={initialValue}>
         <Editable

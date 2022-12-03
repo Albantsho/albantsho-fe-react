@@ -28,7 +28,7 @@ const Script: NextPageWithLayout = () => {
         className="pt-3 lg:pt-5 flex px-5 sm:px-10 max-w-screen-2xl"
       >
         {query.tab && (
-          <div className="max-w-sm w-full bg-white pt-11 px-6 space-y-4 overflow-y-scroll h-[85vh] hidden lg:block">
+          <div className="max-w-sm w-full bg-white pt-11 px-6 space-y-4 overflow-y-scroll h-[85vh] min-w-[384px] hidden lg:block">
             {query.tab === "scenes" && <ScenesList />}
             {query.tab === "comment" && <CommentList />}
             {query.tab === "export" && (
