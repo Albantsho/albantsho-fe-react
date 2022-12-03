@@ -9,12 +9,14 @@ interface IProps {
 const ExportFile = ({ textEditorValue }: IProps) => {
   const handleExportPdfFile = () => {
     const doc = new jsPDF("p", "pt", "a4");
-    // const doc = new jsPDF({ format: "a4", orientation: "p", unit: "px", });
     if (textEditorValue) {
       doc.html(
-        `<div style="padding:0 40px;width:595px;">${textEditorValue}</div>`,
+        `<div style="padding:0 40px;width:595px;">
+        ${textEditorValue}
+        </div>`,
         {
           margin: [30, 0],
+          autoPaging: "text",
           callback: (pdf) => {
             for (let i = 1; i < doc.internal.pages.length; i++) {
               doc.setPage(i);

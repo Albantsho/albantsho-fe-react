@@ -17,8 +17,8 @@ const TextEditorList = ({ setTextEditorValue }: IProps) => {
   } | null>(null);
 
   return (
-    <div ref={ref}>
-      <ButtonGroup className="relative ml-auto hidden xl:flex w-min flex-col -right-16 top-[135px]">
+    <div ref={ref} className="relative">
+      <ButtonGroup className="absolute ml-auto hidden xl:flex w-min flex-col -right-16 top-10">
         <Tooltip
           classes={{
             tooltip: "bg-black",

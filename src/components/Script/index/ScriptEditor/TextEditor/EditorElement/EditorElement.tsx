@@ -215,7 +215,6 @@ const EditorElement = ({
             marginBottom: "16px",
             color: "black",
             position: "relative",
-            lineHeight: "16px",
             textTransform: "uppercase",
           }}
         >
