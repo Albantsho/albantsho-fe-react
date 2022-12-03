@@ -265,16 +265,11 @@ const routes = {
   wallet: {
     url: "/wallet",
     mustAuthenticated: "yes",
-    permission: ["producer"],
+    permission: ["producer", "writer"],
   },
   withdrawWallet: {
     url: "/wallet/withdraw",
-    mustAuthenticated: "yes",
-    permission: ["writer"],
-  },
-  cryptoWithdrawWallet: {
-    url: "/wallet/crypto-withdraw",
-    mustAuthenticated: "yes",
+    mustAuthenticated: "noMatter",
     permission: ["writer"],
   },
   helpWallet: {
