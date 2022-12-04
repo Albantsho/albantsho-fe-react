@@ -13,9 +13,14 @@ import { BiChevronDown } from "react-icons/bi";
 interface IProps {
   title: string;
   description?: string;
+  editorValue: (value: string) => void;
 }
 
-const QuestionnaireAccordion = ({ title, description }: IProps) => {
+const QuestionnaireAccordion = ({
+  title,
+  description,
+  editorValue,
+}: IProps) => {
   const initialValue: CustomElement[] = [
     {
       type: "paragraph",
@@ -56,7 +61,7 @@ const QuestionnaireAccordion = ({ title, description }: IProps) => {
         </div>
       </AccordionSummary>
       <AccordionDetails className="rounded-lg px-0 pb-6 md:pb-9 lg:pb-12">
-        <TextEditor initialValue={initialValue} />
+        <TextEditor editorValue={editorValue} initialValue={initialValue} />
         <div className="flex py-6 gap-x-5 flex-nowrap justify-center sm:justify-start">
           <Button
             disableElevation

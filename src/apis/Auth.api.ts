@@ -163,7 +163,7 @@ const useAuthApi = (controller?: AbortController) => {
     },
 
     async getUserProfileForAdmin(id: string | string[]) {
-      const res = await api.get(`/user/profile/${id}`, {
+      const res = await axiosPrivate.get(`/user/profile/${id}`, {
         signal: controller?.signal,
       });
 

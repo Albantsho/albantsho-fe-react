@@ -197,7 +197,7 @@ const routes = {
     url: "/dashboard/reviewer/[id]/questionnaire",
     dynamicUrl: (id: string) => `/dashboard/reviewer/${id}/questionnaire`,
     mustAuthenticated: "yes",
-    permission: ["reviewer"],
+    permission: ["writer"],
   },
   producerDashboard: {
     url: "/dashboard/producer",
@@ -299,8 +299,8 @@ const routes = {
   },
   script: {
     url: "/script",
-    mustAuthenticated: "no",
-    permission: [],
+    mustAuthenticated: "yes",
+    permission: ["writer"],
   },
 };
 

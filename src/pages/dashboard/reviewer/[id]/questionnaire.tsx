@@ -10,54 +10,6 @@ import RatingQuestionnaire from "components/Dashboard/Reviewer/Questionnaire/Que
 import { useState } from "react";
 import type { IReviewTypeA, IReviewTypeB } from "interfaces/reviews";
 
-const listQuestionnaireAccordionTypeA = [
-  { title: "INTRODUCTION" },
-  { title: "Plot" },
-  { title: "Character(s)" },
-  { title: "Genre tropes and Story structure" },
-  { title: "Dialogue" },
-  {
-    title: "Story quality",
-    description:
-      "how relevant is this story concept and what is unique or not about its approach to the ide",
-  },
-  {
-    title: "Suggestions",
-    description: "your final thoughts and suggestions",
-  },
-];
-const listQuestionnaireAccordionTypeB = [
-  { title: "INTRODUCTION" },
-  { title: "Plot" },
-  { title: "Character(s)" },
-  { title: "Genre tropes and Story structure" },
-  { title: "Dialogue" },
-  {
-    title: "Story quality",
-    description:
-      "how relevant is this story concept and what is unique or not about its approach to the ide",
-  },
-  {
-    title: "World-building",
-    description: "how authentic and real is the world-building",
-  },
-  {
-    title: "Script formatting & Editing",
-    description:
-      "how well are the scripting conventions creatively utilized? Reference scene or page numbers",
-  },
-  {
-    title: "Writer’s Voice",
-    description: "What’s unique or not about  the writing style",
-  },
-  { title: "Authenticity feedback" },
-  { title: "Opening  and closing image" },
-  {
-    title: "Suggestions",
-    description: "your final thoughts and suggestions",
-  },
-];
-
 const Questionnaire = () => {
   const [countRate, setCountRate] = useState<number | null>(2);
   const [reviewTypeAValues, setReviewTypeAValues] = useState<IReviewTypeA>({
@@ -81,7 +33,136 @@ const Questionnaire = () => {
     writer_voice: "",
     authenticity_feedback: "",
     suggestions: "",
+    opening_and_closing_image: "",
   });
+
+  const listQuestionnaireAccordionTypeA = [
+    {
+      title: "INTRODUCTION",
+      editorValue: (value: string) =>
+        setReviewTypeAValues({ ...reviewTypeAValues, introduction: value }),
+    },
+    {
+      title: "Plot",
+      editorValue: (value: string) =>
+        setReviewTypeAValues({ ...reviewTypeAValues, plot: value }),
+    },
+    {
+      title: "Character(s)",
+      editorValue: (value: string) =>
+        setReviewTypeAValues({ ...reviewTypeAValues, character: value }),
+    },
+    {
+      title: "Genre tropes and Story structure",
+      editorValue: (value: string) =>
+        setReviewTypeAValues({
+          ...reviewTypeAValues,
+          genre_and_story_structure: value,
+        }),
+    },
+    {
+      title: "Dialogue",
+      editorValue: (value: string) =>
+        setReviewTypeAValues({ ...reviewTypeAValues, dialogue: value }),
+    },
+    {
+      title: "Story quality",
+      description:
+        "how relevant is this story concept and what is unique or not about its approach to the ide",
+      editorValue: (value: string) =>
+        setReviewTypeAValues({ ...reviewTypeAValues, story_quality: value }),
+    },
+    {
+      title: "Suggestions",
+      description: "your final thoughts and suggestions",
+      editorValue: (value: string) =>
+        setReviewTypeAValues({ ...reviewTypeAValues, suggestions: value }),
+    },
+  ];
+
+  const listQuestionnaireAccordionTypeB = [
+    {
+      title: "INTRODUCTION",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({ ...reviewTypeBValues, introduction: value }),
+    },
+    {
+      title: "Plot",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({ ...reviewTypeBValues, plot: value }),
+    },
+    {
+      title: "Character(s)",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({ ...reviewTypeBValues, character: value }),
+    },
+    {
+      title: "Genre tropes and Story structure",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({
+          ...reviewTypeBValues,
+          genre_and_story_structure: value,
+        }),
+    },
+    {
+      title: "Dialogue",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({ ...reviewTypeBValues, dialogue: value }),
+    },
+    {
+      title: "Story quality",
+      description:
+        "how relevant is this story concept and what is unique or not about its approach to the ide",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({ ...reviewTypeBValues, story_quality: value }),
+    },
+    {
+      title: "World-building",
+      description: "how authentic and real is the world-building",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({ ...reviewTypeBValues, world_building: value }),
+    },
+    {
+      title: "Script formatting & Editing",
+      description:
+        "how well are the scripting conventions creatively utilized? Reference scene or page numbers",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({
+          ...reviewTypeBValues,
+          script_formatting: value,
+        }),
+    },
+    {
+      title: "Writer’s Voice",
+      description: "What’s unique or not about  the writing style",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({ ...reviewTypeBValues, writer_voice: value }),
+    },
+    {
+      title: "Authenticity feedback",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({
+          ...reviewTypeBValues,
+          authenticity_feedback: value,
+        }),
+    },
+    {
+      title: "Opening  and closing image",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({
+          ...reviewTypeBValues,
+          opening_and_closing_image: value,
+        }),
+    },
+    {
+      title: "Suggestions",
+      description: "your final thoughts and suggestions",
+      editorValue: (value: string) =>
+        setReviewTypeBValues({ ...reviewTypeBValues, suggestions: value }),
+    },
+  ];
+
+  const completed = Object.values(reviewTypeAValues).every((value) => value);
 
   return (
     <>
@@ -124,18 +205,26 @@ const Questionnaire = () => {
         </div>
 
         <div className="rounded-lg text-center max-w-5xl mx-auto space-y-6">
-          {listQuestionnaireAccordionTypeA.map((accordionTitle) => (
+          {listQuestionnaireAccordionTypeA.map((accordion) => (
             <AccordionQuestionnaire
-              key={accordionTitle.title}
-              title={accordionTitle.title}
-              description={accordionTitle.description}
+              key={accordion.title}
+              title={accordion.title}
+              description={accordion.description}
+              editorValue={accordion.editorValue}
             />
           ))}
           <RatingQuestionnaire
             countRate={countRate}
             setCountRate={setCountRate}
           />
-          <Btn fullWidth className="mt-6 py-4 rounded-lg">
+          <Btn
+            onClick={() => {
+              console.log(reviewTypeAValues);
+            }}
+            disabled={!completed}
+            fullWidth
+            className="mt-6 py-4 rounded-lg"
+          >
             COMPLETE REVIEW
           </Btn>
         </div>

@@ -65,5 +65,6 @@ export interface IReviewTypeB {
   script_formatting: string;
   writer_voice: string;
   authenticity_feedback: string;
+  opening_and_closing_image: string;
   suggestions: string;
 }

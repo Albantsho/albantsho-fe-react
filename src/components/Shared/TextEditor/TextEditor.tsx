@@ -15,13 +15,18 @@ import useTextEditor from "./useTextEditor";
 interface IProps {
   setTextEditorValue?: React.Dispatch<React.SetStateAction<string | undefined>>;
   initialValue: CustomElement[];
+  editorValue?: (value: string) => void;
 }
 
 interface INode {
   children: Descendant[];
 }
 
-const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
+const TextEditor = ({
+  setTextEditorValue,
+  initialValue,
+  editorValue,
+}: IProps) => {
   const editor = useMemo(
     () => withHistory(withNewFeatures(withReact(createEditor()))),
     []
@@ -148,6 +153,7 @@ const TextEditor = ({ setTextEditorValue, initialValue }: IProps) => {
 
     if (value !== undefined && setTextEditorValue !== undefined)
       setTextEditorValue(value);
+    if (value !== undefined && editorValue !== undefined) editorValue(value);
   };
 
   return (
