@@ -217,14 +217,7 @@ const Questionnaire = () => {
             countRate={countRate}
             setCountRate={setCountRate}
           />
-          <Btn
-            onClick={() => {
-              console.log(reviewTypeAValues);
-            }}
-            disabled={!completed}
-            fullWidth
-            className="mt-6 py-4 rounded-lg"
-          >
+          <Btn disabled={!completed} fullWidth className="mt-6 py-4 rounded-lg">
             COMPLETE REVIEW
           </Btn>
         </div>

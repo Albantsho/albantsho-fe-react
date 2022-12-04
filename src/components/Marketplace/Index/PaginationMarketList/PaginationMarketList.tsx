@@ -19,7 +19,7 @@ const CustomPaginationComponent = () => {
           },
         }}
         className="bg-white shadow-md w-auto rounded-md p-4 md:px-10"
-        count={8}
+        count={5}
         size={matches ? "large" : "medium"}
       />
     </div>

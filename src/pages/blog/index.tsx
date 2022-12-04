@@ -17,6 +17,7 @@ const Blog: NextPageWithLayout = () => {
       try {
         setLoading(true);
         const res = await getAllWeblogs();
+
         setBlogList(res.data.weblogs);
         setLoading(false);
       } catch (error) {

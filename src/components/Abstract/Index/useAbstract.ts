@@ -38,7 +38,6 @@ const useAbstract = () => {
   const updateScriptFunc = () => setPublish(false);
 
   const onSubmit = async (data: IAbstractFormValues) => {
-    console.log(data);
     if (publish) {
       try {
         setLoadingPublishButton(true);

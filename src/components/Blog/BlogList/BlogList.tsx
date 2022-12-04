@@ -1,6 +1,14 @@
-import { Box, Card, Skeleton } from "@mui/material";
+import {
+  Box,
+  Card,
+  Pagination,
+  Skeleton,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import CustomPaginationComponent from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
 import { IWeblog } from "interfaces/weblog";
+import { useState } from "react";
 import BlogCard from "../BlogCard/BlogCard";
 
 interface IProps {
@@ -9,6 +17,18 @@ interface IProps {
 }
 
 const BlogList = ({ blogList, loading }: IProps) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const lengthPage = Math.ceil(blogList.length / postsPerPage);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+
+  const currentPosts = blogList.slice(indexOfFirstPost, indexOfLastPost);
+
   return (
     <div className="max-w-screen-2xl w-full px-5 sm:px-10">
       <Box
@@ -16,6 +36,7 @@ const BlogList = ({ blogList, loading }: IProps) => {
         gridTemplateColumns={{
           sm: "repeat(auto-fill, minmax(280px, auto))",
           md: "repeat(auto-fill, minmax(350px, auto))",
+          xl: "repeat(auto-fill, minmax(510px, auto))",
         }}
       >
         {loading
@@ -43,9 +64,31 @@ const BlogList = ({ blogList, loading }: IProps) => {
                 <Skeleton className="mx-5 mb-5" animation="wave" height={15} />
               </Card>
             ))
-          : blogList.map((blog) => <BlogCard key={blog._id} post={blog} />)}
+          : currentPosts.map((blog) => <BlogCard key={blog._id} post={blog} />)}
       </Box>
-      <CustomPaginationComponent />
+      {blogList.length >= 11 && (
+        <div className=" flex justify-center px-5 sm:px-10   mb-6 sm:mb-14 m-3 sm:mt-7 ">
+          <Pagination
+            page={currentPage}
+            onChange={(event: React.ChangeEvent<unknown>, page: number) => {
+              setCurrentPage(page);
+            }}
+            siblingCount={matches ? 2 : 0}
+            boundaryCount={matches ? 2 : 1}
+            sx={{
+              "& .MuiPaginationItem-root.Mui-selected": {
+                backgroundColor: "#fff !important",
+                border: "1px solid #7953B5",
+                borderRadius: "100%",
+                color: "#7953B5",
+              },
+            }}
+            className="bg-white shadow-md w-auto rounded-md p-4 md:px-10"
+            count={lengthPage}
+            size={matches ? "large" : "medium"}
+          />
+        </div>
+      )}
     </div>
   );
 };
