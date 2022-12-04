@@ -18,9 +18,11 @@ const BlogPost = () => {
 
   useEffect(() => {
     async function getOneWeblogFunc() {
+      console.log(query.id);
+
       try {
         if (query.id !== undefined) {
-          const res = await getWeblog(query.id);
+          const res = await getWeblog(query.id[0]);
           setOneWeblog(res.data.weblog);
         }
       } catch (error) {

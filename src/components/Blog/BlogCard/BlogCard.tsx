@@ -15,6 +15,12 @@ interface IProps {
 }
 
 const BlogCard = ({ post }: IProps) => {
+  const convertToSlug = (Text: string) => {
+    return Text.toLowerCase()
+      .replace(/ /g, "-")
+      .replace(/[^\w-]+/g, "");
+  };
+
   return (
     <Card
       className="rounded-lg"
@@ -40,7 +46,7 @@ const BlogCard = ({ post }: IProps) => {
       </CardContent>
       <CardActions className="px-4 pb-4">
         <Link
-          href={routes.oneBlog.dynamicUrl(post._id)}
+          href={routes.oneBlog.dynamicUrl(post._id, convertToSlug(post.title))}
           className="underline text-primary-700"
         >
           Read more

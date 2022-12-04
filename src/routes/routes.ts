@@ -54,8 +54,8 @@ const routes = {
   },
   blog: { url: "/blog", mustAuthenticated: "noMatter", permission: [] },
   oneBlog: {
-    url: `/blog/[id]`,
-    dynamicUrl: (blogId: string) => `/blog/${blogId}`,
+    url: `/blog/[...id]`,
+    dynamicUrl: (blogId: string, slug: string) => `/blog/${blogId}/${slug}`,
     mustAuthenticated: "noMatter",
     permission: [],
   },
