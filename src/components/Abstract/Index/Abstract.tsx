@@ -33,7 +33,9 @@ const Abstract = () => {
     onSubmit,
     control,
     publishScript,
-    updateScript,
+    updateScriptFunc,
+    loadingPublishButton,
+    loadingUpdateButton,
   } = useAbstract();
 
   return (
@@ -70,9 +72,10 @@ const Abstract = () => {
         )}
         <UploadImage step={step} register={register} errors={errors} />
         <StepsButtons
+          loadingPublishButton={loadingPublishButton}
+          loadingUpdateButton={loadingUpdateButton}
           publishScript={publishScript}
-          updateScript={updateScript}
-          setOpenSaveProgressModal={setOpenSaveProgressModal}
+          updateScript={updateScriptFunc}
           step={step}
           setStep={setStep}
         />

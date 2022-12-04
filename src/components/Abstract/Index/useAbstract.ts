@@ -1,15 +1,19 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import useScriptsApi from "apis/Scripts.api";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import errorHandler from "utils/error-handler";
 import { abstractSchema } from "./validation/abstract.validation";
 
 const useAbstract = () => {
   const [step, setStep] = useState(1);
   const [openSaveProgressModal, setOpenSaveProgressModal] = useState(false);
   const [activeButton, setActiveButton] = useState<number>(0);
-  // const [loading, setLoading] = useState(false);
+  const [loadingPublishButton, setLoadingPublishButton] = useState(false);
+  const [loadingUpdateButton, setLoadingUpdateButton] = useState(false);
   const [publish, setPublish] = useState(false);
+  const { updateScript, addScriptTheme } = useScriptsApi();
 
   const {
     register,
@@ -31,10 +35,30 @@ const useAbstract = () => {
   });
 
   const publishScript = () => setPublish(true);
-  const updateScript = () => setPublish(false);
+  const updateScriptFunc = () => setPublish(false);
 
-  const onSubmit = (data: IAbstractFormValues) => {
+  const onSubmit = async (data: IAbstractFormValues) => {
     console.log(data);
+    if (publish) {
+      try {
+        setLoadingPublishButton(true);
+        const res = await updateScript(data, "1");
+      } catch (error) {
+        errorHandler(error);
+      } finally {
+        setLoadingPublishButton(false);
+      }
+    } else {
+      try {
+        setLoadingUpdateButton(true);
+        const res = await addScriptTheme({ theme: data.theme }, "1");
+        setOpenSaveProgressModal(true);
+      } catch (error) {
+        errorHandler(error);
+      } finally {
+        setLoadingUpdateButton(false);
+      }
+    }
   };
 
   return {
@@ -50,7 +74,9 @@ const useAbstract = () => {
     onSubmit,
     control,
     publishScript,
-    updateScript,
+    updateScriptFunc,
+    loadingPublishButton,
+    loadingUpdateButton,
   };
 };
 

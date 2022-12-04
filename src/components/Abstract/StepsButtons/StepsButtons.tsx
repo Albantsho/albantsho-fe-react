@@ -1,20 +1,23 @@
+import { LoadingButton } from "@mui/lab";
 import { Button, IconButton } from "@mui/material";
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 
 interface IProps {
   step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
-  setOpenSaveProgressModal: React.Dispatch<React.SetStateAction<boolean>>;
   publishScript: () => void;
   updateScript: () => void;
+  loadingPublishButton: boolean;
+  loadingUpdateButton: boolean;
 }
 
 const StepsButtons = ({
   step,
   setStep,
-  setOpenSaveProgressModal,
   publishScript,
   updateScript,
+  loadingPublishButton,
+  loadingUpdateButton,
 }: IProps) => {
   return (
     <>
@@ -29,37 +32,38 @@ const StepsButtons = ({
         >
           Back
         </Button>
-
-        <Button
+        <LoadingButton
+          loading={loadingUpdateButton}
           type="submit"
           onClick={updateScript}
-          // onClick={() => setOpenSaveProgressModal(true)}
           className="rounded-md px-8 py-3 mx-auto"
           variant="outlined"
         >
           Save & complete later
-        </Button>
-        {step !== 7 ? (
+        </LoadingButton>
+        {step !== 7 && (
           <Button
             disabled={step === 7}
             onClick={() => {
               if (step !== 7) setStep((prevCount: number) => prevCount + 1);
             }}
-            className="rounded-md px-8 py-3 hidden md:block"
+            className="rounded-md px-8 py-3 hidden min-w-[116px] text-center md:block"
             variant="contained"
           >
             Next
           </Button>
-        ) : (
-          <Button
-            type="submit"
-            onClick={publishScript}
-            className="rounded-md px-[82.5px] md:px-8 py-3 min-w-[178px]  mx-auto md:mx-0 md:min-w-fit"
-            variant="contained"
-          >
-            publish
-          </Button>
         )}
+        <LoadingButton
+          loading={loadingPublishButton}
+          type="submit"
+          onClick={publishScript}
+          className={`${
+            step !== 7 ? "hidden" : "flex"
+          } rounded-md px-[82.5px] md:px-8 py-3 min-w-[178px]  mx-auto md:mx-0 md:min-w-fit`}
+          variant="contained"
+        >
+          publish
+        </LoadingButton>
       </div>
 
       <div className="flex md:hidden justify-center mt-4 gap-4 items-center">

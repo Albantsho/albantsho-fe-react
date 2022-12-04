@@ -19,7 +19,7 @@ interface IUpdateScriptPayload {
   based_on?: string;
   copyright?: string;
   content_info?: string;
-  image?: string;
+  image?: File;
   front_page?: string;
   by_line?: string;
   cover_page?: string;
