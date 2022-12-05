@@ -6,6 +6,7 @@ interface ICreateNewWeblogPayload {
   description: string;
   content: string | undefined;
   image: string | File;
+  slug: string;
 }
 
 interface IUpdateWeblogPayload {
@@ -15,6 +16,7 @@ interface IUpdateWeblogPayload {
   image?: File;
   archive?: boolean;
   trash?: boolean;
+  slug?: string;
 }
 
 const useWeblogApi = (controller?: AbortController) => {
@@ -51,8 +53,8 @@ const useWeblogApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAllWeblogs() {
-      const res = await api.get("/weblog/all", {
+    async getAllWeblogs(page: number) {
+      const res = await api.get(`/weblog/all?limit=10&page=${page}`, {
         signal: controller?.signal,
       });
 

@@ -11,13 +11,15 @@ const Blog: NextPageWithLayout = () => {
   const [blogList, setBlogList] = useState<IWeblog[]>([]);
   const [loading, setLoading] = useState(false);
   const { getAllWeblogs } = useWeblogApi();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
     async function getAllWeblogsFunc() {
       try {
         setLoading(true);
-        const res = await getAllWeblogs();
-
+        const res = await getAllWeblogs(currentPage);
+        setPageCount(res.data.pagesCount);
         setBlogList(res.data.weblogs);
         setLoading(false);
       } catch (error) {
@@ -28,7 +30,7 @@ const Blog: NextPageWithLayout = () => {
     getAllWeblogsFunc();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [pageCount]);
 
   return (
     <>
@@ -36,7 +38,13 @@ const Blog: NextPageWithLayout = () => {
         <title>Albantsho || Blog</title>
       </Head>
 
-      <BlogList loading={loading} blogList={blogList} />
+      <BlogList
+        pageCount={pageCount}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        loading={loading}
+        blogList={blogList}
+      />
     </>
   );
 };

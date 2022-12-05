@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
+import { convertToSlug } from "utils/convert-to-slug";
 import errorHandler from "utils/error-handler";
 import { addBlogSchema } from "./validation/addBlog.validate";
 
@@ -46,6 +47,7 @@ const useAddBlog = () => {
         description: data.description,
         content: textEditorValue,
         image: data.image[0],
+        slug: convertToSlug(data.title),
       });
       replace(routes.blogsAdminDashboard.url);
       setTextEditorValue("");

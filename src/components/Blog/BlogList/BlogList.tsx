@@ -8,26 +8,25 @@ import {
 } from "@mui/material";
 import CustomPaginationComponent from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
 import { IWeblog } from "interfaces/weblog";
-import { useState } from "react";
 import BlogCard from "../BlogCard/BlogCard";
 
 interface IProps {
   blogList: IWeblog[];
   loading: boolean;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  currentPage: number;
+  pageCount: number;
 }
 
-const BlogList = ({ blogList, loading }: IProps) => {
+const BlogList = ({
+  blogList,
+  loading,
+  currentPage,
+  setCurrentPage,
+  pageCount,
+}: IProps) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-
-  const [postsPerPage, setPostsPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
-  const lengthPage = Math.ceil(blogList.length / postsPerPage);
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-  const currentPosts = blogList.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <div className="max-w-screen-2xl w-full px-5 sm:px-10">
@@ -64,10 +63,11 @@ const BlogList = ({ blogList, loading }: IProps) => {
                 <Skeleton className="mx-5 mb-5" animation="wave" height={15} />
               </Card>
             ))
-          : currentPosts.map((blog) => <BlogCard key={blog._id} post={blog} />)}
+          : blogList.map((blog) => <BlogCard key={blog._id} post={blog} />)}
       </Box>
-      {blogList.length >= 11 && (
-        <div className=" flex justify-center px-5 sm:px-10   mb-6 sm:mb-14 m-3 sm:mt-7 ">
+
+      {pageCount >= 2 && (
+        <div className=" flex justify-center px-5 sm:px-10 mb-6 sm:mb-14 m-3 sm:mt-7 ">
           <Pagination
             page={currentPage}
             onChange={(event: React.ChangeEvent<unknown>, page: number) => {
@@ -84,7 +84,7 @@ const BlogList = ({ blogList, loading }: IProps) => {
               },
             }}
             className="bg-white shadow-md w-auto rounded-md p-4 md:px-10"
-            count={lengthPage}
+            count={pageCount}
             size={matches ? "large" : "medium"}
           />
         </div>

@@ -7,4 +7,5 @@ export interface IWeblog {
   media: string;
   createdAt: string;
   updatedAt: string;
+  slug: string;
 }

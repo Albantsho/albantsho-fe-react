@@ -10,6 +10,7 @@ import errorHandler from "utils/error-handler";
 import { editBlogSchema } from "./validation/editBlog.validate";
 import { getStyleObjectFromString } from "utils/formatter";
 import routes from "routes/routes";
+import { convertToSlug } from "utils/convert-to-slug";
 
 interface IEditWeblogFormValues {
   title: string;
@@ -282,6 +283,7 @@ const useEditBlog = ({
           description: data.description,
           content: textEditorValue,
           image: data.image[0] && data.image[0],
+          slug: convertToSlug(data.title),
         },
         _id
       );

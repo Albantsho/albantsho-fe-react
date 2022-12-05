@@ -18,11 +18,9 @@ const BlogPost = () => {
 
   useEffect(() => {
     async function getOneWeblogFunc() {
-      console.log(query.id);
-
       try {
-        if (query.id !== undefined) {
-          const res = await getWeblog(query.id[0]);
+        if (query.slug !== undefined) {
+          const res = await getWeblog(query.slug);
           setOneWeblog(res.data.weblog);
         }
       } catch (error) {
@@ -33,7 +31,7 @@ const BlogPost = () => {
     getOneWeblogFunc();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.id]);
+  }, [query.slug]);
 
   return (
     <>
