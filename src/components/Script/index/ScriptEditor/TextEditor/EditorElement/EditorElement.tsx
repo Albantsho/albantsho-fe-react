@@ -1,12 +1,13 @@
 import { useMediaQuery } from "@mui/material";
 import { BsCameraVideoFill, BsFillChatLeftDotsFill } from "react-icons/bs";
-import { FaPlay, FaUser } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa";
 import { SiAsana } from "react-icons/si";
 import { type RenderElementProps } from "slate-react";
 import LeftParenthesesIcon from "../../assets/left-parentheses.svg";
 import PhotoIcon from "../../assets/photo.svg";
 import RightParenthesesIcon from "../../assets/right-parentheses.svg";
 import TransitionIcon from "../../assets/transition.svg";
+import CharacterComponent from "./CharacterComponent/CharacterComponent";
 
 const EditorElement = ({
   attributes,
@@ -79,36 +80,9 @@ const EditorElement = ({
       );
     case "character":
       return (
-        <p
-          {...attributes}
-          itemID={element.id}
-          style={{
-            padding: "0px 40px",
-            marginBottom: "16px",
-            textAlign: "start",
-            position: "relative",
-            width: "60%",
-            textTransform: "uppercase",
-            color: "black",
-            marginLeft: "auto",
-            fontFamily: "Curior",
-            fontWeight: 700,
-          }}
-        >
-          <FaUser
-            style={{
-              position: "absolute",
-              left: "0",
-              top: "4px",
-              bottom: "0",
-              width: "24px",
-              height: "20",
-              color: "#DCD8E4",
-              fontFamily: "Curior",
-            }}
-          />
+        <CharacterComponent attributes={attributes} element={element}>
           {children}
-        </p>
+        </CharacterComponent>
       );
     case "dialogue":
       return (
