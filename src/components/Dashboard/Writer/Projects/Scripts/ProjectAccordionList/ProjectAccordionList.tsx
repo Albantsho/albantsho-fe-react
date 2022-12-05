@@ -19,7 +19,7 @@ const ProjectAccordionList = ({ setListScripts, listScripts }: IProps) => {
           />
         );
       })}
-      <CustomPaginationComponent />
+      {/* <CustomPaginationComponent /> */}
     </div>
   );
 };

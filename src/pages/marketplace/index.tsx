@@ -22,7 +22,7 @@ const Marketplace: NextPageWithLayout = () => {
           <>
             <MarketplaceTabs />
             <MarketplaceProducts scripts={scripts} />
-            <CustomPaginationComponent />
+            {/* <CustomPaginationComponent /> */}
           </>
         )}
       </div>

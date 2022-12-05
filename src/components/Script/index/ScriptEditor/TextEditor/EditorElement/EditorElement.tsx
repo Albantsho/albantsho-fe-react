@@ -32,6 +32,7 @@ const EditorElement = ({
             width: "100%",
             textTransform: "uppercase",
           }}
+          className="curior"
         >
           <span
             style={{

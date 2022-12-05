@@ -15,7 +15,7 @@ interface IProps {
 }
 
 const LiveBlog = ({
-  blog: { _id, title, description, media },
+  blog: { _id, title, description, media, slug },
   setBlogList,
 }: IProps) => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
@@ -33,11 +33,11 @@ const LiveBlog = ({
       <div
         data-aos="fade-up"
         data-aos-anchor-placement="top-bottom"
-        className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start"
+        className="flex bg-white flex-col justify-between md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start min-h-[155px]"
       >
         <div className="flex gap-3 lg:gap-6">
           <Image
-            className="rounded-lg h-[76px]"
+            className="rounded-lg h-[76px] w-[76px]"
             width={76}
             height={76}
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${media}`}
@@ -53,13 +53,14 @@ const LiveBlog = ({
               {title}
             </Typography>
             <Typography variant="caption" className="leading-4">
-              {description}
+              {description.slice(0, 350)}
+              {description.length >= 350 && "..."}
             </Typography>
           </div>
         </div>
         <div className="ml-auto flex md:self-start lg:self-center xl:self-start gap-3 md:gap-1">
           <IconButton
-            href={routes.editBlogAdminDashboard.dynamicUrl(_id)}
+            href={routes.editBlogAdminDashboard.dynamicUrl(slug)}
             color="primary"
           >
             <SvgIcon

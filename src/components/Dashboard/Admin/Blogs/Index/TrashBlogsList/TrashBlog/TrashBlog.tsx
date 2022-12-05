@@ -36,11 +36,11 @@ const TrashBlog = ({
       <div
         data-aos="fade-up"
         data-aos-anchor-placement="top-bottom"
-        className="flex bg-white flex-col md:flex-row lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start"
+        className="flex bg-white flex-col md:flex-row justify-between lg:flex-col xl:flex-row shadow-primary rounded-lg px-4 lg:px-6 py-5 lg:py-7 gap-4 items-start min-h-[155px]"
       >
         <div className="flex gap-3 lg:gap-6">
           <Image
-            className="rounded-lg h-[76px]"
+            className="rounded-lg h-[76px] w-[76px]"
             width={76}
             height={76}
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${media}`}
@@ -56,7 +56,8 @@ const TrashBlog = ({
               {title}
             </Typography>
             <Typography variant="caption" className="leading-4">
-              {description}
+              {description.slice(0, 350)}
+              {description.length >= 350 && "..."}
             </Typography>
           </div>
         </div>

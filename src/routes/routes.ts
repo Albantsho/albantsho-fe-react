@@ -220,13 +220,14 @@ const routes = {
     permission: ["admin"],
   },
   blogsAdminDashboardTabs: {
-    url: (query: string) => `/dashboard/admin/blogs${query}`,
+    url: (query: string, page?: string) =>
+      `/dashboard/admin/blogs${query}${page}`,
     mustAuthenticated: "yes",
     permission: ["admin"],
   },
   editBlogAdminDashboard: {
-    url: `/dashboard/admin/blogs/edit-blog/[id]`,
-    dynamicUrl: (id: string) => `/dashboard/admin/blogs/edit-blog/${id}`,
+    url: `/dashboard/admin/blogs/edit-blog/[slug]`,
+    dynamicUrl: (slug: string) => `/dashboard/admin/blogs/edit-blog/${slug}`,
     mustAuthenticated: "yes",
     permission: ["admin"],
   },
@@ -299,8 +300,8 @@ const routes = {
   },
   script: {
     url: "/script",
-    mustAuthenticated: "yes",
-    permission: ["writer"],
+    mustAuthenticated: "no",
+    permission: [],
   },
 };
 

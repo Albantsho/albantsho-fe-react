@@ -16,13 +16,16 @@ import { IWeblog } from "interfaces/weblog";
 import useWeblogApi from "apis/Weblog.api";
 import { DotLoader } from "react-spinners";
 import debounce from "lodash/debounce";
+import CustomPaginationComponent from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
 
 const BlogsPage: NextPageWithLayout = () => {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const [loading, setLoading] = useState(false);
   const [blogList, setBlogList] = useState<Array<IWeblog>>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const { getAllWeblogsForAdmin } = useWeblogApi();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
 
   const handleSearch = useCallback(
     debounce(
@@ -45,6 +48,7 @@ const BlogsPage: NextPageWithLayout = () => {
           searchQuery
         );
         setBlogList(res.data.weblogs);
+        setPageCount(res.data.pagesCount);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
@@ -53,6 +57,22 @@ const BlogsPage: NextPageWithLayout = () => {
     getAllWeblogs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery, query]);
+
+  const handleActivePage = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setCurrentPage(page);
+    !query
+      ? push(routes.blogsAdminDashboardTabs.url("", `?page=${page}`))
+      : query.archive
+      ? push(
+          routes.blogsAdminDashboardTabs.url(`?archive=true`, `&page=${page}`)
+        )
+      : query.trash
+      ? push(routes.blogsAdminDashboardTabs.url(`?trash=true`, `&page=${page}`))
+      : push(routes.blogsAdminDashboardTabs.url("", `?page=${page}`));
+  };
 
   return (
     <>
@@ -77,7 +97,13 @@ const BlogsPage: NextPageWithLayout = () => {
           {query.trash && (
             <TrashBlogsList blogList={blogList} setBlogList={setBlogList} />
           )}
-
+          {pageCount >= 2 && (
+            <CustomPaginationComponent
+              pageCount={pageCount}
+              currentPage={currentPage}
+              handleActivePage={handleActivePage}
+            />
+          )}
           <Fab
             color="primary"
             href={routes.createBlogAdminDashboard.url}

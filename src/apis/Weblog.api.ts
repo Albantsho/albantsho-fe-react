@@ -61,8 +61,8 @@ const useWeblogApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getWeblog(id: string | string[]) {
-      const res = await axiosPrivate.get(`/weblog/${id}`, {
+    async getWeblog(slug: string | string[]) {
+      const res = await axiosPrivate.get(`/weblog/${slug}`, {
         signal: controller?.signal,
       });
 
@@ -71,7 +71,7 @@ const useWeblogApi = (controller?: AbortController) => {
 
     async getAllWeblogsForAdmin(query?: string, search?: string) {
       const res = await axiosPrivate.get(
-        `/weblog/admin/all?${query}&search=${search}`,
+        `/weblog/admin/all?limit=10&${query}&search=${search}`,
         {
           signal: controller?.signal,
         }

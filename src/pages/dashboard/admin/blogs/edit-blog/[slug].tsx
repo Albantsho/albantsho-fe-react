@@ -19,8 +19,8 @@ const EditBlogPage: NextPageWithLayout = () => {
   useEffect(() => {
     async function getWeblogFunc() {
       try {
-        if (query.id !== undefined) {
-          const res = await getWeblog(query.id);
+        if (query.slug !== undefined) {
+          const res = await getWeblog(query.slug);
           setOneWeblog(res.data.weblog);
         }
       } catch (error) {
@@ -29,7 +29,7 @@ const EditBlogPage: NextPageWithLayout = () => {
     }
 
     getWeblogFunc();
-  }, [query.id!]);
+  }, [query.slug!]);
 
   return (
     <>

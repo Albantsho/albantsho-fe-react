@@ -40,7 +40,7 @@ const MoveBlogToTrashListModal = ({
         );
       }
       setOpenMoveBlogToTrashListModal(false);
-      if (query.id) push(routes.blogsAdminDashboard.url);
+      if (query.slug) push(routes.blogsAdminDashboard.url);
     } catch (error) {
       errorHandler(error);
     }

@@ -17,7 +17,7 @@ interface IProps {
 const BlogCard = ({ post }: IProps) => {
   return (
     <Card
-      className="rounded-lg"
+      className="rounded-lg flex flex-col"
       sx={{ boxShadow: " 0px 2px 7px rgba(117, 88, 162, 0.15)" }}
     >
       <CardMedia
@@ -35,7 +35,7 @@ const BlogCard = ({ post }: IProps) => {
           className: "leading-normal futura font-medium",
         }}
       />
-      <CardContent className="pt-0">
+      <CardContent className="pt-0 flex-1">
         <Typography color="gray.400">{post.description}</Typography>
       </CardContent>
       <CardActions className="px-4 pb-4">

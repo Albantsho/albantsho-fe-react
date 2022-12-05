@@ -10,7 +10,7 @@ interface IProps {
 
 const LiveBlogsList = ({ blogList, setBlogList }: IProps) => {
   return (
-    <div className="mt-4 pb-14 flex flex-col gap-4 overflow-hidden">
+    <div className="mt-4 pb-8 flex flex-col gap-4 overflow-hidden">
       {blogList.length > 0 ? (
         <>
           {blogList.map((blog) => (

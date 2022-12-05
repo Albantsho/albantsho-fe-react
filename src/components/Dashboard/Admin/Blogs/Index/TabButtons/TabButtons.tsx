@@ -45,7 +45,7 @@ const TabButtons = () => {
         <Tab
           key={item.label}
           onClick={() =>
-            push(`${routes.blogsAdminDashboardTabs.url(item.route)}`)
+            push(`${routes.blogsAdminDashboardTabs.url(item.route, "")}`)
           }
           sx={{
             "&.MuiButtonBase-root": {

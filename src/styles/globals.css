@@ -31,6 +31,18 @@
   src: url("../assets/fonts/FuturaPT-Bold.woff2") format("opentype");
 }
 
+@font-face {
+  font-family: "Courior";
+  font-weight: 500;
+  src: url("../assets/fonts/Courier.woff2") format("opentype");
+}
+
+@font-face {
+  font-family: "Courior";
+  font-weight: 500;
+  src: url("../assets/fonts/Courier.ttf") format("opentype");
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -88,6 +100,9 @@ ul {
 
 .futura {
   font-family: "Futura", "Helvetica", "Arial", "sans-serif";
+}
+.courier {
+  font-family: "Courior", "Helvetica", "Arial", "sans-serif";
 }
 
 .material-icons {

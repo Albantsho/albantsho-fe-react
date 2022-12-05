@@ -1,13 +1,25 @@
 import { Pagination, useMediaQuery, useTheme } from "@mui/material";
 
-const CustomPaginationComponent = () => {
+interface IProps {
+  handleActivePage: (event: React.ChangeEvent<unknown>, page: number) => void;
+  currentPage: number;
+  pageCount: number;
+}
+
+const CustomPaginationComponent = ({
+  currentPage,
+  handleActivePage,
+  pageCount,
+}: IProps) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
     <div className=" flex justify-center px-5 sm:px-10   mb-6 sm:mb-14 m-3 sm:mt-7 ">
       <Pagination
-        defaultPage={1}
+        page={currentPage}
+        count={pageCount}
+        onChange={handleActivePage}
         siblingCount={matches ? 2 : 0}
         boundaryCount={matches ? 2 : 1}
         sx={{
@@ -19,7 +31,6 @@ const CustomPaginationComponent = () => {
           },
         }}
         className="bg-white shadow-md w-auto rounded-md p-4 md:px-10"
-        count={5}
         size={matches ? "large" : "medium"}
       />
     </div>
