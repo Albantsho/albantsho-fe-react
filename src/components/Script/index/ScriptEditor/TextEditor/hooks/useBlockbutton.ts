@@ -1,7 +1,7 @@
 import { CustomElement, IEditor } from "interfaces/slate";
 import { Editor, Element as SlateElement, Transforms } from "slate";
 
-const LIST_TYPES = ["action"];
+const LIST_TYPES = ["headOne"];
 
 const useBlockButton = () => {
   const isBlockActive = (editor: IEditor, format: CustomElement["type"]) => {
@@ -50,7 +50,7 @@ const useBlockButton = () => {
 
     if (!isActive && isList) {
       const block = {
-        type: format as "action",
+        type: format as "headOne",
         children: [],
       };
       Transforms.wrapNodes(editor, block);

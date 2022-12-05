@@ -150,7 +150,8 @@ interface IPage {
     | ITransition[]
     | IShot[]
     | IGeneral[]
-    | IParagraph[];
+    | IParagraph[]
+    | IHeadOne[];
 }
 
 export type CustomElement =

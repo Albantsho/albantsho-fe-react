@@ -22,7 +22,6 @@ const EditorElement = ({
           {...attributes}
           itemID={element.id}
           style={{
-            fontWeight: 700,
             padding: "0 40px",
             fontSize: "20px",
             lineHeight: "28px",
@@ -31,8 +30,9 @@ const EditorElement = ({
             position: "relative",
             width: "100%",
             textTransform: "uppercase",
+            fontFamily: "Curior",
+            fontWeight: 700,
           }}
-          className="curior"
         >
           <span
             style={{
@@ -42,6 +42,7 @@ const EditorElement = ({
               bottom: "3px",
               width: "24px",
               height: "20",
+              fontFamily: "Curior",
             }}
           >
             <PhotoIcon />
@@ -59,6 +60,7 @@ const EditorElement = ({
             padding: "0 40px",
             position: "relative",
             marginBottom: "16px",
+            fontFamily: "Curior",
           }}
         >
           <FaPlay
@@ -89,6 +91,8 @@ const EditorElement = ({
             textTransform: "uppercase",
             color: "black",
             marginLeft: "auto",
+            fontFamily: "Curior",
+            fontWeight: 700,
           }}
         >
           <FaUser
@@ -100,6 +104,7 @@ const EditorElement = ({
               width: "24px",
               height: "20",
               color: "#DCD8E4",
+              fontFamily: "Curior",
             }}
           />
           {children}
@@ -113,12 +118,14 @@ const EditorElement = ({
           style={{
             padding: "0px 40px",
             marginBottom: "16px",
+            marginTop: "6px",
             textAlign: "start",
             position: "relative",
             width: "60%",
             color: "black",
             marginLeft: "auto",
             marginRight: "auto",
+            fontFamily: "Curior",
           }}
         >
           <BsFillChatLeftDotsFill
@@ -150,6 +157,7 @@ const EditorElement = ({
             marginRight: "auto",
             borderRadius: "6px",
             position: "relative",
+            fontFamily: "Curior",
           }}
         >
           <span
@@ -189,6 +197,7 @@ const EditorElement = ({
             position: "relative",
             textAlign: "end",
             textTransform: "uppercase",
+            fontFamily: "Curior",
           }}
         >
           <span
@@ -217,6 +226,7 @@ const EditorElement = ({
             color: "black",
             position: "relative",
             textTransform: "uppercase",
+            fontFamily: "Curior",
           }}
         >
           <BsCameraVideoFill
@@ -243,6 +253,7 @@ const EditorElement = ({
             marginBottom: "16px",
             color: "black",
             position: "relative",
+            fontFamily: "Curior",
           }}
         >
           <SiAsana
@@ -281,7 +292,15 @@ const EditorElement = ({
 
     default:
       return (
-        <p style={{ marginBottom: "3px", width: "100%" }} {...attributes}>
+        <p
+          style={{
+            marginBottom: "3px",
+            width: "100%",
+            fontFamily: "Curior",
+            fontSize: "16px",
+          }}
+          {...attributes}
+        >
           {children}
         </p>
       );
