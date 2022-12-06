@@ -1,8 +1,10 @@
 import { ButtonGroup, IconButton, SvgIcon, Tooltip } from "@mui/material";
+import Link from "next/link";
 
 import { useState } from "react";
 import { RiFileUserLine } from "react-icons/ri";
 import { useResizeDetector } from "react-resize-detector";
+import routes from "routes/routes";
 import BookMarkIcon from "../assets/book-mark.svg";
 import TextEditor from "./TextEditor";
 
@@ -42,12 +44,14 @@ const TextEditorList = ({ setTextEditorValue }: IProps) => {
           title="Character Bible"
           placement="left"
         >
-          <IconButton
-            disableRipple
-            className="bg-white text-primary-700 rounded-none w-12 h-12"
-          >
-            <SvgIcon inheritViewBox component={BookMarkIcon} />
-          </IconButton>
+          <Link passHref legacyBehavior href={routes.abstract.url}>
+            <IconButton
+              disableRipple
+              className="bg-white text-primary-700 rounded-none w-12 h-12"
+            >
+              <SvgIcon inheritViewBox component={BookMarkIcon} />
+            </IconButton>
+          </Link>
         </Tooltip>
       </ButtonGroup>
       <TextEditor

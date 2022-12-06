@@ -47,8 +47,6 @@ const BlogsPage: NextPageWithLayout = () => {
           queryString.stringify(query),
           searchQuery
         );
-        console.log(res);
-
         setBlogList(res.data.weblogs);
         setPageCount(res.data.pagesCount);
         setLoading(false);

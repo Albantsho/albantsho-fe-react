@@ -114,31 +114,36 @@ const ProfileMenu = ({ isMobile }: IProps) => {
             Go to dashboard
           </ListItemText>
         </MenuItem>
-        <MenuItem
-          TouchRippleProps={{ className: "text-primary-main" }}
-          className="px-6 py-4 hover:bg-primary-50/25"
-        >
-          <ListItemText
-            primaryTypographyProps={{
-              className: "text-primary-700",
-            }}
-          >
-            Contact Us
-          </ListItemText>
-        </MenuItem>
-        <MenuItem
-          divider
-          TouchRippleProps={{ className: "text-primary-main" }}
-          className="px-6 py-4 hover:bg-primary-50/25"
-        >
-          <ListItemText
-            primaryTypographyProps={{
-              className: "text-primary-700",
-            }}
-          >
-            Help
-          </ListItemText>
-        </MenuItem>
+        {user.user_type !== "admin" && (
+          <>
+            <MenuItem
+              TouchRippleProps={{ className: "text-primary-main" }}
+              className="px-6 py-4 hover:bg-primary-50/25"
+            >
+              <ListItemText
+                primaryTypographyProps={{
+                  className: "text-primary-700",
+                }}
+              >
+                Contact Us
+              </ListItemText>
+            </MenuItem>
+            <MenuItem
+              divider
+              TouchRippleProps={{ className: "text-primary-main" }}
+              className="px-6 py-4 hover:bg-primary-50/25"
+            >
+              <ListItemText
+                primaryTypographyProps={{
+                  className: "text-primary-700",
+                }}
+              >
+                Help
+              </ListItemText>
+            </MenuItem>
+          </>
+        )}
+
         <MenuItem
           onClick={logOutUserFunc}
           TouchRippleProps={{ className: "text-error-700" }}

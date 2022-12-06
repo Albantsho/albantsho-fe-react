@@ -19,20 +19,18 @@ const EditorElement = ({
   switch (element.type) {
     case "heading":
       return (
-        <h6
+        <p
           {...attributes}
           itemID={element.id}
           style={{
             padding: "0 40px",
-            fontSize: "20px",
-            lineHeight: "28px",
-            marginBottom: "16px",
+            fontSize: "18px",
+            marginBottom: "20px",
             color: "black",
             position: "relative",
             width: "100%",
             textTransform: "uppercase",
-            fontFamily: "Curior",
-            fontWeight: 700,
+            fontFamily: "Courier",
           }}
         >
           <span
@@ -43,13 +41,12 @@ const EditorElement = ({
               bottom: "3px",
               width: "24px",
               height: "20",
-              fontFamily: "Curior",
             }}
           >
             <PhotoIcon />
           </span>
           {children}
-        </h6>
+        </p>
       );
     case "action":
       return (
@@ -60,8 +57,9 @@ const EditorElement = ({
             width: "100%",
             padding: "0 40px",
             position: "relative",
-            marginBottom: "16px",
-            fontFamily: "Curior",
+            marginBottom: "20px",
+            fontFamily: "Courier",
+            fontSize: "18px",
           }}
         >
           <FaPlay
@@ -95,11 +93,12 @@ const EditorElement = ({
             marginTop: "6px",
             textAlign: "start",
             position: "relative",
-            width: "60%",
+            width: "70%",
             color: "black",
             marginLeft: "auto",
             marginRight: "auto",
-            fontFamily: "Curior",
+            fontFamily: "Courier",
+            fontSize: "18px",
           }}
         >
           <BsFillChatLeftDotsFill
@@ -126,12 +125,13 @@ const EditorElement = ({
             padding: "0 16px",
             marginBottom: "16px",
             width: "fit-content",
-            maxWidth: "40%",
+            maxWidth: "50%",
             marginLeft: "auto",
             marginRight: "auto",
             borderRadius: "6px",
             position: "relative",
-            fontFamily: "Curior",
+            fontFamily: "Courier",
+            fontSize: "18px",
           }}
         >
           <span
@@ -165,13 +165,14 @@ const EditorElement = ({
           {...attributes}
           itemID={element.id}
           style={{
-            marginBottom: "16px",
+            marginBottom: "32px",
             padding: "0 40px",
             color: "black",
             position: "relative",
             textAlign: "end",
             textTransform: "uppercase",
-            fontFamily: "Curior",
+            fontFamily: "Courier",
+            fontSize: "18px",
           }}
         >
           <span
@@ -196,11 +197,12 @@ const EditorElement = ({
           itemID={element.id}
           style={{
             padding: "0 40px",
-            marginBottom: "16px",
+            marginBottom: "18px",
             color: "black",
             position: "relative",
             textTransform: "uppercase",
-            fontFamily: "Curior",
+            fontFamily: "Courier",
+            fontSize: "18px",
           }}
         >
           <BsCameraVideoFill
@@ -224,10 +226,11 @@ const EditorElement = ({
           itemID={element.id}
           style={{
             padding: "0 40px",
-            marginBottom: "16px",
+            marginBottom: "18px",
             color: "black",
             position: "relative",
-            fontFamily: "Curior",
+            fontFamily: "Courier",
+            fontSize: "18px",
           }}
         >
           <SiAsana
@@ -270,8 +273,8 @@ const EditorElement = ({
           style={{
             marginBottom: "3px",
             width: "100%",
-            fontFamily: "Curior",
-            fontSize: "16px",
+            fontFamily: "Courier",
+            fontSize: "18px",
           }}
           {...attributes}
         >

@@ -17,38 +17,37 @@ const CharacterComponent = ({
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    element.children[0].text.endsWith("(") &&
-      setOpenChangeCharacterStatusMenu(true);
+    element.children[0].text.endsWith(`(`)
+      ? setOpenChangeCharacterStatusMenu(true)
+      : closeChangeCharacterStateMenu();
   }, [element.children]);
 
   if (element.type === "character") {
     return (
-      <div className="ml-auto relative w-3/5">
+      <div className="ml-auto relative w-3/5 mb-[18px]">
         <p
           {...attributes}
           itemID={element.id}
           style={{
             padding: "0px 40px",
-            marginBottom: "16px",
             textAlign: "start",
             position: "relative",
             textTransform: "uppercase",
             color: "black",
             marginLeft: "auto",
-            fontFamily: "Curior",
-            fontWeight: 700,
+            fontFamily: "Courier",
+            fontSize: "18px",
           }}
         >
           <FaUser
             style={{
               position: "absolute",
               left: "0",
-              top: "4px",
+              top: "1px",
               bottom: "0",
               width: "24px",
               height: "20",
               color: "#DCD8E4",
-              fontFamily: "Curior",
             }}
           />
           {children}
@@ -65,7 +64,7 @@ const CharacterComponent = ({
         style={{
           marginBottom: "3px",
           width: "100%",
-          fontFamily: "Curior",
+          fontFamily: "courier",
           fontSize: "16px",
         }}
         {...attributes}

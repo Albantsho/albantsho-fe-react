@@ -11,7 +11,7 @@ const ExportFile = ({ textEditorValue }: IProps) => {
     const doc = new jsPDF("p", "pt", "a4");
     if (textEditorValue) {
       doc.html(
-        `<div style="padding:0 40px;width:595px;">
+        `<div style="padding:0 40px;width:595px;font-family:Courier Prime;">
         ${textEditorValue}
         </div>`,
         {

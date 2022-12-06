@@ -32,15 +32,14 @@
 }
 
 @font-face {
-  font-family: "Courior";
+  font-family: "Courier";
   font-weight: 500;
-  src: url("../assets/fonts/Courier.woff2") format("opentype");
+  src: url("../assets/fonts/CourierPrime-Regular.ttf") format("opentype");
 }
-
 @font-face {
-  font-family: "Courior";
-  font-weight: 500;
-  src: url("../assets/fonts/Courier.ttf") format("opentype");
+  font-family: "Courier Prime";
+  font-weight: 700;
+  src: url("../assets/fonts/CourierPrime-Bold.ttf") format("opentype");
 }
 
 body {
@@ -102,7 +101,7 @@ ul {
   font-family: "Futura", "Helvetica", "Arial", "sans-serif";
 }
 .courier {
-  font-family: "Courior", "Helvetica", "Arial", "sans-serif";
+  font-family: "Courier", "Futura", "Helvetica", "Arial", "sans-serif";
 }
 
 .material-icons {
