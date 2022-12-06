@@ -1,9 +1,8 @@
 import { LoadingButton } from "@mui/lab";
-import { Button, Typography } from "@mui/material";
+import { Button, CardMedia, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import TextEditor from "@shared/TextEditor/TextEditor";
 import { IWeblog } from "interfaces/weblog";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import useEditBlog from "./useEditBlog";
 
@@ -124,7 +123,8 @@ const EditBlog = ({ oneWeblog }: IProps) => {
       </div>
       {previewImageValue ? (
         <div className="w-[150px] h-[150px] mx-auto">
-          <Image
+          <CardMedia
+            component="img"
             width={150}
             height={150}
             alt="preview image"
@@ -134,7 +134,8 @@ const EditBlog = ({ oneWeblog }: IProps) => {
         </div>
       ) : (
         <div className="w-[150px] h-[150px] mx-auto">
-          <Image
+          <CardMedia
+            component="img"
             width={150}
             height={150}
             alt={oneWeblog.title}

@@ -1,8 +1,7 @@
 import { LoadingButton } from "@mui/lab";
-import { Button, Typography } from "@mui/material";
+import { Button, CardMedia, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import TextEditor from "@shared/TextEditor/TextEditor";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import useAddBlog from "./useAddBlog";
 
@@ -120,7 +119,8 @@ const AddBlog = () => {
       </div>
       {previewImageValue && (
         <div className="w-[150px] h-[150px] mx-auto">
-          <Image
+          <CardMedia
+            component="img"
             width={150}
             height={150}
             className="w-[150px] h-[150px]"
