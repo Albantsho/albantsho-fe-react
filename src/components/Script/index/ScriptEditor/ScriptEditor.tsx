@@ -9,7 +9,7 @@ interface IProps {
 
 const ScriptEditor = ({ setTextEditorValue }: IProps) => {
   return (
-    <div className="w-full flex gap-1 flex-col justify-start mx-auto max-w-[800px] xl:px-10">
+    <div className="w-full flex gap-1 flex-col justify-start text-center mx-auto max-w-[800px] px-3 xl:px-10">
       <Link href={routes.titleScript.dynamicUrl("2")}>
         <div className="bg-white w-full mx-auto py-14">
           <Typography

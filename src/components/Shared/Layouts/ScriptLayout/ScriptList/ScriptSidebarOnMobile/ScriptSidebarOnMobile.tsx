@@ -106,6 +106,7 @@ const ScriptSidebarOnMobile = ({ textEditorValue }: IProps) => {
         setOpenExportModal={setOpenExportModal}
       />
       <ScenesListModal
+        textEditorValue={textEditorValue}
         openScenesModal={openScenesModal}
         setOpenScenesModal={setOpenScenesModal}
       />

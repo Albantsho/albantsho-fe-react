@@ -1,5 +1,6 @@
 import { ButtonGroup, IconButton, SvgIcon, Tooltip } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { useState } from "react";
 import { RiFileUserLine } from "react-icons/ri";
@@ -13,6 +14,7 @@ interface IProps {
 }
 const TextEditorList = ({ setTextEditorValue }: IProps) => {
   const { ref, width } = useResizeDetector();
+  const { query } = useRouter();
   const [contextMenu, setContextMenu] = useState<{
     mouseX: number;
     mouseY: number;
@@ -36,23 +38,28 @@ const TextEditorList = ({ setTextEditorValue }: IProps) => {
             <RiFileUserLine />
           </IconButton>
         </Tooltip>
-        <Tooltip
-          classes={{
-            tooltip: "bg-black",
-            tooltipPlacementLeft: "bg-black",
-          }}
-          title="Character Bible"
-          placement="left"
+
+        <Link
+          passHref
+          legacyBehavior
+          href={routes.abstract.dynamicUrl(query.id as string)}
         >
-          <Link passHref legacyBehavior href={routes.abstract.dynamicUrl("1")}>
+          <Tooltip
+            classes={{
+              tooltip: "bg-black",
+              tooltipPlacementLeft: "bg-black",
+            }}
+            title="Character Bible"
+            placement="left"
+          >
             <IconButton
               disableRipple
               className="bg-white text-primary-700 rounded-none w-12 h-12"
             >
               <SvgIcon inheritViewBox component={BookMarkIcon} />
             </IconButton>
-          </Link>
-        </Tooltip>
+          </Tooltip>
+        </Link>
       </ButtonGroup>
       <TextEditor
         width={width}

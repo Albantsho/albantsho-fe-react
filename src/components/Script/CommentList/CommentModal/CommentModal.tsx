@@ -30,10 +30,13 @@ const CommentModal = ({ openCommentsModal, setOpenCommentsModal }: IProps) => {
         >
           <AiOutlineClose />
         </IconButton>
-        <Typography variant="h6" className="futura text-primary-700">
+        <Typography
+          variant="h5"
+          className="futura text-primary-700 text-center leading-none"
+        >
           Comments list
         </Typography>
-        <Divider className="my-2" />
+        <Divider className="my-4 -mx-6" />
         <CommentList />
       </div>
     </Modal>
