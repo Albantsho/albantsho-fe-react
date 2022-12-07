@@ -89,7 +89,7 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async deleteScript(id: string) {
-      const res = await axiosPrivate.patch(`/script/delete/${id}`, {
+      const res = await axiosPrivate.delete(`/script/delete/${id}`, {
         signal: controller?.signal,
       });
 

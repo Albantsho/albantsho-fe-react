@@ -20,17 +20,13 @@ import addAbstractIcon from "./assets/add-abstract-icon.png";
 import addScriptIcon from "./assets/add-script-icon.png";
 import addTitleIcon from "./assets/add-title-icon.png";
 import CustomButtonScripts from "./CustomButtonScripts/CustomButtonScripts";
+import CustomIcon from "./assets/accordion-icon.png";
+import errorHandler from "utils/error-handler";
 
 interface IProps {
   script: IWriterScript;
   setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
 }
-
-const buttonsProjects = [
-  { title: "ABSTRACT", image: addAbstractIcon, link: routes.abstract.url },
-  { title: "TITLE", image: addTitleIcon, link: routes.titleScript.url },
-  { title: "SCRIPT", image: addScriptIcon, link: routes.producerDashboard.url },
-];
 
 const ProjectAccordion = ({ script, setListScripts }: IProps) => {
   const { updateWriterArchiveScript, deleteScript } = useScriptsApi();
@@ -38,6 +34,23 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openProjectAccordionMenu = Boolean(anchorEl);
 
+  const buttonsProjects = [
+    {
+      title: "ABSTRACT",
+      image: addAbstractIcon,
+      link: routes.abstract.dynamicUrl(script._id),
+    },
+    {
+      title: "TITLE",
+      image: addTitleIcon,
+      link: routes.titleScript.dynamicUrl(script._id),
+    },
+    {
+      title: "SCRIPT",
+      image: addScriptIcon,
+      link: routes.script.dynamicUrl(script._id),
+    },
+  ];
   const handleOpenProjectAccordionMenu = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -54,21 +67,33 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
   const archivingScript =
     (id: string) =>
     async (event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>) => {
-      await updateWriterArchiveScript({ archive: true }, id);
-      setListScripts((prevState) =>
-        prevState.filter((script) => script._id !== id)
-      );
-      handleCloseProjectAccordionMenu(event);
+      try {
+        event.stopPropagation();
+        await updateWriterArchiveScript({ archive: true }, id);
+        setListScripts((prevState) =>
+          prevState.filter((script) => script._id !== id)
+        );
+        handleCloseProjectAccordionMenu(event);
+      } catch (error) {
+        errorHandler(error);
+      }
     };
 
   const deletingScript =
     (id: string) =>
     async (event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>) => {
-      await deleteScript(id);
-      setListScripts((prevState) =>
-        prevState.filter((script) => script._id !== id)
-      );
-      handleCloseProjectAccordionMenu(event);
+      try {
+        event.stopPropagation();
+        const res = await deleteScript(id);
+        console.log(res);
+        setListScripts((prevState) =>
+          prevState.filter((script) => script._id !== id)
+        );
+        handleCloseProjectAccordionMenu(event);
+      } catch (error) {
+        console.log(error);
+        errorHandler(error);
+      }
     };
 
   return (
@@ -94,11 +119,23 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
       >
         <div className="flex flex-col  sm:flex-row flex-1    gap-x-4 gap-y-3 sm:gap-y-0 xl:pr-20">
           <div className="flex justify-center w-[72px] h-[72px] items-center self-start  bg-tinted-100/60 rounded-md">
-            <Image
-              loading="lazy"
-              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
-              alt={script.title}
-            />
+            {script.script_image ? (
+              <Image
+                loading="lazy"
+                width={72}
+                height={72}
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
+                alt={script.title}
+              />
+            ) : (
+              <Image
+                loading="lazy"
+                width={25}
+                height={32}
+                src={CustomIcon}
+                alt="Test Icon"
+              />
+            )}
           </div>
           <div className="sm:max-w-[280px]   flex-1 self-start leading-none">
             <Typography

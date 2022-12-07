@@ -80,7 +80,8 @@ const routes = {
     permission: [],
   },
   abstract: {
-    url: "/abstract",
+    url: "/abstract/[id]",
+    dynamicUrl: (id: string) => `/abstract/${id}`,
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
@@ -294,12 +295,14 @@ const routes = {
     permission: ["producer"],
   },
   titleScript: {
-    url: "/title",
+    url: "/script/title/[id]",
+    dynamicUrl: (id: string) => `/script/title/${id}`,
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
   script: {
-    url: "/script",
+    url: "/script/[id]",
+    dynamicUrl: (id: string) => `/script/${id}`,
     mustAuthenticated: "yes",
     permission: ["writer"],
   },

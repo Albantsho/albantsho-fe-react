@@ -34,7 +34,7 @@ const Projects: NextPageWithLayout = () => {
         setListScripts([]);
         setLoading(true);
         const res = await getWriterAllScripts(querystring.stringify(query));
-
+        console.log(res);
         setListScripts(res.data.scripts);
         setLoading(false);
       } catch (error) {
@@ -44,7 +44,7 @@ const Projects: NextPageWithLayout = () => {
     getWriterAllScriptsFunc();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, [query, openCreateScript]);
 
   return (
     <>
@@ -57,13 +57,13 @@ const Projects: NextPageWithLayout = () => {
         <div>
           <TabButtons />
           <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
-          {(!query.tab || query.tab === "scripts") && (
+          {(query.archive === "false" || !query) && (
             <ProjectAccordionList
               listScripts={listScripts}
               setListScripts={setListScripts}
             />
           )}
-          {query.tab === "archives" && (
+          {query.archive === "true" && (
             <ArchiveList
               listScripts={listScripts}
               setListScripts={setListScripts}

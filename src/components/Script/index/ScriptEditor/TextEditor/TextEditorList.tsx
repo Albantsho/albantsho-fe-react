@@ -44,7 +44,7 @@ const TextEditorList = ({ setTextEditorValue }: IProps) => {
           title="Character Bible"
           placement="left"
         >
-          <Link passHref legacyBehavior href={routes.abstract.url}>
+          <Link passHref legacyBehavior href={routes.abstract.dynamicUrl("1")}>
             <IconButton
               disableRipple
               className="bg-white text-primary-700 rounded-none w-12 h-12"

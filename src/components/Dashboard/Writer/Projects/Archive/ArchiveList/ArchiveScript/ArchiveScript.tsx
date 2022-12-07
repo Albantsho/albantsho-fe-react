@@ -1,8 +1,9 @@
 import { Button, Chip, TableCell, TableRow, Typography } from "@mui/material";
 import { IWriterScript } from "interfaces/script";
 import dynamic from "next/dynamic";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { Suspense, useState } from "react";
+import beautySmall from "@assets/images/beauty-small.jpg";
 
 const UnArchiveModal = dynamic(
   () => import("../../UnArchiveModal/UnArchiveModal")
@@ -36,15 +37,27 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
         >
           <div className="flex flex-col sm:flex-row sm:gap-4">
             <div className="mt-1">
-              <Image
-                width={64}
-                height={64}
-                layout="fixed"
-                className="rounded-md"
-                loading="lazy"
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
-                alt={script.title}
-              />
+              {script.script_image ? (
+                <Image
+                  width={64}
+                  height={64}
+                  layout="fixed"
+                  className="rounded-md"
+                  loading="lazy"
+                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
+                  alt={script.title}
+                />
+              ) : (
+                <Image
+                  width={64}
+                  height={64}
+                  layout="fixed"
+                  className="rounded-md"
+                  loading="lazy"
+                  src={beautySmall}
+                  alt="Test Icon"
+                />
+              )}
             </div>
 
             <div className="flex-grow sm:max-w-[360px]">
