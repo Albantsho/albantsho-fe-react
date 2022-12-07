@@ -1,6 +1,7 @@
 import { IconButton, Modal } from "@mui/material";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
+import routes from "routes/routes";
 import ExportFile from "../ExportFile";
 
 interface IProps {
@@ -14,10 +15,10 @@ const ExportFileModal = ({
   setOpenExportModal,
   textEditorValue,
 }: IProps) => {
-  const { push } = useRouter();
+  const { push, query } = useRouter();
 
   const handleCloseExportFile = () => {
-    push("/script");
+    push(routes.script.dynamicUrl(query.id as string));
     setOpenExportModal(false);
   };
 

@@ -1,6 +1,7 @@
 import { Divider, IconButton, Modal, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
+import routes from "routes/routes";
 import CommentList from "../CommentList";
 
 interface IProps {
@@ -9,10 +10,10 @@ interface IProps {
 }
 
 const CommentModal = ({ openCommentsModal, setOpenCommentsModal }: IProps) => {
-  const { push } = useRouter();
+  const { push, query } = useRouter();
 
   const handleCloseExportFile = () => {
-    push("/script");
+    push(routes.script.dynamicUrl(query.id as string));
     setOpenCommentsModal(false);
   };
   return (

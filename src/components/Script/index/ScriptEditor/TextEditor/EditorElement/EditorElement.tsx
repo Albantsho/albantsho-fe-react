@@ -150,7 +150,7 @@ const EditorElement = ({
             style={{
               position: "absolute",
               right: "0",
-              bottom: "7px",
+              bottom: "9px",
               width: "7.5px",
               height: "16px",
             }}

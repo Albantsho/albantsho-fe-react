@@ -34,7 +34,7 @@ const Projects: NextPageWithLayout = () => {
         setListScripts([]);
         setLoading(true);
         const res = await getWriterAllScripts(querystring.stringify(query));
-        console.log(res);
+
         setListScripts(res.data.scripts);
         setLoading(false);
       } catch (error) {

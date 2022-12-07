@@ -28,8 +28,6 @@ const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {
     try {
       setLoading(true);
       const res = await createNewScript(data);
-      console.log(res);
-
       setOpenCreateScript(false);
     } catch (error) {
       errorHandler(error);

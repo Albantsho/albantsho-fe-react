@@ -1,6 +1,7 @@
 import { Divider, IconButton, Modal, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
+import routes from "routes/routes";
 import ScenesList from "../ScenesList";
 
 interface IProps {
@@ -9,10 +10,10 @@ interface IProps {
 }
 
 const ScenesListModal = ({ openScenesModal, setOpenScenesModal }: IProps) => {
-  const { push } = useRouter();
+  const { push, query } = useRouter();
 
   const handleCloseExportFile = () => {
-    push("/script");
+    push(routes.script.dynamicUrl(query.id as string));
     setOpenScenesModal(false);
   };
 

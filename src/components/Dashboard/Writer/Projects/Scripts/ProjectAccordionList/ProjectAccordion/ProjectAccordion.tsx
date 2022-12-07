@@ -85,13 +85,11 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
       try {
         event.stopPropagation();
         const res = await deleteScript(id);
-        console.log(res);
         setListScripts((prevState) =>
           prevState.filter((script) => script._id !== id)
         );
         handleCloseProjectAccordionMenu(event);
       } catch (error) {
-        console.log(error);
         errorHandler(error);
       }
     };

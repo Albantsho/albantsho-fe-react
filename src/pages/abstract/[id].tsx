@@ -18,8 +18,6 @@ const AbstractPage = () => {
       try {
         if (typeof query.id === "string") {
           const res = await getScript(query.id);
-          console.log(res);
-
           setScript(res.data.script);
         }
       } catch (error) {

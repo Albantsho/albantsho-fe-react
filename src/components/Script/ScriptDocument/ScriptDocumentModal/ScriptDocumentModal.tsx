@@ -1,6 +1,7 @@
 import { IconButton, Modal } from "@mui/material";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
+import routes from "routes/routes";
 import ScriptDocument from "../ScriptDocument";
 
 interface IProps {
@@ -12,11 +13,11 @@ const ScriptDocumentModal = ({
   openDocumentModal,
   setOpenDocumentModal,
 }: IProps) => {
-  const { push } = useRouter();
+  const { push, query } = useRouter();
 
   const handleCloseExportFile = () => {
     setOpenDocumentModal(false);
-    push("/script");
+    push(routes.script.dynamicUrl(query.id as string));
   };
 
   return (

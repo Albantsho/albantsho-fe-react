@@ -306,6 +306,12 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
+  scriptWritingTabs: {
+    url: (id: string, query: string) => `/script/${id}${query}`,
+
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
 };
 
 export default routes;

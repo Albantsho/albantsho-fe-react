@@ -1,11 +1,18 @@
 import escapeHTML from "escape-html";
 import { CustomElement, IEditor } from "interfaces/slate";
 import { useMemo } from "react";
-import { createEditor, Element, Text, type Descendant } from "slate";
+import {
+  createEditor,
+  Element,
+  Text,
+  Transforms,
+  type Descendant,
+} from "slate";
 import { withHistory } from "slate-history";
 import { Editable, Slate, withReact } from "slate-react";
 import ChangeFormatMenuList from "../ChangeFormatMenuList/ChangeFormatMenuList";
 import EditorElement from "./EditorElement/EditorElement";
+import useBlockButton from "./hooks/useBlockbutton";
 import withNewFeatures from "./plugins/withNewFeatures";
 
 const initialValue: CustomElement[] = [
@@ -44,6 +51,7 @@ const TextEditor = ({
     () => withNewFeatures(withHistory(withReact(createEditor()))),
     []
   );
+  const { isBlockActive } = useBlockButton();
 
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -111,6 +119,70 @@ const TextEditor = ({
       setTextEditorValue(value);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.code === "Enter") {
+      const isActiveHeading = isBlockActive(editor, "heading");
+      const isActiveCharacter = isBlockActive(editor, "character");
+      const isActiveDialogue = isBlockActive(editor, "dialogue");
+      const isActiveParentethical = isBlockActive(editor, "parentethical");
+      const isActiveTransition = isBlockActive(editor, "transition");
+      const isActiveShot = isBlockActive(editor, "shot");
+      const isActiveGeneral = isBlockActive(editor, "general");
+      if (isActiveHeading) {
+        e.preventDefault();
+        Transforms.insertNodes(editor, {
+          type: "action",
+          children: [{ text: "" }],
+        });
+        return;
+      } else if (isActiveCharacter) {
+        e.preventDefault();
+        Transforms.insertNodes(editor, {
+          type: "dialogue",
+          children: [{ text: "" }],
+        });
+        return;
+      } else if (isActiveParentethical) {
+        e.preventDefault();
+        Transforms.insertNodes(editor, {
+          type: "dialogue",
+          children: [{ text: "" }],
+        });
+        return;
+      } else if (isActiveDialogue) {
+        e.preventDefault();
+        Transforms.insertNodes(editor, {
+          type: "action",
+          children: [{ text: "" }],
+        });
+        return;
+      } else if (isActiveTransition) {
+        e.preventDefault();
+        Transforms.insertNodes(editor, {
+          type: "heading",
+          children: [{ text: "" }],
+        });
+        return;
+      } else if (isActiveShot) {
+        e.preventDefault();
+        Transforms.insertNodes(editor, {
+          type: "action",
+          children: [{ text: "" }],
+        });
+        return;
+      } else if (isActiveGeneral) {
+        e.preventDefault();
+        Transforms.insertNodes(editor, {
+          type: "action",
+          children: [{ text: "" }],
+        });
+        return;
+      } else {
+        return;
+      }
+    }
+  };
+
   return (
     <div
       onContextMenu={handleContextMenu}
@@ -119,6 +191,7 @@ const TextEditor = ({
     >
       <Slate onChange={handleChangeEditor} editor={editor} value={initialValue}>
         <Editable
+          onKeyDown={handleKeyDown}
           className="isolation-auto -z-0 break-words"
           spellCheck
           autoFocus

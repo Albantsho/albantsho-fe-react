@@ -10,6 +10,7 @@ import ScriptDocumentModal from "components/Script/ScriptDocument/ScriptDocument
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useState } from "react";
+import routes from "routes/routes";
 import Comment from "../assets/comment.svg";
 import Document from "../assets/document.svg";
 import Export from "../assets/export.svg";
@@ -58,7 +59,14 @@ const ScriptSidebarOnMobile = ({ textEditorValue }: IProps) => {
       >
         {routesArray.map((item) => {
           return (
-            <Link legacyBehavior href={`${item.route}`} key={item.title}>
+            <Link
+              legacyBehavior
+              href={routes.scriptWritingTabs.url(
+                query.id as string,
+                item.route
+              )}
+              key={item.title}
+            >
               <BottomNavigationAction
                 showLabel
                 onClick={handleShowModal(item.value)}
