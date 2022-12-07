@@ -1,4 +1,4 @@
-import CustomPaginationComponent from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
+import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import { IWriterScript } from "interfaces/script";
 import ProjectAccordion from "./ProjectAccordion/ProjectAccordion";
 

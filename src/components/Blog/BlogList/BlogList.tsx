@@ -6,7 +6,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import CustomPaginationComponent from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
+import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import { IWeblog } from "interfaces/weblog";
 import BlogCard from "../BlogCard/BlogCard";
 

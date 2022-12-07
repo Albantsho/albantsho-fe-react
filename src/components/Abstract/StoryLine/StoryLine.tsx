@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IAbstractFormValues } from "interfaces/abstract";
+import { IFullInformationScript } from "interfaces/script";
 import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import { AiFillInfoCircle } from "react-icons/ai";
 
@@ -8,9 +9,10 @@ interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   step: number;
+  script: IFullInformationScript;
 }
 
-const StoryLine = ({ register, errors, step }: IProps) => {
+const StoryLine = ({ register, errors, step, script }: IProps) => {
   return (
     <div className={`${step === 2 ? "block" : "hidden"}`}>
       <Typography
@@ -37,6 +39,7 @@ const StoryLine = ({ register, errors, step }: IProps) => {
         <CustomInput
           {...register("tagline")}
           error={Boolean(errors.tagline) || false}
+          defaultValue={script.tagline ? script.tagline : ""}
           fullWidth
           id="tagline"
           variant="outlined"
@@ -74,6 +77,7 @@ const StoryLine = ({ register, errors, step }: IProps) => {
         <CustomInput
           {...register("log_line")}
           error={Boolean(errors.log_line) || false}
+          defaultValue={script.log_line ? script.log_line : ""}
           fullWidth
           id="logline"
           variant="outlined"
@@ -112,6 +116,7 @@ const StoryLine = ({ register, errors, step }: IProps) => {
           {...register("synopsis")}
           error={Boolean(errors.synopsis) || false}
           multiline
+          defaultValue={script.synopsis ? script.synopsis : ""}
           rows={3}
           fullWidth
           id="synopsis"

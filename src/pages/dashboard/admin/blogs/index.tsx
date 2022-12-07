@@ -16,7 +16,7 @@ import { IWeblog } from "interfaces/weblog";
 import useWeblogApi from "apis/Weblog.api";
 import { DotLoader } from "react-spinners";
 import debounce from "lodash/debounce";
-import CustomPaginationComponent from "components/Marketplace/Index/PaginationMarketList/PaginationMarketList";
+import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 
 const BlogsPage: NextPageWithLayout = () => {
   const { query, push } = useRouter();

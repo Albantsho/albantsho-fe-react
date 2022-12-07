@@ -1,3 +1,4 @@
+import { IFullInformationScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import CharacterBible from "../CharacterBible/CharacterBible";
@@ -19,7 +20,11 @@ const SaveProgressScriptModal = dynamic(
     )
 );
 
-const Abstract = () => {
+interface IProps {
+  script: IFullInformationScript;
+}
+
+const Abstract = ({ script }: IProps) => {
   const {
     activeButton,
     openSaveProgressModal,
@@ -36,7 +41,7 @@ const Abstract = () => {
     updateScriptFunc,
     loadingPublishButton,
     loadingUpdateButton,
-  } = useAbstract();
+  } = useAbstract(script);
 
   return (
     <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto">
@@ -47,8 +52,14 @@ const Abstract = () => {
           control={control}
           register={register}
           errors={errors}
+          script={script}
         />
-        <StoryLine step={step} register={register} errors={errors} />
+        <StoryLine
+          script={script}
+          step={step}
+          register={register}
+          errors={errors}
+        />
         <StoryStructure step={step} register={register} errors={errors} />
         <CharacterBible step={step} register={register} errors={errors} />
         <WritersStatement step={step} register={register} errors={errors} />

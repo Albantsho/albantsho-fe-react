@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IAbstractFormValues } from "interfaces/abstract";
+import { IFullInformationScript } from "interfaces/script";
 import React from "react";
 import type {
   Control,
@@ -20,6 +21,7 @@ interface IProps {
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   control: Control<IAbstractFormValues, any>;
   step: number;
+  script: IFullInformationScript;
 }
 
 const genresFilms = [
@@ -28,7 +30,13 @@ const genresFilms = [
   { label: "Sci Fi" },
 ];
 
-const GeneralScriptProfile = ({ register, errors, control, step }: IProps) => {
+const GeneralScriptProfile = ({
+  register,
+  errors,
+  control,
+  step,
+  script,
+}: IProps) => {
   return (
     <div className={`${step === 1 ? "block" : "hidden"}`}>
       <Typography
@@ -144,6 +152,7 @@ const GeneralScriptProfile = ({ register, errors, control, step }: IProps) => {
           {...register("title")}
           error={Boolean(errors.title) || false}
           fullWidth
+          defaultValue={script.title ? script.title : ""}
           id="script-title"
           variant="outlined"
           size="small"

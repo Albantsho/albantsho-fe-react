@@ -1,12 +1,15 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useScriptsApi from "apis/Scripts.api";
 import { IAbstractFormValues } from "interfaces/abstract";
+import { IFullInformationScript } from "interfaces/script";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import errorHandler from "utils/error-handler";
 import { abstractSchema } from "./validation/abstract.validation";
 
-const useAbstract = () => {
+type IScript = IFullInformationScript;
+
+const useAbstract = (script: IScript) => {
   const [step, setStep] = useState(1);
   const [openSaveProgressModal, setOpenSaveProgressModal] = useState(false);
   const [activeButton, setActiveButton] = useState<number>(0);
@@ -22,14 +25,24 @@ const useAbstract = () => {
     formState: { errors },
   } = useForm<IAbstractFormValues>({
     defaultValues: {
-      script_type: "documentary",
-      storyFormat: "highConcept",
-      primary_genre: "documentary",
-      secondary_genre: "romance",
-      primary_cast: "200",
-      secondary_cast: "50",
-      estimated_budger: "high",
-      theme: ["love"],
+      title: script?.title ? script?.title : "",
+      script_type: script?.script_type ? script?.script_type : "documentary",
+      storyFormat: script?.scriptFormat ? script?.scriptFormat : "highConcept",
+      primary_genre: script?.primary_genre
+        ? script?.primary_genre
+        : "documentary",
+      secondary_genre: script?.secondary_genre
+        ? script?.secondary_genre
+        : "romance",
+      primary_cast: script?.primary_cast ? script?.primary_cast : "200",
+      secondary_cast: script?.secondary_cast ? script?.secondary_cast : "50",
+      estimated_budger: script?.estimated_budget
+        ? script?.estimated_budget
+        : "high",
+      theme: script?.theme ? script.theme : ["love"],
+      tagline: script?.tagline ? script?.tagline : "",
+      log_line: script?.log_line ? script?.log_line : "",
+      synopsis: script?.synopsis ? script?.synopsis : "",
     },
     resolver: yupResolver(abstractSchema(publish)),
   });

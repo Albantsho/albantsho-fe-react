@@ -15,7 +15,7 @@ interface IProps {
 }
 
 const ArchiveList = ({ setListScripts, listScripts }: IProps) => {
-  return (
+  return listScripts.length ? (
     <Table className="mt-4 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
@@ -55,6 +55,10 @@ const ArchiveList = ({ setListScripts, listScripts }: IProps) => {
         ))}
       </TableBody>
     </Table>
+  ) : (
+    <h6 className="px-5 sm:px-10 mt-5 text-center">
+      There is no script in the archive list
+    </h6>
   );
 };
 
