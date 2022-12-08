@@ -20,7 +20,7 @@ import addAbstractIcon from "./assets/add-abstract-icon.png";
 import addScriptIcon from "./assets/add-script-icon.png";
 import addTitleIcon from "./assets/add-title-icon.png";
 import CustomButtonScripts from "./CustomButtonScripts/CustomButtonScripts";
-import CustomIcon from "./assets/accordion-icon.png";
+import CustomIcon from "@assets/images/accordion-icon.png";
 import errorHandler from "utils/error-handler";
 
 interface IProps {
@@ -146,10 +146,12 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
               {script.description}
             </Typography>
           </div>
-          <Chip
-            label={script.primary_genre}
-            className="hidden rounded-md  md:ml-6 xl:ml-24  self-center py-5 px-5 bg-tinted-100/60 text-neutral-800 md:flex lg:hidden xl:flex"
-          />
+          {script.primary_genre && (
+            <Chip
+              label={script.primary_genre}
+              className="hidden rounded-md  md:ml-6 xl:ml-24  self-center py-5 px-5 bg-tinted-100/60 text-neutral-800 md:flex lg:hidden xl:flex"
+            />
+          )}
         </div>
         <div className="flex ml-auto  gap-4 items-center">
           <IconButton onClick={handleOpenProjectAccordionMenu}>

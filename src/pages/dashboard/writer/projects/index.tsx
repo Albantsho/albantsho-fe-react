@@ -34,7 +34,6 @@ const Projects: NextPageWithLayout = () => {
         setListScripts([]);
         setLoading(true);
         const res = await getWriterAllScripts(querystring.stringify(query));
-
         setListScripts(res.data.scripts);
         setLoading(false);
       } catch (error) {
@@ -57,7 +56,7 @@ const Projects: NextPageWithLayout = () => {
         <div>
           <TabButtons />
           <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
-          {(query.archive === "false" || !query) && (
+          {(!query.archive || query.archive === "false") && (
             <ProjectAccordionList
               listScripts={listScripts}
               setListScripts={setListScripts}

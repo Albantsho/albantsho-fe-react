@@ -3,7 +3,7 @@ import { IWriterScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Suspense, useState } from "react";
-import beautySmall from "@assets/images/beauty-small.jpg";
+import CustomIcon from "@assets/images/accordion-icon.png";
 
 const UnArchiveModal = dynamic(
   () => import("../../UnArchiveModal/UnArchiveModal")
@@ -49,12 +49,12 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
                 />
               ) : (
                 <Image
-                  width={64}
-                  height={64}
+                  width={48}
+                  height={48}
                   layout="fixed"
                   className="rounded-md"
                   loading="lazy"
-                  src={beautySmall}
+                  src={CustomIcon}
                   alt="Test Icon"
                 />
               )}
@@ -94,10 +94,12 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
           }}
           className="hidden py-4  sm:py-6 xl:py-10 md:flex lg:hidden xl:flex flex-[0.55] items-center"
         >
-          <Chip
-            label={script.primary_genre}
-            className=" py-5 px-4 md:ml-3 hidden md:flex rounded-md bg-tinted-100/60  text-neutral-800"
-          />
+          {script.primary_genre && (
+            <Chip
+              label={script.primary_genre}
+              className=" py-5 px-4 md:ml-3 hidden md:flex rounded-md bg-tinted-100/60  text-neutral-800"
+            />
+          )}
         </TableCell>
         <TableCell
           sx={{

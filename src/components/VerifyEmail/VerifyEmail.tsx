@@ -3,6 +3,7 @@ import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
 import Countdown, { zeroPad } from "react-countdown";
 import routes from "routes/routes";
 import bell from "./assets/bell.png";
@@ -88,15 +89,20 @@ const VerifyEmail = () => {
 
             <div className="mt-3 flex flex-wrap justify-between items-center">
               <Typography className="text-gray-500 font-normal mb-6 futura">
-                <Countdown
-                  autoStart
-                  key={countDownKey}
-                  precision={2}
-                  zeroPadTime={2}
-                  zeroPadDays={2}
-                  date={Date.now() + 1200000}
-                  renderer={renderer}
-                />
+                {useMemo(
+                  () => (
+                    <Countdown
+                      autoStart
+                      key={countDownKey}
+                      precision={2}
+                      zeroPadTime={2}
+                      zeroPadDays={2}
+                      date={Date.now() + 1200000}
+                      renderer={renderer}
+                    />
+                  ),
+                  [countDownKey]
+                )}
               </Typography>
               <Button
                 onClick={handleResendCode}

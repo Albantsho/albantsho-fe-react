@@ -3,9 +3,10 @@ import useUserStore from "app/user.store";
 import { useEffect } from "react";
 
 const useAxiosPrivate = () => {
-  const { setAccessToken, accessToken } = useUserStore((state) => ({
+  const { setAccessToken, accessToken, logOutUser } = useUserStore((state) => ({
     setAccessToken: state.setAccessToken,
     accessToken: state.accessToken,
+    logOutUser: state.logOutUser,
   }));
 
   useEffect(() => {
@@ -16,12 +17,23 @@ const useAxiosPrivate = () => {
         }
         return config;
       },
-      (error) => Promise.reject(error)
+      (error) => {
+        return Promise.reject(error);
+      }
     );
 
     const responseIntercept = apiPrivate.interceptors.response.use(
-      (response) => response,
+      (response) => {
+        return response;
+      },
       async (error) => {
+        if (
+          error.request.responseURL ===
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/refresh` &&
+          error.response.data.statusCode === 500
+        ) {
+          logOutUser();
+        }
         const prevRequest = error?.config;
         if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;
@@ -32,6 +44,7 @@ const useAxiosPrivate = () => {
           ] = `Bearer ${response.data.data.accessToken}`;
           return apiPrivate(prevRequest);
         }
+
         return Promise.reject(error);
       }
     );
