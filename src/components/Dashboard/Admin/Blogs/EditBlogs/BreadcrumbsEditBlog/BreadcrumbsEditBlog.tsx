@@ -12,6 +12,7 @@ import { IWeblog } from "interfaces/weblog";
 import { useState } from "react";
 import { MdOutlineFolder } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
+import routes from "routes/routes";
 
 interface IProps {
   oneWeblog: IWeblog;
@@ -33,7 +34,7 @@ const BreadcrumbsEditBlog = ({ oneWeblog }: IProps) => {
       underline="hover"
       key="1"
       color="inherit"
-      href="/admin/blogs"
+      href={routes.blogsAdminDashboard.url}
       className="text-gray-300 font-normal mr-2 sm:mr-6"
       variant="h5"
     >

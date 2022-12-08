@@ -14,6 +14,7 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
     const foundRoute = urlRoutes.find((urlRoute) => urlRoute.url === pathname);
 
     if (foundRoute?.mustAuthenticated === "no") {
+      if (!user) return;
       if (user.email_verified) {
         user.user_type === "writer"
           ? replace(routes.writerDashboard.url)

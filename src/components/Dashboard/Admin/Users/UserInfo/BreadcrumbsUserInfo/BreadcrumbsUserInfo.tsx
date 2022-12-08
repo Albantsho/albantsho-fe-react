@@ -1,5 +1,6 @@
 import { Breadcrumbs, Link, SvgIcon, Typography } from "@mui/material";
 import PathIcon from "@assets/icons/path-icon.svg";
+import routes from "routes/routes";
 
 interface IProps {
   name: string;
@@ -11,7 +12,7 @@ const BreadcrumbsUserInfo = ({ name }: IProps) => {
       underline="hover"
       key="1"
       color="inherit"
-      href="/admin/users"
+      href={routes.usersAdminDashboard.url}
       className="text-gray-300 font-normal mr-2 sm:mr-6"
       variant="h5"
     >

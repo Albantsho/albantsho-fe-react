@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
 import useAuthApi from "apis/Auth.api";
@@ -6,16 +7,21 @@ import AllUsersList from "components/Dashboard/Admin/Users/Index/UsersList/AllUs
 import { IUserInformation } from "interfaces/user";
 import { debounce } from "lodash";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useState, useCallback } from "react";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
+import queryString from "query-string";
 
 const UsersPage: NextPageWithLayout = () => {
   const { getAllUser } = useAuthApi();
   const [loading, setLoading] = useState(false);
   const [usersList, setUsersList] = useState<IUserInformation[] | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
+  const { query, push } = useRouter();
 
   const handleSearch = useCallback(
     debounce(
@@ -28,12 +34,20 @@ const UsersPage: NextPageWithLayout = () => {
     [searchQuery]
   );
 
+  const handleActivePage = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setCurrentPage(page);
+    push(`?page=${page}`);
+  };
+
   useEffect(() => {
     async function getAllUsersFunc() {
       try {
         setLoading(true);
-        const res = await getAllUser(searchQuery);
-
+        const res = await getAllUser(queryString.stringify(query), searchQuery);
+        setPageCount(res.data.pagesCount);
         setUsersList(res.data.users);
         setLoading(false);
       } catch (error) {
@@ -43,7 +57,7 @@ const UsersPage: NextPageWithLayout = () => {
     getAllUsersFunc();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleSearch]);
+  }, [handleSearch, query]);
 
   return (
     <>
@@ -63,6 +77,13 @@ const UsersPage: NextPageWithLayout = () => {
             handleSearch={handleSearch}
           />
           <AllUsersList usersList={usersList} />
+          {pageCount > 1 && (
+            <CustomPaginationComponent
+              pageCount={pageCount}
+              handleActivePage={handleActivePage}
+              currentPage={currentPage}
+            />
+          )}
         </>
       ) : (
         <DotLoader color="#7953B5" className="mx-auto mt-10" />

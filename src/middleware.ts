@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
   // console.log(req.headers);
-  // console.log(req.cookies);
+  // console.log(req.cookies.has("refresh_token"));
   // if (url.includes("/admin")) {
   //   if (!refresh_token) {
   //     return NextResponse.redirect(routes.signin.permission);
