@@ -2,6 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useScriptsApi from "apis/Scripts.api";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import errorHandler from "utils/error-handler";
@@ -17,6 +18,7 @@ const useAbstract = (script: IScript) => {
   const [loadingUpdateButton, setLoadingUpdateButton] = useState(false);
   const [publish, setPublish] = useState(false);
   const { updateScript, addScriptTheme } = useScriptsApi();
+  const { query } = useRouter();
 
   const {
     register,
@@ -39,10 +41,15 @@ const useAbstract = (script: IScript) => {
       estimated_budger: script?.estimated_budget
         ? script?.estimated_budget
         : "high",
-      theme: script?.theme ? script.theme : ["love"],
+      theme: [{ label: "love" }],
       tagline: script?.tagline ? script?.tagline : "",
       log_line: script?.log_line ? script?.log_line : "",
       synopsis: script?.synopsis ? script?.synopsis : "",
+      story_world: script?.story_world ? script?.story_world : "",
+      act_structure: script?.act_structure ? script?.act_structure : "",
+      character_bible: script?.character_bible ? script?.character_bible : "",
+      inspiration: script?.inspiration ? script?.inspiration : "",
+      motivation: script?.motivation ? script?.motivation : "",
     },
     resolver: yupResolver(abstractSchema(publish)),
   });
@@ -54,7 +61,14 @@ const useAbstract = (script: IScript) => {
     if (publish) {
       try {
         setLoadingPublishButton(true);
-        const res = await updateScript(data, "1");
+        const res = await updateScript(
+          { ...data, image: data.image[0] },
+          query.id as string
+        );
+        const resTheme = await addScriptTheme(
+          { theme: data.theme.map((theme) => theme.label) },
+          query.id as string
+        );
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -63,7 +77,14 @@ const useAbstract = (script: IScript) => {
     } else {
       try {
         setLoadingUpdateButton(true);
-        const res = await addScriptTheme({ theme: data.theme }, "1");
+        const res = await updateScript(
+          { ...data, image: data.image[0] },
+          query.id as string
+        );
+        const resTheme = await addScriptTheme(
+          { theme: data.theme.map((theme) => theme.label) },
+          query.id as string
+        );
         setOpenSaveProgressModal(true);
       } catch (error) {
         errorHandler(error);

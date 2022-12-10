@@ -60,9 +60,24 @@ const Abstract = ({ script }: IProps) => {
           register={register}
           errors={errors}
         />
-        <StoryStructure step={step} register={register} errors={errors} />
-        <CharacterBible step={step} register={register} errors={errors} />
-        <WritersStatement step={step} register={register} errors={errors} />
+        <StoryStructure
+          script={script}
+          step={step}
+          register={register}
+          errors={errors}
+        />
+        <CharacterBible
+          script={script}
+          step={step}
+          register={register}
+          errors={errors}
+        />
+        <WritersStatement
+          script={script}
+          step={step}
+          register={register}
+          errors={errors}
+        />
         {activeButton === 0 && (
           <UploadScript
             step={step}

@@ -1,15 +1,17 @@
 import { Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IAbstractFormValues } from "interfaces/abstract";
+import { IFullInformationScript } from "interfaces/script";
 import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   step: number;
+  script: IFullInformationScript;
 }
 
-const CharacterBible = ({ errors, register, step }: IProps) => {
+const CharacterBible = ({ errors, register, step, script }: IProps) => {
   return (
     <div className={`${step === 4 ? "block" : "hidden"}`}>
       <Typography
@@ -34,6 +36,7 @@ const CharacterBible = ({ errors, register, step }: IProps) => {
           </Typography>
         </label>
         <CustomInput
+          defaultValue={script.character_bible}
           {...register("character_bible")}
           error={Boolean(errors.character_bible) || false}
           size="small"

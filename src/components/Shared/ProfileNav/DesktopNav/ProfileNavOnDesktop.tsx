@@ -5,6 +5,7 @@ import alert from "@assets/images/alert.png";
 import ProfileLogo from "../assets/profile-logo.svg";
 import Link from "next/link";
 import useProfileNavOnDesktop from "./useProfileNavOnDesktop";
+import routes from "routes/routes";
 
 const ProfileNavOnDesktop = () => {
   const { getNotifications, notificationList } = useProfileNavOnDesktop();
@@ -12,7 +13,7 @@ const ProfileNavOnDesktop = () => {
   return (
     <>
       <div className="md:flex px-1 flex-1 justify-between items-center hidden">
-        <Link legacyBehavior href="/dashboard/projects" passHref>
+        <Link legacyBehavior href={routes.dashboard.url} passHref>
           <Button
             startIcon={<ProfileLogo className="w-5 h-5" />}
             className="hover:bg-transparent text-xl futura font-medium"

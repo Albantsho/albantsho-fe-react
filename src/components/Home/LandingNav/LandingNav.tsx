@@ -5,9 +5,9 @@ import DesktopNav from "./DesktopNav/DesktopNav";
 import MobileNav from "./MobileNav/MobileNav";
 
 const links = [
-  { title: "Story Base", href: routes.marketplace.url },
+  { title: "Story Base", href: "#" },
   { title: "Write", href: "#" },
-  { title: "List", href: "#" },
+  { title: "List", href: routes.marketplace.url },
   { title: "Blog", href: routes.blog.url },
 ];
 

@@ -48,7 +48,7 @@ const DesktopNav = ({ links }: IProps) => {
           </Link>
         ))}
       </div>
-      {user.email_verified && <ProfileMenu />}
+      {user.email_verified && <ProfileMenu inHome />}
       {!user.email_verified && (
         <div className="flex gap-9 text-white">
           <Tooltip

@@ -18,10 +18,11 @@ import ReviewedIcon from "./assets/reviewed.svg";
 
 interface IProps extends CardProps {
   script: IScript;
+  inHome?: boolean;
 }
 
 const ScriptCard = (props: IProps) => {
-  const { script, sx, ...cardProps } = props;
+  const { script, sx, inHome, ...cardProps } = props;
   const user = useUserStore((state) => state.user);
 
   return (
@@ -40,8 +41,8 @@ const ScriptCard = (props: IProps) => {
       >
         <CardMedia
           component="img"
-          className="object-cover object-left w-full max-h-[250px]"
-          // src={script.script_image}
+          className="object-cover object-left w-full h-[250px]"
+          src="assets/images/julie.jpg"
           loading="lazy"
         />
       </Link>
@@ -70,20 +71,22 @@ const ScriptCard = (props: IProps) => {
           </Icon>
         </div>
         <Typography>{script.description}</Typography>
-        <Chip
-          className="rounded mt-6"
-          label={
-            <>
-              <span className="text-neutral-300">Price:</span>
-              <span className="text-primary-main text-lg font-semibold">
-                ${script.script_price}
-              </span>
-            </>
-          }
-        />
+        {!inHome && (
+          <Chip
+            className="rounded mt-6"
+            label={
+              <>
+                <span className="text-neutral-300">Price:</span>
+                <span className="text-primary-main text-lg font-semibold">
+                  ${script.script_price}
+                </span>
+              </>
+            }
+          />
+        )}
       </CardContent>
       <CardActions className="px-4 justify-between pb-6 pt-0 gap-3">
-        {(!user.active || user.user_type === "producer") && (
+        {(!user.active || user.user_type === "producer") && !inHome && (
           <Btn size="large" className="rounded-md">
             Place Bid
           </Btn>

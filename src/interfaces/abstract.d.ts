@@ -4,7 +4,7 @@ export interface IAbstractFormValues {
   title: string;
   primary_genre: string;
   secondary_genre: string;
-  theme: string[];
+  theme: [{ label: string }];
   primary_cast: string;
   secondary_cast: string;
   estimated_budger: string;
@@ -17,5 +17,5 @@ export interface IAbstractFormValues {
   inspiration: string;
   motivation: string;
   // copyright: string;
-  image: File;
+  image: FileList;
 }

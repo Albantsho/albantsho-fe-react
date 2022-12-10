@@ -28,13 +28,6 @@ const MobileNav = ({ links }: IProps) => {
 
   return (
     <>
-      {/* <IconButton
-        onClick={handleToggleDrawer(true)}
-        color="inherit"
-        className="text-white"
-      >
-        <SvgIcon component={MenuIcon} inheritViewBox sx={{ fontSize: 40 }} />
-      </IconButton> */}
       <div className="flex items-center xl:hidden">
         <IconButton
           onClick={handleToggleDrawer(true)}
@@ -77,7 +70,12 @@ const MobileNav = ({ links }: IProps) => {
               ),
             }}
           />
-          <List className="px-4">
+          <List className="px-4 flex gap-1 flex-col justify-start items-start">
+            {user.email_verified && (
+              <li className="px-5 mt-1">
+                <ProfileMenu isMobile />
+              </li>
+            )}
             {links.map(({ title, href }, i) => (
               <ListItem disablePadding key={i}>
                 <Link legacyBehavior href={href} passHref>
@@ -85,14 +83,17 @@ const MobileNav = ({ links }: IProps) => {
                     TouchRippleProps={{ className: "text-transparent" }}
                     className="px-5 hover:bg-primary-50/25"
                   >
-                    <ListItemText primary={title} />
+                    <ListItemText
+                      primaryTypographyProps={{
+                        className: "text-primary-700 font-semibold",
+                      }}
+                      primary={title}
+                    />
                   </ListItemButton>
                 </Link>
               </ListItem>
             ))}
-            {user.email_verified ? (
-              <ProfileMenu />
-            ) : (
+            {!user.email_verified && (
               <div className="px-5 py-2">
                 <Link legacyBehavior href={routes.signin.url} passHref>
                   <Btn className="px-6 py-3">Sign In</Btn>
@@ -102,40 +103,6 @@ const MobileNav = ({ links }: IProps) => {
           </List>
         </Drawer>
       </div>
-      {/* <Drawer anchor="top" open={open} onClose={handleToggleDrawer(false)}>
-        <List>
-          <ListItem>
-            <CustomInput
-              fullWidth
-              placeholder="Search stories, themes, budget, budget"
-              variant="outlined"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AiOutlineSearch className="text-primary-main" />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </ListItem>
-          {links.map(({ title, href }, i) => (
-            <ListItem disablePadding key={i}>
-              <Link href={href} legacyBehavior>
-                <ListItemButton>
-                  <ListItemText primary={title} />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
-          {!user.email_verified && (
-            <ListItem disablePadding>
-              <ListItemButton href={routes.signin.url}>
-                <ListItemText primary="Sign In" />
-              </ListItemButton>
-            </ListItem>
-          )}
-        </List>
-      </Drawer> */}
     </>
   );
 };

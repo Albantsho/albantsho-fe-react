@@ -1,14 +1,16 @@
 import { Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IAbstractFormValues } from "interfaces/abstract";
+import { IFullInformationScript } from "interfaces/script";
 import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   step: number;
+  script: IFullInformationScript;
 }
 
-const StoryStructure = ({ errors, register, step }: IProps) => {
+const StoryStructure = ({ errors, register, step, script }: IProps) => {
   return (
     <div className={`${step === 3 ? "block" : "hidden"}`}>
       <Typography
@@ -32,6 +34,7 @@ const StoryStructure = ({ errors, register, step }: IProps) => {
           </Typography>
         </label>
         <CustomInput
+          defaultValue={script.story_world}
           {...register("story_world")}
           error={Boolean(errors.story_world) || false}
           placeholder="Where is this story domicile?"
@@ -63,6 +66,7 @@ const StoryStructure = ({ errors, register, step }: IProps) => {
           </Typography>
         </label>
         <CustomInput
+          defaultValue={script.act_structure}
           {...register("act_structure")}
           error={Boolean(errors.act_structure) || false}
           fullWidth

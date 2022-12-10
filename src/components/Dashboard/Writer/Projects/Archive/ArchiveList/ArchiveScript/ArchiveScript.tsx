@@ -94,12 +94,12 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
           }}
           className="hidden py-4  sm:py-6 xl:py-10 md:flex lg:hidden xl:flex flex-[0.55] items-center"
         >
-          {script.primary_genre && (
-            <Chip
-              label={script.primary_genre}
-              className=" py-5 px-4 md:ml-3 hidden md:flex rounded-md bg-tinted-100/60  text-neutral-800"
-            />
-          )}
+          <Chip
+            label={script.primary_genre}
+            className={`${
+              !script.primary_genre && "opacity-0"
+            } py-5 px-4 md:ml-3 hidden md:flex rounded-md bg-tinted-100/60 text-neutral-800`}
+          />
         </TableCell>
         <TableCell
           sx={{

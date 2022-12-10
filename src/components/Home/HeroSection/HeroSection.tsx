@@ -4,7 +4,7 @@ import useUserStore from "app/user.store";
 import Link from "next/link";
 import { animated, useSpring } from "react-spring";
 import routes from "routes/routes";
-import Bg from "./assets/bg.png";
+import Bg from "./assets/bg.webp";
 
 const AnimatedScriptCard = animated(ScriptCard);
 
@@ -76,7 +76,7 @@ const HeroSection = () => {
               </Link>
             )}
           </animated.div>
-          {/* {lgScreen && (
+          {lgScreen && (
             <AnimatedScriptCard
               className="w-full"
               style={cardAnim}
@@ -84,9 +84,19 @@ const HeroSection = () => {
                 maxWidth: 395,
                 boxShadow: "0px 35px 60px 0px #0000004D",
               }}
-              // script={}
+              script={{
+                _id: "hbnj15",
+                description:
+                  "One platform sets out to enable better stories one script at a time",
+                primary_genre: "Feature film",
+                rate: 4,
+                title: "Black Onion",
+                script_price: 400,
+                script_verified: "true",
+              }}
+              inHome
             />
-          )} */}
+          )}
         </div>
       </div>
     </Box>

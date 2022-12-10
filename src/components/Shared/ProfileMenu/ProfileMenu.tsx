@@ -15,9 +15,10 @@ import useProfileMenu from "./useProfileMenu";
 
 interface IProps {
   isMobile?: boolean;
+  inHome?: boolean;
 }
 
-const ProfileMenu = ({ isMobile }: IProps) => {
+const ProfileMenu = ({ inHome, isMobile }: IProps) => {
   const {
     handleCloseProfileMenu,
     handleOpenMenu,
@@ -39,13 +40,19 @@ const ProfileMenu = ({ isMobile }: IProps) => {
         <Typography
           variant="h6"
           component="p"
-          className="text-primary-700 futura font-medium mr-3"
+          className={`${
+            inHome
+              ? "text-white text-base font-normal"
+              : "text-primary-700 futura font-medium"
+          } mr-3`}
         >
           {user.fullname}
         </Typography>
         <Avatar src="/assets/images/profile.jpg" />
         <AiFillCaretDown
-          className={`${isMobile ? "hidden " : "block text-primary-700"}`}
+          className={`${inHome && "text-white"} ${
+            isMobile ? "hidden" : "block text-primary-700"
+          }`}
         />
       </div>
       <Menu

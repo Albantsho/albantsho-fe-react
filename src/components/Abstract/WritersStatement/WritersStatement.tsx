@@ -12,13 +12,15 @@ import { useState } from "react";
 import { RiUploadLine } from "react-icons/ri";
 import { IAbstractFormValues } from "interfaces/abstract";
 import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
+import { IFullInformationScript } from "interfaces/script";
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   step: number;
+  script: IFullInformationScript;
 }
 
-const WritersStatement = ({ errors, register, step }: IProps) => {
+const WritersStatement = ({ errors, register, step, script }: IProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -112,6 +114,7 @@ const WritersStatement = ({ errors, register, step }: IProps) => {
           </Typography>
         </label>
         <CustomInput
+          defaultValue={script.inspiration}
           {...register("inspiration")}
           error={Boolean(errors.inspiration) || false}
           sx={{
@@ -147,6 +150,7 @@ const WritersStatement = ({ errors, register, step }: IProps) => {
         </label>
         <CustomInput
           {...register("motivation")}
+          defaultValue={script.motivation}
           error={Boolean(errors.motivation) || false}
           sx={{
             "& ::placeholder": { color: "#B7B7B7 !important" },

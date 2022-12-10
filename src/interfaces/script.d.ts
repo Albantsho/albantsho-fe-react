@@ -3,7 +3,7 @@ export interface IScript {
   title: string;
   description: string;
   script_price: number;
-  rate: string;
+  rate: number;
   primary_genre: string;
   script_verified: string;
 }
