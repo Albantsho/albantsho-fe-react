@@ -39,7 +39,7 @@ const UsersPage: NextPageWithLayout = () => {
     page: number
   ) => {
     setCurrentPage(page);
-    push(`?page=${page}`);
+    push(`?page=${page}`, undefined, { shallow: true });
   };
 
   useEffect(() => {
@@ -49,6 +49,7 @@ const UsersPage: NextPageWithLayout = () => {
         const res = await getAllUser(queryString.stringify(query), searchQuery);
         setPageCount(res.data.pagesCount);
         setUsersList(res.data.users);
+        setCurrentPage(res.data.currenPage);
         setLoading(false);
       } catch (error) {
         errorHandler(error);

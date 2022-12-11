@@ -49,6 +49,7 @@ const BlogsPage: NextPageWithLayout = () => {
         );
         setBlogList(res.data.weblogs);
         setPageCount(res.data.pagesCount);
+        setCurrentPage(res.data.currenPage);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
@@ -62,16 +63,29 @@ const BlogsPage: NextPageWithLayout = () => {
     event: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    setCurrentPage(page);
     !query
-      ? push(routes.blogsAdminDashboardTabs.url("", `?page=${page}`))
+      ? push(
+          routes.blogsAdminDashboardTabs.url("", `?page=${page}`),
+          undefined,
+          { shallow: true }
+        )
       : query.archive
       ? push(
-          routes.blogsAdminDashboardTabs.url(`?archive=true`, `&page=${page}`)
+          routes.blogsAdminDashboardTabs.url(`?archive=true`, `&page=${page}`),
+          undefined,
+          { shallow: true }
         )
       : query.trash
-      ? push(routes.blogsAdminDashboardTabs.url(`?trash=true`, `&page=${page}`))
-      : push(routes.blogsAdminDashboardTabs.url("", `?page=${page}`));
+      ? push(
+          routes.blogsAdminDashboardTabs.url(`?trash=true`, `&page=${page}`),
+          undefined,
+          { shallow: true }
+        )
+      : push(
+          routes.blogsAdminDashboardTabs.url("", `?page=${page}`),
+          undefined,
+          { shallow: true }
+        );
   };
 
   return (

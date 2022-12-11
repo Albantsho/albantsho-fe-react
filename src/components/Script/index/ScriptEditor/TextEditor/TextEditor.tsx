@@ -56,6 +56,9 @@ const TextEditor = ({
   const { isBlockActive } = useBlockButton();
   const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL);
   const { query } = useRouter();
+  // socket.on("createRoom", () => {
+  //   console.log(socket.id);
+  // });
 
   // useEffect(() => {
   //   socket.on("createRoom", () => {
@@ -65,6 +68,11 @@ const TextEditor = ({
   // useEffect(() => {
   //   socket.emit("createRoom", query.id);
   // }, []);
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log(socket.id);
+    });
+  }, []);
 
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();

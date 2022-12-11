@@ -1,9 +1,7 @@
 import deposit from "@assets/icons/deposit.svg";
 import MenuIcon from "@assets/icons/menu.svg";
 import wallet from "@assets/icons/wallet.svg";
-import alert from "@assets/images/alert.png";
 import {
-  Badge,
   Button,
   Divider,
   Drawer,
@@ -15,8 +13,8 @@ import {
   ListItemText,
   SvgIcon,
 } from "@mui/material";
+import NotificationComponent from "@shared/NotificationComponent/NotificationComponent";
 import useUserStore from "app/user.store";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
@@ -56,8 +54,7 @@ const walletLinksForProducer = [
 ];
 
 const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
-  const { handleToggleDrawer, open, getNotifications, notificationList } =
-    useMobileNavMobile();
+  const { handleToggleDrawer, open } = useMobileNavMobile();
   const { push, route } = useRouter();
   const user = useUserStore((state) => state.user);
 
@@ -72,16 +69,7 @@ const ProfileNavOnMobile = ({ isTransparent }: IProps) => {
           Dashboard
         </Button>
       </Link>
-      <IconButton
-        onClick={getNotifications}
-        className="ml-auto mr-4 sm:mr-7 mt-1 self-center max-h-[31px]"
-      >
-        <Badge badgeContent={notificationList.length} color="error">
-          <div>
-            <Image src={alert} alt="alert" />
-          </div>
-        </Badge>
-      </IconButton>
+      <NotificationComponent />
       <IconButton
         onClick={handleToggleDrawer(true)}
         color="inherit"

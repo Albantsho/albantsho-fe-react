@@ -19,8 +19,10 @@ const Blog: NextPageWithLayout = () => {
       try {
         setLoading(true);
         const res = await getAllWeblogs(currentPage);
+        console.log(res);
         setPageCount(res.data.pagesCount);
         setBlogList(res.data.weblogs);
+        setCurrentPage(res.data.currentPage);
         setLoading(false);
       } catch (error) {
         errorHandler(error);

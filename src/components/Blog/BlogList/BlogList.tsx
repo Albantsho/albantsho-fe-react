@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import { IWeblog } from "interfaces/weblog";
+import { useRouter } from "next/router";
 import BlogCard from "../BlogCard/BlogCard";
 
 interface IProps {
@@ -25,10 +26,12 @@ const BlogList = ({
   setCurrentPage,
   pageCount,
 }: IProps) => {
+  const { push } = useRouter();
   const handleActivePage = (
     event: React.ChangeEvent<unknown>,
     page: number
   ) => {
+    push(`?page=${page}`, undefined, { shallow: true });
     setCurrentPage(page);
   };
 

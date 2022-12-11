@@ -1,5 +1,6 @@
 import alert from "@assets/images/alert.png";
 import { Avatar, AvatarGroup, Badge, IconButton } from "@mui/material";
+import NotificationComponent from "@shared/NotificationComponent/NotificationComponent";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
 import Image from "next/image";
 
@@ -15,13 +16,7 @@ const DashboardNavOnDesktop = () => {
           <Avatar className="bg-orange-500">F</Avatar>
           <Avatar className="bg-primary-300">M</Avatar>
         </AvatarGroup>
-        <IconButton className="ml-auto self-center max-h-[31px]  mt-1">
-          <Badge badgeContent={1} color="error">
-            <div>
-              <Image src={alert} alt="alert" />
-            </div>
-          </Badge>
-        </IconButton>
+        <NotificationComponent />
         <ProfileMenu />
       </div>
     </div>

@@ -1,8 +1,7 @@
+import Deposit from "@assets/icons/deposit.svg";
 import MenuIcon from "@assets/icons/menu.svg";
 import wallet from "@assets/icons/wallet.svg";
-import alert from "@assets/images/alert.png";
 import {
-  Badge,
   Divider,
   Drawer,
   IconButton,
@@ -14,10 +13,9 @@ import {
   SvgIcon,
 } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
+import NotificationComponent from "@shared/NotificationComponent/NotificationComponent";
 import useUserStore from "app/user.store";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import Deposit from "@assets/icons/deposit.svg";
 import {
   AiFillInstagram,
   AiOutlineClose,
@@ -55,24 +53,14 @@ const walletLinksForProducer = [
 ];
 
 const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
-  const { handleToggleDrawer, open, getNotifications, notificationList } =
-    useMobileNavDashboard();
+  const { handleToggleDrawer, open } = useMobileNavDashboard();
   const { push } = useRouter();
   const user = useUserStore((state) => state.user);
 
   return (
     <div className="flex items-center lg:hidden w-full">
       <Logo className={isTransparent ? "text-white" : "text-primary-main"} />
-      <IconButton
-        onClick={getNotifications}
-        className="ml-auto mr-7 mt-1 self-center max-h-[31px]"
-      >
-        <Badge badgeContent={notificationList.length} color="error">
-          <div>
-            <Image src={alert} alt="alert" />
-          </div>
-        </Badge>
-      </IconButton>
+      <NotificationComponent />
       <IconButton
         onClick={handleToggleDrawer(true)}
         color="inherit"
