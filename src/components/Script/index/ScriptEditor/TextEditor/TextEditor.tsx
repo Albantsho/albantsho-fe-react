@@ -1,6 +1,7 @@
 import escapeHTML from "escape-html";
 import { CustomElement, IEditor } from "interfaces/slate";
-import { useMemo } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useMemo } from "react";
 import {
   createEditor,
   Element,
@@ -10,6 +11,7 @@ import {
 } from "slate";
 import { withHistory } from "slate-history";
 import { Editable, Slate, withReact } from "slate-react";
+import { io } from "socket.io-client";
 import ChangeFormatMenuList from "../ChangeFormatMenuList/ChangeFormatMenuList";
 import EditorElement from "./EditorElement/EditorElement";
 import useBlockButton from "./hooks/useBlockbutton";
@@ -52,6 +54,17 @@ const TextEditor = ({
     []
   );
   const { isBlockActive } = useBlockButton();
+  const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL);
+  const { query } = useRouter();
+
+  // useEffect(() => {
+  //   socket.on("createRoom", () => {
+  //     console.log(socket.id);
+  //   });
+  // }, []);
+  // useEffect(() => {
+  //   socket.emit("createRoom", query.id);
+  // }, []);
 
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();

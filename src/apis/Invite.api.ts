@@ -1,30 +1,36 @@
-import api from "./configs/axios.config";
+import useAxiosPrivate from "hooks/useAxiosPrivate";
 
-interface ICreateNewReviewPayload {
+interface ICreateNewInvitePayload {
   scriptId: string;
   userId: string;
 }
 
 const useInvite = (controller?: AbortController) => {
+  const axiosPrivate = useAxiosPrivate();
+
   return {
-    async createNewReview(payload: ICreateNewReviewPayload) {
-      const res = await api.post("/invite/send", payload, {
+    async createNewInvite(payload: ICreateNewInvitePayload) {
+      const res = await axiosPrivate.post("/invite/send", payload, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async deleteReview(payload: object, inviteId: string) {
-      const res = await api.patch(`/invite/reject/${inviteId}`, payload, {
-        signal: controller?.signal,
-      });
+    async rejectInvite(payload: object, inviteId: string) {
+      const res = await axiosPrivate.patch(
+        `/invite/reject/${inviteId}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
-    async CompleteReview() {
-      const res = await api.patch("/invite/all", {
+    async allInvite() {
+      const res = await axiosPrivate.get("/invite/all", {
         signal: controller?.signal,
       });
 

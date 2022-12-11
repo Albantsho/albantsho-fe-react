@@ -1,10 +1,25 @@
 import { Avatar, ButtonGroup, Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import { useState } from "react";
+import { IFullInformationScript } from "interfaces/script";
+import useScriptDocument from "./useScriptDocument";
 
-const ScriptDocument = () => {
-  const [activeButton, setActiveButton] = useState(0);
+interface IProps {
+  script: IFullInformationScript;
+}
+
+const ScriptDocument = ({ script }: IProps) => {
+  const {
+    activeButton,
+    errors,
+    handleSubmit,
+    loading,
+    onSubmit,
+    openInfoCollaborator,
+    openListCollaborator,
+    register,
+  } = useScriptDocument();
+
   return (
     <>
       <Typography
@@ -16,9 +31,7 @@ const ScriptDocument = () => {
       </Typography>
       <ButtonGroup className="w-full flex mt-4 md:mt-7 mb-4 md:mb-7 rounded-md">
         <Btn
-          onClick={() => {
-            setActiveButton(0);
-          }}
+          onClick={openInfoCollaborator}
           sx={{ "&.MuiButtonBase-root": { width: "100%" } }}
           className={`${
             activeButton === 0
@@ -31,9 +44,7 @@ const ScriptDocument = () => {
           Info
         </Btn>
         <Btn
-          onClick={() => {
-            setActiveButton(1);
-          }}
+          onClick={openListCollaborator}
           sx={{ "&.MuiButtonBase-root": { width: "100%" } }}
           className={`${
             activeButton === 1
@@ -49,11 +60,15 @@ const ScriptDocument = () => {
       {activeButton === 0 && (
         <>
           <Typography className="futura font-medium mb-1">Title</Typography>
-          <CustomInput variant="outlined" fullWidth />
+          <div className="p-2 border border-gray-300 rounded-lg">
+            <Typography className="leading-normal">{script.title}</Typography>
+          </div>
           <Typography className="futura font-medium mt-2 mb-1">
             Tagline
           </Typography>
-          <CustomInput variant="outlined" fullWidth />
+          <div className="p-2 border border-gray-300 rounded-lg">
+            <Typography className="leading-normal">{script.tagline}</Typography>
+          </div>
         </>
       )}
       {activeButton === 1 && (
@@ -71,19 +86,31 @@ const ScriptDocument = () => {
           <Typography className="futura font-medium mb-1 text-primary-700">
             Add Collaborator
           </Typography>
-          <CustomInput
-            sx={{
-              "& .MuiOutlinedInput-input": {
-                py: 1.5,
-                minWidth: "50px",
-              },
-            }}
-            variant="outlined"
-            fullWidth
-            placeholder="Email Address"
-          />
-
-          <Btn className="mt-4 py-3 px-6">Invite</Btn>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <CustomInput
+              {...register("email")}
+              error={Boolean(errors.email) || false}
+              sx={{
+                "& .MuiOutlinedInput-input": {
+                  py: 1.5,
+                  minWidth: "50px",
+                },
+                "& .MuiFormHelperText-root": {
+                  mt: "8px",
+                  mx: 0,
+                  color: "red",
+                  fontSize: "16px",
+                },
+              }}
+              variant="outlined"
+              fullWidth
+              placeholder="Email Address"
+              helperText={errors.email?.message}
+            />
+            <Btn loading={loading} type="submit" className="mt-4 py-3 px-6">
+              Invite
+            </Btn>
+          </form>
         </>
       )}
     </>

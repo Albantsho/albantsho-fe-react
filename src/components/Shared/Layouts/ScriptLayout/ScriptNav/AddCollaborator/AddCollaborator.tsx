@@ -1,24 +1,25 @@
-import { IconButton, SvgIcon, Popover, Typography } from "@mui/material";
+import { IconButton, Popover, SvgIcon, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import { useState } from "react";
 import AddCollaboratorIcon from "./assets/add-collaborator.svg";
+import useAddCollaborator from "./useAddCollaborator";
 
 const AddCollaborator = () => {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const open = Boolean(anchorEl);
+  const {
+    handleCloseAddCollaborator,
+    handleOpenAddCollaborator,
+    openAddCollaborator,
+    anchorEl,
+    errors,
+    handleSubmit,
+    loading,
+    onSubmit,
+    register,
+  } = useAddCollaborator();
 
   return (
     <>
       <IconButton
-        onClick={handleClick}
+        onClick={handleOpenAddCollaborator}
         color="success"
         className="ml-auto bg-success-50 w-12 h-12 p-2 self-center mt-1"
       >
@@ -28,9 +29,9 @@ const AddCollaborator = () => {
         PaperProps={{
           className: "p-7 w-full max-w-sm relative overflow-visible",
         }}
-        open={open}
+        open={openAddCollaborator}
         anchorEl={anchorEl}
-        onClose={handleClose}
+        onClose={handleCloseAddCollaborator}
         className="top-7"
         anchorOrigin={{
           vertical: "bottom",
@@ -48,12 +49,29 @@ const AddCollaborator = () => {
         <Typography className="futura font-semibold text-primary-700">
           Add Collaborator
         </Typography>
-        <input
-          placeholder="Email Address"
-          type="text"
-          className="outline-none py-3 px-4 bg-tinted-50/25 w-full mt-3 rounded-md placeholder:text-tinted-200"
-        />
-        <Btn className="mt-4 font-semibold py-2 px-8">Invite</Btn>
+        <form
+          className="flex flex-col items-start"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <input
+            {...register("email")}
+            placeholder="Email Address"
+            type="text"
+            className="outline-none py-3 px-4 bg-tinted-50/25 w-full mt-3 rounded-md placeholder:text-tinted-200"
+          />
+          {errors.email?.message && (
+            <span className="text-error-700 text-base">
+              {errors.email.message}
+            </span>
+          )}
+          <Btn
+            loading={loading}
+            type="submit"
+            className="mt-4 font-semibold py-2 px-8"
+          >
+            Invite
+          </Btn>
+        </form>
       </Popover>
     </>
   );

@@ -1,4 +1,5 @@
 import { IconButton, Modal } from "@mui/material";
+import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
@@ -7,11 +8,13 @@ import ScriptDocument from "../ScriptDocument";
 interface IProps {
   openDocumentModal: boolean;
   setOpenDocumentModal: React.Dispatch<React.SetStateAction<boolean>>;
+  script: IFullInformationScript;
 }
 
 const ScriptDocumentModal = ({
   openDocumentModal,
   setOpenDocumentModal,
+  script,
 }: IProps) => {
   const { push, query } = useRouter();
 
@@ -34,7 +37,7 @@ const ScriptDocumentModal = ({
         >
           <AiOutlineClose />
         </IconButton>
-        <ScriptDocument />
+        <ScriptDocument script={script} />
       </div>
     </Modal>
   );

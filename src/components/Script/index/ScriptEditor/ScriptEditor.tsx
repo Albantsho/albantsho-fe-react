@@ -1,13 +1,15 @@
 import { Typography } from "@mui/material";
+import { IFullInformationScript } from "interfaces/script";
 import Link from "next/link";
 import routes from "routes/routes";
 import TextEditorList from "./TextEditor/TextEditorList";
 
 interface IProps {
+  script: IFullInformationScript;
   setTextEditorValue?: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-const ScriptEditor = ({ setTextEditorValue }: IProps) => {
+const ScriptEditor = ({ script, setTextEditorValue }: IProps) => {
   return (
     <div className="w-full flex gap-1 flex-col justify-start text-center mx-auto max-w-[800px] px-3 xl:px-10">
       <Link href={routes.titleScript.dynamicUrl("2")}>
@@ -17,7 +19,7 @@ const ScriptEditor = ({ setTextEditorValue }: IProps) => {
             component="p"
             className="text-center text-black courier"
           >
-            LONG MAN OF LONG BEACH Q
+            {script.title}
           </Typography>
         </div>
       </Link>

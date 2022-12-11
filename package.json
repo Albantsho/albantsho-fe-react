@@ -46,6 +46,7 @@
     "slate-history": "^0.66.0",
     "slate-hyperscript": "^0.77.0",
     "slate-react": "^0.83.1",
+    "socket.io-client": "^4.5.4",
     "swiper": "^8.3.2",
     "yup": "^0.32.11",
     "zustand": "^4.1.2"
