@@ -40,8 +40,8 @@ const BlogList = ({
       <Box
         className="grid gap-4 md:gap-8 py-7 md:py-14"
         gridTemplateColumns={{
-          sm: "repeat(auto-fill, minmax(280px, auto))",
-          md: "repeat(auto-fill, minmax(350px, auto))",
+          sm: "repeat(auto-fill, minmax(290px, auto))",
+          lg: "repeat(auto-fill, minmax(380px, auto))",
           xl: "repeat(auto-fill, minmax(510px, auto))",
         }}
       >

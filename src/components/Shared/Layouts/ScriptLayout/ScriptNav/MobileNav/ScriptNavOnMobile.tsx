@@ -1,8 +1,7 @@
 import MenuIcon from "@assets/icons/menu.svg";
-import alert from "@assets/images/alert.png";
-import { Badge, Drawer, IconButton, SvgIcon } from "@mui/material";
+import { Drawer, IconButton, SvgIcon } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
-import Image from "next/image";
+import NotificationComponent from "@shared/NotificationComponent/NotificationComponent";
 import { AiFillInstagram, AiOutlineClose } from "react-icons/ai";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import ProfileMenu from "../../../../ProfileMenu/ProfileMenu";
@@ -18,13 +17,7 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
   return (
     <div className="flex items-center lg:hidden w-full">
       <Logo className={isTransparent ? "text-white" : "text-primary-main"} />
-      <IconButton className="ml-auto mx-7 mt-1 self-center max-h-[31px]">
-        <Badge badgeContent={1} color="error">
-          <div>
-            <Image src={alert} alt="alert" />
-          </div>
-        </Badge>
-      </IconButton>
+      <NotificationComponent />
       <IconButton
         onClick={handleToggleDrawer(true)}
         color="inherit"

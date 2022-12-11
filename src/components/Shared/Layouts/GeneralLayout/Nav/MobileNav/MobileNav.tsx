@@ -57,6 +57,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
           <AiOutlineClose />
         </IconButton>
         <List>
+          {user.email_verified && <ProfileMenu isMobile />}
           {links.map(({ title, href }, i) => (
             <ListItem disablePadding key={i}>
               <Link legacyBehavior href={href} passHref>
@@ -64,14 +65,17 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
                   TouchRippleProps={{ className: "text-transparent" }}
                   className="px-5 hover:bg-primary-50/25"
                 >
-                  <ListItemText primary={title} />
+                  <ListItemText
+                    primaryTypographyProps={{
+                      className: "text-primary-700 font-semibold",
+                    }}
+                    primary={title}
+                  />
                 </ListItemButton>
               </Link>
             </ListItem>
           ))}
-          {user.email_verified ? (
-            <ProfileMenu />
-          ) : (
+          {!user.email_verified && (
             <div className="px-5 py-2">
               <Link legacyBehavior href={routes.signin.url} passHref>
                 <Btn className="px-6 py-3">Sign In</Btn>

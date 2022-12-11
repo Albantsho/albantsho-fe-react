@@ -24,7 +24,7 @@ const BlogCard = ({ post }: IProps) => {
         loading="lazy"
         component="img"
         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${post.media}`}
-        className="max-h-[250px] object-center"
+        className="h-[250px] object-center"
       />
       <CardHeader
         className="pb-0"

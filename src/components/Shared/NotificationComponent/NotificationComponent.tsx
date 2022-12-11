@@ -57,9 +57,9 @@ const NotificationComponent = () => {
       >
         <List className="gap-2">
           {Array.from(new Array(6)).map((_, index) => (
-            <ListItem className="gap-2" divider key={index}>
+            <ListItem className="gap-2 flex-wrap" divider key={index}>
               <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                <Avatar alt="Remy Sharp" />
               </ListItemAvatar>
               <ListItemText
                 primary={
@@ -72,7 +72,7 @@ const NotificationComponent = () => {
                   </Typography>
                 }
                 secondary="Brunch this weekend? jhuftdrea dsaffsdfsfd"
-                secondaryTypographyProps={{ className: "max-w-[170px] futura" }}
+                secondaryTypographyProps={{ className: "w-[170px] futura" }}
               />
               <IconButton className="text-success-500 hover:bg-success-50 bg-success-50">
                 <MdOutlineDone />
