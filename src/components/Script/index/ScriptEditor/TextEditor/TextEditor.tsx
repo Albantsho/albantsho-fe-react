@@ -69,10 +69,17 @@ const TextEditor = ({
   //   socket.emit("createRoom", query.id);
   // }, []);
   useEffect(() => {
-    socket.on("connect", () => {
-      console.log(socket.id);
-    });
-  }, []);
+    try {
+      socket.on("connect", () => {
+        console.log(socket.id);
+      });
+      socket.on("error", () => {
+        console.log(socket.id);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [socket]);
 
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();

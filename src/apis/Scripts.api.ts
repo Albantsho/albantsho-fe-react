@@ -25,6 +25,7 @@ interface IUpdateScriptPayload {
   cover_page?: string;
   storyFormat?: string;
   primary_genre?: string;
+  secondary_genre: string;
   primary_cast?: string;
   secondary_cast?: string;
   estimated_budger?: string;
@@ -36,7 +37,7 @@ interface IUpdateScriptPayload {
   inspiration?: string;
   motivation?: string;
   script_price?: string;
-  is_abstract?: string;
+  is_abstract?: boolean;
 }
 
 interface IGiveRateToScriptPayload {
@@ -80,10 +81,14 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async verifyScript(payload: object, id: string) {
-      const res = await axiosPrivate.patch(`/script/verify/${id}`, {
-        signal: controller?.signal,
-      });
+    async verifyScript(id: string) {
+      const res = await axiosPrivate.patch(
+        `/script/verify/${id}`,
+        {},
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
@@ -97,17 +102,20 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async getAllScripts(query: string) {
-      const res = await api.get(`/script/all?${query}`, {
+      const res = await api.get(`/script/all?limit=10&${query}`, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async getProducerAllScripts(query: string) {
-      const res = await axiosPrivate.get(`/script/producer/all?${query}`, {
-        signal: controller?.signal,
-      });
+    async getProducerAllScripts(query: string, search: string) {
+      const res = await axiosPrivate.get(
+        `/script/producer/all?limit=10&search=${search}&${query}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
@@ -120,8 +128,8 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async searchScripts(id: string) {
-      const res = await api.get(`/script/${id}`, {
+    async searchScripts(search: string) {
+      const res = await api.get(`/script/search?search=${search}`, {
         signal: controller?.signal,
       });
 
@@ -136,15 +144,18 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getWriterAllScripts(query?: string) {
-      const res = await axiosPrivate.get(`/script/writer/all?${query}`, {
-        signal: controller?.signal,
-      });
+    async getWriterAllScripts(search: string, query?: string) {
+      const res = await axiosPrivate.get(
+        `/script/writer/all?limit=10&search=${search}&${query}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
-    async updateWriterArchiveScript(payload: object, id: string) {
+    async updateWriterArchiveScript(payload: { archive: boolean }, id: string) {
       const res = await axiosPrivate.patch(
         `/script/update/archive/${id}`,
         payload,

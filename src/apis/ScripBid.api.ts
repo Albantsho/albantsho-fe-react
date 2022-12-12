@@ -26,17 +26,25 @@ const useScripBidApi = (controller?: AbortController) => {
     },
 
     async acceptBid(id: string) {
-      const res = await axiosPrivate.post(`/bid/accept/${id}`, undefined, {
-        signal: controller?.signal,
-      });
+      const res = await axiosPrivate.post(
+        `/bid/accept/${id}`,
+        {},
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
     async rejectBid(id: string) {
-      const res = await axiosPrivate.post(`/bid/reject/${id}`, undefined, {
-        signal: controller?.signal,
-      });
+      const res = await axiosPrivate.post(
+        `/bid/reject/${id}`,
+        {},
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
@@ -57,8 +65,8 @@ const useScripBidApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getBidScript(id: string) {
-      const res = await axiosPrivate.get(`/bid/${id}`, {
+    async getBidScript(bidId: string) {
+      const res = await axiosPrivate.get(`/bid/${bidId}`, {
         signal: controller?.signal,
       });
 

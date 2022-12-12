@@ -9,6 +9,8 @@ import {
 import Btn from "@shared/Btn/Btn";
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
+import Head from "next/head";
+import { Suspense } from "react";
 
 const plans = [
   "Synopsis",
@@ -18,18 +20,9 @@ const plans = [
   "Writer’s inspiration",
 ];
 
-import useSubscriptionApi from "apis/Subscription.api";
-import Head from "next/head";
-import { Suspense } from "react";
-
 const Subscription = () => {
-  const { subscription } = useSubscriptionApi();
-
   const subscriptionFunc = async () => {
-    const res = await subscription({
-      sub_name: "mauve",
-      paid: true,
-    });
+    ("");
   };
 
   return (

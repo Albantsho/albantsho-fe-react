@@ -18,7 +18,7 @@ const Reviewer = () => {
     async function getAllReviewerTasksFunc() {
       try {
         setLoading(true);
-        const res = await getAllReviewerTasks();
+        const res = await getAllReviewerTasks("hello");
         setReviewerTaskList(res.data.review);
         setLoading(false);
       } catch (error) {

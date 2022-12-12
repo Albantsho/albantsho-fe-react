@@ -6,7 +6,7 @@ interface ICreateNewTicketPayload {
   text: string;
 }
 
-const useInvite = (controller?: AbortController) => {
+const useTicket = (controller?: AbortController) => {
   return {
     async createNewTicket(payload: ICreateNewTicketPayload) {
       const res = await api.post("/ticket/create", payload, {
@@ -18,4 +18,4 @@ const useInvite = (controller?: AbortController) => {
   };
 };
 
-export default useInvite;
+export default useTicket;

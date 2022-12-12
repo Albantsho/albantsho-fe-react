@@ -9,6 +9,11 @@ interface IUpdateReviewPayload {
   story_quality: string;
   suggestions: string;
   rate: string;
+  world_building?: string;
+  script_formatting?: string;
+  writer_voice?: string;
+  authenticity_feedback?: string;
+  opening_and_closing_image?: string;
 }
 
 interface IAssignReviewRequestToReviewerPayload {
@@ -28,18 +33,18 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async deleteReview(id: string) {
-      const res = await axiosPrivate.delete(`/review/delete/${id}`, {
+    async deleteReview(reviewId: string) {
+      const res = await axiosPrivate.delete(`/review/delete/${reviewId}`, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async completingReview(payload: object, reviewId: string) {
+    async completingReview(reviewId: string) {
       const res = await axiosPrivate.patch(
         `/review/complete/${reviewId}`,
-        payload,
+        {},
         {
           signal: controller?.signal,
         }
@@ -48,10 +53,10 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async sendReviewToWriterEmail(payload: object, reviewId: string) {
-      const res = await axiosPrivate.patch(
+    async sendReviewToWriterEmail(reviewId: string) {
+      const res = await axiosPrivate.post(
         `/review/send/email/${reviewId}`,
-        payload,
+        {},
         {
           signal: controller?.signal,
         }
@@ -88,9 +93,9 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAllRequestedReviews(searchQuery?: string) {
+    async getAllRequestedReviews(query: string, searchQuery?: string) {
       const res = await axiosPrivate.get(
-        `/review/requests?search=${searchQuery}`,
+        `/review/requests?limit=10&${query}&search=${searchQuery}`,
         {
           signal: controller?.signal,
         }
@@ -99,9 +104,9 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAssignedRequestedReviews(searchQuery?: string) {
+    async getAssignedRequestedReviews(query: string, searchQuery?: string) {
       const res = await axiosPrivate.get(
-        `/review/request/assigned?search=${searchQuery}`,
+        `/review/request/assigned?limit=10&${query}&search=${searchQuery}`,
         {
           signal: controller?.signal,
         }
@@ -110,9 +115,9 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getCompletedRequestedReviews(searchQuery?: string) {
+    async getCompletedRequestedReviews(query: string, searchQuery?: string) {
       const res = await axiosPrivate.get(
-        `/review/request/completed?search=${searchQuery}`,
+        `/review/request/completed?limit=10&${query}&search=${searchQuery}`,
         {
           signal: controller?.signal,
         }
@@ -121,8 +126,8 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAllReviewerTasks() {
-      const res = await axiosPrivate.get("/review/my/tasks", {
+    async getAllReviewerTasks(query: string) {
+      const res = await axiosPrivate.get(`/review/my/tasks?limit=10&${query}`, {
         signal: controller?.signal,
       });
 
@@ -139,8 +144,8 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getWriterReviewRequests() {
-      const res = await axiosPrivate.get("/review/scripts", {
+    async getWriterReviewRequests(query: string) {
+      const res = await axiosPrivate.get(`/review/scripts?limit=10&${query}`, {
         signal: controller?.signal,
       });
 

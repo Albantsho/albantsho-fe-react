@@ -22,7 +22,7 @@ const Reviews: NextPageWithLayout = () => {
       try {
         setReviewsList([]);
         setLoading(true);
-        const res = await getWriterReviewRequests();
+        const res = await getWriterReviewRequests("he");
 
         setReviewsList(res.data.reviews);
         setLoading(true);

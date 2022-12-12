@@ -27,7 +27,10 @@ const useMarketPlace = () => {
           setLoading(false);
         }
         if (user.user_type === "producer") {
-          const res = await getProducerAllScripts(queryString.stringify(query));
+          const res = await getProducerAllScripts(
+            queryString.stringify(query),
+            "he"
+          );
           setScripts(res.data.scripts);
           setLoading(false);
         }
