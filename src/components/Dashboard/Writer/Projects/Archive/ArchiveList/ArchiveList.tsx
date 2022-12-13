@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import { IWriterScript } from "interfaces/script";
 import ArchiveScript from "./ArchiveScript/ArchiveScript";
+import emptyBlogs from "@assets/images/empty-blogs.png";
+import Image from "next/image";
 
 interface IProps {
   listScripts: IWriterScript[];
@@ -56,9 +58,16 @@ const ArchiveList = ({ setListScripts, listScripts }: IProps) => {
       </TableBody>
     </Table>
   ) : (
-    <h6 className="px-5 sm:px-10 mt-5 text-center">
-      There is no script in the archive list
-    </h6>
+    <div className="flex mx-auto">
+      <Image
+        width={384}
+        height={384}
+        loading="lazy"
+        className="w-fit h-fit mx-auto mt-14 lg:mt-24"
+        src={emptyBlogs}
+        alt="empty blog list"
+      />
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
-import emptyBlogs from "../assets/empty-blogs.png";
+import emptyBlogs from "@assets/images/empty-blogs.png";
 import TrashBlog from "./TrashBlog/TrashBlog";
 
 interface IProps {

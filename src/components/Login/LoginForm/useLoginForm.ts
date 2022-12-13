@@ -44,8 +44,11 @@ const useLoginForm = () => {
       setLoading(true);
       const res = await signin({ ...data, rememberMe });
       authenticationUser(res.data.user);
+      !res.data.user && replace(routes.verifyEmail.url);
+      !res.data.user && authenticationUser(data.email as any);
+
       setAccessToken(res.data.accessToken);
-      res.data.user.user_type === "writer"
+      res.data.user.user_type && res.data.user.user_type === "writer"
         ? replace(routes.writerDashboard.url)
         : res.data.user.user_type === "producer"
         ? replace(routes.producerDashboard.url)
@@ -53,6 +56,8 @@ const useLoginForm = () => {
         ? replace(routes.adminDashboard.url)
         : replace(routes.reviewerDashboard.url);
     } catch (error) {
+      console.log(error);
+
       errorHandler(error);
     } finally {
       setLoading(false);

@@ -28,8 +28,20 @@ export const abstractSchema = (publish: boolean) => {
       character_bible: Yup.string().required().label("Character bible"),
       inspiration: Yup.string().required().label("Inspiration"),
       motivation: Yup.string().required().label("Motivation"),
-      // copyright: Yup.string().required().label("Copyright"),
-      // scriptFile: Yup.string().required().label("Copyright"),
+      scriptFile: Yup.mixed().test(
+        "required",
+        "Script file is a required field",
+        (value) => {
+          return value && value.length;
+        }
+      ),
+      scriptCopyright: Yup.mixed().test(
+        "required",
+        "Script copyright is a required field",
+        (value) => {
+          return value && value.length;
+        }
+      ),
       image: Yup.mixed()
         .test("required", "Image is a required field", (value) => {
           return value && value.length;
@@ -49,12 +61,10 @@ export const abstractSchema = (publish: boolean) => {
       secondary_genre: Yup.string().label("Secondary genre"),
       theme: Yup.array().label("Theme"),
       primary_cast: Yup.string()
-
         .min(1)
         .matches(/^[0-9]+$/gi, "Please enter current primary cast")
         .label("Primary cast"),
       secondary_cast: Yup.string()
-
         .min(1)
         .matches(/^[0-9]+$/gi, "Please enter current secondary cast")
         .label("Secondary cast"),
@@ -67,8 +77,6 @@ export const abstractSchema = (publish: boolean) => {
       character_bible: Yup.string().label("Character bible"),
       inspiration: Yup.string().label("Inspiration"),
       motivation: Yup.string().label("Motivation"),
-      // copyright: Yup.string().label("Copyright"),
-      // scriptFile: Yup.string().label("Copyright"),
       image: Yup.mixed().test("fileSize", "The file is to large", (value) => {
         if (value[0]) {
           return value && value[0].size <= 4000000;

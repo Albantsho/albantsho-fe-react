@@ -12,9 +12,17 @@ import {
   Typography,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import useDraftApi from "apis/Draft.api";
 import { IAbstractFormValues } from "interfaces/abstract";
-import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
+import { useEffect } from "react";
+import type {
+  Control,
+  FieldErrorsImpl,
+  UseFormRegister,
+} from "react-hook-form";
+import { Controller } from "react-hook-form";
 import { AiOutlineSearch } from "react-icons/ai";
+import errorHandler from "utils/error-handler";
 
 const results = [
   { title: "The Long Man of Long Beach" },
@@ -32,6 +40,7 @@ interface IProps {
   setActiveButton: React.Dispatch<React.SetStateAction<number>>;
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+  control: Control<IAbstractFormValues, any>;
   step: number;
 }
 
@@ -45,9 +54,29 @@ const filterOptions = createFilterOptions({
   stringify: (option: ResultsOptionType) => option.title,
 });
 
-const UploadScript = ({ activeButton, setActiveButton, step }: IProps) => {
+const UploadScript = ({
+  activeButton,
+  setActiveButton,
+  step,
+  control,
+}: IProps) => {
+  const { getAllDraft } = useDraftApi();
+
+  useEffect(() => {
+    async function getOtherDrafts() {
+      try {
+        const res = await getAllDraft();
+        console.log(res);
+      } catch (error) {
+        errorHandler(error);
+      }
+    }
+
+    getOtherDrafts();
+  }, []);
+
   return (
-    <div className={`${step === 6 ? "block" : "hidden"}`}>
+    <div className={`${step === 6 && activeButton === 0 ? "block" : "hidden"}`}>
       <Typography
         variant="h5"
         color="primary.700"
@@ -100,57 +129,68 @@ const UploadScript = ({ activeButton, setActiveButton, step }: IProps) => {
             Select Script<span className="text-error-500 my-auto">*</span>
           </Typography>
         </label>
-        <Autocomplete
-          fullWidth
-          size="medium"
-          id="filter-Results"
-          sx={{
-            "& .MuiSvgIcon-root": { color: "#7953B5 !important" },
-            "& .MuiInputBase-input": { color: "#7953B5" },
-            "& .MuiOutlinedInput-notchedOutline": { borderRadius: "12px" },
-          }}
-          options={results}
-          getOptionLabel={(option) => option.title}
-          renderOption={(props, option) => (
-            <ListItem {...props} className={` px-2 sm:px-4 md:px-6`}>
-              <ListItemButton
-                sx={{
-                  "&.MuiListItemButton-root": {
-                    borderBottom: "1px solid #EEEBF1",
-                  },
-                }}
-              >
-                <ListItemText
-                  primary={option.title}
-                  primaryTypographyProps={{
-                    color: (theme) => theme.palette.primary.main,
-                    fontSize: 20,
-                    fontWeight: 500,
-                    fontFamily: "futura",
+        <Controller
+          name="otherDraft"
+          control={control}
+          render={({ field: { onChange } }) => (
+            <Autocomplete
+              fullWidth
+              onChange={(_, data) => {
+                onChange(data);
+                return data;
+              }}
+              size="medium"
+              id="filter-Results"
+              sx={{
+                "& .MuiSvgIcon-root": { color: "#7953B5 !important" },
+                "& .MuiInputBase-input": { color: "#7953B5" },
+                "& .MuiOutlinedInput-notchedOutline": { borderRadius: "12px" },
+              }}
+              options={results}
+              getOptionLabel={(option) => option.title}
+              renderOption={(props, option) => (
+                <ListItem {...props} className={` px-2 sm:px-4 md:px-6`}>
+                  <ListItemButton
+                    sx={{
+                      "&.MuiListItemButton-root": {
+                        borderBottom: "1px solid #EEEBF1",
+                      },
+                    }}
+                  >
+                    <ListItemText
+                      primary={option.title}
+                      primaryTypographyProps={{
+                        color: (theme) => theme.palette.primary.main,
+                        fontSize: 20,
+                        fontWeight: 500,
+                        fontFamily: "futura",
+                      }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              )}
+              filterOptions={filterOptions}
+              renderInput={({ InputProps, ...params }) => (
+                <TextField
+                  {...params}
+                  InputProps={{
+                    ...InputProps,
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SvgIcon
+                          fontSize="medium"
+                          component={AiOutlineSearch}
+                          inheritViewBox
+                        />
+                      </InputAdornment>
+                    ),
                   }}
                 />
-              </ListItemButton>
-            </ListItem>
-          )}
-          filterOptions={filterOptions}
-          renderInput={({ InputProps, ...params }) => (
-            <TextField
-              {...params}
-              InputProps={{
-                ...InputProps,
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SvgIcon
-                      fontSize="medium"
-                      component={AiOutlineSearch}
-                      inheritViewBox
-                    />
-                  </InputAdornment>
-                ),
-              }}
+              )}
             />
           )}
         />
+
         <Button className="max-w-[520px] w-full  text-primary-700 text-center py-3 mt-8 block mx-auto rounded-lg border-2 border-dashed mb-5 px-8  border-primary-700 ">
           Write new script
         </Button>

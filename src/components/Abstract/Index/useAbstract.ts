@@ -6,7 +6,11 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import errorHandler from "utils/error-handler";
+import { wordToHtml } from "utils/word-to-html";
 import { abstractSchema } from "./validation/abstract.validation";
+import fileToArrayBuffer from "file-to-array-buffer";
+import deserializeDocx from "utils/desrialize-docx";
+import useDraftApi from "apis/Draft.api";
 
 type IScript = IFullInformationScript;
 
@@ -17,9 +21,9 @@ const useAbstract = (script: IScript) => {
   const [loadingPublishButton, setLoadingPublishButton] = useState(false);
   const [loadingUpdateButton, setLoadingUpdateButton] = useState(false);
   const [publish, setPublish] = useState(false);
-  const { updateScript, addScriptTheme } = useScriptsApi();
   const { query } = useRouter();
-
+  const { updateScript, addScriptTheme } = useScriptsApi();
+  const { uploadFileDraft } = useDraftApi();
   const {
     register,
     handleSubmit,
@@ -41,7 +45,11 @@ const useAbstract = (script: IScript) => {
       estimated_budger: script?.estimated_budget
         ? script?.estimated_budget
         : "high",
-      theme: [{ label: "love" }],
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      theme: script.theme
+        ? script.theme.map((theme) => ({ label: theme }))
+        : [{ label: "love" }],
       tagline: script?.tagline ? script?.tagline : "",
       log_line: script?.log_line ? script?.log_line : "",
       synopsis: script?.synopsis ? script?.synopsis : "",
@@ -58,17 +66,49 @@ const useAbstract = (script: IScript) => {
   const updateScriptFunc = () => setPublish(false);
 
   const onSubmit = async (data: IAbstractFormValues) => {
+    console.log(data.theme);
+
     if (publish) {
       try {
         setLoadingPublishButton(true);
         const res = await updateScript(
-          { ...data, image: data.image[0] },
+          {
+            primary_genre: data.primary_genre,
+            secondary_genre: data.secondary_genre,
+            title: data.title,
+            script_type: data.script_type,
+            storyFormat: data.storyFormat,
+            primary_cast: data.primary_cast,
+            secondary_cast: data.secondary_cast,
+            estimated_budger: data.estimated_budger,
+            tagline: data.tagline,
+            synopsis: data.synopsis,
+            story_world: data.story_world,
+            act_structure: data.act_structure,
+            character_bible: data.character_bible,
+            inspiration: data.inspiration,
+            motivation: data.motivation,
+            image: data.image[0],
+          },
           query.id as string
         );
         const resTheme = await addScriptTheme(
           { theme: data.theme.map((theme) => theme.label) },
           query.id as string
         );
+        if (data.scriptFile) {
+          const arrayBuffer = await fileToArrayBuffer(data.scriptFile[0]);
+          const html = await wordToHtml(arrayBuffer);
+          const htmlContent = new DOMParser().parseFromString(
+            html as string,
+            "text/html"
+          );
+          const deserialize = deserializeDocx(htmlContent.body);
+          const res = await uploadFileDraft(query.id as string, {
+            content: deserialize,
+          });
+          console.log(res);
+        }
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -78,13 +118,46 @@ const useAbstract = (script: IScript) => {
       try {
         setLoadingUpdateButton(true);
         const res = await updateScript(
-          { ...data, image: data.image[0] },
+          {
+            primary_genre: data.primary_genre,
+            secondary_genre: data.secondary_genre,
+            title: data.title,
+            script_type: data.script_type,
+            storyFormat: data.storyFormat,
+            primary_cast: data.primary_cast,
+            secondary_cast: data.secondary_cast,
+            estimated_budger: data.estimated_budger,
+            tagline: data.tagline,
+            synopsis: data.synopsis,
+            story_world: data.story_world,
+            act_structure: data.act_structure,
+            character_bible: data.character_bible,
+            inspiration: data.inspiration,
+            motivation: data.motivation,
+            image: data.image[0],
+          },
           query.id as string
         );
+        console.log(res);
         const resTheme = await addScriptTheme(
           { theme: data.theme.map((theme) => theme.label) },
           query.id as string
         );
+        console.log(resTheme);
+
+        if (data.scriptFile) {
+          const arrayBuffer = await fileToArrayBuffer(data.scriptFile[0]);
+          const html = await wordToHtml(arrayBuffer);
+          const htmlContent = new DOMParser().parseFromString(
+            html as string,
+            "text/html"
+          );
+          const deserialize = deserializeDocx(htmlContent.body);
+          const res = await uploadFileDraft(query.id as string, {
+            content: deserialize,
+          });
+          console.log(res);
+        }
         setOpenSaveProgressModal(true);
       } catch (error) {
         errorHandler(error);

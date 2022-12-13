@@ -78,24 +78,24 @@ const Abstract = ({ script }: IProps) => {
           register={register}
           errors={errors}
         />
-        {activeButton === 0 && (
-          <UploadScript
-            step={step}
-            activeButton={activeButton}
-            setActiveButton={setActiveButton}
-            register={register}
-            errors={errors}
-          />
-        )}
-        {activeButton === 1 && (
-          <UploadScriptFiles
-            step={step}
-            activeButton={activeButton}
-            setActiveButton={setActiveButton}
-            register={register}
-            errors={errors}
-          />
-        )}
+
+        <UploadScript
+          step={step}
+          control={control}
+          activeButton={activeButton}
+          setActiveButton={setActiveButton}
+          register={register}
+          errors={errors}
+        />
+
+        <UploadScriptFiles
+          step={step}
+          activeButton={activeButton}
+          setActiveButton={setActiveButton}
+          register={register}
+          errors={errors}
+        />
+
         <UploadImage step={step} register={register} errors={errors} />
         <StepsButtons
           loadingPublishButton={loadingPublishButton}

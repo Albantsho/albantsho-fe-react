@@ -17,7 +17,6 @@ interface IUpdateScriptPayload {
   archived?: boolean;
   page_title?: string;
   based_on?: string;
-  copyright?: string;
   content_info?: string;
   image?: File;
   front_page?: string;
@@ -38,6 +37,8 @@ interface IUpdateScriptPayload {
   motivation?: string;
   script_price?: string;
   is_abstract?: boolean;
+  tagline?: string;
+  character_bible?: string;
 }
 
 interface IGiveRateToScriptPayload {

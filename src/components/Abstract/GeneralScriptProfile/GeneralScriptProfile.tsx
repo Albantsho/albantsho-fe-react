@@ -289,7 +289,6 @@ const GeneralScriptProfile = ({
               }}
               options={genresFilms}
               getOptionLabel={(option) => option.label}
-              defaultValue={[genresFilms[1]]}
               onChange={(_, data) => {
                 onChange(data);
                 return data;

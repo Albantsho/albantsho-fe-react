@@ -16,6 +16,9 @@ export interface IAbstractFormValues {
   character_bible: string;
   inspiration: string;
   motivation: string;
-  // copyright: string;
+  copyright: string;
   image: FileList;
+  scriptFile: FileList;
+  scriptCopyright: FileList;
+  otherDraft: string;
 }

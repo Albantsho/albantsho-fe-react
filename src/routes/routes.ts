@@ -25,8 +25,7 @@ const routes = {
     permission: [],
   },
   resetPassword: {
-    url: (resetPasswordToken: string) =>
-      `/reset-password/${resetPasswordToken}`,
+    url: `/reset-password`,
     mustAuthenticated: "no",
     permission: [],
   },

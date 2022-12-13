@@ -13,9 +13,14 @@ interface IProps {
   step: number;
 }
 
-const UploadScriptFiles = ({ activeButton, setActiveButton, step }: IProps) => {
+const UploadScriptFiles = ({
+  activeButton,
+  setActiveButton,
+  step,
+  register,
+}: IProps) => {
   return (
-    <div className={`${step === 6 ? "block" : "hidden"}`}>
+    <div className={`${step === 6 && activeButton === 1 ? "block" : "hidden"}`}>
       <Typography
         variant="h5"
         color="primary.700"
@@ -66,7 +71,14 @@ const UploadScriptFiles = ({ activeButton, setActiveButton, step }: IProps) => {
               className="absolute cursor-pointer inset-0"
               htmlFor="add-script"
             ></label>
-            <input type="file" id="add-script" hidden name="script" />
+            <input
+              {...register("scriptFile")}
+              accept=".doc,.docx"
+              max={1}
+              type="file"
+              id="add-script"
+              hidden
+            />
             <div className="mx-auto flex justify-center items-center mb-2 sm:mb-3">
               <Image src={UploadFile} alt="upload file" />
             </div>
@@ -90,9 +102,9 @@ const UploadScriptFiles = ({ activeButton, setActiveButton, step }: IProps) => {
           <div className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
             <label
               className="absolute cursor-pointer inset-0"
-              htmlFor="add-script"
+              htmlFor="add-copyright"
             ></label>
-            <input type="file" id="add-script" hidden name="script" />
+            <input type="file" id="add-copyright" hidden name="copyright" />
             <div className="mx-auto flex justify-center items-center mb-2 sm:mb-3">
               <Image src={UploadFile} alt="upload file" />
             </div>

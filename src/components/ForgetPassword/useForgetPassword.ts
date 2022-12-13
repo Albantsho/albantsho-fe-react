@@ -26,8 +26,8 @@ const useForgetPassword = () => {
   const onSubmit = async (data: IAuthForgetPassword) => {
     try {
       setLoading(true);
-      const res = await resetPasswordEmail(data.email);
-      replace(routes.resetPassword.url(res.data.randomString));
+      await resetPasswordEmail(data.email);
+      replace(routes.checkEmail.url);
     } catch (error) {
       errorHandler(error);
     } finally {

@@ -98,6 +98,8 @@ const TextEditor = ({
   };
 
   const handleChangeEditor = (element: Descendant[]) => {
+    console.log(element);
+
     const node = { children: element };
     const serialize = (node: INode | Descendant): string | undefined => {
       if (Text.isText(node)) {
