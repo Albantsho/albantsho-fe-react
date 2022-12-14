@@ -27,9 +27,7 @@ const StepsLines = ({ step, setStep, errors, publish }: IProps) => {
               setStep(i + 1);
             }}
             ref={(elm) => stepLinks.current.push(elm as HTMLDivElement)}
-            className={`${
-              step === i + 1 && publish && errors && "bg-error-500"
-            }${
+            className={` ${
               step === i + 1 ? "bg-success-500" : "bg-[#D9D9D9]"
             } h-1 flex-1 rounded-sm cursor-pointer`}
           ></div>

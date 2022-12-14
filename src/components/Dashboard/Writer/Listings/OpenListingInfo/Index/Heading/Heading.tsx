@@ -43,7 +43,7 @@ const Heading = ({ script }: IProps) => {
           variant="body1"
           className="font-normal xl:mt-2 text-tinted-500 leading-normal"
         >
-          {script.tagLine}
+          {script.tagline}
         </Typography>
 
         <div className="mt-4">

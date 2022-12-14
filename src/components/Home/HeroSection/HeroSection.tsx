@@ -49,7 +49,7 @@ const HeroSection = () => {
               Write better screenplays and be discovered by top producers to
               bring them to life.
             </Typography>
-            {!user.email_verified && (
+            {!user.emailVerified && (
               <Link legacyBehavior passHref href={routes.register.url}>
                 <Button
                   size="large"

@@ -57,7 +57,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
           <AiOutlineClose />
         </IconButton>
         <List>
-          {user.email_verified && <ProfileMenu isMobile />}
+          {user.emailVerified && <ProfileMenu isMobile />}
           {links.map(({ title, href }, i) => (
             <ListItem disablePadding key={i}>
               <Link legacyBehavior href={href} passHref>
@@ -75,7 +75,7 @@ const MobileNav = ({ links, isTransparent }: IProps) => {
               </Link>
             </ListItem>
           ))}
-          {!user.email_verified && (
+          {!user.emailVerified && (
             <div className="px-5 py-2">
               <Link legacyBehavior href={routes.signin.url} passHref>
                 <Btn className="px-6 py-3">Sign In</Btn>

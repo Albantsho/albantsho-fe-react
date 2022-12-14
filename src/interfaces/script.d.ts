@@ -30,7 +30,7 @@ export interface IFullInformationScript {
   _id: string;
   authorId: string;
   title: string;
-  tagLine: string;
+  tagline: string;
   archived: boolean;
   scriptFormat: string;
   storyFormat: string;

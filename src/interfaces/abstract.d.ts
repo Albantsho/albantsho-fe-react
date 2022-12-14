@@ -4,11 +4,11 @@ export interface IAbstractFormValues {
   title: string;
   primaryGenre: string;
   secondaryGenre: string;
-  theme: [{ label: string }];
+  theme: string[];
   primaryCast: string;
   secondaryCast: string;
   estimatedBudget: string;
-  tagLine: string;
+  tagline: string;
   logLine: string;
   synopsis: string;
   storyWorld: string;

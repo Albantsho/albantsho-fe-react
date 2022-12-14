@@ -4,7 +4,7 @@ export interface IUser {
   active: boolean;
   country: string;
   email: string;
-  email_verified: boolean;
+  emailVerified: boolean;
   fullname: string;
   gender: "male" | "female";
   userType?: "writer" | "producer" | "admin" | "reviewer";

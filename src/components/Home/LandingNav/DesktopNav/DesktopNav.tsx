@@ -48,8 +48,8 @@ const DesktopNav = ({ links }: IProps) => {
           </Link>
         ))}
       </div>
-      {user.email_verified && <ProfileMenu inHome />}
-      {!user.email_verified && (
+      {user.emailVerified && <ProfileMenu inHome />}
+      {!user.emailVerified && (
         <div className="flex gap-9 text-white">
           <Tooltip
             TransitionComponent={Fade}

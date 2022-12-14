@@ -67,10 +67,18 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async updateScript(payload: IUpdateScriptPayload, id: string) {
-      const res = await axiosPrivate.patch(`/script/update/${id}`, payload, {
-        signal: controller?.signal,
-      });
+    async updateScript(
+      payload: IUpdateScriptPayload,
+      id: string,
+      query?: string
+    ) {
+      const res = await axiosPrivate.patch(
+        `/script/update/${id}?${query}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },

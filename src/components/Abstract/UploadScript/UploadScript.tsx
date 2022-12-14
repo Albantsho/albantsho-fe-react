@@ -27,7 +27,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 
-const results = [
+let results = [
   { title: "The Long Man of Long Beach" },
   { title: "The Long Man of Long Beach" },
   { title: "The Long Man of Long Beach" },
@@ -71,6 +71,7 @@ const UploadScript = ({
       try {
         const res = await getAllDraft();
         console.log(res);
+        results = res.data.drafts;
       } catch (error) {
         errorHandler(error);
       }

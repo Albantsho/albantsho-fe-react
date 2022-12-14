@@ -1,4 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import useDraftApi from "apis/Draft.api";
 import useScriptsApi from "apis/Scripts.api";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
@@ -6,11 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import errorHandler from "utils/error-handler";
-import { wordToHtml } from "utils/word-to-html";
 import { abstractSchema } from "./validation/abstract.validation";
-import fileToArrayBuffer from "file-to-array-buffer";
-import deserializeDocx from "utils/desrialize-docx";
-import useDraftApi from "apis/Draft.api";
 
 type IScript = IFullInformationScript;
 
@@ -24,7 +21,7 @@ const useAbstract = (script: IScript) => {
   const [publish, setPublish] = useState(false);
   const [progress, setProgress] = useState(0);
   const { query } = useRouter();
-  const { updateScript, addScriptTheme } = useScriptsApi();
+  const { updateScript } = useScriptsApi();
   const { uploadFileDraft } = useDraftApi();
   const {
     register,
@@ -46,12 +43,8 @@ const useAbstract = (script: IScript) => {
       estimatedBudget: script?.estimatedBudget
         ? script?.estimatedBudget
         : "high",
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      theme: script.theme
-        ? script.theme.map((theme) => ({ label: theme }))
-        : [{ label: "love" }],
-      tagLine: script?.tagLine ? script?.tagLine : "",
+      theme: script.theme ? script.theme : ["love"],
+      tagline: script?.tagline ? script?.tagline : "",
       logLine: script?.logLine ? script?.logLine : "",
       synopsis: script?.synopsis ? script?.synopsis : "",
       storyWorld: script?.storyWorld ? script?.storyWorld : "",
@@ -67,9 +60,6 @@ const useAbstract = (script: IScript) => {
     const formValues = getValues();
     const allFields = Object.keys(formValues);
     const completedFields = Object.values(formValues).filter((field) => field);
-
-    console.log(allFields, completedFields);
-    console.log((completedFields.length / allFields.length) * 100);
     setProgress((completedFields.length / allFields.length) * 100);
   }, [getValues()]);
 
@@ -92,7 +82,7 @@ const useAbstract = (script: IScript) => {
             primaryCast: data.primaryCast,
             secondaryCast: data.secondaryCast,
             estimatedBudget: data.estimatedBudget,
-            tagLine: data.tagLine,
+            tagLine: data.tagline,
             synopsis: data.synopsis,
             storyWorld: data.storyWorld,
             actStructure: data.actStructure,
@@ -100,9 +90,10 @@ const useAbstract = (script: IScript) => {
             inspiration: data.inspiration,
             motivation: data.motivation,
             image: data.image[0],
-            theme: data.theme.map((theme) => theme.label),
+            theme: data.theme,
           },
-          query.id as string
+          query.id as string,
+          "publish=true"
         );
         // const resTheme = await addScriptTheme(
         //   { theme: data.theme.map((theme) => theme.label) },
@@ -130,7 +121,7 @@ const useAbstract = (script: IScript) => {
             primaryCast: data.primaryCast,
             secondaryCast: data.secondaryCast,
             estimatedBudget: data.estimatedBudget,
-            tagLine: data.tagLine,
+            tagLine: data.tagline,
             synopsis: data.synopsis,
             storyWorld: data.storyWorld,
             actStructure: data.actStructure,
@@ -138,7 +129,7 @@ const useAbstract = (script: IScript) => {
             inspiration: data.inspiration,
             motivation: data.motivation,
             image: data.image[0],
-            theme: data.theme.map((theme) => theme.label),
+            theme: data.theme,
           },
           query.id as string
         );

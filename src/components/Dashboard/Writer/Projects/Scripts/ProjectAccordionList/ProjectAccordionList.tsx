@@ -1,8 +1,7 @@
-import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
-import { IWriterScript } from "interfaces/script";
-import ProjectAccordion from "./ProjectAccordion/ProjectAccordion";
 import emptyBlogs from "@assets/images/empty-blogs.png";
+import { IWriterScript } from "interfaces/script";
 import Image from "next/image";
+import ProjectAccordion from "./ProjectAccordion/ProjectAccordion";
 
 interface IProps {
   listScripts: IWriterScript[];
@@ -22,7 +21,7 @@ const ProjectAccordionList = ({ setListScripts, listScripts }: IProps) => {
       />
     </div>
   ) : (
-    <div className="mt-4 md:mt-6 pb-16">
+    <div className="mt-4 md:mt-6">
       {listScripts.map((script) => {
         return (
           <ProjectAccordion
@@ -32,7 +31,6 @@ const ProjectAccordionList = ({ setListScripts, listScripts }: IProps) => {
           />
         );
       })}
-      {/* <CustomPaginationComponent /> */}
     </div>
   );
 };

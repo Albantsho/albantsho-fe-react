@@ -67,7 +67,7 @@ const ScriptDocument = ({ script }: IProps) => {
             Tagline
           </Typography>
           <div className="p-2 border border-gray-300 rounded-lg">
-            <Typography className="leading-normal">{script.tagLine}</Typography>
+            <Typography className="leading-normal">{script.tagline}</Typography>
           </div>
         </>
       )}

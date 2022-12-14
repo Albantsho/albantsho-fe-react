@@ -15,7 +15,7 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
 
     if (foundRoute?.mustAuthenticated === "no") {
       if (!user) return;
-      if (user.email_verified) {
+      if (user.emailVerified) {
         user.userType === "writer"
           ? replace(routes.writerDashboard.url)
           : user.userType === "producer"
@@ -30,7 +30,7 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
         return;
       }
     } else if (foundRoute?.mustAuthenticated === "yes") {
-      if (!user.email_verified) {
+      if (!user.emailVerified) {
         replace(routes.signin.url);
         foundRoute.url !== pathname && setLoading(false);
       } else {
@@ -38,7 +38,7 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
           (rule) => rule === user.userType
         );
         if (pathname === "/dashboard") {
-          if (user.email_verified) {
+          if (user.emailVerified) {
             user.userType === "writer"
               ? replace(routes.writerDashboard.url)
               : user.userType === "producer"

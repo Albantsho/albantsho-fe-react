@@ -117,7 +117,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
           id="short-description"
           className=" p-3 border border-gray-300 rounded-lg"
         >
-          <Typography className="leading-normal">{script.tagLine}</Typography>
+          <Typography className="leading-normal">{script.tagline}</Typography>
         </div>
       </div>
 

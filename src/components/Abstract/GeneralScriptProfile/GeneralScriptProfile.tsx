@@ -24,10 +24,127 @@ interface IProps {
   script: IFullInformationScript;
 }
 
+const genreList = [
+  { genre: "Action" },
+  { genre: "Comedy" },
+  { genre: "Crime" },
+  { genre: "Drama" },
+  { genre: "Fantasy" },
+  { genre: "Horror" },
+  { genre: "Mystery" },
+  { genre: "Romance" },
+  { genre: "Thriller" },
+  { genre: "Adventure" },
+  { genre: "Experimental" },
+  { genre: "Sci-fi" },
+  { genre: "Gangster" },
+  { genre: "Musical" },
+  { genre: "Competition" },
+  { genre: "Biographical" },
+  { genre: "Historical" },
+];
+
 const genresFilms = [
-  { label: "Fantasy" },
-  { label: "Love" },
-  { label: "Sci Fi" },
+  "Abduction",
+  "Adultery",
+  "Adventure",
+  "Ambition",
+  "Anecdote",
+  "Apologue",
+  "Ascension & Descension",
+  "Astral",
+  "Bad influence",
+  "Bedtime story",
+  "Captivity",
+  "Chivalric romance",
+  "Coming of age",
+  "Competition",
+  "Conflict with a God",
+  "Creation myth",
+  "Crimes for vengeance",
+  "Crimes of passion",
+  "Crimes of war",
+  "Cruelty of misfortune",
+  "Daring Enterprise",
+  "Deliverance",
+  "Disaster",
+  "Discovery of treasure",
+  "Discovery of culture",
+  "Dishonour of a loved me",
+  "Drugs",
+  "Enmity of Kinsmen",
+  "Enemy Loved",
+  "Erroneous judgment",
+  "Etiological myth",
+  "Escape",
+  "Fable",
+  "Factoid",
+  "Fairy tale",
+  "Falling Prey",
+  "Family",
+  "Farce",
+  "Fatal imprudence",
+  "Fish-Out-Of-Water",
+  "Folklore",
+  "Folkloristics",
+  "Forbidden Love",
+  "Friendship Love",
+  "Ghost",
+  "Grief",
+  "Honour Killing",
+  "Invention",
+  "Involuntary Crimes of Love(Incest)",
+  "Jujuism",
+  "Joke",
+  "Legend",
+  "Loss of Loved Ones",
+  "Love",
+  "Madness",
+  "Mental health",
+  "Metamorphosis",
+  "Mistaken Jealousy",
+  "Murder",
+  "Myths",
+  "Necessity Invention",
+  "Obstacles to Love",
+  "Obtaining",
+  "Oral tradition",
+  "Parable",
+  "Parenthood",
+  "Political myth",
+  "Popular belief",
+  "Popular misconception",
+  "Pursuit",
+  "Quest",
+  "Recovery of a Lost One",
+  "Religion",
+  "Remorse",
+  "Rescue",
+  "Revenge",
+  "Revolt",
+  "Riddle",
+  "Rivalry",
+  "Rivalry of Kinsman",
+  "Rivalry of Superior and Inferior",
+  "Sacrifice",
+  "Satire",
+  "Sacrifice for Passion",
+  "Self-Sacrifice for an Ideal",
+  "Self-Sacrifice for Kindred",
+  "Separation",
+  "Sex",
+  "Short story",
+  "Sibling Rivalry",
+  "Supplication",
+  "Tales by Moonlight",
+  "Tall tales",
+  "Technology",
+  "Temptation",
+  "Transformation",
+  "Underdog",
+  "Urban Legend",
+  "Wretched Excess",
+  "Youth Exuberance",
 ];
 
 const GeneralScriptProfile = ({
@@ -87,9 +204,29 @@ const GeneralScriptProfile = ({
                   script.scriptFormat ? script.scriptFormat : "documentary"
                 }
               >
-                <MenuItem value="documentary">
+                <MenuItem value="Short film">
+                  <ListItemText className="text-primary-700">
+                    Short film
+                  </ListItemText>
+                </MenuItem>
+                <MenuItem value="feature film">
+                  <ListItemText className="text-primary-700">
+                    Feature film
+                  </ListItemText>
+                </MenuItem>
+                <MenuItem value="TV Pilot">
+                  <ListItemText className="text-primary-700">
+                    TV Pilot
+                  </ListItemText>
+                </MenuItem>
+                <MenuItem value="Documentary">
                   <ListItemText className="text-primary-700">
                     Documentary
+                  </ListItemText>
+                </MenuItem>
+                <MenuItem value="Series">
+                  <ListItemText className="text-primary-700">
+                    Series
                   </ListItemText>
                 </MenuItem>
               </CustomInput>
@@ -132,9 +269,14 @@ const GeneralScriptProfile = ({
                   script.storyFormat ? script.storyFormat : "highConcept"
                 }
               >
-                <MenuItem value="highConcept">
+                <MenuItem value="High Concept">
                   <ListItemText className="text-primary-700">
                     High Concept
+                  </ListItemText>
+                </MenuItem>
+                <MenuItem value="Low Concept">
+                  <ListItemText className="text-primary-700">
+                    Low Concept
                   </ListItemText>
                 </MenuItem>
               </CustomInput>
@@ -215,14 +357,16 @@ const GeneralScriptProfile = ({
                 variant="outlined"
                 id="genre-script-primary"
                 defaultValue={
-                  script.primaryGenre ? script.primaryGenre : "documentary"
+                  script.primaryGenre ? script.primaryGenre : "Action"
                 }
               >
-                <MenuItem value="documentary">
-                  <ListItemText className="text-primary-700">
-                    Documentary
-                  </ListItemText>
-                </MenuItem>
+                {genreList.map(({ genre }) => (
+                  <MenuItem key={genre} value={genre}>
+                    <ListItemText className="text-primary-700">
+                      {genre}
+                    </ListItemText>
+                  </MenuItem>
+                ))}
               </CustomInput>
             )}
           />
@@ -260,14 +404,16 @@ const GeneralScriptProfile = ({
                 variant="outlined"
                 id="genre-script-secondary"
                 defaultValue={
-                  script.secondaryGenre ? script.secondaryGenre : "romance"
+                  script.secondaryGenre ? script.secondaryGenre : "Action"
                 }
               >
-                <MenuItem value="romance">
-                  <ListItemText className="text-primary-700">
-                    Romance
-                  </ListItemText>
-                </MenuItem>
+                {genreList.map(({ genre }) => (
+                  <MenuItem key={genre} value={genre}>
+                    <ListItemText className="text-primary-700">
+                      {genre}
+                    </ListItemText>
+                  </MenuItem>
+                ))}
               </CustomInput>
             )}
           />
@@ -296,7 +442,7 @@ const GeneralScriptProfile = ({
                 mb: 1,
               }}
               options={genresFilms}
-              getOptionLabel={(option) => option.label}
+              getOptionLabel={(option) => option}
               onChange={(_, data) => {
                 onChange(data);
                 return data;

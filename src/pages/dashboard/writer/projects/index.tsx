@@ -15,6 +15,7 @@ import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
 import querystring from "query-string";
 import { debounce } from "lodash";
+import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 
 const CreateScriptModal = dynamic(
   () => import("@shared/Modals/CreateScriptModal/CreateScriptModal")
@@ -25,10 +26,23 @@ const Projects: NextPageWithLayout = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const { query } = useRouter();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
+  const { query, push } = useRouter();
   const { getWriterAllScripts } = useScriptsApi();
 
   const handleOpen = () => setOpenCreateScript(true);
+
+  const handleActivePage = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    !query
+      ? push(`?page=${page}`, undefined, { shallow: true })
+      : query.archive === "false"
+      ? push(`?archive=false&page=${page}`, undefined, { shallow: true })
+      : push(`?archive=true&page=${page}`, undefined, { shallow: true });
+  };
 
   const handleSearch = useCallback(
     debounce(
@@ -46,8 +60,14 @@ const Projects: NextPageWithLayout = () => {
       try {
         setListScripts([]);
         setLoading(true);
-        const res = await getWriterAllScripts(querystring.stringify(query));
+        const res = await getWriterAllScripts(
+          querystring.stringify(query),
+          searchQuery
+        );
+        console.log(res);
         setListScripts(res.data.scripts);
+        setPageCount(res.data.pagesCount);
+        setCurrentPage(res.data.currentPage);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
@@ -56,22 +76,22 @@ const Projects: NextPageWithLayout = () => {
     getWriterAllScriptsFunc();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, openCreateScript]);
+  }, [query, openCreateScript, searchQuery]);
 
   return (
     <>
       <Head>
         <title>Albantsho || Projects</title>
       </Head>
+      <TabButtons />
+      <DashboardSearch
+        handleSearch={handleSearch}
+        setOpenCreateScript={setOpenCreateScript}
+      />
       {loading ? (
         <DotLoader color="#7953B5" className="mx-auto mt-10" />
       ) : (
-        <div>
-          <TabButtons />
-          <DashboardSearch
-            handleSearch={handleSearch}
-            setOpenCreateScript={setOpenCreateScript}
-          />
+        <div className="space-y-10 mb-6">
           {(!query.archive || query.archive === "false") && (
             <ProjectAccordionList
               listScripts={listScripts}
@@ -82,6 +102,13 @@ const Projects: NextPageWithLayout = () => {
             <ArchiveList
               listScripts={listScripts}
               setListScripts={setListScripts}
+            />
+          )}
+          {pageCount >= 2 && (
+            <CustomPaginationComponent
+              pageCount={pageCount}
+              currentPage={currentPage}
+              handleActivePage={handleActivePage}
             />
           )}
           <CreateScriptModal

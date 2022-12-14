@@ -71,7 +71,7 @@ const MobileNav = ({ links }: IProps) => {
             }}
           />
           <List className="px-4 flex gap-1 flex-col justify-start items-start">
-            {user.email_verified && (
+            {user.emailVerified && (
               <li className="px-5 mt-1">
                 <ProfileMenu isMobile />
               </li>
@@ -93,7 +93,7 @@ const MobileNav = ({ links }: IProps) => {
                 </Link>
               </ListItem>
             ))}
-            {!user.email_verified && (
+            {!user.emailVerified && (
               <div className="px-5 py-2">
                 <Link legacyBehavior href={routes.signin.url} passHref>
                   <Btn className="px-6 py-3">Sign In</Btn>

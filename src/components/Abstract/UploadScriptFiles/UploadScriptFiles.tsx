@@ -73,7 +73,7 @@ const UploadScriptFiles = ({
             ></label>
             <input
               {...register("scriptFile")}
-              accept=".doc,.docx"
+              accept=".pdf"
               max={1}
               type="file"
               id="add-script"
@@ -104,7 +104,15 @@ const UploadScriptFiles = ({
               className="absolute cursor-pointer inset-0"
               htmlFor="add-copyright"
             ></label>
-            <input type="file" id="add-copyright" hidden name="copyright" />
+            <input
+              {...register("copyright")}
+              accept=".pdf"
+              max={1}
+              type="file"
+              id="add-copyright"
+              hidden
+              name="copyright"
+            />
             <div className="mx-auto flex justify-center items-center mb-2 sm:mb-3">
               <Image src={UploadFile} alt="upload file" />
             </div>
