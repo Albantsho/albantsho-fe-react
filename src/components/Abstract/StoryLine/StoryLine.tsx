@@ -37,9 +37,9 @@ const StoryLine = ({ register, errors, step, script }: IProps) => {
           </Typography>
         </label>
         <CustomInput
-          {...register("tagline")}
-          error={Boolean(errors.tagline) || false}
-          defaultValue={script.tagline ? script.tagline : ""}
+          {...register("tagLine")}
+          error={Boolean(errors.tagLine) || false}
+          defaultValue={script.tagLine ? script.tagLine : ""}
           fullWidth
           id="tagline"
           variant="outlined"
@@ -58,9 +58,9 @@ const StoryLine = ({ register, errors, step, script }: IProps) => {
             </span>
           }
         />
-        {errors.tagline?.message && (
+        {errors.tagLine?.message && (
           <span className="text-error-700 text-base">
-            {errors.tagline.message}
+            {errors.tagLine.message}
           </span>
         )}
       </div>
@@ -75,9 +75,9 @@ const StoryLine = ({ register, errors, step, script }: IProps) => {
           </Typography>
         </label>
         <CustomInput
-          {...register("log_line")}
-          error={Boolean(errors.log_line) || false}
-          defaultValue={script.log_line ? script.log_line : ""}
+          {...register("logLine")}
+          error={Boolean(errors.logLine) || false}
+          defaultValue={script.logLine ? script.logLine : ""}
           fullWidth
           id="logline"
           variant="outlined"
@@ -96,9 +96,9 @@ const StoryLine = ({ register, errors, step, script }: IProps) => {
             </span>
           }
         />
-        {errors.log_line?.message && (
+        {errors.logLine?.message && (
           <span className="text-error-700 text-base">
-            {errors.log_line.message}
+            {errors.logLine.message}
           </span>
         )}
       </div>

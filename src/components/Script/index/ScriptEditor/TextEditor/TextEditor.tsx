@@ -17,15 +17,9 @@ import EditorElement from "./EditorElement/EditorElement";
 import useBlockButton from "./hooks/useBlockbutton";
 import withNewFeatures from "./plugins/withNewFeatures";
 
-const initialValue: CustomElement[] = [
-  {
-    type: "page",
-    children: [{ type: "heading", children: [{ text: "" }] }],
-  },
-];
-
 interface IProps {
   setTextEditorValue?: React.Dispatch<React.SetStateAction<string | undefined>>;
+  initialValue: CustomElement[];
   setContextMenu: React.Dispatch<
     React.SetStateAction<{
       mouseX: number;
@@ -48,6 +42,7 @@ const TextEditor = ({
   contextMenu,
   setTextEditorValue,
   width,
+  initialValue,
 }: IProps) => {
   const editor: IEditor = useMemo(
     () => withNewFeatures(withHistory(withReact(createEditor()))),
@@ -56,30 +51,41 @@ const TextEditor = ({
   const { isBlockActive } = useBlockButton();
   const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL);
   const { query } = useRouter();
-  // socket.on("createRoom", () => {
-  //   console.log(socket.id);
-  // });
 
-  // useEffect(() => {
-  //   socket.on("createRoom", () => {
-  //     console.log(socket.id);
-  //   });
-  // }, []);
-  // useEffect(() => {
-  //   socket.emit("createRoom", query.id);
-  // }, []);
   useEffect(() => {
-    try {
-      socket.on("connect", () => {
-        console.log(socket.id);
-      });
-      socket.on("error", () => {
-        console.log(socket.id);
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   socket.on("createRoom", () => {
+    //     console.log(socket.id);
+    //   });
+    //   socket.on("connect", () => {
+    //     socket.emit("createRoom", { draftId: query.id });
+    //   });
+    //   socket.on("error", () => {
+    //     console.log(socket.id);
+    //   });
+    //   console.log(socket);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    console.log(socket);
   }, [socket]);
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log(socket);
+    });
+    socket.emit("createRoom", { draftId: query.id });
+    console.log(socket);
+
+    // socket.on("disconnect", () => {
+    //   setIsConnected(false);
+    // });
+
+    // return () => {
+    //   socket.off("connect");
+    //   socket.off("disconnect");
+    // };
+  }, []);
 
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -98,8 +104,6 @@ const TextEditor = ({
   };
 
   const handleChangeEditor = (element: Descendant[]) => {
-    console.log(element);
-
     const node = { children: element };
     const serialize = (node: INode | Descendant): string | undefined => {
       if (Text.isText(node)) {

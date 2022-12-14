@@ -86,7 +86,7 @@ const ScriptCard = (props: IProps) => {
         )}
       </CardContent>
       <CardActions className="px-4 justify-between pb-6 pt-0 gap-3">
-        {(!user.active || user.user_type === "producer") && !inHome && (
+        {(!user.active || user.userType === "producer") && !inHome && (
           <Btn size="large" className="rounded-md">
             Place Bid
           </Btn>

@@ -7,10 +7,11 @@ import TabButtons from "components/Dashboard/Writer/Listings/Index/TabButtons/Ta
 import Bids from "components/Dashboard/Writer/Listings/OpenListingInfo/Bids/Bids";
 import { IBidForScript } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
+import { debounce } from "lodash";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../../../_app";
 
@@ -27,9 +28,21 @@ const BidsPage: NextPageWithLayout = () => {
   const [script, setScript] = useState<IFullInformationScript>();
   const [bid, setBid] = useState<IBidForScript>();
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
   const { query } = useRouter();
   const { getScript } = useScriptsApi();
   const { getBidScript } = useScripBidApi();
+
+  const handleSearch = useCallback(
+    debounce(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value.trim());
+      },
+      2000,
+      { leading: false }
+    ),
+    [searchQuery]
+  );
 
   useEffect(() => {
     async function getScriptFunc() {
@@ -57,7 +70,10 @@ const BidsPage: NextPageWithLayout = () => {
         <title>Albantsho || Bids</title>
       </Head>
       <TabButtons />
-      <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
+      <DashboardSearch
+        handleSearch={handleSearch}
+        setOpenCreateScript={setOpenCreateScript}
+      />
       {!loading && bid && script ? (
         <>
           <Bids

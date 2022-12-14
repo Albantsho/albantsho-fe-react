@@ -7,15 +7,15 @@ export interface IUser {
   email_verified: boolean;
   fullname: string;
   gender: "male" | "female";
-  user_type?: "writer" | "producer" | "admin" | "reviewer";
+  userType?: "writer" | "producer" | "admin" | "reviewer";
   portfolio: null | string;
-  production_company_name: null | string;
+  productionCompanyName: null | string;
 }
 
 export interface IUserInformation {
   _id: string;
   fullname: string;
-  user_type: string;
+  userType: string;
   freeze: boolean;
   block: boolean;
 }
@@ -23,7 +23,7 @@ export interface IUserInformation {
 export interface IUserFullInformation {
   _id: string;
   fullname: string;
-  user_type: "writer" | "producer" | "admin" | "reviewer";
+  userType: "writer" | "producer" | "admin" | "reviewer";
   freeze: boolean;
   block: boolean;
   email: string;
@@ -39,9 +39,9 @@ export interface IUserProfile {
   fullname: string;
   director_application: boolean;
   director_approval: boolean;
-  user_type: "writer" | "producer" | "admin" | "reviewer";
+  userType: "writer" | "producer" | "admin" | "reviewer";
   country: string;
-  production_company_name: null | string;
+  productionCompanyName: null | string;
   portfolio: null | string;
   verification_status: boolean;
   bank_name: string | null;

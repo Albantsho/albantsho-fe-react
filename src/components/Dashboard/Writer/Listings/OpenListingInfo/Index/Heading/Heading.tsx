@@ -13,7 +13,7 @@ const Heading = ({ script }: IProps) => {
     <div className="flex flex-col  md:flex-row lg:flex-col xl:flex-row gap-10 lg:gap-6 xl:gap-10">
       <div className="self-center md:self-start lg:self-center xl:self-start">
         <Image
-          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
+          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
           className="rounded-xl"
           alt={script.title}
         />
@@ -21,7 +21,7 @@ const Heading = ({ script }: IProps) => {
       <div className="flex-shrink lg:flex-grow-0  mx-auto md:mx-0 lg:mx-auto xl:mx-0">
         <div className="flex mb-3 md:mb-5 flex-wrap items-center gap-x-6 gap-y-2">
           <Chip
-            label={script.primary_genre}
+            label={script.primaryGenre}
             className="bg-tinted-50/60 py-5 px-4 text-neutral-800"
             sx={{ borderRadius: 1 }}
           />
@@ -43,7 +43,7 @@ const Heading = ({ script }: IProps) => {
           variant="body1"
           className="font-normal xl:mt-2 text-tinted-500 leading-normal"
         >
-          {script.description}
+          {script.tagLine}
         </Typography>
 
         <div className="mt-4">
@@ -56,7 +56,7 @@ const Heading = ({ script }: IProps) => {
               variant="h6"
               className="text-primary-main leading-normal font-semibold"
             >
-              ${script.script_price}
+              ${script.price}
             </Typography>
             <Typography variant="body1" color="primary">
               (1.237 ETH)

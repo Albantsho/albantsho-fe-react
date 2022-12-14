@@ -41,12 +41,22 @@ const Abstract = ({ script }: IProps) => {
     updateScriptFunc,
     loadingPublishButton,
     loadingUpdateButton,
+    adaption,
+    setAdaption,
+    getValues,
+    progress,
+    publish,
   } = useAbstract(script);
 
   return (
     <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <StepsLines setStep={setStep} step={step} />
+        <StepsLines
+          publish={publish}
+          errors={errors}
+          setStep={setStep}
+          step={step}
+        />
         <GeneralScriptProfile
           step={step}
           control={control}
@@ -73,6 +83,9 @@ const Abstract = ({ script }: IProps) => {
           errors={errors}
         />
         <WritersStatement
+          getValues={getValues}
+          adaption={adaption}
+          setAdaption={setAdaption}
           script={script}
           step={step}
           register={register}
@@ -96,7 +109,12 @@ const Abstract = ({ script }: IProps) => {
           errors={errors}
         />
 
-        <UploadImage step={step} register={register} errors={errors} />
+        <UploadImage
+          progress={progress}
+          step={step}
+          register={register}
+          errors={errors}
+        />
         <StepsButtons
           loadingPublishButton={loadingPublishButton}
           loadingUpdateButton={loadingUpdateButton}

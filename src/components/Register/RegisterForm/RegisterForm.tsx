@@ -277,11 +277,11 @@ const RegisterForm = () => {
             Writer/ Producer
           </Typography>
           <Controller
-            name="user_type"
+            name="userType"
             control={control}
             render={({ field }) => (
               <CustomInput
-                error={Boolean(errors.user_type) || false}
+                error={Boolean(errors.userType) || false}
                 {...field}
                 id="user_type"
                 select
@@ -297,7 +297,7 @@ const RegisterForm = () => {
                     fontSize: "16px",
                   },
                 }}
-                helperText={errors.user_type?.message}
+                helperText={errors.userType?.message}
               >
                 <MenuItem value="writer">I’m a writer</MenuItem>
                 <MenuItem value="producer">I’m a producer</MenuItem>
@@ -318,8 +318,8 @@ const RegisterForm = () => {
                 What production company are you affiliated with?
               </Typography>
               <CustomInput
-                error={Boolean(errors.production_company_name) || false}
-                {...register("production_company_name")}
+                error={Boolean(errors.productionCompanyName) || false}
+                {...register("productionCompanyName")}
                 id="Company"
                 variant="outlined"
                 size="medium"
@@ -333,7 +333,7 @@ const RegisterForm = () => {
                     fontSize: "16px",
                   },
                 }}
-                helperText={errors.production_company_name?.message}
+                helperText={errors.productionCompanyName?.message}
               />
             </div>
 

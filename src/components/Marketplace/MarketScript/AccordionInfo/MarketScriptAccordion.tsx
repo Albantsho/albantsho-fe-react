@@ -18,7 +18,7 @@ export default function MarketScriptAccordion({ script }: IProps) {
     <div className=" flex-1">
       <AccordionCustom title="LOGLINE">
         <Typography variant="body2" className="text-[#484848]">
-          {script.log_line}
+          {script.logLine}
         </Typography>
       </AccordionCustom>
       <AccordionCustom title="SYNOPSIS">
@@ -64,7 +64,7 @@ export default function MarketScriptAccordion({ script }: IProps) {
       </AccordionCustom>
       <AccordionCustom title="STORY WORLD">
         <Typography variant="body2" className="text-[#484848]">
-          {script.story_world}
+          {script.storyWorld}
         </Typography>
       </AccordionCustom>
       <AccordionCustom title="MOTIVATION & PERSONAL NOTE">
@@ -93,7 +93,7 @@ export default function MarketScriptAccordion({ script }: IProps) {
       </AccordionCustom>
       <AccordionCustom title="ACT STRUCTURE">
         <Typography variant="body2" className="text-[#484848]">
-          {script.act_structure}
+          {script.actStructure}
         </Typography>
       </AccordionCustom>
       <AccordionCustom title="INSPIRATION">

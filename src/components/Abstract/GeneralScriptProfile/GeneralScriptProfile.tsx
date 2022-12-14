@@ -61,12 +61,12 @@ const GeneralScriptProfile = ({
             </Typography>
           </label>
           <Controller
-            name="script_type"
+            name="scriptFormat"
             control={control}
             render={({ field }) => (
               <CustomInput
                 {...field}
-                error={Boolean(errors.script_type) || false}
+                error={Boolean(errors.scriptFormat) || false}
                 select
                 fullWidth
                 size="small"
@@ -80,10 +80,12 @@ const GeneralScriptProfile = ({
                     fontSize: "16px",
                   },
                 }}
-                helperText={errors.script_type?.message}
+                helperText={errors.scriptFormat?.message}
                 variant="outlined"
                 id="script-format"
-                defaultValue="documentary"
+                defaultValue={
+                  script.scriptFormat ? script.scriptFormat : "documentary"
+                }
               >
                 <MenuItem value="documentary">
                   <ListItemText className="text-primary-700">
@@ -126,7 +128,9 @@ const GeneralScriptProfile = ({
                 helperText={errors.storyFormat?.message}
                 variant="outlined"
                 id="story-format"
-                defaultValue="highConcept"
+                defaultValue={
+                  script.storyFormat ? script.storyFormat : "highConcept"
+                }
               >
                 <MenuItem value="highConcept">
                   <ListItemText className="text-primary-700">
@@ -188,11 +192,11 @@ const GeneralScriptProfile = ({
             </Typography>
           </label>
           <Controller
-            name="primary_genre"
+            name="primaryGenre"
             control={control}
             render={({ field }) => (
               <CustomInput
-                error={Boolean(errors.primary_genre) || false}
+                error={Boolean(errors.primaryGenre) || false}
                 {...field}
                 select
                 fullWidth
@@ -207,10 +211,12 @@ const GeneralScriptProfile = ({
                     fontSize: "16px",
                   },
                 }}
-                helperText={errors.primary_genre?.message}
+                helperText={errors.primaryGenre?.message}
                 variant="outlined"
                 id="genre-script-primary"
-                defaultValue="documentary"
+                defaultValue={
+                  script.primaryGenre ? script.primaryGenre : "documentary"
+                }
               >
                 <MenuItem value="documentary">
                   <ListItemText className="text-primary-700">
@@ -231,11 +237,11 @@ const GeneralScriptProfile = ({
             </Typography>
           </label>
           <Controller
-            name="secondary_genre"
+            name="secondaryGenre"
             control={control}
             render={({ field }) => (
               <CustomInput
-                error={Boolean(errors.secondary_genre) || false}
+                error={Boolean(errors.secondaryGenre) || false}
                 {...field}
                 select
                 fullWidth
@@ -250,10 +256,12 @@ const GeneralScriptProfile = ({
                     fontSize: "16px",
                   },
                 }}
-                helperText={errors.secondary_genre?.message}
+                helperText={errors.secondaryGenre?.message}
                 variant="outlined"
                 id="genre-script-secondary"
-                defaultValue="romance"
+                defaultValue={
+                  script.secondaryGenre ? script.secondaryGenre : "romance"
+                }
               >
                 <MenuItem value="romance">
                   <ListItemText className="text-primary-700">
@@ -328,12 +336,12 @@ const GeneralScriptProfile = ({
             </Typography>
           </label>
           <Controller
-            name="primary_cast"
+            name="primaryCast"
             control={control}
             render={({ field }) => (
               <CustomInput
                 {...field}
-                error={Boolean(errors.primary_cast) || false}
+                error={Boolean(errors.primaryCast) || false}
                 select
                 fullWidth
                 size="small"
@@ -347,9 +355,9 @@ const GeneralScriptProfile = ({
                     fontSize: "16px",
                   },
                 }}
-                helperText={errors.primary_cast?.message}
+                helperText={errors.primaryCast?.message}
                 variant="outlined"
-                defaultValue="200"
+                defaultValue={script.primaryCast ? script.primaryCast : "200"}
                 id="cast-script-primary"
               >
                 <MenuItem value="200">
@@ -369,12 +377,12 @@ const GeneralScriptProfile = ({
             </Typography>
           </label>
           <Controller
-            name="secondary_cast"
+            name="secondaryCast"
             control={control}
             render={({ field }) => (
               <CustomInput
                 {...field}
-                error={Boolean(errors.secondary_cast) || false}
+                error={Boolean(errors.secondaryCast) || false}
                 select
                 fullWidth
                 size="small"
@@ -388,10 +396,12 @@ const GeneralScriptProfile = ({
                     fontSize: "16px",
                   },
                 }}
-                helperText={errors.secondary_cast?.message}
+                helperText={errors.secondaryCast?.message}
                 variant="outlined"
                 id="cast-script-secondary"
-                defaultValue="50"
+                defaultValue={
+                  script.secondaryCast ? script.secondaryCast : "50"
+                }
               >
                 <MenuItem value="50">
                   <ListItemText className="text-primary-700">50</ListItemText>
@@ -412,11 +422,11 @@ const GeneralScriptProfile = ({
           </Typography>
         </label>
         <Controller
-          name="estimated_budger"
+          name="estimatedBudget"
           control={control}
           render={({ field }) => (
             <CustomInput
-              error={Boolean(errors.estimated_budger) || false}
+              error={Boolean(errors.estimatedBudget) || false}
               {...field}
               select
               fullWidth
@@ -432,8 +442,10 @@ const GeneralScriptProfile = ({
                   fontSize: "16px",
                 },
               }}
-              helperText={errors.estimated_budger?.message}
-              defaultValue="high"
+              helperText={errors.estimatedBudget?.message}
+              defaultValue={
+                script.estimatedBudget ? script.estimatedBudget : "high"
+              }
               id="budget-script"
             >
               <MenuItem value="high">

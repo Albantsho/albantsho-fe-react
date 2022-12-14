@@ -65,7 +65,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
           height={180}
           className="rounded-lg"
           alt={script.title}
-          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
+          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
         />
       </div>
       <div className="flex justify-between gap-x-6 gap-y-2 items-center flex-wrap mb-5">
@@ -99,7 +99,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
             className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
           >
             <Typography className="leading-normal">
-              {script.primary_genre}
+              {script.primaryGenre}
             </Typography>
           </div>
         </div>
@@ -117,9 +117,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
           id="short-description"
           className=" p-3 border border-gray-300 rounded-lg"
         >
-          <Typography className="leading-normal">
-            {script.description}
-          </Typography>
+          <Typography className="leading-normal">{script.tagLine}</Typography>
         </div>
       </div>
 

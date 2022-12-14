@@ -104,11 +104,11 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
           divider
           className="px-6 py-4 hover:bg-primary-50/25"
           onClick={() => {
-            user.user_type === "writer"
+            user.userType === "writer"
               ? push(routes.writerDashboard.url)
-              : user.user_type === "producer"
+              : user.userType === "producer"
               ? push(routes.producerDashboard.url)
-              : user.user_type === "admin"
+              : user.userType === "admin"
               ? push(routes.adminDashboard.url)
               : push(routes.reviewerDashboard.url);
           }}
@@ -121,7 +121,7 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
             Go to dashboard
           </ListItemText>
         </MenuItem>
-        {user.user_type !== "admin" && (
+        {user.userType !== "admin" && (
           <MenuItem
             TouchRippleProps={{ className: "text-primary-main" }}
             className="px-6 py-4 hover:bg-primary-50/25"
@@ -135,7 +135,7 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
             </ListItemText>
           </MenuItem>
         )}
-        {user.user_type !== "admin" && (
+        {user.userType !== "admin" && (
           <MenuItem
             divider
             TouchRippleProps={{ className: "text-primary-main" }}

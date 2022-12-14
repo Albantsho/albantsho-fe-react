@@ -1,24 +1,25 @@
 export interface IAbstractFormValues {
-  script_type: string;
+  scriptFormat: string;
   storyFormat: string;
   title: string;
-  primary_genre: string;
-  secondary_genre: string;
+  primaryGenre: string;
+  secondaryGenre: string;
   theme: [{ label: string }];
-  primary_cast: string;
-  secondary_cast: string;
-  estimated_budger: string;
-  tagline: string;
-  log_line: string;
+  primaryCast: string;
+  secondaryCast: string;
+  estimatedBudget: string;
+  tagLine: string;
+  logLine: string;
   synopsis: string;
-  story_world: string;
-  act_structure?: string;
-  character_bible: string;
+  storyWorld: string;
+  actStructure?: string;
+  characterBible: string;
   inspiration: string;
   motivation: string;
+  adaptionPermission: FileList;
   copyright: string;
   image: FileList;
   scriptFile: FileList;
   scriptCopyright: FileList;
-  otherDraft: string;
+  draft: string;
 }

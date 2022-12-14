@@ -1,5 +1,6 @@
 import ScriptLayout from "@shared/Layouts/ScriptLayout/ScriptLayout";
 import ScriptSidebarOnMobile from "@shared/Layouts/ScriptLayout/ScriptList/ScriptSidebarOnMobile/ScriptSidebarOnMobile";
+import useDraftApi from "apis/Draft.api";
 import useScriptsApi from "apis/Scripts.api";
 import CommentList from "components/Script/CommentList/CommentList";
 import ExportFile from "components/Script/ExportFile/ExportFile";
@@ -7,6 +8,7 @@ import ScriptEditor from "components/Script/index/ScriptEditor/ScriptEditor";
 import ScenesList from "components/Script/ScenesList/ScenesList";
 import ScriptDocument from "components/Script/ScriptDocument/ScriptDocument";
 import { IFullInformationScript } from "interfaces/script";
+import { CustomElement } from "interfaces/slate";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
@@ -22,6 +24,13 @@ const Script: NextPageWithLayout = () => {
   const [loading, setLoading] = useState(false);
   const [script, setScript] = useState<IFullInformationScript>();
   const { getScript } = useScriptsApi();
+  const { getOneDraft } = useDraftApi();
+  let initialValue: CustomElement[] = [
+    {
+      type: "page",
+      children: [{ type: "heading", children: [{ text: "" }] }],
+    },
+  ];
 
   useEffect(() => {
     async function getScriptsData() {
@@ -29,6 +38,9 @@ const Script: NextPageWithLayout = () => {
         if (query.id) {
           const res = await getScript(query.id as string);
           setScript(res.data.script);
+          const resDraft = await getOneDraft(query.id as string);
+          console.log(resDraft);
+          initialValue = resDraft.data.draft;
           setLoading(false);
         }
       } catch (error) {
@@ -69,6 +81,7 @@ const Script: NextPageWithLayout = () => {
             )}
 
             <ScriptEditor
+              initialValue={initialValue}
               script={script}
               setTextEditorValue={setTextEditorValue}
             />

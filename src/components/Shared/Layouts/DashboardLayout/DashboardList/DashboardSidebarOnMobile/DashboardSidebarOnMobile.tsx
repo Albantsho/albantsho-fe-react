@@ -33,7 +33,7 @@ const DashboardSidebarOnMobile = () => {
           setActiveRoute(newValue);
         }}
       >
-        {user.user_type === "writer" &&
+        {user.userType === "writer" &&
           routesArray.map((item) => {
             return (
               <BottomNavigationAction
@@ -66,7 +66,7 @@ const DashboardSidebarOnMobile = () => {
               />
             );
           })}
-        {user.user_type === "producer" &&
+        {user.userType === "producer" &&
           routesArray2.map((item) => {
             return (
               <BottomNavigationAction

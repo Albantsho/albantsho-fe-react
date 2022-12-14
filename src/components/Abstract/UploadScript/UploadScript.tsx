@@ -14,6 +14,8 @@ import {
 import Btn from "@shared/Btn/Btn";
 import useDraftApi from "apis/Draft.api";
 import { IAbstractFormValues } from "interfaces/abstract";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import type {
   Control,
@@ -22,6 +24,7 @@ import type {
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { AiOutlineSearch } from "react-icons/ai";
+import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 
 const results = [
@@ -61,6 +64,7 @@ const UploadScript = ({
   control,
 }: IProps) => {
   const { getAllDraft } = useDraftApi();
+  const { query } = useRouter();
 
   useEffect(() => {
     async function getOtherDrafts() {
@@ -130,7 +134,7 @@ const UploadScript = ({
           </Typography>
         </label>
         <Controller
-          name="otherDraft"
+          name="draft"
           control={control}
           render={({ field: { onChange } }) => (
             <Autocomplete
@@ -191,9 +195,15 @@ const UploadScript = ({
           )}
         />
 
-        <Button className="max-w-[520px] w-full  text-primary-700 text-center py-3 mt-8 block mx-auto rounded-lg border-2 border-dashed mb-5 px-8  border-primary-700 ">
-          Write new script
-        </Button>
+        <Link
+          href={routes.script.dynamicUrl(query.id as string)}
+          passHref
+          legacyBehavior
+        >
+          <Button className="max-w-[520px] w-full  text-primary-700 text-center py-3 mt-8 block mx-auto rounded-lg border-2 border-dashed mb-5 px-8  border-primary-700 ">
+            Write new script
+          </Button>
+        </Link>
       </div>
     </div>
   );

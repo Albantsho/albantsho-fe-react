@@ -1,4 +1,5 @@
 import { ButtonGroup, IconButton, SvgIcon, Tooltip } from "@mui/material";
+import { CustomElement } from "interfaces/slate";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -11,8 +12,9 @@ import TextEditor from "./TextEditor";
 
 interface IProps {
   setTextEditorValue?: React.Dispatch<React.SetStateAction<string | undefined>>;
+  initialValue: CustomElement[];
 }
-const TextEditorList = ({ setTextEditorValue }: IProps) => {
+const TextEditorList = ({ setTextEditorValue, initialValue }: IProps) => {
   const { ref, width } = useResizeDetector();
   const { query } = useRouter();
   const [contextMenu, setContextMenu] = useState<{
@@ -62,6 +64,7 @@ const TextEditorList = ({ setTextEditorValue }: IProps) => {
         </Link>
       </ButtonGroup>
       <TextEditor
+        initialValue={initialValue}
         width={width}
         setTextEditorValue={setTextEditorValue}
         contextMenu={contextMenu}

@@ -36,9 +36,9 @@ const CharacterBible = ({ errors, register, step, script }: IProps) => {
           </Typography>
         </label>
         <CustomInput
-          defaultValue={script.character_bible}
-          {...register("character_bible")}
-          error={Boolean(errors.character_bible) || false}
+          defaultValue={script.characterBible}
+          {...register("characterBible")}
+          error={Boolean(errors.characterBible) || false}
           size="small"
           sx={{
             "& .MuiOutlinedInput-input": { py: 2 },
@@ -50,7 +50,7 @@ const CharacterBible = ({ errors, register, step, script }: IProps) => {
               fontSize: "16px",
             },
           }}
-          helperText={errors.character_bible?.message}
+          helperText={errors.characterBible?.message}
           multiline
           rows={3}
           placeholder="Tell us more about the characters in your script"

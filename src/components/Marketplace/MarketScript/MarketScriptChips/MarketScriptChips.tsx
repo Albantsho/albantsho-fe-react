@@ -20,11 +20,11 @@ const MarketScriptChips = ({ script }: IProps) => {
       </div>
       <div className="flex w-full flex-wrap border rounded-md">
         <div className="min-w-[220px] border px-3 py-5 flex-1 text-sm   text-center">
-          Production Cost - {script.estimated_budget}
+          Production Cost - {script.estimatedBudget}
         </div>
 
         <div className="min-w-[220px] border px-3 py-5 flex-1 text-sm  text-center">
-          No of Cast - {script.primary_cast}
+          No of Cast - {script.primaryCast}
         </div>
       </div>
     </div>

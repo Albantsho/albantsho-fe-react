@@ -71,7 +71,7 @@ const DashboardSidebarOnDesktop = () => {
         <Logo color="primary" className="text-white ml-3 mb-5" />
 
         <List className="space-y-4 h-full">
-          {user.user_type === "writer" &&
+          {user.userType === "writer" &&
             listRoutes.map((item) => (
               <ListItem
                 disablePadding
@@ -111,7 +111,7 @@ const DashboardSidebarOnDesktop = () => {
                 </Link>
               </ListItem>
             ))}
-          {user.user_type === "producer" &&
+          {user.userType === "producer" &&
             listRoutes2.map((item) => (
               <ListItem
                 disablePadding

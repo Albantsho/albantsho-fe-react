@@ -51,7 +51,7 @@ const WalletCard = () => {
         </div>
         <Divider className="mt-6 mb-4 hidden md:block" />
         <List className="md:mb-2 hidden md:flex flex-col gap-y-2">
-          {user.user_type === "writer" && (
+          {user.userType === "writer" && (
             <ListItemButton
               TouchRippleProps={{ className: "text-primary-main" }}
               className="hover:bg-primary-50/25"
@@ -76,7 +76,7 @@ const WalletCard = () => {
               </ListItemText>
             </ListItemButton>
           )}
-          {user.user_type !== "writer" && (
+          {user.userType !== "writer" && (
             <ListItemButton
               TouchRippleProps={{ className: "text-primary-main" }}
               className="hover:bg-primary-50/25"

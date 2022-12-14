@@ -115,7 +115,7 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
               primary="Balance:$20,000"
             />
           </ListItem>
-          {user.user_type === "writer" &&
+          {user.userType === "writer" &&
             walletLinksForWriter.map((walletLink) => (
               <ListItem disablePadding className="py-1" key={walletLink.title}>
                 <ListItemButton
@@ -144,7 +144,7 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
               </ListItem>
             ))}
 
-          {user.user_type === "producer" &&
+          {user.userType === "producer" &&
             walletLinksForProducer.map((walletLink) => (
               <ListItem disablePadding className="py-1" key={walletLink.title}>
                 <ListItemButton

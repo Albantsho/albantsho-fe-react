@@ -34,9 +34,9 @@ const StoryStructure = ({ errors, register, step, script }: IProps) => {
           </Typography>
         </label>
         <CustomInput
-          defaultValue={script.story_world}
-          {...register("story_world")}
-          error={Boolean(errors.story_world) || false}
+          defaultValue={script.storyWorld}
+          {...register("storyWorld")}
+          error={Boolean(errors.storyWorld) || false}
           placeholder="Where is this story domicile?"
           fullWidth
           id="story-world"
@@ -52,7 +52,7 @@ const StoryStructure = ({ errors, register, step, script }: IProps) => {
               fontSize: "16px",
             },
           }}
-          helperText={errors.story_world?.message}
+          helperText={errors.storyWorld?.message}
         />
       </div>
 
@@ -66,9 +66,9 @@ const StoryStructure = ({ errors, register, step, script }: IProps) => {
           </Typography>
         </label>
         <CustomInput
-          defaultValue={script.act_structure}
-          {...register("act_structure")}
-          error={Boolean(errors.act_structure) || false}
+          defaultValue={script.actStructure}
+          {...register("actStructure")}
+          error={Boolean(errors.actStructure) || false}
           fullWidth
           id="act-structure"
           variant="outlined"
@@ -82,7 +82,7 @@ const StoryStructure = ({ errors, register, step, script }: IProps) => {
               fontSize: "16px",
             },
           }}
-          helperText={errors.act_structure?.message}
+          helperText={errors.actStructure?.message}
         />
       </div>
     </div>

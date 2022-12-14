@@ -3,7 +3,7 @@ import useScriptsApi from "apis/Scripts.api";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import errorHandler from "utils/error-handler";
 import { wordToHtml } from "utils/word-to-html";
@@ -17,10 +17,12 @@ type IScript = IFullInformationScript;
 const useAbstract = (script: IScript) => {
   const [step, setStep] = useState(1);
   const [openSaveProgressModal, setOpenSaveProgressModal] = useState(false);
+  const [adaption, setAdaption] = useState(false);
   const [activeButton, setActiveButton] = useState<number>(0);
   const [loadingPublishButton, setLoadingPublishButton] = useState(false);
   const [loadingUpdateButton, setLoadingUpdateButton] = useState(false);
   const [publish, setPublish] = useState(false);
+  const [progress, setProgress] = useState(0);
   const { query } = useRouter();
   const { updateScript, addScriptTheme } = useScriptsApi();
   const { uploadFileDraft } = useDraftApi();
@@ -28,39 +30,48 @@ const useAbstract = (script: IScript) => {
     register,
     handleSubmit,
     control,
+    getValues,
     formState: { errors },
   } = useForm<IAbstractFormValues>({
     defaultValues: {
       title: script?.title ? script?.title : "",
-      script_type: script?.script_type ? script?.script_type : "documentary",
+      scriptFormat: script?.scriptFormat ? script?.scriptFormat : "documentary",
       storyFormat: script?.scriptFormat ? script?.scriptFormat : "highConcept",
-      primary_genre: script?.primary_genre
-        ? script?.primary_genre
-        : "documentary",
-      secondary_genre: script?.secondary_genre
-        ? script?.secondary_genre
+      primaryGenre: script?.primaryGenre ? script?.primaryGenre : "documentary",
+      secondaryGenre: script?.secondaryGenre
+        ? script?.secondaryGenre
         : "romance",
-      primary_cast: script?.primary_cast ? script?.primary_cast : "200",
-      secondary_cast: script?.secondary_cast ? script?.secondary_cast : "50",
-      estimated_budger: script?.estimated_budget
-        ? script?.estimated_budget
+      primaryCast: script?.primaryCast ? script?.primaryCast : "200",
+      secondaryCast: script?.secondaryCast ? script?.secondaryCast : "50",
+      estimatedBudget: script?.estimatedBudget
+        ? script?.estimatedBudget
         : "high",
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       theme: script.theme
         ? script.theme.map((theme) => ({ label: theme }))
         : [{ label: "love" }],
-      tagline: script?.tagline ? script?.tagline : "",
-      log_line: script?.log_line ? script?.log_line : "",
+      tagLine: script?.tagLine ? script?.tagLine : "",
+      logLine: script?.logLine ? script?.logLine : "",
       synopsis: script?.synopsis ? script?.synopsis : "",
-      story_world: script?.story_world ? script?.story_world : "",
-      act_structure: script?.act_structure ? script?.act_structure : "",
-      character_bible: script?.character_bible ? script?.character_bible : "",
+      storyWorld: script?.storyWorld ? script?.storyWorld : "",
+      actStructure: script?.actStructure ? script?.actStructure : "",
+      characterBible: script?.characterBible ? script?.characterBible : "",
       inspiration: script?.inspiration ? script?.inspiration : "",
       motivation: script?.motivation ? script?.motivation : "",
     },
     resolver: yupResolver(abstractSchema(publish)),
   });
+
+  useEffect(() => {
+    const formValues = getValues();
+    const allFields = Object.keys(formValues);
+    const completedFields = Object.values(formValues).filter((field) => field);
+
+    console.log(allFields, completedFields);
+    console.log((completedFields.length / allFields.length) * 100);
+    setProgress((completedFields.length / allFields.length) * 100);
+  }, [getValues()]);
 
   const publishScript = () => setPublish(true);
   const updateScriptFunc = () => setPublish(false);
@@ -73,42 +84,34 @@ const useAbstract = (script: IScript) => {
         setLoadingPublishButton(true);
         const res = await updateScript(
           {
-            primary_genre: data.primary_genre,
-            secondary_genre: data.secondary_genre,
+            primaryGenre: data.primaryGenre,
+            secondaryGenre: data.secondaryGenre,
             title: data.title,
-            script_type: data.script_type,
+            scriptFormat: data.scriptFormat,
             storyFormat: data.storyFormat,
-            primary_cast: data.primary_cast,
-            secondary_cast: data.secondary_cast,
-            estimated_budger: data.estimated_budger,
-            tagline: data.tagline,
+            primaryCast: data.primaryCast,
+            secondaryCast: data.secondaryCast,
+            estimatedBudget: data.estimatedBudget,
+            tagLine: data.tagLine,
             synopsis: data.synopsis,
-            story_world: data.story_world,
-            act_structure: data.act_structure,
-            character_bible: data.character_bible,
+            storyWorld: data.storyWorld,
+            actStructure: data.actStructure,
+            characterBible: data.characterBible,
             inspiration: data.inspiration,
             motivation: data.motivation,
             image: data.image[0],
+            theme: data.theme.map((theme) => theme.label),
           },
           query.id as string
         );
-        const resTheme = await addScriptTheme(
-          { theme: data.theme.map((theme) => theme.label) },
-          query.id as string
-        );
-        if (data.scriptFile) {
-          const arrayBuffer = await fileToArrayBuffer(data.scriptFile[0]);
-          const html = await wordToHtml(arrayBuffer);
-          const htmlContent = new DOMParser().parseFromString(
-            html as string,
-            "text/html"
-          );
-          const deserialize = deserializeDocx(htmlContent.body);
-          const res = await uploadFileDraft(query.id as string, {
-            content: deserialize,
-          });
-          console.log(res);
-        }
+        // const resTheme = await addScriptTheme(
+        //   { theme: data.theme.map((theme) => theme.label) },
+        //   query.id as string
+        // );
+        const resDraft = await uploadFileDraft(query.id as string, {
+          content: data.scriptFile,
+        });
+        console.log(resDraft);
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -119,45 +122,35 @@ const useAbstract = (script: IScript) => {
         setLoadingUpdateButton(true);
         const res = await updateScript(
           {
-            primary_genre: data.primary_genre,
-            secondary_genre: data.secondary_genre,
+            primaryGenre: data.primaryGenre,
+            secondaryGenre: data.secondaryGenre,
             title: data.title,
-            script_type: data.script_type,
+            scriptFormat: data.scriptFormat,
             storyFormat: data.storyFormat,
-            primary_cast: data.primary_cast,
-            secondary_cast: data.secondary_cast,
-            estimated_budger: data.estimated_budger,
-            tagline: data.tagline,
+            primaryCast: data.primaryCast,
+            secondaryCast: data.secondaryCast,
+            estimatedBudget: data.estimatedBudget,
+            tagLine: data.tagLine,
             synopsis: data.synopsis,
-            story_world: data.story_world,
-            act_structure: data.act_structure,
-            character_bible: data.character_bible,
+            storyWorld: data.storyWorld,
+            actStructure: data.actStructure,
+            characterBible: data.characterBible,
             inspiration: data.inspiration,
             motivation: data.motivation,
             image: data.image[0],
+            theme: data.theme.map((theme) => theme.label),
           },
           query.id as string
         );
         console.log(res);
-        const resTheme = await addScriptTheme(
-          { theme: data.theme.map((theme) => theme.label) },
-          query.id as string
-        );
-        console.log(resTheme);
-
-        if (data.scriptFile) {
-          const arrayBuffer = await fileToArrayBuffer(data.scriptFile[0]);
-          const html = await wordToHtml(arrayBuffer);
-          const htmlContent = new DOMParser().parseFromString(
-            html as string,
-            "text/html"
-          );
-          const deserialize = deserializeDocx(htmlContent.body);
-          const res = await uploadFileDraft(query.id as string, {
-            content: deserialize,
-          });
-          console.log(res);
-        }
+        // const resTheme = await addScriptTheme(
+        //   { theme: data.theme.map((theme) => theme.label) },
+        //   query.id as string
+        // );
+        // console.log(resTheme);
+        const resDraft = await uploadFileDraft(query.id as string, {
+          content: data.scriptFile,
+        });
         setOpenSaveProgressModal(true);
       } catch (error) {
         errorHandler(error);
@@ -183,6 +176,11 @@ const useAbstract = (script: IScript) => {
     updateScriptFunc,
     loadingPublishButton,
     loadingUpdateButton,
+    adaption,
+    setAdaption,
+    getValues,
+    progress,
+    publish,
   };
 };
 

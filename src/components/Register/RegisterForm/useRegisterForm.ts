@@ -13,9 +13,9 @@ interface IRegisterFormValues {
   email: string;
   password: string;
   country: string;
-  user_type: "writer" | "producer";
+  userType: "writer" | "producer";
   portfolio?: string;
-  production_company_name?: string;
+  productionCompanyName?: string;
   gender: "male" | "female";
 }
 
@@ -38,17 +38,19 @@ const useRegisterForm = () => {
       email: "",
       country: "Nigeria",
       password: "",
-      user_type: "writer",
+      userType: "writer",
       gender: "male",
     },
     resolver: yupResolver(registerSchema),
   });
-  const roleValue = watch("user_type");
+  const roleValue = watch("userType");
   const [acceptTermsAndCondition, setAcceptTermsAndCondition] =
     useState<boolean>(false);
   const [typePasswordInput, setTypePasswordInput] = useState(true);
 
   const onSubmit = async (data: IRegisterFormValues) => {
+    console.log(data);
+
     try {
       setLoading(true);
       const res = await signup(data);

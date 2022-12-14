@@ -5,14 +5,18 @@ import { AiOutlineClose } from "react-icons/ai";
 import { MdOutlineDone } from "react-icons/md";
 import { IAbstractFormValues } from "interfaces/abstract";
 import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
+import { useState } from "react";
 
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   step: number;
+  progress: number;
 }
 
-const UploadImage = ({ errors, register, step }: IProps) => {
+const UploadImage = ({ errors, register, step, progress }: IProps) => {
+  const [showProgress, setShowProgress] = useState(true);
+  const hiddenProgress = () => setShowProgress(false);
   return (
     <div className={`${step === 7 ? "block" : "hidden"}`}>
       <Typography
@@ -71,44 +75,51 @@ const UploadImage = ({ errors, register, step }: IProps) => {
         {errors.image && (
           <span className="text-error-700 ">{errors.image?.message}</span>
         )}
-        <div className="max-w-[528px] relative py-6 mx-auto rounded-md border-2 border-dashed mb-5 px-8 overflow-hidden border-tinted-300  bg-tinted-50/50">
-          <div className="mb-2 pr-5">
-            <Typography variant="body1" color="primary.700">
-              Uploading
-            </Typography>
-            <Typography variant="caption" className="text-gray-400">
-              55% . 5 seconds left
-            </Typography>
+        {progress !== 100 && showProgress && (
+          <div className="max-w-[528px] relative py-6 mx-auto rounded-md border-2 border-dashed mb-5 px-8 overflow-hidden border-tinted-300  bg-tinted-50/50">
+            <div className="mb-2 pr-5">
+              <Typography variant="body1" color="primary.700">
+                Uploading
+              </Typography>
+              <Typography variant="caption" className="text-gray-400">
+                {progress}%
+              </Typography>
+            </div>
+            <LinearProgress
+              className="rounded-lg"
+              variant="determinate"
+              value={progress}
+            />
+            <IconButton
+              onClick={hiddenProgress}
+              className="absolute right-4 top-6 text-error-500 hover:bg-error-50 bg-error-50"
+            >
+              <AiOutlineClose />
+            </IconButton>
           </div>
-          <LinearProgress
-            className="rounded-lg"
-            variant="determinate"
-            value={50}
-          />
-          <IconButton className="absolute right-4 top-6 text-error-500 hover:bg-error-50 bg-error-50">
-            <AiOutlineClose />
-          </IconButton>
-        </div>
+        )}
 
-        <div className="max-w-[528px] relative py-6 mx-auto rounded-md border-2 border-dashed px-8 overflow-hidden border-tinted-300  bg-success-50/50">
-          <div className="mb-2">
-            <Typography variant="body1" color="success.500">
-              Uploading
-            </Typography>
-            <Typography variant="caption" className="text-gray-400">
-              Complete
-            </Typography>
+        {progress === 100 && (
+          <div className="max-w-[528px] relative py-6 mx-auto rounded-md border-2 border-dashed px-8 overflow-hidden border-tinted-300  bg-success-50/50">
+            <div className="mb-2">
+              <Typography variant="body1" color="success.500">
+                Uploading
+              </Typography>
+              <Typography variant="caption" className="text-gray-400">
+                Complete
+              </Typography>
+            </div>
+            <LinearProgress
+              color="success"
+              className="rounded-lg"
+              variant="determinate"
+              value={progress}
+            />
+            <IconButton className="absolute right-4 top-6 text-success-500 hover:bg-success-50 bg-success-50">
+              <MdOutlineDone />
+            </IconButton>
           </div>
-          <LinearProgress
-            color="success"
-            className="rounded-lg"
-            variant="determinate"
-            value={50}
-          />
-          <IconButton className="absolute right-4 top-6 text-success-500 hover:bg-success-50 bg-success-50">
-            <MdOutlineDone />
-          </IconButton>
-        </div>
+        )}
       </div>
     </div>
   );

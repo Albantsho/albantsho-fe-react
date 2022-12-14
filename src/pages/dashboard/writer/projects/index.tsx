@@ -9,11 +9,12 @@ import { IWriterScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
 import querystring from "query-string";
+import { debounce } from "lodash";
 
 const CreateScriptModal = dynamic(
   () => import("@shared/Modals/CreateScriptModal/CreateScriptModal")
@@ -23,10 +24,22 @@ const Projects: NextPageWithLayout = () => {
   const [listScripts, setListScripts] = useState<Array<IWriterScript>>([]);
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const { query } = useRouter();
   const { getWriterAllScripts } = useScriptsApi();
 
   const handleOpen = () => setOpenCreateScript(true);
+
+  const handleSearch = useCallback(
+    debounce(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value.trim());
+      },
+      2000,
+      { leading: false }
+    ),
+    [searchQuery]
+  );
 
   useEffect(() => {
     async function getWriterAllScriptsFunc() {
@@ -55,7 +68,10 @@ const Projects: NextPageWithLayout = () => {
       ) : (
         <div>
           <TabButtons />
-          <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
+          <DashboardSearch
+            handleSearch={handleSearch}
+            setOpenCreateScript={setOpenCreateScript}
+          />
           {(!query.archive || query.archive === "false") && (
             <ProjectAccordionList
               listScripts={listScripts}

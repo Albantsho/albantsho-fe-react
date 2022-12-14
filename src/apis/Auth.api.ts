@@ -5,9 +5,9 @@ interface IRegisterPayload {
   email: string;
   password: string;
   country: string;
-  user_type: "writer" | "producer";
+  userType: "writer" | "producer";
   portfolio?: string;
-  production_company_name?: string;
+  productionCompanyName?: string;
   gender: "male" | "female";
 }
 

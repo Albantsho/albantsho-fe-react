@@ -180,7 +180,7 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
                 className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
               >
                 <Typography className="leading-normal">
-                  {user.user_type}
+                  {user.userType}
                 </Typography>
               </div>
             </div>

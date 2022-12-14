@@ -45,7 +45,7 @@ const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
             variant="h4"
             className="text-primary-main leading-normal font-semibold"
           >
-            ${script.script_price}
+            ${script.price}
           </Typography>
           <span className="text-neutral-500">(1.237 ETH)</span>
         </div>

@@ -16,11 +16,11 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
     if (foundRoute?.mustAuthenticated === "no") {
       if (!user) return;
       if (user.email_verified) {
-        user.user_type === "writer"
+        user.userType === "writer"
           ? replace(routes.writerDashboard.url)
-          : user.user_type === "producer"
+          : user.userType === "producer"
           ? replace(routes.producerDashboard.url)
-          : user.user_type === "admin"
+          : user.userType === "admin"
           ? replace(routes.adminDashboard.url)
           : replace(routes.reviewerDashboard.url);
 
@@ -35,15 +35,15 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
         foundRoute.url !== pathname && setLoading(false);
       } else {
         const matchedRule = foundRoute.permission.find(
-          (rule) => rule === user.user_type
+          (rule) => rule === user.userType
         );
         if (pathname === "/dashboard") {
           if (user.email_verified) {
-            user.user_type === "writer"
+            user.userType === "writer"
               ? replace(routes.writerDashboard.url)
-              : user.user_type === "producer"
+              : user.userType === "producer"
               ? replace(routes.producerDashboard.url)
-              : user.user_type === "admin"
+              : user.userType === "admin"
               ? replace(routes.adminDashboard.url)
               : replace(routes.reviewerDashboard.url);
             foundRoute.url !== pathname && setLoading(false);

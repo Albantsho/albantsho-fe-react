@@ -18,7 +18,7 @@ const ScriptInfo = ({ script }: IProps) => {
   return (
     <div className="flex flex-col px-6 py-6 sm:px-11 gap-10 md:flex-row max-w-screen-2xl mx-auto">
       <div className="md:w-1/2 lg:w-2/5 flex-shrink-0">
-        <Image src={script.script_image} className="rounded-xl" alt="beauty" />
+        <Image src={script.image} className="rounded-xl" alt="beauty" />
       </div>
       <div className="flex-shrink w-full">
         <div className="flex mb-3 md:mb-5 items-center flex-wrap gap-6 sm:gap-10 md:gap-14">

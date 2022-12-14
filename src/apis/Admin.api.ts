@@ -2,7 +2,7 @@ import api from "./configs/axios.config";
 
 interface IUpdateAdminType {
   userId: string;
-  user_type: string;
+  userType: string;
 }
 
 const useAdminApi = (controller?: AbortController) => {

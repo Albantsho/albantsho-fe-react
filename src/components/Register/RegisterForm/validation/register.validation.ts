@@ -16,17 +16,17 @@ export const registerSchema = Yup.object({
     )
     .label("Password"),
   country: Yup.string().required().oneOf(Object.values(countryList)),
-  user_type: Yup.string().required().oneOf(["producer", "writer"]),
+  userType: Yup.string().required().oneOf(["producer", "writer"]),
   portfolio: Yup.string()
     .url()
-    .when("user_type", {
+    .when("userType", {
       is: "producer",
       then: (schema) => schema.required(),
       otherwise: (schema) => schema.notRequired(),
     })
     .label("Portfolio"),
-  production_company_name: Yup.string()
-    .when("user_type", {
+  productionCompanyName: Yup.string()
+    .when("userType", {
       is: "producer",
       then: (schema) => schema.required(),
       otherwise: (schema) => schema.notRequired(),

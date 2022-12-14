@@ -11,34 +11,27 @@ interface IAddThemeScriptPayload<T> {
 }
 
 interface IUpdateScriptPayload {
-  title?: string;
-  description?: string;
-  script_type?: string;
-  archived?: boolean;
-  page_title?: string;
-  based_on?: string;
-  content_info?: string;
-  image?: File;
-  front_page?: string;
-  by_line?: string;
-  cover_page?: string;
+  scriptFormat?: string;
   storyFormat?: string;
-  primary_genre?: string;
-  secondary_genre: string;
-  primary_cast?: string;
-  secondary_cast?: string;
-  estimated_budger?: string;
+  title?: string;
+  primaryGenre?: string;
+  secondaryGenre: string;
+  primaryCast?: string;
+  secondaryCast?: string;
+  estimatedBudget?: string;
+  tagLine?: string;
+  logLine?: string;
   synopsis?: string;
-  story_world?: string;
-  act_structure?: string;
-  adaption?: string;
-  adaption_permission?: string;
+  storyWorld?: string;
+  actStructure?: string;
+  characterBible?: string;
+  theme: string[];
+  adaption?: boolean;
+  adaptionPermission?: File;
   inspiration?: string;
   motivation?: string;
-  script_price?: string;
-  is_abstract?: boolean;
-  tagline?: string;
-  character_bible?: string;
+  script_price?: number;
+  image?: File;
 }
 
 interface IGiveRateToScriptPayload {
@@ -145,9 +138,9 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getWriterAllScripts(search: string, query?: string) {
+    async getWriterAllScripts(query: string, search?: string) {
       const res = await axiosPrivate.get(
-        `/script/writer/all?limit=10&search=${search}&${query}`,
+        `/script/writer/all?limit=10&${query}&search=${search}`,
         {
           signal: controller?.signal,
         }

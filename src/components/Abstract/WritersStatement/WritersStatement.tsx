@@ -8,20 +8,47 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RiUploadLine } from "react-icons/ri";
 import { IAbstractFormValues } from "interfaces/abstract";
-import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
+import type {
+  FieldErrorsImpl,
+  UseFormRegister,
+  UseFormGetValues,
+} from "react-hook-form";
 import { IFullInformationScript } from "interfaces/script";
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   step: number;
   script: IFullInformationScript;
+  setAdaption: React.Dispatch<React.SetStateAction<boolean>>;
+  adaption: boolean;
+  getValues: UseFormGetValues<IAbstractFormValues>;
 }
 
-const WritersStatement = ({ errors, register, step, script }: IProps) => {
-  const [expanded, setExpanded] = useState(false);
+const WritersStatement = ({
+  errors,
+  register,
+  step,
+  script,
+  adaption,
+  setAdaption,
+  getValues,
+}: IProps) => {
+  const [progress, setProgress] = useState(0);
+
+  const addAdaption = () => setAdaption(true);
+  const noAddAdaption = () => setAdaption(false);
+
+  useEffect(() => {
+    const formValues = getValues();
+    if (formValues.adaptionPermission) {
+      setProgress(100);
+    } else {
+      setProgress(0);
+    }
+  }, [getValues()]);
 
   return (
     <div className={`${step === 5 ? "block" : "hidden"}`}>
@@ -38,8 +65,7 @@ const WritersStatement = ({ errors, register, step, script }: IProps) => {
       </Typography>
 
       <Accordion
-        expanded={expanded}
-        onChange={() => setExpanded(!expanded)}
+        expanded={adaption}
         sx={{
           "&:before": { display: "none" },
           "& .MuiButtonBase-root": { border: "1px solid #D9D9D9" },
@@ -61,12 +87,27 @@ const WritersStatement = ({ errors, register, step, script }: IProps) => {
             </Typography>
             <div className="flex gap-4">
               <Btn
+                onClick={addAdaption}
                 sx={{ "&.MuiButtonBase-root": { border: "none" } }}
-                className="rounded-full text-white px-6 py-3 md:px-8 md:py-4"
+                className="relative rounded-full text-white px-6 py-3 md:px-8 md:py-4"
               >
+                <label
+                  className="absolute cursor-pointer inset-0"
+                  htmlFor="add-adaption-file"
+                ></label>
+                <input
+                  {...register("adaptionPermission")}
+                  name="adaption"
+                  accept="image/jpeg,.pdf"
+                  max={1}
+                  type="file"
+                  id="add-adaption-file"
+                  hidden
+                />
                 Yes
               </Btn>
               <Btn
+                onClick={noAddAdaption}
                 sx={{ "&.MuiButtonBase-root": { border: "1px solid #7953B5" } }}
                 className="rounded-full bg-white text-primary-700 px-6 py-3 md:px-8 md:py-4"
               >
@@ -76,7 +117,7 @@ const WritersStatement = ({ errors, register, step, script }: IProps) => {
           </div>
         </AccordionSummary>
         <AccordionDetails className="rounded-md pt-3 md:pt-5 bg-primary-dark/95 py-6">
-          <div className="flex flex-col md:flex-row md:px-7 items-center md:gap-6">
+          <div className="flex flex-col md:flex-row md:px-7 items-center md:gap-6 relative">
             <div className="flex gap-2 mb-8 mt-6 items-end flex-1">
               <SvgIcon className="text-white" component={RiUploadLine} />
               <Typography variant="body2" className="text-white">
@@ -97,7 +138,7 @@ const WritersStatement = ({ errors, register, step, script }: IProps) => {
                   backgroundColor: "#fff",
                 },
               }}
-              value={60}
+              value={progress}
               variant="determinate"
             />
           </div>

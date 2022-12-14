@@ -4,7 +4,7 @@ import Heading from "components/Dashboard/Writer/Listings/OpenListingInfo/Index/
 import TabButtons from "components/Dashboard/Writer/Listings/Index/TabButtons/TabButtons";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { NextPageWithLayout } from "../../../../_app";
 import { Fab } from "@mui/material";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ import useScripBidApi from "apis/ScripBid.api";
 import useScriptsApi from "apis/Scripts.api";
 import { IFullInformationScript } from "interfaces/script";
 import { IBidForScript } from "interfaces/bid";
+import { debounce } from "lodash";
 
 const AuctionsScripts = dynamic(
   () =>
@@ -31,9 +32,21 @@ const ScriptSlug: NextPageWithLayout = () => {
   const [script, setScript] = useState<IFullInformationScript>();
   const [bidsList, setBidsList] = useState<Array<IBidForScript>>([]);
   const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const { getAllBids } = useScripBidApi();
   const { getScript } = useScriptsApi();
   const { query } = useRouter();
+
+  const handleSearch = useCallback(
+    debounce(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value.trim());
+      },
+      2000,
+      { leading: false }
+    ),
+    [searchQuery]
+  );
 
   useEffect(() => {
     async function getScriptsDate() {
@@ -65,7 +78,10 @@ const ScriptSlug: NextPageWithLayout = () => {
         {!loading && script ? (
           <>
             <TabButtons />
-            <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
+            <DashboardSearch
+              handleSearch={handleSearch}
+              setOpenCreateScript={setOpenCreateScript}
+            />
             <div className="py-8 md:py-12 xl:py-20  px-5 sm:px-10 xl:px-20  my-4 md:my-6 bg-white shadow-primary rounded-md">
               <Heading script={script} />
               <Suspense fallback={null}>

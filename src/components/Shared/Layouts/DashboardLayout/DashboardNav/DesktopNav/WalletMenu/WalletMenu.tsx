@@ -78,7 +78,7 @@ const WalletMenu = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {user.user_type === "writer" && (
+        {user.userType === "writer" && (
           <MenuItem
             className="px-6 py-3"
             onClick={() => push(`${routes.withdrawWallet.url}`)}
@@ -100,7 +100,7 @@ const WalletMenu = () => {
             </ListItemText>
           </MenuItem>
         )}
-        {user.user_type === "producer" && (
+        {user.userType === "producer" && (
           <MenuItem
             className="px-6 py-3"
             onClick={() => push(routes.depositWallet.url)}

@@ -39,7 +39,7 @@ const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
                 />
               </Typography>
               <Chip
-                label={script.primary_genre}
+                label={script.primaryGenre}
                 className="rounded bg-tinted-50/60 py-2 xl:py-5 xl:px-2 text-neutral-800 lg:mr-1"
               />
             </div>
@@ -59,7 +59,7 @@ const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
                   className="leading-normal font-semibold"
                   variant="h5"
                 >
-                  ${script.script_price}
+                  ${script.price}
                 </Typography>
                 <Typography variant="body1" color="primary.700">
                   (0.0237 ETH)

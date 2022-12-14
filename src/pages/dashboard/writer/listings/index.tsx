@@ -5,10 +5,11 @@ import ClosedList from "components/Dashboard/Writer/Listings/Index/ClosedList/Cl
 import DraftsList from "components/Dashboard/Writer/Listings/Index/DraftsList/DraftsList";
 import OpeningList from "components/Dashboard/Writer/Listings/Index/OpeningList/OpeningList";
 import TabButtons from "components/Dashboard/Writer/Listings/Index/TabButtons/TabButtons";
+import { debounce } from "lodash";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Suspense } from "react";
+import { Suspense, useCallback, useState } from "react";
 import { DotLoader } from "react-spinners";
 import { NextPageWithLayout } from "../../../_app";
 import useListings from "./useListings";
@@ -20,7 +21,19 @@ const CreateScriptModal = dynamic(
 const Listings: NextPageWithLayout = () => {
   const { loading, openCreateScript, scripts, setOpenCreateScript } =
     useListings();
+  const [searchQuery, setSearchQuery] = useState("");
   const { query } = useRouter();
+
+  const handleSearch = useCallback(
+    debounce(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value.trim());
+      },
+      2000,
+      { leading: false }
+    ),
+    [searchQuery]
+  );
 
   return (
     <>
@@ -33,7 +46,10 @@ const Listings: NextPageWithLayout = () => {
       ) : (
         <>
           <TabButtons />
-          <DashboardSearch setOpenCreateScript={setOpenCreateScript} />
+          <DashboardSearch
+            handleSearch={handleSearch}
+            setOpenCreateScript={setOpenCreateScript}
+          />
           <Suspense fallback={null}>
             <CreateScriptModal
               openCreateScript={openCreateScript}
