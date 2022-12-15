@@ -4,7 +4,7 @@ export interface IAbstractFormValues {
   title: string;
   primaryGenre: string;
   secondaryGenre: string;
-  theme: string[];
+  storyTopics: string[];
   primaryCast: string;
   secondaryCast: string;
   estimatedBudget: string;

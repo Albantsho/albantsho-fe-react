@@ -2,7 +2,9 @@ import success from "@assets/images/success.png";
 import { Button, Grow, IconButton, Modal, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
+import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
+import routes from "routes/routes";
 
 interface IProps {
   openSaveProgressModal: boolean;
@@ -39,12 +41,14 @@ const SaveProgressScriptModal = ({
             Your progress so far has been saved
           </Typography>
           <div className="flex gap-2 sm:gap-6 mt-3 sm:mt-6 xl:mt-7">
-            <Btn
-              size="large"
-              className="sm:py-3 sm:px-5 text-white bg-primary-700"
-            >
-              Back to dash board
-            </Btn>
+            <Link passHref legacyBehavior href={routes.projectsDashboard.url}>
+              <Btn
+                size="large"
+                className="sm:py-3 sm:px-5 text-white bg-primary-700"
+              >
+                Back to dash board
+              </Btn>
+            </Link>
             <Button
               onClick={() => setOpenSaveProgressModal(false)}
               variant="outlined"

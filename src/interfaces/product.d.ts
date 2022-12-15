@@ -29,7 +29,6 @@ export interface IProduct {
   script_market_status: string;
   script_price: number;
   script_published: boolean;
-  script_themes: string;
   secondary_cast: string;
   secondary_genre: string;
   story_concept: IStory_concept[];
@@ -54,6 +53,6 @@ interface IStory_concept {
   created_at: string;
   id: string;
   script_basic_id: string;
-  themes: string;
+  storyTopics: string;
   updated_at: string;
 }

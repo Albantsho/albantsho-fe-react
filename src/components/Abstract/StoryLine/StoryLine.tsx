@@ -66,7 +66,7 @@ const StoryLine = ({ register, errors, step, script }: IProps) => {
       </div>
 
       <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-        <label htmlFor="logline">
+        <label htmlFor="log-line">
           <Typography
             variant="body1"
             className="futura font-medium text-primary-700"
@@ -79,7 +79,7 @@ const StoryLine = ({ register, errors, step, script }: IProps) => {
           error={Boolean(errors.logLine) || false}
           defaultValue={script.logLine ? script.logLine : ""}
           fullWidth
-          id="logline"
+          id="log-line"
           variant="outlined"
           size="small"
           sx={{

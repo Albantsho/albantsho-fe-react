@@ -1,7 +1,7 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 
 interface IUploadFileDraftPayload {
-  content: FileList;
+  content: File;
 }
 
 interface ISelectOtherDraftPayload {
@@ -9,7 +9,7 @@ interface ISelectOtherDraftPayload {
 }
 
 interface IUploadCopyrightPayload {
-  content: FileList;
+  content: File;
 }
 
 const useDraftApi = (controller?: AbortController) => {

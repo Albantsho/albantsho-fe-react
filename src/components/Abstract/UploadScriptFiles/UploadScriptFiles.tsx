@@ -18,6 +18,7 @@ const UploadScriptFiles = ({
   setActiveButton,
   step,
   register,
+  errors,
 }: IProps) => {
   return (
     <div className={`${step === 6 && activeButton === 1 ? "block" : "hidden"}`}>
@@ -98,6 +99,9 @@ const UploadScriptFiles = ({
             </Typography>
           </div>
         </div>
+        {errors.scriptFile && (
+          <span className="text-error-700 ">{errors.scriptFile?.message}</span>
+        )}
         <div className="max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center">
           <div className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
             <label
@@ -132,6 +136,9 @@ const UploadScriptFiles = ({
             </Typography>
           </div>
         </div>
+        {errors.copyright && (
+          <span className="text-error-700 ">{errors.copyright?.message}</span>
+        )}
       </div>
     </div>
   );

@@ -43,7 +43,10 @@ const WritersStatement = ({
 
   useEffect(() => {
     const formValues = getValues();
-    if (formValues.adaptionPermission) {
+    if (
+      formValues.adaptionPermission &&
+      formValues.adaptionPermission.length > 0
+    ) {
       setProgress(100);
     } else {
       setProgress(0);
@@ -98,7 +101,7 @@ const WritersStatement = ({
                 <input
                   {...register("adaptionPermission")}
                   name="adaption"
-                  accept="image/jpeg,.pdf"
+                  accept=".pdf,image/jpeg"
                   max={1}
                   type="file"
                   id="add-adaption-file"

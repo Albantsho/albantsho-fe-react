@@ -82,7 +82,7 @@ const UploadImage = ({ errors, register, step, progress }: IProps) => {
                 Uploading
               </Typography>
               <Typography variant="caption" className="text-gray-400">
-                {progress}%
+                {progress.toFixed(2)}%
               </Typography>
             </div>
             <LinearProgress

@@ -3,9 +3,11 @@ import useDraftApi from "apis/Draft.api";
 import useScriptsApi from "apis/Scripts.api";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
+import { replace } from "lodash";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import { abstractSchema } from "./validation/abstract.validation";
 
@@ -20,9 +22,9 @@ const useAbstract = (script: IScript) => {
   const [loadingUpdateButton, setLoadingUpdateButton] = useState(false);
   const [publish, setPublish] = useState(false);
   const [progress, setProgress] = useState(0);
-  const { query } = useRouter();
+  const { query, replace } = useRouter();
   const { updateScript } = useScriptsApi();
-  const { uploadFileDraft } = useDraftApi();
+  const { uploadFileDraft, uploadCopyright } = useDraftApi();
   const {
     register,
     handleSubmit,
@@ -32,18 +34,18 @@ const useAbstract = (script: IScript) => {
   } = useForm<IAbstractFormValues>({
     defaultValues: {
       title: script?.title ? script?.title : "",
-      scriptFormat: script?.scriptFormat ? script?.scriptFormat : "documentary",
-      storyFormat: script?.scriptFormat ? script?.scriptFormat : "highConcept",
-      primaryGenre: script?.primaryGenre ? script?.primaryGenre : "documentary",
+      scriptFormat: script?.scriptFormat ? script?.scriptFormat : "Documentary",
+      storyFormat: script?.scriptFormat ? script?.scriptFormat : "High Concept",
+      primaryGenre: script?.primaryGenre ? script?.primaryGenre : "Action",
       secondaryGenre: script?.secondaryGenre
         ? script?.secondaryGenre
-        : "romance",
+        : "Comedy",
       primaryCast: script?.primaryCast ? script?.primaryCast : "200",
       secondaryCast: script?.secondaryCast ? script?.secondaryCast : "50",
       estimatedBudget: script?.estimatedBudget
         ? script?.estimatedBudget
         : "high",
-      theme: script.theme ? script.theme : ["love"],
+      storyTopics: script.storyTopics && script.storyTopics,
       tagline: script?.tagline ? script?.tagline : "",
       logLine: script?.logLine ? script?.logLine : "",
       synopsis: script?.synopsis ? script?.synopsis : "",
@@ -53,22 +55,26 @@ const useAbstract = (script: IScript) => {
       inspiration: script?.inspiration ? script?.inspiration : "",
       motivation: script?.motivation ? script?.motivation : "",
     },
-    resolver: yupResolver(abstractSchema(publish)),
+    resolver: yupResolver(abstractSchema(publish, activeButton)),
   });
 
   useEffect(() => {
     const formValues = getValues();
     const allFields = Object.keys(formValues);
-    const completedFields = Object.values(formValues).filter((field) => field);
+
+    const completedFields = Object.values(formValues).filter((field) => {
+      if (field && field.length && field.length > 0) {
+        return field;
+      }
+    });
+
     setProgress((completedFields.length / allFields.length) * 100);
-  }, [getValues()]);
+  }, [step]);
 
   const publishScript = () => setPublish(true);
   const updateScriptFunc = () => setPublish(false);
 
   const onSubmit = async (data: IAbstractFormValues) => {
-    console.log(data.theme);
-
     if (publish) {
       try {
         setLoadingPublishButton(true);
@@ -90,25 +96,30 @@ const useAbstract = (script: IScript) => {
             inspiration: data.inspiration,
             motivation: data.motivation,
             image: data.image[0],
-            theme: data.theme,
+            storyTopics: data.storyTopics,
+            logLine: data.logLine,
+            adaption,
+            adaptionPermission: data.adaptionPermission[0],
           },
           query.id as string,
           "publish=true"
         );
-        // const resTheme = await addScriptTheme(
-        //   { theme: data.theme.map((theme) => theme.label) },
-        //   query.id as string
-        // );
         const resDraft = await uploadFileDraft(query.id as string, {
-          content: data.scriptFile,
+          content: data.scriptFile[0],
         });
-        console.log(resDraft);
+        const resCopyright = await uploadCopyright(query.id as string, {
+          content: data.scriptCopyright[0],
+        });
+        console.log(res, resDraft, resCopyright);
+        // replace(routes.projectsDashboard.url);
       } catch (error) {
         errorHandler(error);
       } finally {
         setLoadingPublishButton(false);
       }
     } else {
+      console.log(data.image[0]);
+
       try {
         setLoadingUpdateButton(true);
         const res = await updateScript(
@@ -129,19 +140,26 @@ const useAbstract = (script: IScript) => {
             inspiration: data.inspiration,
             motivation: data.motivation,
             image: data.image[0],
-            theme: data.theme,
+            storyTopics: data.storyTopics,
+            logLine: data.logLine,
+            adaption,
+            adaptionPermission: data.adaptionPermission[0],
           },
           query.id as string
         );
         console.log(res);
-        // const resTheme = await addScriptTheme(
-        //   { theme: data.theme.map((theme) => theme.label) },
-        //   query.id as string
-        // );
-        // console.log(resTheme);
-        const resDraft = await uploadFileDraft(query.id as string, {
-          content: data.scriptFile,
-        });
+        if (data.scriptFile && data.scriptFile[0]) {
+          const resDraft = await uploadFileDraft(query.id as string, {
+            content: data.scriptFile[0],
+          });
+          console.log(resDraft);
+        }
+        if (data.scriptCopyright && data.scriptCopyright[0]) {
+          const resCopyright = await uploadCopyright(query.id as string, {
+            content: data.scriptCopyright[0],
+          });
+          console.log(resCopyright);
+        }
         setOpenSaveProgressModal(true);
       } catch (error) {
         errorHandler(error);

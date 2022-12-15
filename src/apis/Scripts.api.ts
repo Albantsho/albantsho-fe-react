@@ -25,12 +25,12 @@ interface IUpdateScriptPayload {
   storyWorld?: string;
   actStructure?: string;
   characterBible?: string;
-  theme: string[];
+  storyTopics: string[];
   adaption?: boolean;
   adaptionPermission?: File;
   inspiration?: string;
   motivation?: string;
-  script_price?: number;
+  price?: number;
   image?: File;
 }
 

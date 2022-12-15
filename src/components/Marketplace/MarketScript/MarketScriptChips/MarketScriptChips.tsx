@@ -9,7 +9,7 @@ const MarketScriptChips = ({ script }: IProps) => {
   return (
     <div className="md:w-5/12 space-y-6 lg:pr-4">
       <div className="flex gap-2 flex-wrap">
-        {script.theme.map((oneTheme) => (
+        {script.storyTopics.map((oneTheme) => (
           <Chip
             key={oneTheme}
             size="medium"

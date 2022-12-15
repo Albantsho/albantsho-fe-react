@@ -136,7 +136,7 @@ const ClosedList = ({ scripts }: IProps) => {
                   {listItem.title}
                 </Typography>
                 <Typography variant="caption" className="text-stone-800">
-                  {listItem.script_themes}
+                  {/* {listItem.storyTopics} */}
                 </Typography>
               </div>
             </TableCell>

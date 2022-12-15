@@ -53,7 +53,7 @@ export interface IFullInformationScript {
   price: string;
   listed: boolean;
   published: boolean;
-  theme: string[];
+  storyTopics: string[];
   rate: string;
   rateCount: string;
   bought: boolean;

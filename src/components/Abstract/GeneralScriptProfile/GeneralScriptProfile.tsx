@@ -7,7 +7,6 @@ import {
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
-import React from "react";
 import type {
   Control,
   FieldErrorsImpl,
@@ -15,6 +14,7 @@ import type {
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { AiFillInfoCircle } from "react-icons/ai";
+import { genreList, storyTopics } from "./fieldInputs";
 
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
@@ -23,129 +23,6 @@ interface IProps {
   step: number;
   script: IFullInformationScript;
 }
-
-const genreList = [
-  { genre: "Action" },
-  { genre: "Comedy" },
-  { genre: "Crime" },
-  { genre: "Drama" },
-  { genre: "Fantasy" },
-  { genre: "Horror" },
-  { genre: "Mystery" },
-  { genre: "Romance" },
-  { genre: "Thriller" },
-  { genre: "Adventure" },
-  { genre: "Experimental" },
-  { genre: "Sci-fi" },
-  { genre: "Gangster" },
-  { genre: "Musical" },
-  { genre: "Competition" },
-  { genre: "Biographical" },
-  { genre: "Historical" },
-];
-
-const genresFilms = [
-  "Abduction",
-  "Adultery",
-  "Adventure",
-  "Ambition",
-  "Anecdote",
-  "Apologue",
-  "Ascension & Descension",
-  "Astral",
-  "Bad influence",
-  "Bedtime story",
-  "Captivity",
-  "Chivalric romance",
-  "Coming of age",
-  "Competition",
-  "Conflict with a God",
-  "Creation myth",
-  "Crimes for vengeance",
-  "Crimes of passion",
-  "Crimes of war",
-  "Cruelty of misfortune",
-  "Daring Enterprise",
-  "Deliverance",
-  "Disaster",
-  "Discovery of treasure",
-  "Discovery of culture",
-  "Dishonour of a loved me",
-  "Drugs",
-  "Enmity of Kinsmen",
-  "Enemy Loved",
-  "Erroneous judgment",
-  "Etiological myth",
-  "Escape",
-  "Fable",
-  "Factoid",
-  "Fairy tale",
-  "Falling Prey",
-  "Family",
-  "Farce",
-  "Fatal imprudence",
-  "Fish-Out-Of-Water",
-  "Folklore",
-  "Folkloristics",
-  "Forbidden Love",
-  "Friendship Love",
-  "Ghost",
-  "Grief",
-  "Honour Killing",
-  "Invention",
-  "Involuntary Crimes of Love(Incest)",
-  "Jujuism",
-  "Joke",
-  "Legend",
-  "Loss of Loved Ones",
-  "Love",
-  "Madness",
-  "Mental health",
-  "Metamorphosis",
-  "Mistaken Jealousy",
-  "Murder",
-  "Myths",
-  "Necessity Invention",
-  "Obstacles to Love",
-  "Obtaining",
-  "Oral tradition",
-  "Parable",
-  "Parenthood",
-  "Political myth",
-  "Popular belief",
-  "Popular misconception",
-  "Pursuit",
-  "Quest",
-  "Recovery of a Lost One",
-  "Religion",
-  "Remorse",
-  "Rescue",
-  "Revenge",
-  "Revolt",
-  "Riddle",
-  "Rivalry",
-  "Rivalry of Kinsman",
-  "Rivalry of Superior and Inferior",
-  "Sacrifice",
-  "Satire",
-  "Sacrifice for Passion",
-  "Self-Sacrifice for an Ideal",
-  "Self-Sacrifice for Kindred",
-  "Separation",
-  "Sex",
-  "Short story",
-  "Sibling Rivalry",
-  "Supplication",
-  "Tales by Moonlight",
-  "Tall tales",
-  "Technology",
-  "Temptation",
-  "Transformation",
-  "Underdog",
-  "Urban Legend",
-  "Wretched Excess",
-  "Youth Exuberance",
-];
 
 const GeneralScriptProfile = ({
   register,
@@ -201,7 +78,7 @@ const GeneralScriptProfile = ({
                 variant="outlined"
                 id="script-format"
                 defaultValue={
-                  script.scriptFormat ? script.scriptFormat : "documentary"
+                  script.scriptFormat ? script.scriptFormat : "Documentary"
                 }
               >
                 <MenuItem value="Short film">
@@ -266,7 +143,7 @@ const GeneralScriptProfile = ({
                 variant="outlined"
                 id="story-format"
                 defaultValue={
-                  script.storyFormat ? script.storyFormat : "highConcept"
+                  script.storyFormat ? script.storyFormat : "High Concept"
                 }
               >
                 <MenuItem value="High Concept">
@@ -342,6 +219,7 @@ const GeneralScriptProfile = ({
                 {...field}
                 select
                 fullWidth
+                SelectProps={{ MenuProps: { className: "max-h-[250px]" } }}
                 size="small"
                 sx={{
                   "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
@@ -390,6 +268,7 @@ const GeneralScriptProfile = ({
                 select
                 fullWidth
                 size="small"
+                SelectProps={{ MenuProps: { className: "max-h-[250px]" } }}
                 sx={{
                   "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
                   "& .MuiSvgIcon-root": { color: "#7953B5" },
@@ -404,7 +283,7 @@ const GeneralScriptProfile = ({
                 variant="outlined"
                 id="genre-script-secondary"
                 defaultValue={
-                  script.secondaryGenre ? script.secondaryGenre : "Action"
+                  script.secondaryGenre ? script.secondaryGenre : "Comedy"
                 }
               >
                 {genreList.map(({ genre }) => (
@@ -426,11 +305,11 @@ const GeneralScriptProfile = ({
             variant="body1"
             className="futura font-medium text-primary-700"
           >
-            Themes<span className="text-error-500 my-auto">*</span>
+            Story topics<span className="text-error-500 my-auto">*</span>
           </Typography>
         </label>
         <Controller
-          name="theme"
+          name="storyTopics"
           control={control}
           render={({ field: { onChange } }) => (
             <Autocomplete
@@ -441,7 +320,7 @@ const GeneralScriptProfile = ({
                 "& .MuiSvgIcon-root": { color: "#BCA9DA !important" },
                 mb: 1,
               }}
-              options={genresFilms}
+              options={storyTopics}
               getOptionLabel={(option) => option}
               onChange={(_, data) => {
                 onChange(data);
@@ -461,7 +340,7 @@ const GeneralScriptProfile = ({
                   helperText={
                     <span className="flex items-center gap-2">
                       <AiFillInfoCircle className="text-xl" />
-                      Understanding screenplay themes
+                      Understanding screenplay storyTopics
                     </span>
                   }
                 />
@@ -469,6 +348,11 @@ const GeneralScriptProfile = ({
             />
           )}
         />
+        {errors.storyTopics?.message && (
+          <span className="text-error-700 text-base">
+            {errors.storyTopics.message}
+          </span>
+        )}
       </div>
 
       <div className="flex gap-y-3 gap-x-5 md:gap-10 items-center flex-wrap mb-5">
