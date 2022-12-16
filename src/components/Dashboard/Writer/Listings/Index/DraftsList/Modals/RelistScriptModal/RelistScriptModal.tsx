@@ -19,7 +19,7 @@ const RelistScriptModal = ({
   setOpenRelistScript,
   id,
 }: IProps) => {
-  const { updateWriterListingScript } = useScriptsApi();
+  const { updatePublishedScript } = useScriptsApi();
   const [loading, setLoading] = useState(false);
 
   const handleCloseRelistScript = () => setOpenRelistScript(false);
@@ -27,7 +27,7 @@ const RelistScriptModal = ({
   const reListScriptToMarketplace = async () => {
     try {
       setLoading(true);
-      await updateWriterListingScript({ market: true }, id);
+      await updatePublishedScript({ published: true }, id);
     } catch (error) {
       errorHandler(error);
     } finally {

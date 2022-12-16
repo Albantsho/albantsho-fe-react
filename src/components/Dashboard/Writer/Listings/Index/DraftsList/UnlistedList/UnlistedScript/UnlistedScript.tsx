@@ -1,6 +1,7 @@
 import { Button, Chip, Typography } from "@mui/material";
+import { IUnlistedScript } from "interfaces/script";
 import dynamic from "next/dynamic";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { Suspense, useState } from "react";
 
 const RelistScriptModal = dynamic(
@@ -8,13 +9,7 @@ const RelistScriptModal = dynamic(
 );
 
 interface IProps {
-  script: {
-    id: number;
-    image: StaticImageData;
-    title: string;
-    description: string;
-    scriptType: string;
-  };
+  script: IUnlistedScript;
 }
 
 const UnlistedScript = ({ script }: IProps) => {
@@ -36,7 +31,7 @@ const UnlistedScript = ({ script }: IProps) => {
             alt={script.title}
             className="rounded-md flex-shrink-0 w-16 h-16"
             loading="lazy"
-            src={script.image}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
           />
 
           <div className="flex-grow sm:max-w-[271px] min-w-[170px] ">
@@ -47,7 +42,7 @@ const UnlistedScript = ({ script }: IProps) => {
               {script.title}
             </Typography>
             <Typography variant="caption" className="text-stone-800">
-              {script.scriptType}
+              {script.tagLine}
             </Typography>
           </div>
           <Button
@@ -65,7 +60,7 @@ const UnlistedScript = ({ script }: IProps) => {
         <div className="hidden md:flex lg:hidden xl:flex gap-4 justify-start  flex-col items-center md:items-center lg:items-end xl:items-start xl:ml-2">
           <div className="xl:min-w-[138px]">
             <Chip
-              label={script.scriptType}
+              label={script.scriptFormat}
               className=" py-5 px-4  rounded-md bg-tinted-100/80 text-neutral-800 w-fit"
             />
           </div>
@@ -87,7 +82,7 @@ const UnlistedScript = ({ script }: IProps) => {
       </div>
       <Suspense fallback={null}>
         <RelistScriptModal
-          id={`1`}
+          id={script._id}
           openRelistScript={openRelistScript}
           setOpenRelistScript={setOpenRelistScript}
         />

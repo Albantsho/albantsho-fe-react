@@ -10,6 +10,11 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import beautySmall from "@assets/images/beauty-small.jpg";
+import { IProducerBid } from "interfaces/bid";
+
+interface IProps {
+  bidsList: IProducerBid[];
+}
 
 const CurrentBidsArray = [
   {
@@ -54,7 +59,7 @@ const CurrentBidsArray = [
   },
 ];
 
-const CurrentBids = () => {
+const CurrentBids = ({ bidsList }: IProps) => {
   return (
     <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-primary py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>

@@ -12,3 +12,17 @@ export interface IBidForScript {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface IProducerBid {
+  _id: string;
+  userId: string;
+  scriptId: string;
+  amount: number;
+  accept: boolean;
+  reject: boolean;
+  producer: {
+    fullname: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}

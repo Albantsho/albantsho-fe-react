@@ -1,62 +1,39 @@
-import beautySmall from "@assets/images/beauty-small.jpg";
 import { Paper, Typography } from "@mui/material";
+import useScriptsApi from "apis/Scripts.api";
 import { IBidScript } from "interfaces/script";
+import { useEffect, useState } from "react";
+import { DotLoader } from "react-spinners";
+import errorHandler from "utils/error-handler";
 import OpeningBidScript from "./OpeningBidScript/OpeningBidScript";
 
-const listScripts = [
-  {
-    id: 1,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Tv Pilot",
-    bids: 4,
-  },
-  {
-    id: 2,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Tv Pilot",
-    bids: 2,
-  },
-  {
-    id: 3,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Tv Pilot",
-    bids: 1,
-  },
-  {
-    id: 4,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Tv Pilot",
-    bids: 0,
-  },
-  {
-    id: 5,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    type: "Tv Pilot",
-    bids: 3,
-  },
-];
-
 interface IProps {
-  scripts: IBidScript[];
+  searchQuery: string;
 }
 
-const OpeningList = ({ scripts }: IProps) => {
-  return (
+const OpeningList = ({ searchQuery }: IProps) => {
+  const [listedScripts, setListedScripts] = useState<Array<IBidScript>>([]);
+  const [loading, setLoading] = useState(true);
+  const { getWriterAllPublishedScripts } = useScriptsApi();
+
+  useEffect(() => {
+    async function getScriptsFunc() {
+      try {
+        setLoading(true);
+        const res = await getWriterAllPublishedScripts(searchQuery);
+        setListedScripts(res.data.scripts);
+        setLoading(false);
+      } catch (error) {
+        errorHandler(error);
+      }
+    }
+    getScriptsFunc();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
+
+  return loading ? (
+    <DotLoader color="#7953B5" className="mx-auto mt-10" />
+  ) : (
     <Paper elevation={0} className="mt-4 bg-white mb-16 shadow-primary">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
         <Typography
@@ -80,10 +57,10 @@ const OpeningList = ({ scripts }: IProps) => {
         </Typography>
       </div>
       <div className="px-5 xl:px-14 overflow-hidden">
-        {scripts.map((script, index) => (
+        {listedScripts.map((script, index) => (
           <OpeningBidScript
             key={script._id}
-            scripts={scripts}
+            scripts={listedScripts}
             script={script}
             index={index}
           />

@@ -78,6 +78,27 @@ const routes = {
     mustAuthenticated: "noMatter",
     permission: [],
   },
+  marketplaceTabs: {
+    url: (query: string, page?: string) => `/marketplace${query}${page}`,
+    mustAuthenticated: "noMatter",
+    permission: [],
+  },
+  marketplaceOneScript: {
+    url: `/marketplace/[id]`,
+    dynamicUrl: (id: string) => `/marketplace/${id}`,
+    mustAuthenticated: "yes",
+    permission: ["writer", "producer", "admin", "reviewer"],
+  },
+  marketPlaceSubscriptionSuccessful: {
+    url: "/marketplace/subscription-successful",
+    mustAuthenticated: "yes",
+    permission: ["writer", "producer", "admin", "reviewer"],
+  },
+  marketPlaceSubscription: {
+    url: "/marketplace/subscription",
+    mustAuthenticated: "yes",
+    permission: ["writer", "producer", "admin", "reviewer"],
+  },
   abstract: {
     url: "/abstract/[id]",
     dynamicUrl: (id: string) => `/abstract/${id}`,
@@ -96,27 +117,6 @@ const routes = {
   },
   scriptWriting: {
     url: "/script-writing",
-    mustAuthenticated: "yes",
-    permission: ["writer", "producer", "admin", "reviewer"],
-  },
-  marketplaceTabs: {
-    url: (query: string) => `/marketplace${query}`,
-    mustAuthenticated: "yes",
-    permission: [],
-  },
-  marketplaceOneScript: {
-    url: `/marketplace/[id]`,
-    dynamicUrl: (id: string) => `/marketplace/${id}`,
-    mustAuthenticated: "yes",
-    permission: ["writer", "producer", "admin", "reviewer"],
-  },
-  marketPlaceSubscriptionSuccessful: {
-    url: "/marketplace/subscription-successful",
-    mustAuthenticated: "yes",
-    permission: ["writer", "producer", "admin", "reviewer"],
-  },
-  marketPlaceSubscription: {
-    url: "/marketplace/subscription",
     mustAuthenticated: "yes",
     permission: ["writer", "producer", "admin", "reviewer"],
   },

@@ -10,17 +10,14 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense, useCallback, useState } from "react";
-import { DotLoader } from "react-spinners";
 import { NextPageWithLayout } from "../../../_app";
-import useListings from "./useListings";
 
 const CreateScriptModal = dynamic(
   () => import("@shared/Modals/CreateScriptModal/CreateScriptModal")
 );
 
 const Listings: NextPageWithLayout = () => {
-  const { loading, openCreateScript, scripts, setOpenCreateScript } =
-    useListings();
+  const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState("");
   const { query } = useRouter();
 
@@ -41,44 +38,29 @@ const Listings: NextPageWithLayout = () => {
         <title>Albantsho || Listings</title>
       </Head>
 
-      {loading && scripts.length === 0 ? (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
-      ) : (
-        <>
-          <TabButtons />
-          <DashboardSearch
-            handleSearch={handleSearch}
-            setOpenCreateScript={setOpenCreateScript}
-          />
-          <Suspense fallback={null}>
-            <CreateScriptModal
-              openCreateScript={openCreateScript}
-              setOpenCreateScript={setOpenCreateScript}
-            />
-          </Suspense>
-          {(!query.tab || query.tab === "opening-list") && (
-            <OpeningList scripts={scripts} />
-          )}
-          {query.tab === "drafts" && (
-            <>
-              {/* <DraftsList
-                scripts={scripts}
-              /> */}
-            </>
-          )}
-          {
-            query.tab === "closed-list" && ""
-            // <ClosedList scripts={scripts} />
-          }
-          <Fab
-            onClick={() => setOpenCreateScript(true)}
-            color="primary"
-            className=" block md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
-          >
-            +
-          </Fab>
-        </>
+      <TabButtons />
+      <DashboardSearch
+        handleSearch={handleSearch}
+        setOpenCreateScript={setOpenCreateScript}
+      />
+      <Suspense fallback={null}>
+        <CreateScriptModal
+          openCreateScript={openCreateScript}
+          setOpenCreateScript={setOpenCreateScript}
+        />
+      </Suspense>
+      {(!query.tab || query.tab === "opening-list") && (
+        <OpeningList searchQuery={searchQuery} />
       )}
+      {query.tab === "drafts" && <DraftsList searchQuery={searchQuery} />}
+      {query.tab === "closed-list" && <ClosedList searchQuery={searchQuery} />}
+      <Fab
+        onClick={() => setOpenCreateScript(true)}
+        color="primary"
+        className=" block md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
+      >
+        +
+      </Fab>
     </>
   );
 };

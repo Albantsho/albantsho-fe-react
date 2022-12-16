@@ -3,16 +3,20 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import Image from "next/image";
+import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
+import routes from "routes/routes";
 
 interface IProps {
   openAddToScript: boolean;
   setOpenAddToScript: React.Dispatch<React.SetStateAction<boolean>>;
+  id: string;
 }
 
 const AddScriptToCompletedModal = ({
   openAddToScript,
   setOpenAddToScript,
+  id,
 }: IProps) => {
   const handleClose = () => setOpenAddToScript(false);
   return (
@@ -38,9 +42,11 @@ const AddScriptToCompletedModal = ({
             Proceed to complete listing
           </Typography>
           <div className="flex gap-3 sm:gap-6">
-            <Btn size="large" className="py-3 px-5 text-white bg-primary-700">
-              Proceed
-            </Btn>
+            <Link passHref legacyBehavior href={routes.abstract.dynamicUrl(id)}>
+              <Btn size="large" className="py-3 px-5 text-white bg-primary-700">
+                Proceed
+              </Btn>
+            </Link>
             <CancelBtn onClick={handleClose} />
           </div>
         </div>

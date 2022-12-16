@@ -1,4 +1,3 @@
-import beautySmall from "@assets/images/beauty-small.jpg";
 import {
   Chip,
   Table,
@@ -8,61 +7,42 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { IProduct } from "interfaces/product";
-
-const closedList = [
-  {
-    id: 1,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    price: 6000,
-  },
-  {
-    id: 2,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    price: 6000,
-  },
-  {
-    id: 3,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    price: 6000,
-  },
-  {
-    id: 4,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    price: 6000,
-  },
-  {
-    id: 5,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    price: 6000,
-  },
-];
+import useScriptsApi from "apis/Scripts.api";
+import { IClosedScript } from "interfaces/script";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { DotLoader } from "react-spinners";
+import errorHandler from "utils/error-handler";
 
 interface IProps {
-  scripts: IProduct[];
+  searchQuery: string;
 }
 
-const ClosedList = ({ scripts }: IProps) => {
-  const closedScripts = scripts.filter(
-    (script) => script.script_market_status === "closed"
-  );
+const ClosedList = ({ searchQuery }: IProps) => {
+  const [closedScripts, setClosedScripts] = useState<Array<IClosedScript>>([]);
+  const [loading, setLoading] = useState(true);
+  const { getWriterAllSoldScripts } = useScriptsApi();
 
-  return (
+  useEffect(() => {
+    async function getScriptsFunc() {
+      try {
+        setLoading(true);
+
+        const res = await getWriterAllSoldScripts(searchQuery);
+        setClosedScripts(res.data.scripts);
+        setLoading(false);
+      } catch (error) {
+        errorHandler(error);
+      }
+    }
+    getScriptsFunc();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
+
+  return loading ? (
+    <DotLoader color="#7953B5" className="mx-auto mt-10" />
+  ) : (
     <Table className=" mt-4 sm:mt-6 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
@@ -97,7 +77,7 @@ const ClosedList = ({ scripts }: IProps) => {
           <TableRow
             data-aos="fade-right"
             data-aos-anchor-placement="top-bottom"
-            key={listItem.id}
+            key={listItem._id}
             sx={{
               "& td, & th": {
                 borderBottom: { xs: 0, sm: "1px solid #DCD8E4" },
@@ -108,22 +88,24 @@ const ClosedList = ({ scripts }: IProps) => {
           >
             <TableCell className="flex flex-1 sm:flex-auto sm:min-w-[365px] sm:py-6 xl:py-10 md:min-w-[465px] lg:min-w-[365px] xl:min-w-[465px] xl:max-w-[465px] items-center flex-wrap sm:flex-nowrap gap-1 sm:gap-4 ">
               <div className="flex gap-2 sm:gap-0">
-                <img
+                <Image
                   // layout="fixed"
                   width="64"
                   height="64"
                   className="rounded-md"
-                  // loading="lazy"
-                  src={listItem.script_image}
+                  loading="lazy"
+                  src={listItem.image}
                   alt={listItem.title}
                 />
                 <div className="flex flex-col gap-2">
                   <Chip
-                    label={`Price: $${listItem.script_price}`}
+                    label={`Price: $${listItem.soldPrice}`}
                     className="text-success-500 bg-success-50 sm:hidden"
                   />
                   <Chip
-                    label={`Date:`}
+                    label={`Date:${new Date(
+                      listItem.soldDate
+                    ).toLocaleDateString()}`}
                     className="text-primary-700 bg-primary-50/50 sm:hidden"
                   />
                 </div>
@@ -136,7 +118,7 @@ const ClosedList = ({ scripts }: IProps) => {
                   {listItem.title}
                 </Typography>
                 <Typography variant="caption" className="text-stone-800">
-                  {/* {listItem.storyTopics} */}
+                  {listItem.tagLine}
                 </Typography>
               </div>
             </TableCell>
@@ -151,7 +133,7 @@ const ClosedList = ({ scripts }: IProps) => {
               <Typography
                 variant="body1"
                 className="rounded-md bg-inherit sm:min-w-[70px] lg:min-w-[85px] text-primary-500 font-semibold"
-              >{`$ ${listItem.script_price}`}</Typography>
+              >{`$ ${listItem.soldPrice}`}</Typography>
             </TableCell>
             <TableCell
               sx={{
@@ -165,7 +147,7 @@ const ClosedList = ({ scripts }: IProps) => {
                 variant="body1"
                 className=" text-neutral-700 font-medium"
               >
-                {new Date(listItem.created_at).toLocaleDateString()}
+                {new Date(listItem.soldDate).toLocaleDateString()}
               </Typography>
             </TableCell>
           </TableRow>

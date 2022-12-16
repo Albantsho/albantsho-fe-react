@@ -49,9 +49,13 @@ const ScriptCard = (props: IProps) => {
 
       <CardContent className="py-6">
         <div className="flex flex-wrap gap-2">
-          <Chip label={script.primary_genre} sx={{ borderRadius: 1 }} />
+          <Chip label={script.primaryGenre} sx={{ borderRadius: 1 }} />
         </div>
-        <Rating readOnly defaultValue={4} className="sm:hidden mt-4" />
+        <Rating
+          readOnly
+          defaultValue={script.rate}
+          className="sm:hidden mt-4"
+        />
         <div className="flex justify-between mt-1 sm:mt-4 mb-2 gap-2">
           <Link
             legacyBehavior
@@ -70,7 +74,7 @@ const ScriptCard = (props: IProps) => {
             <ReviewedIcon />
           </Icon>
         </div>
-        <Typography>{script.description}</Typography>
+        <Typography>{script.tagLine}</Typography>
         {!inHome && (
           <Chip
             className="rounded mt-6"
@@ -78,7 +82,7 @@ const ScriptCard = (props: IProps) => {
               <>
                 <span className="text-neutral-300">Price:</span>
                 <span className="text-primary-main text-lg font-semibold">
-                  ${script.script_price}
+                  ${script.price}
                 </span>
               </>
             }

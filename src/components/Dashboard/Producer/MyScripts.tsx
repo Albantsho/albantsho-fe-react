@@ -9,6 +9,13 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import beautySmall from "@assets/images/beauty-small.jpg";
+import { IScript } from "interfaces/script";
+import Link from "next/link";
+import routes from "routes/routes";
+
+interface IProps {
+  scriptsList: IScript[];
+}
 
 const MyScriptsArray = [
   {
@@ -48,7 +55,7 @@ const MyScriptsArray = [
   },
 ];
 
-const MyScripts = () => {
+const MyScripts = ({ scriptsList }: IProps) => {
   return (
     <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
@@ -65,10 +72,10 @@ const MyScripts = () => {
         </TableRow>
       </TableHead>
       <TableBody className="px-5  xl:px-12 overflow-hidden">
-        {MyScriptsArray.map((bid) => (
+        {scriptsList.map((script) => (
           <TableRow
             data-aos="fade-up"
-            key={bid.id}
+            key={script._id}
             sx={{
               "& td, & th": {
                 borderBottom: { xs: 0, sm: "1px solid #DCD8E4" },
@@ -90,18 +97,18 @@ const MyScripts = () => {
                 height="64"
                 className="rounded-md"
                 loading="lazy"
-                src={bid.image}
-                alt={bid.title}
+                src={beautySmall}
+                alt={script.title}
               />
               <div className="flex-grow sm:flex-1 sm:max-w-[271px] min-w-[170px] sm:ml-2">
                 <Typography
                   variant="body1"
                   className="futura font-semibold text-primary-700"
                 >
-                  {bid.title}
+                  {script.title}
                 </Typography>
                 <Typography variant="caption" className="text-stone-800">
-                  {bid.description}
+                  {script.tagLine}
                 </Typography>
               </div>
               <Button
@@ -123,17 +130,23 @@ const MyScripts = () => {
               }}
               className="hidden sm:flex items-center sm:py-6 xl:py-10 justify-end"
             >
-              <Button
-                variant="text"
-                sx={{
-                  paddingY: 1,
-                  border: "1px solid #7953B5",
-                  borderRadius: 1.5,
-                }}
-                className="md:ml-auto xl:ml-0"
+              <Link
+                href={routes.marketplaceOneScript.dynamicUrl(script._id)}
+                passHref
+                legacyBehavior
               >
-                View script
-              </Button>
+                <Button
+                  variant="text"
+                  sx={{
+                    paddingY: 1,
+                    border: "1px solid #7953B5",
+                    borderRadius: 1.5,
+                  }}
+                  className="md:ml-auto xl:ml-0"
+                >
+                  View script
+                </Button>
+              </Link>
             </TableCell>
           </TableRow>
         ))}

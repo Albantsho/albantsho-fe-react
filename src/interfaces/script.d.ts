@@ -1,11 +1,36 @@
 export interface IScript {
   _id: string;
   title: string;
-  description: string;
-  script_price: number;
+  tagLine: string;
+  price: number;
   rate: number;
-  primary_genre: string;
-  script_verified: string;
+  primaryGenre: string;
+  verified: boolean;
+}
+
+export interface IUnlistedScript {
+  _id: string;
+  title: string;
+  tagLine: string;
+  image: string;
+  scriptFormat: string;
+}
+
+export interface IUnCompletedScript {
+  _id: string;
+  title: string;
+  tagLine: string;
+  image: string;
+  progressPercent: number;
+}
+
+export interface IClosedScript {
+  _id: string;
+  title: string;
+  tagLine: string;
+  image: string;
+  soldPrice: number;
+  soldDate: string;
 }
 
 export interface IWriterScript {
@@ -20,9 +45,9 @@ export interface IWriterScript {
 export interface IBidScript {
   _id: string;
   title: string;
-  description: string;
-  script_image: string;
-  primary_genre: string;
+  tagLine: string;
+  image: string;
+  primaryGenre: string;
   numberOfBids: number;
 }
 

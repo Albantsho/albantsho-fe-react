@@ -1,54 +1,10 @@
-import beautySmall from "@assets/images/beauty-small.jpg";
-import { Button, Chip, Divider, Paper, Typography } from "@mui/material";
-import { IProduct } from "interfaces/product";
-import React, { Dispatch, SetStateAction } from "react";
+import { Divider, Paper, Typography } from "@mui/material";
+import { IUnlistedScript } from "interfaces/script";
+import React from "react";
 import UnlistedScript from "./UnlistedScript/UnlistedScript";
 
-const UnlistedItems = [
-  {
-    id: 1,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    scriptType: "Tv Pilot",
-  },
-  {
-    id: 2,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    scriptType: "Feature Film",
-  },
-  {
-    id: 3,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    scriptType: "Feature Film",
-  },
-  {
-    id: 4,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    scriptType: "Tv Pilot",
-  },
-  {
-    id: 5,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    scriptType: "Feature Film",
-  },
-];
-
 interface IProps {
-  unListedScripts: IProduct[];
+  unListedScripts: IUnlistedScript[];
 }
 
 const UnlistedList = ({ unListedScripts }: IProps) => {
@@ -71,10 +27,10 @@ const UnlistedList = ({ unListedScripts }: IProps) => {
         <Typography></Typography>
       </div>
       <div className="px-5 xl:px-14 overflow-hidden">
-        {UnlistedItems.map((script, index) => (
-          <React.Fragment key={script.id}>
-            <UnlistedScript key={script.id} script={script} />
-            {index < UnlistedItems.length - 1 && (
+        {unListedScripts.map((script, index) => (
+          <React.Fragment key={script._id}>
+            <UnlistedScript key={script._id} script={script} />
+            {index < unListedScripts.length - 1 && (
               <Divider className="hidden sm:flex" />
             )}
           </React.Fragment>

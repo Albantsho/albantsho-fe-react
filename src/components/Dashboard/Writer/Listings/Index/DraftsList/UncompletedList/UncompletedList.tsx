@@ -1,54 +1,10 @@
-import beautySmall from "@assets/images/beauty-small.jpg";
 import { Divider, Paper, Typography } from "@mui/material";
-import { IProduct } from "interfaces/product";
+import { IUnCompletedScript } from "interfaces/script";
 import React from "react";
 import UncompletedScript from "./UncompletedScript/UncompletedScript";
 
-const uncompletedList = [
-  {
-    id: 1,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    progress: "20% done",
-  },
-  {
-    id: 2,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    progress: "20% done",
-  },
-  {
-    id: 3,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    progress: "20% done",
-  },
-  {
-    id: 4,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    progress: "20% done",
-  },
-  {
-    id: 5,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    progress: "20% done",
-  },
-];
-
 interface IProps {
-  unCompletedScripts: IProduct[];
+  unCompletedScripts: IUnCompletedScript[];
 }
 
 const UncompletedList = ({ unCompletedScripts }: IProps) => {
@@ -70,10 +26,10 @@ const UncompletedList = ({ unCompletedScripts }: IProps) => {
         </Typography>
       </div>
       <div className="px-5 xl:px-14 overflow-hidden">
-        {uncompletedList.map((script, index) => (
-          <React.Fragment key={script.id}>
+        {unCompletedScripts.map((script, index) => (
+          <React.Fragment key={script._id}>
             <UncompletedScript script={script} />
-            {index < uncompletedList.length - 1 && (
+            {index < unCompletedScripts.length - 1 && (
               <Divider className="hidden sm:flex" />
             )}
           </React.Fragment>

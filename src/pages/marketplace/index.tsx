@@ -8,7 +8,8 @@ import { NextPageWithLayout } from "../_app";
 import useMarketPlace from "./useMarketPlace";
 
 const Marketplace: NextPageWithLayout = () => {
-  const { loading, scripts } = useMarketPlace();
+  const { loading, scripts, currentPage, handleActivePage, pageCount } =
+    useMarketPlace();
 
   return (
     <>
@@ -22,7 +23,11 @@ const Marketplace: NextPageWithLayout = () => {
           <>
             <MarketplaceTabs />
             <MarketplaceProducts scripts={scripts} />
-            {/* <CustomPaginationComponent /> */}
+            <CustomPaginationComponent
+              currentPage={currentPage}
+              pageCount={pageCount}
+              handleActivePage={handleActivePage}
+            />
           </>
         )}
       </div>

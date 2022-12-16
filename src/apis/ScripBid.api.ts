@@ -49,10 +49,13 @@ const useScripBidApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAllBidsForProducer() {
-      const res = await axiosPrivate.get("/bid/producer/all", {
-        signal: controller?.signal,
-      });
+    async getAllBidsForProducer(searchQuery: string) {
+      const res = await axiosPrivate.get(
+        `/bid/producer/all?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },

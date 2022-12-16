@@ -28,7 +28,9 @@ const DashboardSidebarOnMobile = () => {
       <BottomNavigation
         showLabels
         value={activeRoute}
-        className="bg-primary-900 w-full min-h-[65px] flex justify-evenly text-white sm:px-8"
+        className={`${
+          user.userType === "writer" ? "justify-evenly" : "justify-start"
+        } bg-primary-900 w-full min-h-[65px] flex text-white sm:px-8`}
         onChange={(event, newValue) => {
           setActiveRoute(newValue);
         }}

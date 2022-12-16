@@ -108,9 +108,9 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getProducerAllScripts(query: string, search: string) {
+    async getProducerAllScripts(search: string) {
       const res = await axiosPrivate.get(
-        `/script/producer/all?limit=10&search=${search}&${query}`,
+        `/script/producer/all?search=${search}`,
         {
           signal: controller?.signal,
         }
@@ -154,34 +154,46 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getWriterAllPublishedScripts() {
-      const res = await axiosPrivate.get(`/script/writer/published/all`, {
-        signal: controller?.signal,
-      });
+    async getWriterAllPublishedScripts(searchQuery: string) {
+      const res = await axiosPrivate.get(
+        `/script/writer/published/all?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
-    async getWriterAllUnPublishedScripts() {
-      const res = await axiosPrivate.get(`/script/writer/unpublished/all`, {
-        signal: controller?.signal,
-      });
+    async getWriterAllUnPublishedScripts(searchQuery: string) {
+      const res = await axiosPrivate.get(
+        `/script/writer/unpublished/all?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
-    async getWriterAllInCompletedScripts() {
-      const res = await axiosPrivate.get(`/script/writer/incomplete/all`, {
-        signal: controller?.signal,
-      });
+    async getWriterAllInCompletedScripts(searchQuery: string) {
+      const res = await axiosPrivate.get(
+        `/script/writer/incomplete/all?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
-    async getWriterAllSoldScripts() {
-      const res = await axiosPrivate.get(`/script/writer/sold/all`, {
-        signal: controller?.signal,
-      });
+    async getWriterAllSoldScripts(searchQuery: string) {
+      const res = await axiosPrivate.get(
+        `/script/writer/sold/all?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
@@ -206,26 +218,6 @@ const useScriptsApi = (controller?: AbortController) => {
           signal: controller?.signal,
         }
       );
-
-      return res.data;
-    },
-
-    async updateWriterListingScript(payload: { market: boolean }, id: string) {
-      const res = await axiosPrivate.patch(
-        `/script/update/listing/${id}`,
-        payload,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    async getWriterAllListingScripts() {
-      const res = await axiosPrivate.get("/script/writer/listing/all", {
-        signal: controller?.signal,
-      });
 
       return res.data;
     },

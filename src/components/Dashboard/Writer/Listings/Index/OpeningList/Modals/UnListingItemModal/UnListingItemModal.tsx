@@ -18,13 +18,13 @@ const UnListingItemModal = ({
   setOpenUnListingItem,
   id,
 }: IProps) => {
-  const { updateWriterListingScript } = useScriptsApi();
+  const { updatePublishedScript } = useScriptsApi();
 
   const handleClose = () => setOpenUnListingItem(false);
 
   const unListingScript = async () => {
     try {
-      await updateWriterListingScript({ market: false }, id);
+      await updatePublishedScript({ published: false }, id);
       handleClose();
     } catch (error) {
       errorHandler(error);

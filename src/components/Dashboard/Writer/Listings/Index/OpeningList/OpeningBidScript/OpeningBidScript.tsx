@@ -1,16 +1,15 @@
 import {
-  Tooltip,
-  Typography,
   Chip,
+  Divider,
   IconButton,
   Menu,
   MenuItem,
-  Divider,
+  Tooltip,
+  Typography,
 } from "@mui/material";
 import { IBidScript } from "interfaces/script";
 import Image from "next/image";
 import Link from "next/link";
-import script from "next/script";
 import React, { Suspense, useState } from "react";
 import { IoIosMore } from "react-icons/io";
 import routes from "routes/routes";
@@ -47,7 +46,7 @@ const OpeningBidScript = ({ script, index, scripts }: IProps) => {
                 height={64}
                 alt={script.title}
                 className="rounded-md"
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
               />
             </div>
             <Tooltip title="Bids">
@@ -70,13 +69,13 @@ const OpeningBidScript = ({ script, index, scripts }: IProps) => {
               {script.title}
             </Typography>
             <Typography variant="caption" className="text-stone-800">
-              {script.primary_genre}
+              {script.primaryGenre}
             </Typography>
           </div>
         </div>
         <Chip
           className="py-5 px-4 hidden md:flex lg:hidden xl:flex self-center 2xl:mr-36 md:mr-10 min-w-[146px] bg-tinted-100/60 rounded-md  text-neutral-800"
-          label={script.primary_genre}
+          label={script.primaryGenre}
         />
         <Tooltip title="Bids">
           <div
