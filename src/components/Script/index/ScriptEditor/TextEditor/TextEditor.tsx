@@ -1,3 +1,4 @@
+import useUserStore from "app/user.store";
 import escapeHTML from "escape-html";
 import { CustomElement, IEditor } from "interfaces/slate";
 import { useRouter } from "next/router";
@@ -44,47 +45,42 @@ const TextEditor = ({
   width,
   initialValue,
 }: IProps) => {
+  const accessToken = useUserStore((state) => state.accessToken);
   const editor: IEditor = useMemo(
     () => withNewFeatures(withHistory(withReact(createEditor()))),
     []
   );
   const { isBlockActive } = useBlockButton();
-  const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL);
+  console.log(accessToken);
+
+  const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL, {
+    auth: { accessToken },
+  });
   const { query } = useRouter();
 
-  useEffect(() => {
-    // try {
-    //   socket.on("createRoom", () => {
-    //     console.log(socket.id);
-    //   });
-    //   socket.on("connect", () => {
-    //     socket.emit("createRoom", { draftId: query.id });
-    //   });
-    //   socket.on("error", () => {
-    //     console.log(socket.id);
-    //   });
-    //   console.log(socket);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    console.log(socket);
-  }, [socket]);
+  // useEffect(() => {
+  //   // try {
+  //   //   socket.on("createRoom", () => {
+  //   //     console.log(socket.id);
+  //   //   });
+  //   //   socket.on("connect", () => {
+  //   //     socket.emit("createRoom", { draftId: query.id });
+  //   //   });
+  //   //   socket.on("error", () => {
+  //   //     console.log(socket.id);
+  //   //   });
+  //   //   console.log(socket);
+  //   // } catch (error) {
+  //   //   console.log(error);
+  //   // }
+  //   console.log(socket);
+  // }, [socket]);
 
   useEffect(() => {
     socket.on("connect", () => {
       console.log(socket);
     });
-    socket.emit("createRoom", { draftId: query.id });
     console.log(socket);
-
-    // socket.on("disconnect", () => {
-    //   setIsConnected(false);
-    // });
-
-    // return () => {
-    //   socket.off("connect");
-    //   socket.off("disconnect");
-    // };
   }, []);
 
   const handleContextMenu = (event: React.MouseEvent) => {

@@ -45,6 +45,7 @@ const Script: NextPageWithLayout = () => {
         }
       } catch (error) {
         errorHandler(error);
+        console.log(error);
       }
     }
     getScriptsData();

@@ -2,7 +2,7 @@ import useAxiosPrivate from "hooks/useAxiosPrivate";
 
 interface ICreateNewInvitePayload {
   scriptId: string;
-  userId: string;
+  email: string;
 }
 
 const useInvite = (controller?: AbortController) => {

@@ -4,6 +4,7 @@ import { addCollaboratorSchema } from "./validation/addCollaborator.validation";
 import { useForm } from "react-hook-form";
 import useInvite from "apis/Invite.api";
 import errorHandler from "utils/error-handler";
+import { useRouter } from "next/router";
 
 interface IAddCollaboratorFormValues {
   email: string;
@@ -13,6 +14,7 @@ const useAddCollaborator = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [loading, setLoading] = useState(false);
   const { createNewInvite } = useInvite();
+  const { query } = useRouter();
 
   const {
     register,
@@ -41,7 +43,11 @@ const useAddCollaborator = () => {
     try {
       setLoading(true);
       console.log(data);
-      // const res = await createNewInvite({});
+      const res = await createNewInvite({
+        scriptId: query.id as string,
+        email: data.email,
+      });
+      console.log(res);
       reset({ email: "" });
       handleCloseAddCollaborator();
     } catch (error) {

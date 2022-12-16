@@ -6,8 +6,10 @@ interface ICreateNewScriptPayload {
   tagline: string;
 }
 
-interface IAddThemeScriptPayload<T> {
-  theme: Array<T>;
+interface IUpdateCoverPageScriptPayload {
+  title: string;
+  writer: string;
+  dateWrite: string;
 }
 
 interface IUpdateScriptPayload {
@@ -51,29 +53,24 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async addScriptTheme(payload: IAddThemeScriptPayload<string>, id: string) {
-      const res = await axiosPrivate.post(`/script/theme/add/${id}`, payload, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
-    async removeScriptTheme(id: string) {
-      const res = await axiosPrivate.delete(`/script/theme/remove/${id}`, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
     async updateScript(
       payload: IUpdateScriptPayload,
       id: string,
       query?: string
     ) {
-      const res = await axiosPrivate.patch(
+      const res = await axiosPrivate.post(
         `/script/update/${id}?${query}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data;
+    },
+    async updateCoverPageScript(payload: object, id: string) {
+      const res = await axiosPrivate.post(
+        `/script/update/coverpage/${id}`,
         payload,
         {
           signal: controller?.signal,
@@ -157,9 +154,53 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
+    async getWriterAllPublishedScripts() {
+      const res = await axiosPrivate.get(`/script/writer/published/all`, {
+        signal: controller?.signal,
+      });
+
+      return res.data;
+    },
+
+    async getWriterAllUnPublishedScripts() {
+      const res = await axiosPrivate.get(`/script/writer/unpublished/all`, {
+        signal: controller?.signal,
+      });
+
+      return res.data;
+    },
+
+    async getWriterAllInCompletedScripts() {
+      const res = await axiosPrivate.get(`/script/writer/incomplete/all`, {
+        signal: controller?.signal,
+      });
+
+      return res.data;
+    },
+
+    async getWriterAllSoldScripts() {
+      const res = await axiosPrivate.get(`/script/writer/sold/all`, {
+        signal: controller?.signal,
+      });
+
+      return res.data;
+    },
+
     async updateWriterArchiveScript(payload: { archive: boolean }, id: string) {
       const res = await axiosPrivate.patch(
         `/script/update/archive/${id}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data;
+    },
+
+    async updatePublishedScript(payload: { published: boolean }, id: string) {
+      const res = await axiosPrivate.patch(
+        `/script/update/publish/${id}`,
         payload,
         {
           signal: controller?.signal,
