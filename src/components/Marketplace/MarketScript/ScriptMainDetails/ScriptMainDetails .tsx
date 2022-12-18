@@ -23,8 +23,6 @@ const ScriptMainDetails = ({ script }: IProps) => {
         <AccordionSummary
           className="bg-primary-700"
           expandIcon={<BiChevronDown className="w-8 h-8 text-[#F7F5F8]" />}
-          aria-controls="logline-content"
-          id="logline-header"
           sx={{ "&.MuiAccordionSummary-root": { borderRadius: "4px" } }}
         >
           <Typography
@@ -38,7 +36,7 @@ const ScriptMainDetails = ({ script }: IProps) => {
             color="white"
             className="font-bold"
           >
-            LOGLINE
+            SCRIPT
           </Typography>
         </AccordionSummary>
         <AccordionDetails className="px-5 sm:px-10 py-5 bg-tinted-50/60">

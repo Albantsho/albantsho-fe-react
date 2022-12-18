@@ -221,6 +221,13 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data;
     },
+    async listAllCollaborators(scriptId: string) {
+      const res = await axiosPrivate.get(`/script/collaborators/${scriptId}`, {
+        signal: controller?.signal,
+      });
+
+      return res.data;
+    },
   };
 };
 

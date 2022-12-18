@@ -38,9 +38,9 @@ const Script: NextPageWithLayout = () => {
         if (query.id) {
           const res = await getScript(query.id as string);
           setScript(res.data.script);
-          const resDraft = await getOneDraft(query.id as string);
-          console.log(resDraft);
-          initialValue = resDraft.data.draft;
+          // const resDraft = await getOneDraft(query.id as string);
+          // console.log(resDraft);
+          // initialValue = resDraft.data.draft;
           setLoading(false);
         }
       } catch (error) {

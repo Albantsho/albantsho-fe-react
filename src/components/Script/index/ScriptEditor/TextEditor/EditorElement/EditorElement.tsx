@@ -138,9 +138,11 @@ const EditorElement = ({
             style={{
               position: "absolute",
               left: "0",
-              top: "2px",
-              width: "6px",
+              top: "3px",
+              bottom: "0px",
+              width: "5px",
               height: "16px",
+              fontWeight: 100,
             }}
           >
             <LeftParenthesesIcon />
@@ -151,8 +153,9 @@ const EditorElement = ({
               position: "absolute",
               right: "0",
               bottom: "9px",
-              width: "7.5px",
+              width: "6px",
               height: "16px",
+              fontWeight: 100,
             }}
           >
             <RightParenthesesIcon />

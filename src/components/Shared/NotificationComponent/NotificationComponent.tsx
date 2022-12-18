@@ -24,6 +24,8 @@ const NotificationComponent = () => {
     open,
     loading,
     notificationsList,
+    acceptInviteFunc,
+    rejectInvite,
   } = useNotificationComponent();
   return (
     <>
@@ -56,8 +58,12 @@ const NotificationComponent = () => {
           {loading ? (
             <ClipLoader color="grey" className="" />
           ) : (
-            Array.from(new Array(6)).map((_, index) => (
-              <ListItem className="gap-2 flex-wrap" divider key={index}>
+            notificationsList.map((notification) => (
+              <ListItem
+                className="gap-2 flex-wrap"
+                divider
+                key={notification.userId}
+              >
                 <ListItemAvatar>
                   <Avatar alt="Remy Sharp" />
                 </ListItemAvatar>
@@ -68,16 +74,22 @@ const NotificationComponent = () => {
                       variant="body1"
                       className="futura text-primary-700 font-semibold"
                     >
-                      Ali Connors
+                      {notification.title}
                     </Typography>
                   }
-                  secondary="Brunch this weekend? jhuftdrea dsaffsdfsfd"
+                  secondary={notification.description}
                   secondaryTypographyProps={{ className: "w-[170px] futura" }}
                 />
-                <IconButton className="text-success-500 hover:bg-success-50 bg-success-50">
+                <IconButton
+                  onClick={acceptInviteFunc(notification._id)}
+                  className="text-success-500 hover:bg-success-50 bg-success-50"
+                >
                   <MdOutlineDone />
                 </IconButton>
-                <IconButton className="text-error-500 hover:bg-error-50 bg-error-50">
+                <IconButton
+                  onClick={rejectInvite}
+                  className="text-error-500 hover:bg-error-50 bg-error-50"
+                >
                   <AiOutlineClose />
                 </IconButton>
               </ListItem>

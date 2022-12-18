@@ -1,20 +1,43 @@
-import alert from "@assets/images/alert.png";
-import { Avatar, AvatarGroup, Badge, IconButton } from "@mui/material";
+import { Avatar, AvatarGroup } from "@mui/material";
 import NotificationComponent from "@shared/NotificationComponent/NotificationComponent";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
-import Image from "next/image";
-
+import useScriptsApi from "apis/Scripts.api";
+import { ICollaboratorOrOwnerInformation } from "interfaces/collaborator";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import AddCollaborator from "../AddCollaborator/AddCollaborator";
 
 const DashboardNavOnDesktop = () => {
+  const [collaboratorsList, setCollaboratorsList] = useState<
+    Array<ICollaboratorOrOwnerInformation>
+  >([]);
+  const { listAllCollaborators } = useScriptsApi();
+  const { query } = useRouter();
+
+  useEffect(() => {
+    async function getAllCollaboratorsFunc() {
+      if (typeof query.id === "string") {
+        const res = await listAllCollaborators(query.id as string);
+        setCollaboratorsList(res.data.script.collaborators);
+      }
+    }
+
+    getAllCollaboratorsFunc();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
+
   return (
     <div className="lg:flex px-1 flex-1 justify-end items-center hidden">
       <div className="flex items-center gap-12">
         <AddCollaborator />
         <AvatarGroup max={3}>
-          <Avatar className="bg-success-500">J</Avatar>
-          <Avatar className="bg-orange-500">F</Avatar>
-          <Avatar className="bg-primary-300">M</Avatar>
+          {collaboratorsList.map((collaborator) => (
+            <Avatar
+              key={collaborator._id}
+              alt={collaborator.fullname}
+              src={collaborator.image}
+            />
+          ))}
         </AvatarGroup>
         <NotificationComponent />
         <ProfileMenu />

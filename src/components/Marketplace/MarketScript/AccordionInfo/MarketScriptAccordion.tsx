@@ -41,7 +41,7 @@ export default function MarketScriptAccordion({ script }: IProps) {
                 subscribed.
               </Typography>
               <Link
-                href={`${routes.marketplace.url}/subscription`}
+                href={routes.marketPlaceSubscription.url}
                 legacyBehavior
                 passHref
               >
@@ -72,23 +72,16 @@ export default function MarketScriptAccordion({ script }: IProps) {
           {script.motivation}
         </Typography>
       </AccordionCustom>
-      <AccordionCustom title="THEME">
+      <AccordionCustom title="STORY TOPICS">
         <div className="flex gap-3 flex-wrap">
-          <Chip
-            className="text-primary-700 text-sm rounded-3xl bg-tinted-50/60 py-5 px-4"
-            size="medium"
-            label="Love"
-          />
-          <Chip
-            className="text-primary-700 text-sm rounded-3xl bg-tinted-50/60 py-5 px-4"
-            size="medium"
-            label="Fantasy"
-          />
-          <Chip
-            className="text-primary-700 text-sm rounded-3xl bg-tinted-50/60 py-5 px-4"
-            size="medium"
-            label="Patriotism"
-          />
+          {script.storyTopics.map((oneTheme) => (
+            <Chip
+              key={oneTheme}
+              className="text-primary-700 text-sm rounded-3xl bg-tinted-50/60 py-5 px-4"
+              size="medium"
+              label={oneTheme}
+            />
+          ))}
         </div>
       </AccordionCustom>
       <AccordionCustom title="ACT STRUCTURE">

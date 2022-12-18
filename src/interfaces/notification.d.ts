@@ -3,7 +3,8 @@ export interface INotification {
   title: string;
   description: string;
   icon: string;
-  seen: boolean;
+  read: boolean;
   createdAt: string;
   updatedAt: string;
+  userId: string;
 }

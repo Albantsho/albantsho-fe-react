@@ -296,8 +296,8 @@ const routes = {
   titleScript: {
     url: "/script/title/[id]",
     dynamicUrl: (id: string) => `/script/title/${id}`,
-    mustAuthenticated: "no",
-    permission: [],
+    mustAuthenticated: "yes",
+    permission: ["writer"],
   },
   script: {
     url: "/script/[id]",

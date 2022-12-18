@@ -28,6 +28,17 @@ const useInvite = (controller?: AbortController) => {
 
       return res.data;
     },
+    async acceptInvite(inviteId: string) {
+      const res = await axiosPrivate.patch(
+        `/invite/accept/${inviteId}`,
+        {},
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data;
+    },
 
     async allInvite() {
       const res = await axiosPrivate.get("/invite/all", {

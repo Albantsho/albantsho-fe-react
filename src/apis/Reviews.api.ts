@@ -4,16 +4,16 @@ interface IUpdateReviewPayload {
   introduction: string;
   plot: string;
   character: string;
-  genre_and_story_structure: string;
+  genreAndStoryStructure: string;
   dialogue: string;
-  story_quality: string;
+  storyQuality: string;
   suggestions: string;
+  worldBuilding?: string;
+  scriptFormatingAndEditing?: string;
+  writerVoice?: string;
+  authenticityFeedback?: string;
+  openingAndClosingImage?: string;
   rate: string;
-  world_building?: string;
-  script_formatting?: string;
-  writer_voice?: string;
-  authenticity_feedback?: string;
-  opening_and_closing_image?: string;
 }
 
 interface IAssignReviewRequestToReviewerPayload {

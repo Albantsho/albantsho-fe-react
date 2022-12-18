@@ -42,7 +42,7 @@ const ScriptInfo = ({ script }: IProps) => {
           </Icon>
         </div>
         <Typography variant="body1" color="dark.400">
-          {script.motivation}
+          {script.tagline}
         </Typography>
         <PlaceBid script={script} setOpenBidSuccessful={setOpenBidSuccessful} />
         <BidSuccessfulModal

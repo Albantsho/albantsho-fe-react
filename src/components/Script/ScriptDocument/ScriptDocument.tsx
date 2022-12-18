@@ -18,6 +18,7 @@ const ScriptDocument = ({ script }: IProps) => {
     openInfoCollaborator,
     openListCollaborator,
     register,
+    collaboratorsList,
   } = useScriptDocument();
 
   return (
@@ -73,15 +74,42 @@ const ScriptDocument = ({ script }: IProps) => {
       )}
       {activeButton === 1 && (
         <>
-          <div className="border border-gray-400 rounded-lg py-[10px] px-4 flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <Avatar className="w-8 h-8">J</Avatar>
-              <Typography className="futura font-medium">Jane Mawe</Typography>
-            </div>
-            <Typography className="futura text-[#5D5FEF] font-medium">
-              owner
-            </Typography>
-          </div>
+          {collaboratorsList && (
+            <>
+              <div className="border border-gray-400 rounded-lg py-[10px] px-4 flex justify-between items-center mb-2">
+                <div className="flex items-center gap-3">
+                  <Avatar
+                    className="w-8 h-8"
+                    src={collaboratorsList.author.image}
+                    alt={collaboratorsList.author.fullname}
+                  />
+                  <Typography className="futura font-medium">
+                    {collaboratorsList.author.fullname}
+                  </Typography>
+                </div>
+                <Typography className="futura text-[#5D5FEF] font-medium">
+                  owner
+                </Typography>
+              </div>
+              {collaboratorsList.collaborators.map((collaborator) => (
+                <div
+                  key={collaborator._id}
+                  className="border border-gray-400 rounded-lg py-[10px] px-4 flex justify-between items-center mb-2"
+                >
+                  <div className="flex items-center gap-3">
+                    <Avatar
+                      className="w-8 h-8"
+                      src={collaborator.image}
+                      alt={collaborator.fullname}
+                    />
+                    <Typography className="futura font-medium">
+                      {collaborator.fullname}
+                    </Typography>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
           <Divider className="my-8" />
           <Typography className="futura font-medium mb-1 text-primary-700">
             Add Collaborator

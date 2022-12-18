@@ -1,10 +1,12 @@
+import useMouse from "@react-hook/mouse-position";
 import useUserStore from "app/user.store";
 import escapeHTML from "escape-html";
 import { CustomElement, IEditor } from "interfaces/slate";
 import { useRouter } from "next/router";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   createEditor,
+  Editor,
   Element,
   Text,
   Transforms,
@@ -14,6 +16,7 @@ import { withHistory } from "slate-history";
 import { Editable, Slate, withReact } from "slate-react";
 import { io } from "socket.io-client";
 import ChangeFormatMenuList from "../ChangeFormatMenuList/ChangeFormatMenuList";
+import CreateComment from "./CreateComment/CreateComment";
 import EditorElement from "./EditorElement/EditorElement";
 import useBlockButton from "./hooks/useBlockbutton";
 import withNewFeatures from "./plugins/withNewFeatures";
@@ -51,37 +54,68 @@ const TextEditor = ({
     []
   );
   const { isBlockActive } = useBlockButton();
-  console.log(accessToken);
-
-  const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL, {
-    auth: { accessToken },
-  });
   const { query } = useRouter();
-
-  // useEffect(() => {
-  //   // try {
-  //   //   socket.on("createRoom", () => {
-  //   //     console.log(socket.id);
-  //   //   });
-  //   //   socket.on("connect", () => {
-  //   //     socket.emit("createRoom", { draftId: query.id });
-  //   //   });
-  //   //   socket.on("error", () => {
-  //   //     console.log(socket.id);
-  //   //   });
-  //   //   console.log(socket);
-  //   // } catch (error) {
-  //   //   console.log(error);
-  //   // }
-  //   console.log(socket);
-  // }, [socket]);
+  const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL, {
+    auth: { accessToken: `Bearer ${accessToken}` },
+    query: { scriptId: query.id as string },
+  });
+  const [AllCommentsPositions, setAllCommentsPositions] = useState<
+    Array<{ positionX: number; positionY: number }>
+  >([]);
+  const ref = useRef(null);
+  const mouse = useMouse(ref, {
+    enterDelay: 100,
+    leaveDelay: 100,
+  });
 
   useEffect(() => {
     socket.on("connect", () => {
       console.log(socket);
     });
-    console.log(socket);
   }, []);
+
+  useEffect(() => {
+    const [selectedNode] = Editor.nodes(editor, {
+      match: (n) => Editor.isBlock(editor, n),
+      mode: "lowest",
+    });
+    console.log(selectedNode);
+
+    socket.emit("writeTextInScript", selectedNode);
+    socket.on("changeScriptText", (node) => {
+      console.log("changeScriptText", node);
+    });
+    socket.on("writeScript", (node) => {
+      console.log("writeScript", node);
+    });
+    socket.on("error", (node) => {
+      console.log("error", node);
+    });
+    socket.on("newPointerData", (node) => {
+      console.log("newPointerData", node);
+    });
+    socket.on("changeScriptText", (node) => {
+      console.log("changeScriptText", node);
+    });
+    socket.on("newPointerSelectionData", (node) => {
+      console.log(node);
+    });
+    socket.on("newComment", (node) => {
+      console.log(node);
+    });
+    socket.on("deleteSelectedText", (node) => {
+      console.log(node);
+    });
+    socket.on("deleteText", (node) => {
+      console.log(node);
+    });
+    socket.on("formatSelectedText", (node) => {
+      console.log(node);
+    });
+    socket.on("formatText", (node) => {
+      console.log(node);
+    });
+  }, [socket]);
 
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -158,6 +192,8 @@ const TextEditor = ({
       const isActiveTransition = isBlockActive(editor, "transition");
       const isActiveShot = isBlockActive(editor, "shot");
       const isActiveGeneral = isBlockActive(editor, "general");
+      const isActiveAction = isBlockActive(editor, "action");
+      const isActiveParagraph = isBlockActive(editor, "paragraph");
       if (isActiveHeading) {
         e.preventDefault();
         Transforms.insertNodes(editor, {
@@ -207,6 +243,21 @@ const TextEditor = ({
           children: [{ text: "" }],
         });
         return;
+      } else if (isActiveAction) {
+        e.preventDefault();
+        Transforms.insertNodes(editor, {
+          type: "paragraph",
+          children: [{ text: "" }],
+        });
+      } else if (isActiveParagraph) {
+        setContextMenu(
+          contextMenu === null
+            ? {
+                mouseX: window.innerWidth - width!,
+                mouseY: 400,
+              }
+            : null
+        );
       } else {
         return;
       }
@@ -215,10 +266,26 @@ const TextEditor = ({
 
   return (
     <div
+      ref={ref}
       onContextMenu={handleContextMenu}
+      onDoubleClick={(e) => {
+        console.log(mouse);
+        setAllCommentsPositions([
+          ...AllCommentsPositions,
+          { positionX: mouse.x!, positionY: mouse.y! },
+        ]);
+      }}
       style={{ cursor: "context-menu", maxWidth: `${width! - 1}px` }}
-      className="bg-tinted-50/25 w-full mx-auto"
+      className="bg-tinted-50/25 w-full mx-auto relative"
     >
+      {AllCommentsPositions.map((position, index) => (
+        <CreateComment
+          key={index}
+          positionX={position.positionX}
+          positionY={position.positionY}
+        />
+      ))}
+
       <Slate onChange={handleChangeEditor} editor={editor} value={initialValue}>
         <Editable
           onKeyDown={handleKeyDown}
