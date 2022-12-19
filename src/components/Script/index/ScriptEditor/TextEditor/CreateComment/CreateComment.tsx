@@ -8,15 +8,18 @@ import {
 } from "@mui/material";
 import { IoMdSend } from "react-icons/io";
 import useCreateComment from "./useCreateComment";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
+import { Socket } from "socket.io-client";
 
 interface IProps {
   positionX: number;
   positionY: number;
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-const CreateComment = ({ positionX, positionY }: IProps) => {
+const CreateComment = ({ positionX, positionY, socket }: IProps) => {
   const { errors, handleSubmit, onSubmit, register, showForm } =
-    useCreateComment();
+    useCreateComment({ socket, positionX, positionY });
 
   return (
     <div

@@ -1,6 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Socket } from "socket.io-client";
 import * as Yup from "yup";
 
 const createCommentSchema = Yup.object({
@@ -13,7 +15,13 @@ interface IRegisterFormValues {
   email: string;
 }
 
-const useCreateComment = () => {
+interface IProps {
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  positionX: number;
+  positionY: number;
+}
+
+const useCreateComment = ({ socket, positionX, positionY }: IProps) => {
   const {
     register,
     handleSubmit,
@@ -25,6 +33,12 @@ const useCreateComment = () => {
 
   const onSubmit = async (data: IRegisterFormValues) => {
     console.log(data);
+    socket.emit("createComment", {
+      message: data.comment,
+      position: [positionX, positionY],
+      mention: data.email,
+    });
+    console.log(socket);
     setShowForm(false);
   };
 

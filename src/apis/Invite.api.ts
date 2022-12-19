@@ -17,10 +17,10 @@ const useInvite = (controller?: AbortController) => {
       return res.data;
     },
 
-    async rejectInvite(payload: object, inviteId: string) {
+    async rejectInvite(inviteId: string) {
       const res = await axiosPrivate.patch(
         `/invite/reject/${inviteId}`,
-        payload,
+        {},
         {
           signal: controller?.signal,
         }

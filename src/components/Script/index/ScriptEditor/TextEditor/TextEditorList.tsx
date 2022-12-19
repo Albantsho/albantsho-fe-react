@@ -17,10 +17,6 @@ interface IProps {
 const TextEditorList = ({ setTextEditorValue, initialValue }: IProps) => {
   const { ref, width } = useResizeDetector();
   const { query } = useRouter();
-  const [contextMenu, setContextMenu] = useState<{
-    mouseX: number;
-    mouseY: number;
-  } | null>(null);
 
   return (
     <div ref={ref} className="relative text-start">
@@ -67,8 +63,6 @@ const TextEditorList = ({ setTextEditorValue, initialValue }: IProps) => {
         initialValue={initialValue}
         width={width}
         setTextEditorValue={setTextEditorValue}
-        contextMenu={contextMenu}
-        setContextMenu={setContextMenu}
       />
     </div>
   );

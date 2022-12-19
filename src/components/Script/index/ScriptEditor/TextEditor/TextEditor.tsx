@@ -14,26 +14,17 @@ import {
 } from "slate";
 import { withHistory } from "slate-history";
 import { Editable, Slate, withReact } from "slate-react";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import ChangeFormatMenuList from "../ChangeFormatMenuList/ChangeFormatMenuList";
 import CreateComment from "./CreateComment/CreateComment";
 import EditorElement from "./EditorElement/EditorElement";
 import useBlockButton from "./hooks/useBlockbutton";
 import withNewFeatures from "./plugins/withNewFeatures";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 interface IProps {
   setTextEditorValue?: React.Dispatch<React.SetStateAction<string | undefined>>;
   initialValue: CustomElement[];
-  setContextMenu: React.Dispatch<
-    React.SetStateAction<{
-      mouseX: number;
-      mouseY: number;
-    } | null>
-  >;
-  contextMenu: {
-    mouseX: number;
-    mouseY: number;
-  } | null;
   width: number | undefined;
 }
 
@@ -41,18 +32,18 @@ interface INode {
   children: Descendant[];
 }
 
-const TextEditor = ({
-  setContextMenu,
-  contextMenu,
-  setTextEditorValue,
-  width,
-  initialValue,
-}: IProps) => {
+const TextEditor = ({ setTextEditorValue, width, initialValue }: IProps) => {
+  console.log("hi");
+
   const accessToken = useUserStore((state) => state.accessToken);
   const editor: IEditor = useMemo(
     () => withNewFeatures(withHistory(withReact(createEditor()))),
     []
   );
+  const [contextMenu, setContextMenu] = useState<{
+    mouseX: number;
+    mouseY: number;
+  } | null>(null);
   const { isBlockActive } = useBlockButton();
   const { query } = useRouter();
   const socket = io(process.env.NEXT_PUBLIC_API_BASE_URL, {
@@ -60,7 +51,11 @@ const TextEditor = ({
     query: { scriptId: query.id as string },
   });
   const [AllCommentsPositions, setAllCommentsPositions] = useState<
-    Array<{ positionX: number; positionY: number }>
+    Array<{
+      positionX: number;
+      positionY: number;
+      socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+    }>
   >([]);
   const ref = useRef(null);
   const mouse = useMouse(ref, {
@@ -72,50 +67,62 @@ const TextEditor = ({
     socket.on("connect", () => {
       console.log(socket);
     });
+    socket.on("writeScript", (node) => {
+      console.log("🚀 ~ file: TextEditor.tsx:86 ~ socket.on ~ node", node);
+      // if (node !== null) {
+      Transforms.insertNodes(
+        editor,
+        {
+          type: node[0].type,
+          children: node[0].children,
+        },
+        {
+          at: node[1],
+          match: (node) => Editor.isBlock(editor, node),
+        }
+      );
+      // }
+
+      socket.on("newComment", (comment) => {
+        console.log(
+          "🚀 ~ file: TextEditor.tsx:87 ~ socket,on ~ comment",
+          comment
+        );
+        return;
+      });
+
+      // return () => {
+      //   socket.off("writeScript", (node) => {
+      //     console.log(node);
+      //   });
+      // };
+    });
   }, []);
 
   useEffect(() => {
-    const [selectedNode] = Editor.nodes(editor, {
-      match: (n) => Editor.isBlock(editor, n),
-      mode: "lowest",
+    socket.on("newComment", (newComment) => {
+      console.log(newComment);
     });
-    console.log(selectedNode);
+  }, []);
 
-    socket.emit("writeTextInScript", selectedNode);
-    socket.on("changeScriptText", (node) => {
-      console.log("changeScriptText", node);
-    });
-    socket.on("writeScript", (node) => {
-      console.log("writeScript", node);
-    });
-    socket.on("error", (node) => {
-      console.log("error", node);
-    });
-    socket.on("newPointerData", (node) => {
-      console.log("newPointerData", node);
-    });
-    socket.on("changeScriptText", (node) => {
-      console.log("changeScriptText", node);
-    });
-    socket.on("newPointerSelectionData", (node) => {
-      console.log(node);
-    });
-    socket.on("newComment", (node) => {
-      console.log(node);
-    });
-    socket.on("deleteSelectedText", (node) => {
-      console.log(node);
-    });
-    socket.on("deleteText", (node) => {
-      console.log(node);
-    });
-    socket.on("formatSelectedText", (node) => {
-      console.log(node);
-    });
-    socket.on("formatText", (node) => {
-      console.log(node);
-    });
-  }, [socket]);
+  // useEffect(() => {
+  //   socket.on("writeScript", (node) => {
+  //     console.log("🚀 ~ file: TextEditor.tsx:86 ~ socket.on ~ node", node);
+  //     if (node !== null) {
+  //       Transforms.insertNodes(
+  //         editor,
+  //         {
+  //           type: node[0].type,
+  //           children: node[0].children,
+  //         },
+  //         {
+  //           at: node[1],
+  //           match: (node) => Editor.isBlock(editor, node),
+  //         }
+  //       );
+  //     }
+  //   });
+  // }, []);
 
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -140,7 +147,6 @@ const TextEditor = ({
         const string = escapeHTML(node.text);
         return string;
       }
-
       const children = node.children.map((n) => serialize(n)).join("");
       if (Element.isElement(node)) {
         switch (node.type) {
@@ -269,10 +275,9 @@ const TextEditor = ({
       ref={ref}
       onContextMenu={handleContextMenu}
       onDoubleClick={(e) => {
-        console.log(mouse);
         setAllCommentsPositions([
           ...AllCommentsPositions,
-          { positionX: mouse.x!, positionY: mouse.y! },
+          { positionX: mouse.x!, positionY: mouse.y!, socket },
         ]);
       }}
       style={{ cursor: "context-menu", maxWidth: `${width! - 1}px` }}
@@ -283,11 +288,19 @@ const TextEditor = ({
           key={index}
           positionX={position.positionX}
           positionY={position.positionY}
+          socket={position.socket}
         />
       ))}
 
       <Slate onChange={handleChangeEditor} editor={editor} value={initialValue}>
         <Editable
+          onKeyUp={() => {
+            const [selectedNode] = Editor.nodes(editor, {
+              match: (n) => Editor.isBlock(editor, n),
+              mode: "lowest",
+            });
+            socket.emit("writeTextInScript", selectedNode);
+          }}
           onKeyDown={handleKeyDown}
           className="isolation-auto -z-0 break-words"
           spellCheck

@@ -6,7 +6,7 @@ import errorHandler from "utils/error-handler";
 
 const useNotificationComponent = () => {
   const { getAllNotifications } = useNotification();
-  const { acceptInvite } = useInvite();
+  const { acceptInvite, rejectInvite } = useInvite();
   const [notificationsList, setNotificationsList] = useState<
     Array<INotification>
   >([]);
@@ -24,7 +24,8 @@ const useNotificationComponent = () => {
 
   const acceptInviteFunc = (id: string) => async () => {
     try {
-      const res = await acceptInvite(id);
+      console.log(id.split(" ")[2]);
+      const res = await acceptInvite(id.split(" ")[2]);
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -32,8 +33,16 @@ const useNotificationComponent = () => {
     }
   };
 
-  const rejectInvite = () => {
-    ("");
+  const rejectInviteFunc = (id: string) => async () => {
+    try {
+      console.log(id.split(" ")[2]);
+
+      const res = await rejectInvite(id.split(" ")[2]);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      errorHandler(error);
+    }
   };
 
   useEffect(() => {
@@ -61,7 +70,7 @@ const useNotificationComponent = () => {
     notificationsList,
     loading,
     acceptInviteFunc,
-    rejectInvite,
+    rejectInviteFunc,
   };
 };
 

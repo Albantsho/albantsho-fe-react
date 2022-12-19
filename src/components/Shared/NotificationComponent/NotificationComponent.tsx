@@ -25,7 +25,7 @@ const NotificationComponent = () => {
     loading,
     notificationsList,
     acceptInviteFunc,
-    rejectInvite,
+    rejectInviteFunc,
   } = useNotificationComponent();
   return (
     <>
@@ -81,13 +81,13 @@ const NotificationComponent = () => {
                   secondaryTypographyProps={{ className: "w-[170px] futura" }}
                 />
                 <IconButton
-                  onClick={acceptInviteFunc(notification._id)}
+                  onClick={acceptInviteFunc(notification.description)}
                   className="text-success-500 hover:bg-success-50 bg-success-50"
                 >
                   <MdOutlineDone />
                 </IconButton>
                 <IconButton
-                  onClick={rejectInvite}
+                  onClick={rejectInviteFunc(notification.description)}
                   className="text-error-500 hover:bg-error-50 bg-error-50"
                 >
                   <AiOutlineClose />
