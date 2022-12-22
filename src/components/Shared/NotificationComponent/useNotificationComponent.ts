@@ -24,23 +24,16 @@ const useNotificationComponent = () => {
 
   const acceptInviteFunc = (id: string) => async () => {
     try {
-      console.log(id.split(" ")[2]);
       const res = await acceptInvite(id.split(" ")[2]);
-      console.log(res);
     } catch (error) {
-      console.log(error);
       errorHandler(error);
     }
   };
 
   const rejectInviteFunc = (id: string) => async () => {
     try {
-      console.log(id.split(" ")[2]);
-
       const res = await rejectInvite(id.split(" ")[2]);
-      console.log(res);
     } catch (error) {
-      console.log(error);
       errorHandler(error);
     }
   };
@@ -51,7 +44,6 @@ const useNotificationComponent = () => {
         setNotificationsList([]);
         setLoading(true);
         const res = await getAllNotifications();
-        console.log(res);
         setNotificationsList(res.data.notifications);
         setLoading(false);
       } catch (error) {

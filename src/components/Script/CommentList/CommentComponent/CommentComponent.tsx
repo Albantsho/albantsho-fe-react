@@ -7,13 +7,21 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
+import { bgArray } from "assets/colors/color-list";
+import { IComment } from "interfaces/comment";
 import { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { IoMdSend } from "react-icons/io";
 import TickIcon from "./assets/tick.svg";
 
-const CommentComponent = () => {
+interface IProps {
+  commentList: IComment[];
+  comment: IComment;
+}
+
+const CommentComponent = ({ comment, commentList }: IProps) => {
   const [replyComment, setReplyComment] = useState(false);
+  const allReplies = commentList.filter((c) => c.parentId === comment._id);
 
   const handleReplayComment = () => setReplyComment((prevState) => !prevState);
 
@@ -26,7 +34,7 @@ const CommentComponent = () => {
           },
           "& .MuiAccordionSummary-content": {
             alignItems: "center",
-            gap: "12px",
+            gap: "9px",
           },
         }}
         className="p-0"
@@ -38,24 +46,34 @@ const CommentComponent = () => {
           />
         }
       >
-        <Avatar>N</Avatar>
+        <Avatar
+          style={{ backgroundColor: bgArray[Math.floor(Math.random() * 14)] }}
+          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${comment.user?.image}`}
+          alt={comment.user?.fullname}
+        />
         <Typography
           variant="h6"
           color="primary.main"
           className="font-normal futura"
         >
-          Jane Doe
+          {comment.user?.fullname}
         </Typography>
+
         <Typography variant="subtitle1" className="text-gray-400">
-          5min ago
+          {new Date(
+            Date.now() - new Date(comment.createdAt).getTime()
+          ).getMinutes()}
+          min ago
         </Typography>
-        <SvgIcon component={TickIcon} inheritViewBox />
+        <SvgIcon
+          className="ml-auto mr-[2px]"
+          component={TickIcon}
+          inheritViewBox
+        />
       </AccordionSummary>
       <AccordionDetails className="pt-3 md:pt-5">
         <Typography variant="body2" className="mt-3 mb-4">
-          It amet, consectetur adipiscing elit. Volutpat vitae orci proin semper
-          commodo a habitasse mollis. Magna pellentesque dignissim aliquam duis
-          id tincidunt metus
+          {comment.message}
         </Typography>
         <Button
           onClick={handleReplayComment}
@@ -63,7 +81,8 @@ const CommentComponent = () => {
           variant="text"
           className="my-4 text-gray-300"
         >
-          1 Reply
+          {allReplies.length > 0 && allReplies.length}
+          Reply
         </Button>
         {replyComment && (
           <div className="bg-tinted-50 rounded-lg flex justify-between items-center ">

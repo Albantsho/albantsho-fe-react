@@ -7,7 +7,7 @@ import ScenesList from "../ScenesList";
 interface IProps {
   openScenesModal: boolean;
   setOpenScenesModal: React.Dispatch<React.SetStateAction<boolean>>;
-  textEditorValue: string | undefined;
+  textEditorValue: string;
 }
 
 const ScenesListModal = ({

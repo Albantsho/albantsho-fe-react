@@ -261,7 +261,7 @@ const EditorElement = ({
             marginTop: "40px",
             marginBottom: "30px",
             height: "842px",
-            padding: matches ? "40px 56px" : "16px 24px",
+            padding: matches ? "30px 56px" : "16px 24px",
             background: "#fff",
           }}
         >

@@ -10,35 +10,71 @@ import { IoMdSend } from "react-icons/io";
 import useCreateComment from "./useCreateComment";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { Socket } from "socket.io-client";
+import { AiOutlineClose } from "react-icons/ai";
+import useUserStore from "app/user.store";
+import IconComment from "./assets/commentIcon.svg";
+import { bgArray } from "assets/colors/color-list";
 
 interface IProps {
   positionX: number;
   positionY: number;
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  setShowFormStatus: boolean;
+  elementWidth: number;
+  cancelComment: (id: number) => () => void;
+  id: number;
 }
 
-const CreateComment = ({ positionX, positionY, socket }: IProps) => {
+const CreateComment = ({
+  positionX,
+  positionY,
+  socket,
+  setShowFormStatus,
+  elementWidth,
+  cancelComment,
+  id,
+}: IProps) => {
   const { errors, handleSubmit, onSubmit, register, showForm } =
-    useCreateComment({ socket, positionX, positionY });
+    useCreateComment({ socket, positionX, positionY, setShowFormStatus });
+  const user = useUserStore((state) => state.user);
 
   return (
     <div
-      className="w-[420px] flex items-start gap-5"
+      className={`${
+        positionX < 370 ? "flex-row" : "flex-row-reverse"
+      } w-[360px] flex items-start gap-5`}
       style={{
         top: `${positionY}px`,
-        left: `${positionX}px`,
+        left: `${positionX < 370 && positionX}px`,
+        right: `${positionX > 370 && elementWidth - positionX}px`,
         position: "absolute",
         zIndex: 9999,
       }}
     >
-      <div className="border-[6px] border-black rounded-full">
-        <Avatar>OP</Avatar>
+      <div className="w-fit relative">
+        <SvgIcon
+          component={IconComment}
+          className="w-16 h-16"
+          fontSize="large"
+          inheritViewBox
+        />
+        <Avatar
+          style={{ backgroundColor: bgArray[Math.floor(Math.random() * 14)] }}
+          className="absolute top-2 left-3 w-11 h-11"
+          alt={user.fullname}
+        />
       </div>
       {showForm && (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-lg max-w-[360px] w-full p-3 shadow-primary"
+          className="bg-white rounded-lg max-w-[360px] w-full p-4 shadow-primary relative"
         >
+          <IconButton
+            onClick={cancelComment(id)}
+            className="text-error-500 w-7 h-7 p-1 hover:bg-error-50 bg-error-50 absolute top-0 right-0"
+          >
+            <AiOutlineClose />
+          </IconButton>
           <TextField
             error={Boolean(errors.comment) || false}
             {...register("comment")}
@@ -96,6 +132,10 @@ const CreateComment = ({ positionX, positionY, socket }: IProps) => {
             }}
             helperText={errors.email?.message}
             InputProps={{
+              className: "h-6",
+              // inputProps: {
+              //   style: { textAlign: "center" },
+              // },
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton type="submit" color="primary">

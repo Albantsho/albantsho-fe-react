@@ -1,4 +1,5 @@
 import { Divider, IconButton, Modal, Typography } from "@mui/material";
+import { IComment } from "interfaces/comment";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
@@ -7,9 +8,14 @@ import CommentList from "../CommentList";
 interface IProps {
   openCommentsModal: boolean;
   setOpenCommentsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  commentList: IComment[];
 }
 
-const CommentModal = ({ openCommentsModal, setOpenCommentsModal }: IProps) => {
+const CommentModal = ({
+  openCommentsModal,
+  setOpenCommentsModal,
+  commentList,
+}: IProps) => {
   const { push, query } = useRouter();
 
   const handleCloseExportFile = () => {
@@ -37,7 +43,7 @@ const CommentModal = ({ openCommentsModal, setOpenCommentsModal }: IProps) => {
           Comments list
         </Typography>
         <Divider className="my-4 -mx-6" />
-        <CommentList />
+        <CommentList commentList={commentList} />
       </div>
     </Modal>
   );

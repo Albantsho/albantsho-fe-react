@@ -2,19 +2,27 @@ import { ButtonGroup, IconButton, SvgIcon, Tooltip } from "@mui/material";
 import { CustomElement } from "interfaces/slate";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
-import { useState } from "react";
 import { RiFileUserLine } from "react-icons/ri";
 import { useResizeDetector } from "react-resize-detector";
 import routes from "routes/routes";
 import BookMarkIcon from "../assets/book-mark.svg";
 import TextEditor from "./TextEditor";
+import { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 interface IProps {
-  setTextEditorValue?: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setTextEditorValue: React.Dispatch<React.SetStateAction<string>>;
+  textEditorValueSave: React.MutableRefObject<string>;
   initialValue: CustomElement[];
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
-const TextEditorList = ({ setTextEditorValue, initialValue }: IProps) => {
+
+const TextEditorList = ({
+  setTextEditorValue,
+  initialValue,
+  socket,
+  textEditorValueSave,
+}: IProps) => {
   const { ref, width } = useResizeDetector();
   const { query } = useRouter();
 
@@ -60,9 +68,11 @@ const TextEditorList = ({ setTextEditorValue, initialValue }: IProps) => {
         </Link>
       </ButtonGroup>
       <TextEditor
+        socket={socket}
         initialValue={initialValue}
         width={width}
         setTextEditorValue={setTextEditorValue}
+        textEditorValueSave={textEditorValueSave}
       />
     </div>
   );

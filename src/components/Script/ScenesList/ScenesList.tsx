@@ -4,7 +4,7 @@ import deserializeScript from "utils/deserialize-script";
 import PhotoIcon from "./assets/photo.svg";
 
 interface IProps {
-  textEditorValue: string | undefined;
+  textEditorValue: string;
 }
 
 const ScenesList = ({ textEditorValue }: IProps) => {

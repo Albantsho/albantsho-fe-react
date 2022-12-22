@@ -7,6 +7,7 @@ import CommentModal from "components/Script/CommentList/CommentModal/CommentModa
 import ExportFileModal from "components/Script/ExportFile/ExportFileModal/ExportFileModal";
 import ScenesListModal from "components/Script/ScenesList/ScenesListModal/ScenesListModal";
 import ScriptDocumentModal from "components/Script/ScriptDocument/ScriptDocumentModal/ScriptDocumentModal";
+import { IComment } from "interfaces/comment";
 import { IFullInformationScript } from "interfaces/script";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -25,11 +26,17 @@ const routesArray = [
 ];
 
 interface IProps {
-  textEditorValue: string | undefined;
+  textEditorValue: string;
+
   script: IFullInformationScript;
+  commentList: IComment[];
 }
 
-const ScriptSidebarOnMobile = ({ textEditorValue, script }: IProps) => {
+const ScriptSidebarOnMobile = ({
+  textEditorValue,
+  script,
+  commentList,
+}: IProps) => {
   const [activeRoute, setActiveRoute] = useState(0);
   const [openExportModal, setOpenExportModal] = useState(false);
   const [openScenesModal, setOpenScenesModal] = useState(false);
@@ -113,6 +120,7 @@ const ScriptSidebarOnMobile = ({ textEditorValue, script }: IProps) => {
         setOpenScenesModal={setOpenScenesModal}
       />
       <CommentModal
+        commentList={commentList}
         openCommentsModal={openCommentsModal}
         setOpenCommentsModal={setOpenCommentsModal}
       />

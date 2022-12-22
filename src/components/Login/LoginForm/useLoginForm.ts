@@ -56,8 +56,6 @@ const useLoginForm = () => {
         ? replace(routes.adminDashboard.url)
         : replace(routes.reviewerDashboard.url);
     } catch (error) {
-      console.log(error);
-
       errorHandler(error);
     } finally {
       setLoading(false);

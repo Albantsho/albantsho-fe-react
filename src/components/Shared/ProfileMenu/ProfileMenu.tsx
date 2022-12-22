@@ -48,7 +48,10 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
         >
           {user.fullname}
         </Typography>
-        <Avatar src="/assets/images/profile.jpg" />
+        <Avatar
+          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
+          alt={user.fullname}
+        />
         <AiFillCaretDown
           className={`${inHome && "text-white"} ${
             isMobile ? "hidden" : "block text-primary-700"
@@ -84,7 +87,10 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
           onClick={() => push(routes.profile.url)}
         >
           <ListItemAvatar>
-            <Avatar src="/assets/images/profile.jpg" />
+            <Avatar
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
+              alt={user.fullname}
+            />
           </ListItemAvatar>
           <ListItemText>
             <Typography
@@ -93,7 +99,10 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
             >
               {user.fullname}
             </Typography>
-            <Typography variant="caption" className="text-neutral-800 ">
+            <Typography
+              variant="caption"
+              className="text-neutral-800 text-ellipsis overflow-clip"
+            >
               {user.email}
             </Typography>
           </ListItemText>

@@ -19,9 +19,15 @@ interface IProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   positionX: number;
   positionY: number;
+  setShowFormStatus: boolean;
 }
 
-const useCreateComment = ({ socket, positionX, positionY }: IProps) => {
+const useCreateComment = ({
+  socket,
+  positionX,
+  positionY,
+  setShowFormStatus,
+}: IProps) => {
   const {
     register,
     handleSubmit,
@@ -29,16 +35,15 @@ const useCreateComment = ({ socket, positionX, positionY }: IProps) => {
   } = useForm<IRegisterFormValues>({
     resolver: yupResolver(createCommentSchema),
   });
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(setShowFormStatus);
 
   const onSubmit = async (data: IRegisterFormValues) => {
-    console.log(data);
     socket.emit("createComment", {
       message: data.comment,
-      position: [positionX, positionY],
+      positionX,
+      positionY,
       mention: data.email,
     });
-    console.log(socket);
     setShowForm(false);
   };
 

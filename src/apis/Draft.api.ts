@@ -1,7 +1,7 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 
 interface IUploadFileDraftPayload {
-  content: File;
+  content: string | File;
 }
 
 interface ISelectOtherDraftPayload {
@@ -42,7 +42,7 @@ const useDraftApi = (controller?: AbortController) => {
       return res.data;
     },
     async saveFileDraft(scriptId: string, payload: IUploadFileDraftPayload) {
-      const res = await axiosPrivate.post(`/draft/save/${scriptId}`, payload, {
+      const res = await axiosPrivate.patch(`/draft/save/${scriptId}`, payload, {
         signal: controller?.signal,
       });
 
@@ -53,7 +53,7 @@ const useDraftApi = (controller?: AbortController) => {
       scriptId: string,
       payload: ISelectOtherDraftPayload
     ) {
-      const res = await axiosPrivate.post(
+      const res = await axiosPrivate.patch(
         `/draft/select/${scriptId}`,
         payload,
         {
@@ -65,7 +65,7 @@ const useDraftApi = (controller?: AbortController) => {
     },
 
     async uploadCopyright(scriptId: string, payload: IUploadCopyrightPayload) {
-      const res = await axiosPrivate.post(
+      const res = await axiosPrivate.patch(
         `/draft/copyright/${scriptId}`,
         payload,
         {

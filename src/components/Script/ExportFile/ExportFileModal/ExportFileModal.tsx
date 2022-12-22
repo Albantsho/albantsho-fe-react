@@ -7,7 +7,7 @@ import ExportFile from "../ExportFile";
 interface IProps {
   openExportModal: boolean;
   setOpenExportModal: React.Dispatch<React.SetStateAction<boolean>>;
-  textEditorValue: string | undefined;
+  textEditorValue: string;
 }
 
 const ExportFileModal = ({

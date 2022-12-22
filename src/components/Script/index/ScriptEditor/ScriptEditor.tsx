@@ -5,14 +5,24 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import routes from "routes/routes";
 import TextEditorList from "./TextEditor/TextEditorList";
+import { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 interface IProps {
   script: IFullInformationScript;
-  setTextEditorValue?: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setTextEditorValue: React.Dispatch<React.SetStateAction<string>>;
   initialValue: CustomElement[];
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  textEditorValueSave: React.MutableRefObject<string>;
 }
 
-const ScriptEditor = ({ script, setTextEditorValue, initialValue }: IProps) => {
+const ScriptEditor = ({
+  script,
+  setTextEditorValue,
+  initialValue,
+  socket,
+  textEditorValueSave,
+}: IProps) => {
   const { query } = useRouter();
 
   return (
@@ -29,8 +39,10 @@ const ScriptEditor = ({ script, setTextEditorValue, initialValue }: IProps) => {
         </div>
       </Link>
       <TextEditorList
+        socket={socket}
         initialValue={initialValue}
         setTextEditorValue={setTextEditorValue}
+        textEditorValueSave={textEditorValueSave}
       />
     </div>
   );

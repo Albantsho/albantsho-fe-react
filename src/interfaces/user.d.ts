@@ -10,6 +10,7 @@ export interface IUser {
   userType?: "writer" | "producer" | "admin" | "reviewer";
   portfolio: null | string;
   productionCompanyName: null | string;
+  image: null | string;
 }
 
 export interface IUserInformation {

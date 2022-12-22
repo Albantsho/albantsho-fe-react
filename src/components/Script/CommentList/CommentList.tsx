@@ -1,14 +1,20 @@
 import { Divider } from "@mui/material";
+import { IComment } from "interfaces/comment";
+import React from "react";
 import CommentComponent from "./CommentComponent/CommentComponent";
 
-const CommentList = () => {
+interface IProps {
+  commentList: IComment[];
+}
+
+const CommentList = ({ commentList }: IProps) => {
   return (
     <>
-      {Array.from(new Array(6)).map((_, i) => (
-        <>
-          <CommentComponent key={i} />
+      {commentList.map((comment) => (
+        <React.Fragment key={comment._id}>
+          <CommentComponent commentList={commentList} comment={comment} />
           <Divider className="my-1" />
-        </>
+        </React.Fragment>
       ))}
     </>
   );

@@ -3,7 +3,7 @@ import Btn from "@shared/Btn/Btn";
 import jsPDF from "jspdf";
 
 interface IProps {
-  textEditorValue: string | undefined;
+  textEditorValue: string;
 }
 
 const ExportFile = ({ textEditorValue }: IProps) => {
