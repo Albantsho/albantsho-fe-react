@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { CustomElement, IEditor } from "interfaces/slate";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { createEditor } from "slate";
 import { withHistory } from "slate-history";
 import { Editable, Slate, withReact } from "slate-react";
@@ -39,9 +39,9 @@ const TextEditor = ({
     handleKeyUp,
     contextMenu,
     createCommentFunc,
-    ref,
     allComments,
-    mouse,
+    // ref,
+    // mouse,
     cancelComment,
   } = useTextEditor({
     width,
@@ -53,16 +53,15 @@ const TextEditor = ({
 
   return (
     <div
-      ref={ref}
       onContextMenu={handleContextMenu}
-      onDoubleClick={createCommentFunc}
       style={{ cursor: "context-menu", maxWidth: `${width! - 1}px` }}
       className="bg-tinted-50/25 w-full mx-auto relative"
     >
       {allComments.map((comment) => (
         <CreateComment
           key={comment._id}
-          elementWidth={mouse.elementWidth!}
+          // elementWidth={mouse.elementWidth!}
+          elementWidth={500}
           positionX={comment.positionX}
           positionY={comment.positionY}
           socket={comment.socket}
@@ -71,15 +70,15 @@ const TextEditor = ({
           cancelComment={cancelComment}
         />
       ))}
-
       <Slate onChange={handleChangeEditor} editor={editor} value={initialValue}>
         <Editable
+          onDoubleClick={createCommentFunc}
           onPaste={(e) => e.preventDefault()}
           onKeyUp={handleKeyUp}
           onKeyDown={handleKeyDown}
           className="isolation-auto -z-0 break-words"
           spellCheck
-          autoFocus
+          autoFocus={false}
           renderElement={(props) => <EditorElement {...props} />}
         />
         <ChangeFormatMenuList
@@ -91,4 +90,4 @@ const TextEditor = ({
   );
 };
 
-export default TextEditor;
+export default React.memo(TextEditor);

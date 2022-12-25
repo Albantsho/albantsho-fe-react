@@ -3,27 +3,28 @@ import {
   AccordionDetails,
   AccordionSummary,
   Avatar,
-  Button,
   SvgIcon,
   Typography,
 } from "@mui/material";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { bgArray } from "assets/colors/color-list";
 import { IComment } from "interfaces/comment";
-import { useState } from "react";
+import { useMemo } from "react";
 import { BiChevronDown } from "react-icons/bi";
-import { IoMdSend } from "react-icons/io";
+import { Socket } from "socket.io-client";
+import { timeSince } from "utils/get-time";
 import TickIcon from "./assets/tick.svg";
+import FormComment from "./FormComment/FormComment";
+import ResponseComment from "./ResponseComment/ResponseComment";
 
 interface IProps {
   commentList: IComment[];
   comment: IComment;
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-const CommentComponent = ({ comment, commentList }: IProps) => {
-  const [replyComment, setReplyComment] = useState(false);
-  const allReplies = commentList.filter((c) => c.parentId === comment._id);
-
-  const handleReplayComment = () => setReplyComment((prevState) => !prevState);
+const CommentComponent = ({ comment, commentList, socket }: IProps) => {
+  const time = timeSince(new Date(comment.updatedAt).getTime());
 
   return (
     <Accordion sx={{ "&:before": { display: "none" } }} className="shadow-none">
@@ -34,7 +35,7 @@ const CommentComponent = ({ comment, commentList }: IProps) => {
           },
           "& .MuiAccordionSummary-content": {
             alignItems: "center",
-            gap: "9px",
+            gap: "8px",
           },
         }}
         className="p-0"
@@ -46,27 +47,33 @@ const CommentComponent = ({ comment, commentList }: IProps) => {
           />
         }
       >
-        <Avatar
-          style={{ backgroundColor: bgArray[Math.floor(Math.random() * 14)] }}
-          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${comment.user?.image}`}
-          alt={comment.user?.fullname}
-        />
-        <Typography
-          variant="h6"
-          color="primary.main"
-          className="font-normal futura"
-        >
-          {comment.user?.fullname}
-        </Typography>
+        <div className="flex items-center w-full gap-[9px] flex-1">
+          <Avatar
+            className="w-9 h-9"
+            style={{
+              backgroundColor: useMemo(
+                () => bgArray[Math.floor(Math.random() * 14)],
+                [bgArray]
+              ),
+            }}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${comment.user?.image}`}
+            alt={comment.user?.fullname}
+          />
+          <Typography
+            variant="h6"
+            color="primary.main"
+            className="font-normal futura leading-normal"
+          >
+            {comment.user?.fullname}
+          </Typography>
 
-        <Typography variant="subtitle1" className="text-gray-400">
-          {new Date(
-            Date.now() - new Date(comment.createdAt).getTime()
-          ).getMinutes()}
-          min ago
-        </Typography>
+          <Typography variant="body2" className="text-gray-400">
+            {time}
+          </Typography>
+        </div>
         <SvgIcon
-          className="ml-auto mr-[2px]"
+          className="ml-auto"
+          fontSize="small"
           component={TickIcon}
           inheritViewBox
         />
@@ -75,25 +82,16 @@ const CommentComponent = ({ comment, commentList }: IProps) => {
         <Typography variant="body2" className="mt-3 mb-4">
           {comment.message}
         </Typography>
-        <Button
-          onClick={handleReplayComment}
-          disableRipple
-          variant="text"
-          className="my-4 text-gray-300"
-        >
-          {allReplies.length > 0 && allReplies.length}
-          Reply
-        </Button>
-        {replyComment && (
-          <div className="bg-tinted-50 rounded-lg flex justify-between items-center ">
-            <input
-              type="text"
-              placeholder="Reply"
-              className="bg-transparent outline-none placeholder:text-primary-700 px-4 min-h-[40px]"
-            />
-            <IoMdSend className="text-primary-700 mr-4" />
-          </div>
-        )}
+        <FormComment
+          commentList={commentList}
+          id={comment._id}
+          socket={socket}
+        />
+        <ResponseComment
+          socket={socket}
+          commentList={commentList}
+          parentId={comment._id}
+        />
       </AccordionDetails>
     </Accordion>
   );

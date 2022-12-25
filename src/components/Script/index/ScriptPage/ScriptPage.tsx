@@ -9,7 +9,7 @@ import { IComment } from "interfaces/comment";
 import { IFullInformationScript } from "interfaces/script";
 import { CustomElement } from "interfaces/slate";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import errorHandler from "utils/error-handler";
 import ScriptEditor from "../ScriptEditor/ScriptEditor";
@@ -30,6 +30,7 @@ const ScriptPage = ({ script, initialValue }: IProps) => {
     query: { scriptId: query.id as string },
   });
   const [commentList, setCommentList] = useState<Array<IComment>>([]);
+  console.log(commentList);
 
   useEffect(() => {
     socket.on("connect", () => null);
@@ -39,6 +40,7 @@ const ScriptPage = ({ script, initialValue }: IProps) => {
         const res = await saveFileDraft(query.id as string, {
           content: textEditorValueSave.current,
         });
+        socket.emit("scriptSaved");
         console.log(res);
       } catch (error) {
         errorHandler(error);
@@ -70,6 +72,7 @@ const ScriptPage = ({ script, initialValue }: IProps) => {
   return (
     <>
       <ScriptSidebarOnMobile
+        socket={socket}
         script={script}
         textEditorValue={textEditorValue}
         commentList={commentList}
@@ -85,7 +88,7 @@ const ScriptPage = ({ script, initialValue }: IProps) => {
               <ScenesList textEditorValue={textEditorValue} />
             )}
             {query.tab === "comment" && (
-              <CommentList commentList={commentList} />
+              <CommentList socket={socket} commentList={commentList} />
             )}
             {query.tab === "export" && (
               <ExportFile textEditorValue={textEditorValue} />
@@ -106,4 +109,4 @@ const ScriptPage = ({ script, initialValue }: IProps) => {
   );
 };
 
-export default ScriptPage;
+export default React.memo(ScriptPage);

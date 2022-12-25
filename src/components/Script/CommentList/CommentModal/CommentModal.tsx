@@ -4,17 +4,21 @@ import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
 import CommentList from "../CommentList";
+import { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 interface IProps {
   openCommentsModal: boolean;
   setOpenCommentsModal: React.Dispatch<React.SetStateAction<boolean>>;
   commentList: IComment[];
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
 const CommentModal = ({
   openCommentsModal,
   setOpenCommentsModal,
   commentList,
+  socket,
 }: IProps) => {
   const { push, query } = useRouter();
 
@@ -28,7 +32,7 @@ const CommentModal = ({
       open={openCommentsModal}
       onClose={handleCloseExportFile}
     >
-      <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-xs mx-auto pt-14 pb-2 rounded-lg max-h-96 overflow-y-scroll no-scrollbar">
+      <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-sm mx-auto pt-14 pb-2 rounded-lg max-h-96 overflow-y-scroll no-scrollbar">
         <IconButton
           onClick={handleCloseExportFile}
           className="absolute top-4 right-4"
@@ -43,7 +47,7 @@ const CommentModal = ({
           Comments list
         </Typography>
         <Divider className="my-4 -mx-6" />
-        <CommentList commentList={commentList} />
+        <CommentList socket={socket} commentList={commentList} />
       </div>
     </Modal>
   );

@@ -3,7 +3,7 @@ import useMouse from "@react-hook/mouse-position";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IEditor } from "interfaces/slate";
 import { debounce } from "lodash";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Editor, Transforms, type Descendant } from "slate";
 import { Socket } from "socket.io-client";
 import {
@@ -41,62 +41,63 @@ const useTextEditor = ({
   } | null>(null);
   const { isBlockActive } = useBlockButton();
   const [allComments, setAllComments] = useState<Array<IAddComment>>([]);
-  const ref = useRef(null);
-  const mouse = useMouse(ref, {
-    enterDelay: 100,
-    leaveDelay: 100,
-  });
+  // const ref = useRef(null);
+  // const mouse = useMouse(ref, {
+  //   enterDelay: 100,
+  //   leaveDelay: 100,
+  // });
 
   const createCommentFunc = () => {
-    setAllComments([
-      ...allComments,
-      {
-        positionX: mouse.x!,
-        positionY: mouse.y!,
-        socket,
-        setShowFormStatus: true,
-        _id: Math.random(),
-      },
-    ]);
+    // setAllComments([
+    //   ...allComments,
+    //   {
+    //     positionX: mouse.x!,
+    //     positionY: mouse.y!,
+    //     socket,
+    //     setShowFormStatus: true,
+    //     _id: Math.random(),
+    //   },
+    // ]);
   };
 
   const cancelComment = (id: number) => () => {
     const filteredComment = allComments.filter((c) => c._id !== id);
     setAllComments(filteredComment);
   };
+  console.log("hi");
 
   useEffect(() => {
     socket.on(
       "writeScript",
-      debounce(
-        (node) => {
-          try {
-            Transforms.insertNodes(
-              editor,
-              {
-                type: node[0].type,
-                children: node[0].children,
-              },
-              {
-                at: node[1],
-                match: (node) => Editor.isBlock(editor, node),
-              }
-            );
-          } catch (error) {
-            ("");
-          }
-          try {
-            Transforms.removeNodes(editor, {
-              at: [node[1][0], node[1][1] + 1],
-              mode: "lowest",
-            });
-          } catch (error) {
-            ("");
-          }
-        },
-        1000,
-        { leading: false }
-      )
+      // debounce(
+      (node) => {
+        try {
+          Transforms.insertNodes(
+            editor,
+            {
+              type: node[0].type,
+              children: node[0].children,
+            },
+            {
+              at: node[1],
+              match: (node) => Editor.isBlock(editor, node),
+            }
+          );
+        } catch (error) {
+          ("");
+        }
+        try {
+          Transforms.removeNodes(editor, {
+            at: [node[1][0], node[1][1] + 1],
+            mode: "lowest",
+          });
+        } catch (error) {
+          ("");
+        }
+      }
+      //   800,
+      //   { leading: false }
+      // )
     );
 
     socket.on("newComment", (comment) => {
@@ -116,12 +117,6 @@ const useTextEditor = ({
       ]);
     });
 
-    // return () => {
-    //   socket.off("writeScript", () => {
-    //     console.log("off");
-    //   });
-    // };
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -140,19 +135,18 @@ const useTextEditor = ({
   const handleCloseContextMenu = () => setContextMenu(null);
 
   const handleChangeEditor = (element: Descendant[]) => {
-    const [selectedNode] = Editor.nodes(editor, {
-      match: (n) => Editor.isBlock(editor, n),
-      mode: "lowest",
-    });
-    socket.emit("writeTextInScript", selectedNode);
-    const node = { children: element };
-
-    const valueForSave = serializeForSaveInBackend(node);
-    const value = serializeForConvertPdf(node);
-
-    if (valueForSave !== undefined && textEditorValueSave !== undefined)
-      textEditorValueSave.current = valueForSave;
-    if (value !== undefined) setTextEditorValue(value);
+    // console.log("rerender");
+    // const [selectedNode] = Editor.nodes(editor, {
+    //   match: (n) => Editor.isBlock(editor, n),
+    //   mode: "lowest",
+    // });
+    // socket.emit("writeTextInScript", selectedNode);
+    // const node = { children: element };
+    // const valueForSave = serializeForSaveInBackend(node);
+    // const value = serializeForConvertPdf(node);
+    // if (valueForSave !== undefined && textEditorValueSave !== undefined)
+    //   textEditorValueSave.current = valueForSave;
+    // // if (value !== undefined) setTextEditorValue(value);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -237,7 +231,12 @@ const useTextEditor = ({
   };
 
   const handleKeyUp = () => {
-    ("");
+    console.log("rerender");
+    const [selectedNode] = Editor.nodes(editor, {
+      match: (n) => Editor.isBlock(editor, n),
+      mode: "lowest",
+    });
+    socket.emit("writeTextInScript", selectedNode);
   };
 
   return {
@@ -249,8 +248,8 @@ const useTextEditor = ({
     contextMenu,
     allComments,
     createCommentFunc,
-    ref,
-    mouse,
+    // ref,
+    // mouse,
     cancelComment,
   };
 };

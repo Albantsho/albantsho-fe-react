@@ -11,12 +11,14 @@ import { IComment } from "interfaces/comment";
 import { IFullInformationScript } from "interfaces/script";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import routes from "routes/routes";
 import Comment from "../assets/comment.svg";
 import Document from "../assets/document.svg";
 import Export from "../assets/export.svg";
 import Scenes from "../assets/scenes.svg";
+import { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 const routesArray = [
   { route: "?tab=scenes", title: "Scenes", icon: Scenes, value: 1 },
@@ -27,7 +29,7 @@ const routesArray = [
 
 interface IProps {
   textEditorValue: string;
-
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   script: IFullInformationScript;
   commentList: IComment[];
 }
@@ -36,6 +38,7 @@ const ScriptSidebarOnMobile = ({
   textEditorValue,
   script,
   commentList,
+  socket,
 }: IProps) => {
   const [activeRoute, setActiveRoute] = useState(0);
   const [openExportModal, setOpenExportModal] = useState(false);
@@ -120,6 +123,7 @@ const ScriptSidebarOnMobile = ({
         setOpenScenesModal={setOpenScenesModal}
       />
       <CommentModal
+        socket={socket}
         commentList={commentList}
         openCommentsModal={openCommentsModal}
         setOpenCommentsModal={setOpenCommentsModal}
@@ -133,4 +137,4 @@ const ScriptSidebarOnMobile = ({
   );
 };
 
-export default ScriptSidebarOnMobile;
+export default React.memo(ScriptSidebarOnMobile);

@@ -28,7 +28,7 @@ const ExportFileModal = ({
       open={openExportModal}
       onClose={handleCloseExportFile}
     >
-      <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-xs mx-auto py-14 xl:py-20 rounded-lg">
+      <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-sm mx-auto py-14 xl:py-20 rounded-lg">
         <IconButton
           onClick={handleCloseExportFile}
           className="absolute top-5 right-5"

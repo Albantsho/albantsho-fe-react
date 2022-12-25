@@ -1,56 +1,64 @@
-import { Avatar, Button, Typography } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
 import { IComment } from "interfaces/comment";
-import { useState } from "react";
-import { IoMdSend } from "react-icons/io";
+import React from "react";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
+import { Socket } from "socket.io-client";
+import FormComment from "../FormComment/FormComment";
+import { timeSince } from "utils/get-time";
 
 interface IProps {
-  comment: IComment;
+  commentList: IComment[];
+  parentId: string | null;
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-const ResponseComment = ({ comment }: IProps) => {
-  const [replyComment, setReplyComment] = useState(false);
-
-  const handleReplayComment = () => setReplyComment((prevState) => !prevState);
-
+const ResponseComment = ({ commentList, parentId, socket }: IProps) => {
   return (
-    <div className="shadow-none">
-      <div className="items-center flex gap-12">
-        <Avatar>N</Avatar>
-        <Typography
-          variant="h6"
-          color="primary.main"
-          className="font-normal futura"
-        >
-          Jane Doe
-        </Typography>
-        <Typography variant="subtitle1" className="text-gray-400">
-          5min ago
-        </Typography>
-      </div>
-      <div className="pt-3 md:pt-5">
-        <Typography variant="body2" className="mt-3 mb-4">
-          {comment.message}
-        </Typography>
-        <Button
-          onClick={handleReplayComment}
-          disableRipple
-          variant="text"
-          className="my-4 text-gray-300"
-        >
-          1 Reply
-        </Button>
-        {replyComment && (
-          <div className="bg-tinted-50 rounded-lg flex justify-between items-center ">
-            <input
-              type="text"
-              placeholder="Reply"
-              className="bg-transparent outline-none placeholder:text-primary-700 px-4 min-h-[40px]"
-            />
-            <IoMdSend className="text-primary-700 mr-4" />
-          </div>
-        )}
-      </div>
-    </div>
+    <>
+      {commentList.map((comment) => {
+        const time = timeSince(new Date(comment.updatedAt).getTime());
+        return (
+          comment.parentId === parentId && (
+            <React.Fragment key={comment._id}>
+              <div className="-mx-4">
+                <div className="flex gap-3 items-center">
+                  <Avatar
+                    className="w-9 h-9"
+                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${comment.user?.image}`}
+                    alt={comment.user?.fullname}
+                  />
+                  <Typography
+                    variant="h6"
+                    color="primary.main"
+                    className="font-normal futura"
+                  >
+                    {comment.user?.fullname}
+                  </Typography>
+                  <Typography variant="body2" className="text-gray-400">
+                    {time}
+                  </Typography>
+                </div>
+                <div className="pt-3 md:pt-5 px-4">
+                  <Typography variant="body2" className="mt-3 mb-4">
+                    {comment.message}
+                  </Typography>
+                  <FormComment
+                    commentList={commentList}
+                    id={comment._id}
+                    socket={socket}
+                  />
+                </div>
+              </div>
+              {/* <ResponseComment
+                socket={socket}
+                commentList={commentList}
+                parentId={comment._id}
+              /> */}
+            </React.Fragment>
+          )
+        );
+      })}
+    </>
   );
 };
 
