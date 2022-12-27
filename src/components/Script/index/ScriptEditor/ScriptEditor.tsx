@@ -1,28 +1,19 @@
 import { Typography } from "@mui/material";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IFullInformationScript } from "interfaces/script";
-import { CustomElement } from "interfaces/slate";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import routes from "routes/routes";
-import TextEditorList from "./TextEditor/TextEditorList";
 import { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
+import TextEditorList from "./TextEditor/TextEditorList";
 
 interface IProps {
   script: IFullInformationScript;
-  setTextEditorValue: React.Dispatch<React.SetStateAction<string>>;
-  initialValue: CustomElement[];
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-  textEditorValueSave: React.MutableRefObject<string>;
+  htmlInitialValue: string;
 }
 
-const ScriptEditor = ({
-  script,
-  setTextEditorValue,
-  initialValue,
-  socket,
-  textEditorValueSave,
-}: IProps) => {
+const ScriptEditor = ({ script, htmlInitialValue, socket }: IProps) => {
   const { query } = useRouter();
 
   return (
@@ -38,12 +29,7 @@ const ScriptEditor = ({
           </Typography>
         </div>
       </Link>
-      <TextEditorList
-        socket={socket}
-        initialValue={initialValue}
-        setTextEditorValue={setTextEditorValue}
-        textEditorValueSave={textEditorValueSave}
-      />
+      <TextEditorList socket={socket} htmlInitialValue={htmlInitialValue} />
     </div>
   );
 };

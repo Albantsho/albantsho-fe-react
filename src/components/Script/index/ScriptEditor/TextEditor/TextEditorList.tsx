@@ -1,30 +1,44 @@
 import { ButtonGroup, IconButton, SvgIcon, Tooltip } from "@mui/material";
-import { CustomElement } from "interfaces/slate";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
+import useDraftApi from "apis/Draft.api";
+import useScriptValueStore from "app/scriptValue.store";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { RiFileUserLine } from "react-icons/ri";
+import { useState } from "react";
+import { RiFileUserLine, RiSave3Fill } from "react-icons/ri";
 import { useResizeDetector } from "react-resize-detector";
 import routes from "routes/routes";
+import { Socket } from "socket.io-client";
 import BookMarkIcon from "../assets/book-mark.svg";
 import TextEditor from "./TextEditor";
-import { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 interface IProps {
-  setTextEditorValue: React.Dispatch<React.SetStateAction<string>>;
-  textEditorValueSave: React.MutableRefObject<string>;
-  initialValue: CustomElement[];
+  htmlInitialValue: string;
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-const TextEditorList = ({
-  setTextEditorValue,
-  initialValue,
-  socket,
-  textEditorValueSave,
-}: IProps) => {
+export interface IAddComment {
+  positionX: number;
+  positionY: number;
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  setShowFormStatus: boolean;
+  _id: number;
+}
+
+const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   const { ref, width } = useResizeDetector();
   const { query } = useRouter();
+  const { saveFileDraft } = useDraftApi();
+  const [render, setRender] = useState(false);
+  const [allComments, setAllComments] = useState<Array<IAddComment>>([]);
+  const scriptValue = useScriptValueStore((state) => state.scriptValue);
+  setTimeout(() => {
+    setRender(true);
+  }, 1500);
+
+  const saveDraftFile = async () => {
+    await saveFileDraft(query.id as string, { content: scriptValue });
+  };
 
   return (
     <div ref={ref} className="relative text-start">
@@ -66,14 +80,33 @@ const TextEditorList = ({
             </IconButton>
           </Tooltip>
         </Link>
+
+        <Tooltip
+          classes={{
+            tooltip: "bg-black",
+            tooltipPlacementLeft: "bg-black",
+          }}
+          title="Save File"
+          placement="left"
+        >
+          <IconButton
+            onClick={saveDraftFile}
+            disableRipple
+            className="bg-white text-primary-700 rounded-none w-12 h-12"
+          >
+            <SvgIcon inheritViewBox component={RiSave3Fill} />
+          </IconButton>
+        </Tooltip>
       </ButtonGroup>
-      <TextEditor
-        socket={socket}
-        initialValue={initialValue}
-        width={width}
-        setTextEditorValue={setTextEditorValue}
-        textEditorValueSave={textEditorValueSave}
-      />
+      {render && (
+        <TextEditor
+          socket={socket}
+          allComments={allComments}
+          setAllComments={setAllComments}
+          htmlInitialValue={htmlInitialValue}
+          width={width}
+        />
+      )}
     </div>
   );
 };

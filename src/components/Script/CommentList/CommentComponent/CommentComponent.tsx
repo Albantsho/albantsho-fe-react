@@ -9,7 +9,7 @@ import {
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { bgArray } from "assets/colors/color-list";
 import { IComment } from "interfaces/comment";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { Socket } from "socket.io-client";
 import { timeSince } from "utils/get-time";
@@ -18,12 +18,12 @@ import FormComment from "./FormComment/FormComment";
 import ResponseComment from "./ResponseComment/ResponseComment";
 
 interface IProps {
-  commentList: IComment[];
+  comments: IComment[];
   comment: IComment;
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-const CommentComponent = ({ comment, commentList, socket }: IProps) => {
+const CommentComponent = ({ comment, comments, socket }: IProps) => {
   const time = timeSince(new Date(comment.updatedAt).getTime());
 
   return (
@@ -82,14 +82,10 @@ const CommentComponent = ({ comment, commentList, socket }: IProps) => {
         <Typography variant="body2" className="mt-3 mb-4">
           {comment.message}
         </Typography>
-        <FormComment
-          commentList={commentList}
-          id={comment._id}
-          socket={socket}
-        />
+        <FormComment comments={comments} id={comment._id} socket={socket} />
         <ResponseComment
           socket={socket}
-          commentList={commentList}
+          comments={comments}
           parentId={comment._id}
         />
       </AccordionDetails>
@@ -97,4 +93,4 @@ const CommentComponent = ({ comment, commentList, socket }: IProps) => {
   );
 };
 
-export default CommentComponent;
+export default React.memo(CommentComponent);

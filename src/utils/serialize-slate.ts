@@ -5,14 +5,14 @@ interface INode {
   children: Descendant[];
 }
 
-export const serializeForConvertPdf = (
+export const serializeWithoutDiv = (
   node: INode | Descendant
 ): string | undefined => {
   if (Text.isText(node)) {
     const string = escapeHTML(node.text);
     return string;
   }
-  const children = node.children.map((n) => serializeForConvertPdf(n)).join("");
+  const children = node.children.map((n) => serializeWithoutDiv(n)).join("");
   if (Element.isElement(node)) {
     switch (node.type) {
       case "heading": {
@@ -48,16 +48,14 @@ export const serializeForConvertPdf = (
   }
 };
 
-export const serializeForSaveInBackend = (
+export const serializeWithDiv = (
   node: INode | Descendant
 ): string | undefined => {
   if (Text.isText(node)) {
     const string = escapeHTML(node.text);
     return string;
   }
-  const children = node.children
-    .map((n) => serializeForSaveInBackend(n))
-    .join("");
+  const children = node.children.map((n) => serializeWithDiv(n)).join("");
   if (Element.isElement(node)) {
     switch (node.type) {
       case "page": {

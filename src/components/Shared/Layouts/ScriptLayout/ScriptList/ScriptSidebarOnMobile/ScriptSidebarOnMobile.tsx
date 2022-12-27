@@ -3,22 +3,21 @@ import {
   BottomNavigationAction,
   SvgIcon,
 } from "@mui/material";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 import CommentModal from "components/Script/CommentList/CommentModal/CommentModal";
 import ExportFileModal from "components/Script/ExportFile/ExportFileModal/ExportFileModal";
 import ScenesListModal from "components/Script/ScenesList/ScenesListModal/ScenesListModal";
 import ScriptDocumentModal from "components/Script/ScriptDocument/ScriptDocumentModal/ScriptDocumentModal";
-import { IComment } from "interfaces/comment";
 import { IFullInformationScript } from "interfaces/script";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { SyntheticEvent, useState } from "react";
 import routes from "routes/routes";
+import { Socket } from "socket.io-client";
 import Comment from "../assets/comment.svg";
 import Document from "../assets/document.svg";
 import Export from "../assets/export.svg";
 import Scenes from "../assets/scenes.svg";
-import { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 const routesArray = [
   { route: "?tab=scenes", title: "Scenes", icon: Scenes, value: 1 },
@@ -28,18 +27,11 @@ const routesArray = [
 ];
 
 interface IProps {
-  textEditorValue: string;
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   script: IFullInformationScript;
-  commentList: IComment[];
 }
 
-const ScriptSidebarOnMobile = ({
-  textEditorValue,
-  script,
-  commentList,
-  socket,
-}: IProps) => {
+const ScriptSidebarOnMobile = ({ script, socket }: IProps) => {
   const [activeRoute, setActiveRoute] = useState(0);
   const [openExportModal, setOpenExportModal] = useState(false);
   const [openScenesModal, setOpenScenesModal] = useState(false);
@@ -113,22 +105,20 @@ const ScriptSidebarOnMobile = ({
         })}
       </BottomNavigation>
       <ExportFileModal
-        textEditorValue={textEditorValue}
         openExportModal={openExportModal}
         setOpenExportModal={setOpenExportModal}
       />
       <ScenesListModal
-        textEditorValue={textEditorValue}
         openScenesModal={openScenesModal}
         setOpenScenesModal={setOpenScenesModal}
       />
       <CommentModal
         socket={socket}
-        commentList={commentList}
         openCommentsModal={openCommentsModal}
         setOpenCommentsModal={setOpenCommentsModal}
       />
       <ScriptDocumentModal
+        socket={socket}
         script={script}
         openDocumentModal={openDocumentModal}
         setOpenDocumentModal={setOpenDocumentModal}

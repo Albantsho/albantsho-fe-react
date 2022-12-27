@@ -1,29 +1,29 @@
 import { Divider, IconButton, Modal, Typography } from "@mui/material";
-import { IComment } from "interfaces/comment";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { useRouter } from "next/router";
+import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
-import CommentList from "../CommentList";
 import { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
+import CommentList from "../CommentList";
 
 interface IProps {
   openCommentsModal: boolean;
   setOpenCommentsModal: React.Dispatch<React.SetStateAction<boolean>>;
-  commentList: IComment[];
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
 const CommentModal = ({
   openCommentsModal,
   setOpenCommentsModal,
-  commentList,
   socket,
 }: IProps) => {
   const { push, query } = useRouter();
 
   const handleCloseExportFile = () => {
-    push(routes.script.dynamicUrl(query.id as string));
+    push(routes.script.dynamicUrl(query.id as string), undefined, {
+      shallow: true,
+    });
     setOpenCommentsModal(false);
   };
   return (
@@ -47,10 +47,10 @@ const CommentModal = ({
           Comments list
         </Typography>
         <Divider className="my-4 -mx-6" />
-        <CommentList socket={socket} commentList={commentList} />
+        <CommentList socket={socket} />
       </div>
     </Modal>
   );
 };
 
-export default CommentModal;
+export default React.memo(CommentModal);

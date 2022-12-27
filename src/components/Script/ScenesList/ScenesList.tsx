@@ -1,19 +1,15 @@
 import { Divider, SvgIcon, Typography } from "@mui/material";
+import useScriptValueStore from "app/scriptValue.store";
 import React from "react";
-import deserializeScript from "utils/deserialize-script";
+import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
 import PhotoIcon from "./assets/photo.svg";
 
-interface IProps {
-  textEditorValue: string;
-}
+const ScenesList = () => {
+  const scriptValue = useScriptValueStore((state) => state.scriptValue);
+  console.log(scriptValue);
+  const htmlContent = new DOMParser().parseFromString(scriptValue, "text/html");
 
-const ScenesList = ({ textEditorValue }: IProps) => {
-  const htmlContent = new DOMParser().parseFromString(
-    textEditorValue as string,
-    "text/html"
-  );
-
-  const onlyNeedSections = deserializeScript(htmlContent.body).filter(
+  const onlyNeedSections = deserializeScriptWithOutDiv(htmlContent.body).filter(
     (program: { type: string }) =>
       program.type === "heading" || program.type === "action"
   );

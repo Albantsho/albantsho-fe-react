@@ -1,19 +1,18 @@
 import {
   Avatar,
-  TextField,
   Divider,
+  IconButton,
   InputAdornment,
   SvgIcon,
-  IconButton,
+  TextField,
 } from "@mui/material";
-import { IoMdSend } from "react-icons/io";
-import useCreateComment from "./useCreateComment";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-import { Socket } from "socket.io-client";
-import { AiOutlineClose } from "react-icons/ai";
 import useUserStore from "app/user.store";
+import { AiOutlineClose } from "react-icons/ai";
+import { IoMdSend } from "react-icons/io";
+import { Socket } from "socket.io-client";
 import IconComment from "./assets/commentIcon.svg";
-import { bgArray } from "assets/colors/color-list";
+import useCreateComment from "./useCreateComment";
 
 interface IProps {
   positionX: number;
@@ -59,7 +58,7 @@ const CreateComment = ({
           inheritViewBox
         />
         <Avatar
-          style={{ backgroundColor: bgArray[Math.floor(Math.random() * 14)] }}
+          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
           className="absolute top-2 left-3 w-11 h-11"
           alt={user.fullname}
         />
@@ -110,7 +109,7 @@ const CreateComment = ({
             {...register("email")}
             placeholder="@"
             sx={{
-              "& fieldset": { border: "none" },
+              "& fieldset": { border: "none", height: "24px" },
               width: "100%",
               "& .MuiOutlinedInput-root": {
                 "& > fieldset": {
@@ -133,9 +132,6 @@ const CreateComment = ({
             helperText={errors.email?.message}
             InputProps={{
               className: "h-6",
-              // inputProps: {
-              //   style: { textAlign: "center" },
-              // },
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton type="submit" color="primary">

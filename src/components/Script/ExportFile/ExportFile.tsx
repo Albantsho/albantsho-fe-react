@@ -1,18 +1,27 @@
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import useScriptValueStore from "app/scriptValue.store";
 import jsPDF from "jspdf";
+import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
+import { serializeWithoutDiv } from "utils/serialize-slate";
 
-interface IProps {
-  textEditorValue: string;
-}
+const ExportFile = () => {
+  const scriptValue = useScriptValueStore((state) => state.scriptValue);
 
-const ExportFile = ({ textEditorValue }: IProps) => {
   const handleExportPdfFile = () => {
+    const htmlContent = new DOMParser().parseFromString(
+      scriptValue,
+      "text/html"
+    );
+    const value = deserializeScriptWithOutDiv(htmlContent.body);
+    console.log({ children: value });
+
+    const valueForConvertPdf = serializeWithoutDiv({ children: value });
     const doc = new jsPDF("p", "pt", "a4");
-    if (textEditorValue) {
+    if (valueForConvertPdf) {
       doc.html(
         `<div style="padding:0 40px;width:595px;font-family:Courier Prime;">
-        ${textEditorValue}
+        ${valueForConvertPdf}
         </div>`,
         {
           margin: [30, 0],

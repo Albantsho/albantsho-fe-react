@@ -7,14 +7,14 @@ import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 interface IProps {
-  commentList: IComment[];
+  comments: IComment[];
   id: string;
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-const FormComment = ({ commentList, id, socket }: IProps) => {
+const FormComment = ({ comments, id, socket }: IProps) => {
   const [replyComment, setReplyComment] = useState(false);
-  const allReplies = commentList.filter((c) => c.parentId === id);
+  const allReplies = comments.filter((c) => c.parentId === id);
 
   const {
     register,

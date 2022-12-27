@@ -7,18 +7,15 @@ import ScenesList from "../ScenesList";
 interface IProps {
   openScenesModal: boolean;
   setOpenScenesModal: React.Dispatch<React.SetStateAction<boolean>>;
-  textEditorValue: string;
 }
 
-const ScenesListModal = ({
-  openScenesModal,
-  setOpenScenesModal,
-  textEditorValue,
-}: IProps) => {
+const ScenesListModal = ({ openScenesModal, setOpenScenesModal }: IProps) => {
   const { push, query } = useRouter();
 
   const handleCloseExportFile = () => {
-    push(routes.script.dynamicUrl(query.id as string));
+    push(routes.script.dynamicUrl(query.id as string), undefined, {
+      shallow: true,
+    });
     setOpenScenesModal(false);
   };
 
@@ -43,7 +40,7 @@ const ScenesListModal = ({
           Scenes list
         </Typography>
         <Divider className="my-4 -mx-6" />
-        <ScenesList textEditorValue={textEditorValue} />
+        <ScenesList />
       </div>
     </Modal>
   );

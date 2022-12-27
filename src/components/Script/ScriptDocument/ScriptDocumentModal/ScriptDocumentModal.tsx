@@ -4,23 +4,29 @@ import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
 import ScriptDocument from "../ScriptDocument";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
+import { Socket } from "socket.io-client";
 
 interface IProps {
   openDocumentModal: boolean;
   setOpenDocumentModal: React.Dispatch<React.SetStateAction<boolean>>;
   script: IFullInformationScript;
+  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
 const ScriptDocumentModal = ({
   openDocumentModal,
   setOpenDocumentModal,
   script,
+  socket,
 }: IProps) => {
   const { push, query } = useRouter();
 
   const handleCloseExportFile = () => {
     setOpenDocumentModal(false);
-    push(routes.script.dynamicUrl(query.id as string));
+    push(routes.script.dynamicUrl(query.id as string), undefined, {
+      shallow: true,
+    });
   };
 
   return (
@@ -37,7 +43,7 @@ const ScriptDocumentModal = ({
         >
           <AiOutlineClose />
         </IconButton>
-        <ScriptDocument script={script} />
+        <ScriptDocument socket={socket} script={script} />
       </div>
     </Modal>
   );

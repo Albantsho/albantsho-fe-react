@@ -1,25 +1,27 @@
 import { Divider } from "@mui/material";
-import { IComment } from "interfaces/comment";
-import React from "react";
-import CommentComponent from "./CommentComponent/CommentComponent";
-import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
+import useCommentStore from "app/comments.store";
+import React from "react";
+import { Socket } from "socket.io-client";
+import CommentComponent from "./CommentComponent/CommentComponent";
 
 interface IProps {
-  commentList: IComment[];
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-const CommentList = ({ commentList, socket }: IProps) => {
+const CommentList = ({ socket }: IProps) => {
+  const { comments } = useCommentStore((state) => ({
+    comments: state.comments,
+  }));
   return (
     <>
-      {commentList
+      {comments
         .filter((comment) => !comment.parentId)
         .map((comment) => (
           <React.Fragment key={comment._id}>
             <CommentComponent
               socket={socket}
-              commentList={commentList}
+              comments={comments}
               comment={comment}
             />
             <Divider className="my-1" />
@@ -29,4 +31,4 @@ const CommentList = ({ commentList, socket }: IProps) => {
   );
 };
 
-export default CommentList;
+export default React.memo(CommentList);
