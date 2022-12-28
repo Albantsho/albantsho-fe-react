@@ -20,8 +20,7 @@ interface IProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   setShowFormStatus: boolean;
   elementWidth: number;
-  cancelComment: (id: number) => () => void;
-  id: number;
+  cancelComment: () => void;
 }
 
 const CreateComment = ({
@@ -31,7 +30,6 @@ const CreateComment = ({
   setShowFormStatus,
   elementWidth,
   cancelComment,
-  id,
 }: IProps) => {
   const { errors, handleSubmit, onSubmit, register, showForm } =
     useCreateComment({ socket, positionX, positionY, setShowFormStatus });
@@ -65,11 +63,12 @@ const CreateComment = ({
       </div>
       {showForm && (
         <form
+          style={{ zIndex: 999999 }}
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-lg max-w-[360px] w-full p-4 shadow-primary relative"
+          className="bg-white rounded-lg max-w-[360px] w-full p-4 shadow-primary relative z-[99999]"
         >
           <IconButton
-            onClick={cancelComment(id)}
+            onClick={cancelComment}
             className="text-error-500 w-7 h-7 p-1 hover:bg-error-50 bg-error-50 absolute top-0 right-0"
           >
             <AiOutlineClose />

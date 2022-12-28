@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { DefaultEventsMap } from "@socket.io/component-emitter";
+import useCommentStore from "app/comments.store";
 import { CustomElement, IEditor } from "interfaces/slate";
 import React, { useMemo } from "react";
 import { createEditor } from "slate";
@@ -8,27 +9,20 @@ import { Editable, Slate, withReact } from "slate-react";
 import { Socket } from "socket.io-client";
 import { deserializeScriptWithDiv } from "utils/deserialize-script-with-div";
 import ChangeFormatMenuList from "../ChangeFormatMenuList/ChangeFormatMenuList";
+import AllCommentsLogo from "./CreateComment/AllCommentsLogo/AllCommentsLogo";
 import CreateComment from "./CreateComment/CreateComment";
 import EditorElement from "./EditorElement/EditorElement";
 import withNewFeatures from "./plugins/withNewFeatures";
-import { IAddComment } from "./TextEditorList";
+
 import useTextEditor from "./useTextEditor";
 
 interface IProps {
   htmlInitialValue: string;
   width: number | undefined;
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-  setAllComments: React.Dispatch<React.SetStateAction<IAddComment[]>>;
-  allComments: IAddComment[];
 }
 
-const TextEditor = ({
-  width,
-  htmlInitialValue,
-  socket,
-  allComments,
-  setAllComments,
-}: IProps) => {
+const TextEditor = ({ width, htmlInitialValue, socket }: IProps) => {
   const editor: IEditor = useMemo(
     () => withNewFeatures(withHistory(withReact(createEditor()))),
     []
@@ -57,13 +51,13 @@ const TextEditor = ({
     ref,
     mouse,
     cancelComment,
+    addComment,
   } = useTextEditor({
     width,
     editor,
     socket,
-    allComments,
-    setAllComments,
   });
+  const comments = useCommentStore((state) => state.comments);
 
   return (
     <div
@@ -72,18 +66,22 @@ const TextEditor = ({
       style={{ cursor: "context-menu", maxWidth: `${width! - 1}px` }}
       className="bg-tinted-50/25 w-full mx-auto relative"
     >
-      {allComments.map((comment) => (
+      {addComment?.showComponent && (
         <CreateComment
-          key={comment._id}
+          key={addComment.key}
           elementWidth={mouse.elementWidth!}
-          positionX={comment.positionX}
-          positionY={comment.positionY}
-          socket={comment.socket}
-          id={comment._id}
-          setShowFormStatus={comment.setShowFormStatus}
+          positionX={addComment.positionX}
+          positionY={addComment.positionY}
+          socket={socket}
+          setShowFormStatus={addComment.setShowFormStatus}
           cancelComment={cancelComment}
         />
-      ))}
+      )}
+      {comments
+        .filter((comment) => comment.parentId === null)
+        .map((comment) => (
+          <AllCommentsLogo key={comment._id} comment={comment} />
+        ))}
       <Slate onChange={handleChangeEditor} editor={editor} value={initialValue}>
         <Editable
           onDoubleClick={createCommentFunc}
@@ -104,4 +102,4 @@ const TextEditor = ({
   );
 };
 
-export default TextEditor;
+export default React.memo(TextEditor);

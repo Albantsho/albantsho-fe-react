@@ -27,16 +27,13 @@ import { AiOutlineSearch } from "react-icons/ai";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 
-let results = [
-  { title: "The Long Man of Long Beach" },
-  { title: "The Long Man of Long Beach" },
-  { title: "The Long Man of Long Beach" },
-  { title: "The Long Man of Long Beach" },
-  { title: "The Long Man of Long Beach" },
-  { title: "The Long Man of Long Beach" },
-  { title: "The Long Man of Long Beach" },
-  { title: "The Long Man of Long Beach" },
-];
+interface IDraft {
+  _id: string;
+  title: string;
+  image: null | string;
+}
+
+let results: Array<IDraft> = [];
 
 interface IProps {
   activeButton: number;

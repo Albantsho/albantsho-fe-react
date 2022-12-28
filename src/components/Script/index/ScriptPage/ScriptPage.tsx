@@ -12,7 +12,6 @@ import React, { useEffect, useMemo } from "react";
 import { io } from "socket.io-client";
 import errorHandler from "utils/error-handler";
 import ScriptEditor from "../ScriptEditor/ScriptEditor";
-import useSavedScript from "../ScriptEditor/TextEditor/useSavedScript";
 
 interface IProps {
   script: IFullInformationScript;
@@ -25,7 +24,7 @@ const ScriptPage = ({
   htmlInitialValue,
   setHtmlInitialValue,
 }: IProps) => {
-  const { query } = useRouter();
+  const { query, replace } = useRouter();
   const { getOneDraft } = useDraftApi();
   const { getComments } = useCommentStore((state) => ({
     getComments: state.getComments,
@@ -42,12 +41,9 @@ const ScriptPage = ({
     []
   );
 
-  useSavedScript(socket);
-
   useEffect(() => {
     socket.on("connect", () => null);
     socket.on("roomData", (roomData) => {
-      console.log(roomData);
       getComments(roomData.comments);
     });
     socket.on("getScriptOrder", async () => {
@@ -61,6 +57,12 @@ const ScriptPage = ({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    socket.on("disconnect", () => {
+      !socket.connected && replace("/");
+    });
+  }, [socket]);
 
   return (
     <>

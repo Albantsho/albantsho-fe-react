@@ -75,98 +75,100 @@ const useAbstract = (script: IScript) => {
   const updateScriptFunc = () => setPublish(false);
 
   const onSubmit = async (data: IAbstractFormValues) => {
-    if (publish) {
-      try {
-        setLoadingPublishButton(true);
-        const res = await updateScript(
-          {
-            primaryGenre: data.primaryGenre,
-            secondaryGenre: data.secondaryGenre,
-            title: data.title,
-            scriptFormat: data.scriptFormat,
-            storyFormat: data.storyFormat,
-            primaryCast: data.primaryCast,
-            secondaryCast: data.secondaryCast,
-            estimatedBudget: data.estimatedBudget,
-            tagLine: data.tagline,
-            synopsis: data.synopsis,
-            storyWorld: data.storyWorld,
-            actStructure: data.actStructure,
-            characterBible: data.characterBible,
-            inspiration: data.inspiration,
-            motivation: data.motivation,
-            image: data.image[0],
-            storyTopics: data.storyTopics,
-            logLine: data.logLine,
-            adaption,
-            adaptionPermission: data.adaptionPermission[0],
-          },
-          query.id as string,
-          "publish=true"
-        );
-        const resDraft = await uploadFileDraft(query.id as string, {
-          content: data.scriptFile[0],
-        });
-        const resCopyright = await uploadCopyright(query.id as string, {
-          content: data.scriptCopyright[0],
-        });
-        console.log(res, resDraft, resCopyright);
-        // replace(routes.projectsDashboard.url);
-      } catch (error) {
-        errorHandler(error);
-      } finally {
-        setLoadingPublishButton(false);
-      }
-    } else {
-      console.log(data.image[0]);
+    console.log(data);
 
-      try {
-        setLoadingUpdateButton(true);
-        const res = await updateScript(
-          {
-            primaryGenre: data.primaryGenre,
-            secondaryGenre: data.secondaryGenre,
-            title: data.title,
-            scriptFormat: data.scriptFormat,
-            storyFormat: data.storyFormat,
-            primaryCast: data.primaryCast,
-            secondaryCast: data.secondaryCast,
-            estimatedBudget: data.estimatedBudget,
-            tagLine: data.tagline,
-            synopsis: data.synopsis,
-            storyWorld: data.storyWorld,
-            actStructure: data.actStructure,
-            characterBible: data.characterBible,
-            inspiration: data.inspiration,
-            motivation: data.motivation,
-            image: data.image[0],
-            storyTopics: data.storyTopics,
-            logLine: data.logLine,
-            adaption,
-            adaptionPermission: data.adaptionPermission[0],
-          },
-          query.id as string
-        );
-        console.log(res);
-        if (data.scriptFile && data.scriptFile[0]) {
-          const resDraft = await uploadFileDraft(query.id as string, {
-            content: data.scriptFile[0],
-          });
-          console.log(resDraft);
-        }
-        if (data.scriptCopyright && data.scriptCopyright[0]) {
-          const resCopyright = await uploadCopyright(query.id as string, {
-            content: data.scriptCopyright[0],
-          });
-          console.log(resCopyright);
-        }
-        setOpenSaveProgressModal(true);
-      } catch (error) {
-        errorHandler(error);
-      } finally {
-        setLoadingUpdateButton(false);
-      }
-    }
+    // if (publish) {
+    //   try {
+    //     setLoadingPublishButton(true);
+    //     const res = await updateScript(
+    //       {
+    //         primaryGenre: data.primaryGenre,
+    //         secondaryGenre: data.secondaryGenre,
+    //         title: data.title,
+    //         scriptFormat: data.scriptFormat,
+    //         storyFormat: data.storyFormat,
+    //         primaryCast: data.primaryCast,
+    //         secondaryCast: data.secondaryCast,
+    //         estimatedBudget: data.estimatedBudget,
+    //         tagLine: data.tagline,
+    //         synopsis: data.synopsis,
+    //         storyWorld: data.storyWorld,
+    //         actStructure: data.actStructure,
+    //         characterBible: data.characterBible,
+    //         inspiration: data.inspiration,
+    //         motivation: data.motivation,
+    //         image: data.image[0],
+    //         storyTopics: data.storyTopics,
+    //         logLine: data.logLine,
+    //         adaption,
+    //         adaptionPermission: data.adaptionPermission[0],
+    //       },
+    //       query.id as string,
+    //       "publish=true"
+    //     );
+    //     const resDraft = await uploadFileDraft(query.id as string, {
+    //       content: data.scriptFile[0],
+    //     });
+    //     const resCopyright = await uploadCopyright(query.id as string, {
+    //       content: data.scriptCopyright[0],
+    //     });
+    //     console.log(res, resDraft, resCopyright);
+    //     // replace(routes.projectsDashboard.url);
+    //   } catch (error) {
+    //     errorHandler(error);
+    //   } finally {
+    //     setLoadingPublishButton(false);
+    //   }
+    // } else {
+    //   console.log(data.image[0]);
+
+    //   try {
+    //     setLoadingUpdateButton(true);
+    //     const res = await updateScript(
+    //       {
+    //         primaryGenre: data.primaryGenre,
+    //         secondaryGenre: data.secondaryGenre,
+    //         title: data.title,
+    //         scriptFormat: data.scriptFormat,
+    //         storyFormat: data.storyFormat,
+    //         primaryCast: data.primaryCast,
+    //         secondaryCast: data.secondaryCast,
+    //         estimatedBudget: data.estimatedBudget,
+    //         tagLine: data.tagline,
+    //         synopsis: data.synopsis,
+    //         storyWorld: data.storyWorld,
+    //         actStructure: data.actStructure,
+    //         characterBible: data.characterBible,
+    //         inspiration: data.inspiration,
+    //         motivation: data.motivation,
+    //         image: data.image[0],
+    //         storyTopics: data.storyTopics,
+    //         logLine: data.logLine,
+    //         adaption,
+    //         adaptionPermission: data.adaptionPermission[0],
+    //       },
+    //       query.id as string
+    //     );
+    //     console.log(res);
+    //     if (data.scriptFile && data.scriptFile[0]) {
+    //       const resDraft = await uploadFileDraft(query.id as string, {
+    //         content: data.scriptFile[0],
+    //       });
+    //       console.log(resDraft);
+    //     }
+    //     if (data.scriptCopyright && data.scriptCopyright[0]) {
+    //       const resCopyright = await uploadCopyright(query.id as string, {
+    //         content: data.scriptCopyright[0],
+    //       });
+    //       console.log(resCopyright);
+    //     }
+    //     setOpenSaveProgressModal(true);
+    //   } catch (error) {
+    //     errorHandler(error);
+    //   } finally {
+    //     setLoadingUpdateButton(false);
+    //   }
+    // }
   };
 
   return {

@@ -6,7 +6,6 @@ import PhotoIcon from "./assets/photo.svg";
 
 const ScenesList = () => {
   const scriptValue = useScriptValueStore((state) => state.scriptValue);
-  console.log(scriptValue);
   const htmlContent = new DOMParser().parseFromString(scriptValue, "text/html");
 
   const onlyNeedSections = deserializeScriptWithOutDiv(htmlContent.body).filter(

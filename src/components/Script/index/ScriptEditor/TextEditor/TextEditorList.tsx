@@ -17,24 +17,15 @@ interface IProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-export interface IAddComment {
-  positionX: number;
-  positionY: number;
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-  setShowFormStatus: boolean;
-  _id: number;
-}
-
 const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   const { ref, width } = useResizeDetector();
   const { query } = useRouter();
   const { saveFileDraft } = useDraftApi();
   const [render, setRender] = useState(false);
-  const [allComments, setAllComments] = useState<Array<IAddComment>>([]);
   const scriptValue = useScriptValueStore((state) => state.scriptValue);
   setTimeout(() => {
     setRender(true);
-  }, 1500);
+  }, 2000);
 
   const saveDraftFile = async () => {
     await saveFileDraft(query.id as string, { content: scriptValue });
@@ -101,8 +92,6 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
       {render && (
         <TextEditor
           socket={socket}
-          allComments={allComments}
-          setAllComments={setAllComments}
           htmlInitialValue={htmlInitialValue}
           width={width}
         />

@@ -19,6 +19,7 @@ const FormComment = ({ comments, id, socket }: IProps) => {
   const {
     register,
     handleSubmit,
+    resetField,
     formState: { errors },
   } = useForm();
 
@@ -28,6 +29,7 @@ const FormComment = ({ comments, id, socket }: IProps) => {
       message: data.replyComment,
       parentId: id,
     });
+    resetField("replyComment");
     setReplyComment(false);
   };
 

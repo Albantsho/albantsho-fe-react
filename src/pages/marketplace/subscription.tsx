@@ -11,6 +11,9 @@ import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import Head from "next/head";
 import { Suspense } from "react";
+import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
+import useUserStore from "app/user.store";
+import Logo from "@assets/logo.svg";
 
 const plans = [
   "Synopsis",
@@ -21,9 +24,27 @@ const plans = [
 ];
 
 const Subscription = () => {
-  const subscriptionFunc = async () => {
-    ("");
+  const user = useUserStore((state) => state.user);
+
+  const config = {
+    public_key: "FLWPUBK-**************************-X",
+    tx_ref: Date.now(),
+    amount: 300,
+    currency: "NGN",
+    payment_options: "card,mobilemoney,usdt",
+    customer: {
+      email: user.email,
+      name: user.fullname,
+    },
+    customizations: {
+      title: "Subscription Plan",
+      description:
+        "Make the most of your Albantsho experience by subscribing and getting indepth information on all scripts you view.",
+      logo: <Logo />,
+    },
   };
+
+  const handleFlutterPayment = useFlutterwave(config);
 
   return (
     <>
@@ -86,7 +107,17 @@ const Subscription = () => {
           </CardContent>
           <CardActions>
             <Btn
-              onClick={subscriptionFunc}
+              onClick={() => {
+                handleFlutterPayment({
+                  callback: (response) => {
+                    console.log(response);
+                    // closePaymentModal(); // this will close the modal programmatically
+                  },
+                  onClose: () => {
+                    console.log("close");
+                  },
+                });
+              }}
               size="large"
               className="mt-4 py-2 md:mt-5 w-full text-center"
             >
