@@ -13,7 +13,8 @@ import Head from "next/head";
 import { Suspense } from "react";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import useUserStore from "app/user.store";
-import Logo from "@assets/logo.svg";
+import { toast } from "react-toastify";
+import usePlanApi from "apis/Plan.api";
 
 const plans = [
   "Synopsis",
@@ -25,26 +26,44 @@ const plans = [
 
 const Subscription = () => {
   const user = useUserStore((state) => state.user);
-
+  const { buySubscriptionPlan } = usePlanApi();
   const config = {
-    public_key: "FLWPUBK-**************************-X",
-    tx_ref: Date.now(),
+    public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY as string,
+    tx_ref: `${Date.now()}`,
     amount: 300,
-    currency: "NGN",
-    payment_options: "card,mobilemoney,usdt",
+    currency: "USD",
+    redirect_url: "https://www.albantsho.com/",
+    payment_options:
+      "card, banktransfer, ussd, account, mpesa, barter, nqr, credit",
     customer: {
       email: user.email,
       name: user.fullname,
+      phone_number: "07000000000",
     },
     customizations: {
       title: "Subscription Plan",
       description:
         "Make the most of your Albantsho experience by subscribing and getting indepth information on all scripts you view.",
-      logo: <Logo />,
+      logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
     },
   };
 
   const handleFlutterPayment = useFlutterwave(config);
+
+  const paymentBuyingSubscriptionPlan = () => {
+    handleFlutterPayment({
+      callback: async (response) => {
+        console.log(response);
+        const res = await buySubscriptionPlan();
+        console.log(res);
+        closePaymentModal(); // this will close the modal programmatically
+      },
+      onClose: () => {
+        toast.error("payment Field or canceled, please try again");
+        console.log("close");
+      },
+    });
+  };
 
   return (
     <>
@@ -107,22 +126,27 @@ const Subscription = () => {
           </CardContent>
           <CardActions>
             <Btn
+              onClick={paymentBuyingSubscriptionPlan}
+              size="large"
+              className="mt-4 py-2 md:mt-5 w-full text-center"
+            >
+              Subscribe
+            </Btn>
+            {/* <button
               onClick={() => {
                 handleFlutterPayment({
                   callback: (response) => {
                     console.log(response);
-                    // closePaymentModal(); // this will close the modal programmatically
+                    closePaymentModal(); // this will close the modal programmatically
                   },
                   onClose: () => {
                     console.log("close");
                   },
                 });
               }}
-              size="large"
-              className="mt-4 py-2 md:mt-5 w-full text-center"
             >
               Subscribe
-            </Btn>
+            </button> */}
           </CardActions>
         </Card>
       </div>

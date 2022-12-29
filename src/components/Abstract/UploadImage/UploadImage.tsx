@@ -75,7 +75,7 @@ const UploadImage = ({ errors, register, step, progress }: IProps) => {
         {errors.image && (
           <span className="text-error-700 ">{errors.image?.message}</span>
         )}
-        {progress !== 100 && showProgress && (
+        {progress < 100 && showProgress && (
           <div className="max-w-[528px] relative py-6 mx-auto rounded-md border-2 border-dashed mb-5 px-8 overflow-hidden border-tinted-300  bg-tinted-50/50">
             <div className="mb-2 pr-5">
               <Typography variant="body1" color="primary.700">
@@ -99,7 +99,7 @@ const UploadImage = ({ errors, register, step, progress }: IProps) => {
           </div>
         )}
 
-        {progress === 100 && (
+        {progress >= 100 && (
           <div className="max-w-[528px] relative py-6 mx-auto rounded-md border-2 border-dashed px-8 overflow-hidden border-tinted-300  bg-success-50/50">
             <div className="mb-2">
               <Typography variant="body1" color="success.500">
@@ -113,7 +113,7 @@ const UploadImage = ({ errors, register, step, progress }: IProps) => {
               color="success"
               className="rounded-lg"
               variant="determinate"
-              value={progress}
+              value={progress > 100 ? 100 : progress}
             />
             <IconButton className="absolute right-4 top-6 text-success-500 hover:bg-success-50 bg-success-50">
               <MdOutlineDone />

@@ -46,6 +46,7 @@ interface IProps {
 
 interface ResultsOptionType {
   inputValue?: string;
+  _id?: string;
   title: string;
 }
 
@@ -59,6 +60,7 @@ const UploadScript = ({
   setActiveButton,
   step,
   control,
+  errors,
 }: IProps) => {
   const { getAllDraft } = useDraftApi();
   const { query } = useRouter();
@@ -138,7 +140,7 @@ const UploadScript = ({
             <Autocomplete
               fullWidth
               onChange={(_, data) => {
-                onChange(data);
+                onChange(data?._id);
                 return data;
               }}
               size="medium"
@@ -192,7 +194,11 @@ const UploadScript = ({
             />
           )}
         />
-
+        {errors.draft?.message && (
+          <span className="text-error-700 text-base">
+            {errors.draft.message}
+          </span>
+        )}
         <Link
           href={routes.script.dynamicUrl(query.id as string)}
           passHref

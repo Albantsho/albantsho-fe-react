@@ -28,20 +28,37 @@ export const abstractSchema = (publish: boolean, activeButton: number) => {
       characterBible: Yup.string().required().label("Character bible"),
       inspiration: Yup.string().required().label("Inspiration"),
       motivation: Yup.string().required().label("Motivation"),
-      scriptFile: Yup.mixed().test(
+      draft:
+        activeButton === 0
+          ? Yup.string().required().label("Draft")
+          : Yup.string(),
+      scriptFile:
+        activeButton === 1
+          ? Yup.mixed().test(
+              "required",
+              "Script file is a required field",
+              (value) => {
+                return value && value.length;
+              }
+            )
+          : Yup.mixed(),
+      adaptionPermission: Yup.mixed().test(
         "required",
-        "Script file is a required field",
+        "Adaption permission file is a required field",
         (value) => {
           return value && value.length;
         }
       ),
-      scriptCopyright: Yup.mixed().test(
-        "required",
-        "Script copyright is a required field",
-        (value) => {
-          return value && value.length;
-        }
-      ),
+      scriptCopyright:
+        activeButton === 1
+          ? Yup.mixed().test(
+              "required",
+              "Script copyright is a required field",
+              (value) => {
+                return value && value.length;
+              }
+            )
+          : Yup.mixed(),
       image: Yup.mixed()
         .test("required", "Image is a required field", (value) => {
           return value && value.length;

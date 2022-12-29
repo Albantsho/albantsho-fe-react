@@ -1,6 +1,7 @@
 import { IFullInformationScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import { toast } from "react-toastify";
 import CharacterBible from "../CharacterBible/CharacterBible";
 import GeneralScriptProfile from "../GeneralScriptProfile/GeneralScriptProfile";
 import StepsButtons from "../StepsButtons/StepsButtons";
@@ -42,7 +43,8 @@ const Abstract = ({ script }: IProps) => {
     loadingPublishButton,
     loadingUpdateButton,
     adaption,
-    setAdaption,
+    addAdaption,
+    noAddAdaption,
     getValues,
     progress,
     publish,
@@ -50,7 +52,16 @@ const Abstract = ({ script }: IProps) => {
 
   return (
     <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit, (e) => {
+          const existedErrors = Object.keys(e);
+          if (existedErrors.length) {
+            toast.error(
+              `You have some errors please check your inserted fields`
+            );
+          }
+        })}
+      >
         <StepsLines
           publish={publish}
           errors={errors}
@@ -85,7 +96,8 @@ const Abstract = ({ script }: IProps) => {
         <WritersStatement
           getValues={getValues}
           adaption={adaption}
-          setAdaption={setAdaption}
+          addAdaption={addAdaption}
+          noAddAdaption={noAddAdaption}
           script={script}
           step={step}
           register={register}

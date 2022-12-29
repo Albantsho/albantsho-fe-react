@@ -8,23 +8,24 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import { useEffect, useState } from "react";
-import { RiUploadLine } from "react-icons/ri";
 import { IAbstractFormValues } from "interfaces/abstract";
+import { IFullInformationScript } from "interfaces/script";
+import React from "react";
 import type {
   FieldErrorsImpl,
-  UseFormRegister,
   UseFormGetValues,
+  UseFormRegister,
 } from "react-hook-form";
-import { IFullInformationScript } from "interfaces/script";
+import { RiUploadLine } from "react-icons/ri";
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   step: number;
   script: IFullInformationScript;
-  setAdaption: React.Dispatch<React.SetStateAction<boolean>>;
   adaption: boolean;
   getValues: UseFormGetValues<IAbstractFormValues>;
+  addAdaption: () => void;
+  noAddAdaption: () => void;
 }
 
 const WritersStatement = ({
@@ -33,26 +34,9 @@ const WritersStatement = ({
   step,
   script,
   adaption,
-  setAdaption,
-  getValues,
+  addAdaption,
+  noAddAdaption,
 }: IProps) => {
-  const [progress, setProgress] = useState(0);
-
-  const addAdaption = () => setAdaption(true);
-  const noAddAdaption = () => setAdaption(false);
-
-  useEffect(() => {
-    const formValues = getValues();
-    if (
-      formValues.adaptionPermission &&
-      formValues.adaptionPermission.length > 0
-    ) {
-      setProgress(100);
-    } else {
-      setProgress(0);
-    }
-  }, [getValues()]);
-
   return (
     <div className={`${step === 5 ? "block" : "hidden"}`}>
       <Typography
@@ -100,7 +84,6 @@ const WritersStatement = ({
                 ></label>
                 <input
                   {...register("adaptionPermission")}
-                  name="adaption"
                   accept=".pdf,image/jpeg"
                   max={1}
                   type="file"
@@ -141,7 +124,7 @@ const WritersStatement = ({
                   backgroundColor: "#fff",
                 },
               }}
-              value={progress}
+              value={100}
               variant="determinate"
             />
           </div>
@@ -220,4 +203,4 @@ const WritersStatement = ({
   );
 };
 
-export default WritersStatement;
+export default React.memo(WritersStatement);

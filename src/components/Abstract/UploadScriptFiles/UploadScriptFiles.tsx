@@ -109,7 +109,7 @@ const UploadScriptFiles = ({
               htmlFor="add-copyright"
             ></label>
             <input
-              {...register("copyright")}
+              {...register("scriptCopyright")}
               accept=".pdf"
               max={1}
               type="file"
@@ -136,8 +136,10 @@ const UploadScriptFiles = ({
             </Typography>
           </div>
         </div>
-        {errors.copyright && (
-          <span className="text-error-700 ">{errors.copyright?.message}</span>
+        {errors.scriptCopyright && (
+          <span className="text-error-700 ">
+            {errors.scriptCopyright?.message}
+          </span>
         )}
       </div>
     </div>

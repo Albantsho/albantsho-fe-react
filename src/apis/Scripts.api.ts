@@ -32,8 +32,8 @@ interface IUpdateScriptPayload {
   adaptionPermission?: File;
   inspiration?: string;
   motivation?: string;
-  price?: number;
   image?: File;
+  progress: number;
 }
 
 interface IGiveRateToScriptPayload {

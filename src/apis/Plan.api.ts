@@ -6,7 +6,7 @@ interface IPayloadBuyReviewPlan {
   reviewPlan: string;
 }
 
-const usePlan = (controller?: AbortController) => {
+const usePlanApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
   return {
@@ -32,4 +32,4 @@ const usePlan = (controller?: AbortController) => {
   };
 };
 
-export default usePlan;
+export default usePlanApi;

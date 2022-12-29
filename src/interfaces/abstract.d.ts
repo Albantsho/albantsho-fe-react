@@ -17,7 +17,6 @@ export interface IAbstractFormValues {
   inspiration: string;
   motivation: string;
   adaptionPermission: FileList;
-  copyright: string;
   image: FileList;
   scriptFile: FileList;
   scriptCopyright: FileList;

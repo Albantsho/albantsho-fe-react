@@ -49,10 +49,7 @@ const useDraftApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async selectOtherDraft(
-      scriptId: string,
-      payload: ISelectOtherDraftPayload
-    ) {
+    async selectedDraft(scriptId: string, payload: ISelectOtherDraftPayload) {
       const res = await axiosPrivate.patch(
         `/draft/select/${scriptId}`,
         payload,
