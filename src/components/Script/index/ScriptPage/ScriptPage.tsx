@@ -62,6 +62,8 @@ const ScriptPage = ({
     socket.on("disconnect", () => {
       !socket.connected && replace("/");
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
   return (

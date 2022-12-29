@@ -48,10 +48,14 @@ const Abstract = ({ script }: IProps) => {
     getValues,
     progress,
     publish,
+    ref,
   } = useAbstract(script);
 
   return (
-    <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto">
+    <div
+      ref={ref}
+      className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto"
+    >
       <form
         onSubmit={handleSubmit(onSubmit, (e) => {
           const existedErrors = Object.keys(e);

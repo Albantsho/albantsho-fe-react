@@ -1,10 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import useMouse from "@react-hook/mouse-position";
 import useDraftApi from "apis/Draft.api";
 import useScriptsApi from "apis/Scripts.api";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
@@ -56,6 +57,11 @@ const useAbstract = (script: IScript) => {
     },
     resolver: yupResolver(abstractSchema(publish, activeButton)),
   });
+  const ref = useRef(null);
+  const mouse = useMouse(ref, {
+    enterDelay: 3000,
+    leaveDelay: 3000,
+  });
 
   useEffect(() => {
     const formValues = getValues();
@@ -72,11 +78,10 @@ const useAbstract = (script: IScript) => {
         return field;
       }
     });
-    console.log(completedFields);
-    console.log(allFields);
-
     setProgress((completedFields.length / allFields.length) * 100);
-  }, [step, activeButton]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mouse]);
 
   const publishScript = () => setPublish(true);
   const updateScriptFunc = () => setPublish(false);
@@ -216,12 +221,12 @@ const useAbstract = (script: IScript) => {
     loadingPublishButton,
     loadingUpdateButton,
     adaption,
-    setAdaption,
     getValues,
     progress,
     publish,
     addAdaption,
     noAddAdaption,
+    ref,
   };
 };
 

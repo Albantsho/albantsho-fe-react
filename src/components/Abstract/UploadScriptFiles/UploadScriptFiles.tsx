@@ -115,7 +115,7 @@ const UploadScriptFiles = ({
               type="file"
               id="add-copyright"
               hidden
-              name="copyright"
+              name="scriptCopyright"
             />
             <div className="mx-auto flex justify-center items-center mb-2 sm:mb-3">
               <Image src={UploadFile} alt="upload file" />
