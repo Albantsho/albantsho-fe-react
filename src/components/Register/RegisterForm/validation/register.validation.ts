@@ -5,7 +5,10 @@ export const registerSchema = Yup.object({
   fullname: Yup.string()
     .required()
     .min(3)
-    .matches(/^\s*[\S]+(\s[\S]+)+\s*$/gms, "Please enter your full name.")
+    .matches(
+      /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{1,}\s?([a-zA-Z]{1,})?)/gms,
+      "Please enter your full name."
+    )
     .label("Full name"),
   email: Yup.string().email().required().label("Email"),
   password: Yup.string()

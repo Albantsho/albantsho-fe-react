@@ -5,9 +5,11 @@ export interface IUser {
   country: string;
   email: string;
   emailVerified: boolean;
-  fullname: string;
+  firstName: string;
+  lastName: string;
   gender: "male" | "female";
   userType?: "writer" | "producer" | "admin" | "reviewer";
+  subscriptionPlan: null | string;
   portfolio: null | string;
   productionCompanyName: null | string;
   image: null | string;

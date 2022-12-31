@@ -89,13 +89,15 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer", "producer", "admin", "reviewer"],
   },
-  marketPlaceSubscriptionSuccessful: {
-    url: "/marketplace/subscription-successful",
+  marketPlaceSubscription: {
+    url: "/marketplace/subscription",
     mustAuthenticated: "yes",
     permission: ["writer", "producer", "admin", "reviewer"],
   },
-  marketPlaceSubscription: {
-    url: "/marketplace/subscription",
+  marketPlaceSubscriptionSuccessful: {
+    url: "/marketplace/subscription/[id]",
+    dynamicUrl: (transaction_id: string) =>
+      `/marketplace/subscription/${transaction_id}`,
     mustAuthenticated: "yes",
     permission: ["writer", "producer", "admin", "reviewer"],
   },

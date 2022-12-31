@@ -1,8 +1,9 @@
-import { Button, Chip, Tooltip, Typography } from "@mui/material";
+import { Button, Chip, Tooltip, Typography, SvgIcon } from "@mui/material";
 import { IUnCompletedScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Suspense, useState } from "react";
+import DefaultImage from "@assets/default-image-script.svg";
 
 const AddScriptToCompletedModal = dynamic(
   () =>
@@ -24,18 +25,26 @@ const UncompletedScript = ({ script }: IProps) => {
       >
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-14 lg:max-w-[445px] ">
           <div className="flex gap-3 items-end sm:items-start">
-            <Image
-              width={64}
-              height={64}
-              alt={script.title}
-              className="rounded-md flex-shrink-0 w-16 h-16"
-              loading="lazy"
-              src={script.image}
-            />
+            {script.image ? (
+              <Image
+                width={64}
+                height={64}
+                alt={script.title}
+                className="rounded-md flex-shrink-0 w-16 h-16"
+                loading="lazy"
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${script.image}`}
+              />
+            ) : (
+              <SvgIcon
+                inheritViewBox
+                fontSize="large"
+                component={DefaultImage}
+              />
+            )}
 
             <Tooltip title="Progress">
               <Chip
-                label={`${script.progressPercent}% done`}
+                label={`${script.progress}% done`}
                 className="bg-success-50 px-1 flex-shrink font-xs font-semibold sm:hidden text-success-500"
               />
             </Tooltip>
@@ -65,13 +74,13 @@ const UncompletedScript = ({ script }: IProps) => {
         </div>
         <div className="hidden md:flex lg:hidden xl:flex gap-4 justify-start  flex-col items-center md:items-center lg:items-end xl:items-start xl:ml-2">
           <Chip
-            label={`${script.progressPercent}% done`}
+            label={`${script.progress}% done`}
             className="py-5 px-4 hidden md:flex rounded-md bg-success-50 text-success-500"
           />
         </div>
         <div className="sm:min-w-[116px] justify-end xl:py-10 sm:pr-0 items-center hidden flex-col gap-2 sm:flex xl:ml-auto">
           <Chip
-            label={`${script.progressPercent}% done`}
+            label={`${script.progress}% done`}
             className="py-5 px-4 w-full md:hidden lg:flex xl:hidden rounded-md bg-success-50 text-success-500"
           />
           <Button

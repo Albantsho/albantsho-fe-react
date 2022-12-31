@@ -23,9 +23,10 @@ const Reviews: NextPageWithLayout = () => {
         setReviewsList([]);
         setLoading(true);
         const res = await getWriterReviewRequests("he");
+        console.log(res);
 
-        setReviewsList(res.data.reviews);
-        setLoading(true);
+        setReviewsList(res.data.scripts);
+        setLoading(false);
       } catch (error) {
         errorHandler(error);
       }
@@ -41,11 +42,11 @@ const Reviews: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Reviews</title>
       </Head>
+      <Heading showSearchScript />
       {loading ? (
         <DotLoader color="#7953B5" className="mx-auto mt-10" />
       ) : (
         <>
-          <Heading showSearchScript />
           <FilterScriptsSelect />
           <ScriptsList reviewsList={reviewsList} />
         </>

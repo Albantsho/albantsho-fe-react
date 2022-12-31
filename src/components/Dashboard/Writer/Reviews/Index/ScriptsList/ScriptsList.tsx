@@ -1,51 +1,7 @@
 import { Button, Chip, Divider, Paper, Typography } from "@mui/material";
+import { IWriterReview } from "interfaces/reviews";
 import Image from "next/image";
 import React from "react";
-import beautySmall from "@assets/images/beauty-small.jpg";
-import { IWriterReview } from "interfaces/reviews";
-
-const listScripts = [
-  {
-    id: 1,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    status: "In Review",
-  },
-  {
-    id: 2,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    status: "Reviewed",
-  },
-  {
-    id: 3,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    status: "Reviewed",
-  },
-  {
-    id: 4,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    status: "Reviewed",
-  },
-  {
-    id: 5,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-    status: "Reviewed",
-  },
-];
 
 interface IProps {
   reviewsList: IWriterReview[];
@@ -86,7 +42,7 @@ const ScriptsList = ({ reviewsList }: IProps) => {
                       height="72"
                       className="rounded-md"
                       loading="lazy"
-                      src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
+                      src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${script.image}`}
                       alt={script.title}
                     />
                   </div>

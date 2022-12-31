@@ -35,7 +35,7 @@ export interface IWriterReview {
   _id: string;
   title: string;
   description: string;
-  script_image: string;
+  image: string;
   reviewed: boolean;
 }
 

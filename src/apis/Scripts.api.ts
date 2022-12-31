@@ -58,7 +58,7 @@ const useScriptsApi = (controller?: AbortController) => {
       id: string,
       query?: string
     ) {
-      const res = await axiosPrivate.post(
+      const res = await axiosPrivate.patch(
         `/script/update/${id}?${query}`,
         payload,
         {
@@ -69,7 +69,7 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
     async updateCoverPageScript(payload: object, id: string) {
-      const res = await axiosPrivate.post(
+      const res = await axiosPrivate.patch(
         `/script/update/coverpage/${id}`,
         payload,
         {

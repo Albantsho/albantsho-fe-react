@@ -1,7 +1,7 @@
 import useAuthApi from "apis/Auth.api";
 import useUserStore from "app/user.store";
 import { useRouter } from "next/router";
-import React, { FormEvent, useCallback, useRef, useState } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 
@@ -50,7 +50,6 @@ const useVerifyEmail = () => {
         email: user.email,
         code: Object.values(formValues).join(""),
       });
-
       setAccessToken(res.data.accessToken);
       authenticationUser(res.data.user);
       res.data.user.userType === "writer"

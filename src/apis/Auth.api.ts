@@ -1,7 +1,8 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import api, { apiPrivate } from "./configs/axios.config";
 interface IRegisterPayload {
-  fullname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   country: string;

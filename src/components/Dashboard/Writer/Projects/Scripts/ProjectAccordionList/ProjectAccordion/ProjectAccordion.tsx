@@ -20,7 +20,7 @@ import addAbstractIcon from "./assets/add-abstract-icon.png";
 import addScriptIcon from "./assets/add-script-icon.png";
 import addTitleIcon from "./assets/add-title-icon.png";
 import CustomButtonScripts from "./CustomButtonScripts/CustomButtonScripts";
-import CustomIcon from "@assets/images/accordion-icon.png";
+import DefaultImage from "@assets/default-image-script.svg";
 import errorHandler from "utils/error-handler";
 
 interface IProps {
@@ -84,7 +84,7 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
     async (event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>) => {
       try {
         event.stopPropagation();
-        const res = await deleteScript(id);
+        await deleteScript(id);
         setListScripts((prevState) =>
           prevState.filter((script) => script._id !== id)
         );
@@ -126,12 +126,10 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
                 alt={script.title}
               />
             ) : (
-              <Image
-                loading="lazy"
-                width={25}
-                height={32}
-                src={CustomIcon}
-                alt="Test Icon"
+              <SvgIcon
+                inheritViewBox
+                fontSize="large"
+                component={DefaultImage}
               />
             )}
           </div>

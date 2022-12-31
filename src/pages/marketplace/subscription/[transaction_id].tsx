@@ -8,12 +8,15 @@ import success from "@assets/images/success.png";
 import Image from "next/image";
 import routes from "routes/routes";
 import { Suspense } from "react";
+import { useRouter } from "next/router";
 
 const SubscriptionSuccessful = () => {
+  const { query } = useRouter();
+
   return (
     <>
       <Head>
-        <title>Albantsho || Subscription Successful </title>
+        <title>Albantsho || Subscription Successful</title>
       </Head>
       <Nav color="inherit" position="static" />
       <div className="pt-24 md:pt-32 px-10 md:px-16 text-center min-h-screen md:max-w-lg mx-auto">
@@ -33,7 +36,7 @@ const SubscriptionSuccessful = () => {
           mb={0.5}
           className="futura font-medium leading-normal"
         >
-          Transaction ID: 1234567890AVGED
+          Transaction ID: {query.transaction_id}
         </Typography>
         <Typography
           variant="body2"

@@ -15,6 +15,8 @@ import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import useUserStore from "app/user.store";
 import { toast } from "react-toastify";
 import usePlanApi from "apis/Plan.api";
+import { useRouter } from "next/router";
+import routes from "routes/routes";
 
 const plans = [
   "Synopsis",
@@ -26,18 +28,19 @@ const plans = [
 
 const Subscription = () => {
   const user = useUserStore((state) => state.user);
+  const { replace } = useRouter();
   const { buySubscriptionPlan } = usePlanApi();
   const config = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY as string,
     tx_ref: `${Date.now()}`,
     amount: 300,
     currency: "USD",
-    redirect_url: "https://www.albantsho.com/",
+    // redirect_url: "https://www.albantsho.com/",
     payment_options:
       "card, banktransfer, ussd, account, mpesa, barter, nqr, credit",
     customer: {
       email: user.email,
-      name: user.fullname,
+      name: user.firstName,
       phone_number: "07000000000",
     },
     customizations: {
@@ -54,8 +57,18 @@ const Subscription = () => {
     handleFlutterPayment({
       callback: async (response) => {
         console.log(response);
-        const res = await buySubscriptionPlan();
-        console.log(res);
+        response.transaction_id;
+        try {
+          const res = await buySubscriptionPlan();
+          console.log(res);
+          replace(
+            routes.marketPlaceSubscriptionSuccessful.dynamicUrl(
+              `${response.transaction_id}`
+            )
+          );
+        } catch (error) {
+          console.log(error);
+        }
         closePaymentModal(); // this will close the modal programmatically
       },
       onClose: () => {
@@ -132,21 +145,6 @@ const Subscription = () => {
             >
               Subscribe
             </Btn>
-            {/* <button
-              onClick={() => {
-                handleFlutterPayment({
-                  callback: (response) => {
-                    console.log(response);
-                    closePaymentModal(); // this will close the modal programmatically
-                  },
-                  onClose: () => {
-                    console.log("close");
-                  },
-                });
-              }}
-            >
-              Subscribe
-            </button> */}
           </CardActions>
         </Card>
       </div>

@@ -189,39 +189,22 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
                 Country
               </Typography>
             </label>
-            <CustomInput
-              InputProps={{ readOnly: true }}
-              select
-              sx={{
-                "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
-                "& .MuiSvgIcon-root": {
-                  color: "#7953B5",
-                },
-              }}
-              fullWidth
+            <div
               id="country"
-              variant="outlined"
-              size="small"
-              defaultValue="Nigeria"
+              className="min-w-[180px] p-3 border border-gray-300 rounded-lg flex gap-3"
             >
-              <MenuItem
-                TouchRippleProps={{ className: "text-primary-main" }}
-                className="w-full hover:bg-primary-50/25"
-                value="Nigeria"
-              >
-                {countryUser && (
-                  <Image
-                    width={37}
-                    height={21}
-                    src={`https://flagcdn.com/w40/${countryUser[0]}.png`}
-                    alt={`${countryUser[1]} flag`}
-                  />
-                )}
-                <ListItemText className="text-primary-700">
-                  {userProfile[0].country}
-                </ListItemText>
-              </MenuItem>
-            </CustomInput>
+              {countryUser && (
+                <Image
+                  width={37}
+                  height={21}
+                  src={`https://flagcdn.com/w40/${countryUser[0]}.png`}
+                  alt={`${countryUser[1]} flag`}
+                />
+              )}
+              <Typography className="leading-normal text-primary-500">
+                {userProfile[0].country}
+              </Typography>
+            </div>
           </div>
           <Btn
             loading={loading}

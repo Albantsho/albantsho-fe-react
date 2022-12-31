@@ -9,7 +9,7 @@ import errorHandler from "utils/error-handler";
 import { registerSchema } from "./validation/register.validation";
 
 interface IRegisterFormValues {
-  fullname: string;
+  fullname?: string;
   email: string;
   password: string;
   country: string;
@@ -49,18 +49,24 @@ const useRegisterForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
 
   const onSubmit = async (data: IRegisterFormValues) => {
-    console.log(data);
-
-    try {
-      setLoading(true);
-      const res = await signup(data);
-      authenticationUser(res.data.user);
-      // replace(routes.welcome.url);
-      replace(routes.verifyEmail.url);
-    } catch (error) {
-      errorHandler(error);
-    } finally {
-      setLoading(false);
+    if (data.fullname) {
+      const splitFullName = data.fullname.trim().split(" ");
+      try {
+        delete data.fullname;
+        setLoading(true);
+        const res = await signup({
+          ...data,
+          firstName: splitFullName[0],
+          lastName: splitFullName[splitFullName.length - 1],
+        });
+        authenticationUser(res.data.user);
+        replace(routes.welcome.url);
+        replace(routes.verifyEmail.url);
+      } catch (error) {
+        errorHandler(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 

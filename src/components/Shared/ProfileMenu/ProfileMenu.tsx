@@ -46,11 +46,11 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
               : "text-primary-700 futura font-medium"
           } mr-3`}
         >
-          {user.fullname}
+          {user.firstName + " " + user.lastName}
         </Typography>
         <Avatar
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
-          alt={user.fullname}
+          alt={user.firstName}
         />
         <AiFillCaretDown
           className={`${inHome && "text-white"} ${
@@ -89,7 +89,7 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
           <ListItemAvatar>
             <Avatar
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
-              alt={user.fullname}
+              alt={user.firstName}
             />
           </ListItemAvatar>
           <ListItemText>
@@ -97,7 +97,7 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
               variant="h6"
               className="text-primary-700 futura font-medium leading-normal -mb-2"
             >
-              {user.fullname}
+              {user.firstName + " " + user.lastName}
             </Typography>
             <Typography
               variant="caption"

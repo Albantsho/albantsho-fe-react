@@ -64,6 +64,8 @@ const Projects: NextPageWithLayout = () => {
           querystring.stringify(query),
           searchQuery
         );
+        console.log(res);
+
         setListScripts(res.data.scripts);
         setPageCount(res.data.pagesCount);
         setCurrentPage(res.data.currentPage);

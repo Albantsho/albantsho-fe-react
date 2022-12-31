@@ -20,8 +20,8 @@ export interface IUnCompletedScript {
   _id: string;
   title: string;
   tagLine: string;
-  image: string;
-  progressPercent: number;
+  image: string | null;
+  progress: number;
 }
 
 export interface IClosedScript {

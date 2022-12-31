@@ -32,14 +32,14 @@ const WalletCard = () => {
       <CardContent>
         <div className="flex lg:px-5 flex-col items-center gap-2">
           <Avatar
-            src="/assets/images/profile.jpg"
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
             sx={{ width: { xs: 67 }, height: { xs: 67 } }}
           />
           <Typography
             variant="body1"
             className="text-primary-700 futura font-medium"
           >
-            {user.fullname}
+            {user.firstName + " " + user.lastName}
           </Typography>
           <Chip
             title="$20,000"

@@ -10,7 +10,7 @@ import reviews from "../assets/reviews.png";
 import scripts from "../assets/scripts.png";
 
 const routesArray = [
-  { route: routes.projectsDashboard.url, title: "Projects", icon: projects },
+  { route: routes.projectsDashboard.url, title: "My scripts", icon: projects },
   { route: routes.listingsDashboard.url, title: "Listings", icon: listings },
   { route: routes.reviewsDashboard.url, title: "Reviews", icon: reviews },
 ];

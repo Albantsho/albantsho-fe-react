@@ -1,6 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import useUserStore from "app/user.store";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
@@ -25,6 +26,7 @@ const VerifyEmail = () => {
     countDownKey,
     loading,
   } = useVerifyEmail();
+  const user = useUserStore((state) => state.user);
 
   const renderer = ({ minutes, seconds }: ITimeProps) => {
     return (
@@ -56,8 +58,8 @@ const VerifyEmail = () => {
             </div>
           </div>
           <Typography className="max-w-[420px] lg:text-center lg:mx-auto mt-1">
-            Hi Jane, kindly input the 6 digit code that was sent to your mail to
-            verify your email address.
+            Hi {user.firstName}, kindly input the 5 digit code that was sent to
+            your mail to verify your email address.
           </Typography>
           <form onSubmit={onSubmit}>
             <div className="flex gap-3 mt-7 mb-4 justify-center flex-wrap lg:flex-nowrap">

@@ -58,7 +58,7 @@ const CreateComment = ({
         <Avatar
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
           className="absolute top-2 left-3 w-11 h-11"
-          alt={user.fullname}
+          alt={user.firstName}
         />
       </div>
       {showForm && (
