@@ -1,7 +1,7 @@
 export interface IScript {
   _id: string;
   title: string;
-  tagLine: string;
+  tagline: string;
   price: number;
   rate: number;
   primaryGenre: string;
@@ -11,7 +11,7 @@ export interface IScript {
 export interface IUnlistedScript {
   _id: string;
   title: string;
-  tagLine: string;
+  tagline: string;
   image: string;
   scriptFormat: string;
 }
@@ -19,7 +19,7 @@ export interface IUnlistedScript {
 export interface IUnCompletedScript {
   _id: string;
   title: string;
-  tagLine: string;
+  tagline: string;
   image: string | null;
   progress: number;
 }
@@ -27,7 +27,7 @@ export interface IUnCompletedScript {
 export interface IClosedScript {
   _id: string;
   title: string;
-  tagLine: string;
+  tagline: string;
   image: string;
   soldPrice: number;
   soldDate: string;
@@ -36,16 +36,16 @@ export interface IClosedScript {
 export interface IWriterScript {
   _id: string;
   title: string;
-  description: string;
-  script_image: string;
-  primary_genre: string;
+  tagline: string;
+  image: string | null;
+  scriptFormat: string | null;
   archive: boolean;
 }
 
 export interface IBidScript {
   _id: string;
   title: string;
-  tagLine: string;
+  tagline: string;
   image: string;
   primaryGenre: string;
   numberOfBids: number;

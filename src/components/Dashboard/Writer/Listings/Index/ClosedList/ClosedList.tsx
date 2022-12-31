@@ -118,7 +118,7 @@ const ClosedList = ({ searchQuery }: IProps) => {
                   {listItem.title}
                 </Typography>
                 <Typography variant="caption" className="text-stone-800">
-                  {listItem.tagLine}
+                  {listItem.tagline}
                 </Typography>
               </div>
             </TableCell>

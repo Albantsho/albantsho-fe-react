@@ -86,7 +86,7 @@ const HeroSection = () => {
               }}
               script={{
                 _id: "hbnj15",
-                tagLine:
+                tagline:
                   "One platform sets out to enable better stories one script at a time",
                 primaryGenre: "Feature film",
                 rate: 4,

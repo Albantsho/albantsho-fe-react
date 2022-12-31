@@ -117,12 +117,12 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
       >
         <div className="flex flex-col  sm:flex-row flex-1    gap-x-4 gap-y-3 sm:gap-y-0 xl:pr-20">
           <div className="flex justify-center w-[72px] h-[72px] items-center self-start  bg-tinted-100/60 rounded-md">
-            {script.script_image ? (
+            {script.image ? (
               <Image
                 loading="lazy"
                 width={72}
                 height={72}
-                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
                 alt={script.title}
               />
             ) : (
@@ -141,12 +141,12 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
               {script.title}
             </Typography>
             <Typography variant="caption" className=" text-neutral-600">
-              {script.description}
+              {script.tagline}
             </Typography>
           </div>
-          {script.primary_genre && (
+          {script.scriptFormat && (
             <Chip
-              label={script.primary_genre}
+              label={script.scriptFormat}
               className="hidden rounded-md  md:ml-6 xl:ml-24  self-center py-5 px-5 bg-tinted-100/60 text-neutral-800 md:flex lg:hidden xl:flex"
             />
           )}

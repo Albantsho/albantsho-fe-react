@@ -42,7 +42,7 @@ const UnlistedScript = ({ script }: IProps) => {
               {script.title}
             </Typography>
             <Typography variant="caption" className="text-stone-800">
-              {script.tagLine}
+              {script.tagline}
             </Typography>
           </div>
           <Button

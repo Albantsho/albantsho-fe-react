@@ -21,7 +21,7 @@ interface IUpdateScriptPayload {
   primaryCast?: string;
   secondaryCast?: string;
   estimatedBudget?: string;
-  tagLine?: string;
+  tagline?: string;
   logLine?: string;
   synopsis?: string;
   storyWorld?: string;

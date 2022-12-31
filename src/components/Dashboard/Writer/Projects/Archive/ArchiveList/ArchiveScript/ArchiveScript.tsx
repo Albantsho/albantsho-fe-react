@@ -1,9 +1,16 @@
-import { Button, Chip, TableCell, TableRow, Typography } from "@mui/material";
+import {
+  Button,
+  Chip,
+  SvgIcon,
+  TableCell,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import { IWriterScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Suspense, useState } from "react";
-import CustomIcon from "@assets/images/accordion-icon.png";
+import DefaultImage from "@assets/default-image-script.svg";
 
 const UnArchiveModal = dynamic(
   () => import("../../UnArchiveModal/UnArchiveModal")
@@ -37,26 +44,24 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
         >
           <div className="flex flex-col sm:flex-row sm:gap-4">
             <div className="mt-1">
-              {script.script_image ? (
+              {script.image ? (
                 <Image
                   width={64}
                   height={64}
                   layout="fixed"
                   className="rounded-md"
                   loading="lazy"
-                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
                   alt={script.title}
+                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
                 />
               ) : (
-                <Image
-                  width={48}
-                  height={48}
-                  layout="fixed"
-                  className="rounded-md"
-                  loading="lazy"
-                  src={CustomIcon}
-                  alt="Test Icon"
-                />
+                <div className="flex justify-center w-[64px] h-[64px] items-center self-start  bg-tinted-100/60 rounded-md">
+                  <SvgIcon
+                    inheritViewBox
+                    fontSize="large"
+                    component={DefaultImage}
+                  />
+                </div>
               )}
             </div>
 
@@ -68,7 +73,7 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
                 {script.title}
               </Typography>
               <Typography variant="caption" className="text-stone-800">
-                {script.description}
+                {script.tagline}
               </Typography>
             </div>
           </div>
@@ -95,9 +100,9 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
           className="hidden py-4  sm:py-6 xl:py-10 md:flex lg:hidden xl:flex flex-[0.55] items-center"
         >
           <Chip
-            label={script.primary_genre}
+            label={script.scriptFormat}
             className={`${
-              !script.primary_genre && "opacity-0"
+              !script.scriptFormat && "opacity-0"
             } py-5 px-4 md:ml-3 hidden md:flex rounded-md bg-tinted-100/60 text-neutral-800`}
           />
         </TableCell>

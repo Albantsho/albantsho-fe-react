@@ -74,7 +74,7 @@ const ScriptCard = (props: IProps) => {
             <ReviewedIcon />
           </Icon>
         </div>
-        <Typography>{script.tagLine}</Typography>
+        <Typography>{script.tagline}</Typography>
         {!inHome && (
           <Chip
             className="rounded mt-6"
