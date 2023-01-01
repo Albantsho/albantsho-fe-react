@@ -2,13 +2,16 @@ import alert from "@assets/images/alert.png";
 import {
   Avatar,
   Badge,
+  Button,
   IconButton,
   List,
   ListItem,
   ListItemAvatar,
+  ListItemButton,
   ListItemText,
   Popover,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
@@ -27,6 +30,7 @@ const NotificationComponent = () => {
     acceptInviteFunc,
     rejectInviteFunc,
   } = useNotificationComponent();
+  const xlScreen = useMediaQuery("(min-width: 1024px)");
   return (
     <>
       <IconButton
@@ -41,30 +45,30 @@ const NotificationComponent = () => {
       </IconButton>
       <Popover
         elevation={4}
-        className="shadow-secondary"
+        className="shadow-secondary flex flex-col justify-between"
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "center",
+          horizontal: xlScreen ? "center" : "right",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "center",
+          horizontal: xlScreen ? "center" : "right",
         }}
       >
-        <List className="gap-2 min-w-[200px] w-full justify-center items-center">
+        <List className="gap-2 min-w-[250px] min-h-[400px] w-full max-w-md text-center">
           {loading ? (
-            <ClipLoader color="grey" className="" />
+            <ClipLoader color="grey" className="mt-[180px] inline-block" />
           ) : (
             notificationsList.map((notification) => (
               <ListItem
-                className="gap-2 flex-wrap"
+                className="gap-1 items-start"
                 divider
                 key={notification.userId}
               >
-                <ListItemAvatar>
+                <ListItemAvatar className="pt-3">
                   <Avatar alt="Remy Sharp" />
                 </ListItemAvatar>
                 <ListItemText
@@ -78,9 +82,11 @@ const NotificationComponent = () => {
                     </Typography>
                   }
                   secondary={notification.description}
-                  secondaryTypographyProps={{ className: "w-[170px] futura" }}
+                  secondaryTypographyProps={{
+                    className: "max-w-[250px] futura",
+                  }}
                 />
-                <IconButton
+                {/* <IconButton
                   onClick={acceptInviteFunc(notification.description)}
                   className="text-success-500 hover:bg-success-50 bg-success-50"
                 >
@@ -91,11 +97,15 @@ const NotificationComponent = () => {
                   className="text-error-500 hover:bg-error-50 bg-error-50"
                 >
                   <AiOutlineClose />
-                </IconButton>
+                </IconButton> */}
               </ListItem>
             ))
           )}
         </List>
+
+        <Button variant="text" className="text-center w-full py-4">
+          See list all Invites
+        </Button>
       </Popover>
     </>
   );

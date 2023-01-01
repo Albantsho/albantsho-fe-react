@@ -44,6 +44,8 @@ const useNotificationComponent = () => {
         setNotificationsList([]);
         setLoading(true);
         const res = await getAllNotifications();
+        console.log(res);
+
         setNotificationsList(res.data.notifications);
         setLoading(false);
       } catch (error) {
