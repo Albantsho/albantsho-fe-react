@@ -35,7 +35,7 @@ const useResetPasswordForm = () => {
         setLoading(true);
         await resetPassword({
           newPassword: data.password,
-          reset_password_token: query.reset_password_token,
+          resetPasswordToken: query.reset_password_token,
         });
         replace(routes.signin.url);
       }

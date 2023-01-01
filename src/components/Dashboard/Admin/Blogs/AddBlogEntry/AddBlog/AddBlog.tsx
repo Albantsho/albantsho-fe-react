@@ -10,7 +10,7 @@ const AddBlog = () => {
   const {
     onSubmit,
     initialValue,
-    setTextEditorValue,
+    textEditorValue,
     loading,
     errors,
     register,
@@ -85,7 +85,7 @@ const AddBlog = () => {
       </label>
       <TextEditor
         initialValue={initialValue}
-        setTextEditorValue={setTextEditorValue}
+        textEditorValue={textEditorValue}
       />
       <div className="mt-10 mb-8">
         <div className="mb-1 mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center relative py-2 px-4 w-full">

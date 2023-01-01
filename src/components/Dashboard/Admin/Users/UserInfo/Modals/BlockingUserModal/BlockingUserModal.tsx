@@ -2,7 +2,7 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useAuthApi from "apis/Auth.api";
-import { IUserFullInformation } from "interfaces/user";
+import { IUserInformationInAdminPanel } from "interfaces/user";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
 import errorHandler from "utils/error-handler";
@@ -11,8 +11,10 @@ import blockImage from "./assets/block.png";
 interface IProps {
   openBlockingUserModal: boolean;
   setOpenBlockingUserModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setOneUser: React.Dispatch<React.SetStateAction<IUserFullInformation | null>>;
-  user: IUserFullInformation;
+  setOneUser: React.Dispatch<
+    React.SetStateAction<IUserInformationInAdminPanel | null>
+  >;
+  user: IUserInformationInAdminPanel;
 }
 
 const BlockingUserModal = ({

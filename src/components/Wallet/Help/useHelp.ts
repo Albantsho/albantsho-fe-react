@@ -1,20 +1,18 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import useContact from "apis/Contact.api";
+import useUserStore from "app/user.store";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
-import { getInTouchSchema } from "./validation/getInTouch.validation";
 
 interface IContactFormValues {
-  name: string;
-  email: string;
   message: string;
 }
 
-const useGetInTouch = () => {
+const useHelp = () => {
   const { createNewContact } = useContact();
   const [loading, setLoading] = useState(false);
+  const user = useUserStore((state) => state.user);
 
   const {
     register,
@@ -23,18 +21,19 @@ const useGetInTouch = () => {
     formState: { errors },
   } = useForm<IContactFormValues>({
     defaultValues: {
-      name: "",
-      email: "",
       message: "",
     },
-    resolver: yupResolver(getInTouchSchema),
   });
 
   const onSubmit = async (data: IContactFormValues) => {
     try {
       setLoading(true);
-      await createNewContact(data);
-      reset({ email: "", message: "", name: "" });
+      await createNewContact({
+        message: data.message,
+        email: user.email,
+        name: `${user.firstName} ${user.lastName}`,
+      });
+      reset({ message: "" });
       toast.success("successfully send message");
     } catch (error) {
       errorHandler(error);
@@ -46,4 +45,4 @@ const useGetInTouch = () => {
   return { loading, register, handleSubmit, errors, onSubmit };
 };
 
-export default useGetInTouch;
+export default useHelp;

@@ -1,21 +1,19 @@
 import MenuIcon from "@assets/icons/menu.svg";
 import {
+  Button,
   Drawer,
   IconButton,
-  InputAdornment,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
   SvgIcon,
 } from "@mui/material";
-import Btn from "@shared/Btn/Btn";
-import CustomInput from "@shared/CustomInput/CustomInput";
 import useMobileNav from "@shared/Layouts/GeneralLayout/Nav/MobileNav/useMobileNav";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
 import useUserStore from "app/user.store";
 import Link from "next/link";
-import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
 
 interface IProps {
@@ -29,11 +27,7 @@ const MobileNav = ({ links }: IProps) => {
   return (
     <>
       <div className="flex items-center xl:hidden">
-        <IconButton
-          onClick={handleToggleDrawer(true)}
-          color="inherit"
-          className="text-white"
-        >
+        <IconButton onClick={handleToggleDrawer(true)} color="primary">
           <SvgIcon component={MenuIcon} sx={{ fontSize: 40 }} />
         </IconButton>
         <Drawer
@@ -41,7 +35,7 @@ const MobileNav = ({ links }: IProps) => {
           anchor="right"
           sx={{
             "& .MuiPaper-root": {
-              maxWidth: { xs: "290px", sm: "390px" },
+              maxWidth: "290px",
               width: "100%",
               py: 7,
               px: 2,
@@ -57,19 +51,6 @@ const MobileNav = ({ links }: IProps) => {
           >
             <AiOutlineClose />
           </IconButton>
-          <CustomInput
-            className="mt-1"
-            fullWidth
-            placeholder="Search stories, themes, budget, budget"
-            variant="outlined"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AiOutlineSearch className="text-primary-main" />
-                </InputAdornment>
-              ),
-            }}
-          />
           <List className="px-4 flex gap-1 flex-col justify-start items-start">
             {user.emailVerified && (
               <li className="px-5 mt-1">
@@ -96,7 +77,12 @@ const MobileNav = ({ links }: IProps) => {
             {!user.emailVerified && (
               <div className="px-5 py-2">
                 <Link legacyBehavior href={routes.signin.url} passHref>
-                  <Btn className="px-6 py-3">Sign In</Btn>
+                  <Button
+                    variant="outlined"
+                    className="px-4 py-3 rounded-lg font-medium"
+                  >
+                    Sign In
+                  </Button>
                 </Link>
               </div>
             )}

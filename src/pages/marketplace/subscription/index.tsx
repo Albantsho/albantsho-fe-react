@@ -57,7 +57,7 @@ const Subscription = () => {
     handleFlutterPayment({
       callback: async (response) => {
         console.log(response);
-        response.transaction_id;
+
         try {
           const res = await buySubscriptionPlan();
           console.log(res);

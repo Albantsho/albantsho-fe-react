@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const OneUser = ({
-  user: { _id, block, freeze, fullname, userType },
+  user: { _id, block, freeze, firstName, lastName, userType },
 }: IProps) => {
   return (
     <Link legacyBehavior href={routes.userAdminDashboard.dynamicUrl(`${_id}`)}>
@@ -33,7 +33,7 @@ const OneUser = ({
             variant="h6"
             className="futura font-medium text-primary-700 sm:w-64 leading-none"
           >
-            {fullname}
+            {firstName} {lastName}
           </Typography>
           <Typography
             variant="h6"

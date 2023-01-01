@@ -28,11 +28,12 @@ interface IResendCode {
 }
 interface IResetpasswordPayload {
   newPassword: string;
-  reset_password_token: string;
+  resetPasswordToken: string;
 }
 
 interface IUpdateUserInformationPayload {
-  fullname: string;
+  firstName: string;
+  lastName: string;
   image: File;
 }
 

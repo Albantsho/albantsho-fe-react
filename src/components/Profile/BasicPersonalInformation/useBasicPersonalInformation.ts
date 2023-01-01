@@ -19,7 +19,6 @@ interface IUpdateProfileFormValues {
 const useBasicPersonalInformation = ({ userProfile }: IProps) => {
   const [availableChangeValue, setAvailableChangeValue] = useState(false);
   const [loading, setLoading] = useState(false);
-  const divideFullName = userProfile[0].fullname.split(" ");
   const { updateUserInformation } = useAuthApi();
 
   const {
@@ -28,8 +27,8 @@ const useBasicPersonalInformation = ({ userProfile }: IProps) => {
     formState: { errors },
   } = useForm<IUpdateProfileFormValues>({
     defaultValues: {
-      first_name: divideFullName[0],
-      last_name: divideFullName[1] && divideFullName[1],
+      first_name: userProfile[0].firstName,
+      last_name: userProfile[0].lastName,
     },
     resolver: yupResolver(updateProfileSchema),
   });
@@ -38,12 +37,20 @@ const useBasicPersonalInformation = ({ userProfile }: IProps) => {
     setAvailableChangeValue(!availableChangeValue);
 
   const onSubmit = async (data: IUpdateProfileFormValues) => {
+    console.log(
+      "🚀 ~ file: useBasicPersonalInformation.ts:40 ~ onSubmit ~ data",
+      data
+    );
+
     try {
       setLoading(true);
       const res = await updateUserInformation({
-        fullname: `${data.first_name}${data.last_name}`,
+        firstName: data.first_name,
+        lastName: data.last_name,
         image: data.image[0],
       });
+      console.log(res);
+
       setAvailableChangeValue(false);
     } catch (error) {
       errorHandler(error);

@@ -1,18 +1,9 @@
-import {
-  Button,
-  Fade,
-  IconButton,
-  InputAdornment,
-  SvgIcon,
-  Tooltip,
-} from "@mui/material";
-import CustomInput from "@shared/CustomInput/CustomInput";
+import { Button, Typography } from "@mui/material";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
 import useUserStore from "app/user.store";
 import Link from "next/link";
-import { AiOutlineSearch } from "react-icons/ai";
+import { useRouter } from "next/router";
 import routes from "routes/routes";
-import UserIcon from "../assets/user.svg";
 
 interface IProps {
   links: { title: string; href: string }[];
@@ -20,57 +11,39 @@ interface IProps {
 
 const DesktopNav = ({ links }: IProps) => {
   const user = useUserStore((state) => state.user);
+  const { route } = useRouter();
+  console.log("🚀 ~ file: DesktopNav.tsx:27 ~ DesktopNav ~ router", route);
 
   return (
     <>
-      <CustomInput
-        className="max-w-[335px] w-full"
-        placeholder="Search stories, themes, budget, budget"
-        variant="outlined"
-        InputProps={{
-          classes: {
-            root: "!text-white !text-[12px] py-3",
-            notchedOutline: "!border-white",
-          },
-          startAdornment: (
-            <InputAdornment position="start" sx={{ fontSize: 14.5 }}>
-              <AiOutlineSearch className="text-white" />
-            </InputAdornment>
-          ),
-        }}
-      />
-      <div className="flex gap-12 text-white mx-10 flex-1 justify-center">
+      <div className="flex gap-20 mx-10 flex-1 justify-center relative">
         {links.map(({ title, href }, i) => (
-          <Link href={href} passHref legacyBehavior key={i}>
-            <Button color="inherit" size="large">
+          <Link className="relative" href={href} key={i}>
+            <Typography
+              className="futura font-medium text-primary-700"
+              color="inherit"
+              variant="h6"
+            >
               {title}
-            </Button>
+            </Typography>
+            <div
+              className={`${
+                route === href && "bg-primary-700"
+              } absolute -bottom-6 w-full h-1`}
+            ></div>
           </Link>
         ))}
       </div>
       {user.emailVerified && <ProfileMenu inHome />}
       {!user.emailVerified && (
-        <div className="flex gap-9 text-white">
-          <Tooltip
-            TransitionComponent={Fade}
-            TransitionProps={{ timeout: 600 }}
-            arrow
-            title="Please first login"
+        <Link legacyBehavior href={routes.signin.url} passHref>
+          <Button
+            variant="outlined"
+            className="px-4 py-3 rounded-lg font-medium"
           >
-            <IconButton color="inherit">
-              <SvgIcon
-                component={UserIcon}
-                inheritViewBox
-                sx={{ fontSize: 32 }}
-              />
-            </IconButton>
-          </Tooltip>
-          <Link href={routes.signin.url} legacyBehavior passHref>
-            <Button className="rounded-lg" color="inherit" variant="outlined">
-              Sign In
-            </Button>
-          </Link>
-        </div>
+            Sign In
+          </Button>
+        </Link>
       )}
     </>
   );

@@ -1,7 +1,7 @@
 import { Avatar, Button, SvgIcon, Tooltip, Typography } from "@mui/material";
 import useAuthApi from "apis/Auth.api";
 import countryList from "config/country-list.json";
-import { IUserFullInformation } from "interfaces/user";
+import { IUserInformationInAdminPanel } from "interfaces/user";
 import Image from "next/image";
 import { useState } from "react";
 import { MdNotInterested } from "react-icons/md";
@@ -10,8 +10,10 @@ import errorHandler from "utils/error-handler";
 import BlockingUserModal from "../Modals/BlockingUserModal/BlockingUserModal";
 import FreezingUserModal from "../Modals/FreezingUserModal/FreezingUserModal";
 interface IProps {
-  user: IUserFullInformation;
-  setOneUser: React.Dispatch<React.SetStateAction<IUserFullInformation | null>>;
+  user: IUserInformationInAdminPanel;
+  setOneUser: React.Dispatch<
+    React.SetStateAction<IUserInformationInAdminPanel | null>
+  >;
 }
 
 const UserInformation = ({ user, setOneUser }: IProps) => {
@@ -51,7 +53,7 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
         <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6">
           <div className="relative w-fit">
             <Avatar
-              alt={user.fullname}
+              alt={user.firstName}
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
               sx={{ width: 96, height: 96 }}
             />
@@ -94,7 +96,7 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
                 className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
               >
                 <Typography className="leading-normal">
-                  {user.fullname}
+                  {user.firstName} {user.lastName}
                 </Typography>
               </div>
             </div>
@@ -198,7 +200,7 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
                 className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
               >
                 <Typography className="leading-normal">
-                  {user.sold_scripts}
+                  {user.soldScripts}
                 </Typography>
               </div>
             </div>

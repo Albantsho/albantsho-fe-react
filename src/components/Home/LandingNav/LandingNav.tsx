@@ -5,22 +5,22 @@ import DesktopNav from "./DesktopNav/DesktopNav";
 import MobileNav from "./MobileNav/MobileNav";
 
 const links = [
-  { title: "Story Base", href: "#" },
-  { title: "Write", href: "#" },
-  { title: "List", href: routes.marketplace.url },
+  { title: "Home", href: routes.home.url },
+  { title: "About Us", href: routes.aboutUs.url },
   { title: "Blog", href: routes.blog.url },
+  { title: "FAQ", href: routes.FAQs.url },
 ];
 
 const LandingNav = () => {
-  const xlScreen = useMediaQuery("(min-width: 1280px)");
+  const xlScreen = useMediaQuery("(min-width: 1024px)");
 
   return (
     <AppBar position="absolute" elevation={0} color="transparent">
       <Toolbar
-        className="py-10 px-5 sm:px-10 max-w-screen-2xl w-full mx-auto justify-between"
+        className="py-4 px-5 sm:px-10 max-w-screen-2xl w-full mx-auto justify-between bg-white"
         component="nav"
       >
-        <Logo className="mr-12 text-white" />
+        <Logo className="mr-12 text-primary-700" />
         {xlScreen ? <DesktopNav links={links} /> : <MobileNav links={links} />}
       </Toolbar>
     </AppBar>

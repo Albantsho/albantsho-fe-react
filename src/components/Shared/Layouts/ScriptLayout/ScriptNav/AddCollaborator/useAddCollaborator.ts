@@ -42,12 +42,12 @@ const useAddCollaborator = () => {
   const onSubmit = async (data: IAddCollaboratorFormValues) => {
     try {
       setLoading(true);
-      console.log(data);
-      const res = await createNewInvite({
+
+      await createNewInvite({
         scriptId: query.id as string,
         email: data.email,
       });
-      console.log(res);
+
       reset({ email: "" });
       handleCloseAddCollaborator();
     } catch (error) {

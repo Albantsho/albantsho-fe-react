@@ -1,3 +1,4 @@
+import { LoadingButton } from "@mui/lab";
 import {
   Accordion,
   AccordionDetails,
@@ -8,19 +9,34 @@ import {
 } from "@mui/material";
 import TextEditor from "@shared/TextEditor/TextEditor";
 import { CustomElement } from "interfaces/slate";
+import { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 
 interface IProps {
   title: string;
   description?: string;
   editorValue: (value: string) => void;
+  saveValue:
+    | ((
+        setLoading: React.Dispatch<React.SetStateAction<boolean>>
+      ) => () => Promise<void>)
+    | (() => () => Promise<void>);
 }
 
 const QuestionnaireAccordion = ({
   title,
   description,
   editorValue,
+  saveValue,
 }: IProps) => {
+  const [expanded, setExpanded] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleExpandedStatus = () => setExpanded((prev) => !prev);
+  const closeAndCancel = () => {
+    setExpanded(false);
+  };
+
   const initialValue: CustomElement[] = [
     {
       type: "paragraph",
@@ -35,9 +51,11 @@ const QuestionnaireAccordion = ({
         "&:before": { display: "none" },
       }}
       className="px-6 md:px-8 max-w-5xl shadow-primary rounded-lg"
+      expanded={expanded}
     >
       <AccordionSummary
-        className="py-6 md:py-9 lg:py-12 px-0 rounded-lg flex-col sm:flex-row sm:items-start  gap-y-3"
+        onClick={handleExpandedStatus}
+        className="py-6 md:py-9 lg:py-12 px-0 rounded-lg flex-col sm:flex-row sm:items-start gap-y-3"
         sx={{ "& .MuiAccordionSummary-content": { m: 0 } }}
         expandIcon={
           <SvgIcon color="primary" fontSize="large" component={BiChevronDown} />
@@ -63,14 +81,17 @@ const QuestionnaireAccordion = ({
       <AccordionDetails className="rounded-lg px-0 pb-6 md:pb-9 lg:pb-12">
         <TextEditor editorValue={editorValue} initialValue={initialValue} />
         <div className="flex py-6 gap-x-5 flex-nowrap justify-center sm:justify-start">
-          <Button
+          <LoadingButton
+            loading={loading}
+            onClick={saveValue(setLoading)}
             disableElevation
             variant="contained"
             className="rounded-md py-3 px-6"
           >
             Save
-          </Button>
+          </LoadingButton>
           <Button
+            onClick={closeAndCancel}
             variant="outlined"
             sx={{ border: "1px solid #7953B5" }}
             className="bg-white text-primary-700 rounded-md py-3 px-6"

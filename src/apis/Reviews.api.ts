@@ -1,19 +1,19 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 
 interface IUpdateReviewPayload {
-  introduction: string;
-  plot: string;
-  character: string;
-  genreAndStoryStructure: string;
-  dialogue: string;
-  storyQuality: string;
-  suggestions: string;
+  introduction?: string;
+  plot?: string;
+  character?: string;
+  genreAndStoryStructure?: string;
+  dialogue?: string;
+  storyQuality?: string;
+  suggestions?: string;
   worldBuilding?: string;
-  scriptFormatingAndEditing?: string;
+  scriptFormattingAndEditing?: string;
   writerVoice?: string;
   authenticityFeedback?: string;
   openingAndClosingImage?: string;
-  rate: string;
+  rate?: string;
 }
 
 interface IAssignReviewRequestToReviewerPayload {

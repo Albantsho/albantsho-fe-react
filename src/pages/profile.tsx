@@ -18,6 +18,7 @@ const Profile = () => {
       try {
         setLoading(true);
         const res = await getUserProfile();
+        console.log(res);
         setUserProfile(res.data.profile);
         setLoading(false);
       } catch (error) {

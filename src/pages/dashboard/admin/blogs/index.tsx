@@ -49,7 +49,7 @@ const BlogsPage: NextPageWithLayout = () => {
         );
         setBlogList(res.data.weblogs);
         setPageCount(res.data.pagesCount);
-        setCurrentPage(res.data.currenPage);
+        setCurrentPage(res.data.currentPage);
         setLoading(false);
       } catch (error) {
         errorHandler(error);

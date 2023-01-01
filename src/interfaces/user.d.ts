@@ -17,20 +17,22 @@ export interface IUser {
 
 export interface IUserInformation {
   _id: string;
-  fullname: string;
+  firstName: string;
+  lastName: string;
   userType: string;
   freeze: boolean;
   block: boolean;
 }
 
-export interface IUserFullInformation {
+export interface IUserInformationInAdminPanel {
   _id: string;
-  fullname: string;
+  firstName: string;
+  lastName: string;
   userType: "writer" | "producer" | "admin" | "reviewer";
   freeze: boolean;
   block: boolean;
   email: string;
-  sold_scripts: number;
+  soldScripts: number;
   country: string;
   gender: "male" | "female";
   image: null | string;
@@ -39,7 +41,8 @@ export interface IUserFullInformation {
 export interface IUserProfile {
   _id: string;
   email: string;
-  fullname: string;
+  firstName: string;
+  lastName: string;
   director_application: boolean;
   director_approval: boolean;
   userType: "writer" | "producer" | "admin" | "reviewer";
@@ -53,7 +56,7 @@ export interface IUserProfile {
   subscription_count: number | null;
   freeze: boolean;
   block: boolean;
-  sold_scripts: number;
+  soldScripts: number;
   gender: "male" | "female";
   image: string | null;
   createdAt: string;

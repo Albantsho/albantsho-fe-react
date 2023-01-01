@@ -3,8 +3,6 @@ import {
   Divider,
   IconButton,
   InputAdornment,
-  ListItemText,
-  MenuItem,
   SvgIcon,
   Typography,
 } from "@mui/material";
@@ -170,15 +168,14 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
                 Email
               </Typography>
             </label>
-            <CustomInput
-              InputProps={{ readOnly: true }}
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
-              fullWidth
-              id="email"
-              defaultValue={userProfile[0].email}
-              variant="outlined"
-              size="small"
-            />
+            <div
+              id="country"
+              className="min-w-[180px] p-3 border border-gray-300 rounded-lg flex gap-3"
+            >
+              <Typography className="leading-normal text-primary-500">
+                {userProfile[0].email}
+              </Typography>
+            </div>
           </div>
           <div>
             <label className="mb-1 inline-block" htmlFor="country">

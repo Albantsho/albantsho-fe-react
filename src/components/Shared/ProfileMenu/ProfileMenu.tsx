@@ -132,6 +132,7 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
         </MenuItem>
         {user.userType !== "admin" && (
           <MenuItem
+            onClick={() => push(routes.aboutUs.url)}
             TouchRippleProps={{ className: "text-primary-main" }}
             className="px-6 py-4 hover:bg-primary-50/25"
           >

@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useWeblogApi from "apis/Weblog.api";
 import { CustomElement } from "interfaces/slate";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
 import { convertToSlug } from "utils/convert-to-slug";
@@ -28,14 +28,12 @@ const useAddBlog = () => {
     resolver: yupResolver(addBlogSchema),
   });
   const [loading, setLoading] = useState(false);
-  const [textEditorValue, setTextEditorValue] = useState<string | undefined>(
-    ""
-  );
+  const textEditorValue = useRef<string>("");
   const [previewImageValue, setPreviewImageValue] = useState("");
   const { createNewWeblog } = useWeblogApi();
   const { replace } = useRouter();
 
-  let initialValue: CustomElement[] = [
+  const initialValue: CustomElement[] = [
     { type: "paragraph", children: [{ text: "" }] },
   ];
 
@@ -45,13 +43,11 @@ const useAddBlog = () => {
       await createNewWeblog({
         title: data.title,
         description: data.description,
-        content: textEditorValue,
+        content: textEditorValue.current,
         image: data.image[0],
         slug: convertToSlug(data.title),
       });
       replace(routes.blogsAdminDashboard.url);
-      setTextEditorValue("");
-      initialValue = [{ type: "paragraph", children: [{ text: "" }] }];
     } catch (error) {
       errorHandler(error);
     } finally {
@@ -75,7 +71,7 @@ const useAddBlog = () => {
   return {
     initialValue,
     onSubmit,
-    setTextEditorValue,
+    textEditorValue,
     register,
     handleSubmit,
     errors,
