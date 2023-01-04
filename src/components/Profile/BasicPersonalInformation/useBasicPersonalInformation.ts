@@ -39,7 +39,8 @@ const useBasicPersonalInformation = ({ userProfile }: IProps) => {
   const onSubmit = async (data: IUpdateProfileFormValues) => {
     console.log(
       "🚀 ~ file: useBasicPersonalInformation.ts:40 ~ onSubmit ~ data",
-      data
+      data,
+      data.image[0]
     );
 
     try {

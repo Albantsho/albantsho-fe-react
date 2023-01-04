@@ -1,6 +1,10 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 
-const useWallet = (controller?: AbortController) => {
+interface IPayloadIncreaseWalletBalance {
+  transactionId: string;
+}
+
+const useWalletApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
   return {
@@ -12,22 +16,33 @@ const useWallet = (controller?: AbortController) => {
       return res.data;
     },
 
-    async increaseWalletBalance(transferId: string) {
-      const res = await axiosPrivate.get(`/wallet/deposit/${transferId}`, {
-        signal: controller?.signal,
-      });
+    async increaseWalletBalance(
+      transactionId: string,
+      payload: IPayloadIncreaseWalletBalance
+    ) {
+      const res = await axiosPrivate.post(
+        `/wallet/deposit/${transactionId}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
 
     async getWithdraw() {
-      const res = await axiosPrivate.get("/wallet/withdraw", {
-        signal: controller?.signal,
-      });
+      const res = await axiosPrivate.post(
+        "/wallet/withdraw",
+        {},
+        {
+          signal: controller?.signal,
+        }
+      );
 
       return res.data;
     },
   };
 };
 
-export default useWallet;
+export default useWalletApi;

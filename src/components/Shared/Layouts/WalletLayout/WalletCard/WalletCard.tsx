@@ -19,10 +19,28 @@ import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
 import routes from "routes/routes";
 import deposit from "@assets/icons/deposit.svg";
+import useWalletApi from "apis/Wallet.api";
+import { useState, useEffect } from "react";
+import errorHandler from "utils/error-handler";
 
 const WalletCard = () => {
   const { push, route } = useRouter();
   const user = useUserStore((state) => state.user);
+  const [balance, setBalance] = useState(0);
+  const { getWalletBalance } = useWalletApi();
+
+  useEffect(() => {
+    async function getWalletBalanceFunc() {
+      try {
+        const res = await getWalletBalance();
+        setBalance(res.data.balance);
+      } catch (error) {
+        errorHandler(error);
+      }
+    }
+
+    getWalletBalanceFunc();
+  }, []);
 
   return (
     <Card
@@ -42,11 +60,11 @@ const WalletCard = () => {
             {user.firstName + " " + user.lastName}
           </Typography>
           <Chip
-            title="$20,000"
+            title={`$${balance}`}
             sx={{ "& .MuiChip-icon": { color: "#7953B5" } }}
-            className="py-6 flex text-primary-700 futura font-medium text-lg px-2 md:px-4  rounded-md bg-primary-50/50"
+            className="py-6 flex text-primary-700 futura font-medium text-lg px-2 md:px-4 rounded-md bg-primary-50/50"
             icon={<SvgIcon color="primary" component={wallet} inheritViewBox />}
-            label="Balance:$20,000"
+            label={`Balance:$${balance}`}
           />
         </div>
         <Divider className="mt-6 mb-4 hidden md:block" />

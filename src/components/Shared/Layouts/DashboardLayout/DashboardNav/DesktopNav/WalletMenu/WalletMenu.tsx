@@ -8,31 +8,45 @@ import {
   MenuItem,
   SvgIcon,
 } from "@mui/material";
+import useWalletApi from "apis/Wallet.api";
 import useUserStore from "app/user.store";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { IoIosMore } from "react-icons/io";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
 import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
 
 const WalletMenu = () => {
   const { push } = useRouter();
   const user = useUserStore((state) => state.user);
-
   const [openWalletMenu, setOpenWalletMenu] = useState<null | HTMLElement>(
     null
   );
-  const handleOpenWalletMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const [balance, setBalance] = useState(0);
+  const { getWalletBalance } = useWalletApi();
+
+  const handleOpenWalletMenu = (event: React.MouseEvent<HTMLElement>) =>
     setOpenWalletMenu(event.currentTarget);
-  };
 
   const openWallet = Boolean(openWalletMenu);
 
-  const handleCloseWalletMenu = () => {
-    setOpenWalletMenu(null);
-  };
+  const handleCloseWalletMenu = () => setOpenWalletMenu(null);
+
+  useEffect(() => {
+    async function getWalletBalanceFunc() {
+      try {
+        const res = await getWalletBalance();
+        setBalance(res.data.balance);
+      } catch (error) {
+        errorHandler(error);
+      }
+    }
+
+    getWalletBalanceFunc();
+  }, []);
 
   return (
     <>
@@ -57,7 +71,7 @@ const WalletMenu = () => {
           />
         }
       >
-        Balance:$20,000
+        Balance:${balance}
       </Button>
       <Menu
         anchorEl={openWalletMenu}

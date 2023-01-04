@@ -10,13 +10,14 @@ import Btn from "@shared/Btn/Btn";
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import Head from "next/head";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import useUserStore from "app/user.store";
 import { toast } from "react-toastify";
 import usePlanApi from "apis/Plan.api";
 import { useRouter } from "next/router";
 import routes from "routes/routes";
+import useWalletApi from "apis/Wallet.api";
 
 const plans = [
   "Synopsis",
@@ -28,7 +29,9 @@ const plans = [
 
 const Subscription = () => {
   const user = useUserStore((state) => state.user);
+  const { increaseWalletBalance } = useWalletApi();
   const { replace } = useRouter();
+  const [loading, setLoading] = useState(false);
   const { buySubscriptionPlan } = usePlanApi();
   const config = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY as string,
@@ -54,34 +57,46 @@ const Subscription = () => {
   const handleFlutterPayment = useFlutterwave(config);
 
   const paymentBuyingSubscriptionPlan = () => {
-    handleFlutterPayment({
-      callback: async (response) => {
-        console.log(response);
+    try {
+      setLoading(true);
+      handleFlutterPayment({
+        callback: async (response) => {
+          console.log(response);
 
-        try {
-          const res = await buySubscriptionPlan();
-          console.log(res);
-          replace(
-            routes.marketPlaceSubscriptionSuccessful.dynamicUrl(
-              `${response.transaction_id}`
-            )
-          );
-        } catch (error) {
-          console.log(error);
-        }
-        closePaymentModal(); // this will close the modal programmatically
-      },
-      onClose: () => {
-        toast.error("payment Field or canceled, please try again");
-        console.log("close");
-      },
-    });
+          try {
+            const resIncreaseWalletBalance = await increaseWalletBalance(
+              `${response.transaction_id}`,
+              { transactionId: `${response.transaction_id}` }
+            );
+            console.log(resIncreaseWalletBalance);
+            const res = await buySubscriptionPlan();
+            console.log(res);
+            replace(
+              routes.marketPlaceSubscriptionSuccessful.dynamicUrl(
+                `${response.transaction_id}`
+              )
+            );
+          } catch (error) {
+            console.log(error);
+          }
+          closePaymentModal(); // this will close the modal programmatically
+        },
+        onClose: () => {
+          toast.error("payment Field or canceled, please try again");
+          console.log("close");
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
       <Head>
-        <title>Albantsho || Subscription </title>
+        <title>Albantsho || Subscription</title>
       </Head>
       <Nav color="inherit" position="static" />
       <div className="py-8 md:py-12 px-5 sm:px-9 lg:mb-16  mx-auto bg-[#f6f8fc]">
@@ -139,6 +154,7 @@ const Subscription = () => {
           </CardContent>
           <CardActions>
             <Btn
+              loading={loading}
               onClick={paymentBuyingSubscriptionPlan}
               size="large"
               className="mt-4 py-2 md:mt-5 w-full text-center"

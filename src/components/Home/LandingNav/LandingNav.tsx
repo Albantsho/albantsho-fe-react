@@ -15,9 +15,14 @@ const LandingNav = () => {
   const xlScreen = useMediaQuery("(min-width: 1024px)");
 
   return (
-    <AppBar position="absolute" elevation={0} color="transparent">
+    <AppBar
+      position="absolute"
+      elevation={0}
+      className="bg-white"
+      color="transparent"
+    >
       <Toolbar
-        className="py-4 px-5 sm:px-10 max-w-screen-2xl w-full mx-auto justify-between bg-white"
+        className="py-4 px-5 sm:px-10 max-w-screen-2xl w-full mx-auto justify-between"
         component="nav"
       >
         <Logo className="mr-12 text-primary-700" />

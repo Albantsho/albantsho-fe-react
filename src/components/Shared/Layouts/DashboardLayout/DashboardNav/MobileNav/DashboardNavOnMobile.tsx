@@ -53,7 +53,7 @@ const walletLinksForProducer = [
 ];
 
 const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
-  const { handleToggleDrawer, open } = useMobileNavDashboard();
+  const { handleToggleDrawer, open, balance } = useMobileNavDashboard();
   const { push } = useRouter();
   const user = useUserStore((state) => state.user);
 
@@ -66,7 +66,7 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
         color="inherit"
         className={`${
           isTransparent ? "text-white" : "text-primary-main"
-        } -mr-2`}
+        } -mr-2 ml-2`}
       >
         <SvgIcon component={MenuIcon} sx={{ fontSize: 40 }} />
       </IconButton>
@@ -112,7 +112,7 @@ const DashboardNavOnMobile = ({ isTransparent }: IProps) => {
                 className: "text-primary-700 futura font-medium",
                 variant: "h6",
               }}
-              primary="Balance:$20,000"
+              primary={`Balance:$${balance}`}
             />
           </ListItem>
           {user.userType === "writer" &&
