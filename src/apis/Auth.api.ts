@@ -114,6 +114,9 @@ const useAuthApi = (controller?: AbortController) => {
     async updateUserInformation(payload: IUpdateUserInformationPayload) {
       const res = await axiosPrivate.patch("/user/profile/update", payload, {
         signal: controller?.signal,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       return res.data;

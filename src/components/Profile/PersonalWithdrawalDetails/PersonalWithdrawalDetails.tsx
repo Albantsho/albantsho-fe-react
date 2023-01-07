@@ -16,7 +16,7 @@ import bank from "./assets/bank.png";
 import usePersonalWithdrawalDetails from "./usePersonalWithdrawalDetails";
 
 interface IProps {
-  userProfile: IUserProfile[];
+  userProfile: IUserProfile;
 }
 
 const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {

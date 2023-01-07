@@ -86,7 +86,7 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
               border: "1px solid #7953B5",
               borderRadius: 1.5,
             }}
-            className=" md:hidden"
+            className="md:hidden"
           >
             Unarchive
           </Button>
@@ -103,7 +103,7 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
             label={script.scriptFormat}
             className={`${
               !script.scriptFormat && "opacity-0"
-            } py-5 px-4 md:ml-3 hidden md:flex rounded-md bg-tinted-100/60 text-neutral-800`}
+            } py-6 px-4 md:ml-3 hidden md:flex rounded-md bg-tinted-100/60 text-neutral-800`}
           />
         </TableCell>
         <TableCell

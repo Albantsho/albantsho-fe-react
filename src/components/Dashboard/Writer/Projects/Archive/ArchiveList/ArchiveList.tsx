@@ -21,7 +21,7 @@ const ArchiveList = ({ setListScripts, listScripts }: IProps) => {
     <Table className="mt-4 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
-          <TableCell className="flex-1 pl-7  xl:pl-16  xl:max-w-xl  md:pr-0 pt-0 xl:pb-8 pb-5">
+          <TableCell className="flex-1 pl-7  xl:pl-16  xl:max-w-[596px]  md:pr-0 pt-0 xl:pb-8 pb-5">
             <Typography
               variant="h6"
               className="futura font-medium text-primary-700"

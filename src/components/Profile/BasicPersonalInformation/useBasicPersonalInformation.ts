@@ -1,13 +1,15 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useAuthApi from "apis/Auth.api";
+import useUserStore from "app/user.store";
 import { IUserProfile } from "interfaces/user";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
 import { updateProfileSchema } from "./validation/updateProfile.validation";
 
 interface IProps {
-  userProfile: IUserProfile[];
+  userProfile: IUserProfile;
 }
 
 interface IUpdateProfileFormValues {
@@ -20,6 +22,8 @@ const useBasicPersonalInformation = ({ userProfile }: IProps) => {
   const [availableChangeValue, setAvailableChangeValue] = useState(false);
   const [loading, setLoading] = useState(false);
   const { updateUserInformation } = useAuthApi();
+  const [imageProfile, setImageProfile] = useState<null | string>(null);
+  const updateUserProfile = useUserStore((state) => state.updateUserProfile);
 
   const {
     register,
@@ -27,8 +31,8 @@ const useBasicPersonalInformation = ({ userProfile }: IProps) => {
     formState: { errors },
   } = useForm<IUpdateProfileFormValues>({
     defaultValues: {
-      first_name: userProfile[0].firstName,
-      last_name: userProfile[0].lastName,
+      first_name: userProfile.firstName,
+      last_name: userProfile.lastName,
     },
     resolver: yupResolver(updateProfileSchema),
   });
@@ -37,12 +41,6 @@ const useBasicPersonalInformation = ({ userProfile }: IProps) => {
     setAvailableChangeValue(!availableChangeValue);
 
   const onSubmit = async (data: IUpdateProfileFormValues) => {
-    console.log(
-      "🚀 ~ file: useBasicPersonalInformation.ts:40 ~ onSubmit ~ data",
-      data,
-      data.image[0]
-    );
-
     try {
       setLoading(true);
       const res = await updateUserInformation({
@@ -50,8 +48,19 @@ const useBasicPersonalInformation = ({ userProfile }: IProps) => {
         lastName: data.last_name,
         image: data.image[0],
       });
-      console.log(res);
+      toast.success(res.message);
 
+      const reader = new FileReader();
+      reader.readAsDataURL(data.image[0]);
+      reader.onload = () => {
+        const url = window.decodeURI(reader.result as string);
+        setImageProfile(url);
+      };
+      updateUserProfile(
+        data.first_name,
+        data.last_name,
+        `/images/user/${userProfile._id}.jpg`
+      );
       setAvailableChangeValue(false);
     } catch (error) {
       errorHandler(error);
@@ -68,6 +77,7 @@ const useBasicPersonalInformation = ({ userProfile }: IProps) => {
     errors,
     onSubmit,
     loading,
+    imageProfile,
   };
 };
 

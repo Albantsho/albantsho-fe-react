@@ -7,7 +7,7 @@ import errorHandler from "utils/error-handler";
 import { updateWithdrawalSchema } from "./validation/updateWithdrawal.validation";
 
 interface IProps {
-  userProfile: IUserProfile[];
+  userProfile: IUserProfile;
 }
 
 interface IUpdateWithdrawalFormValues {
@@ -27,12 +27,12 @@ const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
     formState: { errors },
   } = useForm<IUpdateWithdrawalFormValues>({
     defaultValues: {
-      bank_name: userProfile[0].bank_name ? userProfile[0].bank_name : "",
-      bank_account_name: userProfile[0].bank_account_name
-        ? userProfile[0].bank_account_name
+      bank_name: userProfile.bank_name ? userProfile.bank_name : "",
+      bank_account_name: userProfile.bank_account_name
+        ? userProfile.bank_account_name
         : "",
-      bank_account_number: userProfile[0].bank_account_number
-        ? userProfile[0].bank_account_number
+      bank_account_number: userProfile.bank_account_number
+        ? userProfile.bank_account_number
         : "",
     },
     resolver: yupResolver(updateWithdrawalSchema),

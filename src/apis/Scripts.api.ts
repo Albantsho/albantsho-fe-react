@@ -32,8 +32,11 @@ interface IUpdateScriptPayload {
   adaptionPermission?: File;
   inspiration?: string;
   motivation?: string;
-  image?: File;
   progress: number;
+}
+
+interface IUpdateScriptImagePayload {
+  image: File;
 }
 
 interface IGiveRateToScriptPayload {
@@ -63,8 +66,21 @@ const useScriptsApi = (controller?: AbortController) => {
         payload,
         {
           signal: controller?.signal,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
+
+      return res.data;
+    },
+    async updateScriptImage(id: string, payload: IUpdateScriptImagePayload) {
+      const res = await axiosPrivate.post(`/script/image/${id}`, payload, {
+        signal: controller?.signal,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       return res.data;
     },

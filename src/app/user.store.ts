@@ -8,6 +8,11 @@ interface IUserState {
   logOutUser: () => void;
   accessToken: string;
   setAccessToken: (accessToken: string) => void;
+  updateUserProfile: (
+    firstName: string,
+    lastName: string,
+    image: string
+  ) => void;
 }
 
 const useUserStore = create<IUserState>()(
@@ -50,6 +55,11 @@ const useUserStore = create<IUserState>()(
         })),
       setAccessToken: (accessToken: string) =>
         set((state) => ({ ...state, accessToken })),
+      updateUserProfile: (firstName: string, lastName: string, image: string) =>
+        set((state) => ({
+          ...state,
+          user: { ...state.user, firstName, lastName, image },
+        })),
     }),
     {
       name: "user",

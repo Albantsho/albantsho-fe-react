@@ -16,7 +16,7 @@ import camera from "./assets/camera.svg";
 import useBasicPersonalInformation from "./useBasicPersonalInformation";
 
 interface IProps {
-  userProfile: IUserProfile[];
+  userProfile: IUserProfile;
 }
 
 const BasicPersonalInformation = ({ userProfile }: IProps) => {
@@ -28,9 +28,10 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
     onSubmit,
     register,
     loading,
+    imageProfile,
   } = useBasicPersonalInformation({ userProfile });
   const countryUser = Object.entries(countryList).find(
-    (countryFlag) => countryFlag[1] === userProfile[0].country
+    (countryFlag) => countryFlag[1] === userProfile.country
   );
 
   return (
@@ -43,7 +44,11 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
         <div className="flex flex-col mx-auto gap-2">
           <div className="relative mx-auto">
             <Avatar
-              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${userProfile[0].image}`}
+              src={
+                imageProfile
+                  ? imageProfile
+                  : `${process.env.NEXT_PUBLIC_API_BASE_URL}${userProfile.image}`
+              }
               sx={{ width: { xs: 100, md: 180 }, height: { xs: 100, md: 180 } }}
             />
             <IconButton
@@ -173,7 +178,7 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
               className="min-w-[180px] p-3 border border-gray-300 rounded-lg flex gap-3"
             >
               <Typography className="leading-normal text-primary-500">
-                {userProfile[0].email}
+                {userProfile.email}
               </Typography>
             </div>
           </div>
@@ -199,7 +204,7 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
                 />
               )}
               <Typography className="leading-normal text-primary-500">
-                {userProfile[0].country}
+                {userProfile.country}
               </Typography>
             </div>
           </div>

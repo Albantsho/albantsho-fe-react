@@ -10,7 +10,9 @@ import errorHandler from "utils/error-handler";
 
 const Profile = () => {
   const { getUserProfile } = useAuthApi();
-  const [userProfile, setUserProfile] = useState<IUserProfile[]>([]);
+  const [userProfile, setUserProfile] = useState<IUserProfile>(
+    {} as IUserProfile
+  );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,7 +20,6 @@ const Profile = () => {
       try {
         setLoading(true);
         const res = await getUserProfile();
-        console.log(res);
         setUserProfile(res.data.profile);
         setLoading(false);
       } catch (error) {
@@ -37,7 +38,7 @@ const Profile = () => {
         <title>Albantsho || Profile </title>
       </Head>
       <ProfileNav color="inherit" position="static" />
-      {loading && userProfile.length === 0 ? (
+      {loading ? (
         <DotLoader color="#7953B5" className="mx-auto mt-10" />
       ) : (
         <div className="px-5 sm:py-10 py-5 bg-[#f6f8fc] min-h-screen">

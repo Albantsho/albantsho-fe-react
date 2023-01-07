@@ -35,7 +35,7 @@ const useInvites = () => {
       );
       copiedInvitesList[copiedInvitedIndex].accepted = true;
       setInvitesList(copiedInvitesList);
-      toast.success(res.data.message);
+      toast.success(res.message);
     } catch (error) {
       errorHandler(error);
     }
@@ -46,7 +46,7 @@ const useInvites = () => {
       const res = await rejectInvite(inviteId);
       setInvitesList(invitesList.filter((i) => i._id !== inviteId));
       console.log(res);
-      toast.success(res.data.message);
+      toast.success(res.message);
     } catch (error) {
       errorHandler(error);
     }

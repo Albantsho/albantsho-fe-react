@@ -147,7 +147,7 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
           {script.scriptFormat && (
             <Chip
               label={script.scriptFormat}
-              className="hidden rounded-md  md:ml-6 xl:ml-24  self-center py-5 px-5 bg-tinted-100/60 text-neutral-800 md:flex lg:hidden xl:flex"
+              className="hidden rounded-md  md:ml-6 xl:ml-24  self-center py-6 px-4 bg-tinted-100/60 text-neutral-800 md:flex lg:hidden xl:flex"
             />
           )}
         </div>

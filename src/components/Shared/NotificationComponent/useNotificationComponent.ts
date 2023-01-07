@@ -35,7 +35,7 @@ const useNotificationComponent = () => {
       );
       copiedNotificationList[findReadiedNotificationIndex].read = true;
       setNotificationsList(copiedNotificationList);
-      toast.success(res.data.message);
+      toast.success(res.message);
       console.log(res);
     } catch (error) {
       errorHandler(error);
@@ -46,7 +46,7 @@ const useNotificationComponent = () => {
     try {
       const res = await deleteNotification(id);
       setNotificationsList(notificationsList.filter((n) => n._id !== id));
-      toast.success(res.data.message);
+      toast.success(res.message);
       console.log(res);
     } catch (error) {
       errorHandler(error);

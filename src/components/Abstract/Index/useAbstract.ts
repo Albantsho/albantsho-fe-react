@@ -14,6 +14,8 @@ import { abstractSchema } from "./validation/abstract.validation";
 type IScript = IFullInformationScript;
 
 const useAbstract = (script: IScript) => {
+  console.log(script);
+
   const [step, setStep] = useState(1);
   const [openSaveProgressModal, setOpenSaveProgressModal] = useState(false);
   const [adaption, setAdaption] = useState(false);
@@ -23,7 +25,7 @@ const useAbstract = (script: IScript) => {
   const [publish, setPublish] = useState(false);
   const [progress, setProgress] = useState(0);
   const { query, replace } = useRouter();
-  const { updateScript } = useScriptsApi();
+  const { updateScript, updateScriptImage } = useScriptsApi();
   const { uploadFileDraft, uploadCopyright, selectedDraft } = useDraftApi();
   const {
     register,
@@ -35,7 +37,7 @@ const useAbstract = (script: IScript) => {
     defaultValues: {
       title: script?.title ? script?.title : "",
       scriptFormat: script?.scriptFormat ? script?.scriptFormat : "Documentary",
-      storyFormat: script?.scriptFormat ? script?.scriptFormat : "High Concept",
+      storyFormat: script?.storyFormat ? script?.storyFormat : "High Concept",
       primaryGenre: script?.primaryGenre ? script?.primaryGenre : "Action",
       secondaryGenre: script?.secondaryGenre
         ? script?.secondaryGenre
@@ -111,7 +113,6 @@ const useAbstract = (script: IScript) => {
             characterBible: data.characterBible,
             inspiration: data.inspiration,
             motivation: data.motivation,
-            image: data.image[0],
             storyTopics: data.storyTopics,
             logLine: data.logLine,
             adaption,
@@ -121,6 +122,11 @@ const useAbstract = (script: IScript) => {
           query.id as string,
           "publish=true"
         );
+        const resImage = await updateScriptImage(query.id as string, {
+          image: data.image[0],
+        });
+        console.log(resImage);
+
         if (activeButton === 0) {
           const resSelectDraft = await selectedDraft(data.draft, {
             draftScriptId: data.draft,
@@ -163,7 +169,6 @@ const useAbstract = (script: IScript) => {
             characterBible: data.characterBible,
             inspiration: data.inspiration,
             motivation: data.motivation,
-            image: data.image[0],
             storyTopics: data.storyTopics,
             logLine: data.logLine,
             adaption,
@@ -172,6 +177,10 @@ const useAbstract = (script: IScript) => {
           },
           query.id as string
         );
+        const resImage = await updateScriptImage(query.id as string, {
+          image: data.image[0],
+        });
+        console.log(resImage);
         if (activeButton === 0) {
           if (data.draft) {
             const resSelectDraft = await selectedDraft(data.draft, {
