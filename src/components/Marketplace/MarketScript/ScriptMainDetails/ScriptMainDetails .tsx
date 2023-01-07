@@ -13,7 +13,6 @@ interface IProps {
 }
 
 const ScriptMainDetails = ({ script }: IProps) => {
-  const parsedData = parse(script.draftContentSnippet);
   return (
     <div className="px-5 sm:px-10 py-10  md:max-w-3xl mx-auto max-w-screen-md">
       <Accordion
@@ -41,7 +40,7 @@ const ScriptMainDetails = ({ script }: IProps) => {
         </AccordionSummary>
         <AccordionDetails className="px-5 sm:px-10 py-5 bg-tinted-50/60">
           <article className="prose lg:prose-lg prose-h1:text-primary-700">
-            {parsedData}
+            ""
           </article>
         </AccordionDetails>
       </Accordion>

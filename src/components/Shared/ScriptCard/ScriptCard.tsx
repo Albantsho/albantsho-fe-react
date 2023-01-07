@@ -42,7 +42,11 @@ const ScriptCard = (props: IProps) => {
         <CardMedia
           component="img"
           className="object-cover object-left w-full h-[250px]"
-          src="assets/images/julie.jpg"
+          src={
+            script.image
+              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`
+              : "assets/images/julie.jpg"
+          }
           loading="lazy"
         />
       </Link>
@@ -90,7 +94,7 @@ const ScriptCard = (props: IProps) => {
         )}
       </CardContent>
       <CardActions className="px-4 justify-between pb-6 pt-0 gap-3">
-        {(!user.active || user.userType === "producer") && !inHome && (
+        {(!user.emailVerified || user.userType === "producer") && !inHome && (
           <Btn size="large" className="rounded-md">
             Place Bid
           </Btn>

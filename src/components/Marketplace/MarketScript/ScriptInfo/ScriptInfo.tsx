@@ -18,16 +18,22 @@ const ScriptInfo = ({ script }: IProps) => {
   return (
     <div className="flex flex-col px-6 py-6 sm:px-11 gap-10 md:flex-row max-w-screen-2xl mx-auto">
       <div className="md:w-1/2 lg:w-2/5 flex-shrink-0">
-        <Image src={script.image} className="rounded-xl" alt="beauty" />
+        <Image
+          width={1000}
+          height={1000}
+          className="rounded-xl w-full"
+          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
+          alt={script.title}
+        />
       </div>
       <div className="flex-shrink w-full">
         <div className="flex mb-3 md:mb-5 items-center flex-wrap gap-6 sm:gap-10 md:gap-14">
           <Chip
             label={script.scriptFormat}
-            className="bg-tinted-50/60 text-neutral-800"
+            className="bg-tinted-50/60 text-neutral-800 py-5"
             sx={{ borderRadius: 1 }}
           />
-          <CustomRating defaultValue={4} />
+          <CustomRating defaultValue={script.rateCount} readOnly />
         </div>
         <div className="flex gap-8 items-center">
           <Typography

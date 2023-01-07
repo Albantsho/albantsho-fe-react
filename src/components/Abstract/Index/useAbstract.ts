@@ -14,18 +14,18 @@ import { abstractSchema } from "./validation/abstract.validation";
 type IScript = IFullInformationScript;
 
 const useAbstract = (script: IScript) => {
-  console.log(script);
-
   const [step, setStep] = useState(1);
   const [openSaveProgressModal, setOpenSaveProgressModal] = useState(false);
   const [adaption, setAdaption] = useState(false);
+  console.log(script, adaption);
   const [activeButton, setActiveButton] = useState<number>(0);
   const [loadingPublishButton, setLoadingPublishButton] = useState(false);
   const [loadingUpdateButton, setLoadingUpdateButton] = useState(false);
   const [publish, setPublish] = useState(false);
   const [progress, setProgress] = useState(0);
   const { query, replace } = useRouter();
-  const { updateScript, updateScriptImage } = useScriptsApi();
+  const { updateScript, updateScriptImage, updateAdaptionPermission } =
+    useScriptsApi();
   const { uploadFileDraft, uploadCopyright, selectedDraft } = useDraftApi();
   const {
     register,
@@ -116,7 +116,6 @@ const useAbstract = (script: IScript) => {
             storyTopics: data.storyTopics,
             logLine: data.logLine,
             adaption,
-            adaptionPermission: data.adaptionPermission[0],
             progress: progress >= 100 ? 100 : progress,
           },
           query.id as string,
@@ -127,6 +126,16 @@ const useAbstract = (script: IScript) => {
         });
         console.log(resImage);
 
+        if (adaption) {
+          const resAdaption = await updateAdaptionPermission(
+            query.id as string,
+            {
+              adaptionPermission: data.adaptionPermission[0],
+            }
+          );
+          console.log(resAdaption);
+        }
+
         if (activeButton === 0) {
           const resSelectDraft = await selectedDraft(data.draft, {
             draftScriptId: data.draft,
@@ -134,16 +143,15 @@ const useAbstract = (script: IScript) => {
           console.log(resSelectDraft);
         } else if (activeButton === 1) {
           const resDraft = await uploadFileDraft(query.id as string, {
-            content: data.scriptFile[0],
+            script: data.scriptFile[0],
           });
           const resCopyright = await uploadCopyright(query.id as string, {
-            content: data.scriptCopyright[0],
+            copyright: data.scriptCopyright[0],
           });
           console.log(resDraft, resCopyright);
         }
         console.log(res);
-
-        // replace(routes.projectsDashboard.url);
+        replace(routes.projectsDashboard.url);
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -172,7 +180,6 @@ const useAbstract = (script: IScript) => {
             storyTopics: data.storyTopics,
             logLine: data.logLine,
             adaption,
-            adaptionPermission: data.adaptionPermission[0],
             progress: progress >= 100 ? 100 : progress,
           },
           query.id as string
@@ -181,6 +188,17 @@ const useAbstract = (script: IScript) => {
           image: data.image[0],
         });
         console.log(resImage);
+
+        if (adaption) {
+          const resAdaption = await updateAdaptionPermission(
+            query.id as string,
+            {
+              adaptionPermission: data.adaptionPermission[0],
+            }
+          );
+          console.log(resAdaption);
+        }
+
         if (activeButton === 0) {
           if (data.draft) {
             const resSelectDraft = await selectedDraft(data.draft, {
@@ -191,13 +209,13 @@ const useAbstract = (script: IScript) => {
         } else if (activeButton === 1) {
           if (data.scriptFile && data.scriptFile[0]) {
             const resDraft = await uploadFileDraft(query.id as string, {
-              content: data.scriptFile[0],
+              script: data.scriptFile[0],
             });
             console.log(resDraft);
           }
           if (data.scriptCopyright && data.scriptCopyright[0]) {
             const resCopyright = await uploadCopyright(query.id as string, {
-              content: data.scriptCopyright[0],
+              copyright: data.scriptCopyright[0],
             });
             console.log(resCopyright);
           }

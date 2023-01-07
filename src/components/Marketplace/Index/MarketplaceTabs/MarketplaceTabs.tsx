@@ -1,27 +1,20 @@
-import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { useEffect, useState } from "react";
-import routes from "routes/routes";
-import { useRouter } from "next/router";
+import Tabs from "@mui/material/Tabs";
+import React from "react";
 
 const routesList = [
-  { id: 1, query: "", label: "Explore" },
-  { id: 2, query: "?sort=rate", label: "Top rated" },
-  { id: 3, query: "?sort=featured", label: "Featured" },
-  { id: 4, query: "?sort=trending", label: "Trending" },
+  { id: 1, query: "?", label: "Explore" },
+  { id: 2, query: "?rate=true", label: "Top rated" },
+  { id: 3, query: "?featured=true", label: "Featured" },
+  { id: 4, query: "?trending=true", label: "Trending" },
 ];
 
-const MarketplaceTabs = () => {
-  const [activeTab, setActiveTab] = useState(0);
-  const { push, query } = useRouter();
+interface IProps {
+  activeTab: number;
+  pushToActiveRoute: (query: string) => () => void;
+}
 
-  useEffect(() => {
-    if (query.sort === "rate") setActiveTab(1);
-    else if (query.sort === "featured") setActiveTab(2);
-    else if (query.sort === "trending") setActiveTab(3);
-    else setActiveTab(0);
-  }, [query]);
-
+const MarketplaceTabs = ({ activeTab, pushToActiveRoute }: IProps) => {
   return (
     <div className="md:border-t border-b md:pl-4  border-gray-400 md:mt-8 w-full">
       <Tabs
@@ -39,9 +32,7 @@ const MarketplaceTabs = () => {
         {routesList.map((route) => (
           <Tab
             key={route.id}
-            onClick={() => {
-              push(routes.marketplaceTabs.url(route.query));
-            }}
+            onClick={pushToActiveRoute(route.query)}
             className="md:text-xl md:mr-2 2xl:ml-8"
             label={route.label}
           />
@@ -51,4 +42,4 @@ const MarketplaceTabs = () => {
   );
 };
 
-export default MarketplaceTabs;
+export default React.memo(MarketplaceTabs);

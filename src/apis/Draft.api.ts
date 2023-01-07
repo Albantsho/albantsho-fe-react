@@ -1,7 +1,10 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 
 interface IUploadFileDraftPayload {
-  content: string | File;
+  script: File;
+}
+interface ISaveDraftPayload {
+  content: string;
 }
 
 interface ISelectOtherDraftPayload {
@@ -9,7 +12,7 @@ interface ISelectOtherDraftPayload {
 }
 
 interface IUploadCopyrightPayload {
-  content: File;
+  copyright: File;
 }
 
 const useDraftApi = (controller?: AbortController) => {
@@ -36,12 +39,15 @@ const useDraftApi = (controller?: AbortController) => {
         payload,
         {
           signal: controller?.signal,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
       return res.data;
     },
-    async saveFileDraft(scriptId: string, payload: IUploadFileDraftPayload) {
+    async saveFileDraft(scriptId: string, payload: ISaveDraftPayload) {
       const res = await axiosPrivate.patch(`/draft/save/${scriptId}`, payload, {
         signal: controller?.signal,
       });
@@ -62,11 +68,14 @@ const useDraftApi = (controller?: AbortController) => {
     },
 
     async uploadCopyright(scriptId: string, payload: IUploadCopyrightPayload) {
-      const res = await axiosPrivate.patch(
+      const res = await axiosPrivate.post(
         `/draft/copyright/${scriptId}`,
         payload,
         {
           signal: controller?.signal,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 

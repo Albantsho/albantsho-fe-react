@@ -29,7 +29,6 @@ interface IUpdateScriptPayload {
   characterBible?: string;
   storyTopics: string[];
   adaption?: boolean;
-  adaptionPermission?: File;
   inspiration?: string;
   motivation?: string;
   progress: number;
@@ -37,6 +36,9 @@ interface IUpdateScriptPayload {
 
 interface IUpdateScriptImagePayload {
   image: File;
+}
+interface IUpdateAdaptionPermissionPayload {
+  adaptionPermission: File;
 }
 
 interface IGiveRateToScriptPayload {
@@ -66,9 +68,6 @@ const useScriptsApi = (controller?: AbortController) => {
         payload,
         {
           signal: controller?.signal,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
         }
       );
 
@@ -81,6 +80,23 @@ const useScriptsApi = (controller?: AbortController) => {
           "Content-Type": "multipart/form-data",
         },
       });
+
+      return res.data;
+    },
+    async updateAdaptionPermission(
+      id: string,
+      payload: IUpdateAdaptionPermissionPayload
+    ) {
+      const res = await axiosPrivate.post(
+        `/script/adaptionPermission/${id}`,
+        payload,
+        {
+          signal: controller?.signal,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       return res.data;
     },

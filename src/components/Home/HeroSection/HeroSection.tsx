@@ -93,6 +93,7 @@ const HeroSection = () => {
                 title: "Black Onion",
                 price: 400,
                 verified: true,
+                image: "",
               }}
               inHome
             />

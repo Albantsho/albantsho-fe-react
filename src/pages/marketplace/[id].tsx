@@ -41,9 +41,12 @@ const ScriptInfoPage = () => {
   useEffect(() => {
     async function getScriptsDate() {
       try {
-        const res = await getScript(query.id as string);
-        setScript(res.data.script);
-        setLoading(false);
+        if (typeof query.id === "string") {
+          const res = await getScript(query.id as string);
+          setScript(res.data.script);
+          console.log(res);
+          setLoading(false);
+        }
       } catch (error) {
         errorHandler(error);
       }

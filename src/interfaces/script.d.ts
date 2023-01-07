@@ -6,6 +6,7 @@ export interface IScript {
   rate: number;
   primaryGenre: string;
   verified: boolean;
+  image: string;
 }
 
 export interface IUnlistedScript {
@@ -56,7 +57,7 @@ export interface IFullInformationScript {
   authorId: string;
   title: string;
   tagline: string;
-  archived: boolean;
+  archive: boolean;
   scriptFormat: string;
   storyFormat: string;
   primaryGenre: string;
@@ -79,9 +80,21 @@ export interface IFullInformationScript {
   listed: boolean;
   published: boolean;
   storyTopics: string[];
-  rate: string;
-  rateCount: string;
+  rate: number;
+  rateCount: number;
   bought: boolean;
   createdAt: string;
   updatedAt: string;
+  basedOn: null | string;
+  collaborators: [];
+  contentPdf: string;
+  contentSnippet: null | string;
+  draftDate: string;
+  progress: number;
+  reviewerRate: number | null;
+  sold: boolean;
+  soldDate: string | null;
+  soldPrice: number | null;
+  writtenBy: string[];
+  subScriptions: string[];
 }

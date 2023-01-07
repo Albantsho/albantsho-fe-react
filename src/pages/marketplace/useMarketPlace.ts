@@ -13,12 +13,15 @@ const useMarketPlace = () => {
   const { query, push } = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+  const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
     async function getScriptsFunc() {
       try {
         setLoading(true);
         const res = await getAllScripts(queryString.stringify(query));
+        console.log(res);
+
         setScripts(res.data.scripts);
         setPageCount(res.data.pagesCount);
         setCurrentPage(res.data.currentPage);
@@ -30,22 +33,56 @@ const useMarketPlace = () => {
     getScriptsFunc();
   }, [query!]);
 
+  useEffect(() => {
+    if (query.rate) setActiveTab(1);
+    else if (query.featured) setActiveTab(2);
+    else if (query.trending) setActiveTab(3);
+    else setActiveTab(0);
+  }, [query]);
+
+  const pushActiveRoute = (query: string) => () => {
+    push(
+      routes.marketplaceTabs.url(query, currentPage > 1 ? `${currentPage}` : "")
+    );
+  };
+
   const handleActivePage = (
     event: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    !query
+    !query.rate && !query.featured && !query.trending
       ? push(routes.marketplaceTabs.url("", `?page=${page}`), undefined, {
           shallow: true,
+          scroll: false,
         })
+      : query.rate
+      ? push(
+          routes.marketplaceTabs.url("?rate=true", `&page=${page}`),
+          undefined,
+          { shallow: true }
+        )
+      : query.featured
+      ? push(
+          routes.marketplaceTabs.url(`?featured=true`, `&page=${page}`),
+          undefined,
+          { shallow: true }
+        )
       : push(
-          routes.marketplaceTabs.url(`?sort=${query.sort}`, `&page=${page}`),
+          routes.marketplaceTabs.url(`?trending=true`, `&page=${page}`),
           undefined,
           { shallow: true }
         );
   };
 
-  return { scripts, loading, currentPage, pageCount, handleActivePage };
+  return {
+    scripts,
+    loading,
+    currentPage,
+    pageCount,
+    handleActivePage,
+    activeTab,
+    pushActiveRoute,
+  };
 };
 
 export default useMarketPlace;
