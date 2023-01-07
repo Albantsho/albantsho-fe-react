@@ -37,7 +37,7 @@ const DashboardNavOnDesktop = () => {
             {collaboratorsList.collaborators.map((collaborator) => (
               <Avatar
                 key={collaborator._id}
-                alt={collaborator.fullname}
+                alt={collaborator.firstName}
                 src={collaborator.image}
               />
             ))}

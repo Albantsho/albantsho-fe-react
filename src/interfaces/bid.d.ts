@@ -21,7 +21,8 @@ export interface IProducerBid {
   accept: boolean;
   reject: boolean;
   producer: {
-    fullname: string;
+    firstName: string;
+    lastName: string;
   };
   createdAt: string;
   updatedAt: string;

@@ -7,7 +7,7 @@ const WithdrawSuccessfulPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Withdraw Successful </title>
+        <title>Albantsho || Withdraw Successful</title>
       </Head>
       <WithdrawSuccessful />
     </>

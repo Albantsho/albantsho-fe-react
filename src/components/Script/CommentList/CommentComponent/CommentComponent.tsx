@@ -57,14 +57,14 @@ const CommentComponent = ({ comment, comments, socket }: IProps) => {
               ),
             }}
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${comment.user?.image}`}
-            alt={comment.user?.fullname}
+            alt={comment.user?.firstName}
           />
           <Typography
             variant="h6"
             color="primary.main"
             className="font-normal futura leading-normal"
           >
-            {comment.user?.fullname}
+            {`${comment.user?.firstName} ${comment.user?.lastName}`}
           </Typography>
 
           <Typography variant="body2" className="text-gray-400">

@@ -41,7 +41,8 @@ export interface IWriterReview {
 
 export interface IReviewer {
   id: string;
-  fullname: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface IReviewTypeA {

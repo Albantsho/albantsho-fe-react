@@ -11,7 +11,8 @@ export interface IComment {
   _id: string;
   user?: {
     email: string;
-    fullname: string;
+    firstName: string;
+    lastName: string;
     image: string | null;
   };
 }

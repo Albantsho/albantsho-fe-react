@@ -309,7 +309,11 @@ const routes = {
   },
   scriptWritingTabs: {
     url: (id: string, query: string) => `/script/${id}${query}`,
-
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
+  invites: {
+    url: "/invites",
     mustAuthenticated: "yes",
     permission: ["writer"],
   },

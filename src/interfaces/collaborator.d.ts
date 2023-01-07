@@ -1,6 +1,7 @@
 export interface ICollaboratorOrOwnerInformation {
   _id: string;
-  fullname: string;
+  firstName: string;
+  lastName: string;
   image: string;
   email: string;
 }

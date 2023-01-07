@@ -29,13 +29,15 @@ interface IProps {
 
 interface IReviewersListOptionType {
   inputValue?: string;
-  fullname: string;
+  firstName: string;
+  lastName: string;
   id: string;
 }
 
 const filterOptions = createFilterOptions({
   matchFrom: "start",
-  stringify: (option: IReviewersListOptionType) => option.fullname,
+  stringify: (option: IReviewersListOptionType) =>
+    `${option.firstName} ${option.lastName}`,
 });
 
 const OneRequest = ({ reviewersList, script }: IProps) => {
@@ -145,7 +147,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
             setSelectedReviewer(newValue);
           }}
           options={reviewersList}
-          getOptionLabel={(option) => option.fullname}
+          getOptionLabel={(option) => `${option.firstName} ${option.lastName}`}
           renderOption={(props, option) => (
             <ListItem
               disablePadding
@@ -162,10 +164,10 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
                 }}
               >
                 <ListItemAvatar>
-                  <Avatar className="w-8 h-8">{option.fullname}</Avatar>
+                  <Avatar className="w-8 h-8">{option.firstName}</Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary={option.fullname}
+                  primary={`${option.firstName} ${option.lastName}`}
                   primaryTypographyProps={{
                     color: (theme) => theme.palette.primary.main,
                     fontSize: 20,

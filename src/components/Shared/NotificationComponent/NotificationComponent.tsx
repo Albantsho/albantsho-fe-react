@@ -1,22 +1,19 @@
 import alert from "@assets/images/alert.png";
 import {
-  Avatar,
   Badge,
   Button,
   IconButton,
   List,
   ListItem,
-  ListItemAvatar,
-  ListItemButton,
   ListItemText,
   Popover,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import Image from "next/image";
-import { AiOutlineClose } from "react-icons/ai";
-import { MdOutlineDone } from "react-icons/md";
+import Link from "next/link";
 import { ClipLoader } from "react-spinners";
+import routes from "routes/routes";
 import useNotificationComponent from "./useNotificationComponent";
 
 const NotificationComponent = () => {
@@ -27,8 +24,9 @@ const NotificationComponent = () => {
     open,
     loading,
     notificationsList,
-    acceptInviteFunc,
-    rejectInviteFunc,
+    readNotification,
+    deleteNotificationFunc,
+    allInvites,
   } = useNotificationComponent();
   const xlScreen = useMediaQuery("(min-width: 1024px)");
   return (
@@ -37,7 +35,10 @@ const NotificationComponent = () => {
         onClick={handleClick}
         className="ml-auto self-center max-h-[31px]  mt-1"
       >
-        <Badge badgeContent={notificationsList.length} color="error">
+        <Badge
+          badgeContent={notificationsList.filter((n) => !n.read).length}
+          color="error"
+        >
           <div>
             <Image src={alert} alt="alert" />
           </div>
@@ -64,13 +65,13 @@ const NotificationComponent = () => {
           ) : (
             notificationsList.map((notification) => (
               <ListItem
-                className="gap-1 items-start"
+                className="gap-1 items-start flex-col relative"
                 divider
                 key={notification.userId}
               >
-                <ListItemAvatar className="pt-3">
-                  <Avatar alt="Remy Sharp" />
-                </ListItemAvatar>
+                {!notification.read && (
+                  <span className="w-1 h-1 rounded-full absolute left-1 top-1/2 bottom-1/2 bg-primary-700"></span>
+                )}
                 <ListItemText
                   primary={
                     <Typography
@@ -83,29 +84,39 @@ const NotificationComponent = () => {
                   }
                   secondary={notification.description}
                   secondaryTypographyProps={{
-                    className: "max-w-[250px] futura",
+                    className: "futura max-w-[250px]",
                   }}
                 />
-                {/* <IconButton
-                  onClick={acceptInviteFunc(notification.description)}
-                  className="text-success-500 hover:bg-success-50 bg-success-50"
-                >
-                  <MdOutlineDone />
-                </IconButton>
-                <IconButton
-                  onClick={rejectInviteFunc(notification.description)}
-                  className="text-error-500 hover:bg-error-50 bg-error-50"
-                >
-                  <AiOutlineClose />
-                </IconButton> */}
+                <div className="flex gap-1 justify-between">
+                  {!notification.read && (
+                    <Button
+                      onClick={readNotification(notification._id)}
+                      variant="outlined"
+                      color="info"
+                    >
+                      Mark as read
+                    </Button>
+                  )}
+
+                  <Button
+                    onClick={deleteNotificationFunc(notification._id)}
+                    variant="outlined"
+                    color="error"
+                  >
+                    Delete
+                  </Button>
+                </div>
               </ListItem>
             ))
           )}
         </List>
-
-        <Button variant="text" className="text-center w-full py-4">
-          See list all Invites
-        </Button>
+        {allInvites.filter((n) => !n.rejected).length > 0 && (
+          <Link passHref legacyBehavior href={routes.invites.url}>
+            <Button variant="text" className="text-center w-full py-4">
+              See your Invites : {allInvites.filter((n) => !n.rejected).length}
+            </Button>
+          </Link>
+        )}
       </Popover>
     </>
   );

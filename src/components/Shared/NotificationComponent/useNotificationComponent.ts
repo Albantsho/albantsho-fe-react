@@ -1,16 +1,20 @@
 import useInvite from "apis/Invite.api";
 import useNotification from "apis/Notification.api";
+import { IInvite } from "interfaces/invite";
 import { INotification } from "interfaces/notification";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
 
 const useNotificationComponent = () => {
-  const { getAllNotifications } = useNotification();
-  const { acceptInvite, rejectInvite } = useInvite();
+  const { getAllNotifications, seenNotification, deleteNotification } =
+    useNotification();
+  const { allInvite } = useInvite();
   const [notificationsList, setNotificationsList] = useState<
     Array<INotification>
   >([]);
   const [loading, setLoading] = useState(false);
+  const [allInvites, setAllInvites] = useState<Array<IInvite>>([]);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
 
@@ -22,17 +26,28 @@ const useNotificationComponent = () => {
     setAnchorEl(null);
   };
 
-  const acceptInviteFunc = (id: string) => async () => {
+  const readNotification = (id: string) => async () => {
     try {
-      const res = await acceptInvite(id.split(" ")[2]);
+      const res = await seenNotification(id);
+      const copiedNotificationList = [...notificationsList];
+      const findReadiedNotificationIndex = copiedNotificationList.findIndex(
+        (n) => n._id === id
+      );
+      copiedNotificationList[findReadiedNotificationIndex].read = true;
+      setNotificationsList(copiedNotificationList);
+      toast.success(res.data.message);
+      console.log(res);
     } catch (error) {
       errorHandler(error);
     }
   };
 
-  const rejectInviteFunc = (id: string) => async () => {
+  const deleteNotificationFunc = (id: string) => async () => {
     try {
-      const res = await rejectInvite(id.split(" ")[2]);
+      const res = await deleteNotification(id);
+      setNotificationsList(notificationsList.filter((n) => n._id !== id));
+      toast.success(res.data.message);
+      console.log(res);
     } catch (error) {
       errorHandler(error);
     }
@@ -45,8 +60,9 @@ const useNotificationComponent = () => {
         setLoading(true);
         const res = await getAllNotifications();
         console.log(res);
-
         setNotificationsList(res.data.notifications);
+        const resInvites = await allInvite();
+        setAllInvites(resInvites.data.invites);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
@@ -63,8 +79,9 @@ const useNotificationComponent = () => {
     open,
     notificationsList,
     loading,
-    acceptInviteFunc,
-    rejectInviteFunc,
+    readNotification,
+    deleteNotificationFunc,
+    allInvites,
   };
 };
 

@@ -48,9 +48,12 @@ const AssignedOrCompletedRequest = ({ script }: IProps) => {
           </div>
           <div className="sm:hidden flex gap-1 items-center">
             <Avatar className="w-8 h-8">J</Avatar>
-            <Tooltip title={script.reviewer.fullname}>
+            <Tooltip
+              title={`${script.reviewer.firstName} ${script.reviewer.lastName}`}
+            >
               <Typography variant="body1">
-                {script.reviewer.fullname.substring(0, 13)}
+                {`${script.reviewer.firstName}
+                ${script.reviewer.lastName}`.substring(0, 13)}
               </Typography>
             </Tooltip>
           </div>
@@ -93,11 +96,17 @@ const AssignedOrCompletedRequest = ({ script }: IProps) => {
           className="py-5 px-4 hidden sm:flex md:hidden lg:flex xl:hidden rounded-md bg-primary-700 w-full text-white"
         />
         <div className="flex gap-2 items-center xl:ml-auto">
-          <Avatar className="w-8 h-8">J</Avatar>
-          <Tooltip title={script.reviewer.fullname}>
+          <Avatar className="w-8 h-8">
+            {script.reviewer.firstName.substring(0, 1)}
+          </Avatar>
+          <Tooltip title={script.reviewer.firstName}>
             <Typography variant="body1">
-              {script.reviewer.fullname.substring(0, 8)}
-              {script.reviewer.fullname.length > 8 && "..."}
+              {`${script.reviewer.firstName} ${script.reviewer.lastName}`.substring(
+                0,
+                8
+              )}
+              {`${script.reviewer.firstName} ${script.reviewer.lastName}`
+                .length > 8 && "..."}
             </Typography>
           </Tooltip>
         </div>

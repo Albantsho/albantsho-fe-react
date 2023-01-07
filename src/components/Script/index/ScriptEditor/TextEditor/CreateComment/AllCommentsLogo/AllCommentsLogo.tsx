@@ -26,7 +26,7 @@ const AllCommentsLogo = ({ comment }: IProps) => {
       <Avatar
         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${comment.user?.image}`}
         className="absolute top-2 left-3 w-11 h-11"
-        alt={comment.user?.fullname}
+        alt={comment.user?.firstName}
       />
     </div>
   );

@@ -60,7 +60,6 @@ const useRegisterForm = () => {
           lastName: splitFullName[splitFullName.length - 1],
         });
         authenticationUser(res.data.user);
-        replace(routes.welcome.url);
         replace(routes.verifyEmail.url);
       } catch (error) {
         errorHandler(error);

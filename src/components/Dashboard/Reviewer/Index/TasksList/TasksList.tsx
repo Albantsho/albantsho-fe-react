@@ -1,47 +1,8 @@
-import beautySmall from "@assets/images/beauty-small.jpg";
 import { Divider, Tab, Tabs } from "@mui/material";
 import { IReviewerTask } from "interfaces/reviews";
 import React, { useState } from "react";
 import ScriptCart from "../ScriptCart/ScriptCart";
 import Task from "./Task/Task";
-
-const tasks = [
-  {
-    id: 1,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-  },
-  {
-    id: 2,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-  },
-  {
-    id: 3,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-  },
-  {
-    id: 4,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-  },
-  {
-    id: 5,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-  },
-];
 
 interface IProps {
   reviewerTaskList: IReviewerTask[];
@@ -50,8 +11,10 @@ interface IProps {
 const TasksList = ({ reviewerTaskList }: IProps) => {
   const [activeLinkIndex, setActiveLinkIndex] = useState(0);
   const [selectedScriptId, setSelectedScriptId] = useState(
-    reviewerTaskList[0]._id
+    reviewerTaskList && reviewerTaskList[0] ? reviewerTaskList[0]._id : "1"
   );
+
+  console.log(reviewerTaskList);
 
   const activeLinkChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveLinkIndex(newValue);
@@ -109,7 +72,7 @@ const TasksList = ({ reviewerTaskList }: IProps) => {
                 setSelectedScriptId={setSelectedScriptId}
                 reviewerTask={reviewerTask}
               />
-              {index < tasks.length - 1 && (
+              {index < reviewerTaskList.length - 1 && (
                 <Divider className="hidden md:block" />
               )}
             </React.Fragment>

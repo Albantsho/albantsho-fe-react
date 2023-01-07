@@ -94,10 +94,10 @@ const ScriptDocument = ({ script, socket }: IProps) => {
                   <Avatar
                     className="w-8 h-8"
                     src={collaboratorsList.author.image}
-                    alt={collaboratorsList.author.fullname}
+                    alt={collaboratorsList.author.firstName}
                   />
                   <Typography className="futura font-medium">
-                    {collaboratorsList.author.fullname}
+                    {`${collaboratorsList.author.firstName} ${collaboratorsList.author.lastName}`}
                   </Typography>
                 </div>
                 <Typography className="futura text-[#5D5FEF] font-medium">
@@ -113,10 +113,10 @@ const ScriptDocument = ({ script, socket }: IProps) => {
                     <Avatar
                       className="w-8 h-8"
                       src={collaborator.image}
-                      alt={collaborator.fullname}
+                      alt={collaborator.firstName}
                     />
                     <Typography className="futura font-medium">
-                      {collaborator.fullname}
+                      {`${collaborator.firstName} ${collaborator.lastName}`}
                     </Typography>
                   </div>
                   {user.email === collaboratorsList.author.email && (

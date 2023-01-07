@@ -19,7 +19,7 @@ const Reviewer = () => {
       try {
         setLoading(true);
         const res = await getAllReviewerTasks("hello");
-        setReviewerTaskList(res.data.review);
+        setReviewerTaskList(res.data.scripts);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
