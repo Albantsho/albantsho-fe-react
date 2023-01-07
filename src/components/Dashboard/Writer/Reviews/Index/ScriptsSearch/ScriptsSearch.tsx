@@ -1,6 +1,3 @@
-import { AiOutlineSearch } from "react-icons/ai";
-import Btn from "@shared/Btn/Btn";
-import Link from "next/link";
 import {
   Autocomplete,
   createFilterOptions,
@@ -11,34 +8,48 @@ import {
   SvgIcon,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import Btn from "@shared/Btn/Btn";
+import useDraftApi from "apis/Draft.api";
+import { IDraft } from "interfaces/draft";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
 
-interface MoviesOptionType {
+interface ScriptsOptionType {
   inputValue?: string;
   title: string;
+  _id: string;
 }
 
-const moviesList = [
-  { title: "The Long Man of Long Beach1" },
-  { title: "The Long Man of Long Beach2" },
-  { title: "The Long Man of Long Beach3" },
-  { title: "The Long Man of Long Beach4" },
-  { title: "The Long Man of Long Beach5" },
-  { title: "The Long Man of Long Beach6" },
-  { title: "The Long Man of Long Beach7" },
-  { title: "The Long Man of Long Beach8" },
-];
+let scriptsList: Array<IDraft> = [];
 
 const filterOptions = createFilterOptions({
   matchFrom: "start",
-  stringify: (option: MoviesOptionType) => option.title,
+  stringify: (option: ScriptsOptionType) => option.title,
 });
 
 const ScriptsSearch = () => {
-  const [selectedStore, setSelectedStory] = useState<MoviesOptionType | null>(
-    null
-  );
+  const [selectedScript, setSelectedScript] =
+    useState<ScriptsOptionType | null>(null);
+  const { getAllDraft } = useDraftApi();
+
+  useEffect(() => {
+    async function getOtherDrafts() {
+      try {
+        const res = await getAllDraft();
+        console.log(res);
+        scriptsList = res.data.drafts;
+      } catch (error) {
+        errorHandler(error);
+      }
+    }
+
+    getOtherDrafts();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="w-full mt-8 lg:mt-16 space-y-8 mx-auto  md:max-w-[640px]">
@@ -53,11 +64,11 @@ const ScriptsSearch = () => {
             "& .MuiInputBase-input": { color: "#7953B5" },
             "& .MuiOutlinedInput-notchedOutline": { borderRadius: "12px" },
           }}
-          value={selectedStore}
-          onChange={(value, newValue: MoviesOptionType | null): void => {
-            setSelectedStory(newValue);
+          value={selectedScript}
+          onChange={(value, newValue: ScriptsOptionType | null): void => {
+            setSelectedScript(newValue);
           }}
-          options={moviesList}
+          options={scriptsList}
           getOptionLabel={(option) => option.title}
           renderOption={(props, option) => (
             <ListItem
@@ -108,8 +119,11 @@ const ScriptsSearch = () => {
       </div>
 
       <div className="flex justify-center sm:justify-start">
-        <Link legacyBehavior href={routes.reviewsPlans.url}>
-          <Btn disabled={!selectedStore} size="large">
+        <Link
+          legacyBehavior
+          href={routes.reviewsPlans.dynamicUrl(selectedScript?._id as string)}
+        >
+          <Btn disabled={!selectedScript} size="large">
             Next
           </Btn>
         </Link>

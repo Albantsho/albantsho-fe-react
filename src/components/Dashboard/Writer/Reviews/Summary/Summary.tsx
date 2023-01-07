@@ -1,19 +1,79 @@
 import { Chip, Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import useReviewsApi from "apis/Reviews.api";
+import usePlanApi from "apis/Plan.api";
+import useUserStore from "app/user.store";
+import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
+import { IFullInformationScript } from "interfaces/script";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 
-const Summary = () => {
-  const [loading, setLoading] = useState(false);
-  const { createNewReview } = useReviewsApi();
+interface IProps {
+  script: IFullInformationScript;
+}
 
-  const createReviewForScript = async () => {
+const Summary = ({ script }: IProps) => {
+  const { query } = useRouter();
+  const user = useUserStore((state) => state.user);
+  const { replace } = useRouter();
+  const [loading, setLoading] = useState(false);
+  const { buyReviewsPlan } = usePlanApi();
+  const config = {
+    public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY as string,
+    tx_ref: `${Date.now()}`,
+    amount: query.reviewPlan === "typeA" ? 100 : 300,
+    currency: "USD",
+    // redirect_url: "https://www.albantsho.com/",
+    payment_options:
+      "card, banktransfer, ussd, account, mpesa, barter, nqr, credit",
+    customer: {
+      email: user.email,
+      name: user.firstName,
+      phone_number: "07000000000",
+    },
+    customizations: {
+      title: "Review Plan",
+      description: "Get your script reviewed by our top experts",
+      logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+    },
+  };
+
+  const handleFlutterPayment = useFlutterwave(config);
+
+  const paymentBuyingReviewPlan = () => {
     try {
       setLoading(true);
-      const res = await createNewReview({ scriptId: "" });
+      handleFlutterPayment({
+        callback: async (response) => {
+          console.log(response);
+
+          try {
+            const res = await buyReviewsPlan({
+              plan: query.reviewPlan as string,
+              scriptId: script._id,
+              transactionId: `${response.transaction_id}`,
+            });
+            console.log(res);
+            replace(
+              routes.reviewsPaymentSuccessful.dynamicUrl(
+                `${response.transaction_id}`
+              )
+            );
+          } catch (error) {
+            errorHandler(error);
+            console.log(error);
+          }
+          closePaymentModal(); // this will close the modal programmatically
+        },
+        onClose: () => {
+          toast.error("payment Field or canceled, please try again");
+          console.log("close");
+        },
+      });
     } catch (error) {
-      errorHandler(error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -31,7 +91,8 @@ const Summary = () => {
           color="primary.700"
           className="mb-3 futura font-medium text-[#7B61FF] lg:mb-6"
         >
-          Type A Review
+          {query.reviewPlan === "typeA" && "Type A"}
+          {query.reviewPlan === "typeB" && "Type B"} Review
         </Typography>
         <div className="flex flex-col  md:flex-row lg:flex-col xl:flex-row mb-2 lg:mb-5 lg:max-w-max  gap-x-2 xl:gap-x-4 gap-y-4">
           <div className="flex items-center gap-x-4 gap-y-2 flex-wrap">
@@ -40,10 +101,10 @@ const Summary = () => {
               color="primary.700"
               className="futura font-medium leading-normal"
             >
-              The Apple and The Berry
+              {script.title}
             </Typography>
             <Chip
-              label="Feature film"
+              label={script.scriptFormat}
               className="rounded bg-tinted-50/60 text-neutral-800 lg:mr-5 md:px-4 md:py-5"
             />
           </div>
@@ -60,7 +121,8 @@ const Summary = () => {
                 className="lg:leading-normal font-semibold"
                 variant="h5"
               >
-                $100
+                {query.reviewPlan === "typeA" && "$100"}
+                {query.reviewPlan === "typeB" && "$300"}
               </Typography>
               <Typography variant="body1" color="primary.700">
                 (0.0237 ETH)
@@ -70,7 +132,7 @@ const Summary = () => {
         </div>
         <Btn
           loading={loading}
-          onClick={createReviewForScript}
+          onClick={paymentBuyingReviewPlan}
           className="mt-4 py-3 px-7 xl:m12"
           size="large"
         >

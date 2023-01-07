@@ -3,7 +3,7 @@ import useAxiosPrivate from "hooks/useAxiosPrivate";
 interface IPayloadBuyReviewPlan {
   scriptId: string;
   plan: string;
-  reviewPlan: string;
+  transactionId: string;
 }
 
 const usePlanApi = (controller?: AbortController) => {

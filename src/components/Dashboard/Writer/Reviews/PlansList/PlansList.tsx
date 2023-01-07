@@ -8,6 +8,9 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import ReviewedIcon from "@assets/icons/reviewed.svg";
+import Link from "next/link";
+import routes from "routes/routes";
+import { useRouter } from "next/router";
 
 const list1 = [
   "Plot",
@@ -33,6 +36,8 @@ const list2 = [
 ];
 
 const PlansList = () => {
+  const { query } = useRouter();
+
   return (
     <div className="mt-3 mb-16 lg:pb-8 w-full px-5 sm:px-10 xl:px-20">
       <Divider />
@@ -84,9 +89,18 @@ const PlansList = () => {
             })}
           </CardContent>
           <CardActions className="mt-7">
-            <Btn size="large" className="py-2 w-full text-center">
-              Proceed to pay
-            </Btn>
+            <Link
+              passHref
+              legacyBehavior
+              href={routes.reviewsSummary.dynamicUrl(
+                query.id as string,
+                "?reviewPlan=typeA"
+              )}
+            >
+              <Btn size="large" className="py-2 w-full text-center">
+                Proceed to pay
+              </Btn>
+            </Link>
           </CardActions>
         </Card>
         <Card
@@ -104,13 +118,13 @@ const PlansList = () => {
               variant="h6"
               className="futura font-medium text-xl text-[#FFAF19]"
             >
-              Type A
+              Type B
             </Typography>
             <Typography
               variant="h3"
               className={`text-[#FFAF19] futura font-semibold leading-normal`}
             >
-              $200
+              $300
             </Typography>
             <Typography variant="body1" className="font-medium mb-8 mt-2">
               This package gets you a complete review of the following:
@@ -136,9 +150,18 @@ const PlansList = () => {
             })}
           </CardContent>
           <CardActions className="mt-7">
-            <Btn size="large" className="py-2 w-full text-center">
-              Proceed to pay
-            </Btn>
+            <Link
+              passHref
+              legacyBehavior
+              href={routes.reviewsSummary.dynamicUrl(
+                query.id as string,
+                "?reviewPlan=typeB"
+              )}
+            >
+              <Btn size="large" className="py-2 w-full text-center">
+                Proceed to pay
+              </Btn>
+            </Link>
           </CardActions>
         </Card>
       </div>

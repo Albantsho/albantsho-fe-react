@@ -1,14 +1,17 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import Head from "next/head";
-import { NextPageWithLayout } from "../../../_app";
+import { NextPageWithLayout } from "../../../../_app";
 import success from "@assets/images/success.png";
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
 import Link from "next/link";
 import routes from "routes/routes";
+import { useRouter } from "next/router";
 
 const PaymentSuccessful: NextPageWithLayout = () => {
+  const { query } = useRouter();
+
   return (
     <>
       <Head>
@@ -34,7 +37,7 @@ const PaymentSuccessful: NextPageWithLayout = () => {
           color="primary.700"
           className="futura font-medium sm:mb-3 leading-normal mb-2"
         >
-          Transaction ID: 1234567890AVGED
+          Transaction ID: {query.transaction_id}
         </Typography>
         <Typography
           variant="body2"

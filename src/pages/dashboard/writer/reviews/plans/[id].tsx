@@ -2,7 +2,7 @@ import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import Heading from "components/Dashboard/Writer/Reviews/Index/Heading/Heading";
 import PlansList from "components/Dashboard/Writer/Reviews/PlansList/PlansList";
 import Head from "next/head";
-import { NextPageWithLayout } from "../../../_app";
+import { NextPageWithLayout } from "../../../../_app";
 
 const Plans: NextPageWithLayout = () => {
   return (

@@ -170,17 +170,22 @@ const routes = {
     permission: ["writer"],
   },
   reviewsPaymentSuccessful: {
-    url: "/dashboard/writer/reviews/payment-successful",
+    url: "/dashboard/writer/reviews/payment-successful/[transaction_id]",
+    dynamicUrl: (transaction_id: string) =>
+      `/dashboard/writer/reviews/payment-successful/${transaction_id}`,
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
   reviewsPlans: {
-    url: "/dashboard/writer/reviews/plans",
+    url: "/dashboard/writer/reviews/plans/[id]",
+    dynamicUrl: (id: string) => `/dashboard/writer/reviews/plans/${id}`,
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
   reviewsSummary: {
-    url: "/dashboard/writer/reviews/summary",
+    url: "/dashboard/writer/reviews/summary/[id]",
+    dynamicUrl: (id: string, query: string) =>
+      `/dashboard/writer/reviews/summary/${id}${query}`,
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
