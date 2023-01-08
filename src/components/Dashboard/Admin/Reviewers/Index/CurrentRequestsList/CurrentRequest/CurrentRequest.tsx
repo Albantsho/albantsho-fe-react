@@ -9,14 +9,7 @@ interface IProps {
 }
 
 const CurrentRequest = ({
-  request: {
-    description,
-    _id,
-    script_image,
-    title,
-    primary_genre,
-    review_plan,
-  },
+  request: { tagline, _id, image, title, reviewPlan },
 }: IProps) => {
   const { push } = useRouter();
 
@@ -48,7 +41,7 @@ const CurrentRequest = ({
               layout="fixed"
               className="rounded-md "
               loading="lazy"
-              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script_image}`}
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${image}`}
               alt={title}
             />
           </div>
@@ -61,13 +54,13 @@ const CurrentRequest = ({
               {title}
             </Typography>
             <Typography variant="caption" className="text-stone-800">
-              {description}
+              {tagline}
             </Typography>
           </div>
         </div>
         <Chip
           className="sm:hidden py-5 px-4  rounded-lg text-white bg-primary-700"
-          label={review_plan}
+          label={reviewPlan}
         />
       </TableCell>
       <TableCell
@@ -79,7 +72,7 @@ const CurrentRequest = ({
         className="hidden py-4  sm:py-6 xl:py-10 sm:flex flex-[0.45] items-center xl:flex-[0.4]"
       >
         <Chip
-          label={review_plan}
+          label={reviewPlan}
           className="py-5 px-4 md:ml-3 hidden sm:flex rounded-md bg-primary-700  text-white"
         />
       </TableCell>

@@ -19,7 +19,9 @@ const InformationReviewPage: NextPageWithLayout = () => {
   const { getScript } = useScriptsApi();
   const [loading, setLoading] = useState(true);
   const [reviewersList, setReviewersList] = useState<Array<IReviewer>>([]);
-  const [script, setScript] = useState<IFullInformationScript>();
+  const [script, setScript] = useState<IFullInformationScript>(
+    {} as IFullInformationScript
+  );
 
   useEffect(() => {
     async function getScriptInfoFunc() {
@@ -28,17 +30,21 @@ const InformationReviewPage: NextPageWithLayout = () => {
           const res = await getAllReviewers();
           const resScript = await getScript(query.id);
           setScript(resScript.data.script);
+          console.log(res);
+
           setReviewersList(res.data.reviewers);
           setLoading(false);
         }
       } catch (error) {
+        console.log(error);
+
         errorHandler(error);
       }
     }
     getScriptInfoFunc();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query]);
 
   return (
     <>

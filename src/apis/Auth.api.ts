@@ -175,8 +175,8 @@ const useAuthApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAllReviewers(query?: string) {
-      const res = await api.get(`/user/all/reviewers?${query}`, {
+    async getAllReviewers() {
+      const res = await axiosPrivate.get("/user/all/reviewers", {
         signal: controller?.signal,
       });
 

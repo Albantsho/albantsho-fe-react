@@ -14,11 +14,12 @@ import {
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useReviewsApi from "apis/Reviews.api";
+import { bgArray } from "assets/colors/color-list";
 import { IReviewer } from "interfaces/reviews";
 import { IFullInformationScript } from "interfaces/script";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import errorHandler from "utils/error-handler";
 
@@ -31,7 +32,8 @@ interface IReviewersListOptionType {
   inputValue?: string;
   firstName: string;
   lastName: string;
-  id: string;
+  image: string | null;
+  _id: string;
 }
 
 const filterOptions = createFilterOptions({
@@ -42,22 +44,32 @@ const filterOptions = createFilterOptions({
 
 const OneRequest = ({ reviewersList, script }: IProps) => {
   const { assignReviewRequestToReviewer } = useReviewsApi();
+  const [loading, setLoading] = useState(false);
   const [selectedReviewer, setSelectedReviewer] =
     useState<IReviewersListOptionType | null>(null);
   const { back } = useRouter();
 
   const assignedReviewToReviewer = async () => {
     try {
-      if (selectedReviewer?.id) {
+      if (selectedReviewer) {
+        setLoading(true);
         const res = await assignReviewRequestToReviewer({
           scriptId: script._id,
-          userId: selectedReviewer?.id,
+          userId: selectedReviewer._id,
         });
+        console.log(res);
       }
     } catch (error) {
       errorHandler(error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  const backgroundColor = useMemo(
+    () => bgArray[Math.floor(Math.random() * 14)],
+    []
+  );
 
   return (
     <div>
@@ -151,7 +163,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
           renderOption={(props, option) => (
             <ListItem
               disablePadding
-              key={option.id}
+              key={option._id}
               {...props}
               className={` px-2 sm:px-4 md:px-6`}
               sx={{ "&:last-child": { border: 0 } }}
@@ -164,7 +176,14 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
                 }}
               >
                 <ListItemAvatar>
-                  <Avatar className="w-8 h-8">{option.firstName}</Avatar>
+                  <Avatar
+                    className="w-8 h-8"
+                    style={{
+                      backgroundColor,
+                    }}
+                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${option.image}`}
+                    alt={option.firstName}
+                  />
                 </ListItemAvatar>
                 <ListItemText
                   primary={`${option.firstName} ${option.lastName}`}
@@ -202,6 +221,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
       </div>
       <div className="mt-8 flex items-stretch  gap-3">
         <Btn
+          loading={loading}
           size="large"
           className="py-3 px-5 rounded-lg  text-white bg-primary-700"
           onClick={assignedReviewToReviewer}

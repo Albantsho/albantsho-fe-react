@@ -1,13 +1,15 @@
 import {
-  TableRow,
-  TableCell,
-  Chip,
   Avatar,
+  Chip,
+  TableCell,
+  TableRow,
   Tooltip,
   Typography,
 } from "@mui/material";
+import { bgArray } from "assets/colors/color-list";
 import { IAssignedOrCompletedRequest } from "interfaces/reviews";
 import Image from "next/image";
+import { useMemo } from "react";
 
 interface IProps {
   script: IAssignedOrCompletedRequest;
@@ -38,12 +40,12 @@ const AssignedOrCompletedRequest = ({ script }: IProps) => {
               layout="fixed"
               className="rounded-md "
               loading="lazy"
-              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.script_image}`}
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
               alt={script.title}
             />
             <Chip
               className="sm:hidden py-5 px-4  rounded-lg text-white bg-primary-700"
-              label={script.review_plan}
+              label={script.reviewPlan}
             />
           </div>
           <div className="sm:hidden flex gap-1 items-center">
@@ -65,7 +67,7 @@ const AssignedOrCompletedRequest = ({ script }: IProps) => {
               {script.title}
             </Typography>
             <Typography variant="caption" className="text-stone-800">
-              {script.description}
+              {script.tagline}
             </Typography>
           </div>
         </div>
@@ -79,7 +81,7 @@ const AssignedOrCompletedRequest = ({ script }: IProps) => {
         className="hidden py-4 min-w-[150px] md:py-6 xl:py-10 md:flex lg:hidden xl:flex flex-[0.4] items-center"
       >
         <Chip
-          label={script.review_plan}
+          label={script.reviewPlan}
           className="py-5 px-4 md:ml-3 hidden sm:flex rounded-md bg-primary-700  text-white"
         />
       </TableCell>
@@ -92,14 +94,24 @@ const AssignedOrCompletedRequest = ({ script }: IProps) => {
         className="hidden py-4 sm:py-6 xl:py-10 sm:flex flex-[0.35] md:flex-[0.4] justify-center flex-col md:items-center gap-2"
       >
         <Chip
-          label={script.review_plan}
+          label={script.reviewPlan}
           className="py-5 px-4 hidden sm:flex md:hidden lg:flex xl:hidden rounded-md bg-primary-700 w-full text-white"
         />
         <div className="flex gap-2 items-center xl:ml-auto">
-          <Avatar className="w-8 h-8">
-            {script.reviewer.firstName.substring(0, 1)}
-          </Avatar>
-          <Tooltip title={script.reviewer.firstName}>
+          <Avatar
+            style={{
+              backgroundColor: useMemo(
+                () => bgArray[Math.floor(Math.random() * 14)],
+                []
+              ),
+            }}
+            className="w-8 h-8"
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.reviewer.image}`}
+            alt={script.reviewer.firstName}
+          />
+          <Tooltip
+            title={`${script.reviewer.firstName} ${script.reviewer.lastName}`}
+          >
             <Typography variant="body1">
               {`${script.reviewer.firstName} ${script.reviewer.lastName}`.substring(
                 0,

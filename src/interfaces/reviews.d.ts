@@ -1,19 +1,13 @@
 export interface ICurrentRequest {
   _id: string;
   title: string;
-  description: string;
-  script_image: string;
-  review_plan: string;
-  primary_genre: string;
+  tagline: string;
+  image: string;
+  reviewPlan: string;
+  primaryGenre: string;
 }
 
-export interface IAssignedOrCompletedRequest {
-  _id: string;
-  title: string;
-  description: string;
-  script_image: string;
-  review_plan: string;
-  primary_genre: string;
+export interface IAssignedOrCompletedRequest extends ICurrentRequest {
   reviewer: IReviewer;
 }
 
@@ -40,9 +34,10 @@ export interface IWriterReview {
 }
 
 export interface IReviewer {
-  id: string;
+  _id: string;
   firstName: string;
   lastName: string;
+  image: null | string;
 }
 
 export interface IReviewTypeA {
