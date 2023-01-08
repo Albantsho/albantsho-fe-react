@@ -8,8 +8,9 @@ interface ICreateNewScriptPayload {
 
 interface IUpdateCoverPageScriptPayload {
   title: string;
-  writer: string;
-  dateWrite: string;
+  writtenBy: string[];
+  basedOn: string;
+  draftDate: string;
 }
 
 interface IUpdateScriptPayload {
@@ -100,7 +101,10 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data;
     },
-    async updateCoverPageScript(payload: object, id: string) {
+    async updateCoverPageScript(
+      payload: IUpdateCoverPageScriptPayload,
+      id: string
+    ) {
       const res = await axiosPrivate.patch(
         `/script/update/coverpage/${id}`,
         payload,
@@ -253,8 +257,17 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data;
     },
+
     async listAllCollaborators(scriptId: string) {
       const res = await axiosPrivate.get(`/script/collaborators/${scriptId}`, {
+        signal: controller?.signal,
+      });
+
+      return res.data;
+    },
+
+    async getCoverPageInformation(scriptId: string) {
+      const res = await axiosPrivate.get(`/script/coverpage/${scriptId}`, {
         signal: controller?.signal,
       });
 

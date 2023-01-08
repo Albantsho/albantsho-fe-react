@@ -93,7 +93,7 @@ const ScriptDocument = ({ script, socket }: IProps) => {
                 <div className="flex items-center gap-3">
                   <Avatar
                     className="w-8 h-8"
-                    src={collaboratorsList.author.image}
+                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${collaboratorsList.author.image}`}
                     alt={collaboratorsList.author.firstName}
                   />
                   <Typography className="futura font-medium">
@@ -112,7 +112,7 @@ const ScriptDocument = ({ script, socket }: IProps) => {
                   <div className="flex items-center gap-3">
                     <Avatar
                       className="w-8 h-8"
-                      src={collaborator.image}
+                      src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${collaborator.image}`}
                       alt={collaborator.firstName}
                     />
                     <Typography className="futura font-medium">

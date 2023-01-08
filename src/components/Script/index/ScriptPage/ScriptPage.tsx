@@ -78,7 +78,7 @@ const ScriptPage = ({
           <div className="max-w-sm w-full bg-white pt-11 px-6 space-y-4 overflow-y-auto mb-8 h-screen min-w-[384px] hidden sticky top-0 lg:block">
             {query.tab === "scenes" && <ScenesList />}
             {query.tab === "comment" && <CommentList socket={socket} />}
-            {query.tab === "export" && <ExportFile />}
+            {query.tab === "export" && <ExportFile script={script} />}
             {query.tab === "document" && (
               <ScriptDocument socket={socket} script={script} />
             )}

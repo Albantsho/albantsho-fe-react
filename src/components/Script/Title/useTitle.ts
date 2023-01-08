@@ -3,8 +3,9 @@ import useScriptsApi from "apis/Scripts.api";
 import dayjs, { Dayjs } from "dayjs";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import { titleSchema } from "./validation/title.validation";
 
@@ -15,31 +16,20 @@ interface ITitleFormValues {
   any: string;
 }
 
-const useTitle = () => {
-  const { query } = useRouter();
+interface IProps {
+  script: IFullInformationScript;
+}
+
+const useTitle = ({ script }: IProps) => {
+  const { query, push } = useRouter();
   const [loading, setLoading] = useState(false);
-  const [script, setScript] = useState<IFullInformationScript>();
-  const { getScript } = useScriptsApi();
-  const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs());
+  const [dateValue, setDateValue] = useState<Dayjs | null>(
+    dayjs(script.draftDate && script.draftDate)
+  );
   const { updateCoverPageScript } = useScriptsApi();
 
   const handleChangeDateValue = (newValue: Dayjs | null) =>
     setDateValue(newValue);
-
-  useEffect(() => {
-    async function getScriptsData() {
-      try {
-        if (query.id) {
-          const res = await getScript(query.id as string);
-          setScript(res.data.script);
-        }
-      } catch (error) {
-        errorHandler(error);
-      }
-    }
-    getScriptsData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.id]);
 
   const {
     register,
@@ -48,21 +38,26 @@ const useTitle = () => {
     formState: { errors },
   } = useForm<ITitleFormValues>({
     defaultValues: {
-      title: script?.title,
+      title: script.title,
+      writer: script.writtenBy.join(" "),
+      any: script.basedOn ? script.basedOn : "",
     },
     resolver: yupResolver(titleSchema),
   });
 
   const onSubmit = async (data: ITitleFormValues) => {
-    console.log(data, dateValue);
-    console.log(dateValue?.toISOString());
-
     try {
       setLoading(true);
-      const res = await updateCoverPageScript(
-        { ...data, date: dateValue?.toISOString() },
+      await updateCoverPageScript(
+        {
+          writtenBy: data.writer.split(" ").filter((name) => name),
+          title: data.title,
+          basedOn: data.any,
+          draftDate: dateValue?.toISOString() as string,
+        },
         query.id as string
       );
+      push(routes.script.dynamicUrl(query.id as string));
     } catch (error) {
       errorHandler(error);
     } finally {
@@ -77,7 +72,6 @@ const useTitle = () => {
     handleSubmit,
     errors,
     loading,
-    script,
     handleChangeDateValue,
     dateValue,
   };

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { RiFileUserLine, RiSave3Fill } from "react-icons/ri";
 import { useResizeDetector } from "react-resize-detector";
+import { toast } from "react-toastify";
 import routes from "routes/routes";
 import { Socket } from "socket.io-client";
 import BookMarkIcon from "../assets/book-mark.svg";
@@ -28,7 +29,10 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   }, 2000);
 
   const saveDraftFile = async () => {
-    await saveFileDraft(query.id as string, { content: scriptValue });
+    const res = await saveFileDraft(query.id as string, {
+      content: scriptValue,
+    });
+    toast.success(res.message);
   };
 
   return (

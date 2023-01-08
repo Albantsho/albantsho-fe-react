@@ -1,4 +1,5 @@
 import { IconButton, Modal } from "@mui/material";
+import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
@@ -7,9 +8,14 @@ import ExportFile from "../ExportFile";
 interface IProps {
   openExportModal: boolean;
   setOpenExportModal: React.Dispatch<React.SetStateAction<boolean>>;
+  script: IFullInformationScript;
 }
 
-const ExportFileModal = ({ openExportModal, setOpenExportModal }: IProps) => {
+const ExportFileModal = ({
+  openExportModal,
+  setOpenExportModal,
+  script,
+}: IProps) => {
   const { push, query } = useRouter();
 
   const handleCloseExportFile = () => {
@@ -33,7 +39,7 @@ const ExportFileModal = ({ openExportModal, setOpenExportModal }: IProps) => {
         >
           <AiOutlineClose />
         </IconButton>
-        <ExportFile />
+        <ExportFile script={script} />
       </div>
     </Modal>
   );

@@ -105,6 +105,7 @@ const ScriptSidebarOnMobile = ({ script, socket }: IProps) => {
         })}
       </BottomNavigation>
       <ExportFileModal
+        script={script}
         openExportModal={openExportModal}
         setOpenExportModal={setOpenExportModal}
       />
