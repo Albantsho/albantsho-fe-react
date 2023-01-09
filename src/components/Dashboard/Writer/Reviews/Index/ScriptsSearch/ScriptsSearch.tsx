@@ -23,6 +23,11 @@ interface ScriptsOptionType {
   _id: string;
 }
 
+interface IProps {
+  showSearchScript: boolean | undefined;
+  openSearchScript: boolean;
+}
+
 let scriptsList: Array<IDraft> = [];
 
 const filterOptions = createFilterOptions({
@@ -30,7 +35,7 @@ const filterOptions = createFilterOptions({
   stringify: (option: ScriptsOptionType) => option.title,
 });
 
-const ScriptsSearch = () => {
+const ScriptsSearch = ({ showSearchScript, openSearchScript }: IProps) => {
   const [selectedScript, setSelectedScript] =
     useState<ScriptsOptionType | null>(null);
   const { getAllDraft } = useDraftApi();
@@ -52,7 +57,11 @@ const ScriptsSearch = () => {
   }, []);
 
   return (
-    <div className="w-full mt-8 lg:mt-16 space-y-8 mx-auto  md:max-w-[640px]">
+    <div
+      className={`${
+        showSearchScript && openSearchScript ? "block" : "hidden"
+      } w-full mt-8 lg:mt-16 space-y-8 mx-auto  md:max-w-[640px]`}
+    >
       <div>
         <label className="futura  font-medium mb-2 block ">
           Select Script<span className="text-error-500 my-auto">*</span>
@@ -75,7 +84,7 @@ const ScriptsSearch = () => {
               disablePadding
               key={option.title}
               {...props}
-              className={` px-2 sm:px-4 md:px-6`}
+              className={`px-2 sm:px-4 md:px-6`}
               sx={{ "&:last-child": { border: 0 } }}
             >
               <ListItemButton

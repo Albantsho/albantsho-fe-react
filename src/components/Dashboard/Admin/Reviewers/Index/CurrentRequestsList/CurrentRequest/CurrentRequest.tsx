@@ -1,8 +1,9 @@
-import { Chip, TableCell, TableRow, Typography } from "@mui/material";
+import { Chip, SvgIcon, TableCell, TableRow, Typography } from "@mui/material";
 import { ICurrentRequest } from "interfaces/reviews";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import routes from "routes/routes";
+import DefaultImage from "@assets/default-image-script.svg";
 
 interface IProps {
   request: ICurrentRequest;
@@ -26,7 +27,7 @@ const CurrentRequest = ({
         },
         "&:last-child td, &:last-child th": { border: 0 },
       }}
-      className="flex flex-1"
+      className="flex flex-1 cursor-pointer"
       onClick={openOneCurrentRequest}
     >
       <TableCell
@@ -35,15 +36,25 @@ const CurrentRequest = ({
       >
         <div className="flex flex-col sm:flex-row sm:gap-4">
           <div className="mt-1">
-            <Image
-              width={64}
-              height={64}
-              layout="fixed"
-              className="rounded-md "
-              loading="lazy"
-              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${image}`}
-              alt={title}
-            />
+            {image ? (
+              <Image
+                width={64}
+                height={64}
+                layout="fixed"
+                className="rounded-md "
+                loading="lazy"
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${image}`}
+                alt={title}
+              />
+            ) : (
+              <div className="flex justify-center w-[64px] h-[64px] items-center self-start  bg-tinted-100/60 rounded-md">
+                <SvgIcon
+                  inheritViewBox
+                  fontSize="large"
+                  component={DefaultImage}
+                />
+              </div>
+            )}
           </div>
 
           <div className="flex-grow sm:max-w-[360px]">
@@ -60,7 +71,9 @@ const CurrentRequest = ({
         </div>
         <Chip
           className="sm:hidden py-5 px-4  rounded-lg text-white bg-primary-700"
-          label={reviewPlan}
+          label={
+            reviewPlan === "A" ? "Type A" : reviewPlan === "B" ? "Type B" : ""
+          }
         />
       </TableCell>
       <TableCell
@@ -72,7 +85,9 @@ const CurrentRequest = ({
         className="hidden py-4  sm:py-6 xl:py-10 sm:flex flex-[0.45] items-center xl:flex-[0.4]"
       >
         <Chip
-          label={reviewPlan}
+          label={
+            reviewPlan === "A" ? "Type A" : reviewPlan === "B" ? "Type B" : ""
+          }
           className="py-5 px-4 md:ml-3 hidden sm:flex rounded-md bg-primary-700  text-white"
         />
       </TableCell>

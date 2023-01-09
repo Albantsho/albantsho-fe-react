@@ -79,7 +79,7 @@ const Title = ({ script }: IProps) => {
               <input
                 {...register("any")}
                 className={`${
-                  errors.any ? "border-error-500" : "border-white"
+                  errors.any ? "border-error-500 " : "border-white"
                 } text-center w-full h-10 rounded-md duration-100 outline-none px-2 py-3 border-2 focus:border-primary-700 placeholder:text-center placeholder:font-bold placeholder:text-black font-bold underline courier`}
                 // defaultValue={script.title}
                 placeholder="Based on (if any)"
@@ -98,10 +98,6 @@ const Title = ({ script }: IProps) => {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  // inputProps={{
-                  //   min: 0,
-                  //   style: { textAlign: "center" },
-                  // }}
                   sx={{
                     width: "100%",
                     "& .MuiOutlinedInput-root": {

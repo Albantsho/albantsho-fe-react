@@ -22,6 +22,8 @@ import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import errorHandler from "utils/error-handler";
+import DefaultImage from "@assets/default-image-script.svg";
+import routes from "routes/routes";
 
 interface IProps {
   script: IFullInformationScript;
@@ -47,17 +49,17 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
   const [loading, setLoading] = useState(false);
   const [selectedReviewer, setSelectedReviewer] =
     useState<IReviewersListOptionType | null>(null);
-  const { back } = useRouter();
+  const { back, replace } = useRouter();
 
   const assignedReviewToReviewer = async () => {
     try {
       if (selectedReviewer) {
         setLoading(true);
-        const res = await assignReviewRequestToReviewer({
+        await assignReviewRequestToReviewer({
           scriptId: script._id,
           userId: selectedReviewer._id,
         });
-        console.log(res);
+        replace(routes.reviewersAdminDashboard.url);
       }
     } catch (error) {
       errorHandler(error);
@@ -74,13 +76,19 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
   return (
     <div>
       <div className="mb-4">
-        <Image
-          width={180}
-          height={180}
-          className="rounded-lg"
-          alt={script.title}
-          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
-        />
+        {script.image ? (
+          <Image
+            width={180}
+            height={180}
+            className="rounded-lg"
+            alt={script.title}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
+          />
+        ) : (
+          <div className="flex justify-center w-[64px] h-[64px] items-center self-start  bg-tinted-100/60 rounded-md">
+            <SvgIcon inheritViewBox fontSize="large" component={DefaultImage} />
+          </div>
+        )}
       </div>
       <div className="flex justify-between gap-x-6 gap-y-2 items-center flex-wrap mb-5">
         <div className="flex-1">
@@ -113,7 +121,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
             className="min-w-[180px] p-3 border border-gray-300 rounded-lg"
           >
             <Typography className="leading-normal">
-              {script.primaryGenre}
+              {script.primaryGenre || <span className="opacity-0">.</span>}
             </Typography>
           </div>
         </div>

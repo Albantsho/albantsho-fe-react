@@ -93,9 +93,9 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAllRequestedReviews(query: string, searchQuery?: string) {
+    async getAllRequestedReviews(searchQuery: string) {
       const res = await axiosPrivate.get(
-        `/review/requests?limit=10&${query}&search=${searchQuery}`,
+        `/review/requests?search=${searchQuery}`,
         {
           signal: controller?.signal,
         }
@@ -104,9 +104,9 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getAssignedRequestedReviews(query: string, searchQuery?: string) {
+    async getAssignedRequestedReviews(searchQuery: string) {
       const res = await axiosPrivate.get(
-        `/review/request/assigned?limit=10&${query}&search=${searchQuery}`,
+        `/review/request/assigned?search=${searchQuery}`,
         {
           signal: controller?.signal,
         }
@@ -115,9 +115,9 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getCompletedRequestedReviews(query: string, searchQuery?: string) {
+    async getCompletedRequestedReviews(searchQuery: string) {
       const res = await axiosPrivate.get(
-        `/review/request/completed?limit=10&${query}&search=${searchQuery}`,
+        `/review/request/completed?search=${searchQuery}`,
         {
           signal: controller?.signal,
         }

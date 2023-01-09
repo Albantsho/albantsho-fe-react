@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import CurrentRequest from "./CurrentRequest/CurrentRequest";
+import emptyBlogs from "@assets/images/empty-blogs.png";
+import Image from "next/image";
 
 interface IProps {
   searchQuery: string;
@@ -30,7 +32,7 @@ const CurrentRequestsList = ({ searchQuery }: IProps) => {
         setCurrentRequestsList([]);
         setLoading(true);
         const res = await getAllRequestedReviews(searchQuery);
-
+        console.log(res);
         setCurrentRequestsList(res.data.scripts);
         setLoading(false);
       } catch (error) {
@@ -47,7 +49,7 @@ const CurrentRequestsList = ({ searchQuery }: IProps) => {
     <>
       {loading ? (
         <DotLoader color="#7953B5" className="mx-auto mt-10" />
-      ) : (
+      ) : currentRequestsList.length > 0 ? (
         <Table className="mt-4 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
           <TableHead>
             <TableRow className="flex">
@@ -63,15 +65,16 @@ const CurrentRequestsList = ({ searchQuery }: IProps) => {
                 sx={{
                   "&.MuiTableCell-root": {
                     px: { xs: 0, sm: 2 },
+                    pl: { xs: 0, sm: 2, xl: 5 },
                   },
                 }}
-                className="w-28 xl:flex-0 flex-[0.5] md:flex-[0.45] xl:pl-0 xl:pb-8 pb-5 pt-0 hidden sm:flex"
+                className="w-28 xl:flex-0 flex-[0.42] md:flex-[0.38] xl:pb-8 pb-5 pt-0 hidden sm:flex"
               >
                 <Typography
                   variant="h6"
                   className="futura font-medium text-primary-700"
                 >
-                  Script Type
+                  Type
                 </Typography>
               </TableCell>
             </TableRow>
@@ -82,6 +85,16 @@ const CurrentRequestsList = ({ searchQuery }: IProps) => {
             ))}
           </TableBody>
         </Table>
+      ) : (
+        <div className="w-fit h-fit mx-auto text-center mt-14 lg:mt-24">
+          <Image
+            width={384}
+            height={384}
+            loading="lazy"
+            src={emptyBlogs}
+            alt="empty blog list"
+          />
+        </div>
       )}
     </>
   );

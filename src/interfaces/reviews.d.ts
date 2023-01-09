@@ -14,16 +14,13 @@ export interface IAssignedOrCompletedRequest extends ICurrentRequest {
 export interface IReviewerTask {
   _id: string;
   title: string;
-  description: string;
-  script_image: string;
-  review_plan: string;
-  primary_genre: string;
+  tagline: string;
+  image: string;
+  reviewPlan: string;
+  primaryGenre: string;
   rate: number;
   createdAt: string;
-  review: {
-    _id: string;
-    complete: boolean;
-  } | null;
+  review: [{ complete: boolean }] | [];
 }
 export interface IWriterReview {
   _id: string;

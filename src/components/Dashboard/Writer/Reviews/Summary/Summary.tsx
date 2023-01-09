@@ -3,6 +3,7 @@ import Btn from "@shared/Btn/Btn";
 import usePlanApi from "apis/Plan.api";
 import useUserStore from "app/user.store";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
+import type { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -42,31 +43,35 @@ const Summary = ({ script }: IProps) => {
 
   const handleFlutterPayment = useFlutterwave(config);
 
+  const responsePayment = async (response: FlutterWaveResponse) => {
+    console.log(response);
+    try {
+      const res = await buyReviewsPlan({
+        plan:
+          query.reviewPlan === "typeA"
+            ? "A"
+            : query.reviewPlan === "typeB"
+            ? "B"
+            : "",
+        scriptId: script._id,
+        transactionId: `${response.transaction_id}`,
+      });
+      console.log(res);
+      replace(
+        routes.reviewsPaymentSuccessful.dynamicUrl(`${response.transaction_id}`)
+      );
+    } catch (error) {
+      errorHandler(error);
+      console.log(error);
+    }
+    closePaymentModal(); // this will close the modal programmatically
+  };
+
   const paymentBuyingReviewPlan = () => {
     try {
       setLoading(true);
       handleFlutterPayment({
-        callback: async (response) => {
-          console.log(response);
-
-          try {
-            const res = await buyReviewsPlan({
-              plan: query.reviewPlan as string,
-              scriptId: script._id,
-              transactionId: `${response.transaction_id}`,
-            });
-            console.log(res);
-            replace(
-              routes.reviewsPaymentSuccessful.dynamicUrl(
-                `${response.transaction_id}`
-              )
-            );
-          } catch (error) {
-            errorHandler(error);
-            console.log(error);
-          }
-          closePaymentModal(); // this will close the modal programmatically
-        },
+        callback: responsePayment,
         onClose: () => {
           toast.error("payment Field or canceled, please try again");
           console.log("close");
@@ -131,6 +136,7 @@ const Summary = ({ script }: IProps) => {
           </div>
         </div>
         <Btn
+          type="submit"
           loading={loading}
           onClick={paymentBuyingReviewPlan}
           className="mt-4 py-3 px-7 xl:m12"

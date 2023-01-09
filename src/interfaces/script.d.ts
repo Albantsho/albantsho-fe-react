@@ -89,7 +89,7 @@ export interface IFullInformationScript {
   collaborators: [];
   contentPdf: string;
   contentSnippet: null | string;
-  draftDate: string;
+  draftDate: string | null;
   progress: number;
   reviewerRate: number | null;
   sold: boolean;

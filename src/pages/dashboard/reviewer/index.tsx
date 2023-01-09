@@ -19,6 +19,8 @@ const Reviewer = () => {
       try {
         setLoading(true);
         const res = await getAllReviewerTasks("hello");
+        console.log(res);
+
         setReviewerTaskList(res.data.scripts);
         setLoading(false);
       } catch (error) {

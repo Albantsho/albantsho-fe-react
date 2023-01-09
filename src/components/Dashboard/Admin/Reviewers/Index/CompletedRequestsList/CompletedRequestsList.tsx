@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import AssignedOrCompletedRequest from "../AssignedRequestsList/AssignedOrCompletedRequest/AssignedOrCompletedRequest";
+import emptyBlogs from "@assets/images/empty-blogs.png";
+import Image from "next/image";
 
 interface IProps {
   searchQuery: string;
@@ -30,6 +32,8 @@ const CompletedRequestsList = ({ searchQuery }: IProps) => {
         setCompletedRequestList([]);
         setLoading(true);
         const res = await getCompletedRequestedReviews(searchQuery);
+        console.log(res);
+
         setCompletedRequestList(res.data.scripts);
         setLoading(false);
       } catch (error) {
@@ -45,7 +49,7 @@ const CompletedRequestsList = ({ searchQuery }: IProps) => {
     <>
       {loading ? (
         <DotLoader color="#7953B5" className="mx-auto mt-10" />
-      ) : (
+      ) : completedRequestList.length > 0 ? (
         <Table className="mt-4 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
           <TableHead>
             <TableRow className="flex">
@@ -88,6 +92,16 @@ const CompletedRequestsList = ({ searchQuery }: IProps) => {
             ))}
           </TableBody>
         </Table>
+      ) : (
+        <div className="w-fit h-fit mx-auto text-center mt-14 lg:mt-24">
+          <Image
+            width={384}
+            height={384}
+            loading="lazy"
+            src={emptyBlogs}
+            alt="empty blog list"
+          />
+        </div>
       )}
     </>
   );

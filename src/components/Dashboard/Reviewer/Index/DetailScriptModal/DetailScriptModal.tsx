@@ -8,10 +8,13 @@ import {
   Typography,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import useReviewsApi from "apis/Reviews.api";
 import { IReviewerTask } from "interfaces/reviews";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FiArrowUpRight } from "react-icons/fi";
 import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
 
 interface IProps {
   openDetailScript: boolean;
@@ -27,6 +30,17 @@ const DetailScriptModal = ({
   const handleCloseUnArchive = () => {
     setOpenDetailScript(false);
   };
+  const { replace } = useRouter();
+  const { createNewReview } = useReviewsApi();
+
+  const beginReviewToScript = (scriptId: string) => async () => {
+    try {
+      await createNewReview({ scriptId });
+      replace(routes.reviewerDashboardQuestionnaire.dynamicUrl(scriptId));
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
 
   return (
     <Modal
@@ -39,7 +53,11 @@ const DetailScriptModal = ({
         <div className="bg-white  w-full mt-12 max-w-lg mx-auto py-8 rounded-lg">
           <div className="pb-8 px-5 sm:px-7 flex gap-3 items-stretch">
             <Button disableElevation className="py-2 px-4" variant="contained">
-              {reviewerTask.review_plan}
+              {reviewerTask?.reviewPlan === "A"
+                ? "Type A"
+                : reviewerTask?.reviewPlan === "B"
+                ? "Type B"
+                : ""}
             </Button>
             <Button
               className="py-2 px-4"
@@ -74,7 +92,7 @@ const DetailScriptModal = ({
               </Typography>
               <Chip
                 className="py-3 px-4 rounded-md"
-                label={reviewerTask.primary_genre}
+                label={reviewerTask.primaryGenre}
               />
             </div>
             <div className="flex items-center mb-8">
@@ -100,20 +118,22 @@ const DetailScriptModal = ({
               </Typography>
               <Rating value={reviewerTask.rate} />
             </div>
-            {!reviewerTask.review ? (
-              <Link
-                href={routes.reviewerDashboardQuestionnaire.dynamicUrl("")}
-                passHref
+            {reviewerTask.review.length === 0 ? (
+              <Btn
+                onClick={beginReviewToScript(reviewerTask._id)}
+                className="w-full py-3"
               >
-                <Btn className="w-full py-3">Begin review</Btn>
-              </Link>
-            ) : reviewerTask.review.complete ? (
+                Begin review
+              </Btn>
+            ) : reviewerTask.review[0].complete ? (
               <Btn color="success" className="w-full py-3">
                 Completed
               </Btn>
             ) : (
               <Link
-                href={routes.reviewerDashboardPreview.dynamicUrl("")}
+                href={routes.reviewerDashboardPreview.dynamicUrl(
+                  reviewerTask._id
+                )}
                 passHref
               >
                 <Btn className="w-full py-3">Continue review</Btn>

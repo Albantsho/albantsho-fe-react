@@ -6,18 +6,18 @@ interface IPayloadBuyReviewPlan {
   transactionId: string;
 }
 
+interface IPayloadBuySubscriptionPlan {
+  transactionId: string;
+}
+
 const usePlanApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
   return {
-    async buySubscriptionPlan() {
-      const res = await axiosPrivate.post(
-        "/plan/buy/subscription",
-        {},
-        {
-          signal: controller?.signal,
-        }
-      );
+    async buySubscriptionPlan(payload: IPayloadBuySubscriptionPlan) {
+      const res = await axiosPrivate.post("/plan/buy/subscription", payload, {
+        signal: controller?.signal,
+      });
 
       return res.data;
     },

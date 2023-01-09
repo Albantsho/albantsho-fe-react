@@ -67,7 +67,7 @@ const NotificationComponent = () => {
               <ListItem
                 className="gap-1 items-start flex-col relative"
                 divider
-                key={notification.userId}
+                key={notification._id}
               >
                 {!notification.read && (
                   <span className="w-1 h-1 rounded-full absolute left-1 top-1/2 bottom-1/2 bg-primary-700"></span>

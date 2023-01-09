@@ -50,7 +50,12 @@ const Heading = ({ showSearchScript }: IProps) => {
           )}
         </div>
       </div>
-      {openSearchScript && showSearchScript && <ScriptsSearch />}
+      {
+        <ScriptsSearch
+          showSearchScript={showSearchScript}
+          openSearchScript={openSearchScript}
+        />
+      }
     </div>
   );
 };
