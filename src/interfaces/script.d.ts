@@ -4,8 +4,8 @@ export interface IScript {
   tagline: string;
   price: number;
   rate: number;
-  primaryGenre: string;
-  verified: boolean;
+  scriptFormat: string;
+  reviewed: boolean;
   image: string;
 }
 
@@ -97,4 +97,16 @@ export interface IFullInformationScript {
   soldPrice: number | null;
   writtenBy: string[];
   subScriptions: string[];
+}
+
+export interface IScriptReviewer {
+  authorId: string;
+  createdAt: string;
+  reviewPlan: string;
+  reviewed: boolean;
+  reviewerId: string;
+  scriptFormat: string;
+  title: string;
+  totalPages: string;
+  _id: string;
 }

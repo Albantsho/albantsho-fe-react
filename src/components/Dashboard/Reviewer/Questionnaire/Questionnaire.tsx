@@ -1,11 +1,18 @@
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Logo from "@shared/Logo/Logo";
+import { IReviewTypeB } from "interfaces/reviews";
+import { IScriptReviewer } from "interfaces/script";
 import QuestionnaireAccordion from "./QuestionnaireAccordion/QuestionnaireAccordion";
 import QuestionnaireRating from "./QuestionnaireRating/QuestionnaireRating";
 import useQuestionnaire from "./useQuestionnaire";
 
-const Questionnaire = () => {
+interface IProps {
+  reviewValues: IReviewTypeB;
+  script: IScriptReviewer;
+}
+
+const Questionnaire = ({ reviewValues, script }: IProps) => {
   const {
     completed,
     countRate,
@@ -22,11 +29,13 @@ const Questionnaire = () => {
         className="bg-white shadow-primary rounded-lg py-6 sm:py-10 lg:py-20 text-center max-w-5xl mx-auto px-5"
       >
         <Logo className="mb-4" color="primary" />
-        <Typography variant="body1">Entry Type: Type A</Typography>
+        <Typography variant="body1">
+          Entry Type: Type {script.reviewPlan}
+        </Typography>
         <Typography
           variant="body1"
           className="mb-8 lg:mb-16"
-        >{`Start date: {{dd/mm/yyyy/}}`}</Typography>
+        >{`Start date: {{${new Date()}}}`}</Typography>
 
         <Typography
           variant="h4"

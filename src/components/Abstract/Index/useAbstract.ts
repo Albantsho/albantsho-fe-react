@@ -17,7 +17,6 @@ const useAbstract = (script: IScript) => {
   const [step, setStep] = useState(1);
   const [openSaveProgressModal, setOpenSaveProgressModal] = useState(false);
   const [adaption, setAdaption] = useState(false);
-  console.log(script, adaption);
   const [activeButton, setActiveButton] = useState<number>(0);
   const [loadingPublishButton, setLoadingPublishButton] = useState(false);
   const [loadingUpdateButton, setLoadingUpdateButton] = useState(false);
@@ -91,12 +90,11 @@ const useAbstract = (script: IScript) => {
   const addAdaption = () => setAdaption(true);
   const noAddAdaption = () => setAdaption(false);
 
-  console.log(errors);
   const onSubmit = async (data: IAbstractFormValues) => {
     if (publish) {
       try {
         setLoadingPublishButton(true);
-        const res = await updateScript(
+        await updateScript(
           {
             primaryGenre: data.primaryGenre,
             secondaryGenre: data.secondaryGenre,
@@ -116,41 +114,33 @@ const useAbstract = (script: IScript) => {
             storyTopics: data.storyTopics,
             logLine: data.logLine,
             adaption,
-            progress: progress >= 100 ? 100 : progress,
+            progress: progress >= 100 ? 100 : Number(progress.toFixed(2)),
           },
           query.id as string,
           "publish=true"
         );
-        const resImage = await updateScriptImage(query.id as string, {
+        await updateScriptImage(query.id as string, {
           image: data.image[0],
         });
-        console.log(resImage);
 
         if (adaption) {
-          const resAdaption = await updateAdaptionPermission(
-            query.id as string,
-            {
-              adaptionPermission: data.adaptionPermission[0],
-            }
-          );
-          console.log(resAdaption);
+          await updateAdaptionPermission(query.id as string, {
+            adaptionPermission: data.adaptionPermission[0],
+          });
         }
 
         if (activeButton === 0) {
-          const resSelectDraft = await selectedDraft(data.draft, {
+          await selectedDraft(data.draft, {
             draftScriptId: data.draft,
           });
-          console.log(resSelectDraft);
         } else if (activeButton === 1) {
-          const resDraft = await uploadFileDraft(query.id as string, {
+          await uploadFileDraft(query.id as string, {
             script: data.scriptFile[0],
           });
-          const resCopyright = await uploadCopyright(query.id as string, {
+          await uploadCopyright(query.id as string, {
             copyright: data.scriptCopyright[0],
           });
-          console.log(resDraft, resCopyright);
         }
-        console.log(res);
         replace(routes.projectsDashboard.url);
       } catch (error) {
         errorHandler(error);
@@ -160,7 +150,7 @@ const useAbstract = (script: IScript) => {
     } else {
       try {
         setLoadingUpdateButton(true);
-        const res = await updateScript(
+        await updateScript(
           {
             primaryGenre: data.primaryGenre,
             secondaryGenre: data.secondaryGenre,
@@ -180,47 +170,38 @@ const useAbstract = (script: IScript) => {
             storyTopics: data.storyTopics,
             logLine: data.logLine,
             adaption,
-            progress: progress >= 100 ? 100 : progress,
+            progress: progress > 100 ? 100 : Number(progress.toFixed(2)),
           },
           query.id as string
         );
-        const resImage = await updateScriptImage(query.id as string, {
+        await updateScriptImage(query.id as string, {
           image: data.image[0],
         });
-        console.log(resImage);
 
         if (adaption) {
-          const resAdaption = await updateAdaptionPermission(
-            query.id as string,
-            {
-              adaptionPermission: data.adaptionPermission[0],
-            }
-          );
-          console.log(resAdaption);
+          await updateAdaptionPermission(query.id as string, {
+            adaptionPermission: data.adaptionPermission[0],
+          });
         }
 
         if (activeButton === 0) {
           if (data.draft) {
-            const resSelectDraft = await selectedDraft(data.draft, {
+            await selectedDraft(data.draft, {
               draftScriptId: data.draft,
             });
-            console.log(resSelectDraft);
           }
         } else if (activeButton === 1) {
           if (data.scriptFile && data.scriptFile[0]) {
-            const resDraft = await uploadFileDraft(query.id as string, {
+            await uploadFileDraft(query.id as string, {
               script: data.scriptFile[0],
             });
-            console.log(resDraft);
           }
           if (data.scriptCopyright && data.scriptCopyright[0]) {
-            const resCopyright = await uploadCopyright(query.id as string, {
+            await uploadCopyright(query.id as string, {
               copyright: data.scriptCopyright[0],
             });
-            console.log(resCopyright);
           }
         }
-        console.log(res);
 
         setOpenSaveProgressModal(true);
       } catch (error) {

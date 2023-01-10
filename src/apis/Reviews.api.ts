@@ -73,8 +73,8 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getOneReview(reviewId: string) {
-      const res = await axiosPrivate.get(`/review/${reviewId}`, {
+    async getOneReview(scriptId: string) {
+      const res = await axiosPrivate.get(`/review/${scriptId}`, {
         signal: controller?.signal,
       });
 

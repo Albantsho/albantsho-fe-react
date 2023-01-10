@@ -131,7 +131,7 @@ const DetailScriptModal = ({
               </Btn>
             ) : (
               <Link
-                href={routes.reviewerDashboardPreview.dynamicUrl(
+                href={routes.reviewerDashboardQuestionnaire.dynamicUrl(
                   reviewerTask._id
                 )}
                 passHref

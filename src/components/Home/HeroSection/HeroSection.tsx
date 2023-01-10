@@ -88,11 +88,11 @@ const HeroSection = () => {
                 _id: "hbnj15",
                 tagline:
                   "One platform sets out to enable better stories one script at a time",
-                primaryGenre: "Feature film",
+                scriptFormat: "Feature film",
                 rate: 4,
                 title: "Black Onion",
                 price: 400,
-                verified: true,
+                reviewed: true,
                 image: "",
               }}
               inHome

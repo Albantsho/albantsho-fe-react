@@ -1,3 +1,5 @@
+import beautySmall from "@assets/images/beauty-small.jpg";
+import emptyBlogs from "@assets/images/empty-blogs.png";
 import {
   Button,
   Chip,
@@ -8,9 +10,8 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import Image from "next/image";
-import beautySmall from "@assets/images/beauty-small.jpg";
 import { IProducerBid } from "interfaces/bid";
+import Image from "next/image";
 
 interface IProps {
   bidsList: IProducerBid[];
@@ -60,7 +61,7 @@ const CurrentBidsArray = [
 ];
 
 const CurrentBids = ({ bidsList }: IProps) => {
-  return (
+  return bidsList.length > 0 ? (
     <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-primary py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
@@ -182,6 +183,15 @@ const CurrentBids = ({ bidsList }: IProps) => {
         ))}
       </TableBody>
     </Table>
+  ) : (
+    <Image
+      width={384}
+      height={384}
+      loading="lazy"
+      className="w-fit h-fit mx-auto mt-14 lg:mt-24"
+      src={emptyBlogs}
+      alt="empty blog list"
+    />
   );
 };
 

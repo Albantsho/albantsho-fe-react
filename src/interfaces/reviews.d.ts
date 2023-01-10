@@ -54,3 +54,9 @@ export interface IReviewTypeB extends IReviewTypeA {
   authenticityFeedback: string;
   openingAndClosingImage: string;
 }
+
+export interface IReviewValues {
+  _id: string;
+  image: string;
+  title: string;
+}

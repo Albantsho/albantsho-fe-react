@@ -1,3 +1,4 @@
+import emptyBlogs from "@assets/images/empty-blogs.png";
 import {
   Button,
   Table,
@@ -7,9 +8,8 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import Image from "next/image";
-import beautySmall from "@assets/images/beauty-small.jpg";
 import { IScript } from "interfaces/script";
+import Image from "next/image";
 import Link from "next/link";
 import routes from "routes/routes";
 
@@ -17,46 +17,8 @@ interface IProps {
   scriptsList: IScript[];
 }
 
-const MyScriptsArray = [
-  {
-    id: 1,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-  },
-  {
-    id: 2,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-  },
-  {
-    id: 3,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-  },
-  {
-    id: 4,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-  },
-  {
-    id: 5,
-    image: beautySmall,
-    title: "The Long man of Long Beach",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesu fermentum ipsum ",
-  },
-];
-
 const MyScripts = ({ scriptsList }: IProps) => {
-  return (
+  return scriptsList.length > 0 ? (
     <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
@@ -97,7 +59,7 @@ const MyScripts = ({ scriptsList }: IProps) => {
                 height="64"
                 className="rounded-md"
                 loading="lazy"
-                src={beautySmall}
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
                 alt={script.title}
               />
               <div className="flex-grow sm:flex-1 sm:max-w-[271px] min-w-[170px] sm:ml-2">
@@ -152,6 +114,15 @@ const MyScripts = ({ scriptsList }: IProps) => {
         ))}
       </TableBody>
     </Table>
+  ) : (
+    <Image
+      width={384}
+      height={384}
+      loading="lazy"
+      className="w-fit h-fit mx-auto mt-14 lg:mt-24"
+      src={emptyBlogs}
+      alt="empty blog list"
+    />
   );
 };
 

@@ -53,7 +53,7 @@ const ScriptCard = (props: IProps) => {
 
       <CardContent className="py-6">
         <div className="flex flex-wrap gap-2">
-          <Chip label={script.primaryGenre} sx={{ borderRadius: 1 }} />
+          <Chip label={script.scriptFormat} sx={{ borderRadius: 1 }} />
         </div>
         <Rating
           readOnly
@@ -74,9 +74,11 @@ const ScriptCard = (props: IProps) => {
               {script.title}
             </Typography>
           </Link>
-          <Icon fontSize="large">
-            <ReviewedIcon />
-          </Icon>
+          {script.reviewed && (
+            <Icon fontSize="large">
+              <ReviewedIcon />
+            </Icon>
+          )}
         </div>
         <Typography>{script.tagline}</Typography>
         {!inHome && (
@@ -95,7 +97,11 @@ const ScriptCard = (props: IProps) => {
       </CardContent>
       <CardActions className="px-4 justify-between pb-6 pt-0 gap-3">
         {(!user.emailVerified || user.userType === "producer") && !inHome && (
-          <Btn size="large" className="rounded-md">
+          <Btn
+            href={routes.marketplaceOneScript.dynamicUrl(script._id)}
+            size="large"
+            className="rounded-md"
+          >
             Place Bid
           </Btn>
         )}
