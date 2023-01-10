@@ -1,34 +1,48 @@
 import useReviewsApi from "apis/Reviews.api";
-import { IReviewTypeA, IReviewTypeB } from "interfaces/reviews";
+import { IReviewTypeA, IReviewTypeB, IReviewValues } from "interfaces/reviews";
 import { useRef, useState } from "react";
 import errorHandler from "utils/error-handler";
 
-const useUpdateReviews = () => {
+interface IProps {
+  reviewValues: IReviewValues;
+}
+
+const useUpdateReviews = ({ reviewValues }: IProps) => {
   const { updateReview } = useReviewsApi();
   const [countRate, setCountRate] = useState<number | null>(2);
 
   const reviewTypeAValues = useRef<IReviewTypeA>({
-    introduction: "",
-    plot: "",
-    character: "",
-    genreAndStoryStructure: "",
-    dialogue: "",
-    storyQuality: "",
-    suggestions: "",
+    introduction: reviewValues.introduction ? reviewValues.introduction : "",
+    plot: reviewValues.plot ? reviewValues.plot : "",
+    character: reviewValues.character ? reviewValues.character : "",
+    genreAndStoryStructure: reviewValues.genreAndStoryStructure
+      ? reviewValues.genreAndStoryStructure
+      : "",
+    dialogue: reviewValues.dialogue ? reviewValues.dialogue : "",
+    storyQuality: reviewValues.storyQuality ? reviewValues.storyQuality : "",
+    suggestions: reviewValues.suggestions ? reviewValues.suggestions : "",
   });
   const reviewTypeBValues = useRef<IReviewTypeB>({
-    introduction: "",
-    plot: "",
-    character: "",
-    genreAndStoryStructure: "",
-    dialogue: "",
-    storyQuality: "",
-    worldBuilding: "",
-    scriptFormattingAndEditing: "",
-    writerVoice: "",
-    authenticityFeedback: "",
-    suggestions: "",
-    openingAndClosingImage: "",
+    introduction: reviewValues.introduction ? reviewValues.introduction : "",
+    plot: reviewValues.plot ? reviewValues.plot : "",
+    character: reviewValues.character ? reviewValues.character : "",
+    genreAndStoryStructure: reviewValues.genreAndStoryStructure
+      ? reviewValues.genreAndStoryStructure
+      : "",
+    dialogue: reviewValues.dialogue ? reviewValues.dialogue : "",
+    storyQuality: reviewValues.storyQuality ? reviewValues.storyQuality : "",
+    worldBuilding: reviewValues.worldBuilding ? reviewValues.worldBuilding : "",
+    scriptFormattingAndEditing: reviewValues.scriptFormattingAndEditing
+      ? reviewValues.scriptFormattingAndEditing
+      : "",
+    writerVoice: reviewValues.writerVoice ? reviewValues.writerVoice : "",
+    authenticityFeedback: reviewValues.authenticityFeedback
+      ? reviewValues.authenticityFeedback
+      : "",
+    suggestions: reviewValues.suggestions ? reviewValues.suggestions : "",
+    openingAndClosingImage: reviewValues.openingAndClosingImage
+      ? reviewValues.openingAndClosingImage
+      : "",
   });
 
   const updateIntroductionTypeA =
@@ -37,7 +51,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { introduction: reviewTypeAValues.current.introduction },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -52,7 +66,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { plot: reviewTypeAValues.current.plot },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -67,7 +81,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { character: reviewTypeAValues.current.character },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -85,7 +99,7 @@ const useUpdateReviews = () => {
             genreAndStoryStructure:
               reviewTypeAValues.current.genreAndStoryStructure,
           },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -100,7 +114,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { dialogue: reviewTypeAValues.current.dialogue },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -115,7 +129,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { storyQuality: reviewTypeAValues.current.storyQuality },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -130,7 +144,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { suggestions: reviewTypeAValues.current.suggestions },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -145,7 +159,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { introduction: reviewTypeBValues.current.introduction },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -160,7 +174,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { plot: reviewTypeBValues.current.plot },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -175,7 +189,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { character: reviewTypeBValues.current.character },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -193,7 +207,7 @@ const useUpdateReviews = () => {
             genreAndStoryStructure:
               reviewTypeBValues.current.genreAndStoryStructure,
           },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -208,7 +222,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { dialogue: reviewTypeBValues.current.dialogue },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -223,7 +237,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { storyQuality: reviewTypeBValues.current.storyQuality },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -238,7 +252,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { worldBuilding: reviewTypeBValues.current.worldBuilding },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -256,7 +270,7 @@ const useUpdateReviews = () => {
             scriptFormattingAndEditing:
               reviewTypeBValues.current.scriptFormattingAndEditing,
           },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -271,7 +285,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { writerVoice: reviewTypeBValues.current.writerVoice },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -289,7 +303,7 @@ const useUpdateReviews = () => {
             authenticityFeedback:
               reviewTypeBValues.current.authenticityFeedback,
           },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -307,7 +321,7 @@ const useUpdateReviews = () => {
             openingAndClosingImage:
               reviewTypeBValues.current.openingAndClosingImage,
           },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -322,7 +336,7 @@ const useUpdateReviews = () => {
         setLoading(true);
         const res = await updateReview(
           { suggestions: reviewTypeBValues.current.suggestions },
-          "45"
+          reviewValues._id
         );
       } catch (error) {
         errorHandler(error);
@@ -333,7 +347,10 @@ const useUpdateReviews = () => {
 
   const updateRateReview = async () => {
     try {
-      const res = await updateReview({ rate: `${countRate}` }, "45");
+      const res = await updateReview(
+        { rate: `${countRate}` },
+        reviewValues._id
+      );
     } catch (error) {
       errorHandler(error);
     }

@@ -55,6 +55,15 @@ export interface IReviewTypeB extends IReviewTypeA {
   openingAndClosingImage: string;
 }
 
+export interface IReviewValues extends IReviewTypeB {
+  _id: string;
+  worldBuilding: string;
+  scriptFormattingAndEditing: string;
+  writerVoice: string;
+  authenticityFeedback: string;
+  openingAndClosingImage: string;
+}
+
 export interface IReviewValues {
   _id: string;
   image: string;

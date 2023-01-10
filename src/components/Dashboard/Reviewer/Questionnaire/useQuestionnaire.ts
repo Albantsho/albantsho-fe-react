@@ -1,6 +1,11 @@
+import { IReviewValues } from "interfaces/reviews";
 import useUpdateReviews from "./useUpdateReviews";
 
-const useQuestionnaire = () => {
+interface IProps {
+  reviewValues: IReviewValues;
+}
+
+const useQuestionnaire = ({ reviewValues }: IProps) => {
   const {
     countRate,
     reviewTypeAValues,
@@ -26,7 +31,7 @@ const useQuestionnaire = () => {
     updateSuggestionsTypeB,
     updateWorldBuildingTypeB,
     updateWriterVoiceTypeB,
-  } = useUpdateReviews();
+  } = useUpdateReviews({ reviewValues });
   const listQuestionnaireAccordionTypeA = [
     {
       title: "INTRODUCTION",

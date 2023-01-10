@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import useReviewsApi from "apis/Reviews.api";
 import Questionnaire from "components/Dashboard/Reviewer/Questionnaire/Questionnaire";
-import { IReviewTypeB } from "interfaces/reviews";
+import { IReviewTypeB, IReviewValues } from "interfaces/reviews";
 import { IScriptReviewer } from "interfaces/script";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -14,8 +14,8 @@ const QuestionnairePage = () => {
   const { query } = useRouter();
   const { getOneReview } = useReviewsApi();
   const [loading, setLoading] = useState(true);
-  const [reviewValues, setReviewsValues] = useState<IReviewTypeB>(
-    {} as IReviewTypeB
+  const [reviewValues, setReviewsValues] = useState<IReviewValues>(
+    {} as IReviewValues
   );
   const [script, setScript] = useState<IScriptReviewer>({} as IScriptReviewer);
 
