@@ -54,7 +54,13 @@ const ConnectWallet = () => {
         alt={user.firstName}
         className="w-20 h-20"
       />
-      <Button onClick={connectWallet}>Connect Wallet</Button>
+      {!defaultAccount ? (
+        <Button variant="contained" onClick={connectWallet}>
+          Connect Wallet
+        </Button>
+      ) : (
+        <Typography>account : {defaultAccount}</Typography>
+      )}
     </div>
   );
 };

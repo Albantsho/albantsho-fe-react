@@ -30,7 +30,6 @@ const plans = [
 
 const Subscription = () => {
   const user = useUserStore((state) => state.user);
-  const { increaseWalletBalance } = useWalletApi();
   const { replace } = useRouter();
   const [loading, setLoading] = useState(false);
   const { buySubscriptionPlan } = usePlanApi();

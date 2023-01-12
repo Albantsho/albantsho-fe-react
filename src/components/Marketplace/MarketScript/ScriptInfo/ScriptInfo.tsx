@@ -1,7 +1,7 @@
 import ReviewedIcon from "@assets/icons/reviewed.svg";
 import { Chip, Icon, Typography } from "@mui/material";
 import CustomRating from "@shared/CustomRating/CustomRating";
-import { IProduct } from "interfaces/product";
+import { IBidInMarketplace } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
 import Image from "next/image";
 import { useState } from "react";
@@ -10,9 +10,13 @@ import PlaceBid from "./PlaceBid/PlaceBid";
 
 interface IProps {
   script: IFullInformationScript;
+  bid: boolean | IBidInMarketplace | null;
+  setBid: React.Dispatch<
+    React.SetStateAction<boolean | IBidInMarketplace | null>
+  >;
 }
 
-const ScriptInfo = ({ script }: IProps) => {
+const ScriptInfo = ({ script, bid, setBid }: IProps) => {
   const [openBidSuccessful, setOpenBidSuccessful] = useState(false);
 
   return (
@@ -50,7 +54,12 @@ const ScriptInfo = ({ script }: IProps) => {
         <Typography variant="body1" color="dark.400">
           {script.tagline}
         </Typography>
-        <PlaceBid script={script} setOpenBidSuccessful={setOpenBidSuccessful} />
+        <PlaceBid
+          bid={bid}
+          setBid={setBid}
+          script={script}
+          setOpenBidSuccessful={setOpenBidSuccessful}
+        />
         <BidSuccessfulModal
           openBidSuccessful={openBidSuccessful}
           setOpenBidSuccessful={setOpenBidSuccessful}

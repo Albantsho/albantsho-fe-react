@@ -9,17 +9,17 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import useUserStore from "app/user.store";
+import { IPayment, IWithdraw } from "interfaces/transaction";
 
-const transactionList = [
-  { id: 1, TransactionID: "1234567890AVGED", price: 4000, date: "01/02/22" },
-  { id: 2, TransactionID: "1234567890AVGED", price: 6000, date: "01/02/22" },
-  { id: 3, TransactionID: "1234567890AVGED", price: 5700, date: "01/02/22" },
-  { id: 4, TransactionID: "1234567890AVGED", price: 2000, date: "01/02/22" },
-  { id: 5, TransactionID: "1234567890AVGED", price: 1000, date: "01/02/22" },
-  { id: 6, TransactionID: "1234567890AVGED", price: 1800, date: "01/02/22" },
-];
+interface IProps {
+  withdrawList: IWithdraw[];
+  paymentsList: IPayment[];
+}
 
-const TransactionHistory = () => {
+const TransactionHistory = ({ paymentsList, withdrawList }: IProps) => {
+  const user = useUserStore((state) => state.user);
+
   return (
     <div className="bg-white rounded-md px-5 sm:px-6  md:px-10 py-9 lg:px-14 lg:py-14 flex-1 w-full">
       <Typography
@@ -65,34 +65,63 @@ const TransactionHistory = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {transactionList.map((transaction) => (
-                <TableRow key={transaction.id}>
-                  <TableCell className="w-full  pr-10 lg:py-8 xl:py-16">
-                    <Typography
-                      variant="h6"
-                      className="text-primary-700 futura font-medium"
-                    >
-                      {transaction.TransactionID}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="h6"
-                      className="font-semibold text-primary-700"
-                    >
-                      $ {transaction.price}
-                    </Typography>
-                  </TableCell>
-                  <TableCell className="pl-10">
-                    <Typography
-                      variant="h6"
-                      className="font-medium text-primary-700"
-                    >
-                      {transaction.date}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {user.userType === "writer"
+                ? withdrawList.map((transaction) => (
+                    <TableRow key={transaction._id}>
+                      <TableCell className="w-full  pr-10 lg:py-8 xl:py-16">
+                        <Typography
+                          variant="h6"
+                          className="text-primary-700 futura font-medium"
+                        >
+                          {transaction.transactionId}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography
+                          variant="h6"
+                          className="font-semibold text-primary-700"
+                        >
+                          $ {transaction.amount}
+                        </Typography>
+                      </TableCell>
+                      <TableCell className="pl-10">
+                        <Typography
+                          variant="h6"
+                          className="font-medium text-primary-700"
+                        >
+                          {new Date(transaction.createdAt).toLocaleDateString()}
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : paymentsList.map((transaction) => (
+                    <TableRow key={transaction._id}>
+                      <TableCell className="w-full  pr-10 lg:py-8 xl:py-16">
+                        <Typography
+                          variant="h6"
+                          className="text-primary-700 futura font-medium"
+                        >
+                          {transaction.transactionId}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography
+                          variant="h6"
+                          className="font-semibold text-primary-700"
+                        >
+                          $ {transaction.amount}
+                        </Typography>
+                      </TableCell>
+                      <TableCell className="pl-10">
+                        <Typography
+                          variant="h6"
+                          className="font-medium text-primary-700"
+                        >
+                          {new Date(transaction.createdAt).toLocaleDateString()}
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  ))}
             </TableBody>
           </Table>
         </TableContainer>

@@ -4,16 +4,25 @@ import { NextPageWithLayout } from "../_app";
 import TransactionHistory from "components/Wallet/TransactionHistory/TransactionHistory";
 import { useEffect, useState } from "react";
 import useTransactionApi from "apis/transaction.api";
+import { IPayment, IWithdraw } from "interfaces/transaction";
+import { DotLoader } from "react-spinners";
 
 const TransactionHistoryPage: NextPageWithLayout = () => {
   const [loading, setLoading] = useState(false);
-  const { getAllPayments } = useTransactionApi();
+  const { getAllPayments, getAllWithdraws } = useTransactionApi();
+  const [paymentsList, setPaymentsList] = useState<Array<IPayment>>([]);
+  const [withdrawList, setWithdrawList] = useState<Array<IWithdraw>>([]);
 
   useEffect(() => {
     async function getTransactionsFunc() {
       try {
-        const res = await getAllPayments();
-        console.log(res);
+        setLoading(true);
+        const resPayment = await getAllPayments();
+        const resWithdraw = await getAllWithdraws();
+        setPaymentsList(resPayment.data.payments);
+        setWithdrawList(resWithdraw.data.withdraws);
+        console.log(resPayment);
+        console.log(resWithdraw);
       } catch (error) {
         console.log(error);
       }
@@ -27,7 +36,14 @@ const TransactionHistoryPage: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Transaction History</title>
       </Head>
-      <TransactionHistory />
+      {loading ? (
+        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+      ) : (
+        <TransactionHistory
+          paymentsList={paymentsList}
+          withdrawList={withdrawList}
+        />
+      )}
     </>
   );
 };

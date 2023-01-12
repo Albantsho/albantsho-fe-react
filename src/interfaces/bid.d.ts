@@ -20,3 +20,14 @@ export interface IProducerBid {
   }[];
   script: { title: string; tagline: string; image: string };
 }
+
+export interface IBidInMarketplace {
+  _id: string;
+  userId: string;
+  scriptId: string;
+  amount: number;
+  accepted: boolean;
+  rejected: boolean;
+  createdAt: string;
+  updatedAt: string;
+}

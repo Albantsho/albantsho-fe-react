@@ -1,7 +1,8 @@
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import useScripBidApi from "apis/ScripBid.api";
+import { IBidInMarketplace } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
 import { useState } from "react";
 import errorHandler from "utils/error-handler";
@@ -9,9 +10,13 @@ import errorHandler from "utils/error-handler";
 interface IProps {
   setOpenBidSuccessful: React.Dispatch<React.SetStateAction<boolean>>;
   script: IFullInformationScript;
+  bid: boolean | IBidInMarketplace | null;
+  setBid: React.Dispatch<
+    React.SetStateAction<boolean | IBidInMarketplace | null>
+  >;
 }
 
-const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
+const PlaceBid = ({ setOpenBidSuccessful, script, bid, setBid }: IProps) => {
   const [bidValue, setBidValue] = useState("");
   const { createBid, deleteBid } = useScripBidApi();
   const handleBidValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +27,7 @@ const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
   const handleOpenBidSuccessful = async () => {
     try {
       await createBid({ amount: +bidValue, scriptId: script._id });
+      setBid(true);
       setOpenBidSuccessful(true);
     } catch (error) {
       errorHandler(error);
@@ -31,6 +37,7 @@ const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
   const handleCloseBidSuccessful = async () => {
     try {
       await deleteBid(script._id);
+      setBid(false);
     } catch (error) {
       errorHandler(error);
     }
@@ -61,21 +68,24 @@ const PlaceBid = ({ setOpenBidSuccessful, script }: IProps) => {
           placeholder="Enter Bid"
           type="tel"
         />
-        <Btn
-          onClick={handleOpenBidSuccessful}
-          size="small"
-          className="mr-auto py-3 px-4"
-        >
-          Place Bid
-        </Btn>
-        <Btn
-          variant="outlined"
-          onClick={handleCloseBidSuccessful}
-          size="small"
-          className="mr-auto py-3 px-4"
-        >
-          Withdraw Bid
-        </Btn>
+        {!bid ? (
+          <Btn
+            onClick={handleOpenBidSuccessful}
+            size="small"
+            className="mr-auto py-3 px-4"
+          >
+            Place Bid
+          </Btn>
+        ) : (
+          <Button
+            variant="outlined"
+            onClick={handleCloseBidSuccessful}
+            size="small"
+            className="mr-auto py-3 px-4"
+          >
+            Withdraw Bid
+          </Button>
+        )}
       </div>
     </div>
   );

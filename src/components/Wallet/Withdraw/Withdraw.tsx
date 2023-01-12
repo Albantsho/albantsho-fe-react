@@ -8,8 +8,8 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import useWithdraw from "./useWithdraw";
 import { Controller } from "react-hook-form";
+import useWithdraw from "./useWithdraw";
 
 const Withdraw = () => {
   const {
@@ -151,8 +151,8 @@ const Withdraw = () => {
               </Typography>
             </label>
             <CustomInput
-              error={Boolean(errors.account_name) || false}
-              {...register("account_name")}
+              error={Boolean(errors.bankName) || false}
+              {...register("bankName")}
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-input": { py: 2 },
@@ -164,7 +164,7 @@ const Withdraw = () => {
                   fontSize: "16px",
                 },
               }}
-              helperText={errors.account_name?.message}
+              helperText={errors.bankName?.message}
               id="account-name"
               variant="outlined"
               size="medium"
@@ -181,8 +181,8 @@ const Withdraw = () => {
               </Typography>
             </label>
             <CustomInput
-              error={Boolean(errors.account_number) || false}
-              {...register("account_number")}
+              error={Boolean(errors.withdrawPlatform) || false}
+              {...register("withdrawPlatform")}
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-input": { py: 2 },
@@ -194,7 +194,7 @@ const Withdraw = () => {
                   fontSize: "16px",
                 },
               }}
-              helperText={errors.account_number?.message}
+              helperText={errors.withdrawPlatform?.message}
               id="account-number"
               variant="outlined"
               size="medium"
