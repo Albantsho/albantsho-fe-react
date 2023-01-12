@@ -1,20 +1,38 @@
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import useReviewsApi from "apis/Reviews.api";
 import { AiOutlineClose } from "react-icons/ai";
+import errorHandler from "utils/error-handler";
 
 interface IProps {
   openSendReview: boolean;
   setOpenSendReview: React.Dispatch<React.SetStateAction<boolean>>;
   setOpenSuccessReview: React.Dispatch<React.SetStateAction<boolean>>;
+  reviewId: string;
 }
 
 const SendReviewModal = ({
   openSendReview,
   setOpenSendReview,
   setOpenSuccessReview,
+  reviewId,
 }: IProps) => {
+  const { sendReviewToWriterEmail } = useReviewsApi();
+
   const handleCloseSendReview = () => setOpenSendReview(false);
+  const sendReviewAsEmail = async () => {
+    try {
+      const res = await sendReviewToWriterEmail(reviewId);
+      console.log(res);
+
+      setOpenSendReview(false);
+      setOpenSuccessReview(true);
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
   return (
     <Modal
       className="px-5"
@@ -46,10 +64,7 @@ const SendReviewModal = ({
           </Typography>
           <div className="flex gap-2 sm:gap-5 mt-8 sm:mt-12 justify-center items-stretch">
             <Btn
-              onClick={() => {
-                setOpenSendReview(false);
-                setOpenSuccessReview(true);
-              }}
+              onClick={sendReviewAsEmail}
               size="large"
               className="py-3 px-4 text-white bg-primary-700 rounded-lg"
             >

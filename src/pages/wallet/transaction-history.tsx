@@ -7,12 +7,12 @@ import useTransactionApi from "apis/transaction.api";
 
 const TransactionHistoryPage: NextPageWithLayout = () => {
   const [loading, setLoading] = useState(false);
-  const { getAllTransactions } = useTransactionApi();
+  const { getAllPayments } = useTransactionApi();
 
   useEffect(() => {
     async function getTransactionsFunc() {
       try {
-        const res = await getAllTransactions();
+        const res = await getAllPayments();
         console.log(res);
       } catch (error) {
         console.log(error);

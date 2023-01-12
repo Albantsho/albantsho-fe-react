@@ -5,24 +5,42 @@ import { useState } from "react";
 
 const ConnectWallet = () => {
   const user = useUserStore((state) => state.user);
-  const [isConnected, setIsConnected] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [defaultAccount, setDefaultAccount] = useState("");
+  const [userBalance, setUserBalance] = useState("");
+  console.log(errorMessage);
+  console.log(defaultAccount);
+  console.log(userBalance);
 
-  async function connectWallet() {
+  const connectWallet = async () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    if (typeof window.ethereum !== "undefined") {
+    if (window.ethereum) {
       try {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-        setIsConnected(true);
+        const allAccounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        setDefaultAccount(allAccounts[0]);
+        getUserBalanceAccount(defaultAccount);
       } catch (error) {
         console.log(error);
       }
     } else {
-      setIsConnected(false);
+      setErrorMessage("Please Install Metamask");
     }
-  }
+  };
+
+  const getUserBalanceAccount = async (accountAddress: string) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const balanceAccount = await window.ethereum.request({
+      method: "eth_getBalance",
+      params: [String(accountAddress)],
+    });
+    setUserBalance(ethers.utils.formatEther(balanceAccount));
+  };
 
   return (
     <div>
@@ -36,11 +54,7 @@ const ConnectWallet = () => {
         alt={user.firstName}
         className="w-20 h-20"
       />
-      {isConnected ? (
-        "connected"
-      ) : (
-        <Button onClick={() => connectWallet()}>connect</Button>
-      )}
+      <Button onClick={connectWallet}>Connect Wallet</Button>
     </div>
   );
 };

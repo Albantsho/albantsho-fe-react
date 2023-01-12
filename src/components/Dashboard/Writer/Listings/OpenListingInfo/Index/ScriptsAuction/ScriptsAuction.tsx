@@ -14,21 +14,11 @@ import {
 import AcceptOfferModal from "@shared/Modals/AcceptOfferModal/AcceptOfferModal";
 import useScripBidApi from "apis/ScripBid.api";
 import { IBidForScript } from "interfaces/bid";
-import { IProduct } from "interfaces/product";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import routes from "routes/routes";
-
-const auctions = [
-  { id: 1, name: "Woyenbrakemi", price: 4000 },
-  { id: 2, name: "Talan", price: 6000 },
-  { id: 3, name: "Odhran", price: 5700 },
-  { id: 4, name: "Desmond", price: 2000 },
-  { id: 5, name: "Musa", price: 1000 },
-  { id: 6, name: "Lawlyn", price: 18000 },
-];
 
 interface IProps {
   bidsList: IBidForScript[];
@@ -86,14 +76,16 @@ const ScriptsAuction = ({ bidsList }: IProps) => {
           </TableHead>
           <TableBody>
             {bidsList.map((auction) => (
-              <>
+              <React.Fragment key={auction._id}>
                 <TableRow
-                  key={auction._id}
-                  onClick={() =>
+                  onClick={() => {
                     push(
-                      `${routes.listingsDashboard.url}/${query.id}/bids/${auction._id}`
-                    )
-                  }
+                      routes.listingsBidScript.dynamicUrl(
+                        auction.scriptId,
+                        auction._id
+                      )
+                    );
+                  }}
                   sx={{
                     "&:nth-of-type(odd)": {
                       backgroundColor: "#FBF9FF",
@@ -112,7 +104,8 @@ const ScriptsAuction = ({ bidsList }: IProps) => {
                       variant="h6"
                       className="font-normal text-neutral-700"
                     >
-                      {""}
+                      {auction.producer.firstName}
+                      {auction.producer.lastName}
                     </Typography>
                   </TableCell>
                   <TableCell align="center" className="w-20">
@@ -168,7 +161,7 @@ const ScriptsAuction = ({ bidsList }: IProps) => {
                   openAcceptOffer={openAcceptOffer}
                   setOpenAcceptOffer={setOpenAcceptOffer}
                 /> */}
-              </>
+              </React.Fragment>
             ))}
           </TableBody>
         </Table>
@@ -177,4 +170,4 @@ const ScriptsAuction = ({ bidsList }: IProps) => {
   );
 };
 
-export default ScriptsAuction;
+export default React.memo(ScriptsAuction);

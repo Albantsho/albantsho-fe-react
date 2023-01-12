@@ -11,11 +11,13 @@ import TextEditor from "@shared/TextEditor/TextEditor";
 import { CustomElement } from "interfaces/slate";
 import { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
+import { deserializeBlogContent } from "utils/deserialize-blog-content";
 
 interface IProps {
   title: string;
   description?: string;
   editorValue: (value: string) => void;
+  initialValue: string;
   saveValue:
     | ((
         setLoading: React.Dispatch<React.SetStateAction<boolean>>
@@ -28,21 +30,28 @@ const QuestionnaireAccordion = ({
   description,
   editorValue,
   saveValue,
+  initialValue,
 }: IProps) => {
   const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
+  const htmlContent = new DOMParser().parseFromString(
+    initialValue,
+    "text/html"
+  );
 
   const handleExpandedStatus = () => setExpanded((prev) => !prev);
   const closeAndCancel = () => {
     setExpanded(false);
   };
 
-  const initialValue: CustomElement[] = [
-    {
-      type: "paragraph",
-      children: [{ text: "" }],
-    },
-  ];
+  const initialValueMain: CustomElement[] = initialValue
+    ? deserializeBlogContent(htmlContent.body)
+    : [
+        {
+          type: "paragraph",
+          children: [{ text: "" }],
+        },
+      ];
 
   return (
     <Accordion
@@ -79,7 +88,7 @@ const QuestionnaireAccordion = ({
         </div>
       </AccordionSummary>
       <AccordionDetails className="rounded-lg px-0 pb-6 md:pb-9 lg:pb-12">
-        <TextEditor editorValue={editorValue} initialValue={initialValue} />
+        <TextEditor editorValue={editorValue} initialValue={initialValueMain} />
         <div className="flex py-6 gap-x-5 flex-nowrap justify-center sm:justify-start">
           <LoadingButton
             loading={loading}

@@ -1,13 +1,9 @@
-import Typography from "@mui/material/Typography";
 import { Chip } from "@mui/material";
-import lock from "./assets/lock.png";
-import Image from "next/image";
-import Btn from "@shared/Btn/Btn";
-import Link from "next/link";
-import AccordionCustom from "./AccordionCustom/AccordionCustom";
-import routes from "routes/routes";
-import { IProduct } from "interfaces/product";
+import Typography from "@mui/material/Typography";
+
 import { IFullInformationScript } from "interfaces/script";
+import AccordionCustom from "./AccordionCustom/AccordionCustom";
+import NotAccessInformation from "./NotAccessInformation/NotAccessInformation";
 
 interface IProps {
   script: IFullInformationScript;
@@ -17,82 +13,74 @@ export default function MarketScriptAccordion({ script }: IProps) {
   return (
     <div className=" flex-1">
       <AccordionCustom title="LOGLINE">
-        <Typography variant="body2" className="text-[#484848]">
-          {script.logLine}
-        </Typography>
+        {script.logLine ? (
+          <Typography variant="body2" className="text-[#484848]">
+            {script.logLine}
+          </Typography>
+        ) : (
+          <NotAccessInformation />
+        )}
       </AccordionCustom>
       <AccordionCustom title="SYNOPSIS">
-        <div>
-          {/* {!user.subscription_count ? ( */}
-          <div className="flex gap-5 sm:p-12 items-center flex-col mb-3 sm:flex-row">
-            <div className="max-w-[106px] flex-shrink-0">
-              <Image src={lock} alt="lock" />
-            </div>
-            <div className="flex flex-col sm:max-w-xs">
-              <Typography
-                color="primary.700"
-                variant="h4"
-                className="futura leading-normal"
-              >
-                oops!
-              </Typography>
-              <Typography variant="body1" mb={2} className="text-tinted-500">
-                You’re unable to view this content because you’re not
-                subscribed.
-              </Typography>
-              <Link
-                href={routes.marketPlaceSubscription.url}
-                legacyBehavior
-                passHref
-              >
-                <Btn
-                  size="large"
-                  sx={{ padding: { xs: "6px 12px", md: "12px 24px" } }}
-                  className="mr-auto"
-                >
-                  View plans
-                </Btn>
-              </Link>
-            </div>
-          </div>
-          {/* ) : (
-            <Typography variant="body2" className="text-[#484848]">
-              {script.synopsis}
-            </Typography>
-          )} */}
-        </div>
+        {script.synopsis ? (
+          <Typography variant="body2" className="text-[#484848]">
+            {script.synopsis}
+          </Typography>
+        ) : (
+          <NotAccessInformation />
+        )}
       </AccordionCustom>
       <AccordionCustom title="STORY WORLD">
-        <Typography variant="body2" className="text-[#484848]">
-          {script.storyWorld}
-        </Typography>
+        {script.storyWorld ? (
+          <Typography variant="body2" className="text-[#484848]">
+            {script.storyWorld}
+          </Typography>
+        ) : (
+          <NotAccessInformation />
+        )}
       </AccordionCustom>
       <AccordionCustom title="MOTIVATION & PERSONAL NOTE">
-        <Typography variant="body2" className="text-[#484848]">
-          {script.motivation}
-        </Typography>
+        {script.motivation ? (
+          <Typography variant="body2" className="text-[#484848]">
+            {script.motivation}
+          </Typography>
+        ) : (
+          <NotAccessInformation />
+        )}
       </AccordionCustom>
       <AccordionCustom title="STORY TOPICS">
-        <div className="flex gap-3 flex-wrap">
-          {script.storyTopics.map((oneTheme) => (
-            <Chip
-              key={oneTheme}
-              className="text-primary-700 text-sm rounded-3xl bg-tinted-50/60 py-5 px-4"
-              size="medium"
-              label={oneTheme}
-            />
-          ))}
-        </div>
+        {script.storyTopics.length ? (
+          <div className="flex gap-3 flex-wrap">
+            {script.storyTopics.map((oneTheme) => (
+              <Chip
+                key={oneTheme}
+                className="text-primary-700 text-sm rounded-3xl bg-tinted-50/60 py-5 px-4"
+                size="medium"
+                label={oneTheme}
+              />
+            ))}
+          </div>
+        ) : (
+          <NotAccessInformation />
+        )}
       </AccordionCustom>
       <AccordionCustom title="ACT STRUCTURE">
-        <Typography variant="body2" className="text-[#484848]">
-          {script.actStructure}
-        </Typography>
+        {script.actStructure ? (
+          <Typography variant="body2" className="text-[#484848]">
+            {script.actStructure}
+          </Typography>
+        ) : (
+          <NotAccessInformation />
+        )}
       </AccordionCustom>
       <AccordionCustom title="INSPIRATION">
-        <Typography variant="body2" className="text-[#484848]">
-          {script.inspiration}
-        </Typography>
+        {script.inspiration ? (
+          <Typography variant="body2" className="text-[#484848]">
+            {script.inspiration}
+          </Typography>
+        ) : (
+          <NotAccessInformation />
+        )}
       </AccordionCustom>
     </div>
   );

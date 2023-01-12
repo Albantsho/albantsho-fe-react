@@ -3,6 +3,7 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScriptsApi from "apis/Scripts.api";
+import { IUnlistedScript } from "interfaces/script";
 import Image from "next/image";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -12,11 +13,13 @@ interface IProps {
   openRelistScript: boolean;
   setOpenRelistScript: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
+  setUnListedScripts: React.Dispatch<React.SetStateAction<IUnlistedScript[]>>;
 }
 
 const RelistScriptModal = ({
   openRelistScript,
   setOpenRelistScript,
+  setUnListedScripts,
   id,
 }: IProps) => {
   const { updatePublishedScript } = useScriptsApi();
@@ -28,6 +31,7 @@ const RelistScriptModal = ({
     try {
       setLoading(true);
       await updatePublishedScript({ published: true }, id);
+      setUnListedScripts((prev) => prev.filter((script) => script._id !== id));
     } catch (error) {
       errorHandler(error);
     } finally {

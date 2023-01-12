@@ -12,6 +12,9 @@ export interface IAssignedOrCompletedRequest extends ICurrentRequest {
 }
 
 export interface IReviewerTask {
+  basedOn: string;
+  draftDate: string;
+  writtenBy: string[];
   _id: string;
   title: string;
   tagline: string;
@@ -20,12 +23,12 @@ export interface IReviewerTask {
   primaryGenre: string;
   rate: number;
   createdAt: string;
-  review: [{ complete: boolean }] | [];
+  review: [{ completed: boolean }] | [];
 }
 export interface IWriterReview {
   _id: string;
   title: string;
-  description: string;
+  tagline: string;
   image: string;
   reviewed: boolean;
 }
@@ -55,17 +58,14 @@ export interface IReviewTypeB extends IReviewTypeA {
   openingAndClosingImage: string;
 }
 
-export interface IReviewValues extends IReviewTypeB {
+export interface IReviewValuesTypeA extends IReviewTypeA {
   _id: string;
-  worldBuilding: string;
-  scriptFormattingAndEditing: string;
-  writerVoice: string;
-  authenticityFeedback: string;
-  openingAndClosingImage: string;
+  completed: boolean;
+  rate: number | null;
 }
 
-export interface IReviewValues {
+export interface IReviewValuesTypeB extends IReviewTypeB {
   _id: string;
-  image: string;
-  title: string;
+  completed: boolean;
+  rate: number | null;
 }

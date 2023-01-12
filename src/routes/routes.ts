@@ -148,6 +148,13 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
+  listingsBidScript: {
+    url: `/dashboard/writer/listings/[id]/bids/[bidId]`,
+    dynamicUrl: (id: string, bidId: string) =>
+      `/dashboard/writer/listings/${id}/bids/${bidId}`,
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
   projectsDashboard: {
     url: `/dashboard/writer/projects`,
     mustAuthenticated: "yes",
@@ -160,6 +167,12 @@ const routes = {
   },
   reviewsDashboard: {
     url: "/dashboard/writer/reviews",
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
+  oneReviewInformation: {
+    url: "/dashboard/writer/reviews/[id]",
+    dynamicUrl: (id: string) => `/dashboard/writer/reviews/${id}`,
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
@@ -194,15 +207,27 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["reviewer"],
   },
-  reviewerDashboardPreview: {
-    url: "/dashboard/reviewer/[id]/preview",
-    dynamicUrl: (id: string) => `/dashboard/reviewer/${id}/preview`,
+  reviewerDashboardPreviewTypeA: {
+    url: "/dashboard/reviewer/[id]/preview/typeA",
+    dynamicUrl: (id: string) => `/dashboard/reviewer/${id}/preview/typeA`,
     mustAuthenticated: "yes",
     permission: ["reviewer"],
   },
-  reviewerDashboardQuestionnaire: {
-    url: "/dashboard/reviewer/[id]/questionnaire",
-    dynamicUrl: (id: string) => `/dashboard/reviewer/${id}/questionnaire`,
+  reviewerDashboardPreviewTypeB: {
+    url: "/dashboard/reviewer/[id]/preview/typeB",
+    dynamicUrl: (id: string) => `/dashboard/reviewer/${id}/preview/typeB`,
+    mustAuthenticated: "yes",
+    permission: ["reviewer"],
+  },
+  reviewerDashboardQuestionnaireTypeA: {
+    url: "/dashboard/reviewer/[id]/questionnaire/typeA",
+    dynamicUrl: (id: string) => `/dashboard/reviewer/${id}/questionnaire/typeA`,
+    mustAuthenticated: "yes",
+    permission: ["reviewer"],
+  },
+  reviewerDashboardQuestionnaireTypeB: {
+    url: "/dashboard/reviewer/[id]/questionnaire/typeB",
+    dynamicUrl: (id: string) => `/dashboard/reviewer/${id}/questionnaire/typeB`,
     mustAuthenticated: "yes",
     permission: ["reviewer"],
   },

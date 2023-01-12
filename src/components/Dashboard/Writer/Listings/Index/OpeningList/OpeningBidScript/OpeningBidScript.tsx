@@ -19,9 +19,15 @@ interface IProps {
   script: IBidScript;
   scripts: IBidScript[];
   index: number;
+  setListedScript: React.Dispatch<React.SetStateAction<IBidScript[]>>;
 }
 
-const OpeningBidScript = ({ script, index, scripts }: IProps) => {
+const OpeningBidScript = ({
+  script,
+  index,
+  scripts,
+  setListedScript,
+}: IProps) => {
   const [openUnListingItem, setOpenUnListingItem] = useState<boolean>(false);
   const [openMenuItem, setOpenMenuItem] = useState<null | HTMLElement>(null);
   const openMenu = Boolean(openMenuItem);
@@ -69,7 +75,7 @@ const OpeningBidScript = ({ script, index, scripts }: IProps) => {
               {script.title}
             </Typography>
             <Typography variant="caption" className="text-stone-800">
-              {script.primaryGenre}
+              {script.tagline}
             </Typography>
           </div>
         </div>
@@ -83,7 +89,7 @@ const OpeningBidScript = ({ script, index, scripts }: IProps) => {
               script.numberOfBids === 0
                 ? "text-gray-300 border border-gray-300"
                 : "text-success-500 border border-success-500"
-            } w-9 h-9 justify-center hidden sm:flex self-center lg:mr-auto lg:ml-0 xl:ml-10  md:ml-auto items-center  border rounded-full`}
+            } w-9 h-9 justify-center hidden sm:flex self-center lg:mr-auto lg:ml-0 xl:ml-10  md:ml-auto md:mr-8 items-center  border rounded-full`}
           >
             {script.numberOfBids}
           </div>
@@ -149,6 +155,7 @@ const OpeningBidScript = ({ script, index, scripts }: IProps) => {
       <Suspense fallback={null}>
         <UnListingItemModal
           id={script._id}
+          setListedScript={setListedScript}
           openUnListingItem={openUnListingItem}
           setOpenUnListingItem={setOpenUnListingItem}
         />

@@ -13,6 +13,8 @@ const Heading = ({ script }: IProps) => {
     <div className="flex flex-col  md:flex-row lg:flex-col xl:flex-row gap-10 lg:gap-6 xl:gap-10">
       <div className="self-center md:self-start lg:self-center xl:self-start">
         <Image
+          width={1000}
+          height={1000}
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
           className="rounded-xl"
           alt={script.title}

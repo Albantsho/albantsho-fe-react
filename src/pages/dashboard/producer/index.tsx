@@ -65,7 +65,7 @@ const Scripts: NextPageWithLayout = () => {
       ) : (
         <>
           {(!query.tab || query.tab === "current-bids") && (
-            <CurrentBids bidsList={bidsList} />
+            <CurrentBids setBidsList={setBidsList} bidsList={bidsList} />
           )}
           {query.tab === "my-scripts" && (
             <MyScripts scriptsList={scriptsList} />

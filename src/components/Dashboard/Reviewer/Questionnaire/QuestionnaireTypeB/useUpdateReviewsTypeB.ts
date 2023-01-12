@@ -1,165 +1,60 @@
 import useReviewsApi from "apis/Reviews.api";
-import { IReviewTypeA, IReviewTypeB, IReviewValues } from "interfaces/reviews";
+import { IReviewTypeB, IReviewValuesTypeB } from "interfaces/reviews";
+import { useRouter } from "next/router";
 import { useRef, useState } from "react";
+import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 
 interface IProps {
-  reviewValues: IReviewValues;
+  reviewValuesTypeB: IReviewValuesTypeB;
 }
 
-const useUpdateReviews = ({ reviewValues }: IProps) => {
-  const { updateReview } = useReviewsApi();
-  const [countRate, setCountRate] = useState<number | null>(2);
-
-  const reviewTypeAValues = useRef<IReviewTypeA>({
-    introduction: reviewValues.introduction ? reviewValues.introduction : "",
-    plot: reviewValues.plot ? reviewValues.plot : "",
-    character: reviewValues.character ? reviewValues.character : "",
-    genreAndStoryStructure: reviewValues.genreAndStoryStructure
-      ? reviewValues.genreAndStoryStructure
-      : "",
-    dialogue: reviewValues.dialogue ? reviewValues.dialogue : "",
-    storyQuality: reviewValues.storyQuality ? reviewValues.storyQuality : "",
-    suggestions: reviewValues.suggestions ? reviewValues.suggestions : "",
-  });
+const useUpdateReviewsTypeB = ({ reviewValuesTypeB }: IProps) => {
+  const { updateReview, completingReview } = useReviewsApi();
+  const [countRate, setCountRate] = useState<number | null>(
+    reviewValuesTypeB.rate
+  );
   const reviewTypeBValues = useRef<IReviewTypeB>({
-    introduction: reviewValues.introduction ? reviewValues.introduction : "",
-    plot: reviewValues.plot ? reviewValues.plot : "",
-    character: reviewValues.character ? reviewValues.character : "",
-    genreAndStoryStructure: reviewValues.genreAndStoryStructure
-      ? reviewValues.genreAndStoryStructure
+    introduction: reviewValuesTypeB.introduction
+      ? reviewValuesTypeB.introduction
       : "",
-    dialogue: reviewValues.dialogue ? reviewValues.dialogue : "",
-    storyQuality: reviewValues.storyQuality ? reviewValues.storyQuality : "",
-    worldBuilding: reviewValues.worldBuilding ? reviewValues.worldBuilding : "",
-    scriptFormattingAndEditing: reviewValues.scriptFormattingAndEditing
-      ? reviewValues.scriptFormattingAndEditing
+    plot: reviewValuesTypeB.plot ? reviewValuesTypeB.plot : "",
+    character: reviewValuesTypeB.character ? reviewValuesTypeB.character : "",
+    genreAndStoryStructure: reviewValuesTypeB.genreAndStoryStructure
+      ? reviewValuesTypeB.genreAndStoryStructure
       : "",
-    writerVoice: reviewValues.writerVoice ? reviewValues.writerVoice : "",
-    authenticityFeedback: reviewValues.authenticityFeedback
-      ? reviewValues.authenticityFeedback
+    dialogue: reviewValuesTypeB.dialogue ? reviewValuesTypeB.dialogue : "",
+    storyQuality: reviewValuesTypeB.storyQuality
+      ? reviewValuesTypeB.storyQuality
       : "",
-    suggestions: reviewValues.suggestions ? reviewValues.suggestions : "",
-    openingAndClosingImage: reviewValues.openingAndClosingImage
-      ? reviewValues.openingAndClosingImage
+    worldBuilding: reviewValuesTypeB.worldBuilding
+      ? reviewValuesTypeB.worldBuilding
+      : "",
+    scriptFormattingAndEditing: reviewValuesTypeB.scriptFormattingAndEditing
+      ? reviewValuesTypeB.scriptFormattingAndEditing
+      : "",
+    writerVoice: reviewValuesTypeB.writerVoice
+      ? reviewValuesTypeB.writerVoice
+      : "",
+    authenticityFeedback: reviewValuesTypeB.authenticityFeedback
+      ? reviewValuesTypeB.authenticityFeedback
+      : "",
+    suggestions: reviewValuesTypeB.suggestions
+      ? reviewValuesTypeB.suggestions
+      : "",
+    openingAndClosingImage: reviewValuesTypeB.openingAndClosingImage
+      ? reviewValuesTypeB.openingAndClosingImage
       : "",
   });
-
-  const updateIntroductionTypeA =
-    (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => async () => {
-      try {
-        setLoading(true);
-        const res = await updateReview(
-          { introduction: reviewTypeAValues.current.introduction },
-          reviewValues._id
-        );
-      } catch (error) {
-        errorHandler(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-  const updatePlotTypeA =
-    (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => async () => {
-      try {
-        setLoading(true);
-        const res = await updateReview(
-          { plot: reviewTypeAValues.current.plot },
-          reviewValues._id
-        );
-      } catch (error) {
-        errorHandler(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-  const updateCharacterTypeA =
-    (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => async () => {
-      try {
-        setLoading(true);
-        const res = await updateReview(
-          { character: reviewTypeAValues.current.character },
-          reviewValues._id
-        );
-      } catch (error) {
-        errorHandler(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-  const updateGenreAndStoryStructureTypeA =
-    (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => async () => {
-      try {
-        setLoading(true);
-        const res = await updateReview(
-          {
-            genreAndStoryStructure:
-              reviewTypeAValues.current.genreAndStoryStructure,
-          },
-          reviewValues._id
-        );
-      } catch (error) {
-        errorHandler(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-  const updateDialogueTypeA =
-    (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => async () => {
-      try {
-        setLoading(true);
-        const res = await updateReview(
-          { dialogue: reviewTypeAValues.current.dialogue },
-          reviewValues._id
-        );
-      } catch (error) {
-        errorHandler(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-  const updateStoryQualityTypeA =
-    (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => async () => {
-      try {
-        setLoading(true);
-        const res = await updateReview(
-          { storyQuality: reviewTypeAValues.current.storyQuality },
-          reviewValues._id
-        );
-      } catch (error) {
-        errorHandler(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-  const updateSuggestionsTypeA =
-    (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => async () => {
-      try {
-        setLoading(true);
-        const res = await updateReview(
-          { suggestions: reviewTypeAValues.current.suggestions },
-          reviewValues._id
-        );
-      } catch (error) {
-        errorHandler(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
+  const [loading, setLoading] = useState(false);
+  const { query, push } = useRouter();
   const updateIntroductionTypeB =
     (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => async () => {
       try {
         setLoading(true);
         const res = await updateReview(
           { introduction: reviewTypeBValues.current.introduction },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -174,7 +69,7 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
         setLoading(true);
         const res = await updateReview(
           { plot: reviewTypeBValues.current.plot },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -189,7 +84,7 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
         setLoading(true);
         const res = await updateReview(
           { character: reviewTypeBValues.current.character },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -207,7 +102,7 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
             genreAndStoryStructure:
               reviewTypeBValues.current.genreAndStoryStructure,
           },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -222,7 +117,7 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
         setLoading(true);
         const res = await updateReview(
           { dialogue: reviewTypeBValues.current.dialogue },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -237,7 +132,7 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
         setLoading(true);
         const res = await updateReview(
           { storyQuality: reviewTypeBValues.current.storyQuality },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -252,7 +147,7 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
         setLoading(true);
         const res = await updateReview(
           { worldBuilding: reviewTypeBValues.current.worldBuilding },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -270,7 +165,7 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
             scriptFormattingAndEditing:
               reviewTypeBValues.current.scriptFormattingAndEditing,
           },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -285,7 +180,7 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
         setLoading(true);
         const res = await updateReview(
           { writerVoice: reviewTypeBValues.current.writerVoice },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -303,7 +198,7 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
             authenticityFeedback:
               reviewTypeBValues.current.authenticityFeedback,
           },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -321,7 +216,7 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
             openingAndClosingImage:
               reviewTypeBValues.current.openingAndClosingImage,
           },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -336,7 +231,7 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
         setLoading(true);
         const res = await updateReview(
           { suggestions: reviewTypeBValues.current.suggestions },
-          reviewValues._id
+          reviewValuesTypeB._id
         );
       } catch (error) {
         errorHandler(error);
@@ -345,27 +240,57 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
       }
     };
 
-  const updateRateReview = async () => {
+  const updateRateReview =
+    (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => async () => {
+      try {
+        setLoading(true);
+        const res = await updateReview(
+          { rate: `${countRate}` },
+          reviewValuesTypeB._id
+        );
+      } catch (error) {
+        errorHandler(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+  const completeFileFunc = async () => {
     try {
-      const res = await updateReview(
-        { rate: `${countRate}` },
-        reviewValues._id
+      setLoading(true);
+      await updateReview(
+        {
+          rate: `${countRate}`,
+          introduction: reviewTypeBValues.current.introduction,
+          plot: reviewTypeBValues.current.plot,
+          genreAndStoryStructure:
+            reviewTypeBValues.current.genreAndStoryStructure,
+          dialogue: reviewTypeBValues.current.dialogue,
+          storyQuality: reviewTypeBValues.current.storyQuality,
+          worldBuilding: reviewTypeBValues.current.worldBuilding,
+          scriptFormattingAndEditing:
+            reviewTypeBValues.current.scriptFormattingAndEditing,
+          writerVoice: reviewTypeBValues.current.writerVoice,
+          authenticityFeedback: reviewTypeBValues.current.authenticityFeedback,
+          openingAndClosingImage:
+            reviewTypeBValues.current.openingAndClosingImage,
+          suggestions: reviewTypeBValues.current.suggestions,
+        },
+        reviewValuesTypeB._id
       );
+      const res = await completingReview(reviewValuesTypeB._id, {
+        completed: true,
+      });
+      push(routes.reviewerDashboardPreviewTypeB.dynamicUrl(query.id as string));
+      console.log(res);
     } catch (error) {
       errorHandler(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return {
-    reviewTypeAValues,
-    reviewTypeBValues,
-    updateIntroductionTypeA,
-    updatePlotTypeA,
-    updateCharacterTypeA,
-    updateGenreAndStoryStructureTypeA,
-    updateDialogueTypeA,
-    updateStoryQualityTypeA,
-    updateSuggestionsTypeA,
     updateIntroductionTypeB,
     updatePlotTypeB,
     updateCharacterTypeB,
@@ -381,7 +306,10 @@ const useUpdateReviews = ({ reviewValues }: IProps) => {
     updateRateReview,
     setCountRate,
     countRate,
+    reviewTypeBValues,
+    completeFileFunc,
+    loading,
   };
 };
 
-export default useUpdateReviews;
+export default useUpdateReviewsTypeB;

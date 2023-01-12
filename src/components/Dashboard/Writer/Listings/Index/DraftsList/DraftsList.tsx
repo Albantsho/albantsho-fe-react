@@ -72,7 +72,10 @@ const DraftsList = ({ searchQuery }: IProps) => {
         </Typography>
       </div>
       <Suspense fallback={null}>
-        <UnlistedList unListedScripts={unListedScripts} />
+        <UnlistedList
+          unListedScripts={unListedScripts}
+          setUnListedScripts={setUnListedScripts}
+        />
       </Suspense>
     </div>
   );

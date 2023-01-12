@@ -2,6 +2,8 @@ import { Divider, Paper, Typography } from "@mui/material";
 import { IUnCompletedScript } from "interfaces/script";
 import React from "react";
 import UncompletedScript from "./UncompletedScript/UncompletedScript";
+import emptyBlogs from "@assets/images/empty-blogs.png";
+import Image from "next/image";
 
 interface IProps {
   unCompletedScripts: IUnCompletedScript[];
@@ -10,7 +12,7 @@ interface IProps {
 const UncompletedList = ({ unCompletedScripts }: IProps) => {
   console.log(unCompletedScripts);
 
-  return (
+  return unCompletedScripts.length > 0 ? (
     <Paper elevation={0} className="mt-4 sm:mt-6 shadow-primary bg-white">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
         <Typography
@@ -38,6 +40,17 @@ const UncompletedList = ({ unCompletedScripts }: IProps) => {
         ))}
       </div>
     </Paper>
+  ) : (
+    <div className="flex items-center">
+      <Image
+        width={384}
+        height={384}
+        loading="lazy"
+        className="w-fit h-fit mx-auto mt-14 lg:mt-24"
+        src={emptyBlogs}
+        alt="empty blog list"
+      />
+    </div>
   );
 };
 

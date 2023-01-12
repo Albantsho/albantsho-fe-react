@@ -1,5 +1,5 @@
 import { Button, IconButton, Typography } from "@mui/material";
-import ProfileNav from "@shared/ProfileNav/ProfileNav";
+import WalletNav from "@shared/WalletNav/WalletNav";
 import Head from "next/head";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
@@ -17,7 +17,7 @@ const Invites = () => {
       <Head>
         <title>Albantsho || Invites</title>
       </Head>
-      <ProfileNav color="inherit" position="static" />
+      <WalletNav color="inherit" position="static" />
       <div className="px-5 sm:px-10 py-10 overflow-hidden">
         <Typography variant="h4" color="primary">
           Invites List

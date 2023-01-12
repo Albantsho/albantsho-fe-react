@@ -51,6 +51,8 @@ const BidsPage: NextPageWithLayout = () => {
           setLoading(true);
           const resScript = await getScript(query.id);
           const res = await getBidScript(query.bidId);
+          console.log(res, resScript);
+
           setScript(resScript.data.script);
           setBid(res.data.scriptBid);
           setLoading(false);
@@ -62,7 +64,7 @@ const BidsPage: NextPageWithLayout = () => {
     getScriptFunc();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.id, query.bidId]);
+  }, [query]);
 
   return (
     <>

@@ -1,25 +1,27 @@
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Logo from "@shared/Logo/Logo";
-import { IReviewValues } from "interfaces/reviews";
+import { IReviewValuesTypeA } from "interfaces/reviews";
 import { IScriptReviewer } from "interfaces/script";
-import QuestionnaireAccordion from "./QuestionnaireAccordion/QuestionnaireAccordion";
-import QuestionnaireRating from "./QuestionnaireRating/QuestionnaireRating";
-import useQuestionnaire from "./useQuestionnaire";
+import QuestionnaireAccordion from "../QuestionnaireAccordion/QuestionnaireAccordion";
+import QuestionnaireRating from "../QuestionnaireRating/QuestionnaireRating";
+import useQuestionnaireTypeA from "./useQuestionnaireTypeA";
 
 interface IProps {
-  reviewValues: IReviewValues;
+  reviewValuesTypeA: IReviewValuesTypeA;
   script: IScriptReviewer;
 }
 
-const Questionnaire = ({ reviewValues, script }: IProps) => {
+const QuestionnaireTypeA = ({ reviewValuesTypeA, script }: IProps) => {
   const {
     completed,
     countRate,
     listQuestionnaireAccordionTypeA,
-    listQuestionnaireAccordionTypeB,
     setCountRate,
-  } = useQuestionnaire({ reviewValues });
+    updateRateReview,
+    loading,
+    completeFileFunc,
+  } = useQuestionnaireTypeA({ reviewValuesTypeA });
 
   return (
     <div className="py-6 md:py-6 lg:py-8 gap-6 bg-[#f6f8fc] px-5 sm:px-10 space-y-6 overflow-hidden">
@@ -56,37 +58,35 @@ const Questionnaire = ({ reviewValues, script }: IProps) => {
           variant="body1"
           className="text-neutral-800  font-medium leading-normal"
         >
-          {script.scriptFormat} |{" "}
+          {script.scriptFormat} |
           {script.totalPages && `${script.totalPages} Page`}
         </Typography>
       </div>
 
       <div className="rounded-lg text-center max-w-5xl mx-auto space-y-6">
-        {script.reviewPlan === "A"
-          ? listQuestionnaireAccordionTypeA.map((accordion) => (
-              <QuestionnaireAccordion
-                key={accordion.title}
-                title={accordion.title}
-                description={accordion.description}
-                editorValue={accordion.editorValue}
-                saveValue={accordion.saveValue}
-              />
-            ))
-          : listQuestionnaireAccordionTypeB.map((accordion) => (
-              <QuestionnaireAccordion
-                key={accordion.title}
-                title={accordion.title}
-                description={accordion.description}
-                editorValue={accordion.editorValue}
-                saveValue={accordion.saveValue}
-              />
-            ))}
+        {listQuestionnaireAccordionTypeA.map((accordion) => (
+          <QuestionnaireAccordion
+            key={accordion.title}
+            title={accordion.title}
+            description={accordion.description}
+            editorValue={accordion.editorValue}
+            saveValue={accordion.saveValue}
+            initialValue={accordion.initialValue}
+          />
+        ))}
 
         <QuestionnaireRating
           countRate={countRate}
           setCountRate={setCountRate}
+          updateRateReview={updateRateReview}
         />
-        <Btn disabled={!completed} fullWidth className="mt-6 py-4 rounded-lg">
+        <Btn
+          loading={loading}
+          onClick={completeFileFunc}
+          disabled={!completed}
+          fullWidth
+          className="mt-6 py-4 rounded-lg"
+        >
           COMPLETE REVIEW
         </Btn>
       </div>
@@ -94,4 +94,4 @@ const Questionnaire = ({ reviewValues, script }: IProps) => {
   );
 };
 
-export default Questionnaire;
+export default QuestionnaireTypeA;

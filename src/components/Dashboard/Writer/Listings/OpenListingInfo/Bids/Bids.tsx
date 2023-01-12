@@ -2,8 +2,6 @@ import ReviewedIcon from "@assets/icons/reviewed.svg";
 import { Button, Chip, Divider, SvgIcon, Typography } from "@mui/material";
 import { IBidForScript } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
-import CompletedBid from "./CompletedBid/CompletedBid";
-import InProgressBid from "./InProgressBid/InProgressBid";
 
 interface IProps {
   setOpenAcceptOffer: React.Dispatch<React.SetStateAction<boolean>>;
@@ -68,47 +66,41 @@ const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
             </div>
           </div>
           <Divider className="my-5 md:my-7 lg:my-4 xl:my-6" />
-          {!bid.accept ? (
-            <div className="lg:pt-6 md:flex ">
-              <div className="mb-4 md:mb-0  space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12">
-                <Typography
-                  variant="h6"
-                  className="text-neutral-700 font-normal"
-                >
-                  <span className="font-semibold text-primary-700">Talan</span>{" "}
-                  has placed a bid for your script
-                </Typography>
-                <Typography
-                  variant="h3"
-                  color="primary.700"
-                  className="font-semibold leading-normal"
-                >
-                  @${bid.amount}
-                </Typography>
-              </div>
-              <div className="border-none flex items-stretch md:items-end md:pb-2  md:-ml-24 gap-x-2 md:gap-x-8 xl:gap-x-12">
-                <Button
-                  onClick={() => setOpenAcceptOffer(true)}
-                  sx={{ "&.MuiButtonBase-root": { fontWeight: 600 } }}
-                  size="large"
-                  variant="text"
-                  className="text-success-500"
-                >
-                  Accept Offer
-                </Button>
-                <Button
-                  sx={{ "&.MuiButtonBase-root": { fontWeight: 600 } }}
-                  size="large"
-                  variant="text"
-                  className="text-secondary-700"
-                >
-                  Decline
-                </Button>
-              </div>
+
+          <div className="lg:pt-6 md:flex ">
+            <div className="mb-4 md:mb-0  space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12">
+              <Typography variant="h6" className="text-neutral-700 font-normal">
+                <span className="font-semibold text-primary-700">Talan</span>{" "}
+                has placed a bid for your script
+              </Typography>
+              <Typography
+                variant="h3"
+                color="primary.700"
+                className="font-semibold leading-normal"
+              >
+                @${bid.amount}
+              </Typography>
             </div>
-          ) : (
-            <>{bid.paid ? <CompletedBid /> : <InProgressBid bid={bid} />}</>
-          )}
+            <div className="border-none flex items-stretch md:items-end md:pb-2  md:-ml-24 gap-x-2 md:gap-x-8 xl:gap-x-12">
+              <Button
+                onClick={() => setOpenAcceptOffer(true)}
+                sx={{ "&.MuiButtonBase-root": { fontWeight: 600 } }}
+                size="large"
+                variant="text"
+                className="text-success-500"
+              >
+                Accept Offer
+              </Button>
+              <Button
+                sx={{ "&.MuiButtonBase-root": { fontWeight: 600 } }}
+                size="large"
+                variant="text"
+                className="text-secondary-700"
+              >
+                Decline
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </>

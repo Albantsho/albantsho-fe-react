@@ -13,6 +13,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
+import emptyBlogs from "@assets/images/empty-blogs.png";
 
 interface IProps {
   searchQuery: string;
@@ -42,7 +43,7 @@ const ClosedList = ({ searchQuery }: IProps) => {
 
   return loading ? (
     <DotLoader color="#7953B5" className="mx-auto mt-10" />
-  ) : (
+  ) : closedScripts.length > 0 ? (
     <Table className=" mt-4 sm:mt-6 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
         <TableRow className="flex">
@@ -154,6 +155,17 @@ const ClosedList = ({ searchQuery }: IProps) => {
         ))}
       </TableBody>
     </Table>
+  ) : (
+    <div className="flex items-center">
+      <Image
+        width={384}
+        height={384}
+        loading="lazy"
+        className="w-fit h-fit mx-auto mt-14 lg:mt-24"
+        src={emptyBlogs}
+        alt="empty blog list"
+      />
+    </div>
   );
 };
 

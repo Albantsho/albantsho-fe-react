@@ -9,13 +9,17 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomRating from "@shared/CustomRating/CustomRating";
+import useDraftApi from "apis/Draft.api";
 import useReviewsApi from "apis/Reviews.api";
 import { IReviewerTask } from "interfaces/reviews";
+import jsPDF from "jspdf";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FiArrowUpRight } from "react-icons/fi";
 import routes from "routes/routes";
+import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
 import errorHandler from "utils/error-handler";
+import { serializeWithoutDiv } from "utils/serialize-slate";
 
 interface IProps {
   selectedScriptId: string;
@@ -28,13 +32,56 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
   );
   const { createNewReview } = useReviewsApi();
   const { replace } = useRouter();
-
+  const { getOneDraft } = useDraftApi();
   const beginReviewToScript = (scriptId: string) => async () => {
     try {
       await createNewReview({ scriptId });
-      replace(routes.reviewerDashboardQuestionnaire.dynamicUrl(scriptId));
+      selectedScript?.reviewPlan === "A"
+        ? replace(
+            routes.reviewerDashboardQuestionnaireTypeA.dynamicUrl(scriptId)
+          )
+        : replace(
+            routes.reviewerDashboardQuestionnaireTypeB.dynamicUrl(scriptId)
+          );
     } catch (error) {
       errorHandler(error);
+    }
+  };
+
+  const seeScript = async () => {
+    const resDraft = await getOneDraft(selectedScript?._id as string);
+    const htmlContent = new DOMParser().parseFromString(
+      resDraft.data.draft,
+      "text/html"
+    );
+    const value = deserializeScriptWithOutDiv(htmlContent.body);
+    console.log({ children: value });
+
+    const valueForConvertPdf = serializeWithoutDiv({ children: value });
+    const doc = new jsPDF("p", "pt", "a4");
+    if (valueForConvertPdf) {
+      doc.html(
+        `<div style="padding:0 40px;width:595px;height:842px;font-family:Courier Prime;display:flex;justify-content:center;align-items:center;gap:18px;flex-direction:column;"><h6 style="font-family:Courier Prime;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
+          selectedScript?.title
+        }</h6><h6 style="font-family:Courier Prime;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${selectedScript?.writtenBy.join(
+          " "
+        )}</h6><h6 style="font-family:Courier Prime;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
+          selectedScript?.draftDate as string
+        ).toLocaleDateString()}</h6></div><div style="padding:0 40px;width:595px;font-family:Courier Prime;">
+        ${valueForConvertPdf}
+        </div>`,
+        {
+          margin: [30, 0],
+          autoPaging: "text",
+          callback: (pdf) => {
+            for (let i = 0; i < doc.internal.pages.length; i++) {
+              doc.setPage(i);
+              doc.text(i <= 1 ? " " : `Page ${String(i - 1)}`, 275, 830);
+            }
+            pdf.save(selectedScript?.title);
+          },
+        }
+      );
     }
   };
 
@@ -53,6 +100,7 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
             : ""}
         </Button>
         <Button
+          onClick={seeScript}
           className="py-[10px] px-4"
           variant="outlined"
           startIcon={<FiArrowUpRight />}
@@ -124,15 +172,39 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
           >
             Begin review
           </Btn>
-        ) : selectedScript?.review[0].complete ? (
-          <Btn color="success" className="w-full py-3 rounded-lg">
-            Completed
-          </Btn>
+        ) : selectedScript?.review[0].completed ? (
+          <Link
+            href={
+              selectedScript?.reviewPlan === "A"
+                ? routes.reviewerDashboardPreviewTypeA.dynamicUrl(
+                    selectedScript?._id as string
+                  )
+                : routes.reviewerDashboardPreviewTypeB.dynamicUrl(
+                    selectedScript?._id as string
+                  )
+            }
+            passHref
+            legacyBehavior
+          >
+            <Button
+              color="success"
+              variant="contained"
+              className="w-full text-white py-3 rounded-lg"
+            >
+              Completed
+            </Button>
+          </Link>
         ) : (
           <Link
-            href={routes.reviewerDashboardQuestionnaire.dynamicUrl(
-              selectedScript?._id as string
-            )}
+            href={
+              selectedScript?.reviewPlan === "A"
+                ? routes.reviewerDashboardQuestionnaireTypeA.dynamicUrl(
+                    selectedScript?._id as string
+                  )
+                : routes.reviewerDashboardQuestionnaireTypeB.dynamicUrl(
+                    selectedScript?._id as string
+                  )
+            }
             passHref
           >
             <Btn className="w-full py-3 rounded-lg">Continue review</Btn>

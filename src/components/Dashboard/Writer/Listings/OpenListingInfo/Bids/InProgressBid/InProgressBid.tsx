@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
 import { IBidForScript } from "interfaces/bid";
-import CircularStatic from "../CircularProgress/CircularProgress";
 
 interface IProps {
   bid: IBidForScript;
@@ -18,7 +17,7 @@ const InProgressBid = ({ bid }: IProps) => {
         </Typography>
       </div>
       <div className="my-8 md:my-16  mx-auto w-[100px] md:w-[200px]">
-        <CircularStatic bid={bid} />
+        {/* <CircularStatic bid={bid} /> */}
       </div>
     </div>
   );

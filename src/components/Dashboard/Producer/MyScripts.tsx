@@ -115,14 +115,16 @@ const MyScripts = ({ scriptsList }: IProps) => {
       </TableBody>
     </Table>
   ) : (
-    <Image
-      width={384}
-      height={384}
-      loading="lazy"
-      className="w-fit h-fit mx-auto mt-14 lg:mt-24"
-      src={emptyBlogs}
-      alt="empty blog list"
-    />
+    <div className="flex items-center">
+      <Image
+        width={384}
+        height={384}
+        loading="lazy"
+        className="w-fit h-fit mx-auto mt-14 lg:mt-24"
+        src={emptyBlogs}
+        alt="empty blog list"
+      />
+    </div>
   );
 };
 

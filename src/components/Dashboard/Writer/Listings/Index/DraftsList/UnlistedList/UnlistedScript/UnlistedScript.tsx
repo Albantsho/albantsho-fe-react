@@ -10,9 +10,10 @@ const RelistScriptModal = dynamic(
 
 interface IProps {
   script: IUnlistedScript;
+  setUnListedScripts: React.Dispatch<React.SetStateAction<IUnlistedScript[]>>;
 }
 
-const UnlistedScript = ({ script }: IProps) => {
+const UnlistedScript = ({ script, setUnListedScripts }: IProps) => {
   const [openRelistScript, setOpenRelistScript] = useState<boolean>(false);
 
   const setOpenRelistScriptModal = () => setOpenRelistScript(true);
@@ -82,6 +83,7 @@ const UnlistedScript = ({ script }: IProps) => {
       </div>
       <Suspense fallback={null}>
         <RelistScriptModal
+          setUnListedScripts={setUnListedScripts}
           id={script._id}
           openRelistScript={openRelistScript}
           setOpenRelistScript={setOpenRelistScript}

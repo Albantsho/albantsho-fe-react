@@ -1,3 +1,4 @@
+import { LoadingButton } from "@mui/lab";
 import {
   Accordion,
   AccordionDetails,
@@ -13,6 +14,9 @@ import { BiChevronDown } from "react-icons/bi";
 interface IProps {
   countRate: number | null;
   setCountRate: React.Dispatch<React.SetStateAction<number | null>>;
+  updateRateReview: (
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => () => Promise<void>;
 }
 
 const labels: { [index: string]: string } = {
@@ -27,8 +31,18 @@ function getLabelText(value: number) {
   return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
 }
 
-const QuestionnaireRating = ({ setCountRate, countRate }: IProps) => {
-  const [hoverRate, setHoverRate] = useState(-1);
+const QuestionnaireRating = ({
+  setCountRate,
+  countRate,
+  updateRateReview,
+}: IProps) => {
+  const [hoverRate, setHoverRate] = useState(1);
+  const [expanded, setExpanded] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const handleExpandedStatus = () => setExpanded((prev) => !prev);
+  const closeAndCancel = () => {
+    setExpanded(false);
+  };
 
   return (
     <Accordion
@@ -36,9 +50,11 @@ const QuestionnaireRating = ({ setCountRate, countRate }: IProps) => {
         "&.MuiPaper-root": { borderRadius: "8px" },
         "&:before": { display: "none" },
       }}
+      expanded={expanded}
       className="px-6 md:px-9 lg:px-16 shadow-primary rounded-lg"
     >
       <AccordionSummary
+        onClick={handleExpandedStatus}
         className="py-6 md:py-9 lg:py-12 px-0 rounded-lg flex-col sm:flex-row gap-y-3"
         sx={{ "& .MuiAccordionSummary-content": { m: 0 } }}
         expandIcon={
@@ -67,7 +83,7 @@ const QuestionnaireRating = ({ setCountRate, countRate }: IProps) => {
             }}
             getLabelText={getLabelText}
             size="large"
-            defaultValue={3}
+            defaultValue={countRate ? countRate : 1}
             precision={1}
             onChange={(event, newValue) => {
               setCountRate(newValue);
@@ -86,14 +102,17 @@ const QuestionnaireRating = ({ setCountRate, countRate }: IProps) => {
           )}
         </div>
         <div className="flex py-6 gap-x-5  justify-center sm:justify-start">
-          <Button
+          <LoadingButton
+            loading={loading}
+            onClick={updateRateReview(setLoading)}
             disableElevation
             variant="contained"
             className="rounded-md py-3 px-6"
           >
             Save
-          </Button>
+          </LoadingButton>
           <Button
+            onClick={closeAndCancel}
             variant="outlined"
             sx={{ border: "1px solid #7953B5" }}
             className="bg-white text-primary-700 rounded-md py-3 px-6"

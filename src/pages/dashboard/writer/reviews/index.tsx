@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
+import queryString from "query-string";
 
 const Reviews: NextPageWithLayout = () => {
   const [reviewsList, setReviewsList] = useState<Array<IWriterReview>>([]);
@@ -22,7 +23,7 @@ const Reviews: NextPageWithLayout = () => {
       try {
         setReviewsList([]);
         setLoading(true);
-        const res = await getWriterReviewRequests("he");
+        const res = await getWriterReviewRequests(queryString.stringify(query));
         console.log(res);
 
         setReviewsList(res.data.scripts);

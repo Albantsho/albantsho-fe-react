@@ -1,15 +1,21 @@
 import { Typography } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
+import { IScriptReviewer } from "interfaces/script";
 
-const Heading = () => {
+interface IProps {
+  script: IScriptReviewer;
+}
+
+const Heading = ({ script }: IProps) => {
   return (
     <div className="text-center">
       <Logo className="mb-4" color="primary" />
-      <Typography variant="body1">Entry Type: Type A</Typography>
-      <Typography
-        variant="body1"
-        className="mb-16"
-      >{`Start date: {{dd/mm/yyyy/}}`}</Typography>
+      <Typography variant="body1">
+        Entry Type: Type {script.reviewPlan}
+      </Typography>
+      <Typography variant="body1" className="mb-16">{`Start date: {{${new Date(
+        script.createdAt
+      ).toLocaleDateString()}}}`}</Typography>
 
       <Typography
         variant="h4"
@@ -22,13 +28,14 @@ const Heading = () => {
         variant="h6"
         className="text-primary-700 futura font-medium leading-normal"
       >
-        The Long Man of Long Beach
+        {script.title}
       </Typography>
       <Typography
         variant="body1"
         className="text-neutral-800  font-medium leading-normal"
       >
-        Feature film | 100 pages
+        {script.scriptFormat}|{" "}
+        {script.totalPages && `${script.totalPages} Page`}
       </Typography>
     </div>
   );

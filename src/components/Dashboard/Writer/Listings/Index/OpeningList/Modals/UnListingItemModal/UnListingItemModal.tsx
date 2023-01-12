@@ -2,6 +2,7 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScriptsApi from "apis/Scripts.api";
+import { IBidScript } from "interfaces/script";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
 import errorHandler from "utils/error-handler";
@@ -11,12 +12,14 @@ interface IProps {
   openUnListingItem: boolean;
   setOpenUnListingItem: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
+  setListedScript: React.Dispatch<React.SetStateAction<IBidScript[]>>;
 }
 
 const UnListingItemModal = ({
   openUnListingItem,
   setOpenUnListingItem,
   id,
+  setListedScript,
 }: IProps) => {
   const { updatePublishedScript } = useScriptsApi();
 
@@ -25,6 +28,7 @@ const UnListingItemModal = ({
   const unListingScript = async () => {
     try {
       await updatePublishedScript({ published: false }, id);
+      setListedScript((prev) => prev.filter((script) => script._id !== id));
       handleClose();
     } catch (error) {
       errorHandler(error);

@@ -6,6 +6,8 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
+import questString from "query-string";
+import { useRouter } from "next/router";
 
 const Reviewer = () => {
   const [reviewerTaskList, setReviewerTaskList] = useState<
@@ -13,12 +15,13 @@ const Reviewer = () => {
   >([]);
   const [loading, setLoading] = useState(false);
   const { getAllReviewerTasks } = useReviewsApi();
+  const { query } = useRouter();
 
   useEffect(() => {
     async function getAllReviewerTasksFunc() {
       try {
         setLoading(true);
-        const res = await getAllReviewerTasks("hello");
+        const res = await getAllReviewerTasks(questString.stringify(query));
         console.log(res);
 
         setReviewerTaskList(res.data.scripts);
@@ -31,7 +34,7 @@ const Reviewer = () => {
     getAllReviewerTasksFunc();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query]);
 
   return (
     <>

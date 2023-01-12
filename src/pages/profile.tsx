@@ -36,7 +36,7 @@ const Profile = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Profile </title>
+        <title>Albantsho || Profile</title>
       </Head>
       <ProfileNav color="inherit" position="static" />
       {loading ? (

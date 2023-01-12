@@ -1,109 +1,36 @@
-import { IReviewValues } from "interfaces/reviews";
-import useUpdateReviews from "./useUpdateReviews";
+import { IReviewValuesTypeB } from "interfaces/reviews";
+import useUpdateReviewsTypeB from "./useUpdateReviewsTypeB";
 
 interface IProps {
-  reviewValues: IReviewValues;
+  reviewValuesTypeB: IReviewValuesTypeB;
 }
 
-const useQuestionnaire = ({ reviewValues }: IProps) => {
+const useQuestionnaireTypeB = ({ reviewValuesTypeB }: IProps) => {
   const {
     countRate,
-    reviewTypeAValues,
     reviewTypeBValues,
     setCountRate,
     updateAuthenticityFeedbackTypeB,
-    updateCharacterTypeA,
     updateCharacterTypeB,
-    updateDialogueTypeA,
     updateDialogueTypeB,
-    updateGenreAndStoryStructureTypeA,
     updateGenreAndStoryStructureTypeB,
-    updateIntroductionTypeA,
     updateIntroductionTypeB,
     updateOpeningAndClosingImageTypeB,
-    updatePlotTypeA,
     updatePlotTypeB,
     updateRateReview,
     updateScriptFormattingAndEditingTypeB,
-    updateStoryQualityTypeA,
     updateStoryQualityTypeB,
-    updateSuggestionsTypeA,
     updateSuggestionsTypeB,
     updateWorldBuildingTypeB,
     updateWriterVoiceTypeB,
-  } = useUpdateReviews({ reviewValues });
-  const listQuestionnaireAccordionTypeA = [
-    {
-      title: "INTRODUCTION",
-      editorValue: (value: string) =>
-        (reviewTypeAValues.current = {
-          ...reviewTypeAValues.current,
-          introduction: value,
-        }),
-      saveValue: updateIntroductionTypeA,
-    },
-    {
-      title: "Plot",
-      editorValue: (value: string) =>
-        (reviewTypeAValues.current = {
-          ...reviewTypeAValues.current,
-          plot: value,
-        }),
-      saveValue: updatePlotTypeA,
-    },
-    {
-      title: "Character(s)",
-      editorValue: (value: string) =>
-        (reviewTypeAValues.current = {
-          ...reviewTypeAValues.current,
-          character: value,
-        }),
-      saveValue: updateCharacterTypeA,
-    },
-    {
-      title: "Genre tropes and Story structure",
-      editorValue: (value: string) =>
-        (reviewTypeAValues.current = {
-          ...reviewTypeAValues.current,
-          genreAndStoryStructure: value,
-        }),
-      saveValue: updateGenreAndStoryStructureTypeA,
-    },
-    {
-      title: "Dialogue",
-      editorValue: (value: string) =>
-        (reviewTypeAValues.current = {
-          ...reviewTypeAValues.current,
-          dialogue: value,
-        }),
-      saveValue: updateDialogueTypeA,
-    },
-    {
-      title: "Story quality",
-      description:
-        "how relevant is this story concept and what is unique or not about its approach to the ide",
-      editorValue: (value: string) =>
-        (reviewTypeAValues.current = {
-          ...reviewTypeAValues.current,
-          storyQuality: value,
-        }),
-      saveValue: updateStoryQualityTypeA,
-    },
-    {
-      title: "Suggestions",
-      description: "your final thoughts and suggestions",
-      editorValue: (value: string) =>
-        (reviewTypeAValues.current = {
-          ...reviewTypeAValues.current,
-          suggestions: value,
-        }),
-      saveValue: updateSuggestionsTypeA,
-    },
-  ];
+    completeFileFunc,
+    loading,
+  } = useUpdateReviewsTypeB({ reviewValuesTypeB });
 
   const listQuestionnaireAccordionTypeB = [
     {
       title: "INTRODUCTION",
+      initialValue: reviewTypeBValues.current.introduction,
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
           ...reviewTypeBValues.current,
@@ -113,6 +40,7 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
     },
     {
       title: "Plot",
+      initialValue: reviewTypeBValues.current.plot,
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
           ...reviewTypeBValues.current,
@@ -122,6 +50,7 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
     },
     {
       title: "Character(s)",
+      initialValue: reviewTypeBValues.current.character,
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
           ...reviewTypeBValues.current,
@@ -131,6 +60,7 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
     },
     {
       title: "Genre tropes and Story structure",
+      initialValue: reviewTypeBValues.current.genreAndStoryStructure,
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
           ...reviewTypeBValues.current,
@@ -140,6 +70,7 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
     },
     {
       title: "Dialogue",
+      initialValue: reviewTypeBValues.current.dialogue,
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
           ...reviewTypeBValues.current,
@@ -151,6 +82,7 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
       title: "Story quality",
       description:
         "how relevant is this story concept and what is unique or not about its approach to the ide",
+      initialValue: reviewTypeBValues.current.storyQuality,
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
           ...reviewTypeBValues.current,
@@ -161,6 +93,7 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
     {
       title: "World-building",
       description: "how authentic and real is the world-building",
+      initialValue: reviewTypeBValues.current.worldBuilding,
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
           ...reviewTypeBValues.current,
@@ -172,6 +105,7 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
       title: "Script formatting & Editing",
       description:
         "how well are the scripting conventions creatively utilized? Reference scene or page numbers",
+      initialValue: reviewTypeBValues.current.scriptFormattingAndEditing,
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
           ...reviewTypeBValues.current,
@@ -182,6 +116,7 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
     {
       title: "Writer’s Voice",
       description: "What’s unique or not about  the writing style",
+      initialValue: reviewTypeBValues.current.writerVoice,
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
           ...reviewTypeBValues.current,
@@ -191,6 +126,7 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
     },
     {
       title: "Authenticity feedback",
+      initialValue: reviewTypeBValues.current.authenticityFeedback,
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
           ...reviewTypeBValues.current,
@@ -200,6 +136,7 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
     },
     {
       title: "Opening  and closing image",
+      initialValue: reviewTypeBValues.current.openingAndClosingImage,
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
           ...reviewTypeBValues.current,
@@ -209,6 +146,7 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
     },
     {
       title: "Suggestions",
+      initialValue: reviewTypeBValues.current.suggestions,
       description: "your final thoughts and suggestions",
       editorValue: (value: string) =>
         (reviewTypeBValues.current = {
@@ -219,17 +157,19 @@ const useQuestionnaire = ({ reviewValues }: IProps) => {
     },
   ];
 
-  const completed = Object.values(reviewTypeAValues.current).every(
-    (value) => value
-  );
+  const completed = Object.values(
+    reviewTypeBValues.current && `${countRate}`
+  ).every((value) => value);
 
   return {
     completed,
     countRate,
     setCountRate,
-    listQuestionnaireAccordionTypeA,
     listQuestionnaireAccordionTypeB,
+    updateRateReview,
+    completeFileFunc,
+    loading,
   };
 };
 
-export default useQuestionnaire;
+export default useQuestionnaireTypeB;

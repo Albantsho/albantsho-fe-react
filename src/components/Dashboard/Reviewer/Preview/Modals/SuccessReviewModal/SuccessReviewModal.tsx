@@ -2,7 +2,7 @@ import success from "@assets/images/success.png";
 import { Grow, IconButton, Modal, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
 interface IProps {
@@ -14,8 +14,6 @@ const SuccessReviewModal = ({
   setOpenSuccessReview,
   openSuccessReview,
 }: IProps) => {
-  const { push } = useRouter();
-
   const handleCloseSuccessReview = () => setOpenSuccessReview(false);
   return (
     <Modal
@@ -46,14 +44,11 @@ const SuccessReviewModal = ({
           <Typography variant="body1" className="text-center text-[#484848]">
             Thanks for your professional review
           </Typography>
-
-          <Btn
-            onClick={() => push(routes.projectsDashboard.url)}
-            size="medium"
-            className="mt-4 sm:mt-6 py-3 px-6"
-          >
-            Back to dashboard
-          </Btn>
+          <Link passHref legacyBehavior href={routes.reviewerDashboard.url}>
+            <Btn size="medium" className="mt-4 sm:mt-6 py-3 px-6">
+              Back to dashboard
+            </Btn>
+          </Link>
         </div>
       </Grow>
     </Modal>

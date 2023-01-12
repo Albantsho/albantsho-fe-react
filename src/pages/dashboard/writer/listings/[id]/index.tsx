@@ -55,6 +55,7 @@ const ScriptSlug: NextPageWithLayout = () => {
           setLoading(false);
           const res = await getAllBids(query.id);
           const scriptRes = await getScript(query.id);
+          console.log(res);
 
           setBidsList(res.data.scriptBids);
           setScript(scriptRes.data.script);

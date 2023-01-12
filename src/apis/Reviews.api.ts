@@ -41,10 +41,10 @@ const useReviewsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async completingReview(reviewId: string) {
+    async completingReview(reviewId: string, payload: { completed: boolean }) {
       const res = await axiosPrivate.patch(
         `/review/complete/${reviewId}`,
-        {},
+        payload,
         {
           signal: controller?.signal,
         }
@@ -145,7 +145,7 @@ const useReviewsApi = (controller?: AbortController) => {
     },
 
     async getWriterReviewRequests(query: string) {
-      const res = await axiosPrivate.get(`/review/scripts?limit=10&${query}`, {
+      const res = await axiosPrivate.get(`/review/scripts?${query}`, {
         signal: controller?.signal,
       });
 

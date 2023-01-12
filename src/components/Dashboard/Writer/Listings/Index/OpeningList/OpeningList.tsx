@@ -1,10 +1,12 @@
 import { Paper, Typography } from "@mui/material";
 import useScriptsApi from "apis/Scripts.api";
 import { IBidScript } from "interfaces/script";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import OpeningBidScript from "./OpeningBidScript/OpeningBidScript";
+import emptyBlogs from "@assets/images/empty-blogs.png";
 
 interface IProps {
   searchQuery: string;
@@ -21,6 +23,7 @@ const OpeningList = ({ searchQuery }: IProps) => {
         setLoading(true);
         const res = await getWriterAllPublishedScripts(searchQuery);
         setListedScripts(res.data.scripts);
+        console.log(res);
         setLoading(false);
       } catch (error) {
         errorHandler(error);
@@ -33,7 +36,7 @@ const OpeningList = ({ searchQuery }: IProps) => {
 
   return loading ? (
     <DotLoader color="#7953B5" className="mx-auto mt-10" />
-  ) : (
+  ) : listedScripts.length > 0 ? (
     <Paper elevation={0} className="mt-4 bg-white mb-16 shadow-primary">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
         <Typography
@@ -51,7 +54,7 @@ const OpeningList = ({ searchQuery }: IProps) => {
         </Typography>
         <Typography
           variant="h6"
-          className="futura hidden sm:block self-start md:mx-auto  lg:ml-0 xl:ml-20 xl:mr-0 md:text-center lg:text-star font-medium text-primary-700"
+          className="futura hidden sm:block self-start md:mx-auto  lg:ml-0 xl:ml-28 xl:mr-0 md:text-center lg:text-star font-medium text-primary-700"
         >
           Bids
         </Typography>
@@ -60,6 +63,7 @@ const OpeningList = ({ searchQuery }: IProps) => {
         {listedScripts.map((script, index) => (
           <OpeningBidScript
             key={script._id}
+            setListedScript={setListedScripts}
             scripts={listedScripts}
             script={script}
             index={index}
@@ -67,6 +71,17 @@ const OpeningList = ({ searchQuery }: IProps) => {
         ))}
       </div>
     </Paper>
+  ) : (
+    <div className="flex items-center">
+      <Image
+        width={384}
+        height={384}
+        loading="lazy"
+        className="w-fit h-fit mx-auto mt-14 lg:mt-24"
+        src={emptyBlogs}
+        alt="empty blog list"
+      />
+    </div>
   );
 };
 

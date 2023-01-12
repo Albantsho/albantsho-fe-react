@@ -1,6 +1,7 @@
 import { Divider, Tab, Tabs } from "@mui/material";
 import { IReviewerTask } from "interfaces/reviews";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import ScriptCart from "../ScriptCart/ScriptCart";
 import Task from "./Task/Task";
 
@@ -13,12 +14,18 @@ const TasksList = ({ reviewerTaskList }: IProps) => {
   const [selectedScriptId, setSelectedScriptId] = useState(
     reviewerTaskList && reviewerTaskList[0] ? reviewerTaskList[0]._id : "1"
   );
+  const { query, push } = useRouter();
 
   console.log(reviewerTaskList);
 
   const activeLinkChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveLinkIndex(newValue);
   };
+
+  useEffect(() => {
+    if (query.reviewed === "false") setActiveLinkIndex(0);
+    if (query.reviewed === "true") setActiveLinkIndex(1);
+  }, [query]);
 
   return (
     <>
@@ -41,6 +48,7 @@ const TasksList = ({ reviewerTaskList }: IProps) => {
           }}
         >
           <Tab
+            onClick={() => push("?reviewed=false")}
             sx={{
               "&.MuiButtonBase-root": {
                 flex: { xs: 1 },
@@ -52,6 +60,7 @@ const TasksList = ({ reviewerTaskList }: IProps) => {
             label="Tasks"
           />
           <Tab
+            onClick={() => push("?reviewed=true")}
             sx={{
               "&.MuiButtonBase-root": {
                 flex: { xs: 1 },

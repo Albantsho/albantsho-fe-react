@@ -2,7 +2,7 @@ import useWalletApi from "apis/Wallet.api";
 import { useEffect, useState } from "react";
 import errorHandler from "utils/error-handler";
 
-const useMobileNavMobile = () => {
+const useWalletNavOnMobile = () => {
   const [open, setOpen] = useState(false);
   const [balance, setBalance] = useState(0);
   const { getWalletBalance } = useWalletApi();
@@ -29,4 +29,4 @@ const useMobileNavMobile = () => {
   };
 };
 
-export default useMobileNavMobile;
+export default useWalletNavOnMobile;
