@@ -24,8 +24,6 @@ const SendReviewModal = ({
   const sendReviewAsEmail = async () => {
     try {
       const res = await sendReviewToWriterEmail(reviewId);
-      console.log(res);
-
       setOpenSendReview(false);
       setOpenSuccessReview(true);
     } catch (error) {

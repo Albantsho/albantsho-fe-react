@@ -10,8 +10,6 @@ interface IProps {
 }
 
 const UncompletedList = ({ unCompletedScripts }: IProps) => {
-  console.log(unCompletedScripts);
-
   return unCompletedScripts.length > 0 ? (
     <Paper elevation={0} className="mt-4 sm:mt-6 shadow-primary bg-white">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">

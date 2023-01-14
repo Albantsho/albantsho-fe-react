@@ -23,7 +23,6 @@ const OpeningList = ({ searchQuery }: IProps) => {
         setLoading(true);
         const res = await getWriterAllPublishedScripts(searchQuery);
         setListedScripts(res.data.scripts);
-        console.log(res);
         setLoading(false);
       } catch (error) {
         errorHandler(error);

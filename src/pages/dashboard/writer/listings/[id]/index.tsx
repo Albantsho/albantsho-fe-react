@@ -55,8 +55,6 @@ const ScriptSlug: NextPageWithLayout = () => {
           setLoading(false);
           const res = await getAllBids(query.id);
           const scriptRes = await getScript(query.id);
-          console.log(res);
-
           setBidsList(res.data.scriptBids);
           setScript(scriptRes.data.script);
           setLoading(false);
@@ -90,8 +88,11 @@ const ScriptSlug: NextPageWithLayout = () => {
                   openCreateScript={openCreateScript}
                   setOpenCreateScript={setOpenCreateScript}
                 />
-
-                <AuctionsScripts bidsList={bidsList} />
+                <AuctionsScripts
+                  script={script}
+                  bidsList={bidsList}
+                  setBidsList={setBidsList}
+                />
               </Suspense>
             </div>
             <Fab

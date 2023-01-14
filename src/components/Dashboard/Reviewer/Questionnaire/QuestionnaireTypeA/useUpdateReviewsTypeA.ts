@@ -43,7 +43,6 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           { introduction: reviewTypeAValues.current.introduction },
           reviewValuesTypeA._id
         );
-        console.log(res);
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -59,7 +58,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           { plot: reviewTypeAValues.current.plot },
           reviewValuesTypeA._id
         );
-        console.log(res);
+
         toast.success(res.message);
       } catch (error) {
         errorHandler(error);
@@ -76,7 +75,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           { character: reviewTypeAValues.current.character },
           reviewValuesTypeA._id
         );
-        console.log(res);
+
         toast.success(res.message);
       } catch (error) {
         errorHandler(error);
@@ -96,7 +95,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           },
           reviewValuesTypeA._id
         );
-        console.log(res);
+
         toast.success(res.message);
       } catch (error) {
         errorHandler(error);
@@ -113,7 +112,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           { dialogue: reviewTypeAValues.current.dialogue },
           reviewValuesTypeA._id
         );
-        console.log(res);
+
         toast.success(res.message);
       } catch (error) {
         errorHandler(error);
@@ -130,7 +129,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           { storyQuality: reviewTypeAValues.current.storyQuality },
           reviewValuesTypeA._id
         );
-        console.log(res);
+
         toast.success(res.message);
       } catch (error) {
         errorHandler(error);
@@ -147,7 +146,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           { suggestions: reviewTypeAValues.current.suggestions },
           reviewValuesTypeA._id
         );
-        console.log(res);
+
         toast.success(res.message);
       } catch (error) {
         errorHandler(error);
@@ -160,12 +159,11 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
     (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => async () => {
       try {
         setLoading(true);
-        console.log(countRate);
         const res = await updateReview(
           { rate: `${countRate}` },
           reviewValuesTypeA._id
         );
-        console.log(res);
+
         toast.success(res.message);
       } catch (error) {
         errorHandler(error);
@@ -195,7 +193,6 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
         completed: true,
       });
       push(routes.reviewerDashboardPreviewTypeA.dynamicUrl(query.id as string));
-      console.log(res);
     } catch (error) {
       errorHandler(error);
     } finally {

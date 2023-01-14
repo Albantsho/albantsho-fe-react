@@ -15,9 +15,6 @@ const TasksList = ({ reviewerTaskList }: IProps) => {
     reviewerTaskList && reviewerTaskList[0] ? reviewerTaskList[0]._id : "1"
   );
   const { query, push } = useRouter();
-
-  console.log(reviewerTaskList);
-
   const activeLinkChange = (event: React.SyntheticEvent, newValue: number) => {
     setActiveLinkIndex(newValue);
   };

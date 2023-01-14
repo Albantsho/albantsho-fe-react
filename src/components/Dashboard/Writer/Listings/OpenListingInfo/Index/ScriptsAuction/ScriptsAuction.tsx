@@ -14,6 +14,7 @@ import {
 import AcceptOfferModal from "@shared/Modals/AcceptOfferModal/AcceptOfferModal";
 import useScripBidApi from "apis/ScripBid.api";
 import { IBidForScript } from "interfaces/bid";
+import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -22,10 +23,12 @@ import routes from "routes/routes";
 
 interface IProps {
   bidsList: IBidForScript[];
+  setBidsList: React.Dispatch<React.SetStateAction<IBidForScript[]>>;
+  script: IFullInformationScript;
 }
 
-const ScriptsAuction = ({ bidsList }: IProps) => {
-  const { query, push } = useRouter();
+const ScriptsAuction = ({ bidsList, script, setBidsList }: IProps) => {
+  const { query, push, replace } = useRouter();
   const { rejectBid } = useScripBidApi();
   const [openAcceptOffer, setOpenAcceptOffer] = useState<boolean>(false);
 
@@ -38,6 +41,7 @@ const ScriptsAuction = ({ bidsList }: IProps) => {
 
   const rejectOfferFunc = (id: string) => async () => {
     await rejectBid(id);
+    setBidsList((prev) => prev.filter((b) => b._id !== id));
   };
 
   return (
@@ -155,12 +159,12 @@ const ScriptsAuction = ({ bidsList }: IProps) => {
                     </div>
                   </TableCell>
                 </TableRow>
-                {/* <AcceptOfferModal
-                  script={script}
+                <AcceptOfferModal
+                  title={script.title}
                   auction={auction}
                   openAcceptOffer={openAcceptOffer}
                   setOpenAcceptOffer={setOpenAcceptOffer}
-                /> */}
+                />
               </React.Fragment>
             ))}
           </TableBody>

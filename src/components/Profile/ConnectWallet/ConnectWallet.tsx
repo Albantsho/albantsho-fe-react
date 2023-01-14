@@ -8,9 +8,6 @@ const ConnectWallet = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [defaultAccount, setDefaultAccount] = useState("");
   const [userBalance, setUserBalance] = useState("");
-  console.log(errorMessage);
-  console.log(defaultAccount);
-  console.log(userBalance);
 
   const connectWallet = async () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -25,7 +22,7 @@ const ConnectWallet = () => {
         setDefaultAccount(allAccounts[0]);
         getUserBalanceAccount(defaultAccount);
       } catch (error) {
-        console.log(error);
+        ("");
       }
     } else {
       setErrorMessage("Please Install Metamask");

@@ -2,6 +2,7 @@ import { Typography, Button } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import useScripBidApi from "apis/ScripBid.api";
+import useUserStore from "app/user.store";
 import { IBidInMarketplace } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
 import { useState } from "react";
@@ -19,6 +20,8 @@ interface IProps {
 const PlaceBid = ({ setOpenBidSuccessful, script, bid, setBid }: IProps) => {
   const [bidValue, setBidValue] = useState("");
   const { createBid, deleteBid } = useScripBidApi();
+  const user = useUserStore((state) => state.user);
+
   const handleBidValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const result = e.target.value.replace(/\D/g, "");
     setBidValue(result);
@@ -68,23 +71,29 @@ const PlaceBid = ({ setOpenBidSuccessful, script, bid, setBid }: IProps) => {
           placeholder="Enter Bid"
           type="tel"
         />
-        {!bid ? (
-          <Btn
-            onClick={handleOpenBidSuccessful}
-            size="small"
-            className="mr-auto py-3 px-4"
-          >
-            Place Bid
-          </Btn>
+        {user.emailVerified ? (
+          <>
+            {!bid && user.userType === "producer" ? (
+              <Btn
+                onClick={handleOpenBidSuccessful}
+                size="small"
+                className="mr-auto py-3 px-4"
+              >
+                Place Bid
+              </Btn>
+            ) : (
+              <Button
+                variant="outlined"
+                onClick={handleCloseBidSuccessful}
+                size="small"
+                className="mr-auto py-3 px-4"
+              >
+                Withdraw Bid
+              </Button>
+            )}
+          </>
         ) : (
-          <Button
-            variant="outlined"
-            onClick={handleCloseBidSuccessful}
-            size="small"
-            className="mr-auto py-3 px-4"
-          >
-            Withdraw Bid
-          </Button>
+          <Typography>Please First login</Typography>
         )}
       </div>
     </div>

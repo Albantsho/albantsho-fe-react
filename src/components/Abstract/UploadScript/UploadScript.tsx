@@ -69,7 +69,6 @@ const UploadScript = ({
     async function getOtherDrafts() {
       try {
         const res = await getAllDraft();
-        console.log(res);
         results = res.data.drafts;
       } catch (error) {
         errorHandler(error);

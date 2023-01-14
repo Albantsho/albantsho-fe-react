@@ -36,7 +36,6 @@ const useNotificationComponent = () => {
       copiedNotificationList[findReadiedNotificationIndex].read = true;
       setNotificationsList(copiedNotificationList);
       toast.success(res.message);
-      console.log(res);
     } catch (error) {
       errorHandler(error);
     }
@@ -47,7 +46,6 @@ const useNotificationComponent = () => {
       const res = await deleteNotification(id);
       setNotificationsList(notificationsList.filter((n) => n._id !== id));
       toast.success(res.message);
-      console.log(res);
     } catch (error) {
       errorHandler(error);
     }
@@ -59,7 +57,6 @@ const useNotificationComponent = () => {
         setNotificationsList([]);
         setLoading(true);
         const res = await getAllNotifications();
-        console.log(res);
         setNotificationsList(res.data.notifications);
         const resInvites = await allInvite();
         setAllInvites(resInvites.data.invites);

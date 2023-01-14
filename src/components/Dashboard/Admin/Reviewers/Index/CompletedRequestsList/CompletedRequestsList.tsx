@@ -32,8 +32,6 @@ const CompletedRequestsList = ({ searchQuery }: IProps) => {
         setCompletedRequestList([]);
         setLoading(true);
         const res = await getCompletedRequestedReviews(searchQuery);
-        console.log(res);
-
         setCompletedRequestList(res.data.scripts);
         setLoading(false);
       } catch (error) {

@@ -5,13 +5,15 @@ import useScripBidApi from "apis/ScripBid.api";
 import { IBidForScript } from "interfaces/bid";
 import { IProduct } from "interfaces/product";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
+import routes from "routes/routes";
 import acceptOffer from "./assets/accept-offer.png";
 
 interface IProps {
   openAcceptOffer: boolean;
   setOpenAcceptOffer: React.Dispatch<React.SetStateAction<boolean>>;
-  script: IProduct;
+  title: string;
   auction: IBidForScript;
 }
 
@@ -19,13 +21,15 @@ const AcceptOfferModal = ({
   openAcceptOffer,
   setOpenAcceptOffer,
   auction,
-  script,
+  title,
 }: IProps) => {
   const { acceptBid } = useScripBidApi();
+  const { replace } = useRouter();
 
   const handleCloseAcceptOffer = () => setOpenAcceptOffer(false);
   const acceptOfferFunc = (id: string) => async () => {
     const res = await acceptBid(id);
+    replace(routes.writerDashboard.url);
   };
 
   return (
@@ -58,7 +62,7 @@ const AcceptOfferModal = ({
             color="primary.700"
             variant="h5"
           >
-            {script.title}
+            {title}
           </Typography>
           <Typography
             className="text-center mt-3 lg:mt-6 leading-normal  futura font-semibold"

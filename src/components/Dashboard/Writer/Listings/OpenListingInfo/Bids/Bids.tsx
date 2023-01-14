@@ -1,7 +1,10 @@
 import ReviewedIcon from "@assets/icons/reviewed.svg";
 import { Button, Chip, Divider, SvgIcon, Typography } from "@mui/material";
+import useScripBidApi from "apis/ScripBid.api";
 import { IBidForScript } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
+import { useRouter } from "next/router";
+import routes from "routes/routes";
 
 interface IProps {
   setOpenAcceptOffer: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,6 +13,14 @@ interface IProps {
 }
 
 const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
+  const { replace } = useRouter();
+  const { rejectBid } = useScripBidApi();
+
+  const rejectOfferFunc = (id: string) => async () => {
+    await rejectBid(id);
+    replace(routes.writerDashboard.url);
+  };
+
   return (
     <>
       <div className="bg-white shadow-primary my-4 md:my-6 py-4 sm:py-8 lg:py-12 xl:py-16 px-5 sm:px-8 lg:px-8 xl:px-20 rounded-md">
@@ -92,6 +103,7 @@ const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
                 Accept Offer
               </Button>
               <Button
+                onClick={rejectOfferFunc(bid._id)}
                 sx={{ "&.MuiButtonBase-root": { fontWeight: 600 } }}
                 size="large"
                 variant="text"

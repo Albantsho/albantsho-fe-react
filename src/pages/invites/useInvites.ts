@@ -14,7 +14,6 @@ const useInvites = () => {
       try {
         setLoading(true);
         const res = await allInvite();
-        console.log(res);
         setInvitesList(res.data.invites);
         setLoading(false);
       } catch (error) {
@@ -28,7 +27,6 @@ const useInvites = () => {
   const acceptInviteFunc = (inviteId: string) => async () => {
     try {
       const res = await acceptInvite(inviteId);
-      console.log(res);
       const copiedInvitesList = [...invitesList];
       const copiedInvitedIndex = invitesList.findIndex(
         (n) => n._id === inviteId
@@ -45,7 +43,6 @@ const useInvites = () => {
     try {
       const res = await rejectInvite(inviteId);
       setInvitesList(invitesList.filter((i) => i._id !== inviteId));
-      console.log(res);
       toast.success(res.message);
     } catch (error) {
       errorHandler(error);

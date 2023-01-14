@@ -12,7 +12,6 @@ interface IProps {
 const DesktopNav = ({ links }: IProps) => {
   const user = useUserStore((state) => state.user);
   const { route } = useRouter();
-  console.log("🚀 ~ file: DesktopNav.tsx:27 ~ DesktopNav ~ router", route);
 
   return (
     <>

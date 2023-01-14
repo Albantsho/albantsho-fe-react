@@ -19,8 +19,6 @@ const ExportFile = ({ script }: IProps) => {
       "text/html"
     );
     const value = deserializeScriptWithOutDiv(htmlContent.body);
-    console.log({ children: value });
-
     const valueForConvertPdf = serializeWithoutDiv({ children: value });
     const doc = new jsPDF("p", "pt", "a4");
     if (valueForConvertPdf) {

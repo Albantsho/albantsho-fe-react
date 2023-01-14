@@ -27,7 +27,6 @@ const CurrentBids = ({ bidsList, setBidsList }: IProps) => {
     try {
       const res = await deleteBid(bidId);
       setBidsList((prev) => prev.filter((b) => b._id !== bidId));
-      console.log(res);
     } catch (error) {
       errorHandler(error);
     }

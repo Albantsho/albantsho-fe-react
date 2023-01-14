@@ -44,7 +44,6 @@ const ScriptsSearch = ({ showSearchScript, openSearchScript }: IProps) => {
     async function getOtherDrafts() {
       try {
         const res = await getAllDraft();
-        console.log(res);
         scriptsList = res.data.drafts;
       } catch (error) {
         errorHandler(error);

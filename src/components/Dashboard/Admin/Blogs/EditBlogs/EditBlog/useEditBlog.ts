@@ -58,7 +58,6 @@ const useEditBlog = ({
   };
 
   let initialValue: CustomElement[] = deserializeBlogContent(htmlContent.body);
-  console.log(deserializeBlogContent(htmlContent.body));
 
   const onSubmit = async (data: IEditWeblogFormValues) => {
     try {

@@ -22,8 +22,6 @@ const Reviewer = () => {
       try {
         setLoading(true);
         const res = await getAllReviewerTasks(questString.stringify(query));
-        console.log(res);
-
         setReviewerTaskList(res.data.scripts);
         setLoading(false);
       } catch (error) {

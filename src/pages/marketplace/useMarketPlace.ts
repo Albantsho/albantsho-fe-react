@@ -20,8 +20,6 @@ const useMarketPlace = () => {
       try {
         setLoading(true);
         const res = await getAllScripts(queryString.stringify(query));
-        console.log(res);
-
         setScripts(res.data.scripts);
         setPageCount(res.data.pagesCount);
         setCurrentPage(res.data.currentPage);

@@ -24,8 +24,6 @@ const Reviews: NextPageWithLayout = () => {
         setReviewsList([]);
         setLoading(true);
         const res = await getWriterReviewRequests(queryString.stringify(query));
-        console.log(res);
-
         setReviewsList(res.data.scripts);
         setLoading(false);
       } catch (error) {

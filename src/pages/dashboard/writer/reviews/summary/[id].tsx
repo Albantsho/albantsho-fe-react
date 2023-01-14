@@ -22,7 +22,6 @@ const SummaryPage: NextPageWithLayout = () => {
         if (typeof query.id === "string") {
           const res = await getScript(query.id as string);
           setScript(res.data.script);
-          console.log(res);
           setLoading(false);
         }
       } catch (error) {
@@ -32,8 +31,6 @@ const SummaryPage: NextPageWithLayout = () => {
 
     getScriptFunc();
   }, [query]);
-
-  console.log(query);
 
   return (
     <>

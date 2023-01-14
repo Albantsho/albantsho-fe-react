@@ -27,12 +27,10 @@ const OneReviewPage: NextPageWithLayout = () => {
         if (typeof query.id === "string") {
           setLoading(true);
           const res = await getOneReview(query.id);
-          console.log(res);
           setReviewInformation(res.data);
           setLoading(false);
         }
       } catch (error) {
-        console.log(error);
         errorHandler(error);
       }
     }

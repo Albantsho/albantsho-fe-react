@@ -282,7 +282,6 @@ const useUpdateReviewsTypeB = ({ reviewValuesTypeB }: IProps) => {
         completed: true,
       });
       push(routes.reviewerDashboardPreviewTypeB.dynamicUrl(query.id as string));
-      console.log(res);
     } catch (error) {
       errorHandler(error);
     } finally {

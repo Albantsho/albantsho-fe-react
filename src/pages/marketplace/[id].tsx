@@ -1,6 +1,9 @@
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
+import useAuthApi from "apis/Auth.api";
+import { apiPrivate } from "apis/configs/axios.config";
 import useScriptsApi from "apis/Scripts.api";
+import useUserStore from "app/user.store";
 import ScriptInfo from "components/Marketplace/MarketScript/ScriptInfo/ScriptInfo";
 import { IBidInMarketplace } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
@@ -39,15 +42,17 @@ const ScriptInfoPage = () => {
   const [loading, setLoading] = useState(true);
   const { getScript } = useScriptsApi();
   const { query } = useRouter();
+  const setAccessToken = useUserStore((state) => state.setAccessToken);
 
   useEffect(() => {
     async function getScriptsDate() {
       try {
         if (typeof query.id === "string") {
+          const response = await apiPrivate.post("/user/refresh", {});
+          setAccessToken(response.data.data.accessToken);
           const res = await getScript(query.id as string);
           setScript(res.data.script);
           setBid(res.data.bid);
-          console.log(res);
           setLoading(false);
         }
       } catch (error) {
@@ -61,7 +66,7 @@ const ScriptInfoPage = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Marketplace Info</title>
+        <title>Albantsho || {script?.title}</title>
       </Head>
       <Nav color="inherit" position="static" />
       {!loading && script ? (

@@ -24,12 +24,11 @@ const Script: NextPageWithLayout = () => {
           const res = await getScript(query.id as string);
           setScript(res.data.script);
           const resDraft = await getOneDraft(query.id as string);
-          console.log(resDraft.data.draft);
           if (resDraft.data.draft) setHtmlInitialValue(resDraft.data.draft);
           setLoading(false);
         }
       } catch (error) {
-        console.log(error);
+        ("");
       }
     }
     getScriptsData();

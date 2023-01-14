@@ -61,10 +61,10 @@ const useDeposit = () => {
         transactionId: `${response.transaction_id}`,
         paymentPlatform: "bank",
       });
-      replace(routes.wallet.url);
       closePaymentModal(); // this will close the modal programmatically
+      replace(routes.wallet.url);
     } catch (error) {
-      console.log(error);
+      ("");
     }
   };
 
@@ -75,11 +75,10 @@ const useDeposit = () => {
         callback: paymentResponse,
         onClose: () => {
           toast.error("payment Field or canceled, please try again");
-          console.log("close");
         },
       });
     } catch (error) {
-      console.log(error);
+      ("");
     } finally {
       setLoading(false);
     }

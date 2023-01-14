@@ -57,27 +57,23 @@ const Subscription = () => {
   const handleFlutterPayment = useFlutterwave(config);
 
   const paymentResponse = async (response: FlutterWaveResponse) => {
-    console.log(response);
-
     try {
       // const resIncreaseWalletBalance = await increaseWalletBalance(
       //   `${response.transaction_id}`,
       //   { transactionId: `${response.transaction_id}` }
       // );
-      // console.log(resIncreaseWalletBalance);
-      const res = await buySubscriptionPlan({
+      await buySubscriptionPlan({
         transactionId: `${response.transaction_id}`,
       });
-      console.log(res);
       replace(
         routes.marketPlaceSubscriptionSuccessful.dynamicUrl(
           `${response.transaction_id}`
         )
       );
+      closePaymentModal(); // this will close the modal programmatically
     } catch (error) {
-      console.log(error);
+      ("");
     }
-    closePaymentModal(); // this will close the modal programmatically
   };
 
   const paymentBuyingSubscriptionPlan = () => {
@@ -87,11 +83,10 @@ const Subscription = () => {
         callback: paymentResponse,
         onClose: () => {
           toast.error("payment Field or canceled, please try again");
-          console.log("close");
         },
       });
     } catch (error) {
-      console.log(error);
+      ("");
     } finally {
       setLoading(false);
     }

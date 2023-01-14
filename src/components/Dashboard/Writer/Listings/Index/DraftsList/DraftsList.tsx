@@ -35,8 +35,6 @@ const DraftsList = ({ searchQuery }: IProps) => {
         const resUnCompleted = await getWriterAllInCompletedScripts(
           searchQuery
         );
-        console.log(resUnCompleted);
-
         setUnCompletedScripts(resUnCompleted.data.scripts);
         setLoading(false);
       } catch (error) {

@@ -30,14 +30,10 @@ const InformationReviewPage: NextPageWithLayout = () => {
           const res = await getAllReviewers();
           const resScript = await getScript(query.id);
           setScript(resScript.data.script);
-          console.log(res);
-
           setReviewersList(res.data.reviewers);
           setLoading(false);
         }
       } catch (error) {
-        console.log(error);
-
         errorHandler(error);
       }
     }

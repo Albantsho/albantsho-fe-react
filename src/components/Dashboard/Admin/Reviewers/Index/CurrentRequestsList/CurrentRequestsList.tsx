@@ -32,7 +32,6 @@ const CurrentRequestsList = ({ searchQuery }: IProps) => {
         setCurrentRequestsList([]);
         setLoading(true);
         const res = await getAllRequestedReviews(searchQuery);
-        console.log(res);
         setCurrentRequestsList(res.data.scripts);
         setLoading(false);
       } catch (error) {

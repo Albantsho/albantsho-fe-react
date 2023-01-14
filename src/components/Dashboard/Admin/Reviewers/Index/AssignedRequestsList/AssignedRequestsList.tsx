@@ -32,8 +32,6 @@ const AssignedRequestsList = ({ searchQuery }: IProps) => {
         setAssignedRequestList([]);
         setLoading(true);
         const res = await getAssignedRequestedReviews(searchQuery);
-        console.log(res);
-
         setAssignedRequestList(res.data.scripts);
         setLoading(false);
       } catch (error) {

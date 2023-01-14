@@ -44,7 +44,6 @@ const Summary = ({ script }: IProps) => {
   const handleFlutterPayment = useFlutterwave(config);
 
   const responsePayment = async (response: FlutterWaveResponse) => {
-    console.log(response);
     try {
       const res = await buyReviewsPlan({
         plan:
@@ -56,15 +55,13 @@ const Summary = ({ script }: IProps) => {
         scriptId: script._id,
         transactionId: `${response.transaction_id}`,
       });
-      console.log(res);
+      closePaymentModal(); // this will close the modal programmatically
       replace(
         routes.reviewsPaymentSuccessful.dynamicUrl(`${response.transaction_id}`)
       );
     } catch (error) {
       errorHandler(error);
-      console.log(error);
     }
-    closePaymentModal(); // this will close the modal programmatically
   };
 
   const paymentBuyingReviewPlan = () => {
@@ -74,11 +71,10 @@ const Summary = ({ script }: IProps) => {
         callback: responsePayment,
         onClose: () => {
           toast.error("payment Field or canceled, please try again");
-          console.log("close");
         },
       });
     } catch (error) {
-      console.log(error);
+      ("");
     } finally {
       setLoading(false);
     }

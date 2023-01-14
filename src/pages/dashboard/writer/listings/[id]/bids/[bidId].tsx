@@ -51,8 +51,6 @@ const BidsPage: NextPageWithLayout = () => {
           setLoading(true);
           const resScript = await getScript(query.id);
           const res = await getBidScript(query.bidId);
-          console.log(res, resScript);
-
           setScript(resScript.data.script);
           setBid(res.data.scriptBid);
           setLoading(false);
@@ -88,10 +86,12 @@ const BidsPage: NextPageWithLayout = () => {
               openCreateScript={openCreateScript}
               setOpenCreateScript={setOpenCreateScript}
             />
-            {/* <AcceptOfferModal
+            <AcceptOfferModal
+              title={script.title}
+              auction={bid}
               openAcceptOffer={openAcceptOffer}
               setOpenAcceptOffer={setOpenAcceptOffer}
-            /> */}
+            />
           </Suspense>
           <Fab
             onClick={() => setOpenCreateScript(true)}
