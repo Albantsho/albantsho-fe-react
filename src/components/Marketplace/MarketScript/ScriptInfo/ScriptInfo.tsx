@@ -4,7 +4,8 @@ import CustomRating from "@shared/CustomRating/CustomRating";
 import { IBidInMarketplace } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { priceConverter } from "utils/price-convert";
 import BidSuccessfulModal from "../BidSuccessfulModal/BidSuccessfulModal";
 import PlaceBid from "./PlaceBid/PlaceBid";
 
@@ -18,6 +19,16 @@ interface IProps {
 
 const ScriptInfo = ({ script, bid, setBid }: IProps) => {
   const [openBidSuccessful, setOpenBidSuccessful] = useState(false);
+  const [ethPrice, setEthPrice] = useState<number | false | null>(null);
+  console.log(ethPrice);
+
+  useEffect(() => {
+    async function getETHPrice() {
+      const price = await priceConverter();
+      setEthPrice(price.USDT.ETH(script.price));
+    }
+    getETHPrice();
+  }, []);
 
   return (
     <div className="flex flex-col px-6 py-6 sm:px-11 gap-10 md:flex-row max-w-screen-2xl mx-auto">
@@ -55,6 +66,7 @@ const ScriptInfo = ({ script, bid, setBid }: IProps) => {
           {script.tagline}
         </Typography>
         <PlaceBid
+          ethPrice={ethPrice}
           bid={bid}
           setBid={setBid}
           script={script}

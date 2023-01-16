@@ -8,11 +8,11 @@ interface IPayloadIncreaseWalletBalance {
 interface IPayloadWithdrawWallet {
   amount: string;
   method: string;
-  withdrawPlatform?: string;
-  bank?: string;
+  bankAccountName?: string;
   bankName?: string;
+  bankAccountNumber?: string;
   network?: string;
-  address?: string;
+  usdtTrc20Address?: string;
 }
 
 const useWalletApi = (controller?: AbortController) => {

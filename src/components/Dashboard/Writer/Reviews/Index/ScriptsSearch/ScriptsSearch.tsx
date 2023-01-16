@@ -15,7 +15,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import routes from "routes/routes";
-import errorHandler from "utils/error-handler";
 
 interface ScriptsOptionType {
   inputValue?: string;
@@ -46,7 +45,7 @@ const ScriptsSearch = ({ showSearchScript, openSearchScript }: IProps) => {
         const res = await getAllDraft();
         scriptsList = res.data.drafts;
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

@@ -119,9 +119,12 @@ const useAbstract = (script: IScript) => {
           query.id as string,
           "publish=true"
         );
-        await updateScriptImage(query.id as string, {
-          image: data.image[0],
-        });
+        {
+          data.image[0] &&
+            (await updateScriptImage(query.id as string, {
+              image: data.image[0],
+            }));
+        }
 
         if (adaption) {
           await updateAdaptionPermission(query.id as string, {
@@ -174,9 +177,12 @@ const useAbstract = (script: IScript) => {
           },
           query.id as string
         );
-        await updateScriptImage(query.id as string, {
-          image: data.image[0],
-        });
+        {
+          data.image[0] &&
+            (await updateScriptImage(query.id as string, {
+              image: data.image[0],
+            }));
+        }
 
         if (adaption) {
           await updateAdaptionPermission(query.id as string, {

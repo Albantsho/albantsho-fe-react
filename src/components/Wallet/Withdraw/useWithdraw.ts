@@ -39,8 +39,9 @@ const useWithdraw = () => {
   const onSubmit = async (data: IWithdrawFormValues) => {
     try {
       setLoading(true);
-      withdrawWallet(data);
-      replace(routes.wallet.url);
+      const res = await withdrawWallet(data);
+      console.log(res);
+      // replace(routes.wallet.url);
     } catch (error) {
       errorHandler(error);
     } finally {

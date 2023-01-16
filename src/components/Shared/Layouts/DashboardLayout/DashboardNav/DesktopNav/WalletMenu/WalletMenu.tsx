@@ -17,7 +17,6 @@ import { IoIosMore } from "react-icons/io";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
 import routes from "routes/routes";
-import errorHandler from "utils/error-handler";
 
 const WalletMenu = () => {
   const { push } = useRouter();
@@ -41,7 +40,7 @@ const WalletMenu = () => {
         const res = await getWalletBalance();
         setBalance(res.data.balance);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

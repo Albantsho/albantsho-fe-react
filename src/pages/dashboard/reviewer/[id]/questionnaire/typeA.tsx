@@ -1,13 +1,12 @@
-import Head from "next/head";
 import ProfileNav from "@shared/ProfileNav/ProfileNav";
 import useReviewsApi from "apis/Reviews.api";
+import QuestionnaireTypeA from "components/Dashboard/Reviewer/Questionnaire/QuestionnaireTypeA/QuestionnaireTypeA";
+import { IReviewValuesTypeA } from "interfaces/reviews";
 import { IScriptReviewer } from "interfaces/script";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
-import QuestionnaireTypeA from "components/Dashboard/Reviewer/Questionnaire/QuestionnaireTypeA/QuestionnaireTypeA";
-import { IReviewValuesTypeA } from "interfaces/reviews";
 
 const TypeA = () => {
   const { query } = useRouter();
@@ -28,7 +27,7 @@ const TypeA = () => {
           setLoading(false);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getReviewValues();

@@ -4,7 +4,9 @@ import useScripBidApi from "apis/ScripBid.api";
 import { IBidForScript } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import routes from "routes/routes";
+import { priceConverter } from "utils/price-convert";
 
 interface IProps {
   setOpenAcceptOffer: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,11 +17,20 @@ interface IProps {
 const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
   const { replace } = useRouter();
   const { rejectBid } = useScripBidApi();
+  const [ethPrice, setEthPrice] = useState<number | false | null>(null);
 
   const rejectOfferFunc = (id: string) => async () => {
     await rejectBid(id);
     replace(routes.writerDashboard.url);
   };
+
+  useEffect(() => {
+    async function getETHPrice() {
+      const price = await priceConverter();
+      setEthPrice(price.USDT.ETH(script.price));
+    }
+    getETHPrice();
+  }, []);
 
   return (
     <>
@@ -71,7 +82,7 @@ const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
                   ${script.price}
                 </Typography>
                 <Typography variant="body1" color="primary.700">
-                  (0.0237 ETH)
+                  ({ethPrice} ETH)
                 </Typography>
               </div>
             </div>

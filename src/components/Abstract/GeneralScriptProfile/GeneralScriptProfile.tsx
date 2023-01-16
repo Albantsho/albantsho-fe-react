@@ -374,6 +374,7 @@ const GeneralScriptProfile = ({
                 error={Boolean(errors.primaryCast) || false}
                 select
                 fullWidth
+                SelectProps={{ MenuProps: { className: "max-h-[250px]" } }}
                 size="small"
                 sx={{
                   "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
@@ -390,9 +391,13 @@ const GeneralScriptProfile = ({
                 defaultValue={script.primaryCast ? script.primaryCast : "200"}
                 id="cast-script-primary"
               >
-                <MenuItem value="200">
-                  <ListItemText className="text-primary-700">200</ListItemText>
-                </MenuItem>
+                {Array.from(new Array(300)).map((_, i) => (
+                  <MenuItem key={i} value={i + 1}>
+                    <ListItemText className="text-primary-700">
+                      {i + 1}
+                    </ListItemText>
+                  </MenuItem>
+                ))}
               </CustomInput>
             )}
           />
@@ -415,6 +420,7 @@ const GeneralScriptProfile = ({
                 error={Boolean(errors.secondaryCast) || false}
                 select
                 fullWidth
+                SelectProps={{ MenuProps: { className: "max-h-[250px]" } }}
                 size="small"
                 sx={{
                   "& .MuiOutlinedInput-input": { py: 1.5, minWidth: "135px" },
@@ -433,9 +439,13 @@ const GeneralScriptProfile = ({
                   script.secondaryCast ? script.secondaryCast : "50"
                 }
               >
-                <MenuItem value="50">
-                  <ListItemText className="text-primary-700">50</ListItemText>
-                </MenuItem>
+                {Array.from(new Array(300)).map((_, i) => (
+                  <MenuItem key={i} value={i + 1}>
+                    <ListItemText className="text-primary-700">
+                      {i + 1}
+                    </ListItemText>
+                  </MenuItem>
+                ))}
               </CustomInput>
             )}
           />

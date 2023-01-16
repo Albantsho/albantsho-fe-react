@@ -1,12 +1,11 @@
+import emptyBlogs from "@assets/images/empty-blogs.png";
 import { Paper, Typography } from "@mui/material";
 import useScriptsApi from "apis/Scripts.api";
 import { IBidScript } from "interfaces/script";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 import OpeningBidScript from "./OpeningBidScript/OpeningBidScript";
-import emptyBlogs from "@assets/images/empty-blogs.png";
 
 interface IProps {
   searchQuery: string;
@@ -25,7 +24,7 @@ const OpeningList = ({ searchQuery }: IProps) => {
         setListedScripts(res.data.scripts);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getScriptsFunc();

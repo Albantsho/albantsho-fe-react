@@ -12,7 +12,6 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense, useCallback, useEffect, useState } from "react";
-import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../../../_app";
 
 const AcceptOfferModal = dynamic(
@@ -56,7 +55,7 @@ const BidsPage: NextPageWithLayout = () => {
           setLoading(false);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getScriptFunc();

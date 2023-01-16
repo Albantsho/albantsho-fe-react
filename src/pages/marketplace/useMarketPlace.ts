@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
 import routes from "routes/routes";
-import errorHandler from "utils/error-handler";
 
 const useMarketPlace = () => {
   const [scripts, setScripts] = useState<Array<IScript>>([]);
@@ -25,7 +24,7 @@ const useMarketPlace = () => {
         setCurrentPage(res.data.currentPage);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getScriptsFunc();

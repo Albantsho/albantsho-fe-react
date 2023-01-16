@@ -7,7 +7,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../../_app";
 
 const SummaryPage: NextPageWithLayout = () => {
@@ -25,7 +24,7 @@ const SummaryPage: NextPageWithLayout = () => {
           setLoading(false);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

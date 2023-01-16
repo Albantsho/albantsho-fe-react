@@ -6,11 +6,10 @@ import ScriptsList from "components/Dashboard/Writer/Reviews/Index/ScriptsList/S
 import { IWriterReview } from "interfaces/reviews";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import queryString from "query-string";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
-import queryString from "query-string";
 
 const Reviews: NextPageWithLayout = () => {
   const [reviewsList, setReviewsList] = useState<Array<IWriterReview>>([]);
@@ -27,7 +26,7 @@ const Reviews: NextPageWithLayout = () => {
         setReviewsList(res.data.scripts);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

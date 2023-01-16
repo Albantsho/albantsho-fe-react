@@ -4,9 +4,8 @@ import Abstract from "components/Abstract/Index/Abstract";
 import { IFullInformationScript } from "interfaces/script";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 
 const AbstractPage = () => {
   const { query } = useRouter();
@@ -21,7 +20,7 @@ const AbstractPage = () => {
           setScript(res.data.script);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

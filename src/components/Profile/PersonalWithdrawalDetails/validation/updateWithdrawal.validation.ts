@@ -1,9 +1,9 @@
 import * as Yup from "yup";
 
 export const updateWithdrawalSchema = Yup.object({
-  bank_name: Yup.string().required().min(3).label("Bank name"),
-  bank_account_name: Yup.string().required().min(3).label("Bank account name"),
-  bank_account_number: Yup.string()
+  bankName: Yup.string().required().min(3).label("Bank name"),
+  bankAccountName: Yup.string().required().min(3).label("Bank account name"),
+  bankAccountNumber: Yup.string()
     .required()
     .min(3)
     .label("Bank account number"),

@@ -10,6 +10,7 @@ import {
   type CardProps,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import CustomRating from "@shared/CustomRating/CustomRating";
 import useUserStore from "app/user.store";
 import { IScript } from "interfaces/script";
 import Link from "next/link";
@@ -41,7 +42,7 @@ const ScriptCard = (props: IProps) => {
       >
         <CardMedia
           component="img"
-          className="object-cover object-left w-full h-[250px]"
+          className="object-cover object-left w-full h-[250px] cursor-pointer"
           src={
             script.image
               ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`
@@ -62,7 +63,6 @@ const ScriptCard = (props: IProps) => {
         />
         <div className="flex justify-between mt-1 sm:mt-4 mb-2 gap-2">
           <Link
-            legacyBehavior
             href={routes.marketplaceOneScript.dynamicUrl(script._id)}
             passHref
           >
@@ -105,7 +105,7 @@ const ScriptCard = (props: IProps) => {
             Place Bid
           </Btn>
         )}
-        <Rating
+        <CustomRating
           readOnly
           defaultValue={+script.rate}
           className="hidden sm:inline-flex"

@@ -30,7 +30,9 @@ const useAxiosPrivate = () => {
         if (
           error.request.responseURL ===
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/refresh` &&
-          error.response.data.statusCode === 500
+          error.response.data.statusCode === 400 &&
+          error.response.data.message ===
+            "Refresh token not found, please login again."
         ) {
           logOutUser();
         }

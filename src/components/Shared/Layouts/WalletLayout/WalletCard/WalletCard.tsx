@@ -1,3 +1,4 @@
+import deposit from "@assets/icons/deposit.svg";
 import wallet from "@assets/icons/wallet.svg";
 import {
   Avatar,
@@ -12,16 +13,14 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
+import useWalletApi from "apis/Wallet.api";
 import useUserStore from "app/user.store";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
 import routes from "routes/routes";
-import deposit from "@assets/icons/deposit.svg";
-import useWalletApi from "apis/Wallet.api";
-import { useState, useEffect } from "react";
-import errorHandler from "utils/error-handler";
 
 const WalletCard = () => {
   const { push, route } = useRouter();
@@ -35,7 +34,7 @@ const WalletCard = () => {
         const res = await getWalletBalance();
         setBalance(res.data.balance);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

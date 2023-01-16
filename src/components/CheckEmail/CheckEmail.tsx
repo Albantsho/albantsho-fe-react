@@ -35,6 +35,7 @@ const CheckEmail = () => {
 
         <div className="justify-start lg:flex mt-8 hidden">
           <Btn
+            href="mailto:"
             size="large"
             className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"
           >

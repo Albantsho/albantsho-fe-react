@@ -3,12 +3,24 @@ import { Chip, Icon, Typography } from "@mui/material";
 import CustomRating from "@shared/CustomRating/CustomRating";
 import { IFullInformationScript } from "interfaces/script";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { priceConverter } from "utils/price-convert";
 
 interface IProps {
   script: IFullInformationScript;
 }
 
 const Heading = ({ script }: IProps) => {
+  const [ethPrice, setEthPrice] = useState<number | false | null>(null);
+
+  useEffect(() => {
+    async function getETHPrice() {
+      const price = await priceConverter();
+      setEthPrice(price.USDT.ETH(script.price));
+    }
+    getETHPrice();
+  }, []);
+
   return (
     <div className="flex flex-col  md:flex-row lg:flex-col xl:flex-row gap-10 lg:gap-6 xl:gap-10">
       <div className="self-center md:self-start lg:self-center xl:self-start">
@@ -61,7 +73,7 @@ const Heading = ({ script }: IProps) => {
               ${script.price}
             </Typography>
             <Typography variant="body1" color="primary">
-              (1.237 ETH)
+              ({ethPrice} ETH)
             </Typography>
           </div>
         </div>

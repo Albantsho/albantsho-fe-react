@@ -25,7 +25,7 @@ const CurrentBids = ({ bidsList, setBidsList }: IProps) => {
 
   const withdrawOnScript = (bidId: string) => async () => {
     try {
-      const res = await deleteBid(bidId);
+      await deleteBid(bidId);
       setBidsList((prev) => prev.filter((b) => b._id !== bidId));
     } catch (error) {
       errorHandler(error);

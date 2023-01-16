@@ -1,11 +1,10 @@
-import Head from "next/head";
-import Title from "components/Script/Title/Title";
-import { useRouter } from "next/router";
-import { DotLoader } from "react-spinners";
 import useScriptsApi from "apis/Scripts.api";
+import Title from "components/Script/Title/Title";
 import { IFullInformationScript } from "interfaces/script";
-import { useState, useEffect } from "react";
-import errorHandler from "utils/error-handler";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { DotLoader } from "react-spinners";
 
 const TitlePage = () => {
   const [script, setScript] = useState<IFullInformationScript>();
@@ -20,7 +19,7 @@ const TitlePage = () => {
           setScript(res.data.script);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getScriptsData();

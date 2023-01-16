@@ -25,7 +25,6 @@ import type {
 import { Controller } from "react-hook-form";
 import { AiOutlineSearch } from "react-icons/ai";
 import routes from "routes/routes";
-import errorHandler from "utils/error-handler";
 
 interface IDraft {
   _id: string;
@@ -71,7 +70,7 @@ const UploadScript = ({
         const res = await getAllDraft();
         results = res.data.drafts;
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

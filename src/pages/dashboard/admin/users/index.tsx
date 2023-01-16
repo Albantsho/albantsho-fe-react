@@ -8,11 +8,10 @@ import { IUserInformation } from "interfaces/user";
 import { debounce } from "lodash";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState, useCallback } from "react";
-import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
-import { NextPageWithLayout } from "../../../_app";
 import queryString from "query-string";
+import { useCallback, useEffect, useState } from "react";
+import { DotLoader } from "react-spinners";
+import { NextPageWithLayout } from "../../../_app";
 
 const UsersPage: NextPageWithLayout = () => {
   const { getAllUser } = useAuthApi();
@@ -52,7 +51,7 @@ const UsersPage: NextPageWithLayout = () => {
         setCurrentPage(res.data.currenPage);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getAllUsersFunc();

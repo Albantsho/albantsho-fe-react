@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 
 const EditBlogPage: NextPageWithLayout = () => {
   const { query } = useRouter();
@@ -24,7 +23,7 @@ const EditBlogPage: NextPageWithLayout = () => {
           setOneWeblog(res.data.weblog);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

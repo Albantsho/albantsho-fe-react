@@ -2,14 +2,13 @@ import { Typography } from "@mui/material";
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import useWeblogApi from "apis/Weblog.api";
+import parse from "html-react-parser";
 import { IWeblog } from "interfaces/weblog";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
-import parse from "html-react-parser";
 
 const BlogPost = () => {
   const { query } = useRouter();
@@ -24,7 +23,7 @@ const BlogPost = () => {
           setOneWeblog(res.data.weblog);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 
 const InformationReviewPage: NextPageWithLayout = () => {
   const { query } = useRouter();
@@ -34,7 +33,7 @@ const InformationReviewPage: NextPageWithLayout = () => {
           setLoading(false);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getScriptInfoFunc();

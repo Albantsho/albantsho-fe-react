@@ -15,9 +15,16 @@ interface IProps {
   setBid: React.Dispatch<
     React.SetStateAction<boolean | IBidInMarketplace | null>
   >;
+  ethPrice: number | false | null;
 }
 
-const PlaceBid = ({ setOpenBidSuccessful, script, bid, setBid }: IProps) => {
+const PlaceBid = ({
+  setOpenBidSuccessful,
+  script,
+  bid,
+  setBid,
+  ethPrice,
+}: IProps) => {
   const [bidValue, setBidValue] = useState("");
   const { createBid, deleteBid } = useScripBidApi();
   const user = useUserStore((state) => state.user);
@@ -57,23 +64,26 @@ const PlaceBid = ({ setOpenBidSuccessful, script, bid, setBid }: IProps) => {
           >
             ${script.price}
           </Typography>
-          <span className="text-neutral-500">(1.237 ETH)</span>
+          <span className="text-neutral-500">({ethPrice} ETH)</span>
         </div>
       </div>
       <div className="flex sm:flex-col gap-3 sm:gap-6 -mt-1 xl:mt-0 md:flex-row flex-wrap">
-        <CustomInput
-          value={bidValue}
-          onChange={handleBidValue}
-          InputProps={{ classes: { input: "bg-white rounded-lg" } }}
-          className="flex-1 min-w-[170px] sm:min-w-[210px] max-w-xs sm:max-w-md text-tinted-200"
-          variant="outlined"
-          size="small"
-          placeholder="Enter Bid"
-          type="tel"
-        />
+        {user.userType === "producer" && (
+          <CustomInput
+            value={bidValue}
+            onChange={handleBidValue}
+            InputProps={{ classes: { input: "bg-white rounded-lg" } }}
+            className="flex-1 min-w-[170px] sm:min-w-[210px] max-w-xs sm:max-w-md text-tinted-200"
+            variant="outlined"
+            size="small"
+            placeholder="Enter Bid"
+            type="tel"
+          />
+        )}
+
         {user.emailVerified ? (
           <>
-            {!bid && user.userType === "producer" ? (
+            {!bid && user.userType === "producer" && (
               <Btn
                 onClick={handleOpenBidSuccessful}
                 size="small"
@@ -81,7 +91,8 @@ const PlaceBid = ({ setOpenBidSuccessful, script, bid, setBid }: IProps) => {
               >
                 Place Bid
               </Btn>
-            ) : (
+            )}
+            {bid && user.userType === "producer" && (
               <Button
                 variant="outlined"
                 onClick={handleCloseBidSuccessful}

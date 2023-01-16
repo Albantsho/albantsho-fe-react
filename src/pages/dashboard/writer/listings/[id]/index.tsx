@@ -1,20 +1,19 @@
+import { Fab } from "@mui/material";
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/DashboardSearch";
-import Heading from "components/Dashboard/Writer/Listings/OpenListingInfo/Index/Heading/Heading";
-import TabButtons from "components/Dashboard/Writer/Listings/Index/TabButtons/TabButtons";
-import Head from "next/head";
-import dynamic from "next/dynamic";
-import { Suspense, useCallback, useEffect, useState } from "react";
-import { NextPageWithLayout } from "../../../../_app";
-import { Fab } from "@mui/material";
-import { useRouter } from "next/router";
-import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 import useScripBidApi from "apis/ScripBid.api";
 import useScriptsApi from "apis/Scripts.api";
-import { IFullInformationScript } from "interfaces/script";
+import TabButtons from "components/Dashboard/Writer/Listings/Index/TabButtons/TabButtons";
+import Heading from "components/Dashboard/Writer/Listings/OpenListingInfo/Index/Heading/Heading";
 import { IBidForScript } from "interfaces/bid";
+import { IFullInformationScript } from "interfaces/script";
 import { debounce } from "lodash";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { Suspense, useCallback, useEffect, useState } from "react";
+import { DotLoader } from "react-spinners";
+import { NextPageWithLayout } from "../../../../_app";
 
 const AuctionsScripts = dynamic(
   () =>
@@ -60,7 +59,7 @@ const ScriptSlug: NextPageWithLayout = () => {
           setLoading(false);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getScriptsDate();

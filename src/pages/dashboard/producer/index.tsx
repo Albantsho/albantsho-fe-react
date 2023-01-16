@@ -12,7 +12,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../_app";
 
 const Scripts: NextPageWithLayout = () => {
@@ -45,7 +44,7 @@ const Scripts: NextPageWithLayout = () => {
         setScriptsList(resScripts.data.scripts);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

@@ -46,7 +46,7 @@ const NotificationComponent = () => {
       </IconButton>
       <Popover
         elevation={4}
-        className="shadow-secondary flex flex-col justify-between"
+        className="shadow-secondary flex flex-col justify-between max-h-[600px]"
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}

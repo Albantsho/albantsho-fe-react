@@ -1,22 +1,21 @@
 import { Fab } from "@mui/material";
+import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
+import useWeblogApi from "apis/Weblog.api";
 import ArchiveBlogsList from "components/Dashboard/Admin/Blogs/Index/ArchiveBlogsList/ArchiveBlogsList";
 import LiveBlogsList from "components/Dashboard/Admin/Blogs/Index/LiveBlogsList/LiveBlogsList";
 import TabButtons from "components/Dashboard/Admin/Blogs/Index/TabButtons/TabButtons";
 import TrashBlogsList from "components/Dashboard/Admin/Blogs/Index/TrashBlogsList/TrashBlogsList";
+import { IWeblog } from "interfaces/weblog";
+import debounce from "lodash/debounce";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
-import routes from "routes/routes";
-import errorHandler from "utils/error-handler";
-import { NextPageWithLayout } from "../../../_app";
 import queryString from "query-string";
-import { IWeblog } from "interfaces/weblog";
-import useWeblogApi from "apis/Weblog.api";
+import { useCallback, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import debounce from "lodash/debounce";
-import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
+import routes from "routes/routes";
+import { NextPageWithLayout } from "../../../_app";
 
 const BlogsPage: NextPageWithLayout = () => {
   const { query, push } = useRouter();
@@ -52,7 +51,7 @@ const BlogsPage: NextPageWithLayout = () => {
         setCurrentPage(res.data.currentPage);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getAllWeblogs();

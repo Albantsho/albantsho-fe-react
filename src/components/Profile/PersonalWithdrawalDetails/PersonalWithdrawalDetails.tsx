@@ -14,6 +14,7 @@ import Image from "next/image";
 import pencil from "../assets/pencil.svg";
 import bank from "./assets/bank.png";
 import usePersonalWithdrawalDetails from "./usePersonalWithdrawalDetails";
+import { Controller } from "react-hook-form";
 
 interface IProps {
   userProfile: IUserProfile;
@@ -27,7 +28,11 @@ const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
     loading,
     onSubmit,
     register,
+    control,
     updateInformationBankAccess,
+    connectWallet,
+    defaultAccount,
+    errorMessage,
   } = usePersonalWithdrawalDetails({ userProfile });
 
   return (
@@ -54,8 +59,8 @@ const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
               </Typography>
             </label>
             <CustomInput
-              error={Boolean(errors.bank_account_name) || false}
-              {...register("bank_account_name")}
+              error={Boolean(errors.bankAccountName) || false}
+              {...register("bankAccountName")}
               disabled={!availableChangeValue}
               fullWidth
               id="account-name"
@@ -87,7 +92,7 @@ const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
                   fontSize: "16px",
                 },
               }}
-              helperText={errors.bank_account_name?.message}
+              helperText={errors.bankAccountName?.message}
             />
           </div>
           <div>
@@ -100,8 +105,8 @@ const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
               </Typography>
             </label>
             <CustomInput
-              error={Boolean(errors.bank_account_number) || false}
-              {...register("bank_account_number")}
+              error={Boolean(errors.bankAccountNumber) || false}
+              {...register("bankAccountNumber")}
               disabled={!availableChangeValue}
               className="disabled:text-red-700"
               fullWidth
@@ -134,7 +139,7 @@ const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
                   fontSize: "16px",
                 },
               }}
-              helperText={errors.bank_account_number?.message}
+              helperText={errors.bankAccountNumber?.message}
             />
           </div>
           <div>
@@ -146,23 +151,38 @@ const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
                 Bank
               </Typography>
             </label>
-            <CustomInput
-              select
-              sx={{
-                "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
-                "& .MuiSvgIcon-root": { color: "#7953B5" },
-              }}
-              fullWidth
-              id="bank"
-              variant="outlined"
-              size="small"
-            >
-              <MenuItem>
-                <ListItemText className="text-primary-700">
-                  Guaranty Trust Bank
-                </ListItemText>
-              </MenuItem>
-            </CustomInput>
+            <Controller
+              name="bankName"
+              control={control}
+              render={({ field }) => (
+                <CustomInput
+                  {...field}
+                  error={Boolean(errors.bankName) || false}
+                  select
+                  sx={{
+                    "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
+                    "& .MuiSvgIcon-root": { color: "#7953B5" },
+                    "& .MuiFormHelperText-root": {
+                      mt: "8px",
+                      mx: 0,
+                      color: "red",
+                      fontSize: "16px",
+                    },
+                  }}
+                  fullWidth
+                  id="bank"
+                  variant="outlined"
+                  size="small"
+                  defaultValue="Guaranty Trust Bank"
+                >
+                  <MenuItem value="Guaranty Trust Bank">
+                    <ListItemText className="text-primary-700">
+                      Guaranty Trust Bank
+                    </ListItemText>
+                  </MenuItem>
+                </CustomInput>
+              )}
+            />
           </div>
           <div>
             <label htmlFor="USDT" className="inline-block mb-1">
@@ -174,21 +194,33 @@ const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
               </Typography>
             </label>
             <CustomInput
+              error={Boolean(errorMessage) || false}
+              value={defaultAccount}
               InputProps={{ readOnly: true }}
-              sx={{ "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" } }}
+              sx={{
+                "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
+                "& .MuiFormHelperText-root": {
+                  mt: "8px",
+                  mx: 0,
+                  color: "red",
+                  fontSize: "16px",
+                },
+              }}
               fullWidth
               id="USDT"
               variant="outlined"
               size="small"
+              helperText={errorMessage}
             />
           </div>
-          <Btn
-            type="submit"
-            loading={loading}
-            className="mt-2 xl:mt-8 py-3 px-6 mr-auto md:mr-0 md:ml-auto"
-          >
-            Save and Update
-          </Btn>
+          <div className="flex justify-between mt-2 xl:mt-8 gap-4 flex-wrap">
+            <Btn type="submit" loading={loading} className="py-3 px-6">
+              Save and Update
+            </Btn>
+            <Btn onClick={connectWallet} className="py-3 px-6">
+              Connect Wallet
+            </Btn>
+          </div>
         </div>
       </div>
     </form>

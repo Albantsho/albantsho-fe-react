@@ -1,5 +1,15 @@
 import * as Yup from "yup";
 
+interface IWithdrawFormValues {
+  amount: string;
+  method: string;
+  bank?: string;
+  bankName?: string;
+  withdrawPlatform?: string;
+  network?: string;
+  address?: string;
+}
+
 export const withdrawSchema = Yup.object({
   amount: Yup.string()
     .required()

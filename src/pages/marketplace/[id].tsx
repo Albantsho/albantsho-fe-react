@@ -1,6 +1,5 @@
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
-import useAuthApi from "apis/Auth.api";
 import { apiPrivate } from "apis/configs/axios.config";
 import useScriptsApi from "apis/Scripts.api";
 import useUserStore from "app/user.store";
@@ -12,7 +11,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 
 const MarketScriptChips = dynamic(
   () =>
@@ -56,7 +54,7 @@ const ScriptInfoPage = () => {
           setLoading(false);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getScriptsDate();

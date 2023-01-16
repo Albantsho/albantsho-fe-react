@@ -1,3 +1,4 @@
+import emptyBlogs from "@assets/images/empty-blogs.png";
 import {
   Table,
   TableBody,
@@ -8,12 +9,10 @@ import {
 } from "@mui/material";
 import useReviewsApi from "apis/Reviews.api";
 import { IAssignedOrCompletedRequest } from "interfaces/reviews";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 import AssignedOrCompletedRequest from "./AssignedOrCompletedRequest/AssignedOrCompletedRequest";
-import emptyBlogs from "@assets/images/empty-blogs.png";
-import Image from "next/image";
 
 interface IProps {
   searchQuery: string;
@@ -35,7 +34,7 @@ const AssignedRequestsList = ({ searchQuery }: IProps) => {
         setAssignedRequestList(res.data.scripts);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getAssignedReviewsFunc();

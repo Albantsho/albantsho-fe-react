@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 
 export interface IReviewInformation {
   script: IScriptReviewer;
@@ -31,7 +30,7 @@ const OneReviewPage: NextPageWithLayout = () => {
           setLoading(false);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getReviewValues();

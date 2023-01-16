@@ -43,17 +43,17 @@ export interface IUserProfile {
   email: string;
   firstName: string;
   lastName: string;
-  director_application: boolean;
-  director_approval: boolean;
+  directorApplication: boolean;
+  directorApproval: boolean;
   userType: "writer" | "producer" | "admin" | "reviewer";
   country: string;
   productionCompanyName: null | string;
   portfolio: null | string;
-  verification_status: boolean;
-  bank_name: string | null;
-  bank_account_name: string | null;
-  bank_account_number: string | null;
-  subscription_count: number | null;
+  verificationStatus: boolean;
+  bankName: string | null;
+  bankAccountName: string | null;
+  bankAccountNumber: string | null;
+  subscriptionPlan: null | string;
   freeze: boolean;
   block: boolean;
   soldScripts: number;
@@ -61,5 +61,6 @@ export interface IUserProfile {
   image: string | null;
   createdAt: string;
   updatedAt: string;
+  usdtTrc20Address: string | null;
   wallet: IWallet[];
 }

@@ -1,6 +1,5 @@
 import useWalletApi from "apis/Wallet.api";
 import { useEffect, useState } from "react";
-import errorHandler from "utils/error-handler";
 
 const useMobileNavDashboard = () => {
   const [open, setOpen] = useState(false);
@@ -15,7 +14,7 @@ const useMobileNavDashboard = () => {
         const res = await getWalletBalance();
         setBalance(res.data.balance);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

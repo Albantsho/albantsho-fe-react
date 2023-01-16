@@ -27,7 +27,7 @@ const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {
   const onSubmit = async (data: ICreateScript) => {
     try {
       setLoading(true);
-      const res = await createNewScript(data);
+      await createNewScript(data);
       setOpenCreateScript(false);
     } catch (error) {
       errorHandler(error);

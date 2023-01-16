@@ -21,6 +21,7 @@ const TransactionHistoryPage: NextPageWithLayout = () => {
         const resWithdraw = await getAllWithdraws();
         setPaymentsList(resPayment.data.payments);
         setWithdrawList(resWithdraw.data.withdraws);
+        setLoading(true);
       } catch (error) {
         ("");
       }

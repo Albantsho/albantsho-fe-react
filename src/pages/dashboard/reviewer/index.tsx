@@ -3,11 +3,10 @@ import useReviewsApi from "apis/Reviews.api";
 import TasksList from "components/Dashboard/Reviewer/Index/TasksList/TasksList";
 import { IReviewerTask } from "interfaces/reviews";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import questString from "query-string";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
-import questString from "query-string";
-import { useRouter } from "next/router";
 
 const Reviewer = () => {
   const [reviewerTaskList, setReviewerTaskList] = useState<
@@ -25,7 +24,7 @@ const Reviewer = () => {
         setReviewerTaskList(res.data.scripts);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

@@ -1,4 +1,5 @@
 import { Fab } from "@mui/material";
+import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/DashboardSearch";
 import useScriptsApi from "apis/Scripts.api";
@@ -6,16 +7,14 @@ import ArchiveList from "components/Dashboard/Writer/Projects/Archive/ArchiveLis
 import ProjectAccordionList from "components/Dashboard/Writer/Projects/Scripts/ProjectAccordionList/ProjectAccordionList";
 import TabButtons from "components/Dashboard/Writer/Projects/TabButtons/TabButtons";
 import { IWriterScript } from "interfaces/script";
+import { debounce } from "lodash";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import querystring from "query-string";
 import { useCallback, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
-import querystring from "query-string";
-import { debounce } from "lodash";
-import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 
 const CreateScriptModal = dynamic(
   () => import("@shared/Modals/CreateScriptModal/CreateScriptModal")
@@ -69,7 +68,7 @@ const Projects: NextPageWithLayout = () => {
         setCurrentPage(res.data.currentPage);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getWriterAllScriptsFunc();

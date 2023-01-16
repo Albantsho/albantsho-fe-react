@@ -2,14 +2,19 @@ import { Chip, Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import usePlanApi from "apis/Plan.api";
 import useUserStore from "app/user.store";
-import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
+import {
+  closePaymentModal,
+  useFlutterwave,
+  FlutterWaveButton,
+} from "flutterwave-react-v3";
 import type { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
+import { priceConverter } from "utils/price-convert";
 
 interface IProps {
   script: IFullInformationScript;
@@ -20,6 +25,7 @@ const Summary = ({ script }: IProps) => {
   const user = useUserStore((state) => state.user);
   const { replace } = useRouter();
   const [loading, setLoading] = useState(false);
+  const [ethPrice, setEthPrice] = useState<number | false | null>(null);
   const { buyReviewsPlan } = usePlanApi();
   const config = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY as string,
@@ -55,7 +61,7 @@ const Summary = ({ script }: IProps) => {
         scriptId: script._id,
         transactionId: `${response.transaction_id}`,
       });
-      closePaymentModal(); // this will close the modal programmatically
+      // closePaymentModal(); // this will close the modal programmatically
       replace(
         routes.reviewsPaymentSuccessful.dynamicUrl(`${response.transaction_id}`)
       );
@@ -79,6 +85,14 @@ const Summary = ({ script }: IProps) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    async function getETHPrice() {
+      const price = await priceConverter();
+      setEthPrice(price.USDT.ETH(query.reviewPlan === "typeA" ? 100 : 300));
+    }
+    getETHPrice();
+  }, []);
 
   return (
     <div className="pb-9 lg:pb-16 bg-white rounded-md px-5">
@@ -126,13 +140,16 @@ const Summary = ({ script }: IProps) => {
                 {query.reviewPlan === "typeB" && "$300"}
               </Typography>
               <Typography variant="body1" color="primary.700">
-                (0.0237 ETH)
+                ({ethPrice} ETH)
               </Typography>
             </div>
           </div>
         </div>
+        {/* <FlutterWaveButton onClick={paymentBuyingReviewPlan}>
+          Proceed to pay
+        </FlutterWaveButton> */}
         <Btn
-          type="submit"
+          type="button"
           loading={loading}
           onClick={paymentBuyingReviewPlan}
           className="mt-4 py-3 px-7 xl:m12"

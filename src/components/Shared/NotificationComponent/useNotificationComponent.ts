@@ -62,7 +62,7 @@ const useNotificationComponent = () => {
         setAllInvites(resInvites.data.invites);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

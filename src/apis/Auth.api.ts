@@ -38,9 +38,10 @@ interface IUpdateUserInformationPayload {
 }
 
 interface IUpdateWithdrawUserInformationPayload {
-  bank_name: string;
-  bank_account_name: string;
-  bank_account_number: string;
+  bankName?: string;
+  bankAccountName?: string;
+  bankAccountNumber?: string;
+  usdtTrc20Address?: string;
 }
 
 interface IUserRestrictionPayload {
@@ -125,7 +126,7 @@ const useAuthApi = (controller?: AbortController) => {
     async updateUserWithdrawInformation(
       payload: IUpdateWithdrawUserInformationPayload
     ) {
-      const res = await axiosPrivate.post(
+      const res = await axiosPrivate.patch(
         "/user/profile/withdraw/update",
         payload,
         {

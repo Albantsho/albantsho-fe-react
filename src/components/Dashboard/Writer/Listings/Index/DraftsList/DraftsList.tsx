@@ -4,7 +4,6 @@ import { IUnCompletedScript, IUnlistedScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import { Suspense, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 import UncompletedList from "./UncompletedList/UncompletedList";
 
 const UnlistedList = dynamic(() => import("./UnlistedList/UnlistedList"));
@@ -38,7 +37,7 @@ const DraftsList = ({ searchQuery }: IProps) => {
         setUnCompletedScripts(resUnCompleted.data.scripts);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getScriptsFunc();

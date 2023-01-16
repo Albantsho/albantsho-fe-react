@@ -2,6 +2,8 @@ import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
 import success from "@assets/images/success.png";
+import Link from "next/link";
+import routes from "routes/routes";
 
 const ResetPasswordConfirmation = () => {
   return (
@@ -35,12 +37,14 @@ const ResetPasswordConfirmation = () => {
         </div>
 
         <div className="justify-center flex mt-6">
-          <Btn
-            size="large"
-            className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"
-          >
-            Sign in
-          </Btn>
+          <Link passHref legacyBehavior href={routes.signin.url}>
+            <Btn
+              size="large"
+              className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"
+            >
+              Sign in
+            </Btn>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import emptyBlogs from "@assets/images/empty-blogs.png";
 import {
   Chip,
   Table,
@@ -12,8 +13,6 @@ import { IClosedScript } from "interfaces/script";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
-import emptyBlogs from "@assets/images/empty-blogs.png";
 
 interface IProps {
   searchQuery: string;
@@ -33,7 +32,7 @@ const ClosedList = ({ searchQuery }: IProps) => {
         setClosedScripts(res.data.scripts);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getScriptsFunc();

@@ -1,8 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useAuthApi from "apis/Auth.api";
+import { ethers } from "ethers";
 import { IUserProfile } from "interfaces/user";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
 import { updateWithdrawalSchema } from "./validation/updateWithdrawal.validation";
 
@@ -11,28 +13,67 @@ interface IProps {
 }
 
 interface IUpdateWithdrawalFormValues {
-  bank_name: string;
-  bank_account_name: string;
-  bank_account_number: string;
+  bankName: string;
+  bankAccountName: string;
+  bankAccountNumber: string;
 }
 
 const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
   const [availableChangeValue, setAvailableChangeValue] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { updateUserInformation, updateUserWithdrawInformation } = useAuthApi();
+  const { updateUserWithdrawInformation } = useAuthApi();
+  const [defaultAccount, setDefaultAccount] = useState("");
+  const [userBalance, setUserBalance] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const connectWallet = async () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (window.ethereum) {
+      try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const allAccounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        setDefaultAccount(allAccounts[0]);
+        await updateUserWithdrawInformation({
+          usdtTrc20Address: allAccounts[0],
+        });
+        getUserBalanceAccount(defaultAccount);
+      } catch (error) {
+        ("");
+      }
+    } else {
+      setErrorMessage("Please Install Metamask");
+    }
+  };
+
+  const getUserBalanceAccount = async (accountAddress: string) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const balanceAccount = await window.ethereum.request({
+      method: "eth_getBalance",
+      params: [String(accountAddress)],
+    });
+    setUserBalance(ethers.utils.formatEther(balanceAccount));
+  };
 
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<IUpdateWithdrawalFormValues>({
     defaultValues: {
-      bank_name: userProfile.bank_name ? userProfile.bank_name : "",
-      bank_account_name: userProfile.bank_account_name
-        ? userProfile.bank_account_name
+      bankName: userProfile.bankName
+        ? userProfile.bankName
+        : "Guaranty Trust Bank",
+      bankAccountName: userProfile.bankAccountName
+        ? userProfile.bankAccountName
         : "",
-      bank_account_number: userProfile.bank_account_number
-        ? userProfile.bank_account_number
+      bankAccountNumber: userProfile.bankAccountNumber
+        ? userProfile.bankAccountNumber
         : "",
     },
     resolver: yupResolver(updateWithdrawalSchema),
@@ -45,6 +86,7 @@ const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
     try {
       setLoading(true);
       const res = await updateUserWithdrawInformation(data);
+      toast.success(res.message);
       setAvailableChangeValue(false);
     } catch (error) {
       errorHandler(error);
@@ -61,6 +103,10 @@ const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
     errors,
     onSubmit,
     loading,
+    control,
+    defaultAccount,
+    connectWallet,
+    errorMessage,
   };
 };
 

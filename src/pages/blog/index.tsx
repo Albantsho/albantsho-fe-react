@@ -4,7 +4,6 @@ import BlogList from "components/Blog/BlogList/BlogList";
 import { IWeblog } from "interfaces/weblog";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../_app";
 
 const Blog: NextPageWithLayout = () => {
@@ -24,7 +23,7 @@ const Blog: NextPageWithLayout = () => {
         setCurrentPage(res.data.currentPage);
         setLoading(false);
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
 

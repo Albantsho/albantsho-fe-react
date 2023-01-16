@@ -76,7 +76,7 @@ const useScriptDocument = ({ socket }: IProps) => {
     try {
       setLoading(true);
 
-      const res = await createNewInvite({
+      await createNewInvite({
         email: data.email,
         scriptId: query.id as string,
       });

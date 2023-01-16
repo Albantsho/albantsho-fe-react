@@ -8,7 +8,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
-import errorHandler from "utils/error-handler";
 
 const PreviewTypeA = () => {
   const { query } = useRouter();
@@ -29,7 +28,7 @@ const PreviewTypeA = () => {
           setLoading(false);
         }
       } catch (error) {
-        errorHandler(error);
+        ("");
       }
     }
     getReviewValues();

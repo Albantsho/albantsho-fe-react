@@ -145,8 +145,9 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
             </ListItemText>
           </MenuItem>
         )}
-        {user.userType !== "admin" && (
+        {(user.userType === "writer" || user.userType === "producer") && (
           <MenuItem
+            onClick={() => push(routes.helpWallet.url)}
             divider
             TouchRippleProps={{ className: "text-primary-main" }}
             className="px-6 py-4 hover:bg-primary-50/25"
