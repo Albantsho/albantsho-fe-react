@@ -92,9 +92,9 @@ const ClosedList = ({ searchQuery }: IProps) => {
                   // layout="fixed"
                   width="64"
                   height="64"
-                  className="rounded-md"
+                  className="rounded-md w-16 h-16"
                   loading="lazy"
-                  src={listItem.image}
+                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${listItem.image}`}
                   alt={listItem.title}
                 />
                 <div className="flex flex-col gap-2">

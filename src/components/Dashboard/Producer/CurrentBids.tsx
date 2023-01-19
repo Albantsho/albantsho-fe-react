@@ -13,6 +13,8 @@ import {
 import useScripBidApi from "apis/ScripBid.api";
 import { IProducerBid } from "interfaces/bid";
 import Image from "next/image";
+import Link from "next/link";
+import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 
 interface IProps {
@@ -82,7 +84,7 @@ const CurrentBids = ({ bidsList, setBidsList }: IProps) => {
                   <Image
                     width="64"
                     height="64"
-                    className="rounded-md"
+                    className="rounded-md w-16 h-16"
                     loading="lazy"
                     src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${bid.script.image}`}
                     alt={bid.script.title}
@@ -93,12 +95,19 @@ const CurrentBids = ({ bidsList, setBidsList }: IProps) => {
                   />
                 </div>
                 <div className="flex-grow sm:flex-1 sm:max-w-[271px] min-w-[170px] sm:-ml-4 lg:ml-0">
-                  <Typography
-                    variant="body1"
-                    className="futura font-semibold text-primary-700"
+                  <Link
+                    passHref
+                    href={routes.marketplaceOneScript.dynamicUrl(
+                      bid.script._id
+                    )}
                   >
-                    {bid.script.title}
-                  </Typography>
+                    <Typography
+                      variant="body1"
+                      className="futura font-semibold text-primary-700"
+                    >
+                      {bid.script.title}
+                    </Typography>
+                  </Link>
                   <Typography variant="caption" className="text-stone-800">
                     {bid.script.tagline}
                   </Typography>

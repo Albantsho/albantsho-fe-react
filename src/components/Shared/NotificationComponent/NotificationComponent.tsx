@@ -46,7 +46,8 @@ const NotificationComponent = () => {
       </IconButton>
       <Popover
         elevation={4}
-        className="shadow-secondary flex flex-col justify-between max-h-[600px]"
+        className="shadow-secondary flex flex-col justify-between"
+        sx={{ "& .MuiPaper-root": { maxHeight: "600px" } }}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}

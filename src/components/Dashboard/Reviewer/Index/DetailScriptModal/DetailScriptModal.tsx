@@ -163,7 +163,10 @@ const DetailScriptModal = ({
               >
                 Rating:
               </Typography>
-              <Rating value={reviewerTask.rate} />
+              <Rating
+                readOnly
+                defaultValue={reviewerTask.review[0]?.rate || 0}
+              />
             </div>
             {reviewerTask.review.length === 0 ? (
               <Btn

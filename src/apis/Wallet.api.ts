@@ -2,7 +2,7 @@ import useAxiosPrivate from "hooks/useAxiosPrivate";
 
 interface IPayloadIncreaseWalletBalance {
   transactionId: string;
-  paymentPlatform: string;
+  method: string;
 }
 
 interface IPayloadWithdrawWallet {

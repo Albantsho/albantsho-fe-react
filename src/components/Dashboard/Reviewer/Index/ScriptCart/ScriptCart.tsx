@@ -15,6 +15,7 @@ import { IReviewerTask } from "interfaces/reviews";
 import jsPDF from "jspdf";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 import routes from "routes/routes";
 import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
@@ -27,11 +28,12 @@ interface IProps {
 }
 
 const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
+  const [resDraft, setResDraft] = useState<any>();
   const selectedScript = reviewerTaskList.find(
     (reviewerTask) => reviewerTask._id === selectedScriptId
   );
   const { createNewReview } = useReviewsApi();
-  const { replace } = useRouter();
+  const { replace, push } = useRouter();
   const { getOneDraft } = useDraftApi();
   const beginReviewToScript = (scriptId: string) => async () => {
     try {
@@ -48,46 +50,61 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
     }
   };
 
+  useEffect(() => {
+    async function getDraftFunc() {
+      try {
+        const res = await getOneDraft(selectedScript?._id as string);
+        setResDraft(res);
+      } catch (error) {
+        ("");
+      }
+    }
+    getDraftFunc();
+  }, []);
+
   const seeScript = async () => {
-    const resDraft = await getOneDraft(selectedScript?._id as string);
-    const htmlContent = new DOMParser().parseFromString(
-      resDraft.data.draft,
-      "text/html"
-    );
-    const value = deserializeScriptWithOutDiv(htmlContent.body);
-    const valueForConvertPdf = serializeWithoutDiv({ children: value });
-    const doc = new jsPDF("p", "pt", "a4");
-    if (valueForConvertPdf) {
-      doc.html(
-        `<div style="padding:0 40px;width:595px;height:842px;font-family:Courier Prime;display:flex;justify-content:center;align-items:center;gap:18px;flex-direction:column;"><h6 style="font-family:Courier Prime;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
-          selectedScript?.title
-        }</h6><h6 style="font-family:Courier Prime;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${selectedScript?.writtenBy.join(
-          " "
-        )}</h6><h6 style="font-family:Courier Prime;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
-          selectedScript?.draftDate as string
-        ).toLocaleDateString()}</h6></div><div style="padding:0 40px;width:595px;font-family:Courier Prime;">
-        ${valueForConvertPdf}
-        </div>`,
-        {
-          margin: [30, 0],
-          autoPaging: "text",
-          callback: (pdf) => {
-            for (let i = 0; i < doc.internal.pages.length; i++) {
-              doc.setPage(i);
-              doc.text(i <= 1 ? " " : `Page ${String(i - 1)}`, 275, 830);
-            }
-            pdf.save(selectedScript?.title);
-          },
-        }
+    if (resDraft.data) {
+      const htmlContent = new DOMParser().parseFromString(
+        resDraft.data.draft,
+        "text/html"
       );
+      const value = deserializeScriptWithOutDiv(htmlContent.body);
+      const valueForConvertPdf = serializeWithoutDiv({ children: value });
+      const doc = new jsPDF("p", "pt", "a4");
+      if (valueForConvertPdf) {
+        doc.html(
+          `<div style="padding:0 40px;width:595px;height:842px;font-family:Courier Prime;display:flex;justify-content:center;align-items:center;gap:18px;flex-direction:column;"><h6 style="font-family:Courier Prime;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
+            selectedScript?.title
+          }</h6><h6 style="font-family:Courier Prime;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${selectedScript?.writtenBy.join(
+            " "
+          )}</h6><h6 style="font-family:Courier Prime;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
+            selectedScript?.draftDate as string
+          ).toLocaleDateString()}</h6></div><div style="padding:0 40px;width:595px;font-family:Courier Prime;">
+          ${valueForConvertPdf}
+          </div>`,
+          {
+            margin: [30, 0],
+            autoPaging: "text",
+            callback: (pdf) => {
+              for (let i = 0; i < doc.internal.pages.length; i++) {
+                doc.setPage(i);
+                doc.text(i <= 1 ? " " : `Page ${String(i - 1)}`, 275, 830);
+              }
+              pdf.save(selectedScript?.title);
+            },
+          }
+        );
+      }
+    } else {
+      return resDraft;
     }
   };
-
   return (
     <Card
       data-aos="fade-left"
       elevation={0}
-      className="h-fit hidden lg:block shadow-primary pt-7 pb-3 flex-[0.7]  xl:flex-[0.55] max-w-2xl"
+      className={` h-fit hidden lg:block shadow-primary pt-7 pb-3 flex-[0.7]  xl:flex-[0.55] max-w-2xl`}
+      style={{ opacity: selectedScript ? "100%" : "0" }}
     >
       <CardActions className="px-5 py-0 space-x-3 lg:space-x-6">
         <Button disableElevation className="py-[10px] px-4" variant="contained">
@@ -97,14 +114,31 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
             ? "Type B"
             : ""}
         </Button>
-        <Button
-          onClick={seeScript}
-          className="py-[10px] px-4"
-          variant="outlined"
-          startIcon={<FiArrowUpRight />}
-        >
-          View script
-        </Button>
+        {resDraft && resDraft.data ? (
+          <Button
+            onClick={seeScript}
+            className="py-[10px] px-4"
+            variant="outlined"
+            startIcon={<FiArrowUpRight />}
+          >
+            View script
+          </Button>
+        ) : (
+          <a
+            href={resDraft}
+            rel="noreferrer"
+            target={"_blank"}
+            download="file.pdf"
+          >
+            <Button
+              className="py-[10px] px-4"
+              variant="outlined"
+              startIcon={<FiArrowUpRight />}
+            >
+              View script
+            </Button>
+          </a>
+        )}
       </CardActions>
       <Divider className="my-7" />
       <CardContent className="px-5 py-0 ">
@@ -159,7 +193,7 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
           <CustomRating
             name="half-rating"
             readOnly
-            defaultValue={selectedScript?.rate}
+            defaultValue={selectedScript?.review[0]?.rate || 0}
             precision={0.5}
           />
         </div>

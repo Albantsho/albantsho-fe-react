@@ -52,7 +52,7 @@ const useTextEditor = ({ width, editor, socket }: IProps) => {
   const socketChange = useRef(false);
   const createCommentFunc = () => {
     setAddComment({
-      key: Math.random(),
+      key: Date.now(),
       positionX: mouse.x!,
       positionY: mouse.y!,
       setShowFormStatus: true,
@@ -62,7 +62,7 @@ const useTextEditor = ({ width, editor, socket }: IProps) => {
 
   const cancelComment = () => {
     setAddComment({
-      key: Math.random(),
+      key: Date.now(),
       positionX: mouse.x!,
       positionY: mouse.y!,
       setShowFormStatus: true,

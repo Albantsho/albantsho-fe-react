@@ -23,7 +23,7 @@ export interface IReviewerTask {
   primaryGenre: string;
   rate: number;
   createdAt: string;
-  review: [{ completed: boolean }] | [];
+  review: [{ completed: boolean; rate: number }] | [];
 }
 export interface IWriterReview {
   _id: string;

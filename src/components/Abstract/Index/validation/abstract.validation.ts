@@ -28,10 +28,7 @@ export const abstractSchema = (publish: boolean, activeButton: number) => {
       characterBible: Yup.string().required().label("Character bible"),
       inspiration: Yup.string().required().label("Inspiration"),
       motivation: Yup.string().required().label("Motivation"),
-      draft:
-        activeButton === 0
-          ? Yup.string().required().label("Draft")
-          : Yup.string(),
+      draft: activeButton === 0 ? Yup.string().label("Draft") : Yup.string(),
       scriptFile:
         activeButton === 1
           ? Yup.mixed().test(

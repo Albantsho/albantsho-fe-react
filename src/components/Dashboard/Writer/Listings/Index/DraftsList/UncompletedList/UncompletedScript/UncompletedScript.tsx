@@ -24,7 +24,7 @@ const UncompletedScript = ({ script }: IProps) => {
         className="flex py-6 items-center sm:justify-between xl:justify-start"
       >
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-14 lg:max-w-[445px] ">
-          <div className="flex gap-3 items-end sm:items-start">
+          <div className="flex min-w-[64px] min-h-[64px] gap-3 items-end sm:items-start">
             {script.image ? (
               <Image
                 width={64}

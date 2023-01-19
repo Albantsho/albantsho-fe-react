@@ -1,8 +1,8 @@
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import { apiPrivate } from "apis/configs/axios.config";
-import useScriptsApi from "apis/Scripts.api";
 import useUserStore from "app/user.store";
+import axios from "axios";
 import ScriptInfo from "components/Marketplace/MarketScript/ScriptInfo/ScriptInfo";
 import { IBidInMarketplace } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
@@ -36,9 +36,8 @@ const RateToScript = dynamic(
 
 const ScriptInfoPage = () => {
   const [script, setScript] = useState<IFullInformationScript>();
-  const [bid, setBid] = useState<null | IBidInMarketplace | boolean>(false);
+  const [bid, setBid] = useState<null | IBidInMarketplace>(null);
   const [loading, setLoading] = useState(true);
-  const { getScript } = useScriptsApi();
   const { query } = useRouter();
   const setAccessToken = useUserStore((state) => state.setAccessToken);
 
@@ -47,10 +46,20 @@ const ScriptInfoPage = () => {
       try {
         if (typeof query.id === "string") {
           const response = await apiPrivate.post("/user/refresh", {});
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/script/${
+              query.id as string
+            }`,
+            {
+              withCredentials: true,
+              headers: {
+                Authorization: `Bearer ${response.data.data.accessToken}`,
+              },
+            }
+          );
           setAccessToken(response.data.data.accessToken);
-          const res = await getScript(query.id as string);
-          setScript(res.data.script);
-          setBid(res.data.bid);
+          setScript(res.data.data.script);
+          setBid(res.data.data.bid);
           setLoading(false);
         }
       } catch (error) {
@@ -69,7 +78,7 @@ const ScriptInfoPage = () => {
       <Nav color="inherit" position="static" />
       {!loading && script ? (
         <>
-          <ScriptInfo setBid={setBid} bid={bid} script={script} />
+          <ScriptInfo bid={bid} script={script} />
           <Suspense fallback={null}>
             <div className="flex flex-col md:flex-row mt-7 mb-4 py-6 gap-10 lg:gap-7 mx-auto px-5 sm:px-10 max-w-screen-2xl">
               <MarketScriptChips script={script} />

@@ -1,39 +1,29 @@
 import * as Yup from "yup";
 
-interface IWithdrawFormValues {
-  amount: string;
-  method: string;
-  bank?: string;
-  bankName?: string;
-  withdrawPlatform?: string;
-  network?: string;
-  address?: string;
-}
-
 export const withdrawSchema = Yup.object({
   amount: Yup.string()
     .required()
     .min(1)
     .matches(/^[0-9]+$/gi, "Please enter current amount")
     .label("Amount"),
-  method: Yup.string().required().oneOf(["bank_deposit", "network_deposit"]),
-  bank: Yup.string()
+  method: Yup.string().required().oneOf(["bank", "usdt"]),
+  bankName: Yup.string()
     .when("method", {
-      is: "bank_deposit",
+      is: "bank",
       then: (schema) => schema.required(),
       otherwise: (schema) => schema.notRequired(),
     })
     .label("Bank"),
-  account_name: Yup.string()
+  bankAccountName: Yup.string()
     .when("method", {
-      is: "bank_deposit",
+      is: "bank",
       then: (schema) => schema.required(),
       otherwise: (schema) => schema.notRequired(),
     })
     .label("Account name"),
-  account_number: Yup.string()
+  bankAccountNumber: Yup.string()
     .when("method", {
-      is: "bank_deposit",
+      is: "bank",
       then: (schema) => schema.required(),
       otherwise: (schema) => schema.notRequired(),
     })
@@ -41,14 +31,14 @@ export const withdrawSchema = Yup.object({
     .label("Account number"),
   network: Yup.string()
     .when("method", {
-      is: "network_deposit",
+      is: "usdt",
       then: (schema) => schema.required(),
       otherwise: (schema) => schema.notRequired(),
     })
     .label("Network"),
-  address: Yup.string()
+  usdtTrc20Address: Yup.string()
     .when("method", {
-      is: "network_deposit",
+      is: "usdt",
       then: (schema) => schema.required(),
       otherwise: (schema) => schema.notRequired(),
     })

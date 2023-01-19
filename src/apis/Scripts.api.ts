@@ -164,7 +164,7 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async searchScripts(search: string) {
-      const res = await api.get(`/script/${search}`, {
+      const res = await api.get(`/script/search?search=${search}`, {
         signal: controller?.signal,
       });
 

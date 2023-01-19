@@ -5,7 +5,6 @@ import {
   CardMedia,
   Chip,
   Icon,
-  Rating,
   Typography,
   type CardProps,
 } from "@mui/material";
@@ -56,9 +55,9 @@ const ScriptCard = (props: IProps) => {
         <div className="flex flex-wrap gap-2">
           <Chip label={script.scriptFormat} sx={{ borderRadius: 1 }} />
         </div>
-        <Rating
+        <CustomRating
           readOnly
-          defaultValue={script.rate}
+          defaultValue={script.reviewerRate}
           className="sm:hidden mt-4"
         />
         <div className="flex justify-between mt-1 sm:mt-4 mb-2 gap-2">
@@ -107,7 +106,7 @@ const ScriptCard = (props: IProps) => {
         )}
         <CustomRating
           readOnly
-          defaultValue={+script.rate}
+          defaultValue={+script.reviewerRate}
           className="hidden sm:inline-flex"
         />
       </CardActions>

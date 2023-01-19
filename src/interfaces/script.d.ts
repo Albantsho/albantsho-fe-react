@@ -3,7 +3,7 @@ export interface IScript {
   title: string;
   tagline: string;
   price: number;
-  rate: number;
+  reviewerRate: number;
   scriptFormat: string;
   reviewed: boolean;
   image: string;
@@ -48,7 +48,7 @@ export interface IBidScript {
   title: string;
   tagline: string;
   image: string;
-  primaryGenre: string;
+  scriptFormat: string;
   numberOfBids: number;
 }
 

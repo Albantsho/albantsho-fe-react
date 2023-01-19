@@ -19,6 +19,7 @@ const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {
   const {
     register,
     handleSubmit,
+    resetField,
     formState: { errors },
   } = useForm<ICreateScript>({
     resolver: yupResolver(createScriptSchema),
@@ -28,6 +29,8 @@ const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {
     try {
       setLoading(true);
       await createNewScript(data);
+      resetField("title");
+      resetField("tagline");
       setOpenCreateScript(false);
     } catch (error) {
       errorHandler(error);

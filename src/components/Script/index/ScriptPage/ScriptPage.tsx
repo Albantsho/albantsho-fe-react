@@ -56,7 +56,7 @@ const ScriptPage = ({
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query]);
 
   useEffect(() => {
     socket.on("disconnect", () => {

@@ -22,6 +22,7 @@ const TypeB = () => {
         if (typeof query.id === "string") {
           setLoading(true);
           const res = await getOneReview(query.id);
+
           setReviewValuesTypeB(res.data.review);
           setScript(res.data.script);
           setLoading(false);

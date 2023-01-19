@@ -1,9 +1,11 @@
 import { Divider, Tab, Tabs } from "@mui/material";
 import { IReviewerTask } from "interfaces/reviews";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import ScriptCart from "../ScriptCart/ScriptCart";
 import Task from "./Task/Task";
+import emptyBlogs from "@assets/images/empty-blogs.png";
 
 interface IProps {
   reviewerTaskList: IReviewerTask[];
@@ -70,19 +72,32 @@ const TasksList = ({ reviewerTaskList }: IProps) => {
           />
         </Tabs>
 
-        <div className=" bg-white rounded-md shadow-sm flex flex-col overflow-hidden">
-          {reviewerTaskList.map((reviewerTask, index) => (
-            <React.Fragment key={index}>
-              <Task
-                selectedScriptId={selectedScriptId}
-                setSelectedScriptId={setSelectedScriptId}
-                reviewerTask={reviewerTask}
+        <div className="bg-white h-full rounded-md shadow-sm flex flex-col gap-2 overflow-hidden justify-start">
+          {reviewerTaskList.length > 0 ? (
+            reviewerTaskList.map((reviewerTask, index) => (
+              <React.Fragment key={index}>
+                <Task
+                  selectedScriptId={selectedScriptId}
+                  setSelectedScriptId={setSelectedScriptId}
+                  reviewerTask={reviewerTask}
+                />
+                {index < reviewerTaskList.length - 1 && (
+                  <Divider className="hidden md:block" />
+                )}
+              </React.Fragment>
+            ))
+          ) : (
+            <div className="flex mx-auto">
+              <Image
+                width={384}
+                height={384}
+                loading="lazy"
+                className="w-fit h-fit mx-auto mt-14 lg:mt-24"
+                src={emptyBlogs}
+                alt="empty blog list"
               />
-              {index < reviewerTaskList.length - 1 && (
-                <Divider className="hidden md:block" />
-              )}
-            </React.Fragment>
-          ))}
+            </div>
+          )}
         </div>
       </div>
       <ScriptCart

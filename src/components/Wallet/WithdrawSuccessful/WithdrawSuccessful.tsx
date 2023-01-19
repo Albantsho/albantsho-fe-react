@@ -1,12 +1,13 @@
-import { Divider, Typography } from "@mui/material";
 import success from "@assets/images/success.png";
-import Image from "next/image";
+import { Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import routes from "routes/routes";
 
 const WithdrawSuccessful = () => {
-  const { push } = useRouter();
+  const { query } = useRouter();
 
   return (
     <div className="bg-white rounded-md px-5 sm:px-6  md:px-10 py-9 lg:px-14 lg:py-14 flex-1 w-full max-w-screen-2xl">
@@ -35,7 +36,7 @@ const WithdrawSuccessful = () => {
         variant="h5"
         className="mt-3 text-center leading-normal mx-auto futura font-medium text-primary-700"
       >
-        Transaction ID: 1234567890AVGED
+        Transaction ID: {query.transaction_id}
       </Typography>
       <Typography
         variant="body1"
@@ -45,11 +46,10 @@ const WithdrawSuccessful = () => {
         hours before arriving in your account. Thanks for trusting Albantsho
       </Typography>
 
-      <div
-        onClick={() => push(routes.projectsDashboard.url)}
-        className="flex mt-4 sm:mt-6 md:my-8"
-      >
-        <Btn className="py-3 px-6 mx-auto">Back to dashboard</Btn>
+      <div className="flex mt-4 sm:mt-6 md:my-8">
+        <Link passHref legacyBehavior href={routes.projectsDashboard.url}>
+          <Btn className="py-3 px-6 mx-auto">Back to dashboard</Btn>
+        </Link>
       </div>
     </div>
   );

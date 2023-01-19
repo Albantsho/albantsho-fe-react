@@ -1,11 +1,14 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Logo from "@shared/Logo/Logo";
+import useUserStore from "app/user.store";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import routes from "routes/routes";
 
 const Footer = () => {
+  const user = useUserStore((state) => state.user);
+
   return (
     <footer className="bg-primary-main py-20 relative z-50">
       <div className="max-w-screen-2xl mx-auto text-white px-5 sm:px-10">
@@ -75,11 +78,18 @@ const Footer = () => {
                 About Us
               </Button>
             </Link>
-            <Link legacyBehavior href={routes.scriptWriting.url}>
-              <Button color="inherit" size="large" className="sm:justify-start">
-                Script Writing
-              </Button>
-            </Link>
+            {user.userType === "writer" && (
+              <Link legacyBehavior href={routes.writerDashboard.url}>
+                <Button
+                  color="inherit"
+                  size="large"
+                  className="sm:justify-start"
+                >
+                  Script Writing
+                </Button>
+              </Link>
+            )}
+
             <Link legacyBehavior href={`${routes.marketplace.url}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
                 Marketplace

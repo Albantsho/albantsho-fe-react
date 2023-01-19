@@ -16,7 +16,7 @@ const Heading = ({ script }: IProps) => {
   useEffect(() => {
     async function getETHPrice() {
       const price = await priceConverter();
-      setEthPrice(price.USDT.ETH(script.price));
+      setEthPrice(price?.USDT.ETH(script.price) as number);
     }
     getETHPrice();
   }, []);
@@ -39,7 +39,7 @@ const Heading = ({ script }: IProps) => {
             className="bg-tinted-50/60 py-5 px-4 text-neutral-800"
             sx={{ borderRadius: 1 }}
           />
-          <CustomRating readOnly defaultValue={+script.rate} />
+          <CustomRating readOnly defaultValue={script.reviewerRate as number} />
         </div>
 
         <Typography

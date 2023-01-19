@@ -35,12 +35,14 @@ const Task = ({
           selectedScriptId === reviewerTask._id
             ? "bg-primary-50/40"
             : "bg-white"
-        } flex flex-1 cursor-pointer  items-center hover:bg-primary-50/40 flex-wrap sm:flex-nowrap gap-y-2 gap-x-2 py-5 sm:py-6 lg:py-9 px-5 sm:px-6 lg:px-12`}
+        } flex cursor-pointer  h-fit justify-start hover:bg-primary-50/40 flex-wrap sm:flex-nowrap gap-y-2 gap-x-2 py-5 sm:py-6 lg:py-9 px-5 sm:px-6 lg:px-12 `}
       >
         <div className="flex-shrink-0 -mb-2">
           {reviewerTask.image ? (
             <Image
-              className="rounded-md"
+              width={64}
+              height={64}
+              className="rounded-md w-16 h-16"
               loading="lazy"
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${reviewerTask.image}`}
               alt={reviewerTask.title}

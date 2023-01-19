@@ -1,6 +1,7 @@
 import success from "@assets/images/success.png";
 import { Fade, IconButton, Modal, Typography } from "@mui/material";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 interface IProps {
   setOpenBidSuccessful: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,7 +12,13 @@ const BidSuccessfulModal = ({
   setOpenBidSuccessful,
   openBidSuccessful,
 }: IProps) => {
-  const handleCloseBidSuccessful = () => setOpenBidSuccessful(false);
+  const { reload } = useRouter();
+
+  const handleCloseBidSuccessful = () => {
+    reload();
+    setOpenBidSuccessful(false);
+  };
+
   return (
     <Modal
       className="px-5"

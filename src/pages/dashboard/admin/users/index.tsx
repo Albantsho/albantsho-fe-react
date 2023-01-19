@@ -64,18 +64,15 @@ const UsersPage: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Admin Users</title>
       </Head>
+      <Typography
+        variant="h4"
+        className="text-primary-700 futura font-normal leading-normal"
+      >
+        User List
+      </Typography>
+      <AdminDashboardSearch placeholder="Search" handleSearch={handleSearch} />
       {!loading && usersList !== null ? (
         <>
-          <Typography
-            variant="h4"
-            className="text-primary-700 futura font-normal leading-normal"
-          >
-            User List
-          </Typography>
-          <AdminDashboardSearch
-            placeholder="Search"
-            handleSearch={handleSearch}
-          />
           <AllUsersList usersList={usersList} />
           {pageCount > 1 && (
             <CustomPaginationComponent

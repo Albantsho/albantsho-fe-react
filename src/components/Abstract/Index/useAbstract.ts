@@ -69,7 +69,10 @@ const useAbstract = (script: IScript) => {
     let allFields = Object.keys(formValues);
     if (activeButton === 0) {
       allFields = allFields.filter(
-        (field) => field !== "scriptFile" && field !== "scriptCopyright"
+        (field) =>
+          field !== "scriptFile" &&
+          field !== "scriptCopyright" &&
+          field !== "draft"
       );
     } else if (activeButton === 1) {
       allFields = allFields.filter((field) => field !== "draft");
@@ -132,7 +135,7 @@ const useAbstract = (script: IScript) => {
           });
         }
 
-        if (activeButton === 0) {
+        if (activeButton === 0 && data.draft) {
           await selectedDraft(data.draft, {
             draftScriptId: data.draft,
           });
@@ -190,7 +193,7 @@ const useAbstract = (script: IScript) => {
           });
         }
 
-        if (activeButton === 0) {
+        if (activeButton === 0 && data.draft) {
           if (data.draft) {
             await selectedDraft(data.draft, {
               draftScriptId: data.draft,

@@ -1,7 +1,7 @@
 import WalletLayout from "@shared/Layouts/WalletLayout/WalletLayout";
 import Withdraw from "components/Wallet/Withdraw/Withdraw";
 import Head from "next/head";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "../../_app";
 
 const WithdrawPage: NextPageWithLayout = () => {
   return (

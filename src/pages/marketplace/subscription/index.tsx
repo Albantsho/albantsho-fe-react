@@ -10,7 +10,6 @@ import Btn from "@shared/Btn/Btn";
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import usePlanApi from "apis/Plan.api";
-import useWalletApi from "apis/Wallet.api";
 import useUserStore from "app/user.store";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import type { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
@@ -56,24 +55,23 @@ const Subscription = () => {
 
   const handleFlutterPayment = useFlutterwave(config);
 
-  const paymentResponse = async (response: FlutterWaveResponse) => {
-    try {
-      // const resIncreaseWalletBalance = await increaseWalletBalance(
-      //   `${response.transaction_id}`,
-      //   { transactionId: `${response.transaction_id}` }
-      // );
-      await buySubscriptionPlan({
-        transactionId: `${response.transaction_id}`,
-      });
-      replace(
-        routes.marketPlaceSubscriptionSuccessful.dynamicUrl(
-          `${response.transaction_id}`
-        )
-      );
-      closePaymentModal(); // this will close the modal programmatically
-    } catch (error) {
-      ("");
+  const paymentResponse = (response: FlutterWaveResponse) => {
+    async function buyingSubscriptionPlan() {
+      try {
+        const res = await buySubscriptionPlan({
+          transactionId: `${response.transaction_id}`,
+        });
+        replace(
+          routes.marketPlaceSubscriptionSuccessful.dynamicUrl(
+            `${response.transaction_id}`
+          )
+        );
+        closePaymentModal(); // this will close the modal programmatically
+      } catch (error) {
+        ("");
+      }
     }
+    buyingSubscriptionPlan();
   };
 
   const paymentBuyingSubscriptionPlan = () => {

@@ -2,15 +2,11 @@ import { Chip, Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import usePlanApi from "apis/Plan.api";
 import useUserStore from "app/user.store";
-import {
-  closePaymentModal,
-  useFlutterwave,
-  FlutterWaveButton,
-} from "flutterwave-react-v3";
+import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import type { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
@@ -49,25 +45,31 @@ const Summary = ({ script }: IProps) => {
 
   const handleFlutterPayment = useFlutterwave(config);
 
-  const responsePayment = async (response: FlutterWaveResponse) => {
-    try {
-      const res = await buyReviewsPlan({
-        plan:
-          query.reviewPlan === "typeA"
-            ? "A"
-            : query.reviewPlan === "typeB"
-            ? "B"
-            : "",
-        scriptId: script._id,
-        transactionId: `${response.transaction_id}`,
-      });
-      // closePaymentModal(); // this will close the modal programmatically
-      replace(
-        routes.reviewsPaymentSuccessful.dynamicUrl(`${response.transaction_id}`)
-      );
-    } catch (error) {
-      errorHandler(error);
+  const responsePayment = (response: FlutterWaveResponse) => {
+    async function buyingReviewPlan() {
+      try {
+        const res = await buyReviewsPlan({
+          plan:
+            query.reviewPlan === "typeA"
+              ? "A"
+              : query.reviewPlan === "typeB"
+              ? "B"
+              : "",
+          scriptId: script._id,
+          transactionId: `${response.transaction_id}`,
+        });
+
+        replace(
+          routes.reviewsPaymentSuccessful.dynamicUrl(
+            `${response.transaction_id}`
+          )
+        );
+      } catch (error) {
+        errorHandler(error);
+      }
     }
+    buyingReviewPlan();
+    closePaymentModal(); // this will close the modal programmatically
   };
 
   const paymentBuyingReviewPlan = () => {
@@ -89,7 +91,9 @@ const Summary = ({ script }: IProps) => {
   useEffect(() => {
     async function getETHPrice() {
       const price = await priceConverter();
-      setEthPrice(price.USDT.ETH(query.reviewPlan === "typeA" ? 100 : 300));
+      setEthPrice(
+        price?.USDT.ETH(query.reviewPlan === "typeA" ? 100 : 300) as number
+      );
     }
     getETHPrice();
   }, []);

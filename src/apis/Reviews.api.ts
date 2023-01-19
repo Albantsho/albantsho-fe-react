@@ -127,7 +127,7 @@ const useReviewsApi = (controller?: AbortController) => {
     },
 
     async getAllReviewerTasks(query: string) {
-      const res = await axiosPrivate.get(`/review/my/tasks?limit=10&${query}`, {
+      const res = await axiosPrivate.get(`/review/my/tasks?${query}`, {
         signal: controller?.signal,
       });
 

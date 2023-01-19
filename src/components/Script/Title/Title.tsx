@@ -49,7 +49,6 @@ const Title = ({ script }: IProps) => {
                 className={`${
                   errors.writer ? "border-error-500" : "border-white"
                 } text-center w-full h-10 rounded-md duration-100 outline-none px-2 py-3 border-2 focus:border-primary-700 placeholder:text-center placeholder:font-bold placeholder:text-black font-bold underline courier`}
-                // defaultValue={script.title}
                 placeholder="Written by"
               />
               {errors.writer?.message && (
@@ -65,7 +64,6 @@ const Title = ({ script }: IProps) => {
                 className={`${
                   errors.names ? "border-error-500" : "border-white"
                 } text-center w-full h-10 rounded-md duration-100 outline-none px-2 py-3 border-2 focus:border-primary-700 placeholder:text-center placeholder:font-bold placeholder:text-black font-bold underline courier`}
-                // defaultValue={script.title}
                 placeholder="THIS IS WHERE THE NAMES GO"
               />
               {errors.names?.message && (
@@ -81,7 +79,6 @@ const Title = ({ script }: IProps) => {
                 className={`${
                   errors.any ? "border-error-500 " : "border-white"
                 } text-center w-full h-10 rounded-md duration-100 outline-none px-2 py-3 border-2 focus:border-primary-700 placeholder:text-center placeholder:font-bold placeholder:text-black font-bold underline courier`}
-                // defaultValue={script.title}
                 placeholder="Based on (if any)"
               />
               {errors.any?.message && (
@@ -90,37 +87,38 @@ const Title = ({ script }: IProps) => {
                 </span>
               )}
             </div>
-
-            <MobileDatePicker
-              inputFormat="MM/DD/YYYY"
-              value={dateValue}
-              onChange={handleChangeDateValue}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  sx={{
-                    width: "100%",
-                    "& .MuiOutlinedInput-root": {
-                      "& > fieldset": {
-                        borderColor: "white",
-                        textAlign: "center",
+            <div className="fle text-center items-center justify-center">
+              <MobileDatePicker
+                inputFormat="MM/DD/YYYY"
+                value={dateValue}
+                onChange={handleChangeDateValue}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    sx={{
+                      width: "100%",
+                      "& .MuiOutlinedInput-root": {
+                        "& > fieldset": {
+                          borderColor: "white",
+                          textAlign: "center",
+                        },
                       },
-                    },
-                    "& .MuiOutlinedInput-root:hover": {
-                      "& > fieldset": {
-                        borderColor: "white",
+                      "& .MuiOutlinedInput-root:hover": {
+                        "& > fieldset": {
+                          borderColor: "white",
+                        },
                       },
-                    },
-                  }}
-                  InputProps={{
-                    className: "h-10 rounded-md font-bold courier",
-                    // inputProps: {
-                    //   style: { textAlign: "center" },
-                    // },
-                  }}
-                />
-              )}
-            />
+                    }}
+                    InputProps={{
+                      className: "h-10 rounded-md font-bold courier",
+                      // inputProps: {
+                      //   style: { textAlign: "center" },
+                      // },
+                    }}
+                  />
+                )}
+              />
+            </div>
           </div>
         </LocalizationProvider>
       </section>

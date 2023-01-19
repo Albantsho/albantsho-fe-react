@@ -42,7 +42,7 @@ const ScriptsSearch = ({ showSearchScript, openSearchScript }: IProps) => {
   useEffect(() => {
     async function getOtherDrafts() {
       try {
-        const res = await getAllDraft();
+        const res = await getAllDraft("reviewed=false");
         scriptsList = res.data.drafts;
       } catch (error) {
         ("");

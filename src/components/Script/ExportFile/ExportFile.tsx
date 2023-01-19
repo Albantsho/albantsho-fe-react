@@ -28,7 +28,7 @@ const ExportFile = ({ script }: IProps) => {
         }</h6><h6 style="font-family:Courier Prime;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${script.writtenBy.join(
           " "
         )}</h6><h6 style="font-family:Courier Prime;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
-          script.draftDate as string
+          script.draftDate ? (script.draftDate as string) : Date.now()
         ).toLocaleDateString()}</h6></div><div style="padding:0 40px;width:595px;font-family:Courier Prime;">
         ${valueForConvertPdf}
         </div>`,

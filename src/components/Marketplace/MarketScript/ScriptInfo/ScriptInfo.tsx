@@ -11,21 +11,17 @@ import PlaceBid from "./PlaceBid/PlaceBid";
 
 interface IProps {
   script: IFullInformationScript;
-  bid: boolean | IBidInMarketplace | null;
-  setBid: React.Dispatch<
-    React.SetStateAction<boolean | IBidInMarketplace | null>
-  >;
+  bid: IBidInMarketplace | null;
 }
 
-const ScriptInfo = ({ script, bid, setBid }: IProps) => {
+const ScriptInfo = ({ script, bid }: IProps) => {
   const [openBidSuccessful, setOpenBidSuccessful] = useState(false);
   const [ethPrice, setEthPrice] = useState<number | false | null>(null);
-  console.log(ethPrice);
 
   useEffect(() => {
     async function getETHPrice() {
       const price = await priceConverter();
-      setEthPrice(price.USDT.ETH(script.price));
+      setEthPrice(price?.USDT.ETH(bid ? bid.amount : script.price) as number);
     }
     getETHPrice();
   }, []);
@@ -48,7 +44,7 @@ const ScriptInfo = ({ script, bid, setBid }: IProps) => {
             className="bg-tinted-50/60 text-neutral-800 py-5"
             sx={{ borderRadius: 1 }}
           />
-          <CustomRating defaultValue={script.rateCount} readOnly />
+          <CustomRating defaultValue={script.reviewerRate as number} readOnly />
         </div>
         <div className="flex gap-8 items-center">
           <Typography
@@ -68,7 +64,6 @@ const ScriptInfo = ({ script, bid, setBid }: IProps) => {
         <PlaceBid
           ethPrice={ethPrice}
           bid={bid}
-          setBid={setBid}
           script={script}
           setOpenBidSuccessful={setOpenBidSuccessful}
         />

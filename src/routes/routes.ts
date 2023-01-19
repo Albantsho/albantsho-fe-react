@@ -302,7 +302,7 @@ const routes = {
   },
   withdrawWallet: {
     url: "/wallet/withdraw",
-    mustAuthenticated: "noMatter",
+    mustAuthenticated: "yes",
     permission: ["writer"],
   },
   helpWallet: {
@@ -316,7 +316,8 @@ const routes = {
     permission: ["writer", "producer"],
   },
   withdrawSuccessfulWallet: {
-    url: "/wallet/withdraw-successful",
+    url: "/wallet/withdraw/[transaction_id]",
+    dynamicUrl: (transactionId: string) => `/wallet/withdraw/${transactionId}`,
     mustAuthenticated: "yes",
     permission: ["writer"],
   },

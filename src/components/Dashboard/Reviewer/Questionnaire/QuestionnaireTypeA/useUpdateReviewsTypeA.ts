@@ -43,6 +43,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           { introduction: reviewTypeAValues.current.introduction },
           reviewValuesTypeA._id
         );
+        toast.success(res.message);
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -189,9 +190,10 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
         },
         reviewValuesTypeA._id
       );
-      const res = await completingReview(reviewValuesTypeA._id, {
+      await completingReview(reviewValuesTypeA._id, {
         completed: true,
       });
+
       push(routes.reviewerDashboardPreviewTypeA.dynamicUrl(query.id as string));
     } catch (error) {
       errorHandler(error);

@@ -49,7 +49,7 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
                   width={64}
                   height={64}
                   layout="fixed"
-                  className="rounded-md"
+                  className="rounded-md w-16 h-16"
                   loading="lazy"
                   alt={script.title}
                   src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}

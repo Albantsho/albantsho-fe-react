@@ -51,7 +51,7 @@ const OpeningBidScript = ({
                 width={64}
                 height={64}
                 alt={script.title}
-                className="rounded-md"
+                className="rounded-md w-16 h-16"
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
               />
             </div>
@@ -81,7 +81,7 @@ const OpeningBidScript = ({
         </div>
         <Chip
           className="py-5 px-4 hidden md:flex lg:hidden xl:flex self-center 2xl:mr-36 md:mr-10 min-w-[146px] bg-tinted-100/60 rounded-md  text-neutral-800"
-          label={script.primaryGenre}
+          label={script.scriptFormat}
         />
         <Tooltip title="Bids">
           <div

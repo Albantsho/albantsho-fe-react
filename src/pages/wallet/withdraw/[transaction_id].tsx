@@ -1,7 +1,7 @@
 import WalletLayout from "@shared/Layouts/WalletLayout/WalletLayout";
 import WithdrawSuccessful from "components/Wallet/WithdrawSuccessful/WithdrawSuccessful";
 import Head from "next/head";
-import { NextPageWithLayout } from "../_app";
+import { NextPageWithLayout } from "../../_app";
 
 const WithdrawSuccessfulPage: NextPageWithLayout = () => {
   return (

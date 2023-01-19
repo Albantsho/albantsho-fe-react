@@ -9,12 +9,12 @@ import { withdrawSchema } from "./validation/withdraw.validation";
 
 interface IWithdrawFormValues {
   amount: string;
-  method: string;
-  bank?: string;
+  method: "usdt" | "bank";
+  bankAccountName?: string;
   bankName?: string;
-  withdrawPlatform?: string;
+  bankAccountNumber?: string;
   network?: string;
-  address?: string;
+  usdtTrc20Address?: string;
 }
 
 const useWithdraw = () => {
@@ -30,7 +30,7 @@ const useWithdraw = () => {
     formState: { errors },
   } = useForm<IWithdrawFormValues>({
     defaultValues: {
-      method: "bank_deposit",
+      method: "bank",
     },
     resolver: yupResolver(withdrawSchema),
   });
@@ -40,8 +40,9 @@ const useWithdraw = () => {
     try {
       setLoading(true);
       const res = await withdrawWallet(data);
-      console.log(res);
-      // replace(routes.wallet.url);
+      replace(
+        routes.withdrawSuccessfulWallet.dynamicUrl(res.data.transaction._id)
+      );
     } catch (error) {
       errorHandler(error);
     } finally {

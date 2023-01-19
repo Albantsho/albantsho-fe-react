@@ -27,7 +27,7 @@ const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
   useEffect(() => {
     async function getETHPrice() {
       const price = await priceConverter();
-      setEthPrice(price.USDT.ETH(script.price));
+      setEthPrice(price?.USDT.ETH(script.price) as number);
     }
     getETHPrice();
   }, []);

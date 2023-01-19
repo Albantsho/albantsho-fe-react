@@ -57,18 +57,24 @@ const MyScripts = ({ scriptsList }: IProps) => {
               <Image
                 width="64"
                 height="64"
-                className="rounded-md"
+                className="rounded-md w-16 h-16"
                 loading="lazy"
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
                 alt={script.title}
               />
               <div className="flex-grow sm:flex-1 sm:max-w-[271px] min-w-[170px] sm:ml-2">
-                <Typography
-                  variant="body1"
-                  className="futura font-semibold text-primary-700"
+                <Link
+                  passHref
+                  href={routes.marketplaceOneScript.dynamicUrl(script._id)}
                 >
-                  {script.title}
-                </Typography>
+                  <Typography
+                    variant="body1"
+                    className="futura font-semibold text-primary-700"
+                  >
+                    {script.title}
+                  </Typography>
+                </Link>
+
                 <Typography variant="caption" className="text-stone-800">
                   {script.tagline}
                 </Typography>

@@ -95,21 +95,21 @@ const Withdraw = () => {
               id="method"
               variant="outlined"
               size="medium"
-              defaultValue="bank_deposit"
+              defaultValue="bank"
             >
-              <MenuItem value="bank_deposit">
+              <MenuItem value="bank">
                 <ListItemText className="text-primary-700">
                   Bank Deposit
                 </ListItemText>
               </MenuItem>
-              <MenuItem value="network_deposit">
+              <MenuItem value="usdt">
                 <ListItemText className="text-primary-700">USDT</ListItemText>
               </MenuItem>
             </CustomInput>
           )}
         />
       </div>
-      {withdrawTypeValue === "bank_deposit" && (
+      {withdrawTypeValue === "bank" && (
         <>
           <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
             <label htmlFor="bank">
@@ -118,36 +118,6 @@ const Withdraw = () => {
                 className="futura font-medium text-neutral-800"
               >
                 Bank<span className="text-error-700">*</span>
-              </Typography>
-            </label>
-            <CustomInput
-              error={Boolean(errors.bank) || false}
-              {...register("bank")}
-              fullWidth
-              sx={{
-                "& .MuiOutlinedInput-input": { py: 2 },
-                maxWidth: "628px",
-                "& .MuiFormHelperText-root": {
-                  mt: "8px",
-                  mx: 0,
-                  color: "red",
-                  fontSize: "16px",
-                },
-              }}
-              helperText={errors.bank?.message}
-              id="bank"
-              variant="outlined"
-              size="medium"
-            />
-          </div>
-
-          <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
-            <label htmlFor="account-name">
-              <Typography
-                variant="body1"
-                className="futura font-medium text-neutral-800"
-              >
-                Account Name<span className="text-error-700">*</span>
               </Typography>
             </label>
             <CustomInput
@@ -165,6 +135,36 @@ const Withdraw = () => {
                 },
               }}
               helperText={errors.bankName?.message}
+              id="bank"
+              variant="outlined"
+              size="medium"
+            />
+          </div>
+
+          <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
+            <label htmlFor="account-name">
+              <Typography
+                variant="body1"
+                className="futura font-medium text-neutral-800"
+              >
+                Account Name<span className="text-error-700">*</span>
+              </Typography>
+            </label>
+            <CustomInput
+              error={Boolean(errors.bankAccountName) || false}
+              {...register("bankAccountName")}
+              fullWidth
+              sx={{
+                "& .MuiOutlinedInput-input": { py: 2 },
+                maxWidth: "628px",
+                "& .MuiFormHelperText-root": {
+                  mt: "8px",
+                  mx: 0,
+                  color: "red",
+                  fontSize: "16px",
+                },
+              }}
+              helperText={errors.bankAccountName?.message}
               id="account-name"
               variant="outlined"
               size="medium"
@@ -181,8 +181,8 @@ const Withdraw = () => {
               </Typography>
             </label>
             <CustomInput
-              error={Boolean(errors.withdrawPlatform) || false}
-              {...register("withdrawPlatform")}
+              error={Boolean(errors.bankAccountNumber) || false}
+              {...register("bankAccountNumber")}
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-input": { py: 2 },
@@ -194,7 +194,7 @@ const Withdraw = () => {
                   fontSize: "16px",
                 },
               }}
-              helperText={errors.withdrawPlatform?.message}
+              helperText={errors.bankAccountNumber?.message}
               id="account-number"
               variant="outlined"
               size="medium"
@@ -203,7 +203,7 @@ const Withdraw = () => {
         </>
       )}
 
-      {withdrawTypeValue === "network_deposit" && (
+      {withdrawTypeValue === "usdt" && (
         <>
           <div className="flex items-start flex-col justify-start gap-2 mb-3 md:mb-5">
             <label
@@ -232,7 +232,6 @@ const Withdraw = () => {
               id="network"
               variant="outlined"
               size="medium"
-              value="USDT"
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="start">
@@ -253,8 +252,8 @@ const Withdraw = () => {
               Address<span className="text-error-700">*</span>
             </label>
             <CustomInput
-              error={Boolean(errors.address) || false}
-              {...register("address")}
+              error={Boolean(errors.usdtTrc20Address) || false}
+              {...register("usdtTrc20Address")}
               fullWidth
               sx={{
                 "& .MuiOutlinedInput-input": { py: 2 },
@@ -266,7 +265,7 @@ const Withdraw = () => {
                   fontSize: "16px",
                 },
               }}
-              helperText={errors.address?.message}
+              helperText={errors.usdtTrc20Address?.message}
               id="address"
               variant="outlined"
               size="medium"

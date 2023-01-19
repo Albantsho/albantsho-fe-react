@@ -19,8 +19,8 @@ const useDraftApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
   return {
-    async getAllDraft() {
-      const res = await axiosPrivate.get("/draft/all", {
+    async getAllDraft(query?: string) {
+      const res = await axiosPrivate.get(`/draft/all?${query}`, {
         signal: controller?.signal,
       });
 

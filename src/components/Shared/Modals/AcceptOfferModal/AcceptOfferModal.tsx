@@ -28,7 +28,7 @@ const AcceptOfferModal = ({
 
   const handleCloseAcceptOffer = () => setOpenAcceptOffer(false);
   const acceptOfferFunc = (id: string) => async () => {
-    const res = await acceptBid(id);
+    await acceptBid(id);
     replace(routes.writerDashboard.url);
   };
 

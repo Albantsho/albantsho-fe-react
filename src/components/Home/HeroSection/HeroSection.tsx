@@ -56,17 +56,7 @@ const HeroSection = () => {
       maxWidth: 395,
       boxShadow: "0px 35px 60px 0px #0000004D",
     }}
-    script={{
-      _id: "hbnj15",
-      tagline:
-        "One platform sets out to enable better stories one script at a time",
-      scriptFormat: "Feature film",
-      rate: 4,
-      title: "Black Onion",
-      price: 400,
-      reviewed: true,
-      image: "",
-    }}
+    script={bestScript}
     inHome
   />;
 
@@ -187,17 +177,19 @@ const HeroSection = () => {
                 </div>
               </Card>
             ) : (
-              <AnimatedScriptCard
-                key={bestScript._id}
-                className="w-full"
-                style={cardAnim}
-                sx={{
-                  maxWidth: 395,
-                  boxShadow: "0px 35px 60px 0px #0000004D",
-                }}
-                script={bestScript}
-                inHome
-              />
+              bestScript && (
+                <AnimatedScriptCard
+                  key={bestScript._id}
+                  className="w-full"
+                  style={cardAnim}
+                  sx={{
+                    maxWidth: 395,
+                    boxShadow: "0px 35px 60px 0px #0000004D",
+                  }}
+                  script={bestScript}
+                  inHome
+                />
+              )
             ))}
         </div>
       </div>

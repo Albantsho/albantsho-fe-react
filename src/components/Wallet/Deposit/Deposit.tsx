@@ -1,10 +1,11 @@
 import { Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import PaymentModal from "./PaymentModal/PaymentModal";
 import useDeposit from "./useDeposit";
 
 const Deposit = () => {
-  const { errors, handleSubmit, loading, onSubmit, register } = useDeposit();
+  const { errors, handleSubmit, amount, onSubmit, register } = useDeposit();
 
   return (
     <form
@@ -52,9 +53,10 @@ const Deposit = () => {
           placeholder="How much would you like to deposit?"
         />
       </div>
-      <Btn loading={loading} type="submit" className="py-3 px-6">
+      <Btn type="submit" className="py-3 px-6">
         Deposit
       </Btn>
+      {amount > 0 && <PaymentModal amount={amount as number} />}
     </form>
   );
 };

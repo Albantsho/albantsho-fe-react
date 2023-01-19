@@ -47,12 +47,12 @@ const ScriptsList = ({ reviewsList }: IProps) => {
             >
               <div className="sm:flex md:w-fit xl:mr-14 lg:max-w-[445px] 2xl:max-w-[425px] 2xl:mr-[75px]">
                 <div className="flex gap-4 sm:mr-3 xl:mr-[85px]">
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 w-[72px] h-[72px]">
                     {script.image ? (
                       <Image
                         width="72"
                         height="72"
-                        className="rounded-md"
+                        className="rounded-md h-[72px]"
                         loading="lazy"
                         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${script.image}`}
                         alt={script.title}

@@ -39,10 +39,16 @@ const ScriptsAuction = ({ bidsList, script, setBidsList }: IProps) => {
     setOpenAcceptOffer(true);
   };
 
-  const rejectOfferFunc = (id: string) => async () => {
-    await rejectBid(id);
-    setBidsList((prev) => prev.filter((b) => b._id !== id));
-  };
+  const rejectOfferFunc =
+    (id: string) => async (event: React.PointerEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      try {
+        const res = await rejectBid(id);
+        setBidsList((prev) => prev.filter((b) => b._id !== id));
+      } catch (error) {
+        ("");
+      }
+    };
 
   return (
     <div className="mt-12 md:mt-20 grid">
@@ -108,8 +114,8 @@ const ScriptsAuction = ({ bidsList, script, setBidsList }: IProps) => {
                       variant="h6"
                       className="font-normal text-neutral-700"
                     >
-                      {auction.producer.firstName}
-                      {auction.producer.lastName}
+                      {auction.producer[0].firstName}{" "}
+                      {auction.producer[0].lastName}
                     </Typography>
                   </TableCell>
                   <TableCell align="center" className="w-20">
