@@ -37,7 +37,7 @@ const useResetPasswordForm = () => {
           newPassword: data.password,
           resetPasswordToken: query.reset_password_token,
         });
-        replace(routes.signin.url);
+        replace(routes.resetPasswordConfirmation.url);
       }
     } catch (error) {
       errorHandler(error);

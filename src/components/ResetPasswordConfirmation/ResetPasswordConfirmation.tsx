@@ -37,7 +37,12 @@ const ResetPasswordConfirmation = () => {
         </div>
 
         <div className="justify-center flex mt-6">
-          <Link passHref legacyBehavior href={routes.signin.url}>
+          <Link
+            passHref
+            legacyBehavior
+            target="_blank"
+            href={routes.signin.url}
+          >
             <Btn
               size="large"
               className="py-3 lg:text-xl px-6 font-normal montserrat lg:py-4 lg:px-10"

@@ -45,7 +45,7 @@ const useLoginForm = () => {
       const res = await signin({ ...data, rememberMe });
       authenticationUser(res.data.user);
       !res.data.user && replace(routes.verifyEmail.url);
-      !res.data.user && authenticationUser(data.email as any);
+      !res.data.user && authenticationUser({ email: data.email } as any);
       setAccessToken(res.data.accessToken);
       res.data.user.userType && res.data.user.userType === "writer"
         ? replace(routes.writerDashboard.url)

@@ -54,13 +54,39 @@ const useRegisterForm = () => {
       try {
         delete data.fullname;
         setLoading(true);
-        const res = await signup({
-          ...data,
-          firstName: splitFullName[0],
-          lastName: splitFullName[splitFullName.length - 1],
-        });
-        authenticationUser(res.data.user);
-        replace(routes.verifyEmail.url);
+        if (data.userType === "writer") {
+          const res = await signup({
+            ...data,
+            firstName: splitFullName
+              .slice(0, splitFullName.length - 1)
+              .join(" "),
+            lastName: splitFullName[splitFullName.length - 1],
+            country: data.country,
+            email: data.email,
+            gender: data.gender,
+            password: data.password,
+            userType: data.userType,
+          });
+          authenticationUser(res.data.user);
+          replace(routes.verifyEmail.url);
+        } else if (data.userType === "producer") {
+          const res = await signup({
+            ...data,
+            firstName: splitFullName
+              .slice(0, splitFullName.length - 1)
+              .join(" "),
+            lastName: splitFullName[splitFullName.length - 1],
+            country: data.country,
+            email: data.email,
+            gender: data.gender,
+            password: data.password,
+            userType: data.userType,
+            portfolio: data.portfolio,
+            productionCompanyName: data.productionCompanyName,
+          });
+          authenticationUser(res.data.user);
+          replace(routes.verifyEmail.url);
+        }
       } catch (error) {
         errorHandler(error);
       } finally {
