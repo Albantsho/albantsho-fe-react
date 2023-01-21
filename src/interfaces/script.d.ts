@@ -7,6 +7,9 @@ export interface IScript {
   scriptFormat: string;
   reviewed: boolean;
   image: string;
+  writtenBy: string[];
+  draftDate: string;
+  basedOn: string;
 }
 
 export interface IUnlistedScript {

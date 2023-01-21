@@ -102,6 +102,10 @@ const Title = ({ script }: IProps) => {
                           borderColor: "white",
                           textAlign: "center",
                         },
+                        "& > input": {
+                          textAlign: "center",
+                          textDecoration: "underline",
+                        },
                       },
                       "& .MuiOutlinedInput-root:hover": {
                         "& > fieldset": {
@@ -110,10 +114,8 @@ const Title = ({ script }: IProps) => {
                       },
                     }}
                     InputProps={{
-                      className: "h-10 rounded-md font-bold courier",
-                      // inputProps: {
-                      //   style: { textAlign: "center" },
-                      // },
+                      className:
+                        "h-10 rounded-md font-bold courier text-center",
                     }}
                   />
                 )}

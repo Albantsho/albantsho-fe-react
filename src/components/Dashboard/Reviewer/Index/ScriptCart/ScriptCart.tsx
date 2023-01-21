@@ -33,8 +33,8 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
     (reviewerTask) => reviewerTask._id === selectedScriptId
   );
   const { createNewReview } = useReviewsApi();
-  const { replace, push } = useRouter();
-  const { getOneDraft } = useDraftApi();
+  const { replace } = useRouter();
+  const { getOneDraft, getOneDraftAsPdf } = useDraftApi();
   const beginReviewToScript = (scriptId: string) => async () => {
     try {
       await createNewReview({ scriptId });
@@ -73,12 +73,17 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
       const doc = new jsPDF("p", "pt", "a4");
       if (valueForConvertPdf) {
         doc.html(
-          `<div style="padding:0 40px;width:595px;height:842px;font-family:Courier Prime;display:flex;justify-content:center;align-items:center;gap:18px;flex-direction:column;"><h6 style="font-family:Courier Prime;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
+          `<div style="padding:0 40px;width:595px;height:842px;font-family:Courier;display:flex;align-items:center;gap:25px;flex-direction:column;padding:0 20px;padding-top:80px;"><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
             selectedScript?.title
-          }</h6><h6 style="font-family:Courier Prime;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${selectedScript?.writtenBy.join(
-            " "
-          )}</h6><h6 style="font-family:Courier Prime;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
-            selectedScript?.draftDate as string
+          }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${
+            selectedScript?.writtenBy.length !== 0 &&
+            selectedScript?.writtenBy.join(" ")
+          }</h6><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
+            selectedScript?.basedOn
+          }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
+            selectedScript?.draftDate
+              ? (selectedScript.draftDate as string)
+              : Date.now()
           ).toLocaleDateString()}</h6></div><div style="padding:0 40px;width:595px;font-family:Courier Prime;">
           ${valueForConvertPdf}
           </div>`,
@@ -96,9 +101,17 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
         );
       }
     } else {
-      return resDraft;
+      const res = await getOneDraftAsPdf(selectedScript?._id as string);
+      const blobUrl = window.URL.createObjectURL(new Blob([res]));
+      const aTag = document.createElement("a");
+      aTag.href = blobUrl;
+      aTag.setAttribute("download", `${selectedScript?.title}.pdf`);
+      document.body.appendChild(aTag);
+      aTag.click();
+      aTag.remove();
     }
   };
+
   return (
     <Card
       data-aos="fade-left"
@@ -114,31 +127,14 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
             ? "Type B"
             : ""}
         </Button>
-        {resDraft && resDraft.data ? (
-          <Button
-            onClick={seeScript}
-            className="py-[10px] px-4"
-            variant="outlined"
-            startIcon={<FiArrowUpRight />}
-          >
-            View script
-          </Button>
-        ) : (
-          <a
-            href={resDraft}
-            rel="noreferrer"
-            target={"_blank"}
-            download="file.pdf"
-          >
-            <Button
-              className="py-[10px] px-4"
-              variant="outlined"
-              startIcon={<FiArrowUpRight />}
-            >
-              View script
-            </Button>
-          </a>
-        )}
+        <Button
+          onClick={seeScript}
+          className="py-[10px] px-4"
+          variant="outlined"
+          startIcon={<FiArrowUpRight />}
+        >
+          View script
+        </Button>
       </CardActions>
       <Divider className="my-7" />
       <CardContent className="px-5 py-0 ">

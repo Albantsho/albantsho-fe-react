@@ -2,7 +2,7 @@ import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import useScripBidApi from "apis/ScripBid.api";
 import useScriptsApi from "apis/Scripts.api";
 import CurrentBids from "components/Dashboard/Producer/CurrentBids";
-import MyScripts from "components/Dashboard/Producer/MyScripts";
+import MyScriptsList from "components/Dashboard/Producer/MyScriptList/MyScriptsList";
 import ScriptsSearch from "components/Dashboard/Producer/ScriptsSearch";
 import TabButtons from "components/Dashboard/Producer/TabButtons";
 import { IProducerBid } from "interfaces/bid";
@@ -39,6 +39,10 @@ const Scripts: NextPageWithLayout = () => {
       try {
         setLoading(true);
         const resScripts = await getProducerAllScripts(searchQuery);
+        console.log(
+          "🚀 ~ file: index.tsx:42 ~ getScriptsFunc ~ resScripts",
+          resScripts
+        );
         const resBids = await getAllBidsForProducer(searchQuery);
         setBidsList(resBids.data.scriptBids);
         setScriptsList(resScripts.data.scripts);
@@ -66,7 +70,7 @@ const Scripts: NextPageWithLayout = () => {
             <CurrentBids setBidsList={setBidsList} bidsList={bidsList} />
           )}
           {query.tab === "my-scripts" && (
-            <MyScripts scriptsList={scriptsList} />
+            <MyScriptsList scriptsList={scriptsList} />
           )}
         </>
       )}
