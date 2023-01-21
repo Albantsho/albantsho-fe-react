@@ -17,6 +17,18 @@ const MyScript = ({ script }: IProps) => {
   const { getOneDraft, getOneDraftAsPdf } = useDraftApi();
   const [resDraft, setResDraft] = useState<any>();
 
+  useEffect(() => {
+    async function getDraftFunc() {
+      try {
+        const res = await getOneDraft(script._id as string);
+        setResDraft(res);
+      } catch (error) {
+        ("");
+      }
+    }
+    getDraftFunc();
+  }, []);
+
   const seeScript = async () => {
     if (resDraft.data) {
       const htmlContent = new DOMParser().parseFromString(
@@ -63,18 +75,6 @@ const MyScript = ({ script }: IProps) => {
       aTag.remove();
     }
   };
-
-  useEffect(() => {
-    async function getDraftFunc() {
-      try {
-        const res = await getOneDraft(script._id as string);
-        setResDraft(res);
-      } catch (error) {
-        ("");
-      }
-    }
-    getDraftFunc();
-  }, []);
 
   return (
     <TableRow

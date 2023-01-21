@@ -6,6 +6,7 @@ import {
   Chip,
   Icon,
   Typography,
+  Rating,
   type CardProps,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
@@ -55,7 +56,7 @@ const ScriptCard = (props: IProps) => {
         <div className="flex flex-wrap gap-2">
           <Chip label={script.scriptFormat} sx={{ borderRadius: 1 }} />
         </div>
-        <CustomRating
+        <Rating
           readOnly
           defaultValue={script.reviewerRate}
           className="sm:hidden mt-4"
@@ -104,7 +105,7 @@ const ScriptCard = (props: IProps) => {
             Place Bid
           </Btn>
         )}
-        <CustomRating
+        <Rating
           readOnly
           defaultValue={+script.reviewerRate}
           className="hidden sm:inline-flex"

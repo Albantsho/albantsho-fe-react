@@ -39,10 +39,6 @@ const Scripts: NextPageWithLayout = () => {
       try {
         setLoading(true);
         const resScripts = await getProducerAllScripts(searchQuery);
-        console.log(
-          "🚀 ~ file: index.tsx:42 ~ getScriptsFunc ~ resScripts",
-          resScripts
-        );
         const resBids = await getAllBidsForProducer(searchQuery);
         setBidsList(resBids.data.scriptBids);
         setScriptsList(resScripts.data.scripts);
