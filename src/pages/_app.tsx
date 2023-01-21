@@ -3,6 +3,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "normalize.css"
 import Authorization from "components/Authorization/Authorization";
 import type { NextPage } from "next";
 import NextProgress from "next-progress";

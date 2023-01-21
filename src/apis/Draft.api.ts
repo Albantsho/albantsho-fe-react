@@ -33,6 +33,16 @@ const useDraftApi = (controller?: AbortController) => {
 
       return res.data;
     },
+    async getOneDraftAsPdf(scriptId: string) {
+      const res = await axiosPrivate.get(`/draft/${scriptId}`, {
+        signal: controller?.signal,
+        headers: {
+          "Content-Type": "application/pdf",
+        },
+      });
+
+      return res.data;
+    },
     async uploadFileDraft(scriptId: string, payload: IUploadFileDraftPayload) {
       const res = await axiosPrivate.post(
         `/draft/upload/${scriptId}`,

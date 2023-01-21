@@ -46,7 +46,7 @@ const ScriptsList = ({ reviewsList }: IProps) => {
               className="flex py-6 xl:py-10 items-center sm:justify-between md:justify-end 2xl:justify-start"
             >
               <div className="sm:flex md:w-fit xl:mr-14 lg:max-w-[445px] 2xl:max-w-[425px] 2xl:mr-[75px]">
-                <div className="flex gap-4 sm:mr-3 xl:mr-[85px]">
+                <div className="flex gap-4 sm:mr-3 xl:mr-10">
                   <div className="flex-shrink-0 w-[72px] h-[72px]">
                     {script.image ? (
                       <Image
