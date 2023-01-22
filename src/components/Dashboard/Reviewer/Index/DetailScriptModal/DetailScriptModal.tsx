@@ -8,18 +8,20 @@ import {
   Typography,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import useDraftApi from "apis/Draft.api";
 import useReviewsApi from "apis/Reviews.api";
 import { IReviewerTask } from "interfaces/reviews";
-import jsPDF from "jspdf";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { FiArrowUpRight } from "react-icons/fi";
 import routes from "routes/routes";
-import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
 import errorHandler from "utils/error-handler";
-import { serializeWithoutDiv } from "utils/serialize-slate";
+
+const ButtonExportPdf = dynamic(
+  () => import("./ButtonExportPdf/ButtonExportPdf"),
+  {
+    ssr: false,
+  }
+);
 
 interface IProps {
   openDetailScript: boolean;
@@ -35,10 +37,9 @@ const DetailScriptModal = ({
   const handleCloseUnArchive = () => {
     setOpenDetailScript(false);
   };
-  const { getOneDraft, getOneDraftAsPdf } = useDraftApi();
+
   const { replace } = useRouter();
   const { createNewReview } = useReviewsApi();
-  const [resDraft, setResDraft] = useState<any>();
 
   const beginReviewToScript = (scriptId: string) => async () => {
     try {
@@ -52,68 +53,6 @@ const DetailScriptModal = ({
           );
     } catch (error) {
       errorHandler(error);
-    }
-  };
-
-  useEffect(() => {
-    async function getDraftFunc() {
-      try {
-        const res = await getOneDraft(reviewerTask._id as string);
-        setResDraft(res);
-      } catch (error) {
-        ("");
-      }
-    }
-    getDraftFunc();
-  }, []);
-
-  const seeScript = async () => {
-    if (resDraft.data) {
-      const htmlContent = new DOMParser().parseFromString(
-        resDraft.data.draft,
-        "text/html"
-      );
-      const value = deserializeScriptWithOutDiv(htmlContent.body);
-      const valueForConvertPdf = serializeWithoutDiv({ children: value });
-      const doc = new jsPDF("p", "pt", "a4");
-      if (valueForConvertPdf) {
-        doc.html(
-          `<div style="padding:0 40px;width:595px;height:842px;font-family:Courier;display:flex;align-items:center;gap:25px;flex-direction:column;padding:0 20px;padding-top:80px;"><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
-            reviewerTask.title
-          }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${
-            reviewerTask.writtenBy.length !== 0 &&
-            reviewerTask.writtenBy.join(" ")
-          }</h6><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
-            reviewerTask.basedOn
-          }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
-            reviewerTask.draftDate
-              ? (reviewerTask.draftDate as string)
-              : Date.now()
-          ).toLocaleDateString()}</h6></div><div style="padding:0 40px;width:595px;font-family:Courier Prime;">
-          ${valueForConvertPdf}
-          </div>`,
-          {
-            margin: [30, 0],
-            autoPaging: "text",
-            callback: (pdf) => {
-              for (let i = 0; i < doc.internal.pages.length; i++) {
-                doc.setPage(i);
-                doc.text(i <= 1 ? " " : `Page ${String(i - 1)}`, 275, 830);
-              }
-              pdf.save(reviewerTask.title);
-            },
-          }
-        );
-      }
-    } else {
-      const res = await getOneDraftAsPdf(reviewerTask._id as string);
-      const blobUrl = window.URL.createObjectURL(new Blob([res]));
-      const aTag = document.createElement("a");
-      aTag.href = blobUrl;
-      aTag.setAttribute("download", `${reviewerTask.title}.pdf`);
-      document.body.appendChild(aTag);
-      aTag.click();
-      aTag.remove();
     }
   };
 
@@ -134,14 +73,7 @@ const DetailScriptModal = ({
                 ? "Type B"
                 : ""}
             </Button>
-            <Button
-              onClick={seeScript}
-              className="py-2 px-4"
-              variant="outlined"
-              startIcon={<FiArrowUpRight />}
-            >
-              View script
-            </Button>
+            <ButtonExportPdf reviewerTask={reviewerTask} />
           </div>
           <Divider />
           <div className="pt-8 px-5 sm:px-7">
