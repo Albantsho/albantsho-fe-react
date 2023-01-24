@@ -35,25 +35,12 @@ const DetailScriptModal = ({
   const handleCloseUnArchive = () => {
     setOpenDetailScript(false);
   };
-  const { getOneDraft, getOneDraftAsPdf } = useDraftApi();
+
   const { replace } = useRouter();
   const { createNewReview } = useReviewsApi();
+  const { getOneDraft, getOneDraftAsPdf } = useDraftApi();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [resDraft, setResDraft] = useState<any>();
-
-  const beginReviewToScript = (scriptId: string) => async () => {
-    try {
-      await createNewReview({ scriptId });
-      reviewerTask.reviewPlan === "A"
-        ? replace(
-            routes.reviewerDashboardQuestionnaireTypeA.dynamicUrl(scriptId)
-          )
-        : replace(
-            routes.reviewerDashboardQuestionnaireTypeB.dynamicUrl(scriptId)
-          );
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
 
   useEffect(() => {
     async function getDraftFunc() {
@@ -65,6 +52,7 @@ const DetailScriptModal = ({
       }
     }
     getDraftFunc();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const seeScript = async () => {
@@ -117,6 +105,21 @@ const DetailScriptModal = ({
     }
   };
 
+  const beginReviewToScript = (scriptId: string) => async () => {
+    try {
+      await createNewReview({ scriptId });
+      reviewerTask.reviewPlan === "A"
+        ? replace(
+            routes.reviewerDashboardQuestionnaireTypeA.dynamicUrl(scriptId)
+          )
+        : replace(
+            routes.reviewerDashboardQuestionnaireTypeB.dynamicUrl(scriptId)
+          );
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+
   return (
     <Modal
       className="px-5 lg:hidden"
@@ -142,6 +145,7 @@ const DetailScriptModal = ({
             >
               View script
             </Button>
+            );
           </div>
           <Divider />
           <div className="pt-8 px-5 sm:px-7">

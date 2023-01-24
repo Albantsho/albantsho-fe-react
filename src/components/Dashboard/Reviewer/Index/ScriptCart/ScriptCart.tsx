@@ -28,27 +28,14 @@ interface IProps {
 }
 
 const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
-  const [resDraft, setResDraft] = useState<any>();
   const selectedScript = reviewerTaskList.find(
     (reviewerTask) => reviewerTask._id === selectedScriptId
   );
   const { createNewReview } = useReviewsApi();
   const { replace } = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [resDraft, setResDraft] = useState<any>();
   const { getOneDraft, getOneDraftAsPdf } = useDraftApi();
-  const beginReviewToScript = (scriptId: string) => async () => {
-    try {
-      await createNewReview({ scriptId });
-      selectedScript?.reviewPlan === "A"
-        ? replace(
-            routes.reviewerDashboardQuestionnaireTypeA.dynamicUrl(scriptId)
-          )
-        : replace(
-            routes.reviewerDashboardQuestionnaireTypeB.dynamicUrl(scriptId)
-          );
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
 
   useEffect(() => {
     async function getDraftFunc() {
@@ -60,6 +47,7 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
       }
     }
     getDraftFunc();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const seeScript = async () => {
@@ -109,6 +97,21 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
       document.body.appendChild(aTag);
       aTag.click();
       aTag.remove();
+    }
+  };
+
+  const beginReviewToScript = (scriptId: string) => async () => {
+    try {
+      await createNewReview({ scriptId });
+      selectedScript?.reviewPlan === "A"
+        ? replace(
+            routes.reviewerDashboardQuestionnaireTypeA.dynamicUrl(scriptId)
+          )
+        : replace(
+            routes.reviewerDashboardQuestionnaireTypeB.dynamicUrl(scriptId)
+          );
+    } catch (error) {
+      errorHandler(error);
     }
   };
 

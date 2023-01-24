@@ -19,6 +19,7 @@ import { genreList, storyTopics } from "./fieldInputs";
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<IAbstractFormValues, any>;
   step: number;
   script: IFullInformationScript;

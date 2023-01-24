@@ -39,6 +39,7 @@ interface IProps {
   setActiveButton: React.Dispatch<React.SetStateAction<number>>;
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<IAbstractFormValues, any>;
   step: number;
 }

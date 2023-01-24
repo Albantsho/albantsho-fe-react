@@ -19,6 +19,7 @@ const Heading = ({ script }: IProps) => {
       setEthPrice(price?.USDT.ETH(script.price) as number);
     }
     getETHPrice();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -23,7 +23,7 @@ const SendReviewModal = ({
   const handleCloseSendReview = () => setOpenSendReview(false);
   const sendReviewAsEmail = async () => {
     try {
-      const res = await sendReviewToWriterEmail(reviewId);
+      await sendReviewToWriterEmail(reviewId);
       setOpenSendReview(false);
       setOpenSuccessReview(true);
     } catch (error) {

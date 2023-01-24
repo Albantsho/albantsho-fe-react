@@ -1,11 +1,4 @@
-import {
-  Box,
-  Card,
-  Pagination,
-  Skeleton,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Card, Skeleton } from "@mui/material";
 import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import { IWeblog } from "interfaces/weblog";
 import { useRouter } from "next/router";

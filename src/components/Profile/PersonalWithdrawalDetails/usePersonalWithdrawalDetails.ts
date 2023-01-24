@@ -1,6 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useAuthApi from "apis/Auth.api";
-import { ethers } from "ethers";
 import { IUserProfile } from "interfaces/user";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

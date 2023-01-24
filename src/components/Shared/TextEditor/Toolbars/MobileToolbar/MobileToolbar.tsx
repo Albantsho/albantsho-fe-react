@@ -33,7 +33,6 @@ const MobileToolbar = () => {
       )}
       {width! > 230 && <MarkButton format="code" icon={BsCode} />}
       {width! > 300 && <EmojiButton />}
-
       {width! > 345 && (
         <>
           <Divider className="flex h-full" orientation="vertical" />

@@ -58,7 +58,7 @@ const Subscription = () => {
   const paymentResponse = (response: FlutterWaveResponse) => {
     async function buyingSubscriptionPlan() {
       try {
-        const res = await buySubscriptionPlan({
+        await buySubscriptionPlan({
           transactionId: `${response.transaction_id}`,
         });
         replace(

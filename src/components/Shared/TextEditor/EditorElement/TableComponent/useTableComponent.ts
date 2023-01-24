@@ -51,6 +51,7 @@ const useTableComponent = () => {
 
   const addColumnHandler = () => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const [table, tablePath] = Editor.parent(editor, editor.selection!, {
         depth: 2,
       });
@@ -88,6 +89,7 @@ const useTableComponent = () => {
 
   const removeRowHandler = () => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const [table, tablePath] = Editor.parent(editor, editor.selection!, {
         depth: 2,
       });
@@ -110,10 +112,12 @@ const useTableComponent = () => {
 
   const removeColumnHandler = () => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const [table, tablePath] = Editor.parent(editor, editor.selection!, {
         depth: 2,
       });
 
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const [row] = Editor.parent(editor, editor.selection!, {
         depth: 3,
       });

@@ -5,13 +5,11 @@ import { IWeblog } from "interfaces/weblog";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { jsx } from "slate-hyperscript";
-import errorHandler from "utils/error-handler";
-import { editBlogSchema } from "./validation/editBlog.validate";
-import { getStyleObjectFromString } from "utils/formatter";
 import routes from "routes/routes";
 import { convertToSlug } from "utils/convert-to-slug";
 import { deserializeBlogContent } from "utils/deserialize-blog-content";
+import errorHandler from "utils/error-handler";
+import { editBlogSchema } from "./validation/editBlog.validate";
 
 interface IEditWeblogFormValues {
   title: string;

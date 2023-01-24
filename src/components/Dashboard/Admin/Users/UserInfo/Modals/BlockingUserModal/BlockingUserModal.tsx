@@ -29,7 +29,7 @@ const BlockingUserModal = ({
 
   const blockUser = async () => {
     try {
-      const res = await updateUserRestriction({ block: true }, user._id);
+      await updateUserRestriction({ block: true }, user._id);
       setOneUser({ ...user, block: true });
       handleCloseBlockingUserModal();
     } catch (error) {

@@ -8,12 +8,12 @@ import {
 } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
 import useScriptsApi from "apis/Scripts.api";
-import useUserStore from "store/user.store";
 import { IScript } from "interfaces/script";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { animated, useSpring } from "react-spring";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
 import Bg from "./assets/bg.webp";
 
 const AnimatedScriptCard = animated(ScriptCard);
@@ -47,6 +47,7 @@ const HeroSection = () => {
       }
     }
     getBestScriptFunc();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   <AnimatedScriptCard

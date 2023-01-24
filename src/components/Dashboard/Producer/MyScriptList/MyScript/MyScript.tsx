@@ -15,6 +15,7 @@ interface IProps {
 
 const MyScript = ({ script }: IProps) => {
   const { getOneDraft, getOneDraftAsPdf } = useDraftApi();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [resDraft, setResDraft] = useState<any>();
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const MyScript = ({ script }: IProps) => {
       }
     }
     getDraftFunc();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const seeScript = async () => {
@@ -127,7 +129,7 @@ const MyScript = ({ script }: IProps) => {
             border: "1px solid #7953B5",
             borderRadius: 1.5,
           }}
-          className=" sm:hidden mb-2 mt-1"
+          className="sm:hidden mb-2 mt-1"
         >
           View script
         </Button>
@@ -144,7 +146,6 @@ const MyScript = ({ script }: IProps) => {
           onClick={seeScript}
           variant="text"
           sx={{
-            paddingY: 1,
             border: "1px solid #7953B5",
             borderRadius: 1.5,
           }}

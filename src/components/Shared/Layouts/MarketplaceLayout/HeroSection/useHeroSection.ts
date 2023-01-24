@@ -1,13 +1,14 @@
 import useScriptsApi from "apis/Scripts.api";
 import { IScript } from "interfaces/script";
 import { debounce } from "lodash";
-import { useState, useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const useHeroSection = () => {
   const { searchScripts } = useScriptsApi();
   const [searchQuery, setSearchQuery] = useState("");
   const [scriptList, setScriptList] = useState<Array<IScript>>([]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce(
       (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +31,7 @@ const useHeroSection = () => {
     }
 
     getScripts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   return { handleSearch, scriptList, searchQuery };

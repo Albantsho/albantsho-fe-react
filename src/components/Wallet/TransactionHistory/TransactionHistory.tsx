@@ -9,7 +9,6 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import useUserStore from "store/user.store";
 import { IPayment, IWithdraw } from "interfaces/transaction";
 
 interface IProps {
@@ -18,8 +17,6 @@ interface IProps {
 }
 
 const TransactionHistory = ({ paymentsList, withdrawList }: IProps) => {
-  const user = useUserStore((state) => state.user);
-
   return (
     <div className="bg-white rounded-md px-5 sm:px-6  md:px-10 py-9 lg:px-14 lg:py-14 flex-1 w-full">
       <Typography

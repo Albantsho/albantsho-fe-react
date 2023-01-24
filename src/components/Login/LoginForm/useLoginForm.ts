@@ -1,10 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useAuthApi from "apis/Auth.api";
-import useUserStore from "store/user.store";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 import { loginSchema } from "./validation/login.validation";
 interface IAuthLogin {

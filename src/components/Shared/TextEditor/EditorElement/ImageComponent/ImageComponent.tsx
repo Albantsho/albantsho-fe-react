@@ -1,16 +1,8 @@
 import { Button, ButtonGroup, SvgIcon } from "@mui/material";
-import useMarkButton from "@shared/TextEditor/hooks/useMarkButton";
 import { useState } from "react";
 import { CiAlignCenterV, CiAlignLeft, CiAlignRight } from "react-icons/ci";
 import { MdPhotoSizeSelectLarge } from "react-icons/md";
-import { Editor } from "slate";
-import {
-  ReactEditor,
-  useFocused,
-  useSelected,
-  useSlate,
-  type RenderElementProps,
-} from "slate-react";
+import { useSelected, type RenderElementProps } from "slate-react";
 import SetImageSizeModal from "./SetImageSizeModal/SetImageSizeModal";
 
 const ImageComponent = ({
@@ -18,10 +10,7 @@ const ImageComponent = ({
   children,
   element,
 }: RenderElementProps) => {
-  const editor = useSlate();
-  const path = ReactEditor.findPath(editor, element);
   const selected = useSelected();
-  const focused = useFocused();
   const [positionImage, setPositionImage] = useState(0);
   const [openSetImageSize, setOpenSetImageSize] = useState(false);
   const [imageSize, setImageSize] = useState({

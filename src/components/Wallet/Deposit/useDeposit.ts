@@ -1,16 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import useWalletApi from "apis/Wallet.api";
-import useUserStore from "store/user.store";
-import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
-import {
-  FlutterWaveResponse,
-  FlutterwaveConfig,
-} from "flutterwave-react-v3/dist/types";
-import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import { depositSchema } from "./validation/deposit.validation";
 
@@ -24,7 +14,6 @@ const useDeposit = () => {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm<IDepositFormValues>({
     defaultValues: {},

@@ -293,7 +293,7 @@ const useUpdateReviewsTypeB = ({ reviewValuesTypeB }: IProps) => {
         },
         reviewValuesTypeB._id
       );
-      const res = await completingReview(reviewValuesTypeB._id, {
+      await completingReview(reviewValuesTypeB._id, {
         completed: true,
       });
       push(routes.reviewerDashboardPreviewTypeB.dynamicUrl(query.id as string));

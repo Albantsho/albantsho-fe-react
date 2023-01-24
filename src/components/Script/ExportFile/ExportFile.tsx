@@ -1,10 +1,6 @@
 import { Typography } from "@mui/material";
-import Btn from "@shared/Btn/Btn";
-import useScriptValueStore from "store/scriptValue.store";
 import { IFullInformationScript } from "interfaces/script";
-import jsPDF from "jspdf";
-import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
-import { serializeWithoutDiv } from "utils/serialize-slate";
+import useScriptValueStore from "store/scriptValue.store";
 import ButtonExport from "./ButtonExport/ButtonExport";
 
 interface IProps {

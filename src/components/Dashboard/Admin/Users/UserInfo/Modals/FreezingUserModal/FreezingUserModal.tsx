@@ -29,7 +29,7 @@ const FreezingUserModal = ({
 
   const freezeUser = async () => {
     try {
-      const res = await updateUserRestriction({ freeze: true }, user._id);
+      await updateUserRestriction({ freeze: true }, user._id);
       setOneUser({ ...user, freeze: true });
       handleCloseFreezingUserModal();
     } catch (error) {

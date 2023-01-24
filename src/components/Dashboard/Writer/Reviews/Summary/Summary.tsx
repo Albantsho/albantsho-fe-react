@@ -1,7 +1,6 @@
 import { Chip, Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import usePlanApi from "apis/Plan.api";
-import useUserStore from "store/user.store";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import type { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { IFullInformationScript } from "interfaces/script";
@@ -9,6 +8,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 import { priceConverter } from "utils/price-convert";
 
@@ -48,7 +48,7 @@ const Summary = ({ script }: IProps) => {
   const responsePayment = (response: FlutterWaveResponse) => {
     async function buyingReviewPlan() {
       try {
-        const res = await buyReviewsPlan({
+        await buyReviewsPlan({
           plan:
             query.reviewPlan === "typeA"
               ? "A"
@@ -96,6 +96,7 @@ const Summary = ({ script }: IProps) => {
       );
     }
     getETHPrice();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -1,7 +1,6 @@
 import MenuIcon from "@assets/icons/menu.svg";
 import { LoadingButton } from "@mui/lab";
 import { Drawer, IconButton, SvgIcon } from "@mui/material";
-import Logo from "@shared/Logo/Logo";
 import NotificationComponent from "@shared/NotificationComponent/NotificationComponent";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
 import { AiFillInstagram, AiOutlineClose } from "react-icons/ai";

@@ -5,16 +5,15 @@ import {
   CardMedia,
   Chip,
   Icon,
-  Typography,
   Rating,
+  Typography,
   type CardProps,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import CustomRating from "@shared/CustomRating/CustomRating";
-import useUserStore from "store/user.store";
 import { IScript } from "interfaces/script";
 import Link from "next/link";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
 import ReviewedIcon from "./assets/reviewed.svg";
 
 interface IProps extends CardProps {

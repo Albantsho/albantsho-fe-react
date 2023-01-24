@@ -34,10 +34,10 @@ const useMintNft = () => {
   useEffect(() => {
     async function getNftsFunc() {
       const res = await getAllUserNfts();
-      console.log("🚀 ~ file: MintNft.tsx:29 ~ getNftsFunc ~ res", res);
       setNftList(res.data.nfts);
     }
     getNftsFunc();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

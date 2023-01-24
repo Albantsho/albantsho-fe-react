@@ -9,7 +9,6 @@ import {
   SvgIcon,
 } from "@mui/material";
 import useWalletApi from "apis/Wallet.api";
-import useUserStore from "store/user.store";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
@@ -17,6 +16,7 @@ import { IoIosMore } from "react-icons/io";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
 
 const WalletMenu = () => {
   const { push } = useRouter();
@@ -45,6 +45,7 @@ const WalletMenu = () => {
     }
 
     getWalletBalanceFunc();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

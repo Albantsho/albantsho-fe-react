@@ -53,6 +53,7 @@ const CommentComponent = ({ comment, comments, socket }: IProps) => {
             style={{
               backgroundColor: useMemo(
                 () => bgArray[Math.floor(Math.random() * 14)],
+                // eslint-disable-next-line react-hooks/exhaustive-deps
                 [bgArray]
               ),
             }}

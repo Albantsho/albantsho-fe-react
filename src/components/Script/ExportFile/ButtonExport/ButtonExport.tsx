@@ -1,8 +1,8 @@
 import Btn from "@shared/Btn/Btn";
 import { IFullInformationScript } from "interfaces/script";
+import jsPDF from "jspdf";
 import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
 import { serializeWithoutDiv } from "utils/serialize-slate";
-import jsPDF from "jspdf";
 interface IProps {
   script: IFullInformationScript;
   scriptValue: string;
@@ -32,7 +32,7 @@ const ButtonExport = ({ script, scriptValue }: IProps) => {
           margin: [30, 0],
           autoPaging: "slice",
 
-          callback: (pdf: any) => {
+          callback: (pdf) => {
             for (let i = 0; i < doc.internal.pages.length; i++) {
               doc.setPage(i);
               doc.text(i <= 1 ? " " : `Page ${String(i - 1)}`, 275, 830);

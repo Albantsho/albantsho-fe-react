@@ -1,10 +1,10 @@
 import useWalletApi from "apis/Wallet.api";
-import useUserStore from "store/user.store";
-import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
+import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
 
 interface IProps {
   amount: number;
@@ -40,7 +40,7 @@ const PaymentModal = ({ amount }: IProps) => {
   const paymentResponse = (response: FlutterWaveResponse) => {
     async function increaseWalletBalanceFunc() {
       try {
-        const res = await increaseWalletBalance({
+        await increaseWalletBalance({
           transactionId: `${response.transaction_id}`,
           method: "bank",
         });

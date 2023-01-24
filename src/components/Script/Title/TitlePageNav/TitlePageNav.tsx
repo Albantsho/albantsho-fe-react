@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, type AppBarProps } from "@mui/material";
+import { AppBar, Toolbar } from "@mui/material";
 import DashboardNavOnDesktop from "./DesktopNav/TitlePageNavOnDesktop";
 import DashboardNavOnMobile from "./MobileNav/TitlePageNavOnMobile";
 

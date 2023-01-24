@@ -4,7 +4,6 @@ import {
   Menu,
   MenuItem,
   SvgIcon,
-  Typography,
 } from "@mui/material";
 import { AiOutlineBorderlessTable } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
