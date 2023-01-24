@@ -69,13 +69,15 @@ const Task = ({
           </Typography>
         </div>
       </div>
-      <Suspense fallback={null}>
-        <DetailScriptModal
-          reviewerTask={reviewerTask}
-          openDetailScript={openDetailScript}
-          setOpenDetailScript={setOpenDetailScript}
-        />
-      </Suspense>
+      {openDetailScript ? (
+        <Suspense fallback={null}>
+          <DetailScriptModal
+            reviewerTask={reviewerTask}
+            openDetailScript={openDetailScript}
+            setOpenDetailScript={setOpenDetailScript}
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 };

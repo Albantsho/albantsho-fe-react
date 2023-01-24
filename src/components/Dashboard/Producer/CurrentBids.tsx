@@ -1,4 +1,3 @@
-import beautySmall from "@assets/images/beauty-small.jpg";
 import emptyBlogs from "@assets/images/empty-blogs.png";
 import {
   Button,

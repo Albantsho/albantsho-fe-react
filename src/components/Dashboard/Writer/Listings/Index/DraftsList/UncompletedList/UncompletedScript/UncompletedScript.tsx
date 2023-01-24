@@ -96,13 +96,15 @@ const UncompletedScript = ({ script }: IProps) => {
           </Button>
         </div>
       </div>
-      <Suspense fallback={null}>
-        <AddScriptToCompletedModal
-          id={script._id}
-          openAddToScript={openAddToScript}
-          setOpenAddToScript={setOpenAddToScript}
-        />
-      </Suspense>
+      {openAddToScript ? (
+        <Suspense fallback={null}>
+          <AddScriptToCompletedModal
+            id={script._id}
+            openAddToScript={openAddToScript}
+            setOpenAddToScript={setOpenAddToScript}
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 };

@@ -12,7 +12,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import querystring from "query-string";
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import { NextPageWithLayout } from "../../../_app";
 
@@ -43,6 +43,7 @@ const Projects: NextPageWithLayout = () => {
       : push(`?archive=true&page=${page}`, undefined, { shallow: true });
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce(
       (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,10 +110,15 @@ const Projects: NextPageWithLayout = () => {
               handleActivePage={handleActivePage}
             />
           )}
-          <CreateScriptModal
-            openCreateScript={openCreateScript}
-            setOpenCreateScript={setOpenCreateScript}
-          />
+          {openCreateScript ? (
+            <Suspense fallback={null}>
+              <CreateScriptModal
+                openCreateScript={openCreateScript}
+                setOpenCreateScript={setOpenCreateScript}
+              />
+            </Suspense>
+          ) : null}
+
           <Fab
             color="primary"
             onClick={handleOpen}

@@ -23,6 +23,7 @@ const Scripts: NextPageWithLayout = () => {
   const { getAllBidsForProducer } = useScripBidApi();
   const [searchQuery, setSearchQuery] = useState("");
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce(
       (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +50,8 @@ const Scripts: NextPageWithLayout = () => {
     }
 
     getScriptsFunc();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   return (

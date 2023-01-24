@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import useMobileNav from "@shared/Layouts/GeneralLayout/Nav/MobileNav/useMobileNav";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";

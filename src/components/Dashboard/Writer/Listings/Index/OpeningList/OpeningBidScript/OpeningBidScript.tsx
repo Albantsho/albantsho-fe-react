@@ -8,12 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 import { IBidScript } from "interfaces/script";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import React, { Suspense, useState } from "react";
 import { IoIosMore } from "react-icons/io";
 import routes from "routes/routes";
-import UnListingItemModal from "../Modals/UnListingItemModal/UnListingItemModal";
+
+const UnListingItemModal = dynamic(
+  () => import("../Modals/UnListingItemModal/UnListingItemModal")
+);
 
 interface IProps {
   script: IBidScript;
@@ -152,14 +156,17 @@ const OpeningBidScript = ({
           </Menu>
         </div>
       </div>
-      <Suspense fallback={null}>
-        <UnListingItemModal
-          id={script._id}
-          setListedScript={setListedScript}
-          openUnListingItem={openUnListingItem}
-          setOpenUnListingItem={setOpenUnListingItem}
-        />
-      </Suspense>
+      {openUnListingItem ? (
+        <Suspense fallback={null}>
+          <UnListingItemModal
+            id={script._id}
+            setListedScript={setListedScript}
+            openUnListingItem={openUnListingItem}
+            setOpenUnListingItem={setOpenUnListingItem}
+          />
+        </Suspense>
+      ) : null}
+
       {index < scripts.length - 1 && <Divider className="hidden sm:flex" />}
     </>
   );

@@ -9,7 +9,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { IPayment, IWithdraw } from "interfaces/transaction";
 
 interface IProps {

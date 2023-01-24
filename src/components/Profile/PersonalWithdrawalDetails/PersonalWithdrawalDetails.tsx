@@ -11,10 +11,10 @@ import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IUserProfile } from "interfaces/user";
 import Image from "next/image";
+import { Controller } from "react-hook-form";
 import pencil from "../assets/pencil.svg";
 import bank from "./assets/bank.png";
 import usePersonalWithdrawalDetails from "./usePersonalWithdrawalDetails";
-import { Controller } from "react-hook-form";
 
 interface IProps {
   userProfile: IUserProfile;
@@ -30,9 +30,6 @@ const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
     register,
     control,
     updateInformationBankAccess,
-    connectWallet,
-    defaultAccount,
-    errorMessage,
   } = usePersonalWithdrawalDetails({ userProfile });
 
   return (
@@ -194,9 +191,9 @@ const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
               </Typography>
             </label>
             <CustomInput
-              error={Boolean(errorMessage) || false}
-              value={defaultAccount}
-              InputProps={{ readOnly: true }}
+              error={Boolean(errors.usdtTrc20Address) || false}
+              value={userProfile.usdtTrc20Address}
+              {...register("usdtTrc20Address")}
               sx={{
                 "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },
                 "& .MuiFormHelperText-root": {
@@ -210,15 +207,12 @@ const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
               id="USDT"
               variant="outlined"
               size="small"
-              helperText={errorMessage}
+              helperText={errors.usdtTrc20Address?.message}
             />
           </div>
           <div className="flex justify-between mt-2 xl:mt-8 gap-4 flex-wrap">
             <Btn type="submit" loading={loading} className="py-3 px-6">
               Save and Update
-            </Btn>
-            <Btn onClick={connectWallet} className="py-3 px-6">
-              Connect Wallet
             </Btn>
           </div>
         </div>

@@ -1,10 +1,22 @@
 import { CardMedia, IconButton, SvgIcon, Typography } from "@mui/material";
 import { IWeblog } from "interfaces/weblog";
-import { useState } from "react";
+import dynamic from "next/dynamic";
+import { Suspense, useState } from "react";
 import { TfiTrash } from "react-icons/tfi";
-import DeleteBlogFromTrashListModal from "../Modals/DeleteBlogFromTrashListModal/DeleteBlogFromTrashListModal";
-import RestoreBlogFromTrashListModal from "../Modals/RestoreBlogFromTrashListModal/RestoreBlogFromTrashListModal";
 import RefreshIcon from "./assets/refresh-icon.svg";
+
+const DeleteBlogFromTrashListModal = dynamic(
+  () =>
+    import(
+      "../Modals/DeleteBlogFromTrashListModal/DeleteBlogFromTrashListModal"
+    )
+);
+const RestoreBlogFromTrashListModal = dynamic(
+  () =>
+    import(
+      "../Modals/RestoreBlogFromTrashListModal/RestoreBlogFromTrashListModal"
+    )
+);
 
 interface IProps {
   blog: IWeblog;
@@ -87,22 +99,32 @@ const TrashBlog = ({
           </IconButton>
         </div>
       </div>
-      <DeleteBlogFromTrashListModal
-        setBlogList={setBlogList}
-        weblogId={_id}
-        setOpenDeleteBlogFromTrashListModal={
-          setOpenDeleteBlogFromTrashListModal
-        }
-        openDeleteBlogFromTrashListModal={openDeleteBlogFromTrashListModal}
-      />
-      <RestoreBlogFromTrashListModal
-        setBlogList={setBlogList}
-        weblogId={_id}
-        setOpenRestoreBlogFromTrashListModal={
-          setOpenRestoreBlogFromTrashListModal
-        }
-        openRestoreBlogFromTrashListModal={openRestoreBlogFromTrashListModal}
-      />
+      {openDeleteBlogFromTrashListModal ? (
+        <Suspense fallback={null}>
+          <DeleteBlogFromTrashListModal
+            setBlogList={setBlogList}
+            weblogId={_id}
+            setOpenDeleteBlogFromTrashListModal={
+              setOpenDeleteBlogFromTrashListModal
+            }
+            openDeleteBlogFromTrashListModal={openDeleteBlogFromTrashListModal}
+          />
+        </Suspense>
+      ) : null}
+      {openRestoreBlogFromTrashListModal ? (
+        <Suspense fallback={null}>
+          <RestoreBlogFromTrashListModal
+            setBlogList={setBlogList}
+            weblogId={_id}
+            setOpenRestoreBlogFromTrashListModal={
+              setOpenRestoreBlogFromTrashListModal
+            }
+            openRestoreBlogFromTrashListModal={
+              openRestoreBlogFromTrashListModal
+            }
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 };

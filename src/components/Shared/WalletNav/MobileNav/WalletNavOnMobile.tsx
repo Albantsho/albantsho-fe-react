@@ -14,7 +14,7 @@ import {
   SvgIcon,
 } from "@mui/material";
 import NotificationComponent from "@shared/NotificationComponent/NotificationComponent";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {

@@ -21,6 +21,7 @@ const Listings: NextPageWithLayout = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { query } = useRouter();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce(
       (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,12 +44,15 @@ const Listings: NextPageWithLayout = () => {
         handleSearch={handleSearch}
         setOpenCreateScript={setOpenCreateScript}
       />
-      <Suspense fallback={null}>
-        <CreateScriptModal
-          openCreateScript={openCreateScript}
-          setOpenCreateScript={setOpenCreateScript}
-        />
-      </Suspense>
+      {openCreateScript ? (
+        <Suspense fallback={null}>
+          <CreateScriptModal
+            openCreateScript={openCreateScript}
+            setOpenCreateScript={setOpenCreateScript}
+          />
+        </Suspense>
+      ) : null}
+
       {(!query.tab || query.tab === "opening-list") && (
         <OpeningList searchQuery={searchQuery} />
       )}

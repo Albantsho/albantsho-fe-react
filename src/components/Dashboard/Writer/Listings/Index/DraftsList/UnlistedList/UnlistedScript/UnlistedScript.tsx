@@ -81,14 +81,16 @@ const UnlistedScript = ({ script, setUnListedScripts }: IProps) => {
           </Button>
         </div>
       </div>
-      <Suspense fallback={null}>
-        <RelistScriptModal
-          setUnListedScripts={setUnListedScripts}
-          id={script._id}
-          openRelistScript={openRelistScript}
-          setOpenRelistScript={setOpenRelistScript}
-        />
-      </Suspense>
+      {openRelistScript ? (
+        <Suspense fallback={null}>
+          <RelistScriptModal
+            setUnListedScripts={setUnListedScripts}
+            id={script._id}
+            openRelistScript={openRelistScript}
+            setOpenRelistScript={setOpenRelistScript}
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";

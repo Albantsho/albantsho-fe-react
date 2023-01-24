@@ -32,6 +32,7 @@ const BidsPage: NextPageWithLayout = () => {
   const { getScript } = useScriptsApi();
   const { getBidScript } = useScripBidApi();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce(
       (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,18 +81,24 @@ const BidsPage: NextPageWithLayout = () => {
             bid={bid}
             setOpenAcceptOffer={setOpenAcceptOffer}
           />
-          <Suspense fallback={null}>
-            <CreateScriptModal
-              openCreateScript={openCreateScript}
-              setOpenCreateScript={setOpenCreateScript}
-            />
-            <AcceptOfferModal
-              title={script.title}
-              auction={bid}
-              openAcceptOffer={openAcceptOffer}
-              setOpenAcceptOffer={setOpenAcceptOffer}
-            />
-          </Suspense>
+          {openCreateScript ? (
+            <Suspense fallback={null}>
+              <CreateScriptModal
+                openCreateScript={openCreateScript}
+                setOpenCreateScript={setOpenCreateScript}
+              />
+            </Suspense>
+          ) : null}
+          {openAcceptOffer ? (
+            <Suspense fallback={null}>
+              <AcceptOfferModal
+                title={script.title}
+                auction={bid}
+                openAcceptOffer={openAcceptOffer}
+                setOpenAcceptOffer={setOpenAcceptOffer}
+              />
+            </Suspense>
+          ) : null}
           <Fab
             onClick={() => setOpenCreateScript(true)}
             color="primary"

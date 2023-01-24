@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import useWalletApi from "apis/Wallet.api";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";

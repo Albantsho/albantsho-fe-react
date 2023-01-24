@@ -1,4 +1,4 @@
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 
 const useDesktopNav = () => {
   const user = useUserStore((state) => state.user);

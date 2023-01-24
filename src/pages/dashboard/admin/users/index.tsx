@@ -22,6 +22,7 @@ const UsersPage: NextPageWithLayout = () => {
   const [pageCount, setPageCount] = useState(1);
   const { query, push } = useRouter();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce(
       (e: React.ChangeEvent<HTMLInputElement>) => {

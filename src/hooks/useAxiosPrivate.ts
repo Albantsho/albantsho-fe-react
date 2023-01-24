@@ -1,5 +1,5 @@
 import { apiPrivate } from "apis/configs/axios.config";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { useEffect } from "react";
 
 const useAxiosPrivate = () => {

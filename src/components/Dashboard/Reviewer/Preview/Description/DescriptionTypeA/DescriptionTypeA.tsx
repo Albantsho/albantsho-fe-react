@@ -108,18 +108,24 @@ const DescriptionTypeA = ({ reviewValuesTypeA }: IProps) => {
           </Link>
         </div>
       </div>
-      <Suspense fallback={null}>
-        <SendReviewModal
-          reviewId={reviewValuesTypeA._id}
-          openSendReview={openSendReview}
-          setOpenSendReview={setOpenSendReview}
-          setOpenSuccessReview={setOpenSuccessReview}
-        />
-        <SuccessReviewModal
-          openSuccessReview={openSuccessReview}
-          setOpenSuccessReview={setOpenSuccessReview}
-        />
-      </Suspense>
+      {openSendReview ? (
+        <Suspense fallback={null}>
+          <SendReviewModal
+            reviewId={reviewValuesTypeA._id}
+            openSendReview={openSendReview}
+            setOpenSendReview={setOpenSendReview}
+            setOpenSuccessReview={setOpenSuccessReview}
+          />
+        </Suspense>
+      ) : null}
+      {openSuccessReview ? (
+        <Suspense fallback={null}>
+          <SuccessReviewModal
+            openSuccessReview={openSuccessReview}
+            setOpenSuccessReview={setOpenSuccessReview}
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 };

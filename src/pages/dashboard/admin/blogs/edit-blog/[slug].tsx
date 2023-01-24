@@ -28,7 +28,9 @@ const EditBlogPage: NextPageWithLayout = () => {
     }
 
     getWeblogFunc();
-  }, [query.slug!]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query.slug]);
 
   return (
     <>

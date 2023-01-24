@@ -28,7 +28,8 @@ const useMarketPlace = () => {
       }
     }
     getScriptsFunc();
-  }, [query!]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
 
   useEffect(() => {
     if (query.rate) setActiveTab(1);

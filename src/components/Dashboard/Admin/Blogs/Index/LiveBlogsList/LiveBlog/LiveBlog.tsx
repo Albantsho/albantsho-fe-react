@@ -1,12 +1,22 @@
 import { CardMedia, IconButton, SvgIcon, Typography } from "@mui/material";
-import MoveBlogToArchiveListModal from "@shared/Modals/MoveBlogToArchiveListModal/MoveBlogToArchiveListModal";
-import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
 import { IWeblog } from "interfaces/weblog";
-import { useState } from "react";
+import dynamic from "next/dynamic";
+import { Suspense, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineFolder } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
 import routes from "routes/routes";
+
+const MoveBlogToArchiveListModal = dynamic(
+  () =>
+    import(
+      "@shared/Modals/MoveBlogToArchiveListModal/MoveBlogToArchiveListModal"
+    )
+);
+const MoveBlogToTrashListModal = dynamic(
+  () =>
+    import("@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal")
+);
 
 interface IProps {
   blog: IWeblog;
@@ -89,18 +99,28 @@ const LiveBlog = ({
           </IconButton>
         </div>
       </div>
-      <MoveBlogToTrashListModal
-        setBlogList={setBlogList}
-        weblogId={_id}
-        setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
-        openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
-      />
-      <MoveBlogToArchiveListModal
-        setBlogList={setBlogList}
-        weblogId={_id}
-        setOpenMoveBlogToArchiveListModal={setOpenMoveBlogToArchiveListModal}
-        openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}
-      />
+      {openMoveBlogToTrashListModal ? (
+        <Suspense fallback={null}>
+          <MoveBlogToTrashListModal
+            setBlogList={setBlogList}
+            weblogId={_id}
+            setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
+            openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
+          />
+        </Suspense>
+      ) : null}
+      {openMoveBlogToArchiveListModal ? (
+        <Suspense fallback={null}>
+          <MoveBlogToArchiveListModal
+            setBlogList={setBlogList}
+            weblogId={_id}
+            setOpenMoveBlogToArchiveListModal={
+              setOpenMoveBlogToArchiveListModal
+            }
+            openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 };

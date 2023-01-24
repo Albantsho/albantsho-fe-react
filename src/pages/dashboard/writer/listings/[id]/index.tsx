@@ -36,6 +36,7 @@ const ScriptSlug: NextPageWithLayout = () => {
   const { getScript } = useScriptsApi();
   const { query } = useRouter();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce(
       (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,11 +83,15 @@ const ScriptSlug: NextPageWithLayout = () => {
             />
             <div className="py-8 md:py-12 xl:py-20  px-5 sm:px-10 xl:px-20  my-4 md:my-6 bg-white shadow-primary rounded-md">
               <Heading script={script} />
+              {openCreateScript ? (
+                <Suspense fallback={null}>
+                  <CreateScriptModal
+                    openCreateScript={openCreateScript}
+                    setOpenCreateScript={setOpenCreateScript}
+                  />
+                </Suspense>
+              ) : null}
               <Suspense fallback={null}>
-                <CreateScriptModal
-                  openCreateScript={openCreateScript}
-                  setOpenCreateScript={setOpenCreateScript}
-                />
                 <AuctionsScripts
                   script={script}
                   bidsList={bidsList}

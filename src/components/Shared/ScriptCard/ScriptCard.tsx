@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomRating from "@shared/CustomRating/CustomRating";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { IScript } from "interfaces/script";
 import Link from "next/link";
 import routes from "routes/routes";

@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import routes from "routes/routes";

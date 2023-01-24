@@ -1,12 +1,22 @@
 import { CardMedia, IconButton, SvgIcon, Typography } from "@mui/material";
-import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
 import { IWeblog } from "interfaces/weblog";
-import { useState } from "react";
+import dynamic from "next/dynamic";
+import { Suspense, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsCursor } from "react-icons/bs";
 import { TfiTrash } from "react-icons/tfi";
 import routes from "routes/routes";
-import RestoreBlogFromArchiveListModal from "../Modals/RestoreBlogFromArchiveListModal/RestoreBlogFromArchiveListModal";
+
+const MoveBlogToTrashListModal = dynamic(
+  () =>
+    import("@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal")
+);
+const RestoreBlogFromArchiveListModal = dynamic(
+  () =>
+    import(
+      "../Modals/RestoreBlogFromArchiveListModal/RestoreBlogFromArchiveListModal"
+    )
+);
 
 interface IProps {
   blog: IWeblog;
@@ -93,20 +103,31 @@ const ArchiveBlog = ({
           </IconButton>
         </div>
       </div>
-      <MoveBlogToTrashListModal
-        setBlogList={setBlogList}
-        weblogId={_id}
-        setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
-        openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
-      />
-      <RestoreBlogFromArchiveListModal
-        setBlogList={setBlogList}
-        weblogId={_id}
-        setRestoreBlogFromArchiveListModal={setRestoreBlogFromArchiveListModal}
-        openRestoreBlogFromArchiveListModal={
-          openRestoreBlogFromArchiveListModal
-        }
-      />
+      {openMoveBlogToTrashListModal ? (
+        <Suspense fallback={null}>
+          <MoveBlogToTrashListModal
+            setBlogList={setBlogList}
+            weblogId={_id}
+            setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
+            openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
+          />
+        </Suspense>
+      ) : null}
+
+      {openRestoreBlogFromArchiveListModal ? (
+        <Suspense fallback={null}>
+          <RestoreBlogFromArchiveListModal
+            setBlogList={setBlogList}
+            weblogId={_id}
+            setRestoreBlogFromArchiveListModal={
+              setRestoreBlogFromArchiveListModal
+            }
+            openRestoreBlogFromArchiveListModal={
+              openRestoreBlogFromArchiveListModal
+            }
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 };

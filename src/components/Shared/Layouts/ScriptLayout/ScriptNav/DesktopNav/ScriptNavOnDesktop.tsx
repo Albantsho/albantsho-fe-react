@@ -2,7 +2,7 @@ import { Avatar, AvatarGroup } from "@mui/material";
 import NotificationComponent from "@shared/NotificationComponent/NotificationComponent";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
 import useScriptsApi from "apis/Scripts.api";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { ICollaboratorList } from "interfaces/collaborator";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";

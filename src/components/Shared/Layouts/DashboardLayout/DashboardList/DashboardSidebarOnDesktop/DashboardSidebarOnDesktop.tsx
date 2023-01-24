@@ -8,7 +8,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";

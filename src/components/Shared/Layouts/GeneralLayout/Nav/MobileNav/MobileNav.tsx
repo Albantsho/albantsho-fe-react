@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 // import { useUserStore } from "app/user.store";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";

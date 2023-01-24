@@ -139,12 +139,14 @@ const Abstract = ({ script }: IProps) => {
           step={step}
           setStep={setStep}
         />
-        <Suspense fallback={null}>
-          <SaveProgressScriptModal
-            openSaveProgressModal={openSaveProgressModal}
-            setOpenSaveProgressModal={setOpenSaveProgressModal}
-          />
-        </Suspense>
+        {openSaveProgressModal ? (
+          <Suspense fallback={null}>
+            <SaveProgressScriptModal
+              openSaveProgressModal={openSaveProgressModal}
+              setOpenSaveProgressModal={setOpenSaveProgressModal}
+            />
+          </Suspense>
+        ) : null}
       </form>
     </div>
   );

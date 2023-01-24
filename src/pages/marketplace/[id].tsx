@@ -1,7 +1,7 @@
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import { apiPrivate } from "apis/configs/axios.config";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import axios from "axios";
 import ScriptInfo from "components/Marketplace/MarketScript/ScriptInfo/ScriptInfo";
 import { IBidInMarketplace } from "interfaces/bid";

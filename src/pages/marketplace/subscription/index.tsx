@@ -10,7 +10,7 @@ import Btn from "@shared/Btn/Btn";
 import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import usePlanApi from "apis/Plan.api";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import type { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import Head from "next/head";

@@ -6,7 +6,7 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { useRouter } from "next/router";
 import { AiFillCaretDown } from "react-icons/ai";
 import routes from "routes/routes";

@@ -1,6 +1,6 @@
 import { Divider } from "@mui/material";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-import useCommentStore from "app/comments.store";
+import useCommentStore from "store/comments.store";
 import React from "react";
 import { Socket } from "socket.io-client";
 import CommentComponent from "./CommentComponent/CommentComponent";

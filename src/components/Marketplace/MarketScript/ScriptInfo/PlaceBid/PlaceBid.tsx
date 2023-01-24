@@ -2,7 +2,7 @@ import { Typography, Button } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import useScripBidApi from "apis/ScripBid.api";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { IBidInMarketplace } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";

@@ -1,5 +1,5 @@
 import useContact from "apis/Contact.api";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";

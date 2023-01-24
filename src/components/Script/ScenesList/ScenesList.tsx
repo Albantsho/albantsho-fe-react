@@ -1,5 +1,5 @@
 import { Divider, SvgIcon, Typography } from "@mui/material";
-import useScriptValueStore from "app/scriptValue.store";
+import useScriptValueStore from "store/scriptValue.store";
 import React from "react";
 import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
 import PhotoIcon from "./assets/photo.svg";

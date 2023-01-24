@@ -1,7 +1,7 @@
 import { ButtonGroup, IconButton, SvgIcon, Tooltip } from "@mui/material";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import useDraftApi from "apis/Draft.api";
-import useScriptValueStore from "app/scriptValue.store";
+import useScriptValueStore from "store/scriptValue.store";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";

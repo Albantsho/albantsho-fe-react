@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
 import useScriptsApi from "apis/Scripts.api";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { IScript } from "interfaces/script";
 import Link from "next/link";
 import { useState, useEffect } from "react";

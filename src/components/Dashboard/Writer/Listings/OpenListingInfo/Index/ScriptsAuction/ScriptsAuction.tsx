@@ -11,15 +11,19 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import AcceptOfferModal from "@shared/Modals/AcceptOfferModal/AcceptOfferModal";
 import useScripBidApi from "apis/ScripBid.api";
 import { IBidForScript } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import routes from "routes/routes";
+
+const AcceptOfferModal = dynamic(
+  () => import("@shared/Modals/AcceptOfferModal/AcceptOfferModal")
+);
 
 interface IProps {
   bidsList: IBidForScript[];
@@ -28,7 +32,7 @@ interface IProps {
 }
 
 const ScriptsAuction = ({ bidsList, script, setBidsList }: IProps) => {
-  const { query, push, replace } = useRouter();
+  const { push } = useRouter();
   const { rejectBid } = useScripBidApi();
   const [openAcceptOffer, setOpenAcceptOffer] = useState<boolean>(false);
 
@@ -43,7 +47,7 @@ const ScriptsAuction = ({ bidsList, script, setBidsList }: IProps) => {
     (id: string) => async (event: React.PointerEvent<HTMLButtonElement>) => {
       event.stopPropagation();
       try {
-        const res = await rejectBid(id);
+        await rejectBid(id);
         setBidsList((prev) => prev.filter((b) => b._id !== id));
       } catch (error) {
         ("");
@@ -165,12 +169,16 @@ const ScriptsAuction = ({ bidsList, script, setBidsList }: IProps) => {
                     </div>
                   </TableCell>
                 </TableRow>
-                <AcceptOfferModal
-                  title={script.title}
-                  auction={auction}
-                  openAcceptOffer={openAcceptOffer}
-                  setOpenAcceptOffer={setOpenAcceptOffer}
-                />
+                {openAcceptOffer ? (
+                  <Suspense>
+                    <AcceptOfferModal
+                      title={script.title}
+                      auction={auction}
+                      openAcceptOffer={openAcceptOffer}
+                      setOpenAcceptOffer={setOpenAcceptOffer}
+                    />
+                  </Suspense>
+                ) : null}
               </React.Fragment>
             ))}
           </TableBody>

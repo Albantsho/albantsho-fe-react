@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useWalletApi from "apis/Wallet.api";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import {
   FlutterWaveResponse,

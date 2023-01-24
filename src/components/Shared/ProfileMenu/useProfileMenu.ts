@@ -1,5 +1,5 @@
 import useAuthApi from "apis/Auth.api";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import routes from "routes/routes";

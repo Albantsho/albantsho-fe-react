@@ -2,13 +2,20 @@ import { Avatar, Button, SvgIcon, Tooltip, Typography } from "@mui/material";
 import useAuthApi from "apis/Auth.api";
 import countryList from "config/country-list.json";
 import { IUserInformationInAdminPanel } from "interfaces/user";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { MdNotInterested } from "react-icons/md";
 import { SlDislike, SlLike } from "react-icons/sl";
 import errorHandler from "utils/error-handler";
-import BlockingUserModal from "../Modals/BlockingUserModal/BlockingUserModal";
-import FreezingUserModal from "../Modals/FreezingUserModal/FreezingUserModal";
+
+const BlockingUserModal = dynamic(
+  () => import("../Modals/BlockingUserModal/BlockingUserModal")
+);
+const FreezingUserModal = dynamic(
+  () => import("../Modals/FreezingUserModal/FreezingUserModal")
+);
+
 interface IProps {
   user: IUserInformationInAdminPanel;
   setOneUser: React.Dispatch<
@@ -271,18 +278,26 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
           </div>
         </div>
       </div>
-      <BlockingUserModal
-        user={user}
-        setOneUser={setOneUser}
-        setOpenBlockingUserModal={setOpenBlockingUserModal}
-        openBlockingUserModal={openBlockingUserModal}
-      />
-      <FreezingUserModal
-        user={user}
-        setOneUser={setOneUser}
-        setOpenFreezingUserModal={setOpenFreezingUserModal}
-        openFreezingUserModal={openFreezingUserModal}
-      />
+      {openBlockingUserModal ? (
+        <Suspense fallback={null}>
+          <BlockingUserModal
+            user={user}
+            setOneUser={setOneUser}
+            setOpenBlockingUserModal={setOpenBlockingUserModal}
+            openBlockingUserModal={openBlockingUserModal}
+          />
+        </Suspense>
+      ) : null}
+      {openFreezingUserModal ? (
+        <Suspense fallback={null}>
+          <FreezingUserModal
+            user={user}
+            setOneUser={setOneUser}
+            setOpenFreezingUserModal={setOpenFreezingUserModal}
+            openFreezingUserModal={openFreezingUserModal}
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 };

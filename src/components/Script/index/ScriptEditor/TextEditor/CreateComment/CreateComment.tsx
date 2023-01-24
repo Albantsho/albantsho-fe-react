@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoMdSend } from "react-icons/io";
 import { Socket } from "socket.io-client";

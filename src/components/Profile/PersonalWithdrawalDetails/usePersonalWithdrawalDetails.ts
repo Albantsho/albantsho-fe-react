@@ -16,6 +16,7 @@ interface IUpdateWithdrawalFormValues {
   bankName: string;
   bankAccountName: string;
   bankAccountNumber: string;
+  usdtTrc20Address: string;
 }
 
 const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
@@ -23,7 +24,6 @@ const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
   const [loading, setLoading] = useState(false);
   const { updateUserWithdrawInformation } = useAuthApi();
   const [defaultAccount, setDefaultAccount] = useState("");
-  const [userBalance, setUserBalance] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const connectWallet = async () => {
@@ -40,23 +40,12 @@ const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
         await updateUserWithdrawInformation({
           usdtTrc20Address: allAccounts[0],
         });
-        getUserBalanceAccount(defaultAccount);
       } catch (error) {
         ("");
       }
     } else {
       setErrorMessage("Please Install Metamask");
     }
-  };
-
-  const getUserBalanceAccount = async (accountAddress: string) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const balanceAccount = await window.ethereum.request({
-      method: "eth_getBalance",
-      params: [String(accountAddress)],
-    });
-    setUserBalance(ethers.utils.formatEther(balanceAccount));
   };
 
   const {
@@ -74,6 +63,9 @@ const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
         : "",
       bankAccountNumber: userProfile.bankAccountNumber
         ? userProfile.bankAccountNumber
+        : "",
+      usdtTrc20Address: userProfile.usdtTrc20Address
+        ? userProfile.usdtTrc20Address
         : "",
     },
     resolver: yupResolver(updateWithdrawalSchema),

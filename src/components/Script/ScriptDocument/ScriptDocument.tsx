@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { IFullInformationScript } from "interfaces/script";
 import { AiOutlineClose } from "react-icons/ai";
 import useScriptDocument from "./useScriptDocument";

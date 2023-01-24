@@ -1,7 +1,7 @@
 import { Chip, Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import usePlanApi from "apis/Plan.api";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import type { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { IFullInformationScript } from "interfaces/script";

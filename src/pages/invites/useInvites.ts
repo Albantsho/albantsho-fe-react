@@ -22,6 +22,7 @@ const useInvites = () => {
     }
 
     getInvites();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const acceptInviteFunc = (inviteId: string) => async () => {

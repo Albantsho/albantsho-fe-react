@@ -1,6 +1,6 @@
 import ProfileNav from "@shared/ProfileNav/ProfileNav";
 import useReviewsApi from "apis/Reviews.api";
-import DescriptionTypeA from "components/Dashboard/Reviewer/Preview/Description/DescriptionTypeA/DescriptionTyoeA";
+import DescriptionTypeA from "components/Dashboard/Reviewer/Preview/Description/DescriptionTypeA/DescriptionTypeA";
 import Heading from "components/Dashboard/Reviewer/Preview/Heading/Heading";
 import { IReviewValuesTypeA } from "interfaces/reviews";
 import { IScriptReviewer } from "interfaces/script";
@@ -32,6 +32,7 @@ const PreviewTypeA = () => {
       }
     }
     getReviewValues();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return (

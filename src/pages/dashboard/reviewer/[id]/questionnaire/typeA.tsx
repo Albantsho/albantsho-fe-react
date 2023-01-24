@@ -31,6 +31,7 @@ const TypeA = () => {
       }
     }
     getReviewValues();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return (

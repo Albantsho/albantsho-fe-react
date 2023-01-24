@@ -14,6 +14,7 @@ const ReviewersPage: NextPageWithLayout = () => {
   const { query } = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce(
       (e: React.ChangeEvent<HTMLInputElement>) => {

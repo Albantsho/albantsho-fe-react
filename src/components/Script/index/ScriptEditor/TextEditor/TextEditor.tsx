@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-import useCommentStore from "app/comments.store";
+import useCommentStore from "store/comments.store";
 import { CustomElement, IEditor } from "interfaces/slate";
 import React, { useMemo } from "react";
 import { createEditor } from "slate";

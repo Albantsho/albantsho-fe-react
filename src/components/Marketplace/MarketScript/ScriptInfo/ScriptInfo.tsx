@@ -3,11 +3,15 @@ import { Chip, Icon, Typography } from "@mui/material";
 import CustomRating from "@shared/CustomRating/CustomRating";
 import { IBidInMarketplace } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { priceConverter } from "utils/price-convert";
-import BidSuccessfulModal from "../BidSuccessfulModal/BidSuccessfulModal";
 import PlaceBid from "./PlaceBid/PlaceBid";
+
+const BidSuccessfulModal = dynamic(
+  () => import("../BidSuccessfulModal/BidSuccessfulModal")
+);
 
 interface IProps {
   script: IFullInformationScript;
@@ -24,6 +28,8 @@ const ScriptInfo = ({ script, bid }: IProps) => {
       setEthPrice(price?.USDT.ETH(bid ? bid.amount : script.price) as number);
     }
     getETHPrice();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -67,10 +73,14 @@ const ScriptInfo = ({ script, bid }: IProps) => {
           script={script}
           setOpenBidSuccessful={setOpenBidSuccessful}
         />
-        <BidSuccessfulModal
-          openBidSuccessful={openBidSuccessful}
-          setOpenBidSuccessful={setOpenBidSuccessful}
-        />
+        {openBidSuccessful ? (
+          <Suspense fallback={null}>
+            <BidSuccessfulModal
+              openBidSuccessful={openBidSuccessful}
+              setOpenBidSuccessful={setOpenBidSuccessful}
+            />
+          </Suspense>
+        ) : null}
       </div>
     </div>
   );

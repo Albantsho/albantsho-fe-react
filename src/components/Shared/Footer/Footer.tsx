@@ -1,7 +1,7 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Logo from "@shared/Logo/Logo";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import routes from "routes/routes";

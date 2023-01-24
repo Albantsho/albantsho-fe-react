@@ -6,13 +6,23 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-import MoveBlogToArchiveListModal from "@shared/Modals/MoveBlogToArchiveListModal/MoveBlogToArchiveListModal";
-import MoveBlogToTrashListModal from "@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal";
 import { IWeblog } from "interfaces/weblog";
-import { useState } from "react";
+import dynamic from "next/dynamic";
+import { Suspense, useState } from "react";
 import { MdOutlineFolder } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
 import routes from "routes/routes";
+
+const MoveBlogToArchiveListModal = dynamic(
+  () =>
+    import(
+      "@shared/Modals/MoveBlogToArchiveListModal/MoveBlogToArchiveListModal"
+    )
+);
+const MoveBlogToTrashListModal = dynamic(
+  () =>
+    import("@shared/Modals/MoveBlogToTrashListModal/MoveBlogToTrashListModal")
+);
 
 interface IProps {
   oneWeblog: IWeblog;
@@ -78,16 +88,27 @@ const BreadcrumbsEditBlog = ({ oneWeblog }: IProps) => {
           </IconButton>
         </div>
       </div>
-      <MoveBlogToTrashListModal
-        weblogId={oneWeblog._id}
-        setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
-        openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
-      />
-      <MoveBlogToArchiveListModal
-        weblogId={oneWeblog._id}
-        setOpenMoveBlogToArchiveListModal={setOpenMoveBlogToArchiveListModal}
-        openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}
-      />
+      {openMoveBlogToTrashListModal ? (
+        <Suspense fallback={null}>
+          <MoveBlogToTrashListModal
+            weblogId={oneWeblog._id}
+            setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
+            openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
+          />
+        </Suspense>
+      ) : null}
+
+      {openMoveBlogToArchiveListModal ? (
+        <Suspense fallback={null}>
+          <MoveBlogToArchiveListModal
+            weblogId={oneWeblog._id}
+            setOpenMoveBlogToArchiveListModal={
+              setOpenMoveBlogToArchiveListModal
+            }
+            openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 };

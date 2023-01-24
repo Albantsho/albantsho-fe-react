@@ -2,8 +2,8 @@
 import useMouse from "@react-hook/mouse-position";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import useDraftApi from "apis/Draft.api";
-import useCommentStore from "app/comments.store";
-import useScriptValueStore from "app/scriptValue.store";
+import useCommentStore from "store/comments.store";
+import useScriptValueStore from "store/scriptValue.store";
 import { IEditor } from "interfaces/slate";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";

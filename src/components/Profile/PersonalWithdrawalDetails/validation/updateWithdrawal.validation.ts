@@ -7,4 +7,5 @@ export const updateWithdrawalSchema = Yup.object({
     .required()
     .min(3)
     .label("Bank account number"),
+  usdtTrc20Address: Yup.string().label("Wallet address"),
 });

@@ -1,4 +1,4 @@
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";

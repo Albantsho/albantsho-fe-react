@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
 import NotificationComponent from "@shared/NotificationComponent/NotificationComponent";
-import useUserStore from "app/user.store";
+import useUserStore from "store/user.store";
 import { useRouter } from "next/router";
 import {
   AiFillInstagram,
