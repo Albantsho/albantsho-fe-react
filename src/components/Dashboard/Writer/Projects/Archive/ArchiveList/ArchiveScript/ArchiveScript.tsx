@@ -128,16 +128,16 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
           </Button>
         </TableCell>
       </TableRow>
-      {openUnArchive ? (
-        <Suspense fallback={null}>
+      <Suspense fallback={null}>
+        {openUnArchive ? (
           <UnArchiveModal
             id={script._id}
             openUnArchive={openUnArchive}
             setOpenUnArchive={setOpenUnArchive}
             setListScripts={setListScripts}
           />
-        </Suspense>
-      ) : null}
+        ) : null}
+      </Suspense>
     </>
   );
 };

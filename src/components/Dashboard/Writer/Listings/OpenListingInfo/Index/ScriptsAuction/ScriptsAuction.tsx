@@ -169,16 +169,16 @@ const ScriptsAuction = ({ bidsList, script, setBidsList }: IProps) => {
                     </div>
                   </TableCell>
                 </TableRow>
-                {openAcceptOffer ? (
-                  <Suspense>
+                <Suspense>
+                  {openAcceptOffer ? (
                     <AcceptOfferModal
                       title={script.title}
                       auction={auction}
                       openAcceptOffer={openAcceptOffer}
                       setOpenAcceptOffer={setOpenAcceptOffer}
                     />
-                  </Suspense>
-                ) : null}
+                  ) : null}
+                </Suspense>
               </React.Fragment>
             ))}
           </TableBody>

@@ -99,8 +99,8 @@ const TrashBlog = ({
           </IconButton>
         </div>
       </div>
-      {openDeleteBlogFromTrashListModal ? (
-        <Suspense fallback={null}>
+      <Suspense fallback={null}>
+        {openDeleteBlogFromTrashListModal ? (
           <DeleteBlogFromTrashListModal
             setBlogList={setBlogList}
             weblogId={_id}
@@ -109,10 +109,10 @@ const TrashBlog = ({
             }
             openDeleteBlogFromTrashListModal={openDeleteBlogFromTrashListModal}
           />
-        </Suspense>
-      ) : null}
-      {openRestoreBlogFromTrashListModal ? (
-        <Suspense fallback={null}>
+        ) : null}
+      </Suspense>
+      <Suspense fallback={null}>
+        {openRestoreBlogFromTrashListModal ? (
           <RestoreBlogFromTrashListModal
             setBlogList={setBlogList}
             weblogId={_id}
@@ -123,8 +123,8 @@ const TrashBlog = ({
               openRestoreBlogFromTrashListModal
             }
           />
-        </Suspense>
-      ) : null}
+        ) : null}
+      </Suspense>
     </>
   );
 };

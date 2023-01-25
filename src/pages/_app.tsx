@@ -3,20 +3,23 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import "normalize.css"
 import Authorization from "components/Authorization/Authorization";
 import type { NextPage } from "next";
 import NextProgress from "next-progress";
 import { AppProps } from "next/app";
+import "normalize.css";
 import { useEffect, useState } from "react";
+import { QueryClientProvider, QueryClient } from "react-query";
 import { DotLoader } from "react-spinners";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "styles/globals.css";
 import theme from "styles/themes/theme";
 import createEmotionCache from "utils/create-emotion-cache";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const clientSideEmotionCache = createEmotionCache();
+const queryClient = new QueryClient();
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
@@ -37,26 +40,29 @@ export default function MyApp(props: MyAppProps) {
   }, []);
 
   return (
-    <CacheProvider value={emotionCache}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <NextProgress
-          delay={100}
-          color="#FDD038"
-          height="3px"
-          options={{ showSpinner: false }}
-        />
-        <Authorization>
-          {isLoading ? (
-            <div className="min-h-screen flex items-center">
-              <DotLoader color="#7953B5" className="mx-auto mt-10" />
-            </div>
-          ) : (
-            getLayout(<Component {...pageProps} />)
-          )}
-        </Authorization>
-        <ToastContainer />
-      </ThemeProvider>
-    </CacheProvider>
+    <QueryClientProvider client={queryClient}>
+      <CacheProvider value={emotionCache}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <NextProgress
+            delay={100}
+            color="#FDD038"
+            height="3px"
+            options={{ showSpinner: false }}
+          />
+          <Authorization>
+            {isLoading ? (
+              <div className="min-h-screen flex items-center">
+                <DotLoader color="#7953B5" className="mx-auto mt-10" />
+              </div>
+            ) : (
+              getLayout(<Component {...pageProps} />)
+            )}
+          </Authorization>
+          <ToastContainer />
+        </ThemeProvider>
+      </CacheProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }

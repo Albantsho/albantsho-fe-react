@@ -1,3 +1,5 @@
+declare const window: any;
+
 import nftLogo from "@assets/images/logo.png";
 import { Box, Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";

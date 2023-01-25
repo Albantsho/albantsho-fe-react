@@ -110,15 +110,14 @@ const Projects: NextPageWithLayout = () => {
               handleActivePage={handleActivePage}
             />
           )}
-          {openCreateScript ? (
-            <Suspense fallback={null}>
+          <Suspense fallback={null}>
+            {openCreateScript ? (
               <CreateScriptModal
                 openCreateScript={openCreateScript}
                 setOpenCreateScript={setOpenCreateScript}
               />
-            </Suspense>
-          ) : null}
-
+            ) : null}
+          </Suspense>
           <Fab
             color="primary"
             onClick={handleOpen}

@@ -103,19 +103,18 @@ const ArchiveBlog = ({
           </IconButton>
         </div>
       </div>
-      {openMoveBlogToTrashListModal ? (
-        <Suspense fallback={null}>
+      <Suspense fallback={null}>
+        {openMoveBlogToTrashListModal ? (
           <MoveBlogToTrashListModal
             setBlogList={setBlogList}
             weblogId={_id}
             setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
             openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
           />
-        </Suspense>
-      ) : null}
-
-      {openRestoreBlogFromArchiveListModal ? (
-        <Suspense fallback={null}>
+        ) : null}
+      </Suspense>
+      <Suspense fallback={null}>
+        {openRestoreBlogFromArchiveListModal ? (
           <RestoreBlogFromArchiveListModal
             setBlogList={setBlogList}
             weblogId={_id}
@@ -126,8 +125,8 @@ const ArchiveBlog = ({
               openRestoreBlogFromArchiveListModal
             }
           />
-        </Suspense>
-      ) : null}
+        ) : null}
+      </Suspense>
     </>
   );
 };

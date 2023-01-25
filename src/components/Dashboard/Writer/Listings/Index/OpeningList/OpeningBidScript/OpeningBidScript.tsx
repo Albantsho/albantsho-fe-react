@@ -156,17 +156,16 @@ const OpeningBidScript = ({
           </Menu>
         </div>
       </div>
-      {openUnListingItem ? (
-        <Suspense fallback={null}>
+      <Suspense fallback={null}>
+        {openUnListingItem ? (
           <UnListingItemModal
             id={script._id}
             setListedScript={setListedScript}
             openUnListingItem={openUnListingItem}
             setOpenUnListingItem={setOpenUnListingItem}
           />
-        </Suspense>
-      ) : null}
-
+        ) : null}
+      </Suspense>
       {index < scripts.length - 1 && <Divider className="hidden sm:flex" />}
     </>
   );

@@ -44,15 +44,14 @@ const Listings: NextPageWithLayout = () => {
         handleSearch={handleSearch}
         setOpenCreateScript={setOpenCreateScript}
       />
-      {openCreateScript ? (
-        <Suspense fallback={null}>
+      <Suspense fallback={null}>
+        {openCreateScript ? (
           <CreateScriptModal
             openCreateScript={openCreateScript}
             setOpenCreateScript={setOpenCreateScript}
           />
-        </Suspense>
-      ) : null}
-
+        ) : null}
+      </Suspense>
       {(!query.tab || query.tab === "opening-list") && (
         <OpeningList searchQuery={searchQuery} />
       )}

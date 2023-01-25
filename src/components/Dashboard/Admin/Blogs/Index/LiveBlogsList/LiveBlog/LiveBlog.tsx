@@ -99,18 +99,18 @@ const LiveBlog = ({
           </IconButton>
         </div>
       </div>
-      {openMoveBlogToTrashListModal ? (
-        <Suspense fallback={null}>
+      <Suspense fallback={null}>
+        {openMoveBlogToTrashListModal ? (
           <MoveBlogToTrashListModal
             setBlogList={setBlogList}
             weblogId={_id}
             setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
             openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
           />
-        </Suspense>
-      ) : null}
-      {openMoveBlogToArchiveListModal ? (
-        <Suspense fallback={null}>
+        ) : null}
+      </Suspense>
+      <Suspense fallback={null}>
+        {openMoveBlogToArchiveListModal ? (
           <MoveBlogToArchiveListModal
             setBlogList={setBlogList}
             weblogId={_id}
@@ -119,8 +119,8 @@ const LiveBlog = ({
             }
             openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}
           />
-        </Suspense>
-      ) : null}
+        ) : null}
+      </Suspense>
     </>
   );
 };

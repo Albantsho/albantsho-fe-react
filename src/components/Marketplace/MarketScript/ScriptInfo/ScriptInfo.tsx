@@ -73,14 +73,14 @@ const ScriptInfo = ({ script, bid }: IProps) => {
           script={script}
           setOpenBidSuccessful={setOpenBidSuccessful}
         />
-        {openBidSuccessful ? (
-          <Suspense fallback={null}>
+        <Suspense fallback={null}>
+          {openBidSuccessful ? (
             <BidSuccessfulModal
               openBidSuccessful={openBidSuccessful}
               setOpenBidSuccessful={setOpenBidSuccessful}
             />
-          </Suspense>
-        ) : null}
+          ) : null}
+        </Suspense>
       </div>
     </div>
   );

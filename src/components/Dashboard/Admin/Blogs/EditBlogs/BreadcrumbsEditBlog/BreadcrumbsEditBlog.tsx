@@ -88,18 +88,18 @@ const BreadcrumbsEditBlog = ({ oneWeblog }: IProps) => {
           </IconButton>
         </div>
       </div>
-      {openMoveBlogToTrashListModal ? (
-        <Suspense fallback={null}>
+
+      <Suspense fallback={null}>
+        {openMoveBlogToTrashListModal ? (
           <MoveBlogToTrashListModal
             weblogId={oneWeblog._id}
             setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
             openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
           />
-        </Suspense>
-      ) : null}
-
-      {openMoveBlogToArchiveListModal ? (
-        <Suspense fallback={null}>
+        ) : null}
+      </Suspense>
+      <Suspense fallback={null}>
+        {openMoveBlogToArchiveListModal ? (
           <MoveBlogToArchiveListModal
             weblogId={oneWeblog._id}
             setOpenMoveBlogToArchiveListModal={
@@ -107,8 +107,8 @@ const BreadcrumbsEditBlog = ({ oneWeblog }: IProps) => {
             }
             openMoveBlogToArchiveListModal={openMoveBlogToArchiveListModal}
           />
-        </Suspense>
-      ) : null}
+        ) : null}
+      </Suspense>
     </>
   );
 };

@@ -16,6 +16,8 @@ import { useCallback, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
 import routes from "routes/routes";
 import { NextPageWithLayout } from "../../../_app";
+import { useQuery } from "react-query";
+import useAxiosPrivate from "hooks/useAxiosPrivate";
 
 const BlogsPage: NextPageWithLayout = () => {
   const { query, push } = useRouter();
@@ -25,6 +27,7 @@ const BlogsPage: NextPageWithLayout = () => {
   const { getAllWeblogsForAdmin } = useWeblogApi();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+  const axiosPrivate = useAxiosPrivate();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
@@ -37,6 +40,19 @@ const BlogsPage: NextPageWithLayout = () => {
     ),
     [searchQuery]
   );
+
+  const hello = useQuery(
+    "admin-blogs",
+    () => {
+      return axiosPrivate.get(
+        `/weblog/admin/all?limit=10&${queryString.stringify(
+          query
+        )}&search=${searchQuery}`
+      );
+    },
+    { refetchInterval: 100 }
+  );
+  console.log(hello);
 
   useEffect(() => {
     async function getAllWeblogs() {

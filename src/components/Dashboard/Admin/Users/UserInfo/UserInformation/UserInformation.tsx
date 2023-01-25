@@ -278,26 +278,26 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
           </div>
         </div>
       </div>
-      {openBlockingUserModal ? (
-        <Suspense fallback={null}>
+      <Suspense fallback={null}>
+        {openBlockingUserModal ? (
           <BlockingUserModal
             user={user}
             setOneUser={setOneUser}
             setOpenBlockingUserModal={setOpenBlockingUserModal}
             openBlockingUserModal={openBlockingUserModal}
           />
-        </Suspense>
-      ) : null}
-      {openFreezingUserModal ? (
-        <Suspense fallback={null}>
+        ) : null}
+      </Suspense>
+      <Suspense fallback={null}>
+        {openFreezingUserModal ? (
           <FreezingUserModal
             user={user}
             setOneUser={setOneUser}
             setOpenFreezingUserModal={setOpenFreezingUserModal}
             openFreezingUserModal={openFreezingUserModal}
           />
-        </Suspense>
-      ) : null}
+        ) : null}
+      </Suspense>
     </>
   );
 };

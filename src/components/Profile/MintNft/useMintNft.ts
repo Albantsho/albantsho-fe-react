@@ -1,3 +1,5 @@
+declare const window: any;
+
 import useNftApi from "apis/nft.api";
 import { ethers } from "ethers";
 import { INft } from "interfaces/nft";
@@ -12,8 +14,6 @@ const useMintNft = () => {
   const [balance, setBalance] = useState("");
 
   const connectWalletAddress = async () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const [account] = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
