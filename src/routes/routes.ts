@@ -279,6 +279,11 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["admin"],
   },
+  nftAdminDashboard: {
+    url: `/dashboard/admin/nft`,
+    mustAuthenticated: "yes",
+    permission: ["admin"],
+  },
   reviewersAdminDashboard: {
     url: `/dashboard/admin/reviewers`,
     mustAuthenticated: "yes",

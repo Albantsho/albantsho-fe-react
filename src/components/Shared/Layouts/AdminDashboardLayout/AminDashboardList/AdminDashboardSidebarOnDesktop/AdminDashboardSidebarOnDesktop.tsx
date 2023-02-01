@@ -14,6 +14,7 @@ import routes from "routes/routes";
 import BlogIcon from "../assets/blog-icon.svg";
 import StarIcon from "../assets/star-icon.svg";
 import UserIcon from "../assets/user-icon.svg";
+import NFTIcon from "@assets/icons/mini-logo.svg";
 
 const listRoutes = [
   { route: routes.blogsAdminDashboard.url, title: "Blogs", icon: BlogIcon },
@@ -22,6 +23,11 @@ const listRoutes = [
     route: routes.reviewersAdminDashboard.url,
     title: "Reviews",
     icon: StarIcon,
+  },
+  {
+    route: routes.nftAdminDashboard.url,
+    title: "NFT",
+    icon: NFTIcon,
   },
 ];
 
@@ -96,7 +102,11 @@ const AdminDashboardSidebarOnDesktop = () => {
                   }}
                 >
                   <ListItemIcon>
-                    <SvgIcon component={listRoute.icon} />
+                    <SvgIcon
+                      component={listRoute.icon}
+                      className="text-white"
+                      inheritViewBox
+                    />
                   </ListItemIcon>
                   <ListItemText primary={listRoute.title} />
                 </ListItemButton>

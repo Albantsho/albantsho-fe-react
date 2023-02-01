@@ -2,6 +2,8 @@ import useAxiosPrivate from "hooks/useAxiosPrivate";
 
 interface IPayloadMintNft {
   nftId: string;
+  transaction: string;
+  tokenId: string;
 }
 
 const useNftApi = (controller?: AbortController) => {
@@ -9,15 +11,29 @@ const useNftApi = (controller?: AbortController) => {
 
   return {
     async getAllUserNfts() {
-      const res = await axiosPrivate.get("/nft/all", {
+      const res = await axiosPrivate.get("/nft/user/all", {
         signal: controller?.signal,
       });
 
       return res.data;
     },
 
-    async mintNfts(nftId: string, payload: IPayloadMintNft) {
-      const res = await axiosPrivate.post(`/nft/mint/${nftId}`, payload, {
+    async mintNfts(payload: IPayloadMintNft) {
+      const res = await axiosPrivate.post(`/nft/add`, payload, {
+        signal: controller?.signal,
+      });
+
+      return res.data;
+    },
+    async getAllNftForAdmin() {
+      const res = await axiosPrivate.get(`/nft/all`, {
+        signal: controller?.signal,
+      });
+
+      return res.data;
+    },
+    async getAllNftCountForAdmin(search: string) {
+      const res = await axiosPrivate.get(`/nft/wallet/count?search${search}`, {
         signal: controller?.signal,
       });
 
