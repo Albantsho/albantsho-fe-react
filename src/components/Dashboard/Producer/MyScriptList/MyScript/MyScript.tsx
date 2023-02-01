@@ -45,9 +45,9 @@ const MyScript = ({ script }: IProps) => {
           `<div style="padding:0 40px;width:595px;height:842px;font-family:Courier;display:flex;align-items:center;gap:25px;flex-direction:column;padding:0 20px;padding-top:80px;"><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
             script.title
           }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${
-            script.writtenBy.length !== 0 && script.writtenBy.join(" ")
+            script.writtenBy.length !== 0 && (script.writtenBy.join(" ") || " ")
           }</h6><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
-            script.basedOn
+            script.basedOn || " "
           }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
             script.draftDate ? (script.draftDate as string) : Date.now()
           ).toLocaleDateString()}</h6></div><div style="padding:0 40px;width:595px;font-family:Courier Prime;">

@@ -65,33 +65,33 @@ const DetailScriptModal = ({
       const valueForConvertPdf = serializeWithoutDiv({ children: value });
       const doc = new jsPDF("p", "pt", "a4");
       if (valueForConvertPdf) {
-        doc.html(
-          `<div style="padding:0 40px;width:595px;height:842px;font-family:Courier;display:flex;align-items:center;gap:25px;flex-direction:column;padding:0 20px;padding-top:80px;"><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
-            reviewerTask.title
-          }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${
-            reviewerTask.writtenBy.length !== 0 &&
-            reviewerTask.writtenBy.join(" ")
-          }</h6><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
-            reviewerTask.basedOn
-          }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
-            reviewerTask.draftDate
-              ? (reviewerTask.draftDate as string)
-              : Date.now()
-          ).toLocaleDateString()}</h6></div><div style="padding:0 40px;width:595px;font-family:Courier Prime;">
-          ${valueForConvertPdf}
-          </div>`,
-          {
-            margin: [30, 0],
-            autoPaging: "text",
-            callback: (pdf) => {
-              for (let i = 0; i < doc.internal.pages.length; i++) {
-                doc.setPage(i);
-                doc.text(i <= 1 ? " " : `Page ${String(i - 1)}`, 275, 830);
-              }
-              pdf.save(reviewerTask.title);
-            },
-          }
-        );
+        const exportFile = (document.createElement(
+          "html"
+        ).innerHTML = `<div style="padding:0 40px;width:595px;height:842px;font-family:Courier;display:flex;align-items:center;gap:25px;flex-direction:column;padding:0 20px;padding-top:80px;"><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
+          reviewerTask.title
+        }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${
+          reviewerTask.writtenBy.length !== 0 &&
+          (reviewerTask.writtenBy.join(" ") || " ")
+        }</h6><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
+          reviewerTask.basedOn || " "
+        }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
+          reviewerTask.draftDate
+            ? (reviewerTask.draftDate as string)
+            : Date.now()
+        ).toLocaleDateString()}</h6></div><div style="padding:0 40px;width:595px;font-family:Courier Prime;">
+      ${valueForConvertPdf}
+      </div>`);
+        doc.html(exportFile, {
+          margin: [30, 0],
+          autoPaging: "text",
+          callback: (pdf) => {
+            for (let i = 0; i < doc.internal.pages.length; i++) {
+              doc.setPage(i);
+              doc.text(i <= 1 ? " " : `Page ${String(i - 1)}`, 275, 830);
+            }
+            pdf.save(reviewerTask.title);
+          },
+        });
       }
     } else {
       const res = await getOneDraftAsPdf(reviewerTask._id as string);
@@ -145,7 +145,6 @@ const DetailScriptModal = ({
             >
               View script
             </Button>
-            );
           </div>
           <Divider />
           <div className="pt-8 px-5 sm:px-7">
