@@ -48,7 +48,7 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
                 <Image
                   width={64}
                   height={64}
-                  layout="fixed"
+                  style={{ width: "64px", height: "64px" }}
                   className="rounded-md w-16 h-16"
                   loading="lazy"
                   alt={script.title}

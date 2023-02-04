@@ -1,56 +1,36 @@
 import { Typography } from "@mui/material";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import Btn from "@shared/Btn/Btn";
+import useScriptsApi from "apis/Scripts.api";
 import { IFullInformationScript } from "interfaces/script";
-import jsPDF from "jspdf";
+import { useRouter } from "next/router";
 import useScriptValueStore from "store/scriptValue.store";
 import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
 import { serializeWithoutDiv } from "utils/serialize-slate";
+import PDFFile from "../../Shared/PdfFile/PdfFile";
+
+// const ButtonExportPdf = dynamic(
+//   () => import("./ButtonExportPdf/ButtonExportPdf"),
+//   { ssr: false }
+// );
 
 interface IProps {
   script: IFullInformationScript;
 }
 
 const ExportFile = ({ script }: IProps) => {
+  const { updateScript } = useScriptsApi();
   const scriptValue = useScriptValueStore((state) => state.scriptValue);
+  const { query } = useRouter();
+  const htmlContent = new DOMParser().parseFromString(scriptValue, "text/html");
+  const value = deserializeScriptWithOutDiv(htmlContent.body);
+  const valueForConvertPdf = serializeWithoutDiv({ children: value });
 
-  const handleExportPdfFile = () => {
-    const doc = new jsPDF("p", "pt", "a4");
-    const htmlContent = new DOMParser().parseFromString(
-      scriptValue,
-      "text/html"
+  const handleExportPdfFile = async () => {
+    await updateScript(
+      { scriptPart: valueForConvertPdf?.slice(0, 3500) },
+      query.id as string
     );
-
-    const value = deserializeScriptWithOutDiv(htmlContent.body);
-    const valueForConvertPdf = serializeWithoutDiv({ children: value });
-
-    if (valueForConvertPdf) {
-      const exportFile = (document.createElement(
-        "html"
-      ).innerHTML = `<div style="padding:0 40px;width:595px;height:842px;font-family:Courier;display:flex;align-items:center;gap:25px;flex-direction:column;padding:0 20px;padding-top:80px;"><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
-        script.title
-      }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${
-        script.writtenBy.length !== 0 && (script.writtenBy.join(" ") || " ")
-      }</h6><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
-        script.basedOn || " "
-      }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
-        script.draftDate ? (script.draftDate as string) : Date.now()
-      ).toLocaleDateString()}</h6></div><div style="padding:0 40px;width:595px;font-family:Courier Prime;">${valueForConvertPdf}</div>`);
-
-      doc.html(exportFile, {
-        filename: "html",
-        margin: [30, 0],
-        autoPaging: "slice",
-        callback: (pdf) => {
-          for (let i = 0; i < doc.internal.pages.length; i++) {
-            doc.setPage(i);
-            doc.text(i <= 1 ? " " : `Page ${String(i - 1)}`, 275, 830);
-          }
-
-          pdf.save(script.title);
-          console.log(doc.output());
-        },
-      });
-    }
   };
 
   return (
@@ -62,12 +42,25 @@ const ExportFile = ({ script }: IProps) => {
       >
         Export Document
       </Typography>
-      <Typography className="max-w-[230px] mb-6">
+      <Typography className="max-w-[230px] pb-6">
         Document will be exported as a PDF file.
       </Typography>
-      <Btn onClick={handleExportPdfFile} className="py-2 px-6">
-        Export File
-      </Btn>
+      <PDFDownloadLink
+        document={
+          <PDFFile
+            scriptValue={scriptValue}
+            basedOn={script.basedOn}
+            draftDate={script.draftDate}
+            title={script.title}
+            writtenBy={script.writtenBy.join(" ")}
+          />
+        }
+        fileName={script.title}
+      >
+        <Btn onClick={handleExportPdfFile} className="py-2 px-6">
+          Export File
+        </Btn>
+      </PDFDownloadLink>
     </>
   );
 };

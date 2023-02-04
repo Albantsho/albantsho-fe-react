@@ -51,7 +51,7 @@ const MintNft = () => {
                       gridTemplateColumns={{
                         xs: "repeat(auto-fill, minmax(200px, auto))",
                       }}
-                      className="mt-2 xl:mt-8 gap-4 flex-wrap"
+                      className="mt-2 xl:mt-8 gap-8"
                     >
                       <div className="border rounded-lg border-primary-700 bg-primary-50 p-4 flex flex-col items-center justify-between min-h-[200px]">
                         <div className="w-24 h-24 bg-purple-100 flex justify-center items-center mx-auto rounded-full">

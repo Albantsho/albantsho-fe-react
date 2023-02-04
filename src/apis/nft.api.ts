@@ -25,15 +25,15 @@ const useNftApi = (controller?: AbortController) => {
 
       return res.data;
     },
-    async getAllNftForAdmin() {
-      const res = await axiosPrivate.get(`/nft/all`, {
+    async getAllNftForAdmin(searchQuery: string) {
+      const res = await axiosPrivate.get(`/nft/all?search=${searchQuery}`, {
         signal: controller?.signal,
       });
 
       return res.data;
     },
     async getAllNftCountForAdmin(search: string) {
-      const res = await axiosPrivate.get(`/nft/wallet/count?search${search}`, {
+      const res = await axiosPrivate.get(`/nft/wallet/count?search=${search}`, {
         signal: controller?.signal,
       });
 

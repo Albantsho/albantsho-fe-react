@@ -17,5 +17,7 @@ export interface INftForAdmin {
     walletAddress: string;
     tokenId: string;
     transaction: string;
+    createdAt: string;
+    updatedAt: string;
   }[];
 }

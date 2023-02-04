@@ -1,7 +1,7 @@
 import { ButtonGroup, IconButton, SvgIcon, Tooltip } from "@mui/material";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import useDraftApi from "apis/Draft.api";
-import useScriptValueStore from "store/scriptValue.store";
+import useScriptsApi from "apis/Scripts.api";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -10,6 +10,9 @@ import { useResizeDetector } from "react-resize-detector";
 import { toast } from "react-toastify";
 import routes from "routes/routes";
 import { Socket } from "socket.io-client";
+import useScriptValueStore from "store/scriptValue.store";
+import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
+import { serializeWithoutDiv } from "utils/serialize-slate";
 import BookMarkIcon from "../assets/book-mark.svg";
 import TextEditor from "./TextEditor";
 
@@ -22,6 +25,7 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   const { ref, width } = useResizeDetector();
   const { query } = useRouter();
   const { saveFileDraft } = useDraftApi();
+  const { updateScript } = useScriptsApi();
   const [render, setRender] = useState(false);
   const scriptValue = useScriptValueStore((state) => state.scriptValue);
   setTimeout(() => {
@@ -29,6 +33,16 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   }, 2000);
 
   const saveDraftFile = async () => {
+    const htmlContent = new DOMParser().parseFromString(
+      scriptValue,
+      "text/html"
+    );
+    const value = deserializeScriptWithOutDiv(htmlContent.body);
+    const valueForConvertPdf = serializeWithoutDiv({ children: value });
+    await updateScript(
+      { scriptPart: valueForConvertPdf?.slice(0, 3500) },
+      query.id as string
+    );
     const res = await saveFileDraft(query.id as string, {
       content: scriptValue,
     });
@@ -37,7 +51,10 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
 
   return (
     <div ref={ref} className="relative text-start">
-      <ButtonGroup className="absolute ml-auto hidden xl:flex w-min flex-col -right-16 top-10">
+      <ButtonGroup
+        className="absolute flex-row ml-auto  w-min xl:flex-col 
+      -top-[10px] left-0 xl:-right-16 xl:top-10"
+      >
         <Tooltip
           classes={{
             tooltip: "bg-black",

@@ -40,6 +40,7 @@ const Task = ({
         <div className="flex-shrink-0 -mb-2">
           {reviewerTask.image ? (
             <Image
+              style={{ width: "64px", height: "64px" }}
               width={64}
               height={64}
               className="rounded-md w-16 h-16"

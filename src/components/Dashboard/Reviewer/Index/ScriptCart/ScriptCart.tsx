@@ -7,12 +7,13 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import Btn from "@shared/Btn/Btn";
 import CustomRating from "@shared/CustomRating/CustomRating";
+import PDFFile from "@shared/PdfFile/PdfFile";
 import useDraftApi from "apis/Draft.api";
 import useReviewsApi from "apis/Reviews.api";
 import { IReviewerTask } from "interfaces/reviews";
-import jsPDF from "jspdf";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -49,56 +50,25 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
     getDraftFunc();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  let valueForConvertPdf = "";
+  if (resDraft && resDraft.data) {
+    const htmlContent = new DOMParser().parseFromString(
+      resDraft.data.draft,
+      "text/html"
+    );
+    const value = deserializeScriptWithOutDiv(htmlContent.body);
+    valueForConvertPdf = serializeWithoutDiv({ children: value }) as string;
+  }
 
   const seeScript = async () => {
-    if (resDraft.data) {
-      const htmlContent = new DOMParser().parseFromString(
-        resDraft.data.draft,
-        "text/html"
-      );
-
-      const value = deserializeScriptWithOutDiv(htmlContent.body);
-      const valueForConvertPdf = serializeWithoutDiv({ children: value });
-      const doc = new jsPDF("p", "pt", "a4");
-      if (valueForConvertPdf) {
-        const exportFile = (document.createElement(
-          "html"
-        ).innerHTML = `<div style="padding:0 40px;width:595px;height:842px;font-family:Courier;display:flex;align-items:center;gap:25px;flex-direction:column;padding:0 20px;padding-top:80px;"><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
-          selectedScript?.title
-        }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">Writers<br/>${
-          selectedScript?.writtenBy.length !== 0 &&
-          (selectedScript?.writtenBy.join(" ") || " ")
-        }</h6><h6 style="font-family:Courier;font-size:20px;word-spacing:0px;font-weight:light;text-align:center;">${
-          selectedScript?.basedOn || " "
-        }</h6><h6 style="font-family:Courier;font-size:18px;word-spacing:0px;font-weight:light;text-align:center;">${new Date(
-          selectedScript?.draftDate
-            ? (selectedScript.draftDate as string)
-            : Date.now()
-        ).toLocaleDateString()}</h6></div><div style="padding:0 40px;width:595px;font-family:Courier Prime;">
-        ${valueForConvertPdf}
-        </div>`);
-        doc.html(exportFile, {
-          margin: [30, 0],
-          autoPaging: "text",
-          callback: (pdf) => {
-            for (let i = 0; i < doc.internal.pages.length; i++) {
-              doc.setPage(i);
-              doc.text(i <= 1 ? " " : `Page ${String(i - 1)}`, 275, 830);
-            }
-            pdf.save(selectedScript?.title);
-          },
-        });
-      }
-    } else {
-      const res = await getOneDraftAsPdf(selectedScript?._id as string);
-      const blobUrl = window.URL.createObjectURL(new Blob([res]));
-      const aTag = document.createElement("a");
-      aTag.href = blobUrl;
-      aTag.setAttribute("download", `${selectedScript?.title}.pdf`);
-      document.body.appendChild(aTag);
-      aTag.click();
-      aTag.remove();
-    }
+    const res = await getOneDraftAsPdf(selectedScript?._id as string);
+    const blobUrl = window.URL.createObjectURL(new Blob([res]));
+    const aTag = document.createElement("a");
+    aTag.href = blobUrl;
+    aTag.setAttribute("download", `${selectedScript?.title}.pdf`);
+    document.body.appendChild(aTag);
+    aTag.click();
+    aTag.remove();
   };
 
   const beginReviewToScript = (scriptId: string) => async () => {
@@ -131,14 +101,37 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
             ? "Type B"
             : ""}
         </Button>
-        <Button
-          onClick={seeScript}
-          className="py-[10px] px-4"
-          variant="outlined"
-          startIcon={<FiArrowUpRight />}
-        >
-          View script
-        </Button>
+        {resDraft && resDraft.data ? (
+          <PDFDownloadLink
+            document={
+              <PDFFile
+                scriptValue={valueForConvertPdf as string}
+                basedOn={selectedScript?.basedOn as string}
+                draftDate={selectedScript?.draftDate as string}
+                title={selectedScript?.title as string}
+                writtenBy={selectedScript?.writtenBy.join(" ") as string}
+              />
+            }
+            fileName={selectedScript?.title}
+          >
+            <Button
+              className="py-[10px] px-4"
+              variant="outlined"
+              startIcon={<FiArrowUpRight />}
+            >
+              View script
+            </Button>
+          </PDFDownloadLink>
+        ) : (
+          <Button
+            onClick={seeScript}
+            className="py-[10px] px-4"
+            variant="outlined"
+            startIcon={<FiArrowUpRight />}
+          >
+            View script
+          </Button>
+        )}
       </CardActions>
       <Divider className="my-7" />
       <CardContent className="px-5 py-0 ">

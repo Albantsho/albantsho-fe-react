@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import useNftApi from "apis/nft.api";
 import useReviewsApi from "apis/Reviews.api";
+import { INftForAdmin } from "interfaces/nft";
 import { IAssignedOrCompletedRequest } from "interfaces/reviews";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -55,25 +56,17 @@ const NFTListArray = [
 ];
 
 const NFTList = ({ searchQuery }: IProps) => {
-  const [nftList, setNftList] = useState<Array<IAssignedOrCompletedRequest>>(
-    []
-  );
+  const [nftList, setNftList] = useState<Array<INftForAdmin>>([]);
   const [loading, setLoading] = useState(false);
-  const { getAllNftForAdmin, getAllNftCountForAdmin } = useNftApi();
+  const { getAllNftForAdmin } = useNftApi();
 
   useEffect(() => {
     async function getCompletedReviewsFunc() {
       try {
         setNftList([]);
         setLoading(true);
-        const res = await getAllNftCountForAdmin(searchQuery);
-        console.log(
-          "🚀 ~ file: NFTList.tsx:70 ~ getCompletedReviewsFunc ~ res",
-          res
-        );
-        // console.log(Object.fromEntries(res.data.nftCount));
-
-        // setNftList(res.data.nftCount);
+        const res = await getAllNftForAdmin(searchQuery);
+        setNftList(res.data.writers);
         setLoading(false);
       } catch (error) {
         ("");
@@ -88,7 +81,7 @@ const NFTList = ({ searchQuery }: IProps) => {
     <>
       {loading ? (
         <DotLoader color="#7953B5" className="mx-auto mt-10" />
-      ) : nftList.length == 0 ? (
+      ) : nftList.length > 0 ? (
         <TableContainer
           className="bg-white h-full mt-8 overflow-y-hidden mb-16"
           component={Paper}
@@ -109,7 +102,15 @@ const NFTList = ({ searchQuery }: IProps) => {
                     variant="h6"
                     className="futura font-medium text-primary-700"
                   >
-                    Wallet Address
+                    User
+                  </Typography>
+                </TableCell>
+                <TableCell align="center">
+                  <Typography
+                    variant="h6"
+                    className="futura font-medium text-primary-700"
+                  >
+                    Wallet Addresses
                   </Typography>
                 </TableCell>
                 <TableCell align="center">
@@ -123,7 +124,7 @@ const NFTList = ({ searchQuery }: IProps) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {NFTListArray.map((nft) => (
+              {nftList.map((nft) => (
                 <NFT nft={nft} key={nft._id} />
               ))}
             </TableBody>

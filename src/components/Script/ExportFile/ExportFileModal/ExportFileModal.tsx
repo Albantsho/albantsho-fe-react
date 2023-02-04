@@ -27,7 +27,7 @@ const ExportFileModal = ({
 
   return (
     <Modal
-      className="px-5 lg:hidden"
+      className="px-5 xl:hidden"
       open={openExportModal}
       onClose={handleCloseExportFile}
     >

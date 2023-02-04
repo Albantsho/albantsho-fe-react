@@ -31,7 +31,7 @@ const ScriptDocumentModal = ({
 
   return (
     <Modal
-      className="px-5 lg:hidden"
+      className="px-5 xl:hidden"
       open={openDocumentModal}
       onClose={handleCloseExportFile}
     >

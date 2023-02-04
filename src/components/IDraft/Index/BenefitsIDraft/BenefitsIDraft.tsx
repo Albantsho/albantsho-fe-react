@@ -1,11 +1,11 @@
 import {
-  Timeline,
   TimelineConnector,
   TimelineContent,
   TimelineItem,
   TimelineOppositeContent,
   TimelineSeparator,
 } from "@mui/lab";
+import Timeline from "@mui/lab/Timeline";
 import { Typography } from "@mui/material";
 
 const benefitsList = [
@@ -37,7 +37,7 @@ const BenefitsIDraft = () => {
         data-aos="zoom-in-down"
         className="flex max-w-md sm:items-center sm:justify-center sm:mx-auto   py-4 pb-16"
       >
-        <Timeline className=" px-0">
+        <Timeline className="px-0">
           {benefitsList.map((item, index) => {
             return (
               <TimelineItem

@@ -40,8 +40,8 @@ const AssignedOrCompletedRequest = ({ script }: IProps) => {
               <Image
                 width={64}
                 height={64}
-                layout="fixed"
-                className="rounded-md "
+                style={{ width: "64px", height: "64px" }}
+                className="rounded-md"
                 loading="lazy"
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
                 alt={script.title}

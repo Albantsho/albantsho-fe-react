@@ -18,7 +18,7 @@ interface IUpdateScriptPayload {
   storyFormat?: string;
   title?: string;
   primaryGenre?: string;
-  secondaryGenre: string;
+  secondaryGenre?: string;
   primaryCast?: string;
   secondaryCast?: string;
   estimatedBudget?: string;
@@ -28,11 +28,13 @@ interface IUpdateScriptPayload {
   storyWorld?: string;
   actStructure?: string;
   characterBible?: string;
-  storyTopics: string[];
+  storyTopics?: string[];
   adaption?: boolean;
   inspiration?: string;
   motivation?: string;
-  progress: number;
+  progress?: number;
+  scriptPart?: string;
+  totalPages?: number;
 }
 
 interface IUpdateScriptImagePayload {

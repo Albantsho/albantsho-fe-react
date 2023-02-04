@@ -17,7 +17,7 @@ const ScriptEditor = ({ script, htmlInitialValue, socket }: IProps) => {
   const { query } = useRouter();
 
   return (
-    <div className="w-full flex gap-1 flex-col justify-start text-center mx-auto max-w-[800px] px-3 xl:px-10">
+    <div className="w-full flex gap-3 flex-col justify-start text-center mx-auto max-w-[800px] px-3 xl:px-10">
       <Link href={routes.titleScript.dynamicUrl(query.id as string)}>
         <div className="bg-white w-full mx-auto py-14">
           <Typography

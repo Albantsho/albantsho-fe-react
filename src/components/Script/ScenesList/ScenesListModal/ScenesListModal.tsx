@@ -21,7 +21,7 @@ const ScenesListModal = ({ openScenesModal, setOpenScenesModal }: IProps) => {
 
   return (
     <Modal
-      className="px-5 lg:hidden"
+      className="px-5 xl:hidden"
       open={openScenesModal}
       onClose={handleCloseExportFile}
     >

@@ -8,8 +8,6 @@ const ScriptNav = ({ color = "transparent", ...props }: AppBarProps) => {
 
   return (
     <AppBar
-      data-aos="fade-down"
-      data-aos-duration="300"
       className="shadow-primary"
       position="absolute"
       elevation={0}

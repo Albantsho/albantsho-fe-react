@@ -47,7 +47,9 @@ const Script: NextPageWithLayout = () => {
           script={script}
         />
       ) : (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <div className="flex-1">
+          <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        </div>
       )}
     </>
   );

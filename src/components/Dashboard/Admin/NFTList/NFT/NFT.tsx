@@ -1,13 +1,10 @@
 import nftLogo from "@assets/images/logo.png";
 import { TableCell, TableRow, Typography } from "@mui/material";
+import { INftForAdmin } from "interfaces/nft";
 import Image from "next/image";
 
 interface IProps {
-  nft: {
-    _id: string;
-    walletAddress: string;
-    nftCount: number;
-  };
+  nft: INftForAdmin;
 }
 
 const NFT = ({ nft }: IProps) => {
@@ -32,12 +29,25 @@ const NFT = ({ nft }: IProps) => {
       </TableCell>
       <TableCell align="center">
         <Typography variant="body1" className="text-primary-700">
-          {nft.walletAddress}
+          {nft.email}
         </Typography>
       </TableCell>
       <TableCell align="center">
+        <div className="flex flex-col gap-2">
+          {nft.nfts.map((nft) => (
+            <Typography
+              key={nft._id}
+              variant="body1"
+              className="text-primary-700"
+            >
+              {nft.walletAddress}
+            </Typography>
+          ))}
+        </div>
+      </TableCell>
+      <TableCell align="center">
         <Typography variant="body1" className="text-primary-700">
-          {nft.nftCount}
+          {nft.nfts.length}
         </Typography>
       </TableCell>
     </TableRow>

@@ -99,6 +99,7 @@ export interface IFullInformationScript {
   soldDate: string | null;
   soldPrice: number | null;
   writtenBy: string[];
+  scriptPart: string | null;
   subScriptions: string[];
 }
 

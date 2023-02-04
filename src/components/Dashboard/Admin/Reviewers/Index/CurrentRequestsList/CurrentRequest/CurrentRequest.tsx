@@ -38,6 +38,7 @@ const CurrentRequest = ({
           <div className="mt-1">
             {image ? (
               <Image
+                style={{ width: "64px", height: "64px" }}
                 width={64}
                 height={64}
                 layout="fixed"

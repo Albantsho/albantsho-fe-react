@@ -38,9 +38,21 @@ const ScriptMainDetails = ({ script }: IProps) => {
             SCRIPT
           </Typography>
         </AccordionSummary>
-        <AccordionDetails className="px-5 sm:px-10 py-5 bg-tinted-50/60">
-          <article className="prose lg:prose-lg prose-h1:text-primary-700">
-            ""
+        <AccordionDetails className="py-16 bg-tinted-50/60">
+          <article className="prose lg:prose-lg prose-p:text-primary-700">
+            <Typography
+              variant="h5"
+              className="px-10 font-normal text-primary-700 leading-normal"
+            >
+              {script.title}
+            </Typography>
+            <Typography
+              variant="h6"
+              className="px-10 font-normal text-primary-700 leading-normal"
+            >
+              Written by {script.writtenBy.join(" ")}
+            </Typography>
+            {parse(script.scriptPart as string)}
           </article>
         </AccordionDetails>
       </Accordion>

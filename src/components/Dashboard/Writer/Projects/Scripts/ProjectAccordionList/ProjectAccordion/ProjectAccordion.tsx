@@ -116,10 +116,11 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
         className="rounded-lg px-4 sm:px-6 py-4"
       >
         <div className="flex flex-col  sm:flex-row flex-1    gap-x-4 gap-y-3 sm:gap-y-0 xl:pr-20">
-          <div className="flex justify-center w-[72px] h-[72px] items-center self-start  bg-tinted-100/60 rounded-md">
+          <div className="flex justify-center w-[72px] h-[72px] items-center self-start  bg-tinted-100/60 rounded-md overflow-hidden">
             {script.image ? (
               <Image
                 loading="lazy"
+                style={{ width: "72px", height: "72px" }}
                 width={72}
                 height={72}
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}

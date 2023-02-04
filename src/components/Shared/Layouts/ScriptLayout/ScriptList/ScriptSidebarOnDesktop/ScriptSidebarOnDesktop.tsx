@@ -51,11 +51,7 @@ const ScriptSidebarOnDesktop = () => {
   };
 
   return (
-    <div
-      data-aos="fade-right"
-      data-aos-duration="300"
-      className="min-h-screen bg-primary-900"
-    >
+    <div className="min-h-screen hidden xl:block bg-primary-900">
       <Drawer
         sx={{
           minHeight: "100vh",
@@ -172,7 +168,7 @@ const ScriptSidebarOnDesktop = () => {
           ))}
         </List>
         {openCompleteDrawer && (
-          <div className="mt-auto self-center text-white hidden lg:flex gap-6  justify-start pt-3">
+          <div className="mt-auto self-center text-white hidden xl:flex gap-6  justify-start pt-3">
             <IconButton
               href="https://www.twitter.com/albantsho"
               target="_blank"
