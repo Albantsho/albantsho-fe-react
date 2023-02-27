@@ -1,5 +1,6 @@
 import { jsx } from "slate-hyperscript";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const deserializeScriptWithDiv = (el: any): any => {
   if (el.nodeType === Node.TEXT_NODE) {
     return jsx("text", {}, el.textContent);
@@ -47,6 +48,7 @@ const deserializeScriptWithDiv = (el: any): any => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const deserializeScriptWithOutDiv = (el: any): any => {
   if (el.nodeType === Node.TEXT_NODE) {
     return jsx("text", {}, el.textContent);

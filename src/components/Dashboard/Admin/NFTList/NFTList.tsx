@@ -1,18 +1,16 @@
 import emptyBlogs from "@assets/images/empty-blogs.png";
 import {
+  Paper,
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
   Typography,
-  TableContainer,
-  Paper,
 } from "@mui/material";
 import useNftApi from "apis/nft.api";
-import useReviewsApi from "apis/Reviews.api";
 import { INftForAdmin } from "interfaces/nft";
-import { IAssignedOrCompletedRequest } from "interfaces/reviews";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
@@ -21,39 +19,6 @@ import NFT from "./NFT/NFT";
 interface IProps {
   searchQuery: string;
 }
-
-const NFTListArray = [
-  {
-    _id: "1",
-    walletAddress: "0x874491131b9094d73bE37C13A81c3D06B4cE71e3",
-    nftCount: 5,
-  },
-  {
-    _id: "10",
-    walletAddress: "0x874491131b9094d73bE37C13A81c3D06B4cE71e3",
-    nftCount: 5,
-  },
-  {
-    _id: "2",
-    walletAddress: "0x874491131b9094d73bE37C13A81c3D06B4cE71e3",
-    nftCount: 10,
-  },
-  {
-    _id: "3",
-    walletAddress: "0x874491131b9094d73bE37C13A81c3D06B4cE71e3",
-    nftCount: 7,
-  },
-  {
-    _id: "4",
-    walletAddress: "0x874491131b9094d73bE37C13A81c3D06B4cE71e3",
-    nftCount: 3,
-  },
-  {
-    _id: "5",
-    walletAddress: "0x874491131b9094d73bE37C13A81c3D06B4cE71e3",
-    nftCount: 8,
-  },
-];
 
 const NFTList = ({ searchQuery }: IProps) => {
   const [nftList, setNftList] = useState<Array<INftForAdmin>>([]);

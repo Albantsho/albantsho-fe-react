@@ -28,31 +28,31 @@ const MobileToolbar = () => {
       <MarkButton format="bold" icon={BsTypeBold} />
       <ColorButton />
       <MarkButton format="italic" icon={FiItalic} />
-      {width! > 190 && (
+      {width && width > 190 && (
         <MarkButton format="underline" icon={AiOutlineUnderline} />
       )}
-      {width! > 230 && <MarkButton format="code" icon={BsCode} />}
-      {width! > 300 && <EmojiButton />}
-      {width! > 345 && (
+      {width && width > 230 && <MarkButton format="code" icon={BsCode} />}
+      {width && width > 300 && <EmojiButton />}
+      {width && width > 345 && (
         <>
           <Divider className="flex h-full" orientation="vertical" />
           <LinkButton />
         </>
       )}
-      {width! > 415 && <ImageButton />}
-      {width! > 465 && <TableButton />}
-      {width! > 515 && <EmailButton />}
-      {width! > 560 && (
+      {width && width > 415 && <ImageButton />}
+      {width && width > 465 && <TableButton />}
+      {width && width > 515 && <EmailButton />}
+      {width && width > 560 && (
         <BlockButton format="blockquote" icon={AiFillExclamationCircle} />
       )}
-      {width! > 665 && (
+      {width && width > 665 && (
         <>
           <Divider className="flex h-full" orientation="vertical" />
           <BlockButton format="numberList" icon={MdOutlineFormatListNumbered} />
           <BlockButton format="bulletList" icon={MdFormatListBulleted} />
         </>
       )}
-      {width! > 810 && (
+      {width && width > 810 && (
         <>
           <Divider className="flex h-full" orientation="vertical" />
           <HeadingButtonList />

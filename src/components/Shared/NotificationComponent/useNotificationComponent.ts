@@ -67,6 +67,8 @@ const useNotificationComponent = () => {
     }
 
     getAllNotificationsFunc();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [anchorEl]);
 
   return {

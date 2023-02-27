@@ -8,7 +8,12 @@ interface IProps {
   publish: boolean;
 }
 
-const StepsLines = ({ step, setStep, errors, publish }: IProps) => {
+const StepsLines = ({
+  step,
+  setStep,
+  errors: _errors,
+  publish: _publish,
+}: IProps) => {
   const stepLinks = useRef<HTMLDivElement[]>([]);
   useEffect(() => {
     stepLinks.current[step - 1].scrollIntoView({

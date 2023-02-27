@@ -70,6 +70,8 @@ const useScriptDocument = ({ socket }: IProps) => {
     socket.on("collaboratorLeaves", (_collaboratorId) => {
       ("");
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = async (data: IAddCollaboratorFormValues) => {

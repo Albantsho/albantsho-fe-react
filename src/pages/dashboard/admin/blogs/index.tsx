@@ -14,6 +14,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import queryString from "query-string";
 import { useCallback, useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { DotLoader } from "react-spinners";
 import routes from "routes/routes";
 import { NextPageWithLayout } from "../../../_app";
@@ -26,6 +27,7 @@ const BlogsPage: NextPageWithLayout = () => {
   const { getAllWeblogsForAdmin } = useWeblogApi();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+  const axiosPrivate = useAxiosPrivate();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
@@ -38,6 +40,17 @@ const BlogsPage: NextPageWithLayout = () => {
     ),
     [searchQuery]
   );
+
+  const { data, isLoading, isError, isFetching } = useQuery(
+    "admin-blogs",
+    async () => {
+      const data = await axiosPrivate.get(
+        `/weblog/admin/all?limit=10&${query}&search=${searchQuery}`
+      );
+      return data;
+    }
+  );
+  console.log({ data, isLoading, isError, isFetching });
 
   useEffect(() => {
     async function getAllWeblogs() {
@@ -119,6 +132,7 @@ const BlogsPage: NextPageWithLayout = () => {
               handleActivePage={handleActivePage}
             />
           )}
+          {JSON.stringify(data?.data.data)}
           <Fab
             color="primary"
             href={routes.createBlogAdminDashboard.url}

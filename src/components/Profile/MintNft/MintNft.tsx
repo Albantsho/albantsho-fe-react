@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const window: any;
 
 import nftLogo from "@assets/images/logo.png";

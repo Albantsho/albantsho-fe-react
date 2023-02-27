@@ -1,6 +1,5 @@
-import { Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Typography } from "@mui/material";
 import { IBidForScript } from "interfaces/bid";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 interface IProps {
   bid: IBidForScript;
@@ -9,6 +8,7 @@ interface IProps {
 const hourSeconds = 3600;
 const daySeconds = 86400;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const renderTime = (dimension: string, time: number) => {
   return (
     <div className="flex justify-center items-center">
@@ -20,9 +20,10 @@ const renderTime = (dimension: string, time: number) => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getTimeHours = (time: number) => ((time % daySeconds) / hourSeconds) | 0;
 
-export default function CustomizedProgressBars({ bid }: IProps) {
+export default function CustomizedProgressBars({ bid: _bid }: IProps) {
   // const theme = useTheme();
   // const matches = useMediaQuery(theme.breakpoints.up("md"));
   // const startTime = new Date(bid.updatedAt).getTime() / 1000; // use UNIX timestamp in seconds

@@ -1,6 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function middleware(req: NextRequest) {
   // console.log(req.headers);
   // console.log(req.cookies.has("refresh_token"));

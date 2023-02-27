@@ -1,9 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const window: any;
 
 import useNftApi from "apis/nft.api";
 import { ethers } from "ethers";
 import { INft } from "interfaces/nft";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import NFT from "../../../config/albantsho-abi.json";
@@ -16,7 +16,6 @@ const useMintNft = () => {
   const [correctNetwork, setCorrectNetwork] = useState(true);
   const [nftList, setNftList] = useState<Array<INft>>([]);
   const { getAllUserNfts, mintNfts } = useNftApi();
-  const { reload } = useRouter();
 
   //? Calls Metamask to connect wallet on clicking Connect Wallet button
   const connectWalletAddress = async () => {
@@ -138,12 +137,13 @@ const useMintNft = () => {
       const foundNft = nftListCopy[foundNftIndex];
       foundNft.transaction = res.transactionHash;
       setNftList(nftListCopy);
-      const mintRes = await mintNfts({
+      await mintNfts({
         nftId,
         tokenId: `${parseInt(res.logs[0].topics[3], 16)}`,
         transaction: res.transactionHash,
       });
       toast.success("Successfully minted !");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(error.reason ? error.reason : "something went wrong");
     } finally {

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Button, ButtonGroup, SvgIcon } from "@mui/material";
 import { useState } from "react";
 import { CiAlignCenterV, CiAlignLeft, CiAlignRight } from "react-icons/ci";

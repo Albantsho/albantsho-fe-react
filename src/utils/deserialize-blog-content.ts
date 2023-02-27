@@ -9,10 +9,12 @@ interface IMarkAttributes {
   color?: string;
 }
 
-export const deserializeBlogContent = (
+export function deserializeBlogContent(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   el: any,
   markAttributes: IMarkAttributes = {}
-): any => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): any {
   if (el.nodeType === Node.TEXT_NODE) {
     return jsx("text", markAttributes, el.textContent);
   } else if (el.nodeType !== Node.ELEMENT_NODE) {
@@ -217,4 +219,4 @@ export const deserializeBlogContent = (
   } else {
     return children;
   }
-};
+}
