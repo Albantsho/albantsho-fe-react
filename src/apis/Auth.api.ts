@@ -1,15 +1,28 @@
+import useAxios from "hooks/useAxios";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IResData } from "interfaces/response";
-import { IUser } from "interfaces/user";
+import { IReviewer } from "interfaces/reviews";
+import {
+  IUser,
+  IUserInformation,
+  IUserInformationInAdminPanel,
+  IUserProfile,
+} from "interfaces/user";
 import { useCallback } from "react";
-import api, { apiPrivate } from "./configs/axios.config";
 
 export interface IData_signupUser {
   user: IUser;
 }
+
 export interface IData_AuthorizationUser {
   user: IUser;
   accessToken: string;
+}
+
+export interface IData_allUser {
+  users: IUserInformation[];
+  currentPage: number;
+  pagesCount: number;
 }
 
 export interface IRegisterPayload {
@@ -40,7 +53,7 @@ export interface IResetpasswordPayload {
   resetPasswordToken: string;
 }
 
-interface IUpdateUserInformationPayload {
+export interface IUpdateUserInformationPayload {
   firstName: string;
   lastName: string;
   image: File;
@@ -60,10 +73,11 @@ interface IUserRestrictionPayload {
 
 const useAuthApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
+  const axios = useAxios();
 
   const signup = useCallback(
     async (payload: IRegisterPayload) => {
-      const res = await api.post<IResData<IData_signupUser>>(
+      const res = await axios.post<IResData<IData_signupUser>>(
         "/user/signup",
         payload,
         {
@@ -78,7 +92,7 @@ const useAuthApi = (controller?: AbortController) => {
 
   const emailVerify = useCallback(
     async (payload: IEmailVerifyOtp) => {
-      const res = await api.post<IResData<IData_AuthorizationUser>>(
+      const res = await axiosPrivate.post<IResData<IData_AuthorizationUser>>(
         "/user/verify-otp",
         payload,
         {
@@ -93,7 +107,7 @@ const useAuthApi = (controller?: AbortController) => {
 
   const resendCode = useCallback(
     async (payload: { email: string }) => {
-      await api.post("/user/resend-otp", payload, {
+      await axios.post("/user/resend-otp", payload, {
         signal: controller?.signal,
       });
     },
@@ -112,7 +126,7 @@ const useAuthApi = (controller?: AbortController) => {
 
   const resetPassword = useCallback(
     async (payload: IResetpasswordPayload) => {
-      await api.post("/user/reset-password", payload, {
+      await axios.post("/user/reset-password", payload, {
         signal: controller?.signal,
       });
     },
@@ -121,7 +135,7 @@ const useAuthApi = (controller?: AbortController) => {
 
   const resetPasswordEmail = useCallback(
     async (email: string) => {
-      await api.post<IResData<IData_AuthorizationUser>>(
+      await axios.post<IResData<IData_AuthorizationUser>>(
         "/user/reset-password-email",
         { email },
         {
@@ -134,7 +148,7 @@ const useAuthApi = (controller?: AbortController) => {
 
   const signin = useCallback(
     async (payload: ILoginPayload) => {
-      const res = await api.post<IResData<IData_signupUser>>(
+      const res = await axiosPrivate.post<IResData<IData_signupUser>>(
         "/user/signin",
         payload,
         {
@@ -147,16 +161,8 @@ const useAuthApi = (controller?: AbortController) => {
     [controller?.signal]
   );
 
-  return {
-    signup,
-    emailVerify,
-    resendCode,
-    signin,
-    logoutUser,
-    resetPassword,
-    resetPasswordEmail,
-
-    async updateUserInformation(payload: IUpdateUserInformationPayload) {
+  const updateUserInformation = useCallback(
+    async (payload: IUpdateUserInformationPayload) => {
       const res = await axiosPrivate.patch("/user/profile/update", payload, {
         signal: controller?.signal,
         headers: {
@@ -166,10 +172,11 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data;
     },
+    [controller?.signal]
+  );
 
-    async updateUserWithdrawInformation(
-      payload: IUpdateWithdrawUserInformationPayload
-    ) {
+  const updateUserWithdrawInformation = useCallback(
+    async (payload: IUpdateWithdrawUserInformationPayload) => {
       const res = await axiosPrivate.patch(
         "/user/profile/withdraw/update",
         payload,
@@ -180,8 +187,22 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data;
     },
+    [controller?.signal]
+  );
 
-    async updateUserRestriction(payload: IUserRestrictionPayload, id: string) {
+  const getUserProfile = useCallback(async () => {
+    const res = await axiosPrivate.get<IResData<{ profile: IUserProfile }>>(
+      "/user/me/profile",
+      {
+        signal: controller?.signal,
+      }
+    );
+
+    return res.data.data;
+  }, [controller?.signal]);
+
+  const updateUserRestriction = useCallback(
+    async (payload: IUserRestrictionPayload, id: string) => {
       const res = await axiosPrivate.patch(
         `/user/update/restriction/${id}`,
         payload,
@@ -192,41 +213,141 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data;
     },
+    [controller?.signal]
+  );
 
-    async getAllUser(query: string, searchQuery?: string) {
-      const res = await axiosPrivate.get(
+  const getAllUser = useCallback(
+    async (query: string, searchQuery?: string) => {
+      const res = await axiosPrivate.get<IResData<IData_allUser>>(
         `/user/all/users?limit=10&search=${searchQuery}&${query}`,
+
         {
           signal: controller?.signal,
         }
       );
 
-      return res.data;
+      return res.data.data;
     },
+    [controller?.signal]
+  );
 
-    async getUserProfile() {
-      const res = await axiosPrivate.get("/user/me/profile", {
+  const getUserProfileForAdmin = useCallback(
+    async (id: string) => {
+      const res = await axiosPrivate.get<
+        IResData<{ user: IUserInformationInAdminPanel }>
+      >(`/user/profile/${id}`, {
         signal: controller?.signal,
       });
 
-      return res.data;
+      return res.data.data;
     },
+    [controller?.signal]
+  );
 
-    async getUserProfileForAdmin(id: string | string[]) {
-      const res = await axiosPrivate.get(`/user/profile/${id}`, {
+  const getAllReviewers = useCallback(async () => {
+    const res = await axiosPrivate.get<IResData<{ reviewers: IReviewer[] }>>(
+      "/user/all/reviewers",
+      {
         signal: controller?.signal,
-      });
+      }
+    );
 
-      return res.data;
-    },
+    return res.data.data;
+  }, [controller?.signal]);
 
-    async getAllReviewers() {
-      const res = await axiosPrivate.get("/user/all/reviewers", {
-        signal: controller?.signal,
-      });
+  // async getAllReviewers() {
+  //   const res = await axiosPrivate.get("/user/all/reviewers", {
+  //     signal: controller?.signal,
+  //   });
 
-      return res.data;
-    },
+  //   return res.data.data;
+  // },
+
+  // async getUserProfileForAdmin(id: string ) {
+  //   const res = await axiosPrivate.get(`/user/profile/${id}`, {
+  //     signal: controller?.signal,
+  //   });
+
+  //   return res.data;
+  // },
+
+  // async getAllUser(query: string, searchQuery?: string) {
+  //   const res = await axiosPrivate.get(
+  //     `/user/all/users?limit=10&search=${searchQuery}&${query}`,
+  //     {
+  //       signal: controller?.signal,
+  //     }
+  //   );
+  //   console.log(res);
+
+  //   return res.data;
+  // },
+
+  // async updateUserRestriction(payload: IUserRestrictionPayload, id: string) {
+  //   const res = await axiosPrivate.patch(
+  //     `/user/update/restriction/${id}`,
+  //     payload,
+  //     {
+  //       signal: controller?.signal,
+  //     }
+  //   );
+
+  //   return res.data;
+  // },
+
+  return {
+    signup,
+    emailVerify,
+    resendCode,
+    signin,
+    logoutUser,
+    resetPassword,
+    resetPasswordEmail,
+    updateUserInformation,
+    updateUserWithdrawInformation,
+    getUserProfile,
+    updateUserRestriction,
+    getAllUser,
+    getUserProfileForAdmin,
+    getAllReviewers,
+    // async updateUserRestriction(payload: IUserRestrictionPayload, id: string) {
+    //   const res = await axiosPrivate.patch(
+    //     `/user/update/restriction/${id}`,
+    //     payload,
+    //     {
+    //       signal: controller?.signal,
+    //     }
+    //   );
+    //   console.log(res.data);
+    // },
+
+    // async getAllUser(query: string, searchQuery?: string) {
+    //   const res = await axiosPrivate.get(
+    //     `/user/all/users?limit=10&search=${searchQuery}&${query}`,
+    //     {
+    //       signal: controller?.signal,
+    //     }
+    //   );
+    //   console.log(res);
+
+    //   return res.data;
+    // },
+
+    // async getUserProfileForAdmin(id: string | string[]) {
+    //   const res = await axiosPrivate.get(`/user/profile/${id}`, {
+    //     signal: controller?.signal,
+    //   });
+
+    //   return res.data;
+    // },
+
+    // async getAllReviewers() {
+    //   const res = await axiosPrivate.get("/user/all/reviewers", {
+    //     signal: controller?.signal,
+    //   });
+
+    //   return res.data.data;
+    // },
   };
 };
 

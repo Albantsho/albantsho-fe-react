@@ -1,5 +1,5 @@
+import useAxios from "hooks/useAxios";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
-import api from "./configs/axios.config";
 interface ICreateNewContactPayload {
   email: string;
   name: string;
@@ -8,10 +8,11 @@ interface ICreateNewContactPayload {
 
 const useContact = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
+  const axios = useAxios();
 
   return {
     async createNewContact(payload: ICreateNewContactPayload) {
-      const res = await api.post("/contact/create", payload, {
+      const res = await axios.post("/contact/create", payload, {
         signal: controller?.signal,
       });
 

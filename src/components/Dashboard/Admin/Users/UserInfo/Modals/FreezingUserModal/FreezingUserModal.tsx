@@ -5,37 +5,45 @@ import useAuthApi from "apis/Auth.api";
 import { IUserInformationInAdminPanel } from "interfaces/user";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
+import { QueryClient, useMutation } from "react-query";
+import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
 import disLikeImage from "./assets/dis-like.png";
 
 interface IProps {
   openFreezingUserModal: boolean;
   setOpenFreezingUserModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setOneUser: React.Dispatch<
-    React.SetStateAction<IUserInformationInAdminPanel | null>
-  >;
   user: IUserInformationInAdminPanel;
 }
+
+const queryClient = new QueryClient();
 
 const FreezingUserModal = ({
   openFreezingUserModal,
   setOpenFreezingUserModal,
-  setOneUser,
   user,
 }: IProps) => {
   const { updateUserRestriction } = useAuthApi();
+  const { mutate: updateUserStatus, isLoading: loadingUpdateUserStatus } =
+    useMutation<
+      { message: string; data: object; status: number },
+      Error,
+      { freeze: boolean; id: string }
+    >((data) => updateUserRestriction({ freeze: data.freeze }, data.id), {
+      onError: (error) => {
+        errorHandler(error);
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("userInformationForAdmin");
+        toast.success(data.message);
+        handleCloseFreezingUserModal();
+      },
+    });
 
   const handleCloseFreezingUserModal = () => setOpenFreezingUserModal(false);
 
-  const freezeUser = async () => {
-    try {
-      await updateUserRestriction({ freeze: true }, user._id);
-      setOneUser({ ...user, freeze: true });
-      handleCloseFreezingUserModal();
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const freezeUser = async () =>
+    updateUserStatus({ freeze: true, id: user._id });
 
   return (
     <Modal
@@ -77,6 +85,7 @@ const FreezingUserModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
+              loading={loadingUpdateUserStatus}
               onClick={freezeUser}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"

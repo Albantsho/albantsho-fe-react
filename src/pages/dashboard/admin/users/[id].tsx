@@ -3,37 +3,27 @@ import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDash
 import useAuthApi from "apis/Auth.api";
 import BreadcrumbsUserInfo from "components/Dashboard/Admin/Users/UserInfo/BreadcrumbsUserInfo/BreadcrumbsUserInfo";
 import UserInformation from "components/Dashboard/Admin/Users/UserInfo/UserInformation/UserInformation";
-import { IUserInformationInAdminPanel } from "interfaces/user";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 
 const InformationUserPage: NextPageWithLayout = () => {
-  const [oneUser, setOneUser] = useState<IUserInformationInAdminPanel | null>(
-    null
-  );
   const { query } = useRouter();
   const { getUserProfileForAdmin } = useAuthApi();
-
-  useEffect(() => {
-    async function getUserFunc() {
-      try {
-        if (query.id !== undefined) {
-          const res = await getUserProfileForAdmin(query.id);
-          setOneUser(res.data.user);
-        }
-      } catch (error) {
-        errorHandler(error);
-      }
+  const { data, isLoading } = useQuery(
+    "userInformationForAdmin",
+    () => getUserProfileForAdmin(`${query.id}`),
+    {
+      onError: (err) => {
+        errorHandler(err);
+      },
+      refetchInterval: 1000,
+      refetchIntervalInBackground: true,
     }
-
-    getUserFunc();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.id]);
+  );
 
   return (
     <>
@@ -41,16 +31,16 @@ const InformationUserPage: NextPageWithLayout = () => {
         <title>Albantsho || Admin User information</title>
       </Head>
 
-      {oneUser === null ? (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
-      ) : (
+      {!isLoading && data ? (
         <div className="bg-white shadow-primary rounded-lg pt-4 lg:pt-8 pb-10 lg:pb-24 px-5 lg:px-14 max-w-5xl">
           <BreadcrumbsUserInfo
-            name={`${oneUser.firstName} ${oneUser.lastName}`}
+            name={`${data.user.firstName} ${data.user.lastName}`}
           />
           <Divider className="mt-2 lg:mt-6 mb-6 lg:mb-11" />
-          <UserInformation user={oneUser} setOneUser={setOneUser} />
+          <UserInformation user={data.user} />
         </div>
+      ) : (
+        <DotLoader color="#7953B5" className="mx-auto mt-10" />
       )}
     </>
   );

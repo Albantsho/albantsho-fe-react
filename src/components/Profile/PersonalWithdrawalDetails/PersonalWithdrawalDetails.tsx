@@ -192,7 +192,6 @@ const PersonalWithdrawalDetails = ({ userProfile }: IProps) => {
             </label>
             <CustomInput
               error={Boolean(errors.usdtTrc20Address) || false}
-              value={userProfile.usdtTrc20Address}
               {...register("usdtTrc20Address")}
               sx={{
                 "& .MuiInputBase-input": { color: "#9A7EC7", py: "13px" },

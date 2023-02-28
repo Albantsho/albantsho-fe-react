@@ -82,8 +82,8 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
               </Typography>
             </label>
             <CustomInput
-              error={Boolean(errors.first_name) || false}
-              {...register("first_name")}
+              error={Boolean(errors.firstName) || false}
+              {...register("firstName")}
               disabled={!availableChangeValue}
               fullWidth
               id="first-name"
@@ -115,7 +115,7 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
                   fontSize: "16px",
                 },
               }}
-              helperText={errors.first_name?.message}
+              helperText={errors.firstName?.message}
             />
           </div>
           <div>
@@ -128,8 +128,8 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
               </Typography>
             </label>
             <CustomInput
-              error={Boolean(errors.last_name) || false}
-              {...register("last_name")}
+              error={Boolean(errors.lastName) || false}
+              {...register("lastName")}
               disabled={!availableChangeValue}
               fullWidth
               id="last-name"
@@ -161,7 +161,7 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
                   fontSize: "16px",
                 },
               }}
-              helperText={errors.last_name?.message}
+              helperText={errors.lastName?.message}
             />
           </div>
           <div>
@@ -199,6 +199,7 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
                 <Image
                   width={37}
                   height={21}
+                  className="w-auto h-auto"
                   src={`https://flagcdn.com/w40/${countryUser[0]}.png`}
                   alt={`${countryUser[1]} flag`}
                 />

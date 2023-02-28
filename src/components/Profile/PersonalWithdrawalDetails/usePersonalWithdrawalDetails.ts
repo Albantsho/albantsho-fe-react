@@ -3,6 +3,7 @@ import useAuthApi from "apis/Auth.api";
 import { IUserProfile } from "interfaces/user";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
 import { updateWithdrawalSchema } from "./validation/updateWithdrawal.validation";
@@ -20,32 +21,23 @@ interface IUpdateWithdrawalFormValues {
 
 const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
   const [availableChangeValue, setAvailableChangeValue] = useState(false);
-  const [loading, setLoading] = useState(false);
   const { updateUserWithdrawInformation } = useAuthApi();
-  const [defaultAccount, setDefaultAccount] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const connectWallet = async () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    if (window.ethereum) {
-      try {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        const allAccounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        setDefaultAccount(allAccounts[0]);
-        await updateUserWithdrawInformation({
-          usdtTrc20Address: allAccounts[0],
-        });
-      } catch (error) {
-        ("");
-      }
-    } else {
-      setErrorMessage("Please Install Metamask");
+  const {
+    mutate: updatePersonalInformationFunc,
+    isLoading: loadingUpdatePersonalInformation,
+  } = useMutation<any, Error, IUpdateWithdrawalFormValues>(
+    (data) => updateUserWithdrawInformation(data),
+    {
+      onError: (error) => {
+        errorHandler(error);
+      },
+      onSuccess: (data) => {
+        toast.success(data.message);
+        setAvailableChangeValue(false);
+      },
     }
-  };
+  );
+  console.log(userProfile);
 
   const {
     register,
@@ -73,18 +65,8 @@ const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
   const updateInformationBankAccess = () =>
     setAvailableChangeValue(!availableChangeValue);
 
-  const onSubmit = async (data: IUpdateWithdrawalFormValues) => {
-    try {
-      setLoading(true);
-      const res = await updateUserWithdrawInformation(data);
-      toast.success(res.message);
-      setAvailableChangeValue(false);
-    } catch (error) {
-      errorHandler(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const onSubmit = async (data: IUpdateWithdrawalFormValues) =>
+    updatePersonalInformationFunc(data);
 
   return {
     updateInformationBankAccess,
@@ -93,11 +75,8 @@ const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
     handleSubmit,
     errors,
     onSubmit,
-    loading,
+    loading: loadingUpdatePersonalInformation,
     control,
-    defaultAccount,
-    connectWallet,
-    errorMessage,
   };
 };
 

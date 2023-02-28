@@ -1,8 +1,8 @@
+import useAxios from "hooks/useAxios";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IResData } from "interfaces/response";
 import { IFullInformationScript, IWriterScript } from "interfaces/script";
 import { useCallback } from "react";
-import api from "./configs/axios.config";
 
 export interface ICreateNewScriptPayload {
   title: string;
@@ -64,6 +64,7 @@ interface IData_getWriterScript {
 
 const useScriptsApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
+  const axios = useAxios();
 
   const createNewScript = useCallback(
     async (payload: ICreateNewScriptPayload) => {
@@ -195,7 +196,7 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async getAllScripts(query: string) {
-      const res = await api.get(`/script/all?limit=10&${query}`, {
+      const res = await axios.get(`/script/all?limit=10&${query}`, {
         signal: controller?.signal,
       });
 
@@ -222,7 +223,7 @@ const useScriptsApi = (controller?: AbortController) => {
     },
 
     async searchScripts(search: string) {
-      const res = await api.get(`/script/search?search=${search}`, {
+      const res = await axios.get(`/script/search?search=${search}`, {
         signal: controller?.signal,
       });
 

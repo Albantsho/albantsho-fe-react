@@ -4,23 +4,33 @@ import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDash
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
 import useAuthApi from "apis/Auth.api";
 import AllUsersList from "components/Dashboard/Admin/Users/Index/UsersList/AllUsersList";
-import { IUserInformation } from "interfaces/user";
 import { debounce } from "lodash";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import queryString from "query-string";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import { useQuery } from "react-query";
 import { DotLoader } from "react-spinners";
+import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
 
 const UsersPage: NextPageWithLayout = () => {
   const { getAllUser } = useAuthApi();
-  const [loading, setLoading] = useState(false);
-  const [usersList, setUsersList] = useState<IUserInformation[] | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageCount, setPageCount] = useState(1);
   const { query, push } = useRouter();
+
+  const { data, isLoading } = useQuery(
+    ["userInformationForAdmin", currentPage, searchQuery],
+    () => getAllUser(queryString.stringify(query), searchQuery),
+    {
+      onError: (err) => {
+        errorHandler(err);
+      },
+      refetchInterval: 100000,
+      refetchIntervalInBackground: true,
+    }
+  );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
@@ -35,30 +45,30 @@ const UsersPage: NextPageWithLayout = () => {
   );
 
   const handleActivePage = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
     setCurrentPage(page);
     push(`?page=${page}`, undefined, { shallow: true });
   };
 
-  useEffect(() => {
-    async function getAllUsersFunc() {
-      try {
-        setLoading(true);
-        const res = await getAllUser(queryString.stringify(query), searchQuery);
-        setPageCount(res.data.pagesCount);
-        setUsersList(res.data.users);
-        setCurrentPage(res.data.currenPage);
-        setLoading(false);
-      } catch (error) {
-        ("");
-      }
-    }
-    getAllUsersFunc();
+  // useEffect(() => {
+  //   async function getAllUsersFunc() {
+  //     try {
+  //       setLoading(true);
+  //       const res = await getAllUser(queryString.stringify(query), searchQuery);
+  //       setPageCount(res.data.pagesCount);
+  //       setUsersList(res.data.users);
+  //       setCurrentPage(res.data.currenPage);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       ("");
+  //     }
+  //   }
+  //   getAllUsersFunc();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleSearch, query]);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [handleSearch, query]);
 
   return (
     <>
@@ -72,12 +82,12 @@ const UsersPage: NextPageWithLayout = () => {
         User List
       </Typography>
       <AdminDashboardSearch placeholder="Search" handleSearch={handleSearch} />
-      {!loading && usersList !== null ? (
+      {!isLoading && data ? (
         <>
-          <AllUsersList usersList={usersList} />
-          {pageCount > 1 && (
+          <AllUsersList usersList={data.users} />
+          {data.pagesCount > 1 && (
             <CustomPaginationComponent
-              pageCount={pageCount}
+              pageCount={data.pagesCount}
               handleActivePage={handleActivePage}
               currentPage={currentPage}
             />

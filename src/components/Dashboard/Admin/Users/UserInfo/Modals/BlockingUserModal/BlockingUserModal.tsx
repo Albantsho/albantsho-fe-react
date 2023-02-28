@@ -5,37 +5,44 @@ import useAuthApi from "apis/Auth.api";
 import { IUserInformationInAdminPanel } from "interfaces/user";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
+import { QueryClient, useMutation } from "react-query";
+import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
 import blockImage from "./assets/block.png";
 
 interface IProps {
   openBlockingUserModal: boolean;
   setOpenBlockingUserModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setOneUser: React.Dispatch<
-    React.SetStateAction<IUserInformationInAdminPanel | null>
-  >;
   user: IUserInformationInAdminPanel;
 }
+
+const queryClient = new QueryClient();
 
 const BlockingUserModal = ({
   openBlockingUserModal,
   setOpenBlockingUserModal,
-  setOneUser,
   user,
 }: IProps) => {
   const { updateUserRestriction } = useAuthApi();
+  const { mutate: updateUserStatus, isLoading: loadingUpdateUserStatus } =
+    useMutation<
+      { message: string; data: object; status: number },
+      Error,
+      { block: boolean; id: string }
+    >((data) => updateUserRestriction({ block: data.block }, data.id), {
+      onError: (error) => {
+        errorHandler(error);
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("userInformationForAdmin");
+        toast.success(data.message);
+        handleCloseBlockingUserModal();
+      },
+    });
 
   const handleCloseBlockingUserModal = () => setOpenBlockingUserModal(false);
 
-  const blockUser = async () => {
-    try {
-      await updateUserRestriction({ block: true }, user._id);
-      setOneUser({ ...user, block: true });
-      handleCloseBlockingUserModal();
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const blockUser = async () => updateUserStatus({ block: true, id: user._id });
 
   return (
     <Modal
@@ -78,6 +85,7 @@ const BlockingUserModal = ({
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
               onClick={blockUser}
+              loading={loadingUpdateUserStatus}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"
             >

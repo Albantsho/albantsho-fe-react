@@ -1,3 +1,4 @@
+import { LoadingButton } from "@mui/lab";
 import { Avatar, Button, SvgIcon, Tooltip, Typography } from "@mui/material";
 import useAuthApi from "apis/Auth.api";
 import countryList from "config/country-list.json";
@@ -7,6 +8,8 @@ import Image from "next/image";
 import { Suspense, useState } from "react";
 import { MdNotInterested } from "react-icons/md";
 import { SlDislike, SlLike } from "react-icons/sl";
+import { QueryClient, useMutation } from "react-query";
+import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
 
 const BlockingUserModal = dynamic(
@@ -18,13 +21,43 @@ const FreezingUserModal = dynamic(
 
 interface IProps {
   user: IUserInformationInAdminPanel;
-  setOneUser: React.Dispatch<
-    React.SetStateAction<IUserInformationInAdminPanel | null>
-  >;
 }
 
-const UserInformation = ({ user, setOneUser }: IProps) => {
+const queryClient = new QueryClient();
+
+const UserInformation = ({ user }: IProps) => {
   const { updateUserRestriction } = useAuthApi();
+
+  const { mutate: unFreezeUserStatus, isLoading: loadingUnFreezeUserStatus } =
+    useMutation<
+      { message: string; data: object; status: number },
+      Error,
+      { freeze: boolean; id: string }
+    >((data) => updateUserRestriction({ freeze: data.freeze }, data.id), {
+      onError: (error) => {
+        errorHandler(error);
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("userInformationForAdmin");
+        toast.success(data.message);
+      },
+    });
+
+  const { mutate: unBlockUserStatus, isLoading: loadingUnBlockUserStatus } =
+    useMutation<
+      { message: string; data: object; status: number },
+      Error,
+      { block: boolean; id: string }
+    >((data) => updateUserRestriction({ block: data.block }, data.id), {
+      onError: (error) => {
+        errorHandler(error);
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("userInformationForAdmin");
+        toast.success(data.message);
+      },
+    });
+
   const [openBlockingUserModal, setOpenBlockingUserModal] = useState(false);
   const [openFreezingUserModal, setOpenFreezingUserModal] = useState(false);
 
@@ -35,24 +68,11 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
     (countryFlag) => countryFlag[1] === user.country
   );
 
-  const unFreezeUser = async () => {
-    try {
-      await updateUserRestriction({ freeze: false }, user._id);
+  const unFreezeUser = async () =>
+    unFreezeUserStatus({ freeze: false, id: user._id });
 
-      setOneUser({ ...user, freeze: false });
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
-  const unBlockUser = async () => {
-    try {
-      await updateUserRestriction({ block: false }, user._id);
-
-      setOneUser({ ...user, block: false });
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const unBlockUser = async () =>
+    await unBlockUserStatus({ block: false, id: user._id });
 
   return (
     <>
@@ -214,7 +234,8 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
           </div>
           <div className="flex gap-2 sm:gap-4 flex-wrap w-full">
             {user.freeze ? (
-              <Button
+              <LoadingButton
+                loading={loadingUnFreezeUserStatus}
                 onClick={unFreezeUser}
                 variant="outlined"
                 className="py-2 px-3 lg:py-3 lg:px-6 flex-1 min-w-[180px] sm:flex-grow-0"
@@ -224,7 +245,7 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
                 }
               >
                 Unfreeze user
-              </Button>
+              </LoadingButton>
             ) : (
               <Button
                 variant="outlined"
@@ -243,7 +264,8 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
               </Button>
             )}
             {user.block ? (
-              <Button
+              <LoadingButton
+                loading={loadingUnBlockUserStatus}
                 onClick={unBlockUser}
                 variant="outlined"
                 className="py-2 px-3 lg:py-3 lg:px-6 flex-1 min-w-[180px] sm:flex-grow-0"
@@ -257,7 +279,7 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
                 }
               >
                 Unblock user
-              </Button>
+              </LoadingButton>
             ) : (
               <Button
                 variant="outlined"
@@ -282,7 +304,6 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
         {openBlockingUserModal ? (
           <BlockingUserModal
             user={user}
-            setOneUser={setOneUser}
             setOpenBlockingUserModal={setOpenBlockingUserModal}
             openBlockingUserModal={openBlockingUserModal}
           />
@@ -292,7 +313,6 @@ const UserInformation = ({ user, setOneUser }: IProps) => {
         {openFreezingUserModal ? (
           <FreezingUserModal
             user={user}
-            setOneUser={setOneUser}
             setOpenFreezingUserModal={setOpenFreezingUserModal}
             openFreezingUserModal={openFreezingUserModal}
           />

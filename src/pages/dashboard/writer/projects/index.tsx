@@ -53,7 +53,7 @@ const Projects: NextPageWithLayout = () => {
     [searchQuery]
   );
 
-  const { data, isError, isLoading } = useQuery(
+  const { data, isLoading } = useQuery(
     ["script", querystring.stringify(query), searchQuery, currentPage],
     () => getWriterAllScripts(querystring.stringify(query), searchQuery),
     {
@@ -62,17 +62,9 @@ const Projects: NextPageWithLayout = () => {
     }
   );
 
-  // (function () {
-  //   if (currentPage > 1) {
-  //     query.page = String(currentPage);
-  //   }
-  // })();
-
   useEffect(() => {
     setCurrentPage(+`${query.page}` || 1);
   }, [query]);
-
-  if (isError) return <div>error</div>;
 
   return (
     <>
