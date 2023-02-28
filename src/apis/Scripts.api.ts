@@ -1,7 +1,10 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
+import { IResData } from "interfaces/response";
+import { IFullInformationScript, IWriterScript } from "interfaces/script";
+import { useCallback } from "react";
 import api from "./configs/axios.config";
 
-interface ICreateNewScriptPayload {
+export interface ICreateNewScriptPayload {
   title: string;
   tagline: string;
 }
@@ -49,18 +52,79 @@ interface IGiveRateToScriptPayload {
   rate: string;
 }
 
+interface IData_createScript {
+  script: IFullInformationScript;
+}
+
+interface IData_getWriterScript {
+  scripts: IWriterScript[];
+  currentPage: number;
+  pagesCount: number;
+}
+
 const useScriptsApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
-  return {
-    async createNewScript(payload: ICreateNewScriptPayload) {
-      const res = await axiosPrivate.post("/script/create", payload, {
+  const createNewScript = useCallback(
+    async (payload: ICreateNewScriptPayload) => {
+      const res = await axiosPrivate.post<IResData<IData_createScript>>(
+        "/script/create",
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [controller?.signal]
+  );
+
+  const getWriterAllScripts = useCallback(
+    async (query: string, search?: string) => {
+      const res = await axiosPrivate.get<IResData<IData_getWriterScript>>(
+        `/script/writer/all?limit=10&${query}&search=${search}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [controller?.signal]
+  );
+
+  const deleteScript = useCallback(
+    async (scriptId: string) => {
+      await axiosPrivate.delete(`/script/delete/${scriptId}`, {
         signal: controller?.signal,
       });
-
-      return res.data;
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [controller?.signal]
+  );
 
+  const updateWriterArchiveScript = useCallback(
+    async (payload: { archive: boolean }, scriptId: string) => {
+      const res = await axiosPrivate.patch(
+        `/script/update/archive/${scriptId}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [controller?.signal]
+  );
+
+  return {
+    createNewScript,
+    getWriterAllScripts,
+    deleteScript,
+    updateWriterArchiveScript,
     async updateScript(
       payload: IUpdateScriptPayload,
       id: string,
@@ -130,14 +194,6 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async deleteScript(id: string) {
-      const res = await axiosPrivate.delete(`/script/delete/${id}`, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
     async getAllScripts(query: string) {
       const res = await api.get(`/script/all?limit=10&${query}`, {
         signal: controller?.signal,
@@ -161,7 +217,7 @@ const useScriptsApi = (controller?: AbortController) => {
       const res = await axiosPrivate.get(`/script/${id}`, {
         signal: controller?.signal,
       });
-
+      console.log(res);
       return res.data;
     },
 
@@ -177,17 +233,6 @@ const useScriptsApi = (controller?: AbortController) => {
       const res = await axiosPrivate.post("/script/rate", payload, {
         signal: controller?.signal,
       });
-
-      return res.data;
-    },
-
-    async getWriterAllScripts(query: string, search?: string) {
-      const res = await axiosPrivate.get(
-        `/script/writer/all?limit=10&${query}&search=${search}`,
-        {
-          signal: controller?.signal,
-        }
-      );
 
       return res.data;
     },
@@ -236,17 +281,17 @@ const useScriptsApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async updateWriterArchiveScript(payload: { archive: boolean }, id: string) {
-      const res = await axiosPrivate.patch(
-        `/script/update/archive/${id}`,
-        payload,
-        {
-          signal: controller?.signal,
-        }
-      );
+    // async updateWriterArchiveScript(payload: { archive: boolean }, id: string) {
+    //   const res = await axiosPrivate.patch(
+    //     `/script/update/archive/${id}`,
+    //     payload,
+    //     {
+    //       signal: controller?.signal,
+    //     }
+    //   );
 
-      return res.data;
-    },
+    //   return res.data;
+    // },
 
     async updatePublishedScript(payload: { published: boolean }, id: string) {
       const res = await axiosPrivate.patch(

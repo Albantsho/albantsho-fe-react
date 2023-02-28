@@ -255,6 +255,7 @@ const RegisterForm = () => {
                       <Image
                         width={40}
                         height={30}
+                        className="w-auto h-auto"
                         src={`https://flagcdn.com/w40/${country[0]}.png`}
                         alt={`${country[1]} flag`}
                       />

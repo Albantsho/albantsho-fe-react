@@ -6,13 +6,13 @@ import useScriptsApi from "apis/Scripts.api";
 import ArchiveList from "components/Dashboard/Writer/Projects/Archive/ArchiveList/ArchiveList";
 import ProjectAccordionList from "components/Dashboard/Writer/Projects/Scripts/ProjectAccordionList/ProjectAccordionList";
 import TabButtons from "components/Dashboard/Writer/Projects/TabButtons/TabButtons";
-import { IWriterScript } from "interfaces/script";
 import { debounce } from "lodash";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import querystring from "query-string";
 import { Suspense, useCallback, useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { DotLoader } from "react-spinners";
 import { NextPageWithLayout } from "../../../_app";
 
@@ -21,21 +21,19 @@ const CreateScriptModal = dynamic(
 );
 
 const Projects: NextPageWithLayout = () => {
-  const [listScripts, setListScripts] = useState<Array<IWriterScript>>([]);
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageCount, setPageCount] = useState(1);
   const { query, push } = useRouter();
   const { getWriterAllScripts } = useScriptsApi();
 
   const handleOpen = () => setOpenCreateScript(true);
 
   const handleActivePage = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
+    setCurrentPage(page);
     !query
       ? push(`?page=${page}`, undefined, { shallow: true })
       : query.archive === "false"
@@ -55,27 +53,26 @@ const Projects: NextPageWithLayout = () => {
     [searchQuery]
   );
 
-  useEffect(() => {
-    async function getWriterAllScriptsFunc() {
-      try {
-        setListScripts([]);
-        setLoading(true);
-        const res = await getWriterAllScripts(
-          querystring.stringify(query),
-          searchQuery
-        );
-        setListScripts(res.data.scripts);
-        setPageCount(res.data.pagesCount);
-        setCurrentPage(res.data.currentPage);
-        setLoading(false);
-      } catch (error) {
-        ("");
-      }
+  const { data, isError, isLoading } = useQuery(
+    ["script", querystring.stringify(query), searchQuery, currentPage],
+    () => getWriterAllScripts(querystring.stringify(query), searchQuery),
+    {
+      refetchInterval: 1000,
+      refetchIntervalInBackground: true,
     }
-    getWriterAllScriptsFunc();
+  );
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, openCreateScript, searchQuery]);
+  // (function () {
+  //   if (currentPage > 1) {
+  //     query.page = String(currentPage);
+  //   }
+  // })();
+
+  useEffect(() => {
+    setCurrentPage(+`${query.page}` || 1);
+  }, [query]);
+
+  if (isError) return <div>error</div>;
 
   return (
     <>
@@ -87,25 +84,18 @@ const Projects: NextPageWithLayout = () => {
         handleSearch={handleSearch}
         setOpenCreateScript={setOpenCreateScript}
       />
-      {loading ? (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
-      ) : (
-        <div className="space-y-10 mb-6">
+      {data && !isLoading ? (
+        <div className="space-y-10 mb-16">
           {(!query.archive || query.archive === "false") && (
-            <ProjectAccordionList
-              listScripts={listScripts}
-              setListScripts={setListScripts}
-            />
+            <ProjectAccordionList listScripts={data.scripts} />
           )}
           {query.archive === "true" && (
-            <ArchiveList
-              listScripts={listScripts}
-              setListScripts={setListScripts}
-            />
+            <ArchiveList listScripts={data.scripts} />
           )}
-          {pageCount >= 2 && (
+          {data.pagesCount >= 2 && (
             <CustomPaginationComponent
-              pageCount={pageCount}
+              key={Math.random()}
+              pageCount={data.pagesCount}
               currentPage={currentPage}
               handleActivePage={handleActivePage}
             />
@@ -126,6 +116,8 @@ const Projects: NextPageWithLayout = () => {
             +
           </Fab>
         </div>
+      ) : (
+        <DotLoader color="#7953B5" className="mx-auto mt-10" />
       )}
     </>
   );

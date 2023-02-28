@@ -56,7 +56,6 @@ const useRegisterForm = () => {
         setLoading(true);
         if (data.userType === "writer") {
           const res = await signup({
-            ...data,
             firstName: splitFullName
               .slice(0, splitFullName.length - 1)
               .join(" "),
@@ -71,7 +70,6 @@ const useRegisterForm = () => {
           replace(routes.verifyEmail.url);
         } else if (data.userType === "producer") {
           const res = await signup({
-            ...data,
             firstName: splitFullName
               .slice(0, splitFullName.length - 1)
               .join(" "),

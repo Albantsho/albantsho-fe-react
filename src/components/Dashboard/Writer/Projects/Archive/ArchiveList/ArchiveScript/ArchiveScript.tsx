@@ -18,10 +18,10 @@ const UnArchiveModal = dynamic(
 
 interface IProps {
   script: IWriterScript;
-  setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
+  listScripts: IWriterScript[];
 }
 
-const ArchiveScript = ({ script, setListScripts }: IProps) => {
+const ArchiveScript = ({ script, listScripts }: IProps) => {
   const [openUnArchive, setOpenUnArchive] = useState<boolean>(false);
   const handleOpenUnArchive = () => setOpenUnArchive(true);
 
@@ -134,7 +134,7 @@ const ArchiveScript = ({ script, setListScripts }: IProps) => {
             id={script._id}
             openUnArchive={openUnArchive}
             setOpenUnArchive={setOpenUnArchive}
-            setListScripts={setListScripts}
+            listScripts={listScripts}
           />
         ) : null}
       </Suspense>

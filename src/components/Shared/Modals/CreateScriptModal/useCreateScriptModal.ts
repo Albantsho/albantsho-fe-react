@@ -1,7 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import useScriptsApi from "apis/Scripts.api";
-import { useState } from "react";
+import useScriptsApi, { ICreateNewScriptPayload } from "apis/Scripts.api";
+import { IFullInformationScript } from "interfaces/script";
+import { useRouter } from "next/router";
+import querystring from "query-string";
 import { useForm } from "react-hook-form";
+import { QueryClient, useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
 import { createScriptSchema } from "./validation/createScript.validation";
 
@@ -13,8 +16,9 @@ interface IProps {
   setOpenCreateScript: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+const queryClient = new QueryClient();
+
 const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {
-  const [loading, setLoading] = useState(false);
   const { createNewScript } = useScriptsApi();
   const {
     register,
@@ -24,19 +28,31 @@ const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {
   } = useForm<ICreateScript>({
     resolver: yupResolver(createScriptSchema),
   });
-
-  const onSubmit = async (data: ICreateScript) => {
-    try {
-      setLoading(true);
-      await createNewScript(data);
+  const { query } = useRouter();
+  const { mutate, isLoading } = useMutation<
+    { script: IFullInformationScript },
+    Error,
+    ICreateNewScriptPayload
+  >((newScript) => createNewScript(newScript), {
+    onError: (error) => {
+      errorHandler(error);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(
+        ["script", querystring.stringify(query), ""],
+        {
+          exact: true,
+          stale: true,
+        }
+      );
       resetField("title");
       resetField("tagline");
       setOpenCreateScript(false);
-    } catch (error) {
-      errorHandler(error);
-    } finally {
-      setLoading(false);
-    }
+    },
+  });
+
+  const onSubmit = async (data: ICreateScript) => {
+    mutate(data);
   };
 
   return {
@@ -44,7 +60,7 @@ const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {
     onSubmit,
     handleSubmit,
     errors,
-    loading,
+    loading: isLoading,
   };
 };
 

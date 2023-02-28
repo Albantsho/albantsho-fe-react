@@ -6,28 +6,64 @@ import useScriptsApi from "apis/Scripts.api";
 import { IWriterScript } from "interfaces/script";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
+import { QueryClient, useMutation } from "react-query";
+import errorHandler from "utils/error-handler";
+import querystring from "query-string";
+import { useRouter } from "next/router";
 
 interface IProps {
   openUnArchive: boolean;
   setOpenUnArchive: React.Dispatch<React.SetStateAction<boolean>>;
-  setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
   id: string;
+  listScripts: IWriterScript[];
 }
+
+const queryClient = new QueryClient();
 
 const UnArchiveModal = ({
   openUnArchive,
   setOpenUnArchive,
   id,
-  setListScripts,
+  listScripts,
 }: IProps) => {
   const { updateWriterArchiveScript } = useScriptsApi();
+  const { push, query } = useRouter();
   const handleCloseUnArchive = () => setOpenUnArchive(false);
 
-  const unArchivingScript = async () => {
-    await updateWriterArchiveScript({ archive: false }, id);
-    setListScripts((prevState) =>
-      prevState.filter((script) => script._id !== id)
+  const { mutate: archiveScript, isLoading: isLoadingArchiveScript } =
+    useMutation<
+      void,
+      Error,
+      { payload: { archive: boolean }; scriptId: string }
+    >(
+      (data) =>
+        updateWriterArchiveScript(
+          { archive: data.payload.archive },
+          data.scriptId
+        ),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: () => {
+          if (listScripts.length <= 1) {
+            push(`?archive=true&page=${+String(query.page) - 1}`, undefined, {
+              shallow: true,
+            });
+          }
+          queryClient.invalidateQueries(
+            ["script", querystring.stringify(query), ""],
+            {
+              exact: true,
+              stale: true,
+            }
+          );
+        },
+      }
     );
+
+  const unArchivingScript = async () => {
+    archiveScript({ payload: { archive: false }, scriptId: id });
   };
 
   return (
@@ -57,6 +93,7 @@ const UnArchiveModal = ({
           </Typography>
           <div className="flex gap-2 sm:gap-5 mt-8 justify-center items-stretch">
             <Btn
+              loading={isLoadingArchiveScript}
               size="large"
               className="py-3 px-5 text-white bg-primary-700 rounded-lg"
               onClick={unArchivingScript}

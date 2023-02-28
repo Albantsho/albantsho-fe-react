@@ -5,10 +5,9 @@ import ProjectAccordion from "./ProjectAccordion/ProjectAccordion";
 
 interface IProps {
   listScripts: IWriterScript[];
-  setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
 }
 
-const ProjectAccordionList = ({ setListScripts, listScripts }: IProps) => {
+const ProjectAccordionList = ({ listScripts }: IProps) => {
   return listScripts.length === 0 ? (
     <div className="flex mx-auto">
       <Image
@@ -23,13 +22,7 @@ const ProjectAccordionList = ({ setListScripts, listScripts }: IProps) => {
   ) : (
     <div className="mt-4 md:mt-6">
       {listScripts.map((script) => {
-        return (
-          <ProjectAccordion
-            key={script._id}
-            script={script}
-            setListScripts={setListScripts}
-          />
-        );
+        return <ProjectAccordion key={script._id} script={script} listScripts={listScripts} />;
       })}
     </div>
   );

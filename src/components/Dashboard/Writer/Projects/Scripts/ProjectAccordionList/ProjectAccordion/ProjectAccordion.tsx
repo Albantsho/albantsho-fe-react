@@ -1,3 +1,4 @@
+import DefaultImage from "@assets/default-image-script.svg";
 import {
   Accordion,
   AccordionDetails,
@@ -9,10 +10,8 @@ import {
   SvgIcon,
   Typography,
 } from "@mui/material";
-import useScriptsApi from "apis/Scripts.api";
 import { IWriterScript } from "interfaces/script";
 import Image from "next/image";
-import { useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { IoIosMore } from "react-icons/io";
 import routes from "routes/routes";
@@ -20,19 +19,25 @@ import addAbstractIcon from "./assets/add-abstract-icon.png";
 import addScriptIcon from "./assets/add-script-icon.png";
 import addTitleIcon from "./assets/add-title-icon.png";
 import CustomButtonScripts from "./CustomButtonScripts/CustomButtonScripts";
-import DefaultImage from "@assets/default-image-script.svg";
-import errorHandler from "utils/error-handler";
+import useProjectAccordion from "./useProjectAccordion";
 
 interface IProps {
   script: IWriterScript;
-  setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
+  listScripts: IWriterScript[];
 }
 
-const ProjectAccordion = ({ script, setListScripts }: IProps) => {
-  const { updateWriterArchiveScript, deleteScript } = useScriptsApi();
-  const [expanded, setExpanded] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const openProjectAccordionMenu = Boolean(anchorEl);
+const ProjectAccordion = ({ script, listScripts }: IProps) => {
+  const {
+    anchorEl,
+    archivingScript,
+    deletingScript,
+    expandAccordionHandler,
+    expanded,
+    handleOpenProjectAccordionMenu,
+    isLoadingDeleteScript,
+    openProjectAccordionMenu,
+    handleCloseProjectAccordionMenu,
+  } = useProjectAccordion({ listScripts });
 
   const buttonsProjects = [
     {
@@ -51,53 +56,11 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
       link: routes.script.dynamicUrl(script._id),
     },
   ];
-  const handleOpenProjectAccordionMenu = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.stopPropagation();
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseProjectAccordionMenu = (
-    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>
-  ) => {
-    event.stopPropagation();
-    setAnchorEl(null);
-  };
-
-  const archivingScript =
-    (id: string) =>
-    async (event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>) => {
-      try {
-        event.stopPropagation();
-        await updateWriterArchiveScript({ archive: true }, id);
-        setListScripts((prevState) =>
-          prevState.filter((script) => script._id !== id)
-        );
-        handleCloseProjectAccordionMenu(event);
-      } catch (error) {
-        errorHandler(error);
-      }
-    };
-
-  const deletingScript =
-    (id: string) =>
-    async (event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>) => {
-      try {
-        event.stopPropagation();
-        await deleteScript(id);
-        setListScripts((prevState) =>
-          prevState.filter((script) => script._id !== id)
-        );
-        handleCloseProjectAccordionMenu(event);
-      } catch (error) {
-        errorHandler(error);
-      }
-    };
 
   return (
     <Accordion
       expanded={expanded}
-      onChange={() => setExpanded(!expanded)}
+      onChange={expandAccordionHandler}
       sx={{ "&:before": { display: "none" } }}
       className="shadow-primary mb-4 md:mb-5 rounded-md"
     >
@@ -134,7 +97,7 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
               />
             )}
           </div>
-          <div className="sm:max-w-[280px]   flex-1 self-start leading-none">
+          <div className="sm:max-w-[280px] flex-1 self-start leading-none">
             <Typography
               variant="h6"
               className="futura leading-normal text-primary-700 font-semibold"
@@ -178,6 +141,7 @@ const ProjectAccordion = ({ script, setListScripts }: IProps) => {
             </MenuItem>
             <MenuItem
               className="hover:text-primary-700 hover:bg-tinted-50/50 py-3 px-10"
+              disabled={isLoadingDeleteScript}
               onClick={deletingScript(script._id)}
             >
               Delete

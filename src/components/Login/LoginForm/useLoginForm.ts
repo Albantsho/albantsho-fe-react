@@ -48,13 +48,15 @@ const useLoginForm = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       !res.data.user && authenticationUser({ email: data.email } as any);
       setAccessToken(res.data.accessToken);
-      res.data.user.userType && res.data.user.userType === "writer"
-        ? replace(routes.writerDashboard.url)
-        : res.data.user.userType === "producer"
-        ? replace(routes.producerDashboard.url)
-        : res.data.user.userType === "admin"
-        ? replace(routes.adminDashboard.url)
-        : replace(routes.reviewerDashboard.url);
+      if (res.data.user && res.data.user.userType) {
+        res.data.user.userType === "writer"
+          ? replace(routes.writerDashboard.url)
+          : res.data.user.userType === "producer"
+          ? replace(routes.producerDashboard.url)
+          : res.data.user.userType === "admin"
+          ? replace(routes.adminDashboard.url)
+          : replace(routes.reviewerDashboard.url);
+      }
     } catch (error) {
       errorHandler(error);
     } finally {

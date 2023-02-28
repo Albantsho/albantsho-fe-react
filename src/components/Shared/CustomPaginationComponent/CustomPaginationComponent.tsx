@@ -1,6 +1,11 @@
-import { Pagination, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Pagination,
+  useMediaQuery,
+  useTheme,
+  type PaginationProps,
+} from "@mui/material";
 
-interface IProps {
+interface IProps extends PaginationProps {
   handleActivePage: (event: React.ChangeEvent<unknown>, page: number) => void;
   currentPage: number;
   pageCount: number;
@@ -10,12 +15,13 @@ const CustomPaginationComponent = ({
   currentPage,
   handleActivePage,
   pageCount,
+  ...props
 }: IProps) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
-    <div className=" flex justify-center px-5 sm:px-10   mb-6 sm:mb-14 m-3 sm:mt-7 ">
+    <div className="flex justify-center px-5 sm:px-10 mb-6 sm:mb-14 m-3 sm:mt-7">
       <Pagination
         page={currentPage}
         count={pageCount}
@@ -32,6 +38,7 @@ const CustomPaginationComponent = ({
         }}
         className="bg-white shadow-md w-auto rounded-md p-4 md:px-10"
         size={matches ? "large" : "medium"}
+        {...props}
       />
     </div>
   );

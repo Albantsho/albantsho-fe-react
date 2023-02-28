@@ -13,10 +13,9 @@ import Image from "next/image";
 
 interface IProps {
   listScripts: IWriterScript[];
-  setListScripts: React.Dispatch<React.SetStateAction<IWriterScript[]>>;
 }
 
-const ArchiveList = ({ setListScripts, listScripts }: IProps) => {
+const ArchiveList = ({ listScripts }: IProps) => {
   return listScripts.length ? (
     <Table className="mt-4 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
@@ -51,7 +50,7 @@ const ArchiveList = ({ setListScripts, listScripts }: IProps) => {
         {listScripts.map((script) => (
           <ArchiveScript
             key={script._id}
-            setListScripts={setListScripts}
+            listScripts={listScripts}
             script={script}
           />
         ))}
