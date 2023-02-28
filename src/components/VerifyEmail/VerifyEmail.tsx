@@ -1,12 +1,12 @@
 import { Button, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import useUserStore from "store/user.store";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
 import Countdown, { zeroPad } from "react-countdown";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
 import bell from "./assets/bell.png";
 import useVerifyEmail from "./useVerifyEmail";
 
@@ -25,6 +25,7 @@ const VerifyEmail = () => {
     handleResendCode,
     countDownKey,
     loading,
+    loadingResendCode,
   } = useVerifyEmail();
   const user = useUserStore((state) => state.user);
 
@@ -110,6 +111,7 @@ const VerifyEmail = () => {
                 onClick={handleResendCode}
                 disableRipple
                 className="mb-6 futura hover:bg-transparent text-base text-[#5D5FEF]"
+                disabled={loadingResendCode}
               >
                 Resend code
               </Button>

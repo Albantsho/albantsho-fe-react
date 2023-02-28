@@ -1,8 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import useAuthApi from "apis/Auth.api";
+import useAuthApi, { type ILoginPayload } from "apis/Auth.api";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
+import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
 import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
@@ -13,16 +14,45 @@ interface IAuthLogin {
   rememberMe: boolean;
 }
 
+const queryClient = new QueryClient();
+
 const useLoginForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
   const [rememberMe, setRememberMe] = useState(true);
-  const [loading, setLoading] = useState(false);
   const { signin } = useAuthApi();
   const { replace } = useRouter();
   const { authenticationUser, setAccessToken } = useUserStore((state) => ({
     authenticationUser: state.authenticationUser,
     setAccessToken: state.setAccessToken,
   }));
+
+  const { mutate: signinUser, isLoading: loadingSigninUser } = useMutation<
+    any,
+    Error,
+    ILoginPayload
+  >((user) => signin(user), {
+    onError: (error) => {
+      errorHandler(error);
+    },
+    onSuccess: (data, variables: ILoginPayload) => {
+      queryClient.invalidateQueries(["user"]);
+      authenticationUser(data.user);
+      !data.user && replace(routes.verifyEmail.url);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      !data.user && authenticationUser({ email: variables.email } as any);
+      setAccessToken(data.accessToken);
+      if (data.user && data.user.userType) {
+        data.user.userType === "writer"
+          ? replace(routes.writerDashboard.url)
+          : data.user.userType === "producer"
+          ? replace(routes.producerDashboard.url)
+          : data.user.userType === "admin"
+          ? replace(routes.adminDashboard.url)
+          : replace(routes.reviewerDashboard.url);
+      }
+    },
+  });
+
   const {
     register,
     handleSubmit,
@@ -39,30 +69,8 @@ const useLoginForm = () => {
     setTypePasswordInput((prevState) => !prevState);
   };
 
-  const onSubmit = async (data: IAuthLogin) => {
-    try {
-      setLoading(true);
-      const res = await signin({ ...data, rememberMe });
-      authenticationUser(res.data.user);
-      !res.data.user && replace(routes.verifyEmail.url);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      !res.data.user && authenticationUser({ email: data.email } as any);
-      setAccessToken(res.data.accessToken);
-      if (res.data.user && res.data.user.userType) {
-        res.data.user.userType === "writer"
-          ? replace(routes.writerDashboard.url)
-          : res.data.user.userType === "producer"
-          ? replace(routes.producerDashboard.url)
-          : res.data.user.userType === "admin"
-          ? replace(routes.adminDashboard.url)
-          : replace(routes.reviewerDashboard.url);
-      }
-    } catch (error) {
-      errorHandler(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const onSubmit = async (data: IAuthLogin) =>
+    signinUser({ ...data, rememberMe });
 
   return {
     register,
@@ -73,7 +81,7 @@ const useLoginForm = () => {
     handleTypeInputPassword,
     rememberMe,
     handleChangeRememberMe,
-    loading,
+    loading: loadingSigninUser,
   };
 };
 

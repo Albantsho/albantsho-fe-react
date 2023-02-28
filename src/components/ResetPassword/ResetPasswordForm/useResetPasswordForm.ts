@@ -1,8 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import useAuthApi from "apis/Auth.api";
+import useAuthApi, { IResetpasswordPayload } from "apis/Auth.api";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import { resetPasswordSchema } from "./validation/resetPassword.validation";
@@ -12,11 +13,26 @@ interface IAuthResetPassword {
   verify_password: string;
 }
 
+const queryClient = new QueryClient();
+
 const useResetPasswordForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
-  const [loading, setLoading] = useState(false);
   const { resetPassword } = useAuthApi();
   const { replace, query } = useRouter();
+  const { mutate: resetPasswordFu, isLoading: loadingResetPassword } =
+    useMutation<void, Error, IResetpasswordPayload>(
+      (data) => resetPassword(data),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: () => {
+          queryClient.invalidateQueries(["user"]);
+          replace(routes.resetPasswordConfirmation.url);
+        },
+      }
+    );
+
   const {
     register,
     handleSubmit,
@@ -30,19 +46,11 @@ const useResetPasswordForm = () => {
   };
 
   const onSubmit = async (data: IAuthResetPassword) => {
-    try {
-      if (typeof query.reset_password_token === "string") {
-        setLoading(true);
-        await resetPassword({
-          newPassword: data.password,
-          resetPasswordToken: query.reset_password_token,
-        });
-        replace(routes.resetPasswordConfirmation.url);
-      }
-    } catch (error) {
-      errorHandler(error);
-    } finally {
-      setLoading(false);
+    if (typeof query.reset_password_token === "string") {
+      resetPasswordFu({
+        newPassword: data.password,
+        resetPasswordToken: query.reset_password_token,
+      });
     }
   };
 
@@ -53,7 +61,7 @@ const useResetPasswordForm = () => {
     errors,
     handleTypeInputPassword,
     typePasswordInput,
-    loading,
+    loading: loadingResetPassword,
   };
 };
 

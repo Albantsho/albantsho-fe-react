@@ -1,14 +1,19 @@
-import useAuthApi from "apis/Auth.api";
-import useUserStore from "store/user.store";
+import useAuthApi, {
+  type IData_AuthorizationUser,
+  type IEmailVerifyOtp,
+} from "apis/Auth.api";
 import { useRouter } from "next/router";
 import React, { FormEvent, useRef, useState } from "react";
+import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
+
+const queryClient = new QueryClient();
 
 const useVerifyEmail = () => {
   const { user } = useUserStore.getState();
   const [countDownKey, setCountDownKey] = useState(1);
-  const [loading, setLoading] = useState(false);
   const { setAccessToken, authenticationUser } = useUserStore((state) => ({
     setAccessToken: state.setAccessToken,
     authenticationUser: state.authenticationUser,
@@ -22,6 +27,41 @@ const useVerifyEmail = () => {
     2: "",
     3: "",
     4: "",
+  });
+
+  const { mutate: verifyUser, isLoading: loadingVerifyUser } = useMutation<
+    IData_AuthorizationUser,
+    Error,
+    IEmailVerifyOtp
+  >((user) => emailVerify(user), {
+    onError: (error) => {
+      errorHandler(error);
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries(["user"]);
+      setAccessToken(data.accessToken);
+      authenticationUser(data.user);
+      data.user.userType === "writer"
+        ? replace(routes.writerDashboard.url)
+        : data.user.userType === "producer"
+        ? replace(routes.producerDashboard.url)
+        : data.user.userType === "admin"
+        ? replace(routes.adminDashboard.url)
+        : replace(routes.reviewerDashboard.url);
+    },
+  });
+
+  const { mutate: resendCodeFn, isLoading: loadingResendCode } = useMutation<
+    void,
+    Error,
+    { email: string }
+  >((user) => resendCode(user), {
+    onError: (error) => {
+      errorHandler(error);
+    },
+    onSuccess: () => {
+      setCountDownKey((prevState) => prevState + 1);
+    },
   });
 
   const handleChange =
@@ -44,36 +84,13 @@ const useVerifyEmail = () => {
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-      const res = await emailVerify({
-        email: user.email,
-        code: Object.values(formValues).join(""),
-      });
-      setAccessToken(res.data.accessToken);
-      authenticationUser(res.data.user);
-      res.data.user.userType === "writer"
-        ? replace(routes.writerDashboard.url)
-        : res.data.user.userType === "producer"
-        ? replace(routes.producerDashboard.url)
-        : res.data.user.userType === "admin"
-        ? replace(routes.adminDashboard.url)
-        : replace(routes.reviewerDashboard.url);
-    } catch (error) {
-      errorHandler(error);
-    } finally {
-      setLoading(false);
-    }
+    verifyUser({
+      email: user.email,
+      code: Object.values(formValues).join(""),
+    });
   };
 
-  const handleResendCode = async () => {
-    try {
-      await resendCode({ email: user.email });
-      setCountDownKey((prevState) => prevState + 1);
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const handleResendCode = async () => resendCodeFn({ email: user.email });
 
   return {
     handleChange,
@@ -83,7 +100,8 @@ const useVerifyEmail = () => {
     handleAutoFocus,
     handleResendCode,
     countDownKey,
-    loading,
+    loading: loadingVerifyUser,
+    loadingResendCode,
   };
 };
 

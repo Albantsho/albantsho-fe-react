@@ -1,6 +1,18 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
+import { IResData } from "interfaces/response";
+import { IUser } from "interfaces/user";
+import { useCallback } from "react";
 import api, { apiPrivate } from "./configs/axios.config";
-interface IRegisterPayload {
+
+export interface IData_signupUser {
+  user: IUser;
+}
+export interface IData_AuthorizationUser {
+  user: IUser;
+  accessToken: string;
+}
+
+export interface IRegisterPayload {
   firstName: string;
   lastName: string;
   email: string;
@@ -12,21 +24,18 @@ interface IRegisterPayload {
   gender: "male" | "female";
 }
 
-interface ILoginPayload {
+export interface ILoginPayload {
   email: string;
   password: string;
   rememberMe: boolean;
 }
 
-interface IEmailVerifyOtp {
+export interface IEmailVerifyOtp {
   email: string;
   code: string;
 }
 
-interface IResendCode {
-  email: string;
-}
-interface IResetpasswordPayload {
+export interface IResetpasswordPayload {
   newPassword: string;
   resetPasswordToken: string;
 }
@@ -52,65 +61,100 @@ interface IUserRestrictionPayload {
 const useAuthApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
-  return {
-    async signup(payload: IRegisterPayload) {
-      const res = await api.post("/user/signup", payload, {
+  const signup = useCallback(
+    async (payload: IRegisterPayload) => {
+      const res = await api.post<IResData<IData_signupUser>>(
+        "/user/signup",
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [controller?.signal]
+  );
+
+  const emailVerify = useCallback(
+    async (payload: IEmailVerifyOtp) => {
+      const res = await api.post<IResData<IData_AuthorizationUser>>(
+        "/user/verify-otp",
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [controller?.signal]
+  );
+
+  const resendCode = useCallback(
+    async (payload: { email: string }) => {
+      await api.post("/user/resend-otp", payload, {
         signal: controller?.signal,
       });
-
-      return res.data;
     },
+    [controller?.signal]
+  );
 
-    async signin(payload: ILoginPayload) {
-      const res = await apiPrivate.post("/user/signin", payload, {
+  const logoutUser = useCallback(async () => {
+    await axiosPrivate.post(
+      "/user/logout",
+      {},
+      {
+        signal: controller?.signal,
+      }
+    );
+  }, [controller?.signal]);
+
+  const resetPassword = useCallback(
+    async (payload: IResetpasswordPayload) => {
+      await api.post("/user/reset-password", payload, {
         signal: controller?.signal,
       });
-
-      return res.data;
     },
+    [controller?.signal]
+  );
 
-    async emailVerify(payload: IEmailVerifyOtp) {
-      const res = await apiPrivate.post("/user/verify-otp", payload, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
-    async resendCode(payload: IResendCode) {
-      const res = await api.post("/user/resend-otp", payload, {
-        signal: controller?.signal,
-      });
-      return res.data;
-    },
-
-    async logoutUser() {
-      const res = await axiosPrivate.post("/user/logout", {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
-    async resetPasswordEmail(email: string) {
-      const res = await api.post(
+  const resetPasswordEmail = useCallback(
+    async (email: string) => {
+      await api.post<IResData<IData_AuthorizationUser>>(
         "/user/reset-password-email",
         { email },
         {
           signal: controller?.signal,
         }
       );
-
-      return res.data;
     },
+    [controller?.signal]
+  );
 
-    async resetPassword(payload: IResetpasswordPayload) {
-      const res = await api.post("/user/reset-password", payload, {
-        signal: controller?.signal,
-      });
+  const signin = useCallback(
+    async (payload: ILoginPayload) => {
+      const res = await api.post<IResData<IData_signupUser>>(
+        "/user/signin",
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
 
-      return res.data;
+      return res.data.data;
     },
+    [controller?.signal]
+  );
+
+  return {
+    signup,
+    emailVerify,
+    resendCode,
+    signin,
+    logoutUser,
+    resetPassword,
+    resetPasswordEmail,
 
     async updateUserInformation(payload: IUpdateUserInformationPayload) {
       const res = await axiosPrivate.patch("/user/profile/update", payload, {

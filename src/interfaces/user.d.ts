@@ -9,7 +9,6 @@ export interface IUser {
   lastName: string;
   gender: "male" | "female";
   userType?: "writer" | "producer" | "admin" | "reviewer";
-  subscriptionPlan: null | string;
   portfolio: null | string;
   productionCompanyName: null | string;
   image: null | string;

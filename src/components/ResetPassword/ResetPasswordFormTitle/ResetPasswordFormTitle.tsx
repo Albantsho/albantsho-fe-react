@@ -6,13 +6,13 @@ const ResetPasswordFormTitle = () => {
       <Typography
         variant="h3"
         color="primary.main"
-        className="futura font-medium leading-none mb-3"
+        className="futura font-medium leading-none lg:max-w-[418px] mb-3 text-center"
       >
         Create New Password
       </Typography>
       <Typography
         variant="body1"
-        className="text-[#484848] lg:max-w-[418px]"
+        className="text-[#484848] lg:max-w-[418px] text-center"
       >
         Your new password must be different from all other previously used
         passwords.
