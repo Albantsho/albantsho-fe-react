@@ -28,6 +28,8 @@ const useAxiosPrivate = () => {
       },
       async (error) => {
         if (
+          error.request &&
+          error.request.responseURL &&
           error.request.responseURL ===
             `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/refresh` &&
           error.response.data.statusCode === 400 &&

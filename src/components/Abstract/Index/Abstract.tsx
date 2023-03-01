@@ -43,19 +43,20 @@ const Abstract = ({ script }: IProps) => {
     loadingPublishButton,
     loadingUpdateButton,
     adaption,
-    addAdaption,
-    noAddAdaption,
     getValues,
     progress,
     publish,
-    ref,
+    handleUploadImageCover,
+    imageCoverError,
+    cancelUpload,
+    adaptionPermissionError,
+    cancelUploadAdaption,
+    handleUploadAdaptionPermission,
+    progressAdaption,
   } = useAbstract(script);
 
   return (
-    <div
-      ref={ref}
-      className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto"
-    >
+    <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto">
       <form
         onSubmit={handleSubmit(onSubmit, (e) => {
           const existedErrors = Object.keys(e);
@@ -98,14 +99,16 @@ const Abstract = ({ script }: IProps) => {
           errors={errors}
         />
         <WritersStatement
-          getValues={getValues}
           adaption={adaption}
-          addAdaption={addAdaption}
-          noAddAdaption={noAddAdaption}
+          getValues={getValues}
           script={script}
           step={step}
           register={register}
           errors={errors}
+          adaptionPermissionError={adaptionPermissionError}
+          cancelUploadAdaption={cancelUploadAdaption}
+          handleUploadAdaptionPermission={handleUploadAdaptionPermission}
+          progressAdaption={progressAdaption}
         />
 
         <UploadScript
@@ -128,8 +131,9 @@ const Abstract = ({ script }: IProps) => {
         <UploadImage
           progress={progress}
           step={step}
-          register={register}
-          errors={errors}
+          handleUploadImageCover={handleUploadImageCover}
+          imageCoverError={imageCoverError}
+          cancelUpload={cancelUpload}
         />
         <StepsButtons
           loadingPublishButton={loadingPublishButton}

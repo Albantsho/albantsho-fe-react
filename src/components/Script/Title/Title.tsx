@@ -3,6 +3,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { IFullInformationScript } from "interfaces/script";
+import { useState } from "react";
 import TitlePageNav from "./TitlePageNav/TitlePageNav";
 import useTitle from "./useTitle";
 
@@ -21,6 +22,15 @@ const Title = ({ script }: IProps) => {
     handleChangeDateValue,
   } = useTitle({ script });
 
+  const [isHiddenTitlePlaceholder, setIsHiddenTitlePlaceholder] =
+    useState(false);
+  const [isHiddenWriterPlaceholder, setIsHiddenWriterPlaceholder] =
+    useState(false);
+  const [isHiddenNamesPlaceholder, setIsHiddenNamesPlaceholder] =
+    useState(false);
+  const [isHiddenBasedPlaceholder, setIsHiddenBasedPlaceholder] =
+    useState(false);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TitlePageNav loading={loading} />
@@ -34,7 +44,11 @@ const Title = ({ script }: IProps) => {
                   errors.title ? "border-error-500" : "border-white"
                 } text-center w-full h-10 rounded-md duration-100 outline-none px-2 py-3 border-2 focus:border-primary-700 placeholder:text-center placeholder:font-bold placeholder:text-black font-bold underline courier`}
                 defaultValue={script.title}
-                placeholder="YOUR SCRIPT TITLE"
+                placeholder={
+                  isHiddenTitlePlaceholder ? "" : "YOUR SCRIPT TITLE"
+                }
+                onMouseDown={() => setIsHiddenTitlePlaceholder(true)}
+                onBlur={() => setIsHiddenTitlePlaceholder(false)}
               />
               {errors.title?.message && (
                 <span className="text-error-700 text-base">
@@ -49,7 +63,9 @@ const Title = ({ script }: IProps) => {
                 className={`${
                   errors.writer ? "border-error-500" : "border-white"
                 } text-center w-full h-10 rounded-md duration-100 outline-none px-2 py-3 border-2 focus:border-primary-700 placeholder:text-center placeholder:font-bold placeholder:text-black font-bold underline courier`}
-                placeholder="Written by"
+                placeholder={isHiddenWriterPlaceholder ? "" : "Written by"}
+                onMouseDown={() => setIsHiddenWriterPlaceholder(true)}
+                onBlur={() => setIsHiddenWriterPlaceholder(false)}
               />
               {errors.writer?.message && (
                 <span className="text-error-700 text-base">
@@ -64,7 +80,11 @@ const Title = ({ script }: IProps) => {
                 className={`${
                   errors.names ? "border-error-500" : "border-white"
                 } text-center w-full h-10 rounded-md duration-100 outline-none px-2 py-3 border-2 focus:border-primary-700 placeholder:text-center placeholder:font-bold placeholder:text-black font-bold underline courier`}
-                placeholder="THIS IS WHERE THE NAMES GO"
+                placeholder={
+                  isHiddenNamesPlaceholder ? "" : "THIS IS WHERE THE NAMES GO"
+                }
+                onMouseDown={() => setIsHiddenNamesPlaceholder(true)}
+                onBlur={() => setIsHiddenNamesPlaceholder(false)}
               />
               {errors.names?.message && (
                 <span className="text-error-700 text-base">
@@ -75,19 +95,23 @@ const Title = ({ script }: IProps) => {
 
             <div>
               <input
-                {...register("any")}
+                {...register("basedOn")}
                 className={`${
-                  errors.any ? "border-error-500 " : "border-white"
+                  errors.basedOn ? "border-error-500 " : "border-white"
                 } text-center w-full h-10 rounded-md duration-100 outline-none px-2 py-3 border-2 focus:border-primary-700 placeholder:text-center placeholder:font-bold placeholder:text-black font-bold underline courier`}
-                placeholder="Based on (if any)"
+                placeholder={
+                  isHiddenBasedPlaceholder ? "" : "Based on (if any)"
+                }
+                onMouseDown={() => setIsHiddenBasedPlaceholder(true)}
+                onBlur={() => setIsHiddenBasedPlaceholder(false)}
               />
-              {errors.any?.message && (
+              {errors.basedOn?.message && (
                 <span className="text-error-700 text-base">
-                  {errors.any.message}
+                  {errors.basedOn.message}
                 </span>
               )}
             </div>
-            <div className="fle text-center items-center justify-center">
+            <div>
               <MobileDatePicker
                 inputFormat="MM/DD/YYYY"
                 value={dateValue}

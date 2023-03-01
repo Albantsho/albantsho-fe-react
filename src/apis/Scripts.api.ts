@@ -10,10 +10,11 @@ export interface ICreateNewScriptPayload {
 }
 
 interface IUpdateCoverPageScriptPayload {
-  title: string;
-  writtenBy: string[];
-  basedOn: string;
-  draftDate: string;
+  title?: string;
+  writtenBy?: string;
+  basedOn?: string;
+  draftDate?: string;
+  names?: string;
 }
 
 interface IUpdateScriptPayload {
@@ -141,16 +142,16 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data;
     },
-    async updateScriptImage(id: string, payload: IUpdateScriptImagePayload) {
-      const res = await axiosPrivate.post(`/script/image/${id}`, payload, {
-        signal: controller?.signal,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+    // async updateScriptImage(id: string, payload: IUpdateScriptImagePayload) {
+    //   const res = await axiosPrivate.post(`/script/image/${id}`, payload, {
+    //     signal: controller?.signal,
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   });
 
-      return res.data;
-    },
+    //   return res.data;
+    // },
     async updateAdaptionPermission(
       id: string,
       payload: IUpdateAdaptionPermissionPayload

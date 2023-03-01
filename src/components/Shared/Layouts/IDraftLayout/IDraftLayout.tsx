@@ -1,6 +1,7 @@
+import Nav from "@shared/Nav/Nav";
 import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
-import Nav from "../GeneralLayout/Nav/Nav";
+import routes from "routes/routes";
 import ImageSection from "./ImageSection/ImageSection";
 
 const Footer = dynamic(() => import("@shared/Footer/Footer"));
@@ -9,10 +10,17 @@ interface IProps {
   children: React.ReactNode;
 }
 
+const links = [
+  { title: "Home", href: routes.home.url },
+  { title: "About Us", href: routes.aboutUs.url },
+  { title: "Blog", href: routes.blog.url },
+  { title: "FAQ", href: routes.FAQs.url },
+];
+
 const IDraftLayout = ({ children }: IProps) => {
   return (
     <main className="flex flex-col">
-      <Nav color="inherit" position="static" />
+      <Nav links={links} secondaryUnderLineColor />
       <ImageSection />
       {children}
       <Suspense fallback={null}>

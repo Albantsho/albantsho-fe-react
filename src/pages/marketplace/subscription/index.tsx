@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Footer from "@shared/Footer/Footer";
-import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import usePlanApi from "apis/Plan.api";
 import useUserStore from "store/user.store";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
@@ -18,6 +17,7 @@ import { useRouter } from "next/router";
 import { Suspense, useState } from "react";
 import { toast } from "react-toastify";
 import routes from "routes/routes";
+import Nav from "@shared/Nav/Nav";
 
 const plans = [
   "Synopsis",
@@ -25,6 +25,12 @@ const plans = [
   "Writer’s motivations and personal notes",
   "Act structure",
   "Writer’s inspiration",
+];
+
+const links = [
+  { title: "Home", href: routes.home.url },
+  { title: "Story base", href: routes.marketplace.url },
+  { title: "Blog", href: routes.blog.url },
 ];
 
 const Subscription = () => {
@@ -95,7 +101,7 @@ const Subscription = () => {
       <Head>
         <title>Albantsho || Subscription</title>
       </Head>
-      <Nav color="inherit" position="static" />
+      <Nav secondaryUnderLineColor={false} links={links} position="static" />
       <div className="py-8 md:py-12 px-5 sm:px-9 lg:mb-16  mx-auto bg-[#f6f8fc]">
         <div className="max-w-[520px] mx-auto">
           <Typography

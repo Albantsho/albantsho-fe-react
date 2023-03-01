@@ -13,7 +13,7 @@ interface ITitleFormValues {
   title: string;
   writer: string;
   names: string;
-  any: string;
+  basedOn: string;
 }
 
 interface IProps {
@@ -37,8 +37,9 @@ const useTitle = ({ script }: IProps) => {
   } = useForm<ITitleFormValues>({
     defaultValues: {
       title: script.title,
-      writer: script.writtenBy.join(" "),
-      any: script.basedOn ? script.basedOn : "",
+      writer: script.writtenBy,
+      basedOn: script.basedOn ? script.basedOn : "",
+      names: script.names ? script.names : "",
     },
     resolver: yupResolver(titleSchema),
   });
@@ -48,9 +49,9 @@ const useTitle = ({ script }: IProps) => {
       setLoading(true);
       await updateCoverPageScript(
         {
-          writtenBy: data.writer.split(" ").filter((name) => name),
+          writtenBy: data.writer,
           title: data.title,
-          basedOn: data.any,
+          basedOn: data.basedOn,
           draftDate: dateValue?.toISOString() as string,
         },
         query.id as string

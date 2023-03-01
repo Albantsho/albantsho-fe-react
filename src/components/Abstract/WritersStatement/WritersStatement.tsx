@@ -24,8 +24,12 @@ interface IProps {
   script: IFullInformationScript;
   adaption: boolean;
   getValues: UseFormGetValues<IAbstractFormValues>;
-  addAdaption: () => void;
-  noAddAdaption: () => void;
+  adaptionPermissionError: string;
+  cancelUploadAdaption: () => void;
+  handleUploadAdaptionPermission: (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void;
+  progressAdaption: number;
 }
 
 const WritersStatement = ({
@@ -34,8 +38,10 @@ const WritersStatement = ({
   step,
   script,
   adaption,
-  addAdaption,
-  noAddAdaption,
+  adaptionPermissionError,
+  cancelUploadAdaption,
+  handleUploadAdaptionPermission,
+  progressAdaption,
 }: IProps) => {
   return (
     <div className={`${step === 5 ? "block" : "hidden"}`}>
@@ -74,28 +80,47 @@ const WritersStatement = ({
             </Typography>
             <div className="flex gap-4">
               <Btn
-                onClick={addAdaption}
-                sx={{ "&.MuiButtonBase-root": { border: "none" } }}
-                className="relative rounded-full text-white px-6 py-3 md:px-8 md:py-4"
+                sx={
+                  adaption
+                    ? { "&.MuiButtonBase-root": { border: "none" } }
+                    : {
+                        "&.MuiButtonBase-root": { border: "1px solid #7953B5" },
+                      }
+                }
+                className={`${
+                  adaption
+                    ? "relative rounded-full text-white px-6 py-3 md:px-8 md:py-4"
+                    : "rounded-full bg-white text-primary-700 px-6 py-3 md:px-8 md:py-4"
+                }`}
               >
                 <label
                   className="absolute cursor-pointer inset-0"
                   htmlFor="add-adaption-file"
                 ></label>
                 <input
-                  {...register("adaptionPermission")}
                   accept=".pdf,image/jpeg"
                   max={1}
                   type="file"
                   id="add-adaption-file"
                   hidden
+                  onChange={handleUploadAdaptionPermission}
                 />
                 Yes
               </Btn>
               <Btn
-                onClick={noAddAdaption}
-                sx={{ "&.MuiButtonBase-root": { border: "1px solid #7953B5" } }}
-                className="rounded-full bg-white text-primary-700 px-6 py-3 md:px-8 md:py-4"
+                sx={
+                  !adaption
+                    ? { "&.MuiButtonBase-root": { border: "none" } }
+                    : {
+                        "&.MuiButtonBase-root": { border: "1px solid #7953B5" },
+                      }
+                }
+                className={`${
+                  !adaption
+                    ? "relative rounded-full text-white px-6 py-3 md:px-8 md:py-4"
+                    : "rounded-full bg-white text-primary-700 px-6 py-3 md:px-8 md:py-4"
+                }`}
+                onClick={cancelUploadAdaption}
               >
                 No
               </Btn>
@@ -124,12 +149,16 @@ const WritersStatement = ({
                   backgroundColor: "#fff",
                 },
               }}
-              value={100}
+              value={progressAdaption}
               variant="determinate"
             />
           </div>
         </AccordionDetails>
       </Accordion>
+
+      {adaptionPermissionError.length > 0 && (
+        <p className="text-error-700 pt-3">{adaptionPermissionError}</p>
+      )}
 
       <div className="flex mt-5 md:mt-6 items-start flex-col justify-start gap-2 mb-3 md:mb-5">
         <label htmlFor="character-bible">

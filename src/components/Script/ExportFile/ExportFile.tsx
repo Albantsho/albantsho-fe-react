@@ -9,11 +9,6 @@ import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
 import { serializeWithoutDiv } from "utils/serialize-slate";
 import PDFFile from "../../Shared/PdfFile/PdfFile";
 
-// const ButtonExportPdf = dynamic(
-//   () => import("./ButtonExportPdf/ButtonExportPdf"),
-//   { ssr: false }
-// );
-
 interface IProps {
   script: IFullInformationScript;
 }
@@ -52,7 +47,8 @@ const ExportFile = ({ script }: IProps) => {
             basedOn={script.basedOn}
             draftDate={script.draftDate}
             title={script.title}
-            writtenBy={script.writtenBy.join(" ")}
+            writtenBy={script.writtenBy}
+            names={script.names}
           />
         }
         fileName={script.title}

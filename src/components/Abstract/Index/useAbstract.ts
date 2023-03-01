@@ -1,17 +1,21 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import useMouse from "@react-hook/mouse-position";
 import useDraftApi from "apis/Draft.api";
 import useScriptsApi from "apis/Scripts.api";
+import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import { abstractSchema } from "./validation/abstract.validation";
 
 type IScript = IFullInformationScript;
+
+let controller = new AbortController();
+let controllerAdaption = new AbortController();
 
 const useAbstract = (script: IScript) => {
   const [step, setStep] = useState(1);
@@ -23,8 +27,11 @@ const useAbstract = (script: IScript) => {
   const [publish, setPublish] = useState(false);
   const [progress, setProgress] = useState(0);
   const { query, replace } = useRouter();
-  const { updateScript, updateScriptImage, updateAdaptionPermission } =
-    useScriptsApi();
+  const { updateScript } = useScriptsApi();
+  const axiosPrivate = useAxiosPrivate();
+  const [imageCoverError, setImageCoverError] = useState("");
+  const [adaptionPermissionError, setAdaptionPermissionError] = useState("");
+  const [progressAdaption, setProgressAdaption] = useState(0);
   const { uploadFileDraft, uploadCopyright, selectedDraft } = useDraftApi();
   const {
     register,
@@ -58,40 +65,94 @@ const useAbstract = (script: IScript) => {
     },
     resolver: yupResolver(abstractSchema(publish, activeButton)),
   });
-  const ref = useRef(null);
-  const mouse = useMouse(ref, {
-    enterDelay: 3000,
-    leaveDelay: 3000,
-  });
-
-  useEffect(() => {
-    const formValues = getValues();
-    let allFields = Object.keys(formValues);
-    if (activeButton === 0) {
-      allFields = allFields.filter(
-        (field) =>
-          field !== "scriptFile" &&
-          field !== "scriptCopyright" &&
-          field !== "draft"
-      );
-    } else if (activeButton === 1) {
-      allFields = allFields.filter((field) => field !== "draft");
-    }
-    const completedFields = Object.values(formValues).filter((field) => {
-      if (field && field.length && field.length > 0) {
-        return field;
-      }
-    });
-    setProgress((completedFields.length / allFields.length) * 100);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mouse]);
 
   const publishScript = () => setPublish(true);
   const updateScriptFunc = () => setPublish(false);
 
-  const addAdaption = () => setAdaption(true);
-  const noAddAdaption = () => setAdaption(false);
+  const handleUploadImageCover = (e: React.ChangeEvent<HTMLInputElement>) => {
+    controller = new AbortController();
+    if (!e.target.files) {
+      toast.error("Image is required field");
+      setImageCoverError("Image is required field");
+    } else if (e.target.files.length <= 0) {
+      toast.error("Image is required field");
+      setImageCoverError("Image is required field");
+    } else if (e.target.files[0].size / 1024 > 5120) {
+      toast.error("The file is to large, must less than 5MB");
+      setImageCoverError("The file is to large, must less than 5MB");
+    } else {
+      setImageCoverError("");
+      axiosPrivate
+        .post(
+          `/script/image/${script._id}`,
+          { image: e.target.files[0] },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress: (progressEvent) => {
+              const { loaded, total } = progressEvent;
+              const percentage = (loaded * 100) / total;
+              setProgress(percentage);
+            },
+            signal: controller.signal,
+          }
+        )
+        .then((res) => toast.success(res.data.message));
+    }
+  };
+
+  const handleUploadAdaptionPermission = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setAdaption(true);
+    controllerAdaption = new AbortController();
+    if (!e.target.files) {
+      toast.error("please upload file adaption permission");
+      setAdaptionPermissionError("please upload file adaption permission");
+      setAdaption(false);
+    } else if (e.target.files.length <= 0) {
+      toast.error("please upload file adaption permission");
+      setAdaptionPermissionError("please upload file adaption permission");
+      setAdaption(false);
+    } else if (e.target.files[0].size / 1024 > 5120) {
+      toast.error("The file is to large, must less than 5MB");
+      setAdaptionPermissionError("The file is to large, must less than 5MB");
+      setAdaption(false);
+    } else {
+      setAdaptionPermissionError("");
+      axiosPrivate
+        .post(
+          `/script/adaptionPermission/${script._id}`,
+          { adaptionPermission: e.target.files[0] },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            onUploadProgress: (progressEvent) => {
+              const { loaded, total } = progressEvent;
+              const percentage = (loaded * 100) / total;
+              setProgressAdaption(percentage);
+            },
+            signal: controller.signal,
+          }
+        )
+        .then((res) => toast.success(res.data.message));
+    }
+  };
+
+  const cancelUpload = () => {
+    controller.abort();
+    setProgress(0);
+    toast.error("upload canceled");
+  };
+
+  const cancelUploadAdaption = () => {
+    setAdaption(false);
+    controllerAdaption.abort();
+    setProgressAdaption(0);
+    toast.error("upload canceled");
+  };
 
   const onSubmit = async (data: IAbstractFormValues) => {
     if (publish) {
@@ -117,23 +178,10 @@ const useAbstract = (script: IScript) => {
             storyTopics: data.storyTopics,
             logLine: data.logLine,
             adaption,
-            progress: progress >= 100 ? 100 : Number(progress.toFixed(2)),
           },
           query.id as string,
           "publish=true"
         );
-        {
-          data.image[0] &&
-            (await updateScriptImage(query.id as string, {
-              image: data.image[0],
-            }));
-        }
-
-        if (adaption) {
-          await updateAdaptionPermission(query.id as string, {
-            adaptionPermission: data.adaptionPermission[0],
-          });
-        }
 
         if (activeButton === 0 && data.draft) {
           await selectedDraft(data.draft, {
@@ -176,22 +224,9 @@ const useAbstract = (script: IScript) => {
             storyTopics: data.storyTopics,
             logLine: data.logLine,
             adaption,
-            progress: progress > 100 ? 100 : Number(progress.toFixed(2)),
           },
           query.id as string
         );
-        {
-          data.image[0] &&
-            (await updateScriptImage(query.id as string, {
-              image: data.image[0],
-            }));
-        }
-
-        if (adaption) {
-          await updateAdaptionPermission(query.id as string, {
-            adaptionPermission: data.adaptionPermission[0],
-          });
-        }
 
         if (activeButton === 0 && data.draft) {
           if (data.draft) {
@@ -241,9 +276,13 @@ const useAbstract = (script: IScript) => {
     getValues,
     progress,
     publish,
-    addAdaption,
-    noAddAdaption,
-    ref,
+    handleUploadImageCover,
+    imageCoverError,
+    cancelUpload,
+    handleUploadAdaptionPermission,
+    adaptionPermissionError,
+    progressAdaption,
+    cancelUploadAdaption,
   };
 };
 

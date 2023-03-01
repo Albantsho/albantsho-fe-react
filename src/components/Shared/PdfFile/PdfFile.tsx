@@ -51,6 +51,7 @@ interface IProps {
   title: string;
   basedOn: string | null;
   draftDate: string | null;
+  names: string;
 }
 
 const PDFFile = ({
@@ -59,6 +60,7 @@ const PDFFile = ({
   basedOn,
   draftDate,
   title,
+  names,
 }: IProps) => {
   const htmlContent = new DOMParser().parseFromString(scriptValue, "text/html");
   const value = deserializeScriptWithOutDiv(htmlContent.body);
@@ -77,8 +79,8 @@ const PDFFile = ({
       <Page style={styles.body}>
         <View style={styles.section}>
           <Text style={styles.tag}>{title}</Text>
-          <Text style={styles.tagHelp}>Written by</Text>
-          <Text style={styles.tag}>{writtenBy}</Text>
+          <Text style={styles.tagHelp}>{writtenBy}</Text>
+          <Text style={styles.tag}>{names}</Text>
           <Text style={styles.tag}>{basedOn || " "}</Text>
           <Text style={styles.tag}>
             {new Date(

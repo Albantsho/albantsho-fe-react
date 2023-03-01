@@ -53,7 +53,7 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
           alt={user.firstName}
         />
         <AiFillCaretDown
-          className={`${inHome && "text-white"} ${
+          className={`${inHome && "text-primary-700"} ${
             isMobile ? "hidden" : "block text-primary-700"
           }`}
         />
@@ -101,9 +101,11 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
             </Typography>
             <Typography
               variant="caption"
-              className="text-neutral-800 text-ellipsis overflow-clip"
+              className="text-neutral-800 truncate text-ellipsis"
             >
-              {user.email}
+              {user.email.length < 23
+                ? user.email
+                : `${user.email.slice(0, 20)}...`}
             </Typography>
           </ListItemText>
         </MenuItem>

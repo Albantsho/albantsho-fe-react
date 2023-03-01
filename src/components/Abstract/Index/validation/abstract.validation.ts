@@ -39,13 +39,6 @@ export const abstractSchema = (publish: boolean, activeButton: number) => {
               }
             )
           : Yup.mixed(),
-      adaptionPermission: Yup.mixed().test(
-        "required",
-        "Adaption permission file is a required field",
-        (value) => {
-          return value && value.length;
-        }
-      ),
       scriptCopyright:
         activeButton === 1
           ? Yup.mixed().test(
@@ -56,15 +49,6 @@ export const abstractSchema = (publish: boolean, activeButton: number) => {
               }
             )
           : Yup.mixed(),
-      image: Yup.mixed()
-        .test("required", "Image is a required field", (value) => {
-          return value && value.length;
-        })
-        .test("fileSize", "The file is to large", (value) => {
-          if (value[0]) {
-            return value && value[0].size <= 4000000;
-          }
-        }),
     });
   } else {
     return Yup.object({
@@ -91,13 +75,6 @@ export const abstractSchema = (publish: boolean, activeButton: number) => {
       characterBible: Yup.string().label("Character bible"),
       inspiration: Yup.string().label("Inspiration"),
       motivation: Yup.string().label("Motivation"),
-      image: Yup.mixed().test("fileSize", "The file is to large", (value) => {
-        if (value[0]) {
-          return value && value[0].size <= 4000000;
-        } else {
-          return value;
-        }
-      }),
     });
   }
 };

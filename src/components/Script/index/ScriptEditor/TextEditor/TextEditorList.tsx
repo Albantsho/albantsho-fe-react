@@ -4,7 +4,8 @@ import useDraftApi from "apis/Draft.api";
 import useScriptsApi from "apis/Scripts.api";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AiOutlineSetting } from "react-icons/ai";
 import { RiFileUserLine, RiSave3Fill } from "react-icons/ri";
 import { useResizeDetector } from "react-resize-detector";
 import { toast } from "react-toastify";
@@ -15,6 +16,7 @@ import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
 import { serializeWithoutDiv } from "utils/serialize-slate";
 import BookMarkIcon from "../assets/book-mark.svg";
 import TextEditor from "./TextEditor";
+import TextEditorSettingModal from "./TextEditorSettingModal/TextEditorSettingModal";
 
 interface IProps {
   htmlInitialValue: string;
@@ -27,10 +29,23 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   const { saveFileDraft } = useDraftApi();
   const { updateScript } = useScriptsApi();
   const [render, setRender] = useState(false);
+  const [openSettingModal, setOpenSettingModal] = useState(false);
+  const [editorSetting, setEditorSetting] = useState<{
+    theme: string;
+  }>({
+    theme: "icons",
+  });
   const scriptValue = useScriptValueStore((state) => state.scriptValue);
   setTimeout(() => {
     setRender(true);
   }, 2000);
+
+  useEffect(() => {
+    const setting = JSON.parse(localStorage.getItem("EditorSetting") as string);
+    if (setting) {
+      setEditorSetting(setting);
+    }
+  }, []);
 
   const saveDraftFile = async () => {
     const htmlContent = new DOMParser().parseFromString(
@@ -49,75 +64,113 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
     toast.success(res.message);
   };
 
-  return (
-    <div ref={ref} className="relative text-start">
-      <ButtonGroup
-        className="absolute flex-row ml-auto  w-min xl:flex-col 
-      -top-[10px] left-0 xl:-right-16 xl:top-10"
-      >
-        <Tooltip
-          classes={{
-            tooltip: "bg-black",
-            tooltipPlacementLeft: "bg-black",
-          }}
-          title="Act Structure"
-          placement="left"
-        >
-          <IconButton
-            disableRipple
-            className="bg-white text-primary-700 rounded-none w-12 h-12"
-          >
-            <RiFileUserLine />
-          </IconButton>
-        </Tooltip>
+  const openSettingModalFunc = () => setOpenSettingModal(true);
+  const closeSettingModal = () => setOpenSettingModal(false);
 
-        <Link
-          passHref
-          legacyBehavior
-          href={routes.abstract.dynamicUrl(query.id as string)}
+  const handleChangeSettingIcon = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditorSetting({ ...editorSetting, theme: e.target.value });
+    localStorage.setItem(
+      "EditorSetting",
+      JSON.stringify({ theme: e.target.value })
+    );
+  };
+
+  return (
+    <>
+      <div ref={ref} className="relative text-start">
+        <ButtonGroup
+          className="absolute flex-row ml-auto  w-min xl:flex-col 
+      -top-[10px] left-0 xl:-right-16 xl:top-10"
         >
           <Tooltip
             classes={{
               tooltip: "bg-black",
               tooltipPlacementLeft: "bg-black",
             }}
-            title="Character Bible"
+            title="Act Structure"
             placement="left"
           >
             <IconButton
               disableRipple
               className="bg-white text-primary-700 rounded-none w-12 h-12"
             >
-              <SvgIcon inheritViewBox component={BookMarkIcon} />
+              <RiFileUserLine />
             </IconButton>
           </Tooltip>
-        </Link>
 
-        <Tooltip
-          classes={{
-            tooltip: "bg-black",
-            tooltipPlacementLeft: "bg-black",
-          }}
-          title="Save File"
-          placement="left"
-        >
-          <IconButton
-            onClick={saveDraftFile}
-            disableRipple
-            className="bg-white text-primary-700 rounded-none w-12 h-12"
+          <Link
+            passHref
+            legacyBehavior
+            href={routes.abstract.dynamicUrl(query.id as string)}
           >
-            <SvgIcon inheritViewBox component={RiSave3Fill} />
-          </IconButton>
-        </Tooltip>
-      </ButtonGroup>
-      {render && (
-        <TextEditor
-          socket={socket}
-          htmlInitialValue={htmlInitialValue}
-          width={width}
+            <Tooltip
+              classes={{
+                tooltip: "bg-black",
+                tooltipPlacementLeft: "bg-black",
+              }}
+              title="Character Bible"
+              placement="left"
+            >
+              <IconButton
+                disableRipple
+                className="bg-white text-primary-700 rounded-none w-12 h-12"
+              >
+                <SvgIcon inheritViewBox component={BookMarkIcon} />
+              </IconButton>
+            </Tooltip>
+          </Link>
+
+          <Tooltip
+            classes={{
+              tooltip: "bg-black",
+              tooltipPlacementLeft: "bg-black",
+            }}
+            title="Save File"
+            placement="left"
+          >
+            <IconButton
+              onClick={saveDraftFile}
+              disableRipple
+              className="bg-white text-primary-700 rounded-none w-12 h-12"
+            >
+              <SvgIcon inheritViewBox component={RiSave3Fill} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip
+            classes={{
+              tooltip: "bg-black",
+              tooltipPlacementLeft: "bg-black",
+            }}
+            title="Setting Editor"
+            placement="left"
+          >
+            <IconButton
+              onClick={openSettingModalFunc}
+              disableRipple
+              className="bg-white text-primary-700 rounded-none w-12 h-12"
+            >
+              <SvgIcon inheritViewBox component={AiOutlineSetting} />
+            </IconButton>
+          </Tooltip>
+        </ButtonGroup>
+        {render && (
+          <TextEditor
+            editorSetting={editorSetting}
+            socket={socket}
+            htmlInitialValue={htmlInitialValue}
+            width={width}
+          />
+        )}
+      </div>
+      {openSettingModal ? (
+        <TextEditorSettingModal
+          openSettingModal={openSettingModal}
+          editorSetting={editorSetting}
+          closeSettingModal={closeSettingModal}
+          handleChangeSettingIcon={handleChangeSettingIcon}
         />
-      )}
-    </div>
+      ) : null}
+    </>
   );
 };
 

@@ -1,5 +1,4 @@
 import Footer from "@shared/Footer/Footer";
-import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import { apiPrivate } from "apis/configs/axios.config";
 import useUserStore from "store/user.store";
 import axios from "axios";
@@ -11,6 +10,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense, useEffect, useState } from "react";
 import { DotLoader } from "react-spinners";
+import routes from "routes/routes";
+import Nav from "@shared/Nav/Nav";
 
 const MarketScriptChips = dynamic(
   () =>
@@ -33,6 +34,12 @@ const MainDetailsMarketScript = dynamic(
 const RateToScript = dynamic(
   () => import("components/Marketplace/MarketScript/RateToScript/RateToScript")
 );
+
+const links = [
+  { title: "Home", href: routes.home.url },
+  { title: "Story base", href: routes.marketplace.url },
+  { title: "Blog", href: routes.blog.url },
+];
 
 const ScriptInfoPage = () => {
   const [script, setScript] = useState<IFullInformationScript>();
@@ -75,7 +82,7 @@ const ScriptInfoPage = () => {
       <Head>
         <title>Albantsho || {script?.title}</title>
       </Head>
-      <Nav color="inherit" position="static" />
+      <Nav secondaryUnderLineColor={false} links={links} position="static" />
       {!loading && script ? (
         <>
           <ScriptInfo bid={bid} script={script} />
