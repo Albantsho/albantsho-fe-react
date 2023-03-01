@@ -39,6 +39,9 @@ const MoveBlogToTrashListModal = ({
           errorHandler(error);
         },
         onSuccess: () => {
+          queryClient.invalidateQueries("weblog");
+          setOpenMoveBlogToTrashListModal(false);
+          if (query.slug) push(routes.blogsAdminDashboard.url);
           if (blogList && blogList.length <= 1) {
             query.archive
               ? push(
@@ -56,9 +59,6 @@ const MoveBlogToTrashListModal = ({
                   shallow: true,
                 });
           }
-          queryClient.invalidateQueries("weblog");
-          setOpenMoveBlogToTrashListModal(false);
-          if (query.slug) push(routes.blogsAdminDashboard.url);
         },
       }
     );

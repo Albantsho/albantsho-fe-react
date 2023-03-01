@@ -106,6 +106,7 @@ const ArchiveBlog = ({
       <Suspense fallback={null}>
         {openMoveBlogToTrashListModal ? (
           <MoveBlogToTrashListModal
+            key={_id}
             weblogId={_id}
             blogList={blogList}
             setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
@@ -116,6 +117,7 @@ const ArchiveBlog = ({
       <Suspense fallback={null}>
         {openRestoreBlogFromArchiveListModal ? (
           <RestoreBlogFromArchiveListModal
+            key={_id}
             blogList={blogList}
             weblogId={_id}
             setRestoreBlogFromArchiveListModal={

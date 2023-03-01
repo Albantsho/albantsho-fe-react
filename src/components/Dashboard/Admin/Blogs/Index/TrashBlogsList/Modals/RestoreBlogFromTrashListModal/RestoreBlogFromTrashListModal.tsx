@@ -38,13 +38,17 @@ const RestoreBlogFromTrashListModal = ({
           errorHandler(error);
         },
         onSuccess: () => {
+          queryClient.invalidateQueries({
+            predicate: (query) => {
+              return query.queryKey[0] === "weblog";
+            },
+          });
+          handleCloseRestoreBlogFromTrashListModal();
           if (blogList.length <= 1) {
             push(`?trash=true&page=${+String(query.page) - 1}`, undefined, {
               shallow: true,
             });
           }
-          queryClient.invalidateQueries("weblog");
-          handleCloseRestoreBlogFromTrashListModal();
         },
       }
     );

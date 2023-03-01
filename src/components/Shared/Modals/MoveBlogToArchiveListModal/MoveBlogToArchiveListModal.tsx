@@ -39,6 +39,9 @@ const MoveBlogToArchiveListModal = ({
           errorHandler(error);
         },
         onSuccess: () => {
+          queryClient.invalidateQueries("weblog");
+          setOpenMoveBlogToArchiveListModal(false);
+          if (query.slug) push(routes.blogsAdminDashboard.url);
           if (blogList && blogList.length <= 1) {
             query.archive
               ? push(
@@ -56,9 +59,6 @@ const MoveBlogToArchiveListModal = ({
                   shallow: true,
                 });
           }
-          queryClient.invalidateQueries("weblog");
-          setOpenMoveBlogToArchiveListModal(false);
-          if (query.slug) push(routes.blogsAdminDashboard.url);
         },
       }
     );

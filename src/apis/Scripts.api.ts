@@ -218,7 +218,6 @@ const useScriptsApi = (controller?: AbortController) => {
       const res = await axiosPrivate.get(`/script/${id}`, {
         signal: controller?.signal,
       });
-      console.log(res);
       return res.data;
     },
 

@@ -14,7 +14,6 @@ const useAxios = () => {
         if (config.headers !== undefined && !config.headers["Authorization"]) {
           config.headers["Authorization"] = `Bearer ${accessToken}`;
         }
-        console.log(config);
 
         return config;
       },
@@ -27,7 +26,6 @@ const useAxios = () => {
       async (response) => {
         try {
           const res = await apiPrivate.post("/user/refresh", {});
-          console.log("🚀 ~ file: useAxios.ts:29 ~ async ~ res:", res);
         } catch (error: any) {
           if (
             error.request.responseURL ===

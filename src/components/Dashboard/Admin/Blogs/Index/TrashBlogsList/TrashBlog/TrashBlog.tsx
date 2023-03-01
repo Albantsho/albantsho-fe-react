@@ -102,6 +102,7 @@ const TrashBlog = ({
       <Suspense fallback={null}>
         {openDeleteBlogFromTrashListModal ? (
           <DeleteBlogFromTrashListModal
+            key={_id}
             weblogId={_id}
             blogList={blogList}
             setOpenDeleteBlogFromTrashListModal={
@@ -114,6 +115,7 @@ const TrashBlog = ({
       <Suspense fallback={null}>
         {openRestoreBlogFromTrashListModal ? (
           <RestoreBlogFromTrashListModal
+            key={_id}
             weblogId={_id}
             blogList={blogList}
             setOpenRestoreBlogFromTrashListModal={

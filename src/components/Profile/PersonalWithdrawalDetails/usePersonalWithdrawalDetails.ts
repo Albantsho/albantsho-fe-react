@@ -37,7 +37,6 @@ const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
       },
     }
   );
-  console.log(userProfile);
 
   const {
     register,

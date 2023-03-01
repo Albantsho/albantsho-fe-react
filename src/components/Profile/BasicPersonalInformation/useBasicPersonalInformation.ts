@@ -34,15 +34,12 @@ const useBasicPersonalInformation = ({ userProfile }: IProps) => {
     Error,
     { firstName: string; lastName: string; image: FileList }
   >(
-    (data) => {
-      console.log(data);
-
-      return updateUserInformation({
+    (data) =>
+      updateUserInformation({
         firstName: data.firstName,
         lastName: data.lastName,
         image: data.image[0],
-      });
-    },
+      }),
     {
       onError: (error) => {
         errorHandler(error);

@@ -40,6 +40,9 @@ const RestoreBlogFromArchiveListModal = ({
       errorHandler(error);
     },
     onSuccess: () => {
+      queryClient.invalidateQueries("weblog");
+      setRestoreBlogFromArchiveListModal(false);
+      if (query.id) push(routes.blogsAdminDashboard.url);
       if (blogList && blogList.length <= 1) {
         query.archive
           ? push(`?archive=true&page=${+String(query.page) - 1}`, undefined, {
@@ -53,9 +56,6 @@ const RestoreBlogFromArchiveListModal = ({
               shallow: true,
             });
       }
-      queryClient.invalidateQueries("weblog");
-      setRestoreBlogFromArchiveListModal(false);
-      if (query.id) push(routes.blogsAdminDashboard.url);
     },
   });
 

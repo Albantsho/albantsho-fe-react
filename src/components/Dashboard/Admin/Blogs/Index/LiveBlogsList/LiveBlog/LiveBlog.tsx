@@ -102,6 +102,7 @@ const LiveBlog = ({
       <Suspense fallback={null}>
         {openMoveBlogToTrashListModal ? (
           <MoveBlogToTrashListModal
+            key={_id}
             blogList={blogList}
             weblogId={_id}
             setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
@@ -112,6 +113,7 @@ const LiveBlog = ({
       <Suspense fallback={null}>
         {openMoveBlogToArchiveListModal ? (
           <MoveBlogToArchiveListModal
+            key={_id}
             blogList={blogList}
             weblogId={_id}
             setOpenMoveBlogToArchiveListModal={

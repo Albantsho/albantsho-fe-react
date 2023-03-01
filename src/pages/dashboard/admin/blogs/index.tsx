@@ -31,8 +31,9 @@ const BlogsPage: NextPageWithLayout = () => {
       onError: (err) => {
         errorHandler(err);
       },
-      refetchInterval: 1000,
-      refetchIntervalInBackground: true,
+      cacheTime: 1000,
+      // refetchInterval: 1000,
+      // refetchIntervalInBackground: true,
     }
   );
 
