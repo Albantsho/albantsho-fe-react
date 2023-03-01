@@ -17,7 +17,7 @@ interface IProps {
 const BlogCard = ({ post }: IProps) => {
   return (
     <Card
-      className="rounded-lg flex flex-col"
+      className="rounded-lg flex flex-col max-w-[712px]"
       sx={{ boxShadow: " 0px 2px 7px rgba(117, 88, 162, 0.15)" }}
     >
       <CardMedia

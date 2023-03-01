@@ -7,8 +7,6 @@ import ArchiveBlogsList from "components/Dashboard/Admin/Blogs/Index/ArchiveBlog
 import LiveBlogsList from "components/Dashboard/Admin/Blogs/Index/LiveBlogsList/LiveBlogsList";
 import TabButtons from "components/Dashboard/Admin/Blogs/Index/TabButtons/TabButtons";
 import TrashBlogsList from "components/Dashboard/Admin/Blogs/Index/TrashBlogsList/TrashBlogsList";
-import useAxiosPrivate from "hooks/useAxiosPrivate";
-import { IWeblog } from "interfaces/weblog";
 import debounce from "lodash/debounce";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -17,17 +15,30 @@ import { useCallback, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { DotLoader } from "react-spinners";
 import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
 
 const BlogsPage: NextPageWithLayout = () => {
   const { query, push } = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [blogList, setBlogList] = useState<Array<IWeblog>>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const { getAllWeblogsForAdmin } = useWeblogApi();
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageCount, setPageCount] = useState(1);
-  const axiosPrivate = useAxiosPrivate();
+
+  const { data, isLoading } = useQuery(
+    ["weblog", queryString.stringify(query), searchQuery, currentPage],
+    () => getAllWeblogsForAdmin(queryString.stringify(query), searchQuery),
+    {
+      onError: (err) => {
+        errorHandler(err);
+      },
+      refetchInterval: 1000,
+      refetchIntervalInBackground: true,
+    }
+  );
+
+  useEffect(() => {
+    setCurrentPage(+`${query.page}` || 1);
+  }, [query]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
@@ -41,42 +52,11 @@ const BlogsPage: NextPageWithLayout = () => {
     [searchQuery]
   );
 
-  const { data, isLoading, isError, isFetching } = useQuery(
-    "admin-blogs",
-    async () => {
-      const data = await axiosPrivate.get(
-        `/weblog/admin/all?limit=10&${query}&search=${searchQuery}`
-      );
-      return data;
-    }
-  );
-  console.log({ data, isLoading, isError, isFetching });
-
-  useEffect(() => {
-    async function getAllWeblogs() {
-      try {
-        setBlogList([]);
-        setLoading(true);
-        const res = await getAllWeblogsForAdmin(
-          queryString.stringify(query),
-          searchQuery
-        );
-        setBlogList(res.data.weblogs);
-        setPageCount(res.data.pagesCount);
-        setCurrentPage(res.data.currentPage);
-        setLoading(false);
-      } catch (error) {
-        ("");
-      }
-    }
-    getAllWeblogs();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery, query]);
-
   const handleActivePage = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
+    setCurrentPage(page);
     !query
       ? push(
           routes.blogsAdminDashboardTabs.url("", `?page=${page}`),
@@ -112,27 +92,20 @@ const BlogsPage: NextPageWithLayout = () => {
         handleSearch={handleSearch}
         placeholder="Search for blog by title"
       />
-      {loading ? (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
-      ) : (
+      {!isLoading && data ? (
         <>
           {!query.archive && !query.trash && (
-            <LiveBlogsList blogList={blogList} setBlogList={setBlogList} />
+            <LiveBlogsList blogList={data.weblogs} />
           )}
-          {query.archive && (
-            <ArchiveBlogsList blogList={blogList} setBlogList={setBlogList} />
-          )}
-          {query.trash && (
-            <TrashBlogsList blogList={blogList} setBlogList={setBlogList} />
-          )}
-          {pageCount >= 2 && (
+          {query.archive && <ArchiveBlogsList blogList={data.weblogs} />}
+          {query.trash && <TrashBlogsList blogList={data.weblogs} />}
+          {data.pagesCount >= 2 && (
             <CustomPaginationComponent
-              pageCount={pageCount}
+              pageCount={data.pagesCount}
               currentPage={currentPage}
               handleActivePage={handleActivePage}
             />
           )}
-          {JSON.stringify(data?.data.data)}
           <Fab
             color="primary"
             href={routes.createBlogAdminDashboard.url}
@@ -141,6 +114,8 @@ const BlogsPage: NextPageWithLayout = () => {
             +
           </Fab>
         </>
+      ) : (
+        <DotLoader color="#7953B5" className="mx-auto mt-10" />
       )}
     </>
   );

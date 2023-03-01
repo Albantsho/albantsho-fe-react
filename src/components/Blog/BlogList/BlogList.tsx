@@ -24,7 +24,6 @@ const BlogList = ({
     event: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    push(`?page=${page}`, undefined, { shallow: true });
     setCurrentPage(page);
   };
 
@@ -38,8 +37,9 @@ const BlogList = ({
           xl: "repeat(auto-fill, minmax(510px, auto))",
         }}
       >
-        {loading
-          ? Array.from(new Array(3)).map((_, index) => (
+        {!loading && blogList
+          ? blogList.map((blog) => <BlogCard key={blog._id} post={blog} />)
+          : Array.from(new Array(3)).map((_, index) => (
               <Card
                 key={index}
                 className="rounded-lg"
@@ -62,8 +62,7 @@ const BlogList = ({
                 <Skeleton className="mx-5" animation="wave" height={15} />
                 <Skeleton className="mx-5 mb-5" animation="wave" height={15} />
               </Card>
-            ))
-          : blogList.map((blog) => <BlogCard key={blog._id} post={blog} />)}
+            ))}
       </Box>
 
       {pageCount >= 2 && (

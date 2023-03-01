@@ -3,34 +3,24 @@ import useWeblogApi from "apis/Weblog.api";
 import BlogList from "components/Blog/BlogList/BlogList";
 import { IWeblog } from "interfaces/weblog";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../_app";
 
 const Blog: NextPageWithLayout = () => {
-  const [blogList, setBlogList] = useState<IWeblog[]>([]);
-  const [loading, setLoading] = useState(false);
   const { getAllWeblogs } = useWeblogApi();
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageCount, setPageCount] = useState(1);
 
-  useEffect(() => {
-    async function getAllWeblogsFunc() {
-      try {
-        setLoading(true);
-        const res = await getAllWeblogs(currentPage);
-        setPageCount(res.data.pagesCount);
-        setBlogList(res.data.weblogs);
-        setCurrentPage(res.data.currentPage);
-        setLoading(false);
-      } catch (error) {
-        ("");
-      }
+  const { data, isLoading } = useQuery(
+    ["weblog", currentPage],
+    () => getAllWeblogs(currentPage),
+    {
+      onError: (err) => {
+        errorHandler(err);
+      },
     }
-
-    getAllWeblogsFunc();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  );
 
   return (
     <>
@@ -39,11 +29,11 @@ const Blog: NextPageWithLayout = () => {
       </Head>
 
       <BlogList
-        pageCount={pageCount}
+        pageCount={data?.pagesCount as number}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
-        loading={loading}
-        blogList={blogList}
+        loading={isLoading}
+        blogList={data?.weblogs as IWeblog[]}
       />
     </>
   );

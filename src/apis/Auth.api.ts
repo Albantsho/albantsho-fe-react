@@ -255,46 +255,6 @@ const useAuthApi = (controller?: AbortController) => {
     return res.data.data;
   }, [controller?.signal]);
 
-  // async getAllReviewers() {
-  //   const res = await axiosPrivate.get("/user/all/reviewers", {
-  //     signal: controller?.signal,
-  //   });
-
-  //   return res.data.data;
-  // },
-
-  // async getUserProfileForAdmin(id: string ) {
-  //   const res = await axiosPrivate.get(`/user/profile/${id}`, {
-  //     signal: controller?.signal,
-  //   });
-
-  //   return res.data;
-  // },
-
-  // async getAllUser(query: string, searchQuery?: string) {
-  //   const res = await axiosPrivate.get(
-  //     `/user/all/users?limit=10&search=${searchQuery}&${query}`,
-  //     {
-  //       signal: controller?.signal,
-  //     }
-  //   );
-  //   console.log(res);
-
-  //   return res.data;
-  // },
-
-  // async updateUserRestriction(payload: IUserRestrictionPayload, id: string) {
-  //   const res = await axiosPrivate.patch(
-  //     `/user/update/restriction/${id}`,
-  //     payload,
-  //     {
-  //       signal: controller?.signal,
-  //     }
-  //   );
-
-  //   return res.data;
-  // },
-
   return {
     signup,
     emailVerify,
@@ -310,44 +270,6 @@ const useAuthApi = (controller?: AbortController) => {
     getAllUser,
     getUserProfileForAdmin,
     getAllReviewers,
-    // async updateUserRestriction(payload: IUserRestrictionPayload, id: string) {
-    //   const res = await axiosPrivate.patch(
-    //     `/user/update/restriction/${id}`,
-    //     payload,
-    //     {
-    //       signal: controller?.signal,
-    //     }
-    //   );
-    //   console.log(res.data);
-    // },
-
-    // async getAllUser(query: string, searchQuery?: string) {
-    //   const res = await axiosPrivate.get(
-    //     `/user/all/users?limit=10&search=${searchQuery}&${query}`,
-    //     {
-    //       signal: controller?.signal,
-    //     }
-    //   );
-    //   console.log(res);
-
-    //   return res.data;
-    // },
-
-    // async getUserProfileForAdmin(id: string | string[]) {
-    //   const res = await axiosPrivate.get(`/user/profile/${id}`, {
-    //     signal: controller?.signal,
-    //   });
-
-    //   return res.data;
-    // },
-
-    // async getAllReviewers() {
-    //   const res = await axiosPrivate.get("/user/all/reviewers", {
-    //     signal: controller?.signal,
-    //   });
-
-    //   return res.data.data;
-    // },
   };
 };
 

@@ -1,20 +1,19 @@
+import emptyBlogs from "@assets/images/empty-blogs.png";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
-import emptyBlogs from "@assets/images/empty-blogs.png";
 import TrashBlog from "./TrashBlog/TrashBlog";
 
 interface IProps {
   blogList: IWeblog[];
-  setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
 }
 
-const TrashBlogsList = ({ blogList, setBlogList }: IProps) => {
+const TrashBlogsList = ({ blogList }: IProps) => {
   return (
     <div className="mt-4 pb-14 flex flex-col gap-4 overflow-hidden">
       {blogList.length > 0 ? (
         <>
           {blogList.map((blog) => (
-            <TrashBlog setBlogList={setBlogList} blog={blog} key={blog._id} />
+            <TrashBlog blogList={blogList} blog={blog} key={blog._id} />
           ))}
         </>
       ) : (

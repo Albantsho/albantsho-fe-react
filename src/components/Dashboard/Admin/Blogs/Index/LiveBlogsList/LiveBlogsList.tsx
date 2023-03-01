@@ -5,16 +5,15 @@ import LiveBlog from "./LiveBlog/LiveBlog";
 
 interface IProps {
   blogList: IWeblog[];
-  setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
 }
 
-const LiveBlogsList = ({ blogList, setBlogList }: IProps) => {
+const LiveBlogsList = ({ blogList }: IProps) => {
   return (
     <div className="mt-4 pb-8 flex flex-col gap-4 overflow-hidden">
       {blogList.length > 0 ? (
         <>
           {blogList.map((blog) => (
-            <LiveBlog setBlogList={setBlogList} blog={blog} key={blog._id} />
+            <LiveBlog blogList={blogList} blog={blog} key={blog._id} />
           ))}
         </>
       ) : (

@@ -4,7 +4,9 @@ import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useWeblogApi from "apis/Weblog.api";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
+import { QueryClient, useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
 import moveImage from "./assets/move-image.png";
 
@@ -14,31 +16,44 @@ interface IProps {
     React.SetStateAction<boolean>
   >;
   weblogId: string;
-  setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
+  blogList: IWeblog[];
 }
+
+const queryClient = new QueryClient();
 
 const RestoreBlogFromTrashListModal = ({
   openRestoreBlogFromTrashListModal,
   setOpenRestoreBlogFromTrashListModal,
   weblogId,
-  setBlogList,
+  blogList,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
+  const { query, push } = useRouter();
+
+  const { mutate: restoreTrashBlog, isLoading: loadingRestoreTrashBlog } =
+    useMutation<void, Error, { trash: boolean; id: string }>(
+      (data) => updateWeblog({ trash: data.trash }, data.id),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: () => {
+          if (blogList.length <= 1) {
+            push(`?trash=true&page=${+String(query.page) - 1}`, undefined, {
+              shallow: true,
+            });
+          }
+          queryClient.invalidateQueries("weblog");
+          handleCloseRestoreBlogFromTrashListModal();
+        },
+      }
+    );
 
   const handleCloseRestoreBlogFromTrashListModal = () =>
     setOpenRestoreBlogFromTrashListModal(false);
 
-  const handleRestoreWeblogFromTrashList = async () => {
-    try {
-      await updateWeblog({ trash: false }, weblogId);
-      setBlogList((prevState) =>
-        prevState.filter((blog) => blog._id !== weblogId)
-      );
-      handleCloseRestoreBlogFromTrashListModal();
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const handleRestoreWeblogFromTrashList = async () =>
+    restoreTrashBlog({ trash: false, id: weblogId });
 
   return (
     <Modal
@@ -72,6 +87,7 @@ const RestoreBlogFromTrashListModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
+              loading={loadingRestoreTrashBlog}
               onClick={handleRestoreWeblogFromTrashList}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"

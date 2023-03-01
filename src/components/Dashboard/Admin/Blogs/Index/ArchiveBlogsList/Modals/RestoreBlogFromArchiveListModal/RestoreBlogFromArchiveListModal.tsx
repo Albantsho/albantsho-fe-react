@@ -6,6 +6,7 @@ import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
+import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import moveImage from "./assets/move-image.png";
@@ -16,35 +17,53 @@ interface IProps {
     React.SetStateAction<boolean>
   >;
   weblogId: string;
-  setBlogList?: React.Dispatch<React.SetStateAction<IWeblog[]>>;
+  blogList?: IWeblog[];
 }
+
+const queryClient = new QueryClient();
 
 const RestoreBlogFromArchiveListModal = ({
   openRestoreBlogFromArchiveListModal,
   setRestoreBlogFromArchiveListModal,
   weblogId,
-  setBlogList,
+  blogList,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
   const { query, push } = useRouter();
 
+  const { mutate: restoreBlog, isLoading: loadingRestoreBlog } = useMutation<
+    void,
+    Error,
+    { archive: boolean; id: string }
+  >((data) => updateWeblog({ archive: data.archive }, data.id), {
+    onError: (error) => {
+      errorHandler(error);
+    },
+    onSuccess: () => {
+      if (blogList && blogList.length <= 1) {
+        query.archive
+          ? push(`?archive=true&page=${+String(query.page) - 1}`, undefined, {
+              shallow: true,
+            })
+          : query.trash
+          ? push(`?trash=true&page=${+String(query.page) - 1}`, undefined, {
+              shallow: true,
+            })
+          : push(`?page=${+String(query.page) - 1}`, undefined, {
+              shallow: true,
+            });
+      }
+      queryClient.invalidateQueries("weblog");
+      setRestoreBlogFromArchiveListModal(false);
+      if (query.id) push(routes.blogsAdminDashboard.url);
+    },
+  });
+
   const handleCloseMoveBlogToArchiveListModal = () =>
     setRestoreBlogFromArchiveListModal(false);
 
-  const handleMoveBlogToArchiveList = async () => {
-    try {
-      await updateWeblog({ archive: false }, weblogId);
-      if (setBlogList) {
-        setBlogList((prevState) =>
-          prevState.filter((blog) => blog._id !== weblogId)
-        );
-      }
-      setRestoreBlogFromArchiveListModal(false);
-      if (query.id) push(routes.blogsAdminDashboard.url);
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const handleMoveBlogToArchiveList = async () =>
+    restoreBlog({ archive: false, id: weblogId });
 
   return (
     <Modal
@@ -78,6 +97,7 @@ const RestoreBlogFromArchiveListModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
+              loading={loadingRestoreBlog}
               onClick={handleMoveBlogToArchiveList}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"

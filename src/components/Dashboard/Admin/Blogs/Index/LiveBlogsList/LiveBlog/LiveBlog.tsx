@@ -20,12 +20,12 @@ const MoveBlogToTrashListModal = dynamic(
 
 interface IProps {
   blog: IWeblog;
-  setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
+  blogList: IWeblog[];
 }
 
 const LiveBlog = ({
   blog: { _id, title, description, media, slug },
-  setBlogList,
+  blogList,
 }: IProps) => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
     useState(false);
@@ -102,7 +102,7 @@ const LiveBlog = ({
       <Suspense fallback={null}>
         {openMoveBlogToTrashListModal ? (
           <MoveBlogToTrashListModal
-            setBlogList={setBlogList}
+            blogList={blogList}
             weblogId={_id}
             setOpenMoveBlogToTrashListModal={setOpenMoveBlogToTrashListModal}
             openMoveBlogToTrashListModal={openMoveBlogToTrashListModal}
@@ -112,7 +112,7 @@ const LiveBlog = ({
       <Suspense fallback={null}>
         {openMoveBlogToArchiveListModal ? (
           <MoveBlogToArchiveListModal
-            setBlogList={setBlogList}
+            blogList={blogList}
             weblogId={_id}
             setOpenMoveBlogToArchiveListModal={
               setOpenMoveBlogToArchiveListModal

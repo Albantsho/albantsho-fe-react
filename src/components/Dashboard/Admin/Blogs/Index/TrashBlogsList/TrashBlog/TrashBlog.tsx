@@ -20,12 +20,12 @@ const RestoreBlogFromTrashListModal = dynamic(
 
 interface IProps {
   blog: IWeblog;
-  setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
+  blogList: IWeblog[];
 }
 
 const TrashBlog = ({
   blog: { media, description, title, _id },
-  setBlogList,
+  blogList,
 }: IProps) => {
   const [
     openDeleteBlogFromTrashListModal,
@@ -102,8 +102,8 @@ const TrashBlog = ({
       <Suspense fallback={null}>
         {openDeleteBlogFromTrashListModal ? (
           <DeleteBlogFromTrashListModal
-            setBlogList={setBlogList}
             weblogId={_id}
+            blogList={blogList}
             setOpenDeleteBlogFromTrashListModal={
               setOpenDeleteBlogFromTrashListModal
             }
@@ -114,8 +114,8 @@ const TrashBlog = ({
       <Suspense fallback={null}>
         {openRestoreBlogFromTrashListModal ? (
           <RestoreBlogFromTrashListModal
-            setBlogList={setBlogList}
             weblogId={_id}
+            blogList={blogList}
             setOpenRestoreBlogFromTrashListModal={
               setOpenRestoreBlogFromTrashListModal
             }

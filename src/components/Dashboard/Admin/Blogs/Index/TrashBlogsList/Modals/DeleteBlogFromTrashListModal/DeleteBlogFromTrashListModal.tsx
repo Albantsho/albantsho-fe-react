@@ -4,7 +4,9 @@ import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useWeblogApi from "apis/Weblog.api";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
+import { QueryClient, useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
 import Trash from "./assets/trash.png";
 
@@ -14,31 +16,40 @@ interface IProps {
     React.SetStateAction<boolean>
   >;
   weblogId: string;
-  setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
+  blogList: IWeblog[];
 }
+
+const queryClient = new QueryClient();
 
 const DeleteBlogFromTrashListModal = ({
   openDeleteBlogFromTrashListModal,
   setOpenDeleteBlogFromTrashListModal,
   weblogId,
-  setBlogList,
+  blogList,
 }: IProps) => {
   const { deleteWeblog } = useWeblogApi();
+  const { query, push } = useRouter();
+
+  const { mutate: deleteTrashBlog, isLoading: loadingDeleteTrashBlog } =
+    useMutation<void, Error, { id: string }>((data) => deleteWeblog(data.id), {
+      onError: (error) => {
+        errorHandler(error);
+      },
+      onSuccess: () => {
+        if (blogList.length <= 1) {
+          push(`?trash=true&page=${+String(query.page) - 1}`, undefined, {
+            shallow: true,
+          });
+        }
+        queryClient.invalidateQueries("weblog");
+        handleCloseDeleteBlogFromTrashListModal();
+      },
+    });
 
   const handleCloseDeleteBlogFromTrashListModal = () =>
     setOpenDeleteBlogFromTrashListModal(false);
 
-  const deleteBlogFromTrashList = async () => {
-    try {
-      await deleteWeblog(weblogId);
-      setBlogList((prevState) =>
-        prevState.filter((blog) => blog._id !== weblogId)
-      );
-      handleCloseDeleteBlogFromTrashListModal();
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const deleteBlogFromTrashList = async () => deleteTrashBlog({ id: weblogId });
 
   return (
     <Modal
@@ -67,6 +78,7 @@ const DeleteBlogFromTrashListModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
+              loading={loadingDeleteTrashBlog}
               onClick={deleteBlogFromTrashList}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"

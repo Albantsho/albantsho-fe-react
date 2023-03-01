@@ -3,34 +3,26 @@ import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDash
 import useWeblogApi from "apis/Weblog.api";
 import BreadcrumbsEditBlog from "components/Dashboard/Admin/Blogs/EditBlogs/BreadcrumbsEditBlog/BreadcrumbsEditBlog";
 import EditBlog from "components/Dashboard/Admin/Blogs/EditBlogs/EditBlog/EditBlog";
-import { IWeblog } from "interfaces/weblog";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { DotLoader } from "react-spinners";
+import errorHandler from "utils/error-handler";
 
 const EditBlogPage: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { getWeblog } = useWeblogApi();
-  const [oneWeblog, setOneWeblog] = useState<IWeblog | null>(null);
 
-  useEffect(() => {
-    async function getWeblogFunc() {
-      try {
-        if (query.slug !== undefined) {
-          const res = await getWeblog(query.slug);
-          setOneWeblog(res.data.weblog);
-        }
-      } catch (error) {
-        ("");
-      }
+  const { data, isLoading } = useQuery(
+    ["weblog", query.slug],
+    () => getWeblog(`${query.slug}`),
+    {
+      onError: (err) => {
+        errorHandler(err);
+      },
     }
-
-    getWeblogFunc();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.slug]);
+  );
 
   return (
     <>
@@ -38,14 +30,14 @@ const EditBlogPage: NextPageWithLayout = () => {
         <title>Albantsho || Admin Edit Blog</title>
       </Head>
 
-      {oneWeblog === null ? (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
-      ) : (
+      {data && !isLoading ? (
         <div className="bg-white shadow-primary min-h-full rounded-lg pt-4 lg:pt-8 pb-10 lg:pb-24 px-5 lg:px-14 my-16">
-          <BreadcrumbsEditBlog oneWeblog={oneWeblog} />
+          <BreadcrumbsEditBlog oneWeblog={data.weblog} />
           <Divider className="mt-2 lg:mt-6 mb-6 lg:mb-10" />
-          <EditBlog oneWeblog={oneWeblog} />
+          <EditBlog oneWeblog={data.weblog} />
         </div>
+      ) : (
+        <DotLoader color="#7953B5" className="mx-auto mt-10" />
       )}
     </>
   );

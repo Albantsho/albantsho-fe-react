@@ -3,50 +3,38 @@ import Footer from "@shared/Footer/Footer";
 import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import useWeblogApi from "apis/Weblog.api";
 import parse from "html-react-parser";
-import { IWeblog } from "interfaces/weblog";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { DotLoader } from "react-spinners";
+import errorHandler from "utils/error-handler";
 
 const BlogPost = () => {
   const { query } = useRouter();
   const { getWeblog } = useWeblogApi();
-  const [oneWeblog, setOneWeblog] = useState<IWeblog | null>(null);
 
-  useEffect(() => {
-    async function getOneWeblogFunc() {
-      try {
-        if (query.slug !== undefined) {
-          const res = await getWeblog(query.slug);
-          setOneWeblog(res.data.weblog);
-        }
-      } catch (error) {
-        ("");
-      }
+  const { data, isLoading } = useQuery(
+    ["weblog", query.slug],
+    () => getWeblog(`${query.slug}`),
+    {
+      onError: (err) => {
+        errorHandler(err);
+      },
     }
-
-    getOneWeblogFunc();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.slug]);
+  );
 
   return (
     <>
       <Head>
-        <title>Albantsho || {oneWeblog?.title}</title>
+        <title>Albantsho || {data?.weblog.title}</title>
       </Head>
       <Nav color="inherit" position="static" />
-      {oneWeblog === null ? (
-        <div className="min-h-screen flex items-center justify-center">
-          <DotLoader color="#7953B5" className="mx-auto mt-10" />
-        </div>
-      ) : (
+      {!isLoading && data ? (
         <>
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${oneWeblog.media}`}
-            alt={oneWeblog.title}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${data.weblog.media}`}
+            alt={data.weblog.title}
             width={1920}
             height={500}
             className="object-cover object-center max-h-[500px]"
@@ -57,13 +45,17 @@ const BlogPost = () => {
               className="leading-normal mb-2 md:mb-14 md:text-center"
               color="primary.main"
             >
-              {oneWeblog.title}
+              {data.weblog.title}
             </Typography>
             <article className="prose-img:block prose-img:w-full prose-img:ml-auto prose-img:mr-auto">
-              {oneWeblog.content && parse(oneWeblog.content)}
+              {data.weblog.content && parse(data.weblog.content)}
             </article>
           </div>
         </>
+      ) : (
+        <div className="min-h-screen flex items-center justify-center">
+          <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        </div>
       )}
       <Footer />
     </>

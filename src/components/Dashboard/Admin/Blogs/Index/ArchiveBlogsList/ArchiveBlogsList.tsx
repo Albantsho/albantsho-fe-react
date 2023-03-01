@@ -5,16 +5,15 @@ import ArchiveBlog from "./ArchiveBlog/ArchiveBlog";
 
 interface IProps {
   blogList: IWeblog[];
-  setBlogList: React.Dispatch<React.SetStateAction<IWeblog[]>>;
 }
 
-const ArchiveBlogsList = ({ blogList, setBlogList }: IProps) => {
+const ArchiveBlogsList = ({ blogList }: IProps) => {
   return (
     <div className="mt-4 pb-14 flex flex-col gap-4 overflow-hidden">
       {blogList.length > 0 ? (
         <>
           {blogList.map((blog) => (
-            <ArchiveBlog setBlogList={setBlogList} blog={blog} key={blog._id} />
+            <ArchiveBlog blogList={blogList} blog={blog} key={blog._id} />
           ))}
         </>
       ) : (

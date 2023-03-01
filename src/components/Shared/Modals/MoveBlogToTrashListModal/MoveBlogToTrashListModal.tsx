@@ -6,6 +6,7 @@ import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
+import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import Trash from "./assets/trash.png";
@@ -16,35 +17,57 @@ interface IProps {
     React.SetStateAction<boolean>
   >;
   weblogId: string;
-  setBlogList?: React.Dispatch<React.SetStateAction<IWeblog[]>>;
+  blogList?: IWeblog[];
 }
+
+const queryClient = new QueryClient();
 
 const MoveBlogToTrashListModal = ({
   openMoveBlogToTrashListModal,
   setOpenMoveBlogToTrashListModal,
   weblogId,
-  setBlogList,
+  blogList,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
   const { query, push } = useRouter();
 
+  const { mutate: moveBlogToTrash, isLoading: loadingMoveBlogToTrash } =
+    useMutation<void, Error, { trash: boolean; id: string }>(
+      (data) => updateWeblog({ trash: data.trash }, data.id),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: () => {
+          if (blogList && blogList.length <= 1) {
+            query.archive
+              ? push(
+                  `?archive=true&page=${+String(query.page) - 1}`,
+                  undefined,
+                  {
+                    shallow: true,
+                  }
+                )
+              : query.trash
+              ? push(`?trash=true&page=${+String(query.page) - 1}`, undefined, {
+                  shallow: true,
+                })
+              : push(`?page=${+String(query.page) - 1}`, undefined, {
+                  shallow: true,
+                });
+          }
+          queryClient.invalidateQueries("weblog");
+          setOpenMoveBlogToTrashListModal(false);
+          if (query.slug) push(routes.blogsAdminDashboard.url);
+        },
+      }
+    );
+
   const handleCloseMoveBlogToTrashListModal = () =>
     setOpenMoveBlogToTrashListModal(false);
 
-  const handleMoveBlogToTrashList = async () => {
-    try {
-      await updateWeblog({ trash: true }, weblogId);
-      if (setBlogList) {
-        setBlogList((prevState) =>
-          prevState.filter((blog) => blog._id !== weblogId)
-        );
-      }
-      setOpenMoveBlogToTrashListModal(false);
-      if (query.slug) push(routes.blogsAdminDashboard.url);
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const handleMoveBlogToTrashList = async () =>
+    moveBlogToTrash({ id: weblogId, trash: true });
 
   return (
     <Modal
@@ -73,6 +96,7 @@ const MoveBlogToTrashListModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
+              loading={loadingMoveBlogToTrash}
               onClick={handleMoveBlogToTrashList}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"
