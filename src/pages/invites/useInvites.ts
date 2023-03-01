@@ -1,56 +1,69 @@
-import useInvite from "apis/Invite.api";
-import { IInvite } from "interfaces/invite";
-import { useEffect, useState } from "react";
+import useInvite, { IData_getInvites } from "apis/Invite.api";
+import { IResData } from "interfaces/response";
+import { QueryClient, useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
 
+const queryClient = new QueryClient();
+
 const useInvites = () => {
   const { allInvite, acceptInvite, rejectInvite } = useInvite();
-  const [loading, setLoading] = useState(true);
-  const [invitesList, setInvitesList] = useState<Array<IInvite>>([]);
 
-  useEffect(() => {
-    async function getInvites() {
-      try {
-        setLoading(true);
-        const res = await allInvite();
-        setInvitesList(res.data.invites);
-        setLoading(false);
-      } catch (error) {
-        ("");
+  const { data: invitesData, isLoading: isLoadingInvites } = useQuery<
+    IData_getInvites,
+    Error
+  >("invite", () => allInvite());
+
+  const { mutate: acceptInviteMutate, isLoading: loadingAcceptInvite } =
+    useMutation<IResData<object>, Error, string>(
+      (inviteId) => acceptInvite(inviteId),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: (data) => {
+          queryClient.invalidateQueries([
+            "notification",
+            "invite",
+            "collaborator",
+          ]);
+          toast.success(data.message);
+        },
       }
-    }
+    );
 
-    getInvites();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { mutate: rejectInviteMutate, isLoading: loadingRejectInvite } =
+    useMutation<IResData<object>, Error, string>(
+      (inviteId) => rejectInvite(inviteId),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: (data) => {
+          queryClient.invalidateQueries([
+            "notification",
+            "invite",
+            "collaborator",
+          ]);
+          toast.success(data.message);
+        },
+      }
+    );
 
-  const acceptInviteFunc = (inviteId: string) => async () => {
-    try {
-      const res = await acceptInvite(inviteId);
-      const copiedInvitesList = [...invitesList];
-      const copiedInvitedIndex = invitesList.findIndex(
-        (n) => n._id === inviteId
-      );
-      copiedInvitesList[copiedInvitedIndex].accepted = true;
-      setInvitesList(copiedInvitesList);
-      toast.success(res.message);
-    } catch (error) {
-      errorHandler(error);
-    }
+  const acceptInviteFunc = (inviteId: string) => async () =>
+    acceptInviteMutate(inviteId);
+
+  const rejectInviteFunc = (inviteId: string) => async () =>
+    rejectInviteMutate(inviteId);
+
+  return {
+    rejectInviteFunc,
+    acceptInviteFunc,
+    isLoadingInvites,
+    invitesData,
+    loadingAcceptInvite,
+    loadingRejectInvite,
   };
-
-  const rejectInviteFunc = (inviteId: string) => async () => {
-    try {
-      const res = await rejectInvite(inviteId);
-      setInvitesList(invitesList.filter((i) => i._id !== inviteId));
-      toast.success(res.message);
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
-
-  return { rejectInviteFunc, acceptInviteFunc, loading, invitesList };
 };
 
 export default useInvites;

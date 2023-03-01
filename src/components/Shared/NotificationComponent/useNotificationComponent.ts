@@ -1,22 +1,91 @@
-import useInvite from "apis/Invite.api";
-import useNotification from "apis/Notification.api";
-import { IInvite } from "interfaces/invite";
-import { INotification } from "interfaces/notification";
-import { useEffect, useState } from "react";
+import useInvite, { IData_getInvites } from "apis/Invite.api";
+import useNotification, { IData_getNotifications } from "apis/Notification.api";
+import { IResData } from "interfaces/response";
+import { useState } from "react";
+import { QueryClient, useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
+
+const queryClient = new QueryClient();
 
 const useNotificationComponent = () => {
   const { getAllNotifications, seenNotification, deleteNotification } =
     useNotification();
-  const { allInvite } = useInvite();
-  const [notificationsList, setNotificationsList] = useState<
-    Array<INotification>
-  >([]);
-  const [loading, setLoading] = useState(false);
-  const [allInvites, setAllInvites] = useState<Array<IInvite>>([]);
+  const { allInvite, acceptInvite, rejectInvite } = useInvite();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
+
+  const { data: notificationsData, isLoading: isLoadingNotifications } =
+    useQuery<IData_getNotifications, Error>("notification", () =>
+      getAllNotifications()
+    );
+
+  const { data: invitesData, isLoading: isLoadingInvites } = useQuery<
+    IData_getInvites,
+    Error
+  >("invite", () => allInvite());
+
+  const { mutate: seenNotificationMutate, isLoading: loadingSeenNotification } =
+    useMutation<IResData<object>, Error, string>(
+      (notificationId) => seenNotification(notificationId),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: (data) => {
+          queryClient.invalidateQueries(["notification", "invite"]);
+          toast.success(data.message);
+        },
+      }
+    );
+
+  const {
+    mutate: deleteNotificationMutate,
+    isLoading: loadingDeleteNotification,
+  } = useMutation<IResData<object>, Error, string>(
+    (notificationId) => deleteNotification(notificationId),
+    {
+      onError: (error) => {
+        errorHandler(error);
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["notification", "invite"]);
+        toast.success(data.message);
+      },
+    }
+  );
+
+  const { mutate: acceptInviteMutate, isLoading: loadingAcceptInvite } =
+    useMutation<IResData<object>, Error, string>(
+      (inviteId) => acceptInvite(inviteId),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: (data) => {
+          queryClient.invalidateQueries([
+            "notification",
+            "invite",
+            "collaborator",
+          ]);
+          toast.success(data.message);
+        },
+      }
+    );
+
+  const { mutate: rejectInviteMutate, isLoading: loadingRejectInvite } =
+    useMutation<IResData<object>, Error, string>(
+      (inviteId) => rejectInvite(inviteId),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: (data) => {
+          queryClient.invalidateQueries(["notification"]);
+          toast.success(data.message);
+        },
+      }
+    );
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -26,61 +95,33 @@ const useNotificationComponent = () => {
     setAnchorEl(null);
   };
 
-  const readNotification = (id: string) => async () => {
-    try {
-      const res = await seenNotification(id);
-      const copiedNotificationList = [...notificationsList];
-      const findReadiedNotificationIndex = copiedNotificationList.findIndex(
-        (n) => n._id === id
-      );
-      copiedNotificationList[findReadiedNotificationIndex].read = true;
-      setNotificationsList(copiedNotificationList);
-      toast.success(res.message);
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const readNotification = (id: string) => async () =>
+    seenNotificationMutate(id);
 
-  const deleteNotificationFunc = (id: string) => async () => {
-    try {
-      const res = await deleteNotification(id);
-      setNotificationsList(notificationsList.filter((n) => n._id !== id));
-      toast.success(res.message);
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const deleteNotificationFunc = (id: string) => async () =>
+    deleteNotificationMutate(id);
 
-  useEffect(() => {
-    async function getAllNotificationsFunc() {
-      try {
-        setNotificationsList([]);
-        setLoading(true);
-        const res = await getAllNotifications();
-        setNotificationsList(res.data.notifications);
-        const resInvites = await allInvite();
-        setAllInvites(resInvites.data.invites);
-        setLoading(false);
-      } catch (error) {
-        ("");
-      }
-    }
+  const acceptInviteFunc = (id: string) => async () => acceptInviteMutate(id);
 
-    getAllNotificationsFunc();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [anchorEl]);
+  const rejectInviteFunc = (id: string) => async () => rejectInviteMutate(id);
 
   return {
     anchorEl,
     handleClick,
     handleClose,
     open,
-    notificationsList,
-    loading,
+    notificationsData,
+    isLoadingNotifications,
+    isLoadingInvites,
     readNotification,
     deleteNotificationFunc,
-    allInvites,
+    invitesData,
+    loadingSeenNotification,
+    loadingDeleteNotification,
+    acceptInviteFunc,
+    rejectInviteFunc,
+    loadingAcceptInvite,
+    loadingRejectInvite,
   };
 };
 

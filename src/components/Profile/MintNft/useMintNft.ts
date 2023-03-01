@@ -152,21 +152,23 @@ const useMintNft = () => {
   };
 
   useEffect(() => {
-    window.ethereum.on("accountsChanged", (accounts: string[]) => {
-      setWalletAddress(accounts[0]);
-    });
-    window.ethereum.on("chainChanged", (chain: string) => {
-      // if (chain !== "0x38") {
-      //   setCorrectNetwork(false);
-      // } else {
-      //   setCorrectNetwork(true);
-      // }
-      if (chain !== "0xa869") {
-        setCorrectNetwork(false);
-      } else {
-        setCorrectNetwork(true);
-      }
-    });
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", (accounts: string[]) => {
+        setWalletAddress(accounts[0]);
+      });
+      window.ethereum.on("chainChanged", (chain: string) => {
+        // if (chain !== "0x38") {
+        //   setCorrectNetwork(false);
+        // } else {
+        //   setCorrectNetwork(true);
+        // }
+        if (chain !== "0xa869") {
+          setCorrectNetwork(false);
+        } else {
+          setCorrectNetwork(true);
+        }
+      });
+    }
   });
 
   //? get all nfts user

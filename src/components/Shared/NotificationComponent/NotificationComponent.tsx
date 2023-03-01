@@ -14,6 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ClipLoader } from "react-spinners";
 import routes from "routes/routes";
+import EmptyNotification from "./assets/empty-notification.svg";
 import useNotificationComponent from "./useNotificationComponent";
 
 const NotificationComponent = () => {
@@ -22,13 +23,21 @@ const NotificationComponent = () => {
     handleClick,
     handleClose,
     open,
-    loading,
-    notificationsList,
     readNotification,
     deleteNotificationFunc,
-    allInvites,
+    isLoadingInvites,
+    isLoadingNotifications,
+    invitesData,
+    notificationsData,
+    loadingDeleteNotification,
+    loadingSeenNotification,
+    acceptInviteFunc,
+    loadingAcceptInvite,
+    loadingRejectInvite,
+    rejectInviteFunc,
   } = useNotificationComponent();
   const xlScreen = useMediaQuery("(min-width: 1024px)");
+
   return (
     <>
       <IconButton
@@ -36,7 +45,15 @@ const NotificationComponent = () => {
         className="ml-auto self-center max-h-[31px]  mt-1"
       >
         <Badge
-          badgeContent={notificationsList.filter((n) => !n.read).length}
+          badgeContent={
+            Number(
+              notificationsData?.notifications.filter((n) => !n.read).length
+            ) +
+            Number(
+              invitesData?.invites.filter((i) => !i.rejected && !i.accepted)
+                .length
+            )
+          }
           color="error"
         >
           <div>
@@ -61,62 +78,140 @@ const NotificationComponent = () => {
         }}
       >
         <List className="gap-2 min-w-[250px] min-h-[400px] w-full max-w-md text-center">
-          {loading ? (
-            <ClipLoader color="grey" className="mt-[180px] inline-block" />
-          ) : (
-            notificationsList.map((notification) => (
-              <ListItem
-                className="gap-1 items-start flex-col relative"
-                divider
-                key={notification._id}
-              >
-                {!notification.read && (
-                  <span className="w-1 h-1 rounded-full absolute left-1 top-1/2 bottom-1/2 bg-primary-700"></span>
-                )}
-                <ListItemText
-                  primary={
-                    <Typography
-                      component="h6"
-                      variant="body1"
-                      className="futura text-primary-700 font-semibold"
-                    >
-                      {notification.title}
-                    </Typography>
-                  }
-                  secondary={notification.description}
-                  secondaryTypographyProps={{
-                    className: "futura max-w-[250px]",
-                  }}
-                />
-                <div className="flex gap-1 justify-between">
-                  {!notification.read && (
-                    <Button
-                      onClick={readNotification(notification._id)}
-                      variant="outlined"
-                      color="info"
-                    >
-                      Mark as read
-                    </Button>
-                  )}
-
-                  <Button
-                    onClick={deleteNotificationFunc(notification._id)}
-                    variant="outlined"
-                    color="error"
+          {notificationsData &&
+          !isLoadingNotifications &&
+          invitesData &&
+          !isLoadingInvites ? (
+            notificationsData.notifications.length +
+              invitesData.invites.length >
+            0 ? (
+              <>
+                {notificationsData.notifications.map((notification) => (
+                  <ListItem
+                    className="gap-1 items-start flex-col relative"
+                    divider
+                    key={notification._id}
                   >
-                    Delete
-                  </Button>
-                </div>
-              </ListItem>
-            ))
+                    {!notification.read && (
+                      <span className="w-1 h-1 rounded-full absolute left-1 top-1/2 bottom-1/2 bg-primary-700"></span>
+                    )}
+                    <ListItemText
+                      primary={
+                        <Typography
+                          component="h6"
+                          variant="body1"
+                          className="futura text-primary-700 font-semibold"
+                        >
+                          {notification.title}
+                        </Typography>
+                      }
+                      secondary={notification.description}
+                      secondaryTypographyProps={{
+                        className: "futura max-w-[250px]",
+                      }}
+                    />
+                    <div className="flex gap-1 justify-between">
+                      {!notification.read && (
+                        <Button
+                          onClick={readNotification(notification._id)}
+                          variant="outlined"
+                          color="info"
+                          disabled={loadingSeenNotification}
+                        >
+                          Mark as read
+                        </Button>
+                      )}
+
+                      <Button
+                        onClick={deleteNotificationFunc(notification._id)}
+                        variant="outlined"
+                        color="error"
+                        disabled={loadingDeleteNotification}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </ListItem>
+                ))}
+                {invitesData.invites
+                  .filter((i) => !i.rejected)
+                  .map((invite) => (
+                    <ListItem
+                      className="gap-1 items-start flex-col relative"
+                      divider
+                      key={invite._id}
+                    >
+                      <ListItemText
+                        primary={
+                          <Typography
+                            component="h6"
+                            variant="body1"
+                            className="futura text-primary-700 font-semibold"
+                          >
+                            Collaboration Invite
+                          </Typography>
+                        }
+                        secondary={`Hello, you've been invited by ${invite.inviter.firstName} ${invite.inviter.lastName} to collaborate on ${invite.script.title}.`}
+                        secondaryTypographyProps={{
+                          className: "futura max-w-[250px]",
+                        }}
+                      />
+                      <div className="flex gap-1 justify-between">
+                        {!invite.accepted ? (
+                          <Button
+                            onClick={acceptInviteFunc(invite._id)}
+                            variant="outlined"
+                            color="success"
+                            disabled={loadingAcceptInvite}
+                          >
+                            Accept invite
+                          </Button>
+                        ) : (
+                          <Link
+                            passHref
+                            legacyBehavior
+                            href={routes.script.dynamicUrl(invite.script._id)}
+                          >
+                            <Button variant="outlined" color="success">
+                              go to script Page
+                            </Button>
+                          </Link>
+                        )}
+
+                        {!invite.rejected && !invite.accepted && (
+                          <Button
+                            onClick={rejectInviteFunc(invite._id)}
+                            variant="outlined"
+                            color="error"
+                            disabled={loadingRejectInvite}
+                          >
+                            Reject invite
+                          </Button>
+                        )}
+                      </div>
+                    </ListItem>
+                  ))}
+              </>
+            ) : (
+              <div className="flex min-h-full items-center justify-center py-6 pt-24 px-10">
+                <EmptyNotification />
+              </div>
+            )
+          ) : (
+            <ClipLoader color="grey" className="mt-[180px] inline-block" />
           )}
         </List>
-        {allInvites.filter((n) => !n.rejected).length > 0 && (
-          <Link passHref legacyBehavior href={routes.invites.url}>
-            <Button variant="text" className="text-center w-full py-4">
-              See your Invites : {allInvites.filter((n) => !n.rejected).length}
-            </Button>
-          </Link>
+        {!isLoadingInvites && invitesData ? (
+          invitesData.invites.filter((n) => !n.rejected).length > 0 && (
+            <Link passHref legacyBehavior href={routes.invites.url}>
+              <Button variant="text" className="text-center w-full py-4">
+                See your Invites :
+                {invitesData.invites.filter((n) => !n.rejected).length}
+              </Button>
+            </Link>
+          )
+        ) : (
+          <ClipLoader color="grey" className="mt-[180px] inline-block" />
         )}
       </Popover>
     </>
