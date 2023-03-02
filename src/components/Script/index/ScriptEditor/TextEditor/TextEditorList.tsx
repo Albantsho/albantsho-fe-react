@@ -14,7 +14,7 @@ import { Socket } from "socket.io-client";
 import useScriptValueStore from "store/scriptValue.store";
 import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
 import { serializeWithoutDiv } from "utils/serialize-slate";
-import BookMarkIcon from "../assets/book-mark.svg";
+import BookMarkIcon from "@assets/icons/book-mark.svg";
 import TextEditor from "./TextEditor";
 import TextEditorSettingModal from "./TextEditorSettingModal/TextEditorSettingModal";
 

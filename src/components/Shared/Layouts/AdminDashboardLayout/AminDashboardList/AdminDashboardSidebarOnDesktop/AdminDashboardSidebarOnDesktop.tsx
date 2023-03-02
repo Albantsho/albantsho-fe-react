@@ -15,6 +15,7 @@ import BlogIcon from "../assets/blog-icon.svg";
 import StarIcon from "../assets/star-icon.svg";
 import UserIcon from "../assets/user-icon.svg";
 import NFTIcon from "@assets/icons/mini-logo.svg";
+import { MdOutlineContactSupport } from "react-icons/md";
 
 const listRoutes = [
   { route: routes.blogsAdminDashboard.url, title: "Blogs", icon: BlogIcon },
@@ -28,6 +29,11 @@ const listRoutes = [
     route: routes.nftAdminDashboard.url,
     title: "NFT",
     icon: NFTIcon,
+  },
+  {
+    route: routes.contactsAdminDashboard.url,
+    title: "Contacts",
+    icon: MdOutlineContactSupport,
   },
 ];
 

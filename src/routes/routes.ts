@@ -284,6 +284,17 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["admin"],
   },
+  contactsAdminDashboard: {
+    url: `/dashboard/admin/contacts`,
+    mustAuthenticated: "yes",
+    permission: ["admin"],
+  },
+  contactsAdminDashboardTabs: {
+    url: (query: string, page?: string) =>
+      `/dashboard/admin/contacts${query}${page}`,
+    mustAuthenticated: "yes",
+    permission: ["admin"],
+  },
   reviewersAdminDashboard: {
     url: `/dashboard/admin/reviewers`,
     mustAuthenticated: "yes",

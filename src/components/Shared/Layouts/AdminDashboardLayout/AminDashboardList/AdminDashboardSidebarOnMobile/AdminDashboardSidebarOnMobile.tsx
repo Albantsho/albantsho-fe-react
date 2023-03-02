@@ -10,6 +10,7 @@ import BlogIcon from "../assets/blog-icon.svg";
 import StarIcon from "../assets/star-icon.svg";
 import UserIcon from "../assets/user-icon.svg";
 import NFTIcon from "@assets/icons/mini-logo.svg";
+import { MdOutlineContactSupport } from "react-icons/md";
 
 const listRoutes = [
   { route: routes.blogsAdminDashboard.url, title: "Blogs", icon: BlogIcon },
@@ -24,6 +25,11 @@ const listRoutes = [
     title: "NFT",
     icon: NFTIcon,
   },
+  {
+    route: routes.contactsAdminDashboard.url,
+    title: "Contacts",
+    icon: MdOutlineContactSupport,
+  },
 ];
 
 const AdminDashboardSidebarOnMobile = () => {
@@ -31,49 +37,52 @@ const AdminDashboardSidebarOnMobile = () => {
   const { push, route } = useRouter();
 
   return (
-    <div className=" lg:hidden">
-      <BottomNavigation
-        showLabels
-        value={activeRoute}
-        className="bg-primary-900 w-full min-h-[65px] flex justify-evenly text-white sm:px-8"
-        onChange={(event, newValue) => {
-          setActiveRoute(newValue);
-        }}
-      >
-        {listRoutes.map((listRoute) => {
-          return (
-            <BottomNavigationAction
-              key={listRoute.title}
-              onClick={() => push(`${listRoute.route}`)}
-              showLabel
-              sx={{
-                "&:hover": {
-                  backgroundColor: "#6842A5",
-                },
-                "&.MuiButtonBase-root": {
-                  color: "white",
-                },
-                gap: 0.5,
-                py: 1,
+    <BottomNavigation
+      showLabels
+      value={activeRoute}
+      className="bg-primary-900 w-full min-h-[65px] flex justify-between text-white sm:px-8 no-scrollbar lg:hidden"
+      sx={{
+        "&.MuiBottomNavigation-root": { overflow: "scroll" },
+        overflow: "scroll",
+      }}
+      onChange={(event, newValue) => {
+        setActiveRoute(newValue);
+      }}
+    >
+      {listRoutes.map((listRoute) => {
+        return (
+          <BottomNavigationAction
+            key={listRoute.title}
+            onClick={() => push(`${listRoute.route}`)}
+            showLabel
+            sx={{
+              "&:hover": {
+                backgroundColor: "#6842A5",
+              },
+              "&.MuiButtonBase-root": {
+                color: "white",
+                minWidth: 65,
+              },
+              gap: 0.5,
+              py: 1,
+              borderBottom: `${
+                listRoute.route === route && "4px solid #FDDC6A"
+              }`,
+              "&.Mui-selected": {
                 borderBottom: `${
                   listRoute.route === route && "4px solid #FDDC6A"
                 }`,
-                "&.Mui-selected": {
-                  borderBottom: `${
-                    listRoute.route === route && "4px solid #FDDC6A"
-                  }`,
-                },
-              }}
-              className={`${
-                listRoute.route === route && "bg-primary-700"
-              } sm:max-w-full`}
-              label={listRoute.title}
-              icon={<SvgIcon component={listRoute.icon} inheritViewBox />}
-            />
-          );
-        })}
-      </BottomNavigation>
-    </div>
+              },
+            }}
+            className={`${
+              listRoute.route === route && "bg-primary-700"
+            } sm:max-w-full`}
+            label={listRoute.title}
+            icon={<SvgIcon component={listRoute.icon} inheritViewBox />}
+          />
+        );
+      })}
+    </BottomNavigation>
   );
 };
 
