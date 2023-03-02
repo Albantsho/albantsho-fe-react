@@ -11,12 +11,11 @@ import "normalize.css";
 import { useEffect, useState } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { DotLoader } from "react-spinners";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "styles/globals.css";
 import theme from "styles/themes/theme";
 import createEmotionCache from "utils/create-emotion-cache";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { Toaster } from "react-hot-toast";
 
 const clientSideEmotionCache = createEmotionCache();
 const queryClient = new QueryClient();
@@ -59,7 +58,7 @@ export default function MyApp(props: MyAppProps) {
               getLayout(<Component {...pageProps} />)
             )}
           </Authorization>
-          <ToastContainer />
+          <Toaster />
         </ThemeProvider>
       </CacheProvider>
       <ReactQueryDevtools initialIsOpen={false} />
