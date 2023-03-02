@@ -1,9 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useContact from "apis/Contact.api";
-import { useState } from "react";
+import { IResData } from "interfaces/response";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { QueryClient, useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 import { getInTouchSchema } from "./validation/getInTouch.validation";
 
 interface IContactFormValues {
@@ -12,9 +13,10 @@ interface IContactFormValues {
   message: string;
 }
 
+const queryClient = new QueryClient();
+
 const useGetInTouch = () => {
   const { createNewContact } = useContact();
-  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -30,20 +32,27 @@ const useGetInTouch = () => {
     resolver: yupResolver(getInTouchSchema),
   });
 
-  const onSubmit = async (data: IContactFormValues) => {
-    try {
-      setLoading(true);
-      await createNewContact(data);
-      reset({ email: "", message: "", name: "" });
-      toast.success("successfully send message");
-    } catch (error) {
-      errorHandler(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { mutate: createNewContactMutate, isLoading: loadingCreateNewContact } =
+    useMutation<IResData<object>, Error, IContactFormValues>({
+      mutationFn: (data) => createNewContact(data),
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("contact");
+        successHandler(data.message);
+        reset({ email: "", message: "", name: "" });
+      },
+      onError: (error) => errorHandler(error),
+    });
 
-  return { loading, register, handleSubmit, errors, onSubmit };
+  const onSubmit = async (data: IContactFormValues) =>
+    createNewContactMutate(data);
+
+  return {
+    loading: loadingCreateNewContact,
+    register,
+    handleSubmit,
+    errors,
+    onSubmit,
+  };
 };
 
 export default useGetInTouch;

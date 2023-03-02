@@ -1,14 +1,22 @@
 import { Typography } from "@mui/material";
 import Footer from "@shared/Footer/Footer";
-import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
+import Loader from "@shared/Loader/Loader";
+import Nav from "@shared/Nav/Nav";
 import useWeblogApi from "apis/Weblog.api";
 import parse from "html-react-parser";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
-import { DotLoader } from "react-spinners";
+import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
+
+const links = [
+  { title: "Home", href: routes.home.url },
+  { title: "About Us", href: routes.aboutUs.url },
+  { title: "Blog", href: routes.blog.url },
+  { title: "FAQ", href: routes.FAQs.url },
+];
 
 const BlogPost = () => {
   const { query } = useRouter();
@@ -20,6 +28,7 @@ const BlogPost = () => {
     {
       onError: (err) => {
         errorHandler(err);
+        console.log(err);
       },
     }
   );
@@ -29,7 +38,7 @@ const BlogPost = () => {
       <Head>
         <title>Albantsho || {data?.weblog.title}</title>
       </Head>
-      <Nav color="inherit" position="static" />
+      <Nav links={links} secondaryUnderLineColor={false} />
       {!isLoading && data ? (
         <>
           <Image
@@ -53,9 +62,7 @@ const BlogPost = () => {
           </div>
         </>
       ) : (
-        <div className="min-h-screen flex items-center justify-center">
-          <DotLoader color="#7953B5" className="mx-auto mt-10" />
-        </div>
+        <Loader />
       )}
       <Footer />
     </>

@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 
-const customHandler = (message: string) => {
+const successHandler = (message: string) => {
   toast.success(message, {
     style: {
       border: "1px solid #03B76F",
@@ -16,4 +16,4 @@ const customHandler = (message: string) => {
   return;
 };
 
-export default customHandler;
+export default successHandler;
