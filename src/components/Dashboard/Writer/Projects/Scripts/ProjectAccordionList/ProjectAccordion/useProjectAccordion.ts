@@ -15,6 +15,7 @@ const queryClient = new QueryClient();
 const useProjectAccordion = ({ listScripts }: IProps) => {
   const { updateWriterArchiveScript, deleteScript } = useScriptsApi();
   const [expanded, setExpanded] = useState(false);
+  const [openPublishScript, setOpenPublishScript] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { query, push } = useRouter();
   const openProjectAccordionMenu = Boolean(anchorEl);
@@ -71,12 +72,17 @@ const useProjectAccordion = ({ listScripts }: IProps) => {
       }
     );
 
+  const handleOpenPublishScriptModal = () => {
+    setOpenPublishScript(true);
+  };
+
   const handleOpenProjectAccordionMenu = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
+
   const handleCloseProjectAccordionMenu = (
     event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>
   ) => {
@@ -89,7 +95,6 @@ const useProjectAccordion = ({ listScripts }: IProps) => {
     async (event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>) => {
       event.stopPropagation();
       archiveScript({ payload: { archive: true }, scriptId });
-
       handleCloseProjectAccordionMenu(event);
     };
 
@@ -114,6 +119,9 @@ const useProjectAccordion = ({ listScripts }: IProps) => {
     expandAccordionHandler,
     handleCloseProjectAccordionMenu,
     isLoadingArchiveScript,
+    handleOpenPublishScriptModal,
+    setOpenPublishScript,
+    openPublishScript,
   };
 };
 
