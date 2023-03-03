@@ -5,4 +5,5 @@ export interface IContact {
   message: string;
   createdAt: string;
   updatedAt: string;
+  answered: boolean;
 }

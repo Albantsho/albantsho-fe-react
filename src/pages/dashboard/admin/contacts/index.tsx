@@ -1,7 +1,9 @@
 import { Typography } from "@mui/material";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
+import Loader from "@shared/Loader/Loader";
 import useContact, { type IData_getContacts } from "apis/Contact.api";
+import ContactList from "components/Dashboard/Admin/ContactList/ContactList";
 import TabButtons from "components/Dashboard/Admin/Contacts/TabButtons/TabButtons";
 import NFTList from "components/Dashboard/Admin/NFTList/NFTList";
 import { debounce } from "lodash";
@@ -17,14 +19,15 @@ const ContactsPage: NextPageWithLayout = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { query, push } = useRouter();
-  const { data, isLoading } = useQuery<IData_getContacts, Error>(
-    ["contact", currentPage, searchQuery],
-    () =>
-      allContacts(
-        `${currentPage}`,
-        query.answered ? `${query.answered}` : "false",
-        searchQuery
-      )
+  const { data: contactData, isLoading: isLoadingGetAllContact } = useQuery<
+    IData_getContacts,
+    Error
+  >(["contact", currentPage, searchQuery, query.answered], () =>
+    allContacts(
+      `${currentPage}`,
+      query.answered ? `${query.answered}` : "false",
+      searchQuery
+    )
   );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,8 +41,6 @@ const ContactsPage: NextPageWithLayout = () => {
     ),
     [searchQuery]
   );
-
-  console.log(data);
 
   const handleActivePage = (
     _event: React.ChangeEvent<unknown>,
@@ -71,14 +72,24 @@ const ContactsPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Admin NFT</title>
+        <title>Albantsho || Admin Contact</title>
       </Head>
+
       <TabButtons />
       <AdminDashboardSearch
         placeholder="Search for Contacts"
         handleSearch={handleSearch}
       />
-      <NFTList searchQuery={searchQuery} />
+      {!isLoadingGetAllContact && contactData ? (
+        <ContactList
+          contacts={contactData.contacts}
+          pagesCount={contactData.pagesCount}
+          currentPage={currentPage}
+          handleActivePage={handleActivePage}
+        />
+      ) : (
+        <Loader setCustomHeight="min-h-[62vh]" />
+      )}
     </>
   );
 };

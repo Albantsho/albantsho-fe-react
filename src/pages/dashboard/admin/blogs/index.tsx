@@ -31,9 +31,8 @@ const BlogsPage: NextPageWithLayout = () => {
       onError: (err) => {
         errorHandler(err);
       },
-      cacheTime: 1000,
-      // refetchInterval: 1000,
-      // refetchIntervalInBackground: true,
+      refetchInterval: 2000,
+      staleTime: 10000,
     }
   );
 
@@ -110,7 +109,7 @@ const BlogsPage: NextPageWithLayout = () => {
           <Fab
             color="primary"
             href={routes.createBlogAdminDashboard.url}
-            className="flex items-center justify-center md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
+            className="flex items-center justify-center md:hidden fixed right-10 bottom-4  text-3xl rounded-2xl"
           >
             +
           </Fab>

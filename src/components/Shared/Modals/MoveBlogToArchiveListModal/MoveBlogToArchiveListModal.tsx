@@ -75,12 +75,7 @@ const MoveBlogToArchiveListModal = ({
       open={openMoveBlogToArchiveListModal}
       onClose={handleCloseMoveBlogToArchiveListModal}
     >
-      <Slide
-        direction="up"
-        in={openMoveBlogToArchiveListModal}
-        mountOnEnter
-        unmountOnExit
-      >
+      <Slide direction="up" in={openMoveBlogToArchiveListModal}>
         <div className="px-6 relative bg-white w-full mt-12 lg:mt-28 max-w-xl lg:max-w-2xl mx-auto flex flex-col items-center py-12 lg:py-16 rounded-lg">
           <IconButton
             onClick={handleCloseMoveBlogToArchiveListModal}

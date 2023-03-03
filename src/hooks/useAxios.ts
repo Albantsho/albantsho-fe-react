@@ -25,7 +25,6 @@ const useAxios = () => {
     const responseIntercept = api.interceptors.response.use(
       async (response) => {
         try {
-          console.log(response);
           if (
             response.request.responseURL !==
               `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/signin` &&

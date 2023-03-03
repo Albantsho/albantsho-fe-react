@@ -1,6 +1,7 @@
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
+import useAuthApi from "apis/Auth.api";
 import useWeblogApi from "apis/Weblog.api";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
@@ -8,6 +9,7 @@ import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 import moveImage from "./assets/move-image.png";
 
@@ -21,7 +23,6 @@ interface IProps {
 }
 
 const queryClient = new QueryClient();
-
 const RestoreBlogFromArchiveListModal = ({
   openRestoreBlogFromArchiveListModal,
   setRestoreBlogFromArchiveListModal,
@@ -30,6 +31,10 @@ const RestoreBlogFromArchiveListModal = ({
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
   const { query, push } = useRouter();
+  const { getNewAccessToken } = useAuthApi();
+  const { setAccessToken } = useUserStore((state) => ({
+    setAccessToken: state.setAccessToken,
+  }));
 
   const { mutate: restoreBlog, isLoading: loadingRestoreBlog } = useMutation<
     void,
@@ -40,7 +45,10 @@ const RestoreBlogFromArchiveListModal = ({
       errorHandler(error);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("weblog");
+      queryClient.invalidateQueries("weblog", {
+        fetching: true,
+        active: true,
+      });
       setRestoreBlogFromArchiveListModal(false);
       if (query.id) push(routes.blogsAdminDashboard.url);
       if (blogList && blogList.length <= 1) {
@@ -57,13 +65,21 @@ const RestoreBlogFromArchiveListModal = ({
             });
       }
     },
+    retry: true,
   });
 
   const handleCloseMoveBlogToArchiveListModal = () =>
     setRestoreBlogFromArchiveListModal(false);
 
-  const handleMoveBlogToArchiveList = async () =>
+  const handleMoveBlogToArchiveList = async () => {
+    try {
+      const res = await getNewAccessToken();
+      setAccessToken(res.accessToken);
+    } catch (error) {
+      errorHandler(error);
+    }
     restoreBlog({ archive: false, id: weblogId });
+  };
 
   return (
     <Modal

@@ -9,6 +9,7 @@ import {
   IUserProfile,
 } from "interfaces/user";
 import { useCallback } from "react";
+import { apiPrivate } from "./configs/axios.config";
 
 export interface IData_signupUser {
   user: IUser;
@@ -147,6 +148,15 @@ const useAuthApi = (controller?: AbortController) => {
     [controller?.signal]
   );
 
+  const getNewAccessToken = useCallback(async () => {
+    const res = await apiPrivate.post<IResData<{ accessToken: string }>>(
+      "/user/refresh",
+      {}
+    );
+
+    return res.data.data;
+  }, [controller?.signal]);
+
   const signin = useCallback(
     async (payload: ILoginPayload) => {
       const res = await axios.post<IResData<IData_signupUser>>(
@@ -272,6 +282,7 @@ const useAuthApi = (controller?: AbortController) => {
     getAllUser,
     getUserProfileForAdmin,
     getAllReviewers,
+    getNewAccessToken,
   };
 };
 
