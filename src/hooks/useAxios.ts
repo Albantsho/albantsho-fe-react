@@ -25,7 +25,20 @@ const useAxios = () => {
     const responseIntercept = api.interceptors.response.use(
       async (response) => {
         try {
-          const res = await apiPrivate.post("/user/refresh", {});
+          console.log(response);
+          if (
+            response.request.responseURL !==
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/signin` &&
+            response.request.responseURL !==
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/resend-otp` &&
+            response.request.responseURL !==
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/signup` &&
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/resend-otp` &&
+            response.request.responseURL !==
+              `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/verify-otp`
+          ) {
+            await apiPrivate.post("/user/refresh", {});
+          }
         } catch (error: any) {
           if (
             error.request.responseURL ===

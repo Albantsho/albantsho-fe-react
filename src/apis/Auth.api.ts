@@ -92,11 +92,12 @@ const useAuthApi = (controller?: AbortController) => {
 
   const emailVerify = useCallback(
     async (payload: IEmailVerifyOtp) => {
-      const res = await axiosPrivate.post<IResData<IData_AuthorizationUser>>(
+      const res = await axios.post<IResData<IData_AuthorizationUser>>(
         "/user/verify-otp",
         payload,
         {
           signal: controller?.signal,
+          withCredentials: true,
         }
       );
 
@@ -148,11 +149,12 @@ const useAuthApi = (controller?: AbortController) => {
 
   const signin = useCallback(
     async (payload: ILoginPayload) => {
-      const res = await axiosPrivate.post<IResData<IData_signupUser>>(
+      const res = await axios.post<IResData<IData_signupUser>>(
         "/user/signin",
         payload,
         {
           signal: controller?.signal,
+          withCredentials: true,
         }
       );
 
