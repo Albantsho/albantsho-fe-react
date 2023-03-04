@@ -3,13 +3,14 @@ import { IconButton, Modal, Typography, Zoom } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScriptsApi from "apis/Scripts.api";
+import { IResData } from "interfaces/response";
 import { IWriterScript } from "interfaces/script";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import { QueryClient, useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
-import querystring from "query-string";
-import { useRouter } from "next/router";
+import successHandler from "utils/success-handler";
 
 interface IProps {
   openUnArchive: boolean;
@@ -32,7 +33,7 @@ const UnArchiveModal = ({
 
   const { mutate: archiveScript, isLoading: isLoadingArchiveScript } =
     useMutation<
-      void,
+      IResData<object>,
       Error,
       { payload: { archive: boolean }; scriptId: string }
     >(
@@ -45,19 +46,14 @@ const UnArchiveModal = ({
         onError: (error) => {
           errorHandler(error);
         },
-        onSuccess: () => {
+        onSuccess: (data) => {
+          successHandler(data.message);
           if (listScripts.length <= 1) {
             push(`?archive=true&page=${+String(query.page) - 1}`, undefined, {
               shallow: true,
             });
           }
-          queryClient.invalidateQueries(
-            ["script", querystring.stringify(query), ""],
-            {
-              exact: true,
-              stale: true,
-            }
-          );
+          queryClient.invalidateQueries("script");
         },
       }
     );

@@ -43,12 +43,12 @@ const useWeblogApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const getAllWeblogs = useCallback(
     async (page: number) => {
-      const res = await axiosPrivate.get<IResData<IData_allWeblogs>>(
+      const res = await axios.get<IResData<IData_allWeblogs>>(
         `/weblog/all?limit=10&page=${page}`,
         {
           signal: controller?.signal,
@@ -57,12 +57,12 @@ const useWeblogApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+    [axios, controller?.signal]
   );
 
   const getWeblog = useCallback(
     async (slug: string) => {
-      const res = await axiosPrivate.get<IResData<{ weblog: IWeblog }>>(
+      const res = await axios.get<IResData<{ weblog: IWeblog }>>(
         `/weblog/${slug}`,
         {
           signal: controller?.signal,
@@ -71,7 +71,7 @@ const useWeblogApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+    [axios, controller?.signal]
   );
 
   const createNewWeblog = useCallback(
@@ -83,7 +83,7 @@ const useWeblogApi = (controller?: AbortController) => {
         },
       });
     },
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const updateWeblog = useCallback(
@@ -96,7 +96,7 @@ const useWeblogApi = (controller?: AbortController) => {
       });
       return res.data;
     },
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const deleteWeblog = useCallback(
@@ -106,7 +106,7 @@ const useWeblogApi = (controller?: AbortController) => {
       });
       return res.data;
     },
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   return {

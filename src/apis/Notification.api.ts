@@ -1,21 +1,34 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
+import { INotification } from "interfaces/notification";
+import { IResData } from "interfaces/response";
+import { useCallback } from "react";
+
+export interface IData_getNotifications {
+  notifications: INotification[];
+}
+
+interface IData_getNotification {
+  notification: INotification;
+}
 
 const useNotification = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
-  return {
-    async getAllNotifications() {
-      const res = await axiosPrivate.get("/notification/all", {
+  const getAllNotifications = useCallback(async () => {
+    const res = await axiosPrivate.get<IResData<IData_getNotifications>>(
+      "/notification/all",
+      {
         signal: controller?.signal,
-      });
+      }
+    );
 
-      return res.data;
-    },
+    return res.data.data;
+  }, [axiosPrivate, controller?.signal]);
 
-    async seenNotification(notificationId: string) {
-      const res = await axiosPrivate.patch(
-        `/notification/seen/${notificationId}`,
-        {},
+  const getOneNotification = useCallback(
+    async (notificationId: string) => {
+      const res = await axiosPrivate.get<IResData<IData_getNotification>>(
+        `/notification/${notificationId}`,
         {
           signal: controller?.signal,
         }
@@ -24,8 +37,27 @@ const useNotification = (controller?: AbortController) => {
       return res.data;
     },
 
-    async deleteNotification(notificationId: string) {
-      const res = await axiosPrivate.delete(
+    [axiosPrivate, controller?.signal]
+  );
+
+  const seenNotification = useCallback(
+    async (notificationId: string) => {
+      const res = await axiosPrivate.patch<IResData<object>>(
+        `/notification/seen/${notificationId}`,
+        {},
+        {
+          signal: controller?.signal,
+        }
+      );
+      return res.data;
+    },
+
+    [axiosPrivate, controller?.signal]
+  );
+
+  const deleteNotification = useCallback(
+    async (notificationId: string) => {
+      const res = await axiosPrivate.delete<IResData<object>>(
         `/notification/delete/${notificationId}`,
         {
           signal: controller?.signal,
@@ -35,13 +67,14 @@ const useNotification = (controller?: AbortController) => {
       return res.data;
     },
 
-    async getOneNotification(notificationId: string) {
-      const res = await axiosPrivate.get(`/notification/${notificationId}`, {
-        signal: controller?.signal,
-      });
+    [axiosPrivate, controller?.signal]
+  );
 
-      return res.data;
-    },
+  return {
+    getAllNotifications,
+    getOneNotification,
+    seenNotification,
+    deleteNotification,
   };
 };
 

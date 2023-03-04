@@ -1,48 +1,59 @@
+import emptyBlogs from "@assets/images/empty-blogs.png";
 import WalletLayout from "@shared/Layouts/WalletLayout/WalletLayout";
-import Head from "next/head";
-import { NextPageWithLayout } from "../_app";
-import TransactionHistory from "components/Wallet/TransactionHistory/TransactionHistory";
-import { useEffect, useState } from "react";
+import Loader from "@shared/Loader/Loader";
 import useTransactionApi from "apis/transaction.api";
-import { IPayment, IWithdraw } from "interfaces/transaction";
-import { DotLoader } from "react-spinners";
+import TransactionHistory from "components/Wallet/TransactionHistory/TransactionHistory";
+import Head from "next/head";
+import Image from "next/image";
+import { useQuery } from "react-query";
+import errorHandler from "utils/error-handler";
+import { NextPageWithLayout } from "../_app";
 
 const TransactionHistoryPage: NextPageWithLayout = () => {
-  const [loading, setLoading] = useState(false);
   const { getAllPayments, getAllWithdraws } = useTransactionApi();
-  const [paymentsList, setPaymentsList] = useState<Array<IPayment>>([]);
-  const [withdrawList, setWithdrawList] = useState<Array<IWithdraw>>([]);
 
-  useEffect(() => {
-    async function getTransactionsFunc() {
-      try {
-        setLoading(true);
-        const resPayment = await getAllPayments();
-        const resWithdraw = await getAllWithdraws();
-        setPaymentsList(resPayment.data.payments);
-        setWithdrawList(resWithdraw.data.withdraws);
-        setLoading(false);
-      } catch (error) {
-        ("");
-      }
+  const { data: paymentsData, isLoading: loadingGetPayments } = useQuery(
+    "wallet",
+    () => getAllPayments(),
+    {
+      onError: (error) => errorHandler(error),
     }
+  );
 
-    getTransactionsFunc();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { data: withdrawsData, isLoading: loadingGetWithdraws } = useQuery(
+    "wallet",
+    () => getAllWithdraws(),
+    {
+      onError: (error) => errorHandler(error),
+    }
+  );
 
   return (
     <>
       <Head>
         <title>Albantsho || Transaction History</title>
       </Head>
-      {loading ? (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+      {!loadingGetPayments &&
+      !loadingGetWithdraws &&
+      paymentsData &&
+      withdrawsData ? (
+        withdrawsData.withdraws.length + paymentsData.payments.length > 1 ? (
+          <Image
+            width={384}
+            height={384}
+            loading="lazy"
+            className="w-fit h-fit mx-auto mt-14 lg:mt-24"
+            src={emptyBlogs}
+            alt="empty blog list"
+          />
+        ) : (
+          <TransactionHistory
+            paymentsList={paymentsData.payments}
+            withdrawList={withdrawsData.withdraws}
+          />
+        )
       ) : (
-        <TransactionHistory
-          paymentsList={paymentsList}
-          withdrawList={withdrawList}
-        />
+        <Loader setCustomHeight="min-h-[65vh]" />
       )}
     </>
   );

@@ -2,38 +2,54 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScriptsApi from "apis/Scripts.api";
-import { IBidScript } from "interfaces/script";
+import { IResData } from "interfaces/response";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
+import { QueryClient, useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 import UnListingItem from "./assets/un-listing-item.png";
 
 interface IProps {
   openUnListingItem: boolean;
   setOpenUnListingItem: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
-  setListedScript: React.Dispatch<React.SetStateAction<IBidScript[]>>;
 }
+
+const queryClient = new QueryClient();
 
 const UnListingItemModal = ({
   openUnListingItem,
   setOpenUnListingItem,
   id,
-  setListedScript,
 }: IProps) => {
   const { updatePublishedScript } = useScriptsApi();
 
+  const { mutate: unPublishScriptMutation, isLoading: loadingUnPublishScript } =
+    useMutation<
+      IResData<object>,
+      Error,
+      { payload: { published: boolean }; scriptId: string }
+    >(
+      (data) =>
+        updatePublishedScript(
+          { published: data.payload.published },
+          data.scriptId
+        ),
+      {
+        onError: (error) => errorHandler(error),
+        onSuccess: (data) => {
+          queryClient.invalidateQueries("script");
+          successHandler(data.message);
+          handleClose();
+        },
+      }
+    );
+
   const handleClose = () => setOpenUnListingItem(false);
 
-  const unListingScript = async () => {
-    try {
-      await updatePublishedScript({ published: false }, id);
-      setListedScript((prev) => prev.filter((script) => script._id !== id));
-      handleClose();
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const unListingScript = async () =>
+    unPublishScriptMutation({ payload: { published: false }, scriptId: id });
 
   return (
     <Modal className="px-5" open={openUnListingItem} onClose={handleClose}>
@@ -64,6 +80,7 @@ const UnListingItemModal = ({
           <div className="flex gap-3 sm:gap-6">
             <Btn
               onClick={unListingScript}
+              loading={loadingUnPublishScript}
               size="large"
               className="py-3 px-5 md:px-3 rounded-lg md:py-4 text-white bg-primary-700"
             >

@@ -25,6 +25,7 @@ interface IProps {
 
 const CommentComponent = ({ comment, comments, socket }: IProps) => {
   const time = timeSince(new Date(comment.updatedAt).getTime());
+  console.log({ time, hour: new Date(comment.updatedAt).getTime() });
 
   return (
     <Accordion sx={{ "&:before": { display: "none" } }} className="shadow-none">

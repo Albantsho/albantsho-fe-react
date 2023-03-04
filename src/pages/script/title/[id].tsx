@@ -1,40 +1,32 @@
+import Loader from "@shared/Loader/Loader";
 import useScriptsApi from "apis/Scripts.api";
 import Title from "components/Script/Title/Title";
-import { IFullInformationScript } from "interfaces/script";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { DotLoader } from "react-spinners";
+import { useQuery } from "react-query";
+import errorHandler from "utils/error-handler";
 
 const TitlePage = () => {
-  const [script, setScript] = useState<IFullInformationScript>();
   const { getScript } = useScriptsApi();
   const { query } = useRouter();
 
-  useEffect(() => {
-    async function getScriptsData() {
-      try {
-        if (query.id) {
-          const res = await getScript(query.id as string);
-          setScript(res.data.script);
-        }
-      } catch (error) {
-        ("");
-      }
+  const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
+    "script",
+    () => getScript(query.id as string),
+    {
+      onError: (err) => errorHandler(err),
     }
-    getScriptsData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.id]);
+  );
 
   return (
     <>
       <Head>
-        <title>Albantsho || Title Page</title>
+        <title>Albantsho || {scriptData?.script.title}</title>
       </Head>
-      {script ? (
-        <Title script={script} />
+      {!isLoadingGetScript && scriptData ? (
+        <Title script={scriptData.script} />
       ) : (
-        <DotLoader color="#7953B5" className="mx-auto mt-16" />
+        <Loader />
       )}
     </>
   );

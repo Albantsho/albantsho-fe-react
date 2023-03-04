@@ -7,7 +7,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import { QueryClient, useMutation } from "react-query";
-import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import Trash from "./assets/trash.png";
 
@@ -38,10 +37,10 @@ const MoveBlogToTrashListModal = ({
         onError: (error) => {
           errorHandler(error);
         },
+
         onSuccess: () => {
-          queryClient.invalidateQueries("weblog");
           setOpenMoveBlogToTrashListModal(false);
-          if (query.slug) push(routes.blogsAdminDashboard.url);
+          queryClient.invalidateQueries("weblog");
           if (blogList && blogList.length <= 1) {
             query.archive
               ? push(

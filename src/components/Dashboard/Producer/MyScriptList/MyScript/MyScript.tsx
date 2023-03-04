@@ -100,6 +100,7 @@ const MyScript = ({ script }: IProps) => {
           <PDFDownloadLink
             document={
               <PDFFile
+                names={script.names}
                 scriptValue={valueForConvertPdf as string}
                 basedOn={script.basedOn}
                 draftDate={script.draftDate}
@@ -147,6 +148,7 @@ const MyScript = ({ script }: IProps) => {
           <PDFDownloadLink
             document={
               <PDFFile
+                names={script.names}
                 scriptValue={valueForConvertPdf as string}
                 basedOn={script.basedOn}
                 draftDate={script.draftDate}

@@ -92,7 +92,7 @@ const Footer = () => {
 
             <Link legacyBehavior href={`${routes.marketplace.url}`}>
               <Button color="inherit" size="large" className="sm:justify-start">
-                Marketplace
+                Story Base
               </Button>
             </Link>
           </div>

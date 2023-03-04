@@ -9,12 +9,12 @@ import {
   ListItemText,
   SvgIcon,
 } from "@mui/material";
-import useMobileNav from "@shared/Layouts/GeneralLayout/Nav/MobileNav/useMobileNav";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
 import useUserStore from "store/user.store";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 import routes from "routes/routes";
+import useMobileNav from "./useMobileNav";
 
 interface IProps {
   links: { title: string; href: string }[];

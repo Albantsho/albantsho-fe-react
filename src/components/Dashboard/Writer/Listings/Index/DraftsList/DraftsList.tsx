@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 import useScriptsApi from "apis/Scripts.api";
-import { IUnCompletedScript, IUnlistedScript } from "interfaces/script";
 import dynamic from "next/dynamic";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
+import { useQuery } from "react-query";
 import { DotLoader } from "react-spinners";
 import UncompletedList from "./UncompletedList/UncompletedList";
 
@@ -13,41 +13,23 @@ interface IProps {
 }
 
 const DraftsList = ({ searchQuery }: IProps) => {
-  const [unListedScripts, setUnListedScripts] = useState<
-    Array<IUnlistedScript>
-  >([]);
-  const [unCompletedScripts, setUnCompletedScripts] = useState<
-    Array<IUnCompletedScript>
-  >([]);
-  const [loading, setLoading] = useState(true);
   const { getWriterAllUnPublishedScripts, getWriterAllInCompletedScripts } =
     useScriptsApi();
 
-  useEffect(() => {
-    async function getScriptsFunc() {
-      try {
-        setLoading(true);
-        const resUnPublished = await getWriterAllUnPublishedScripts(
-          searchQuery
-        );
-        setUnListedScripts(resUnPublished.data.scripts);
-        const resUnCompleted = await getWriterAllInCompletedScripts(
-          searchQuery
-        );
-        setUnCompletedScripts(resUnCompleted.data.scripts);
-        setLoading(false);
-      } catch (error) {
-        ("");
-      }
-    }
-    getScriptsFunc();
+  const {
+    data: unPublishedScriptsData,
+    isLoading: loadingGetUnPublishedScripts,
+  } = useQuery("script", () => getWriterAllUnPublishedScripts(searchQuery));
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery]);
+  const {
+    data: unCompletedScriptsData,
+    isLoading: loadingGetUnCompletedScripts,
+  } = useQuery("script", () => getWriterAllInCompletedScripts(searchQuery));
 
-  return loading ? (
-    <DotLoader color="#7953B5" className="mx-auto mt-10" />
-  ) : (
+  return !loadingGetUnPublishedScripts &&
+    !loadingGetUnCompletedScripts &&
+    unPublishedScriptsData &&
+    unCompletedScriptsData ? (
     <div className="my-8">
       <div className="bg-white p-3 inline-block rounded-md shadow-primary">
         <Typography
@@ -58,7 +40,7 @@ const DraftsList = ({ searchQuery }: IProps) => {
           Uncompleted Listings
         </Typography>
       </div>
-      <UncompletedList unCompletedScripts={unCompletedScripts} />
+      <UncompletedList unCompletedScripts={unCompletedScriptsData.scripts} />
       <div className="bg-white p-3 inline-block rounded-md mt-10 px-6 shadow-primary">
         <Typography
           variant="h6"
@@ -69,12 +51,11 @@ const DraftsList = ({ searchQuery }: IProps) => {
         </Typography>
       </div>
       <Suspense fallback={null}>
-        <UnlistedList
-          unListedScripts={unListedScripts}
-          setUnListedScripts={setUnListedScripts}
-        />
+        <UnlistedList unListedScripts={unPublishedScriptsData.scripts} />
       </Suspense>
     </div>
+  ) : (
+    <DotLoader color="#7953B5" className="mx-auto mt-10" />
   );
 };
 

@@ -7,13 +7,19 @@ import LeftParenthesesIcon from "../../assets/left-parentheses.svg";
 import PhotoIcon from "../../assets/photo.svg";
 import RightParenthesesIcon from "../../assets/right-parentheses.svg";
 import TransitionIcon from "../../assets/transition.svg";
+import BulletComponent from "./BulletComponent/BulletComponent";
 import CharacterComponent from "./CharacterComponent/CharacterComponent";
+
+interface IProps extends RenderElementProps {
+  editorSetting: { theme: string };
+}
 
 const EditorElement = ({
   attributes,
   children,
   element,
-}: RenderElementProps) => {
+  editorSetting,
+}: IProps) => {
   const matches = useMediaQuery("(min-width:500px)");
 
   switch (element.type) {
@@ -33,18 +39,23 @@ const EditorElement = ({
             fontFamily: "Courier",
           }}
         >
-          <span
-            style={{
-              position: "absolute",
-              left: "0",
-              top: "3px",
-              bottom: "3px",
-              width: "24px",
-              height: "20",
-            }}
-          >
-            <PhotoIcon />
-          </span>
+          {editorSetting.theme === "icon" ? (
+            <span
+              style={{
+                position: "absolute",
+                left: "0",
+                top: "3px",
+                bottom: "3px",
+                width: "24px",
+                height: "20",
+              }}
+            >
+              <PhotoIcon />
+            </span>
+          ) : (
+            <BulletComponent />
+          )}
+
           {children}
         </p>
       );
@@ -62,23 +73,32 @@ const EditorElement = ({
             fontSize: "18px",
           }}
         >
-          <FaPlay
-            style={{
-              position: "absolute",
-              left: "0",
-              top: "4px",
-              bottom: "0",
-              width: "24px",
-              height: "20",
-              color: "#DCD8E4",
-            }}
-          />
+          {editorSetting.theme === "icon" ? (
+            <FaPlay
+              style={{
+                position: "absolute",
+                left: "0",
+                top: "4px",
+                bottom: "0",
+                width: "24px",
+                height: "20",
+                color: "#DCD8E4",
+              }}
+            />
+          ) : (
+            <BulletComponent />
+          )}
+
           {children}
         </p>
       );
     case "character":
       return (
-        <CharacterComponent attributes={attributes} element={element}>
+        <CharacterComponent
+          editorSetting={editorSetting}
+          attributes={attributes}
+          element={element}
+        >
           {children}
         </CharacterComponent>
       );
@@ -101,17 +121,21 @@ const EditorElement = ({
             fontSize: "18px",
           }}
         >
-          <BsFillChatLeftDotsFill
-            style={{
-              color: "#DCD8E4",
-              position: "absolute",
-              left: "0",
-              top: "4px",
-              bottom: "0",
-              width: "24px",
-              height: "20",
-            }}
-          />
+          {editorSetting.theme === "icon" ? (
+            <BsFillChatLeftDotsFill
+              style={{
+                color: "#DCD8E4",
+                position: "absolute",
+                left: "0",
+                top: "4px",
+                width: "24px",
+                height: "20",
+              }}
+            />
+          ) : (
+            <BulletComponent />
+          )}
+
           {children}
         </p>
       );
@@ -178,18 +202,22 @@ const EditorElement = ({
             fontSize: "18px",
           }}
         >
-          <span
-            style={{
-              position: "absolute",
-              left: "0",
-              top: "0",
-              bottom: "0",
-              width: "24px",
-              height: "20",
-            }}
-          >
-            <TransitionIcon />
-          </span>
+          {editorSetting.theme === "icon" ? (
+            <span
+              style={{
+                position: "absolute",
+                left: "0",
+                top: "0",
+                bottom: "0",
+                width: "24px",
+                height: "20",
+              }}
+            >
+              <TransitionIcon />
+            </span>
+          ) : (
+            <BulletComponent />
+          )}
           {children}
         </p>
       );
@@ -208,17 +236,22 @@ const EditorElement = ({
             fontSize: "18px",
           }}
         >
-          <BsCameraVideoFill
-            style={{
-              color: "#DCD8E4",
-              position: "absolute",
-              left: "0",
-              top: "0",
-              bottom: "0",
-              width: "24px",
-              height: "20px",
-            }}
-          />
+          {editorSetting.theme === "icon" ? (
+            <BsCameraVideoFill
+              style={{
+                color: "#DCD8E4",
+                position: "absolute",
+                left: "0",
+                top: "0",
+                bottom: "0",
+                width: "24px",
+                height: "20px",
+              }}
+            />
+          ) : (
+            <BulletComponent />
+          )}
+
           {children}
         </p>
       );
@@ -236,17 +269,21 @@ const EditorElement = ({
             fontSize: "18px",
           }}
         >
-          <SiAsana
-            style={{
-              color: "#DCD8E4",
-              position: "absolute",
-              left: "0",
-              top: "0",
-              bottom: "0",
-              width: "24px",
-              height: "20px",
-            }}
-          />
+          {editorSetting.theme === "icon" ? (
+            <SiAsana
+              style={{
+                color: "#DCD8E4",
+                position: "absolute",
+                left: "0",
+                top: "0",
+                bottom: "0",
+                width: "24px",
+                height: "20px",
+              }}
+            />
+          ) : (
+            <BulletComponent />
+          )}
           {children}
         </p>
       );

@@ -10,6 +10,7 @@ export interface IScript {
   writtenBy: string[];
   draftDate: string;
   basedOn: string;
+  names: string;
 }
 
 export interface IUnlistedScript {
@@ -98,9 +99,10 @@ export interface IFullInformationScript {
   sold: boolean;
   soldDate: string | null;
   soldPrice: number | null;
-  writtenBy: string[];
+  writtenBy: string;
   scriptPart: string | null;
   subScriptions: string[];
+  names: string;
 }
 
 export interface IScriptReviewer {

@@ -2,12 +2,18 @@ import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import type { RenderElementProps } from "slate-react";
 import ChangeCharacterStatus from "../../../ChangeCharacterStatus/ChangeCharacterStatus";
+import BulletComponent from "../BulletComponent/BulletComponent";
+
+interface IProps extends RenderElementProps {
+  editorSetting: { theme: string };
+}
 
 const CharacterComponent = ({
   attributes,
   children,
   element,
-}: RenderElementProps) => {
+  editorSetting,
+}: IProps) => {
   const [openChangeCharacterStatusMenu, setOpenChangeCharacterStatusMenu] =
     useState(false);
 
@@ -39,17 +45,22 @@ const CharacterComponent = ({
             fontSize: "18px",
           }}
         >
-          <FaUser
-            style={{
-              position: "absolute",
-              left: "0",
-              top: "1px",
-              bottom: "0",
-              width: "24px",
-              height: "20",
-              color: "#DCD8E4",
-            }}
-          />
+          {editorSetting.theme === "icon" ? (
+            <FaUser
+              style={{
+                position: "absolute",
+                left: "0",
+                top: "1px",
+                bottom: "0",
+                width: "12px",
+                height: "12px",
+                color: "#DCD8E4",
+              }}
+            />
+          ) : (
+            <BulletComponent />
+          )}
+
           {children}
         </p>
         <ChangeCharacterStatus

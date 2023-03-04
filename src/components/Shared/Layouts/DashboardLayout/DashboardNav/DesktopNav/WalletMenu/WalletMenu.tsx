@@ -10,13 +10,15 @@ import {
 } from "@mui/material";
 import useWalletApi from "apis/Wallet.api";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { IoIosMore } from "react-icons/io";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
+import { useQuery } from "react-query";
 import routes from "routes/routes";
 import useUserStore from "store/user.store";
+import errorHandler from "utils/error-handler";
 
 const WalletMenu = () => {
   const { push } = useRouter();
@@ -24,8 +26,11 @@ const WalletMenu = () => {
   const [openWalletMenu, setOpenWalletMenu] = useState<null | HTMLElement>(
     null
   );
-  const [balance, setBalance] = useState(0);
   const { getWalletBalance } = useWalletApi();
+
+  const { data } = useQuery("balance", () => getWalletBalance(), {
+    onError: (error) => errorHandler(error),
+  });
 
   const handleOpenWalletMenu = (event: React.MouseEvent<HTMLElement>) =>
     setOpenWalletMenu(event.currentTarget);
@@ -33,20 +38,6 @@ const WalletMenu = () => {
   const openWallet = Boolean(openWalletMenu);
 
   const handleCloseWalletMenu = () => setOpenWalletMenu(null);
-
-  useEffect(() => {
-    async function getWalletBalanceFunc() {
-      try {
-        const res = await getWalletBalance();
-        setBalance(res.data.balance);
-      } catch (error) {
-        ("");
-      }
-    }
-
-    getWalletBalanceFunc();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <>
@@ -71,7 +62,7 @@ const WalletMenu = () => {
           />
         }
       >
-        Balance:${balance}
+        Balance:${data?.balance}
       </Button>
       <Menu
         anchorEl={openWalletMenu}

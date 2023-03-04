@@ -20,9 +20,15 @@ interface IProps {
   htmlInitialValue: string;
   width: number | undefined;
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
+  editorSetting: { theme: string };
 }
 
-const TextEditor = ({ width, htmlInitialValue, socket }: IProps) => {
+const TextEditor = ({
+  width,
+  htmlInitialValue,
+  socket,
+  editorSetting,
+}: IProps) => {
   const editor: IEditor = useMemo(
     () => withNewFeatures(withHistory(withReact(createEditor()))),
     []
@@ -91,7 +97,9 @@ const TextEditor = ({ width, htmlInitialValue, socket }: IProps) => {
           className="isolation-auto -z-0 break-words"
           spellCheck
           autoFocus
-          renderElement={(props) => <EditorElement {...props} />}
+          renderElement={(props) => (
+            <EditorElement editorSetting={editorSetting} {...props} />
+          )}
         />
         <ChangeFormatMenuList
           contextMenu={contextMenu}

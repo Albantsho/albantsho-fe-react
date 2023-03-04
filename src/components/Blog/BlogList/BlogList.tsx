@@ -1,7 +1,7 @@
 import { Box, Card, Skeleton } from "@mui/material";
 import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import { IWeblog } from "interfaces/weblog";
-import { useRouter } from "next/router";
+import Image from "next/image";
 import BlogCard from "../BlogCard/BlogCard";
 
 interface IProps {
@@ -19,9 +19,8 @@ const BlogList = ({
   setCurrentPage,
   pageCount,
 }: IProps) => {
-  const { push } = useRouter();
   const handleActivePage = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
     setCurrentPage(page);
@@ -29,6 +28,17 @@ const BlogList = ({
 
   return (
     <div className="max-w-screen-2xl w-full px-5 sm:px-10">
+      {blogList && !blogList.length && (
+        <div className="text-center ">
+          <Image
+            src="/assets/images/empty-page-image.png"
+            alt="empty blogs image"
+            width={800}
+            height={800}
+            priority
+          />
+        </div>
+      )}
       <Box
         className="grid gap-4 md:gap-8 py-7 md:py-14"
         gridTemplateColumns={{
@@ -64,7 +74,6 @@ const BlogList = ({
               </Card>
             ))}
       </Box>
-
       {pageCount >= 2 && (
         <CustomPaginationComponent
           pageCount={pageCount}

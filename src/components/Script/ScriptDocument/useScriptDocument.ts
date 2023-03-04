@@ -1,11 +1,13 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-import useInvite from "apis/Invite.api";
+import useInvite, { type ICreateNewInvitePayload } from "apis/Invite.api";
 import useScriptsApi from "apis/Scripts.api";
-import { ICollaboratorList } from "interfaces/collaborator";
+import { IResData } from "interfaces/response";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { QueryClient, useMutation, useQuery } from "react-query";
+import { toast } from "react-toastify";
 import { Socket } from "socket.io-client";
 import errorHandler from "utils/error-handler";
 import { addCollaboratorSchema } from "./validation/addCollaborator.validation";
@@ -18,14 +20,31 @@ interface IProps {
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
+const queryClient = new QueryClient();
+
 const useScriptDocument = ({ socket }: IProps) => {
-  const [loading, setLoading] = useState(false);
   const [activeButton, setActiveButton] = useState(0);
   const { createNewInvite } = useInvite();
-  const [collaboratorsList, setCollaboratorsList] =
-    useState<ICollaboratorList>();
   const { listAllCollaborators } = useScriptsApi();
   const { query } = useRouter();
+
+  const { data: collaboratorsData, isLoading: loadingGetCollaboratorList } =
+    useQuery("collaborator", () => listAllCollaborators(query.id as string));
+
+  const { mutate: createInviteMutate, isLoading: loadingCreateInvite } =
+    useMutation<IResData<object>, Error, ICreateNewInvitePayload>(
+      (data) => createNewInvite(data),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: (data) => {
+          queryClient.invalidateQueries(["notification", "invite"]);
+          reset({ email: "" });
+          toast.success(data.message);
+        },
+      }
+    );
 
   const {
     register,
@@ -39,31 +58,14 @@ const useScriptDocument = ({ socket }: IProps) => {
     resolver: yupResolver(addCollaboratorSchema),
   });
 
-  useEffect(() => {
-    async function getAllCollaboratorsFunc() {
-      if (typeof query.id === "string") {
-        const res = await listAllCollaborators(query.id as string);
-
-        setCollaboratorsList(res.data.script);
-      }
-    }
-
-    getAllCollaboratorsFunc();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
-
   const openInfoCollaborator = () => setActiveButton(0);
   const openListCollaborator = () => setActiveButton(1);
 
   const removeCollaborator = (collaboratorId: string) => () => {
     socket.emit("removeCollaborator", collaboratorId);
-    if (collaboratorsList)
-      setCollaboratorsList({
-        ...collaboratorsList,
-        collaborators: collaboratorsList.collaborators.filter(
-          (c) => c._id !== collaboratorId
-        ),
-      });
+    if (collaboratorsData) {
+      queryClient.invalidateQueries("collaborator");
+    }
   };
 
   useEffect(() => {
@@ -74,24 +76,11 @@ const useScriptDocument = ({ socket }: IProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmit = async (data: IAddCollaboratorFormValues) => {
-    try {
-      setLoading(true);
-
-      await createNewInvite({
-        email: data.email,
-        scriptId: query.id as string,
-      });
-      reset({ email: "" });
-    } catch (error) {
-      errorHandler(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const onSubmit = async (data: IAddCollaboratorFormValues) =>
+    createInviteMutate({ email: data.email, scriptId: query.id as string });
 
   return {
-    loading,
+    loading: loadingCreateInvite,
     onSubmit,
     register,
     handleSubmit,
@@ -99,7 +88,8 @@ const useScriptDocument = ({ socket }: IProps) => {
     openInfoCollaborator,
     openListCollaborator,
     activeButton,
-    collaboratorsList,
+    collaboratorsList: collaboratorsData,
+    loadingGetCollaboratorList,
     removeCollaborator,
   };
 };

@@ -1,22 +1,24 @@
 import { IconButton, LinearProgress, Typography } from "@mui/material";
 import Image from "next/image";
-import uploadImage from "./assets/upload-image.png";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdOutlineDone } from "react-icons/md";
-import { IAbstractFormValues } from "interfaces/abstract";
-import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
-import { useState } from "react";
+import uploadImage from "./assets/upload-image.png";
 
 interface IProps {
-  register: UseFormRegister<IAbstractFormValues>;
-  errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   step: number;
   progress: number;
+  handleUploadImageCover: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  cancelUpload: () => void;
+  imageCoverError: string;
 }
 
-const UploadImage = ({ errors, register, step, progress }: IProps) => {
-  const [showProgress, setShowProgress] = useState(true);
-  const hiddenProgress = () => setShowProgress(false);
+const UploadImage = ({
+  step,
+  progress,
+  handleUploadImageCover,
+  imageCoverError,
+  cancelUpload,
+}: IProps) => {
   return (
     <div className={`${step === 7 ? "block" : "hidden"}`}>
       <Typography
@@ -39,13 +41,13 @@ const UploadImage = ({ errors, register, step, progress }: IProps) => {
               htmlFor="add-image"
             ></label>
             <input
-              {...register("image")}
               name="image"
               accept="image/*"
               max={1}
               type="file"
               id="add-image"
               hidden
+              onChange={handleUploadImageCover}
             />
             <div className="mx-auto flex justify-center items-center mb-5 md:mb-7">
               <Image src={uploadImage} alt="upload image" />
@@ -72,10 +74,10 @@ const UploadImage = ({ errors, register, step, progress }: IProps) => {
             </Typography>
           </div>
         </div>
-        {errors.image && (
-          <span className="text-error-700 ">{errors.image?.message}</span>
+        {imageCoverError.length > 0 && (
+          <span className="text-error-700 ">{imageCoverError}</span>
         )}
-        {progress < 100 && showProgress && (
+        {progress < 100 ? (
           <div className="max-w-[528px] relative py-6 mx-auto rounded-md border-2 border-dashed mb-5 px-8 overflow-hidden border-tinted-300  bg-tinted-50/50">
             <div className="mb-2 pr-5">
               <Typography variant="body1" color="primary.700">
@@ -91,15 +93,13 @@ const UploadImage = ({ errors, register, step, progress }: IProps) => {
               value={progress}
             />
             <IconButton
-              onClick={hiddenProgress}
+              onClick={cancelUpload}
               className="absolute right-4 top-6 text-error-500 hover:bg-error-50 bg-error-50"
             >
               <AiOutlineClose />
             </IconButton>
           </div>
-        )}
-
-        {progress >= 100 && (
+        ) : (
           <div className="max-w-[528px] relative py-6 mx-auto rounded-md border-2 border-dashed px-8 overflow-hidden border-tinted-300  bg-success-50/50">
             <div className="mb-2">
               <Typography variant="body1" color="success.500">
@@ -113,7 +113,7 @@ const UploadImage = ({ errors, register, step, progress }: IProps) => {
               color="success"
               className="rounded-lg"
               variant="determinate"
-              value={progress > 100 ? 100 : progress}
+              value={progress}
             />
             <IconButton className="absolute right-4 top-6 text-success-500 hover:bg-success-50 bg-success-50">
               <MdOutlineDone />

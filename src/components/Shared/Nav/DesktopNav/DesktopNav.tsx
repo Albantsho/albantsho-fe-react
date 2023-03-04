@@ -7,9 +7,10 @@ import routes from "routes/routes";
 
 interface IProps {
   links: { title: string; href: string }[];
+  secondaryUnderLineColor?: boolean;
 }
 
-const DesktopNav = ({ links }: IProps) => {
+const DesktopNav = ({ links, secondaryUnderLineColor }: IProps) => {
   const user = useUserStore((state) => state.user);
   const { route } = useRouter();
 
@@ -27,8 +28,13 @@ const DesktopNav = ({ links }: IProps) => {
             </Typography>
             <div
               className={`${
-                route === href && "bg-primary-700"
-              } absolute -bottom-6 w-full h-1`}
+                route === href &&
+                `${
+                  !secondaryUnderLineColor
+                    ? "bg-primary-700 "
+                    : "bg-secondary-700"
+                }`
+              } absolute -bottom-5 w-full h-1`}
             ></div>
           </Link>
         ))}

@@ -2,11 +2,18 @@ import GreenArrow from "@assets/icons/green-arrow.svg";
 import StarIcon from "@assets/icons/star.svg";
 import YellowArrow from "@assets/icons/yellow-arrow.svg";
 import { SvgIcon } from "@mui/material";
+import Nav from "@shared/Nav/Nav";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import routes from "routes/routes";
 import HeroSection from "./HeroSection/HeroSection";
-import Nav from "./Nav/Nav";
 
+const links = [
+  { title: "Home", href: routes.home.url },
+  { title: "About Us", href: routes.aboutUs.url },
+  { title: "Blog", href: routes.blog.url },
+  { title: "FAQ", href: routes.FAQs.url },
+];
 interface IProps {
   children: React.ReactNode;
   title: string;
@@ -18,7 +25,7 @@ const Footer = dynamic(() => import("@shared/Footer/Footer"));
 const GeneralLayout = ({ children, title, hideBg }: IProps) => {
   return (
     <>
-      <Nav />
+      <Nav links={links} secondaryUnderLineColor={false} />
       <main>
         <HeroSection title={title} />
         <div className="flex justify-center">

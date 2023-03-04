@@ -8,15 +8,20 @@ const RelistScriptModal = dynamic(
   () => import("../../Modals/RelistScriptModal/RelistScriptModal")
 );
 
+const DeleteScriptModal = dynamic(
+  () => import("../../Modals/DeleteScriptModal/DeleteScriptModal")
+);
+
 interface IProps {
   script: IUnlistedScript;
-  setUnListedScripts: React.Dispatch<React.SetStateAction<IUnlistedScript[]>>;
 }
 
-const UnlistedScript = ({ script, setUnListedScripts }: IProps) => {
+const UnlistedScript = ({ script }: IProps) => {
   const [openRelistScript, setOpenRelistScript] = useState<boolean>(false);
+  const [openDeleteScript, setOpenDeleteScript] = useState<boolean>(false);
 
   const setOpenRelistScriptModal = () => setOpenRelistScript(true);
+  const setOpenDeleteScriptModal = () => setOpenDeleteScript(true);
 
   return (
     <>
@@ -25,7 +30,7 @@ const UnlistedScript = ({ script, setUnListedScripts }: IProps) => {
         data-aos-anchor-placement="top-bottom"
         className="flex py-6 items-center sm:justify-between xl:justify-start"
       >
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-14 lg:max-w-[445px] ">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-6 lg:max-w-[445px] ">
           <Image
             width={64}
             height={64}
@@ -46,17 +51,23 @@ const UnlistedScript = ({ script, setUnListedScripts }: IProps) => {
               {script.tagline}
             </Typography>
           </div>
-          <Button
-            onClick={setOpenRelistScriptModal}
-            variant="text"
-            sx={{
-              border: "1px solid #7953B5",
-              borderRadius: 1.5,
-            }}
-            className=" sm:hidden mb-1"
-          >
-            Relist
-          </Button>
+          <div className="flex-1 flex gap-4">
+            <Button
+              onClick={setOpenRelistScriptModal}
+              variant="outlined"
+              className="sm:hidden mb-1 min-w-[77px] flex-1"
+            >
+              Relist
+            </Button>
+            <Button
+              onClick={setOpenDeleteScriptModal}
+              variant="outlined"
+              color="error"
+              className=" sm:hidden mb-1"
+            >
+              Delete
+            </Button>
+          </div>
         </div>
         <div className="hidden md:flex lg:hidden xl:flex gap-4 justify-start  flex-col items-center md:items-center lg:items-end xl:items-start xl:ml-2">
           <div className="xl:min-w-[138px]">
@@ -66,28 +77,49 @@ const UnlistedScript = ({ script, setUnListedScripts }: IProps) => {
             />
           </div>
         </div>
-        <div className="sm:min-w-[116px] justify-end xl:py-10 sm:pr-0 items-center hidden sm:flex xl:ml-auto">
+        <div className="sm:min-w-[140px] xl:min-w-[160px] justify-end gap-4 xl:py-10 sm:pr-0 items-center hidden sm:flex xl:ml-auto lg:flex-col xl:flex-row ">
           <Button
             onClick={setOpenRelistScriptModal}
-            variant="text"
+            variant="outlined"
             sx={{
               paddingY: 1,
-              border: "1px solid #7953B5",
+              border: "1px solid",
               borderRadius: 1.5,
             }}
-            className="md:ml-auto xl:ml-0 w-full"
+            className="md:ml-auto xl:ml-0 w-full xl:min-w-[77px] xl:h-[48px]"
           >
             Relist
+          </Button>
+          <Button
+            onClick={setOpenDeleteScriptModal}
+            variant="outlined"
+            color="error"
+            sx={{
+              paddingY: 1,
+              border: "1px solid",
+              borderRadius: 1.5,
+            }}
+            className="md:ml-auto xl:ml-0 w-full xl:min-w-[77px] xl:h-[48px]"
+          >
+            Delete
           </Button>
         </div>
       </div>
       <Suspense fallback={null}>
         {openRelistScript ? (
           <RelistScriptModal
-            setUnListedScripts={setUnListedScripts}
             id={script._id}
             openRelistScript={openRelistScript}
             setOpenRelistScript={setOpenRelistScript}
+          />
+        ) : null}
+      </Suspense>
+      <Suspense fallback={null}>
+        {openDeleteScript ? (
+          <DeleteScriptModal
+            id={script._id}
+            openDeleteScript={openDeleteScript}
+            setOpenDeleteScript={setOpenDeleteScript}
           />
         ) : null}
       </Suspense>

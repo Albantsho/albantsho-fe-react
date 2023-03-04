@@ -1,19 +1,21 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useScriptsApi from "apis/Scripts.api";
 import dayjs, { Dayjs } from "dayjs";
+import { IResData } from "interfaces/response";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import routes from "routes/routes";
+import { useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 import { titleSchema } from "./validation/title.validation";
 
 interface ITitleFormValues {
   title: string;
   writer: string;
   names: string;
-  any: string;
+  basedOn: string;
 }
 
 interface IProps {
@@ -21,13 +23,44 @@ interface IProps {
 }
 
 const useTitle = ({ script }: IProps) => {
-  const { query, push } = useRouter();
-  const [loading, setLoading] = useState(false);
+  const { query, back } = useRouter();
   const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs(Date.now()));
   const { updateCoverPageScript } = useScriptsApi();
 
-  const handleChangeDateValue = (newValue: Dayjs | null) =>
-    setDateValue(newValue);
+  const { mutate: updateCoverPageMutation, isLoading: loadingUpdateCoverPage } =
+    useMutation<
+      IResData<object>,
+      Error,
+      {
+        payload: {
+          title: string;
+          writer: string;
+          names: string;
+          basedOn: string;
+          draftDate: string;
+        };
+        scriptId: string;
+      }
+    >(
+      (data) =>
+        updateCoverPageScript(
+          {
+            basedOn: data.payload.basedOn,
+            names: data.payload.names,
+            draftDate: data.payload.draftDate,
+            title: data.payload.title,
+            writtenBy: data.payload.writer,
+          },
+          data.scriptId
+        ),
+      {
+        onError: (error) => errorHandler(error),
+        onSuccess: (data) => {
+          successHandler(data.message);
+          back();
+        },
+      }
+    );
 
   const {
     register,
@@ -37,31 +70,27 @@ const useTitle = ({ script }: IProps) => {
   } = useForm<ITitleFormValues>({
     defaultValues: {
       title: script.title,
-      writer: script.writtenBy.join(" "),
-      any: script.basedOn ? script.basedOn : "",
+      writer: script.writtenBy,
+      basedOn: script.basedOn ? script.basedOn : "",
+      names: script.names ? script.names : "",
     },
     resolver: yupResolver(titleSchema),
   });
 
-  const onSubmit = async (data: ITitleFormValues) => {
-    try {
-      setLoading(true);
-      await updateCoverPageScript(
-        {
-          writtenBy: data.writer.split(" ").filter((name) => name),
-          title: data.title,
-          basedOn: data.any,
-          draftDate: dateValue?.toISOString() as string,
-        },
-        query.id as string
-      );
-      push(routes.script.dynamicUrl(query.id as string));
-    } catch (error) {
-      errorHandler(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const handleChangeDateValue = (newValue: Dayjs | null) =>
+    setDateValue(newValue);
+
+  const onSubmit = async (data: ITitleFormValues) =>
+    updateCoverPageMutation({
+      scriptId: query.id as string,
+      payload: {
+        basedOn: data.basedOn,
+        draftDate: `${dateValue}`,
+        names: data.names,
+        title: data.title,
+        writer: data.writer,
+      },
+    });
 
   return {
     register,
@@ -69,7 +98,7 @@ const useTitle = ({ script }: IProps) => {
     onSubmit,
     handleSubmit,
     errors,
-    loading,
+    loading: loadingUpdateCoverPage,
     handleChangeDateValue,
     dateValue,
   };

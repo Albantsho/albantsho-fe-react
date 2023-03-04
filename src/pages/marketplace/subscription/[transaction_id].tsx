@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Footer from "@shared/Footer/Footer";
-import Nav from "@shared/Layouts/GeneralLayout/Nav/Nav";
 import Head from "next/head";
 import Link from "next/link";
 import success from "@assets/images/success.png";
@@ -9,6 +8,13 @@ import Image from "next/image";
 import routes from "routes/routes";
 import { Suspense } from "react";
 import { useRouter } from "next/router";
+import Nav from "@shared/Nav/Nav";
+
+const links = [
+  { title: "Home", href: routes.home.url },
+  { title: "Story base", href: routes.marketplace.url },
+  { title: "Blog", href: routes.blog.url },
+];
 
 const SubscriptionSuccessful = () => {
   const { query } = useRouter();
@@ -18,7 +24,7 @@ const SubscriptionSuccessful = () => {
       <Head>
         <title>Albantsho || Subscription Successful</title>
       </Head>
-      <Nav color="inherit" position="static" />
+      <Nav secondaryUnderLineColor={false} links={links} position="static" />
       <div className="pt-24 md:pt-32 px-10 md:px-16 text-center min-h-screen md:max-w-lg mx-auto">
         <div>
           <Image src={success} alt="success" />
