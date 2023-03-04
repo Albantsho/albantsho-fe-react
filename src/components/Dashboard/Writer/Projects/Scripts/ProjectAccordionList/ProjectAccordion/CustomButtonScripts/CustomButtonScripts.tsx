@@ -1,7 +1,4 @@
 import { Button, SvgIcon } from "@mui/material";
-import { color } from "html2canvas/dist/types/css/types/color";
-import Image, { StaticImageData } from "next/image";
-import { useRouter } from "next/router";
 
 interface IProps {
   title: string;

@@ -1,11 +1,9 @@
-import { Typography } from "@mui/material";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
 import Loader from "@shared/Loader/Loader";
 import useContact, { type IData_getContacts } from "apis/Contact.api";
 import ContactList from "components/Dashboard/Admin/ContactList/ContactList";
 import TabButtons from "components/Dashboard/Admin/Contacts/TabButtons/TabButtons";
-import NFTList from "components/Dashboard/Admin/NFTList/NFTList";
 import { debounce } from "lodash";
 import Head from "next/head";
 import { useRouter } from "next/router";

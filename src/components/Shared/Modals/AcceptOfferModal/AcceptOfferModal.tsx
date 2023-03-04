@@ -3,10 +3,14 @@ import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScripBidApi from "apis/ScripBid.api";
 import { IBidForScript } from "interfaces/bid";
+import { IResData } from "interfaces/response";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
+import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 import acceptOffer from "./assets/accept-offer.png";
 
 interface IProps {
@@ -15,6 +19,8 @@ interface IProps {
   title: string;
   auction: IBidForScript;
 }
+
+const queryClient = new QueryClient();
 
 const AcceptOfferModal = ({
   openAcceptOffer,
@@ -25,11 +31,19 @@ const AcceptOfferModal = ({
   const { acceptBid } = useScripBidApi();
   const { replace } = useRouter();
 
+  const { mutate: acceptBidMutation, isLoading: loadingAcceptBid } =
+    useMutation<IResData<object>, Error, string>((data) => acceptBid(data), {
+      onError: (error) => errorHandler(error),
+      onSuccess: (data) => {
+        successHandler(data.message);
+        queryClient.invalidateQueries(["script", "bid"]);
+        replace(routes.writerDashboard.url);
+      },
+    });
+
   const handleCloseAcceptOffer = () => setOpenAcceptOffer(false);
-  const acceptOfferFunc = (id: string) => async () => {
-    await acceptBid(id);
-    replace(routes.writerDashboard.url);
-  };
+
+  const acceptOfferFunc = (id: string) => async () => acceptBidMutation(id);
 
   return (
     <Modal
@@ -72,6 +86,7 @@ const AcceptOfferModal = ({
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-10 lg:mt-8">
             <Btn
+              loading={loadingAcceptBid}
               onClick={acceptOfferFunc(auction._id)}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"

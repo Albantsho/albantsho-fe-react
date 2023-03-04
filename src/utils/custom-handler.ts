@@ -1,6 +1,4 @@
 import toast from "react-hot-toast";
-import { SvgIcon } from "@mui/material";
-import MiniLogo from "@assets/icons/mini-logo.svg";
 
 const customHandler = ({
   icon,

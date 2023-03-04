@@ -1,10 +1,12 @@
 import useScriptsApi from "apis/Scripts.api";
+import { IResData } from "interfaces/response";
 import { IWriterScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import querystring from "query-string";
 import { useState } from "react";
 import { QueryClient, useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 interface IProps {
   listScripts: IWriterScript[];
@@ -41,7 +43,7 @@ const useProjectAccordion = ({ listScripts }: IProps) => {
     });
   const { mutate: archiveScript, isLoading: isLoadingArchiveScript } =
     useMutation<
-      void,
+      IResData<object>,
       Error,
       { payload: { archive: boolean }; scriptId: string }
     >(
@@ -55,7 +57,8 @@ const useProjectAccordion = ({ listScripts }: IProps) => {
         onError: (error) => {
           errorHandler(error);
         },
-        onSuccess: () => {
+        onSuccess: (data) => {
+          successHandler(data.message);
           if (listScripts.length <= 1) {
             push(`?archive=false&page=${+String(query.page) - 1}`, undefined, {
               shallow: true,

@@ -1,4 +1,6 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
+import { IResData } from "interfaces/response";
+import { useCallback } from "react";
 
 interface IUploadFileDraftPayload {
   script: File;
@@ -15,25 +17,30 @@ interface IUploadCopyrightPayload {
   copyright: File;
 }
 
+interface IData_getDraft {
+  draft: string;
+}
+
 const useDraftApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
-  return {
-    async getAllDraft(query?: string) {
-      const res = await axiosPrivate.get(`/draft/all?${query}`, {
-        signal: controller?.signal,
-      });
+  const getOneDraft = useCallback(
+    async (scriptId: string) => {
+      const res = await axiosPrivate.get<IResData<IData_getDraft>>(
+        `/draft/${scriptId}`,
+        {
+          signal: controller?.signal,
+        }
+      );
 
-      return res.data;
+      return res.data.data;
     },
-    async getOneDraft(scriptId: string) {
-      const res = await axiosPrivate.get(`/draft/${scriptId}`, {
-        signal: controller?.signal,
-      });
 
-      return res.data;
-    },
-    async getOneDraftAsPdf(scriptId: string) {
+    [axiosPrivate, controller?.signal]
+  );
+
+  const getOneDraftAsPdf = useCallback(
+    async (scriptId: string) => {
       const res = await axiosPrivate.get(`/draft/${scriptId}`, {
         signal: controller?.signal,
         headers: {
@@ -43,7 +50,12 @@ const useDraftApi = (controller?: AbortController) => {
 
       return res.data;
     },
-    async getDraftPdf(scriptId: string) {
+
+    [axiosPrivate, controller?.signal]
+  );
+
+  const getDraftPdf = useCallback(
+    async (scriptId: string) => {
       const res = await axiosPrivate.get(`/draft/pdf/${scriptId}`, {
         signal: controller?.signal,
         headers: {
@@ -53,8 +65,25 @@ const useDraftApi = (controller?: AbortController) => {
 
       return res.data;
     },
-    async uploadFileDraft(scriptId: string, payload: IUploadFileDraftPayload) {
-      const res = await axiosPrivate.post(
+
+    [axiosPrivate, controller?.signal]
+  );
+
+  const getAllDraft = useCallback(
+    async (query?: string) => {
+      const res = await axiosPrivate.get(`/draft/all?${query}`, {
+        signal: controller?.signal,
+      });
+
+      return res.data;
+    },
+
+    [axiosPrivate, controller?.signal]
+  );
+
+  const uploadFileDraft = useCallback(
+    async (scriptId: string, payload: IUploadFileDraftPayload) => {
+      const res = await axiosPrivate.post<IResData<object>>(
         `/draft/upload/${scriptId}`,
         payload,
         {
@@ -67,17 +96,14 @@ const useDraftApi = (controller?: AbortController) => {
 
       return res.data;
     },
-    async saveFileDraft(scriptId: string, payload: ISaveDraftPayload) {
-      const res = await axiosPrivate.patch(`/draft/save/${scriptId}`, payload, {
-        signal: controller?.signal,
-      });
 
-      return res.data;
-    },
+    [axiosPrivate, controller?.signal]
+  );
 
-    async selectedDraft(scriptId: string, payload: ISelectOtherDraftPayload) {
-      const res = await axiosPrivate.patch(
-        `/draft/select/${scriptId}`,
+  const saveFileDraft = useCallback(
+    async (scriptId: string, payload: ISaveDraftPayload) => {
+      const res = await axiosPrivate.patch<IResData<object>>(
+        `/draft/save/${scriptId}`,
         payload,
         {
           signal: controller?.signal,
@@ -87,8 +113,12 @@ const useDraftApi = (controller?: AbortController) => {
       return res.data;
     },
 
-    async uploadCopyright(scriptId: string, payload: IUploadCopyrightPayload) {
-      const res = await axiosPrivate.post(
+    [axiosPrivate, controller?.signal]
+  );
+
+  const uploadCopyright = useCallback(
+    async (scriptId: string, payload: IUploadCopyrightPayload) => {
+      const res = await axiosPrivate.post<IResData<object>>(
         `/draft/copyright/${scriptId}`,
         payload,
         {
@@ -101,6 +131,35 @@ const useDraftApi = (controller?: AbortController) => {
 
       return res.data;
     },
+
+    [axiosPrivate, controller?.signal]
+  );
+
+  const selectedDraft = useCallback(
+    async (scriptId: string, payload: ISelectOtherDraftPayload) => {
+      const res = await axiosPrivate.patch<IResData<object>>(
+        `/draft/select/${scriptId}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data;
+    },
+
+    [axiosPrivate, controller?.signal]
+  );
+
+  return {
+    getAllDraft,
+    getOneDraft,
+    getOneDraftAsPdf,
+    getDraftPdf,
+    uploadFileDraft,
+    selectedDraft,
+    uploadCopyright,
+    saveFileDraft,
   };
 };
 

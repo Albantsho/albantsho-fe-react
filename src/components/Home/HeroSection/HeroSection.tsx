@@ -8,9 +8,8 @@ import {
 } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
 import useScriptsApi from "apis/Scripts.api";
-import { IScript } from "interfaces/script";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { animated, useSpring } from "react-spring";
 import routes from "routes/routes";
 import useUserStore from "store/user.store";
@@ -22,8 +21,6 @@ const HeroSection = () => {
   const lgScreen = useMediaQuery("(min-width: 1024px)");
   const user = useUserStore((state) => state.user);
   const { getAllScripts } = useScriptsApi();
-  const [bestScript, setBestScript] = useState<IScript>({} as IScript);
-  const [loading, setLoading] = useState(false);
 
   const titleAnim = useSpring({
     from: { x: -100, opacity: 0 },
@@ -35,31 +32,8 @@ const HeroSection = () => {
     to: { x: 0, opacity: 1 },
   });
 
-  useEffect(() => {
-    async function getBestScriptFunc() {
-      try {
-        setLoading(true);
-        const res = await getAllScripts("rate=true");
-        setBestScript(res.data.scripts[0]);
-        setLoading(false);
-      } catch (error) {
-        ("");
-      }
-    }
-    getBestScriptFunc();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  <AnimatedScriptCard
-    className="w-full"
-    style={cardAnim}
-    sx={{
-      maxWidth: 395,
-      boxShadow: "0px 35px 60px 0px #0000004D",
-    }}
-    script={bestScript}
-    inHome
-  />;
+  const { data: trendingScriptsData, isLoading: loadingGetTrendingScripts } =
+    useQuery("script", () => getAllScripts("rate=true"));
 
   return (
     <Box
@@ -116,7 +90,21 @@ const HeroSection = () => {
             )}
           </animated.div>
           {lgScreen &&
-            (loading ? (
+            (!loadingGetTrendingScripts &&
+            trendingScriptsData &&
+            trendingScriptsData.scripts[0] ? (
+              <AnimatedScriptCard
+                key={trendingScriptsData.scripts[0]._id}
+                className="w-full"
+                style={cardAnim}
+                sx={{
+                  maxWidth: 395,
+                  boxShadow: "0px 35px 60px 0px #0000004D",
+                }}
+                script={trendingScriptsData.scripts[0]}
+                inHome
+              />
+            ) : (
               <Card
                 className="rounded-lg w-96"
                 sx={{ boxShadow: " 0px 2px 7px rgba(117, 88, 162, 0.15)" }}
@@ -177,20 +165,6 @@ const HeroSection = () => {
                   />
                 </div>
               </Card>
-            ) : (
-              bestScript && (
-                <AnimatedScriptCard
-                  key={bestScript._id}
-                  className="w-full"
-                  style={cardAnim}
-                  sx={{
-                    maxWidth: 395,
-                    boxShadow: "0px 35px 60px 0px #0000004D",
-                  }}
-                  script={bestScript}
-                  inHome
-                />
-              )
             ))}
         </div>
       </div>

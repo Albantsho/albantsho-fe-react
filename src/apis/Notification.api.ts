@@ -14,20 +14,16 @@ interface IData_getNotification {
 const useNotification = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
-  const getAllNotifications = useCallback(
-    async () => {
-      const res = await axiosPrivate.get<IResData<IData_getNotifications>>(
-        "/notification/all",
-        {
-          signal: controller?.signal,
-        }
-      );
+  const getAllNotifications = useCallback(async () => {
+    const res = await axiosPrivate.get<IResData<IData_getNotifications>>(
+      "/notification/all",
+      {
+        signal: controller?.signal,
+      }
+    );
 
-      return res.data.data;
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
-  );
+    return res.data.data;
+  }, [axiosPrivate, controller?.signal]);
 
   const getOneNotification = useCallback(
     async (notificationId: string) => {
@@ -40,8 +36,8 @@ const useNotification = (controller?: AbortController) => {
 
       return res.data;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
+
+    [axiosPrivate, controller?.signal]
   );
 
   const seenNotification = useCallback(
@@ -55,8 +51,8 @@ const useNotification = (controller?: AbortController) => {
       );
       return res.data;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
+
+    [axiosPrivate, controller?.signal]
   );
 
   const deleteNotification = useCallback(
@@ -70,8 +66,8 @@ const useNotification = (controller?: AbortController) => {
 
       return res.data;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
+
+    [axiosPrivate, controller?.signal]
   );
 
   return {

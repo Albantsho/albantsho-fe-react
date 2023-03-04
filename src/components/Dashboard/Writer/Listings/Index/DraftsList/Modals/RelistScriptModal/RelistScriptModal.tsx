@@ -3,41 +3,53 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScriptsApi from "apis/Scripts.api";
-import { IUnlistedScript } from "interfaces/script";
+import { IResData } from "interfaces/response";
 import Image from "next/image";
-import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { QueryClient, useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
-
+import successHandler from "utils/success-handler";
 interface IProps {
   openRelistScript: boolean;
   setOpenRelistScript: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
-  setUnListedScripts: React.Dispatch<React.SetStateAction<IUnlistedScript[]>>;
 }
+
+const queryClient = new QueryClient();
 
 const RelistScriptModal = ({
   openRelistScript,
   setOpenRelistScript,
-  setUnListedScripts,
   id,
 }: IProps) => {
   const { updatePublishedScript } = useScriptsApi();
-  const [loading, setLoading] = useState(false);
+
+  const { mutate: publishScriptMutation, isLoading: loadingPublishScript } =
+    useMutation<
+      IResData<object>,
+      Error,
+      { payload: { published: boolean }; scriptId: string }
+    >(
+      (data) =>
+        updatePublishedScript(
+          { published: data.payload.published },
+          data.scriptId
+        ),
+      {
+        onError: (error) => errorHandler(error),
+        onSuccess: (data) => {
+          successHandler(data.message);
+          queryClient.invalidateQueries("script");
+          handleCloseRelistScript();
+        },
+      }
+    );
 
   const handleCloseRelistScript = () => setOpenRelistScript(false);
 
-  const reListScriptToMarketplace = async () => {
-    try {
-      setLoading(true);
-      await updatePublishedScript({ published: true }, id);
-      setUnListedScripts((prev) => prev.filter((script) => script._id !== id));
-    } catch (error) {
-      errorHandler(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const reListScriptToMarketplace = async () =>
+    publishScriptMutation({ payload: { published: true }, scriptId: id });
+
   return (
     <Modal
       className="px-5"
@@ -71,7 +83,7 @@ const RelistScriptModal = ({
               onClick={reListScriptToMarketplace}
               size="large"
               className="py-3 px-5 rounded-lg text-white bg-primary-700"
-              loading={loading}
+              loading={loadingPublishScript}
             >
               Proceed
             </Btn>

@@ -1,36 +1,25 @@
+import { Divider, Skeleton } from "@mui/material";
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import useScriptsApi from "apis/Scripts.api";
 import Heading from "components/Dashboard/Writer/Reviews/Index/Heading/Heading";
 import Summary from "components/Dashboard/Writer/Reviews/Summary/Summary";
-import { IFullInformationScript } from "interfaces/script";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { DotLoader } from "react-spinners";
+import { useQuery } from "react-query";
+import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../../_app";
 
 const SummaryPage: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { getScript } = useScriptsApi();
-  const [script, setScript] = useState<IFullInformationScript>();
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function getScriptFunc() {
-      try {
-        if (typeof query.id === "string") {
-          const res = await getScript(query.id as string);
-          setScript(res.data.script);
-          setLoading(false);
-        }
-      } catch (error) {
-        ("");
-      }
+  const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
+    "script",
+    () => getScript(query.id as string),
+    {
+      onError: (err) => errorHandler(err),
     }
-
-    getScriptFunc();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  );
 
   return (
     <>
@@ -39,10 +28,32 @@ const SummaryPage: NextPageWithLayout = () => {
       </Head>
       <div className="bg-white shadow-primary rounded-md mb-16">
         <Heading />
-        {!loading && script ? (
-          <Summary script={script} />
+        {!isLoadingGetScript && scriptData ? (
+          <Summary script={scriptData.script} />
         ) : (
-          <DotLoader color="#7953B5" className="mx-auto mt-10" />
+          <div className="pb-9 lg:pb-16 bg-white rounded-md px-5">
+            <div
+              data-aos="flip-left"
+              className="mt-7 lg:mt-12 rounded-md mx-auto lg:px-10   lg:py-9  xl:py-12 lg:shadow-secondary  max-w-3xl"
+            >
+              <Skeleton variant="rounded" width={210} height={60} />
+              <div className="flex flex-col  md:flex-row lg:flex-col xl:flex-row mb-2 lg:mb-5 lg:max-w-max  gap-x-2 xl:gap-x-4 gap-y-4">
+                <div className="flex items-center gap-x-4 gap-y-2 flex-wrap">
+                  <Skeleton variant="rounded" width={210} height={40} />
+                  <Skeleton variant="rounded" width={120} height={40} />
+                </div>
+                <Divider
+                  className="hidden md:block md:mx-4 xl:mx-7 2xl:mx-9 lg:hidden xl:block"
+                  orientation="vertical"
+                  flexItem
+                />
+                <div>
+                  <Skeleton variant="rounded" width={160} height={60} />
+                </div>
+              </div>
+              <Skeleton variant="rounded" width={160} height={40} />
+            </div>
+          </div>
         )}
       </div>
     </>

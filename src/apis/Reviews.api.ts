@@ -1,4 +1,10 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
+import { IResData } from "interfaces/response";
+import {
+  IAssignedOrCompletedRequest,
+  ICurrentRequest,
+} from "interfaces/reviews";
+import { useCallback } from "react";
 
 interface IUpdateReviewPayload {
   introduction?: string;
@@ -21,10 +27,64 @@ interface IAssignReviewRequestToReviewerPayload {
   userId: string;
 }
 
+interface IData_getReviews {
+  scripts: ICurrentRequest[];
+  pagesCount: number;
+  currentPage: number;
+}
+interface IData_getAssignedOrCompletedRequest {
+  scripts: IAssignedOrCompletedRequest[];
+  pagesCount: number;
+  currentPage: number;
+}
+
 const useReviewsApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
+  const getAllRequestedReviews = useCallback(
+    async (searchQuery: string) => {
+      const res = await axiosPrivate.get<IResData<IData_getReviews>>(
+        `/review/requests?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [controller?.signal]
+  );
+
+  const getAssignedRequestedReviews = useCallback(
+    async (searchQuery: string) => {
+      const res = await axiosPrivate.get<
+        IResData<IData_getAssignedOrCompletedRequest>
+      >(`/review/request/assigned?search=${searchQuery}`, {
+        signal: controller?.signal,
+      });
+
+      return res.data.data;
+    },
+    [controller?.signal]
+  );
+
+  const getCompletedRequestedReviews = useCallback(
+    async (searchQuery: string) => {
+      const res = await axiosPrivate.get<
+        IResData<IData_getAssignedOrCompletedRequest>
+      >(`/review/request/completed?search=${searchQuery}`, {
+        signal: controller?.signal,
+      });
+
+      return res.data.data;
+    },
+    [controller?.signal]
+  );
+
   return {
+    getAllRequestedReviews,
+    getAssignedRequestedReviews,
+    getCompletedRequestedReviews,
     async createNewReview(payload: { scriptId: string }) {
       const res = await axiosPrivate.post("/review/create", payload, {
         signal: controller?.signal,
@@ -85,39 +145,6 @@ const useReviewsApi = (controller?: AbortController) => {
       const res = await axiosPrivate.patch(
         `/review/update/${reviewId}`,
         payload,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    async getAllRequestedReviews(searchQuery: string) {
-      const res = await axiosPrivate.get(
-        `/review/requests?search=${searchQuery}`,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    async getAssignedRequestedReviews(searchQuery: string) {
-      const res = await axiosPrivate.get(
-        `/review/request/assigned?search=${searchQuery}`,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    async getCompletedRequestedReviews(searchQuery: string) {
-      const res = await axiosPrivate.get(
-        `/review/request/completed?search=${searchQuery}`,
         {
           signal: controller?.signal,
         }

@@ -31,7 +31,7 @@ const useContact = (controller?: AbortController) => {
       return res.data;
     },
 
-    [controller?.signal]
+    [axios, controller?.signal]
   );
 
   const answerToContact = useCallback(
@@ -46,7 +46,7 @@ const useContact = (controller?: AbortController) => {
       return res.data;
     },
 
-    [controller?.signal]
+    [axios, controller?.signal]
   );
 
   const allContacts = useCallback(
@@ -59,7 +59,7 @@ const useContact = (controller?: AbortController) => {
       );
       return res.data.data;
     },
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   return {

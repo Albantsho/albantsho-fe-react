@@ -49,7 +49,7 @@ const ScriptPage = ({
     socket.on("getScriptOrder", async () => {
       try {
         const res = await getOneDraft(query.id as string);
-        setHtmlInitialValue(res.data.draft);
+        setHtmlInitialValue(res.draft);
       } catch (error) {
         errorHandler(error);
       }

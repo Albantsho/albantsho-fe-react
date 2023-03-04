@@ -88,7 +88,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+    [axios, controller?.signal]
   );
 
   const emailVerify = useCallback(
@@ -104,7 +104,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+    [axios, controller?.signal]
   );
 
   const resendCode = useCallback(
@@ -113,7 +113,7 @@ const useAuthApi = (controller?: AbortController) => {
         signal: controller?.signal,
       });
     },
-    [controller?.signal]
+    [axios, controller?.signal]
   );
 
   const logoutUser = useCallback(async () => {
@@ -124,7 +124,7 @@ const useAuthApi = (controller?: AbortController) => {
         signal: controller?.signal,
       }
     );
-  }, [controller?.signal]);
+  }, [axiosPrivate, controller?.signal]);
 
   const resetPassword = useCallback(
     async (payload: IResetpasswordPayload) => {
@@ -132,7 +132,7 @@ const useAuthApi = (controller?: AbortController) => {
         signal: controller?.signal,
       });
     },
-    [controller?.signal]
+    [axios, controller?.signal]
   );
 
   const resetPasswordEmail = useCallback(
@@ -145,7 +145,7 @@ const useAuthApi = (controller?: AbortController) => {
         }
       );
     },
-    [controller?.signal]
+    [axios, controller?.signal]
   );
 
   const getNewAccessToken = useCallback(async () => {
@@ -155,7 +155,7 @@ const useAuthApi = (controller?: AbortController) => {
     );
 
     return res.data.data;
-  }, [controller?.signal]);
+  }, []);
 
   const signin = useCallback(
     async (payload: ILoginPayload) => {
@@ -170,7 +170,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+    [axios, controller?.signal]
   );
 
   const updateUserInformation = useCallback(
@@ -184,7 +184,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data;
     },
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const updateUserWithdrawInformation = useCallback(
@@ -199,7 +199,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data;
     },
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const getUserProfile = useCallback(async () => {
@@ -211,7 +211,7 @@ const useAuthApi = (controller?: AbortController) => {
     );
 
     return res.data.data;
-  }, [controller?.signal]);
+  }, [axiosPrivate, controller?.signal]);
 
   const updateUserRestriction = useCallback(
     async (payload: IUserRestrictionPayload, id: string) => {
@@ -225,7 +225,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data;
     },
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const getAllUser = useCallback(
@@ -240,7 +240,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const getUserProfileForAdmin = useCallback(
@@ -253,7 +253,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const getAllReviewers = useCallback(async () => {
@@ -265,7 +265,7 @@ const useAuthApi = (controller?: AbortController) => {
     );
 
     return res.data.data;
-  }, [controller?.signal]);
+  }, [axiosPrivate, controller?.signal]);
 
   return {
     signup,

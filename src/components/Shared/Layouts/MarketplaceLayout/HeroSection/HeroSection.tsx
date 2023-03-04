@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const HeroSection = ({ description }: IProps) => {
-  const { handleSearch, scriptList, searchQuery } = useHeroSection();
+  const { handleSearch, searchScriptData, searchQuery } = useHeroSection();
 
   return (
     <Box
@@ -32,7 +32,9 @@ const HeroSection = ({ description }: IProps) => {
       <div className="flex flex-col bg-white rounded-lg md:min-w-[716px] relative">
         <div
           className={`${
-            scriptList.length > 0 ? "border-b-2 mb-4" : "border-none"
+            searchScriptData && searchScriptData.scripts.length > 0
+              ? "border-b-2 mb-4"
+              : "border-none"
           } flex flex-1 items-center rounded-lg overflow-hidden`}
         >
           <input
@@ -45,7 +47,7 @@ const HeroSection = ({ description }: IProps) => {
         </div>
         {searchQuery && (
           <div className="flex flex-col gap-2 absolute -bottom-7 left-0 right-0 bg-white rounded-lg">
-            {scriptList.map((script) => (
+            {searchScriptData?.scripts.map((script) => (
               <Link
                 key={script._id}
                 passHref

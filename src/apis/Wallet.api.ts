@@ -1,4 +1,6 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
+import { IResData } from "interfaces/response";
+import { useCallback } from "react";
 
 interface IPayloadIncreaseWalletBalance {
   transactionId: string;
@@ -18,14 +20,19 @@ interface IPayloadWithdrawWallet {
 const useWalletApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
-  return {
-    async getWalletBalance() {
-      const res = await axiosPrivate.get("/wallet/balance", {
+  const getWalletBalance = useCallback(async () => {
+    const res = await axiosPrivate.get<IResData<{ balance: number }>>(
+      "/wallet/balance",
+      {
         signal: controller?.signal,
-      });
+      }
+    );
 
-      return res.data;
-    },
+    return res.data.data;
+  }, [axiosPrivate, controller?.signal]);
+
+  return {
+    getWalletBalance,
 
     async increaseWalletBalance(payload: IPayloadIncreaseWalletBalance) {
       const res = await axiosPrivate.post("/wallet/deposit", payload, {

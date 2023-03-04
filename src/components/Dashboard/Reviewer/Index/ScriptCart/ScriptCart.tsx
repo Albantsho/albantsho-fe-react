@@ -108,8 +108,9 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
                 scriptValue={valueForConvertPdf as string}
                 basedOn={selectedScript?.basedOn as string}
                 draftDate={selectedScript?.draftDate as string}
+                names={selectedScript?.names as string}
                 title={selectedScript?.title as string}
-                writtenBy={selectedScript?.writtenBy.join(" ") as string}
+                writtenBy={selectedScript?.writtenBy as string}
               />
             }
             fileName={selectedScript?.title}

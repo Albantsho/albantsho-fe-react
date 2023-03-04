@@ -1,4 +1,6 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
+import { IResData } from "interfaces/response";
+import { useCallback } from "react";
 
 interface IPayloadBuyReviewPlan {
   scriptId: string;
@@ -13,22 +15,39 @@ interface IPayloadBuySubscriptionPlan {
 const usePlanApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
+  const buySubscriptionPlan = useCallback(
+    async (payload: IPayloadBuySubscriptionPlan) => {
+      const res = await axiosPrivate.post<IResData<object>>(
+        "/plan/buy/subscription",
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const buyReviewsPlan = useCallback(
+    async (payload: IPayloadBuyReviewPlan) => {
+      const res = await axiosPrivate.post<IResData<object>>(
+        "/plan/buy/review",
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
   return {
-    async buySubscriptionPlan(payload: IPayloadBuySubscriptionPlan) {
-      const res = await axiosPrivate.post("/plan/buy/subscription", payload, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
-    async buyReviewsPlan(payload: IPayloadBuyReviewPlan) {
-      const res = await axiosPrivate.post("/plan/buy/review", payload, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
+    buySubscriptionPlan,
+    buyReviewsPlan,
   };
 };
 

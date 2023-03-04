@@ -1,13 +1,15 @@
-import { Typography, Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import useScripBidApi from "apis/ScripBid.api";
-import useUserStore from "store/user.store";
 import { IBidInMarketplace } from "interfaces/bid";
+import { IResData } from "interfaces/response";
 import { IFullInformationScript } from "interfaces/script";
-import { useRouter } from "next/router";
 import { useState } from "react";
+import { QueryClient, useMutation } from "react-query";
+import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 interface IProps {
   setOpenBidSuccessful: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,34 +18,50 @@ interface IProps {
   ethPrice: number | false | null;
 }
 
+const queryClient = new QueryClient();
+
 const PlaceBid = ({ setOpenBidSuccessful, script, bid, ethPrice }: IProps) => {
   const [bidValue, setBidValue] = useState("");
   const { createBid, deleteBid } = useScripBidApi();
   const user = useUserStore((state) => state.user);
-  const { reload } = useRouter();
+
+  const { mutate: createBidMutate, isLoading: loadingCreateBid } = useMutation<
+    IResData<object>,
+    Error,
+    { scriptId: string; amount: number }
+  >((data) => createBid(data), {
+    onError: (error) => errorHandler(error),
+    onSuccess: (data) => {
+      successHandler(data.message);
+      queryClient.invalidateQueries("script");
+      setOpenBidSuccessful(true);
+    },
+  });
+
+  const { mutate: deleteBidMutate, isLoading: loadingDeleteBid } = useMutation<
+    IResData<object>,
+    Error,
+    string
+  >((data) => deleteBid(data), {
+    onError: (error) => errorHandler(error),
+    onSuccess: (data) => {
+      successHandler(data.message);
+      queryClient.invalidateQueries("script");
+      setOpenBidSuccessful(true);
+    },
+  });
 
   const handleBidValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const result = e.target.value.replace(/\D/g, "");
     setBidValue(result);
   };
 
-  const handleOpenBidSuccessful = async () => {
-    try {
-      await createBid({ amount: +bidValue, scriptId: script._id });
-      setOpenBidSuccessful(true);
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const handleOpenBidSuccessful = async () =>
+    createBidMutate({ amount: +bidValue, scriptId: script._id });
 
   const handleCloseBidSuccessful = async () => {
-    try {
-      if (bid) {
-        await deleteBid(bid._id);
-        reload();
-      }
-    } catch (error) {
-      errorHandler(error);
+    if (bid) {
+      deleteBidMutate(bid._id);
     }
   };
 
@@ -84,6 +102,7 @@ const PlaceBid = ({ setOpenBidSuccessful, script, bid, ethPrice }: IProps) => {
                 {!bid && user.userType === "producer" && (
                   <Btn
                     onClick={handleOpenBidSuccessful}
+                    loading={loadingCreateBid}
                     size="small"
                     className="mr-auto py-3 px-4"
                   >
@@ -92,6 +111,7 @@ const PlaceBid = ({ setOpenBidSuccessful, script, bid, ethPrice }: IProps) => {
                 )}
                 {bid && user.userType === "producer" && (
                   <Button
+                    disabled={loadingDeleteBid}
                     variant="outlined"
                     onClick={handleCloseBidSuccessful}
                     size="small"

@@ -14,33 +14,23 @@ import {
   Typography,
 } from "@mui/material";
 import useWalletApi from "apis/Wallet.api";
-import useUserStore from "store/user.store";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
+import { useQuery } from "react-query";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
+import errorHandler from "utils/error-handler";
 
 const WalletCard = () => {
   const { push, route } = useRouter();
   const user = useUserStore((state) => state.user);
-  const [balance, setBalance] = useState(0);
   const { getWalletBalance } = useWalletApi();
 
-  useEffect(() => {
-    async function getWalletBalanceFunc() {
-      try {
-        const res = await getWalletBalance();
-        setBalance(res.data.balance);
-      } catch (error) {
-        ("");
-      }
-    }
-
-    getWalletBalanceFunc();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { data } = useQuery("balance", () => getWalletBalance(), {
+    onError: (error) => errorHandler(error),
+  });
 
   return (
     <Card
@@ -60,11 +50,11 @@ const WalletCard = () => {
             {user.firstName + " " + user.lastName}
           </Typography>
           <Chip
-            title={`$${balance}`}
+            title={`$${data?.balance}`}
             sx={{ "& .MuiChip-icon": { color: "#7953B5" } }}
             className="py-6 flex text-primary-700 futura font-medium text-lg px-2 md:px-4 rounded-md bg-primary-50/50"
             icon={<SvgIcon color="primary" component={wallet} inheritViewBox />}
-            label={`Balance:$${balance}`}
+            label={`Balance:$${data?.balance}`}
           />
         </div>
         <Divider className="mt-6 mb-4 hidden md:block" />

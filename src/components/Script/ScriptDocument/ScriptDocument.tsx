@@ -7,12 +7,13 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import useUserStore from "store/user.store";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IFullInformationScript } from "interfaces/script";
 import { AiOutlineClose } from "react-icons/ai";
-import useScriptDocument from "./useScriptDocument";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
+import { ClipLoader } from "react-spinners";
 import { Socket } from "socket.io-client";
+import useUserStore from "store/user.store";
+import useScriptDocument from "./useScriptDocument";
 
 interface IProps {
   script: IFullInformationScript;
@@ -31,6 +32,7 @@ const ScriptDocument = ({ script, socket }: IProps) => {
     register,
     collaboratorsList,
     removeCollaborator,
+    loadingGetCollaboratorList,
   } = useScriptDocument({ socket });
   const user = useUserStore((state) => state.user);
 
@@ -87,24 +89,24 @@ const ScriptDocument = ({ script, socket }: IProps) => {
       )}
       {activeButton === 1 && (
         <>
-          {collaboratorsList && (
+          {collaboratorsList && !loadingGetCollaboratorList ? (
             <>
               <div className="border border-gray-400 rounded-lg py-[10px] px-4 flex justify-between items-center mb-2">
                 <div className="flex items-center gap-3">
                   <Avatar
                     className="w-8 h-8"
-                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${collaboratorsList.author.image}`}
-                    alt={collaboratorsList.author.firstName}
+                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${collaboratorsList.script.author.image}`}
+                    alt={collaboratorsList.script.author.firstName}
                   />
                   <Typography className="futura font-medium">
-                    {`${collaboratorsList.author.firstName} ${collaboratorsList.author.lastName}`}
+                    {`${collaboratorsList.script.author.firstName} ${collaboratorsList.script.author.lastName}`}
                   </Typography>
                 </div>
                 <Typography className="futura text-[#5D5FEF] font-medium">
                   owner
                 </Typography>
               </div>
-              {collaboratorsList.collaborators.map((collaborator) => (
+              {collaboratorsList.script.collaborators.map((collaborator) => (
                 <div
                   key={collaborator._id}
                   className="border border-gray-400 rounded-lg py-[10px] px-4 flex justify-between items-center mb-2"
@@ -119,7 +121,7 @@ const ScriptDocument = ({ script, socket }: IProps) => {
                       {`${collaborator.firstName} ${collaborator.lastName}`}
                     </Typography>
                   </div>
-                  {user.email === collaboratorsList.author.email && (
+                  {user.email === collaboratorsList.script.author.email && (
                     <IconButton
                       onClick={removeCollaborator(collaborator._id)}
                       className="text-error-500 hover:bg-error-50 bg-error-50"
@@ -129,7 +131,7 @@ const ScriptDocument = ({ script, socket }: IProps) => {
                   )}
                 </div>
               ))}
-              {user.email === collaboratorsList.author.email && (
+              {user.email === collaboratorsList.script.author.email && (
                 <>
                   <Divider className="my-8" />
                   <Typography className="futura font-medium mb-1 text-primary-700">
@@ -167,6 +169,8 @@ const ScriptDocument = ({ script, socket }: IProps) => {
                 </>
               )}
             </>
+          ) : (
+            <ClipLoader color="grey" className="mt-[180px] inline-block" />
           )}
         </>
       )}

@@ -50,7 +50,7 @@ const ScriptMainDetails = ({ script }: IProps) => {
               variant="h6"
               className="px-10 font-normal text-primary-700 leading-normal"
             >
-              Written by {script.writtenBy.join(" ")}
+              Written by {script.writtenBy}
             </Typography>
             {parse(script.scriptPart as string)}
           </article>

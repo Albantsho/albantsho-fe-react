@@ -2,11 +2,15 @@ import ReviewedIcon from "@assets/icons/reviewed.svg";
 import { Button, Chip, Divider, SvgIcon, Typography } from "@mui/material";
 import useScripBidApi from "apis/ScripBid.api";
 import { IBidForScript } from "interfaces/bid";
+import { IResData } from "interfaces/response";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
 import { priceConverter } from "utils/price-convert";
+import successHandler from "utils/success-handler";
 
 interface IProps {
   setOpenAcceptOffer: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,15 +18,24 @@ interface IProps {
   script: IFullInformationScript;
 }
 
+const queryClient = new QueryClient();
+
 const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
   const { replace } = useRouter();
   const { rejectBid } = useScripBidApi();
   const [ethPrice, setEthPrice] = useState<number | false | null>(null);
 
-  const rejectOfferFunc = (id: string) => async () => {
-    await rejectBid(id);
-    replace(routes.writerDashboard.url);
-  };
+  const { mutate: rejectBidMutation, isLoading: loadingRejectBid } =
+    useMutation<IResData<object>, Error, string>((data) => rejectBid(data), {
+      onError: (error) => errorHandler(error),
+      onSuccess: (data) => {
+        successHandler(data.message);
+        queryClient.invalidateQueries(["script", "bid"]);
+        replace(routes.writerDashboard.url);
+      },
+    });
+
+  const rejectOfferFunc = (id: string) => async () => rejectBidMutation(id);
 
   useEffect(() => {
     async function getETHPrice() {
@@ -115,6 +128,7 @@ const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
                 Accept Offer
               </Button>
               <Button
+                disabled={loadingRejectBid}
                 onClick={rejectOfferFunc(bid._id)}
                 sx={{ "&.MuiButtonBase-root": { fontWeight: 600 } }}
                 size="large"

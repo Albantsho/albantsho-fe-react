@@ -47,12 +47,14 @@ const NotificationComponent = () => {
         <Badge
           badgeContent={
             Number(
-              notificationsData?.notifications.filter((n) => !n.read).length
-            ) +
-            Number(
-              invitesData?.invites.filter((i) => !i.rejected && !i.accepted)
-                .length
-            )
+              Number(
+                notificationsData?.notifications.filter((n) => !n.read).length
+              ) +
+                Number(
+                  invitesData?.invites.filter((i) => !i.rejected && !i.accepted)
+                    .length
+                )
+            ) || null
           }
           color="error"
         >
