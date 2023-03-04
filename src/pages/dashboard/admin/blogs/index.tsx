@@ -2,6 +2,7 @@ import { Fab } from "@mui/material";
 import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
+import Loader from "@shared/Loader/Loader";
 import useWeblogApi from "apis/Weblog.api";
 import ArchiveBlogsList from "components/Dashboard/Admin/Blogs/Index/ArchiveBlogsList/ArchiveBlogsList";
 import LiveBlogsList from "components/Dashboard/Admin/Blogs/Index/LiveBlogsList/LiveBlogsList";
@@ -31,9 +32,8 @@ const BlogsPage: NextPageWithLayout = () => {
       onError: (err) => {
         errorHandler(err);
       },
-      cacheTime: 1000,
-      // refetchInterval: 1000,
-      // refetchIntervalInBackground: true,
+      refetchInterval: 2000,
+      staleTime: 10000,
     }
   );
 
@@ -110,13 +110,13 @@ const BlogsPage: NextPageWithLayout = () => {
           <Fab
             color="primary"
             href={routes.createBlogAdminDashboard.url}
-            className="flex items-center justify-center md:hidden fixed right-10 bottom-6  text-3xl rounded-2xl"
+            className="flex items-center justify-center md:hidden fixed right-10 bottom-4  text-3xl rounded-2xl"
           >
             +
           </Fab>
         </>
       ) : (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <Loader setCustomHeight="min-h-[60vh]" />
       )}
     </>
   );

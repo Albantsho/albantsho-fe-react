@@ -2,23 +2,30 @@ import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import CustomRating from "@shared/CustomRating/CustomRating";
 import useScriptsApi from "apis/Scripts.api";
 import { useState } from "react";
+import successHandler from "utils/success-handler";
 
 interface IProps {
   id: string;
+  rate: number;
 }
 
-const RateToScript = ({ id }: IProps) => {
+const RateToScript = ({ id, rate }: IProps) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const { giveRateToScript } = useScriptsApi();
-  const [rateValue, setRateValue] = useState<number | null>(null);
+  const [rateValue, setRateValue] = useState<number | null>(rate);
 
   const handleRateScript = async (
-    event: React.SyntheticEvent<Element, Event>,
+    _event: React.SyntheticEvent<Element, Event>,
     newValue: number | null
   ) => {
     setRateValue(newValue);
-    await giveRateToScript({ rate: `${newValue}`, scriptId: id });
+    try {
+      const res = await giveRateToScript({ rate: `${newValue}`, scriptId: id });
+      successHandler(res.message);
+    } catch (error) {
+      ("");
+    }
   };
 
   return (

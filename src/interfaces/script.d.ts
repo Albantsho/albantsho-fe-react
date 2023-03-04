@@ -10,6 +10,7 @@ export interface IScript {
   writtenBy: string[];
   draftDate: string;
   basedOn: string;
+  names: string;
 }
 
 export interface IUnlistedScript {

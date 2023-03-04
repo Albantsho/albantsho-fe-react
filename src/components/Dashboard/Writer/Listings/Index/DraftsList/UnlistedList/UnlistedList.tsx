@@ -1,16 +1,15 @@
+import emptyBlogs from "@assets/images/empty-blogs.png";
 import { Divider, Paper, Typography } from "@mui/material";
 import { IUnlistedScript } from "interfaces/script";
 import Image from "next/image";
 import React from "react";
 import UnlistedScript from "./UnlistedScript/UnlistedScript";
-import emptyBlogs from "@assets/images/empty-blogs.png";
 
 interface IProps {
   unListedScripts: IUnlistedScript[];
-  setUnListedScripts: React.Dispatch<React.SetStateAction<IUnlistedScript[]>>;
 }
 
-const UnlistedList = ({ unListedScripts, setUnListedScripts }: IProps) => {
+const UnlistedList = ({ unListedScripts }: IProps) => {
   return unListedScripts.length ? (
     <Paper elevation={0} className="mt-4 sm:mt-6 bg-white shadow-primary">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
@@ -32,11 +31,7 @@ const UnlistedList = ({ unListedScripts, setUnListedScripts }: IProps) => {
       <div className="px-5 xl:px-14 overflow-hidden">
         {unListedScripts.map((script, index) => (
           <React.Fragment key={script._id}>
-            <UnlistedScript
-              setUnListedScripts={setUnListedScripts}
-              key={script._id}
-              script={script}
-            />
+            <UnlistedScript key={script._id} script={script} />
             {index < unListedScripts.length - 1 && (
               <Divider className="hidden sm:flex" />
             )}

@@ -11,27 +11,36 @@ import {
 } from "@mui/material";
 import useScripBidApi from "apis/ScripBid.api";
 import { IProducerBid } from "interfaces/bid";
+import { IResData } from "interfaces/response";
 import Image from "next/image";
 import Link from "next/link";
+import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 interface IProps {
   bidsList: IProducerBid[];
-  setBidsList: React.Dispatch<React.SetStateAction<IProducerBid[]>>;
 }
 
-const CurrentBids = ({ bidsList, setBidsList }: IProps) => {
+const queryClient = new QueryClient();
+
+const CurrentBids = ({ bidsList }: IProps) => {
   const { deleteBid } = useScripBidApi();
 
-  const withdrawOnScript = (bidId: string) => async () => {
-    try {
-      await deleteBid(bidId);
-      setBidsList((prev) => prev.filter((b) => b._id !== bidId));
-    } catch (error) {
-      errorHandler(error);
-    }
-  };
+  const { mutate: deleteBidMutate, isLoading: loadingDeleteBid } = useMutation<
+    IResData<object>,
+    Error,
+    string
+  >((data) => deleteBid(data), {
+    onError: (error) => errorHandler(error),
+    onSuccess: (data) => {
+      successHandler(data.message);
+      queryClient.invalidateQueries("script");
+    },
+  });
+
+  const withdrawOnScript = (bidId: string) => () => deleteBidMutate(bidId);
 
   return bidsList.filter((b) => !b.rejected).length > 0 ? (
     <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-primary py-5 xl:py-8 flex flex-col mb-16">
@@ -113,6 +122,7 @@ const CurrentBids = ({ bidsList, setBidsList }: IProps) => {
                 </div>
                 <Button
                   variant="text"
+                  disabled={loadingDeleteBid}
                   onClick={withdrawOnScript(bid._id)}
                   sx={{
                     paddingY: 1,
@@ -150,6 +160,7 @@ const CurrentBids = ({ bidsList, setBidsList }: IProps) => {
                   label={`Current Bid : $${bid.amount}`}
                 />
                 <Button
+                  disabled={loadingDeleteBid}
                   variant="text"
                   onClick={withdrawOnScript(bid._id)}
                   sx={{

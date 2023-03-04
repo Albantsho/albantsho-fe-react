@@ -1,16 +1,18 @@
+import emptyUsers from "@assets/images/empty-blogs.png";
 import { Typography } from "@mui/material";
 import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
+import Loader from "@shared/Loader/Loader";
 import useAuthApi from "apis/Auth.api";
 import AllUsersList from "components/Dashboard/Admin/Users/Index/UsersList/AllUsersList";
 import { debounce } from "lodash";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import queryString from "query-string";
 import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
-import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
 
@@ -52,24 +54,6 @@ const UsersPage: NextPageWithLayout = () => {
     push(`?page=${page}`, undefined, { shallow: true });
   };
 
-  // useEffect(() => {
-  //   async function getAllUsersFunc() {
-  //     try {
-  //       setLoading(true);
-  //       const res = await getAllUser(queryString.stringify(query), searchQuery);
-  //       setPageCount(res.data.pagesCount);
-  //       setUsersList(res.data.users);
-  //       setCurrentPage(res.data.currenPage);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       ("");
-  //     }
-  //   }
-  //   getAllUsersFunc();
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [handleSearch, query]);
-
   return (
     <>
       <Head>
@@ -83,18 +67,30 @@ const UsersPage: NextPageWithLayout = () => {
       </Typography>
       <AdminDashboardSearch placeholder="Search" handleSearch={handleSearch} />
       {!isLoading && data ? (
-        <>
-          <AllUsersList usersList={data.users} />
-          {data.pagesCount > 1 && (
-            <CustomPaginationComponent
-              pageCount={data.pagesCount}
-              handleActivePage={handleActivePage}
-              currentPage={currentPage}
+        data.users.length ? (
+          <>
+            <AllUsersList usersList={data.users} />
+            {data.pagesCount > 1 && (
+              <CustomPaginationComponent
+                pageCount={data.pagesCount}
+                handleActivePage={handleActivePage}
+                currentPage={currentPage}
+              />
+            )}
+          </>
+        ) : (
+          <div className="w-fit  mx-auto text-center min-h-[60vh] flex items-center">
+            <Image
+              width={384}
+              height={384}
+              loading="lazy"
+              src={emptyUsers}
+              alt="empty blog list"
             />
-          )}
-        </>
+          </div>
+        )
       ) : (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <Loader setCustomHeight="min-h-[60vh]" />
       )}
     </>
   );

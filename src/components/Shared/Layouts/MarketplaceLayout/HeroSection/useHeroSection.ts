@@ -1,12 +1,15 @@
 import useScriptsApi from "apis/Scripts.api";
-import { IScript } from "interfaces/script";
 import { debounce } from "lodash";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import { useQuery } from "react-query";
 
 const useHeroSection = () => {
   const { searchScripts } = useScriptsApi();
   const [searchQuery, setSearchQuery] = useState("");
-  const [scriptList, setScriptList] = useState<Array<IScript>>([]);
+
+  const { data: searchScriptData } = useQuery("script search", () =>
+    searchScripts(searchQuery)
+  );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
@@ -20,21 +23,7 @@ const useHeroSection = () => {
     [searchQuery]
   );
 
-  useEffect(() => {
-    async function getScripts() {
-      try {
-        const res = await searchScripts(searchQuery);
-        setScriptList(res.data.scripts);
-      } catch (error) {
-        ("");
-      }
-    }
-
-    getScripts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery]);
-
-  return { handleSearch, scriptList, searchQuery };
+  return { handleSearch, searchScriptData, searchQuery };
 };
 
 export default useHeroSection;

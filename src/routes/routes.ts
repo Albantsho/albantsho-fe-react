@@ -364,6 +364,11 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
+  notfound: {
+    url: "/404",
+    mustAuthenticated: "noMatter",
+    permission: [],
+  },
 };
 
 export default routes;

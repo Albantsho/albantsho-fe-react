@@ -14,7 +14,7 @@ export interface IAssignedOrCompletedRequest extends ICurrentRequest {
 export interface IReviewerTask {
   basedOn: string;
   draftDate: string;
-  writtenBy: string[];
+  writtenBy: string;
   _id: string;
   title: string;
   tagline: string;
@@ -24,6 +24,7 @@ export interface IReviewerTask {
   rate: number;
   createdAt: string;
   review: [{ completed: boolean; rate: number }] | [];
+  names: string;
 }
 export interface IWriterReview {
   _id: string;

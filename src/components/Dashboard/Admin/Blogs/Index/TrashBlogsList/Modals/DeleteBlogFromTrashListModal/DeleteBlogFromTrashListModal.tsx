@@ -36,9 +36,7 @@ const DeleteBlogFromTrashListModal = ({
         errorHandler(error);
       },
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          predicate: (query) => query.queryKey[0] === "weblog",
-        });
+        queryClient.invalidateQueries("weblog");
         handleCloseDeleteBlogFromTrashListModal();
         if (blogList.length <= 1) {
           push(`?trash=true&page=${+String(query.page) - 1}`, undefined, {
@@ -46,6 +44,7 @@ const DeleteBlogFromTrashListModal = ({
           });
         }
       },
+      retry: true,
     });
 
   const handleCloseDeleteBlogFromTrashListModal = () =>

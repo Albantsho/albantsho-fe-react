@@ -1,17 +1,18 @@
 import { Fab } from "@mui/material";
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/DashboardSearch";
+import Loader from "@shared/Loader/Loader";
 import useScripBidApi from "apis/ScripBid.api";
 import useScriptsApi from "apis/Scripts.api";
 import TabButtons from "components/Dashboard/Writer/Listings/Index/TabButtons/TabButtons";
 import Bids from "components/Dashboard/Writer/Listings/OpenListingInfo/Bids/Bids";
-import { IBidForScript } from "interfaces/bid";
-import { IFullInformationScript } from "interfaces/script";
 import { debounce } from "lodash";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useState } from "react";
+import { useQuery } from "react-query";
+import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../../../_app";
 
 const AcceptOfferModal = dynamic(
@@ -24,13 +25,26 @@ const CreateScriptModal = dynamic(
 const BidsPage: NextPageWithLayout = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
   const [openAcceptOffer, setOpenAcceptOffer] = useState<boolean>(false);
-  const [script, setScript] = useState<IFullInformationScript>();
-  const [bid, setBid] = useState<IBidForScript>();
-  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const { query } = useRouter();
   const { getScript } = useScriptsApi();
   const { getBidScript } = useScripBidApi();
+
+  const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
+    "script",
+    () => getScript(query.id as string),
+    {
+      onError: (err) => errorHandler(err),
+    }
+  );
+
+  const { data: bidScriptData, isLoading: isLoadingGetBidScript } = useQuery(
+    "script",
+    () => getBidScript(query.bidId as string),
+    {
+      onError: (err) => errorHandler(err),
+    }
+  );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
@@ -44,26 +58,6 @@ const BidsPage: NextPageWithLayout = () => {
     [searchQuery]
   );
 
-  useEffect(() => {
-    async function getScriptFunc() {
-      try {
-        if (typeof query.id === "string" && typeof query.bidId === "string") {
-          setLoading(true);
-          const resScript = await getScript(query.id);
-          const res = await getBidScript(query.bidId);
-          setScript(resScript.data.script);
-          setBid(res.data.scriptBid);
-          setLoading(false);
-        }
-      } catch (error) {
-        ("");
-      }
-    }
-    getScriptFunc();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
-
   return (
     <>
       <Head>
@@ -74,11 +68,14 @@ const BidsPage: NextPageWithLayout = () => {
         handleSearch={handleSearch}
         setOpenCreateScript={setOpenCreateScript}
       />
-      {!loading && bid && script ? (
+      {!isLoadingGetScript &&
+      !isLoadingGetBidScript &&
+      bidScriptData &&
+      scriptData ? (
         <>
           <Bids
-            script={script}
-            bid={bid}
+            script={scriptData.script}
+            bid={bidScriptData.scriptBid}
             setOpenAcceptOffer={setOpenAcceptOffer}
           />
           {openCreateScript ? (
@@ -92,8 +89,8 @@ const BidsPage: NextPageWithLayout = () => {
           {openAcceptOffer ? (
             <Suspense fallback={null}>
               <AcceptOfferModal
-                title={script.title}
-                auction={bid}
+                title={scriptData.script.title}
+                auction={bidScriptData.scriptBid}
                 openAcceptOffer={openAcceptOffer}
                 setOpenAcceptOffer={setOpenAcceptOffer}
               />
@@ -108,7 +105,7 @@ const BidsPage: NextPageWithLayout = () => {
           </Fab>
         </>
       ) : (
-        ""
+        <Loader setCustomHeight="min-h-[55vh]" />
       )}
     </>
   );

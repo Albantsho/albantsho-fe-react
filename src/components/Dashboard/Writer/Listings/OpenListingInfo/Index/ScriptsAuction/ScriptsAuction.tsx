@@ -13,13 +13,17 @@ import {
 } from "@mui/material";
 import useScripBidApi from "apis/ScripBid.api";
 import { IBidForScript } from "interfaces/bid";
+import { IResData } from "interfaces/response";
 import { IFullInformationScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { Suspense, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
+import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 const AcceptOfferModal = dynamic(
   () => import("@shared/Modals/AcceptOfferModal/AcceptOfferModal")
@@ -27,14 +31,24 @@ const AcceptOfferModal = dynamic(
 
 interface IProps {
   bidsList: IBidForScript[];
-  setBidsList: React.Dispatch<React.SetStateAction<IBidForScript[]>>;
   script: IFullInformationScript;
 }
 
-const ScriptsAuction = ({ bidsList, script, setBidsList }: IProps) => {
+const queryClient = new QueryClient();
+
+const ScriptsAuction = ({ bidsList, script }: IProps) => {
   const { push } = useRouter();
   const { rejectBid } = useScripBidApi();
   const [openAcceptOffer, setOpenAcceptOffer] = useState<boolean>(false);
+
+  const { mutate: rejectBidMutation, isLoading: loadingRejectBid } =
+    useMutation<IResData<object>, Error, string>((data) => rejectBid(data), {
+      onError: (error) => errorHandler(error),
+      onSuccess: (data) => {
+        successHandler(data.message);
+        queryClient.invalidateQueries(["script", "bid"]);
+      },
+    });
 
   const handleOpenAcceptOfferModal = (
     event: React.PointerEvent<HTMLButtonElement>
@@ -46,12 +60,7 @@ const ScriptsAuction = ({ bidsList, script, setBidsList }: IProps) => {
   const rejectOfferFunc =
     (id: string) => async (event: React.PointerEvent<HTMLButtonElement>) => {
       event.stopPropagation();
-      try {
-        await rejectBid(id);
-        setBidsList((prev) => prev.filter((b) => b._id !== id));
-      } catch (error) {
-        ("");
-      }
+      rejectBidMutation(id);
     };
 
   return (
@@ -142,6 +151,7 @@ const ScriptsAuction = ({ bidsList, script, setBidsList }: IProps) => {
                           Accept Offer
                         </Button>
                         <Button
+                          disabled={loadingRejectBid}
                           onClick={rejectOfferFunc(auction._id)}
                           variant="text"
                           color="warning"
@@ -162,6 +172,7 @@ const ScriptsAuction = ({ bidsList, script, setBidsList }: IProps) => {
                           onClick={rejectOfferFunc(auction._id)}
                           color="warning"
                           className="flex sm:hidden text-secondary-700"
+                          disabled={loadingRejectBid}
                         >
                           <AiOutlineClose />
                         </IconButton>

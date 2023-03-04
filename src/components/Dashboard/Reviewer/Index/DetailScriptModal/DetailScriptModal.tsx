@@ -113,10 +113,11 @@ const DetailScriptModal = ({
                 document={
                   <PDFFile
                     scriptValue={valueForConvertPdf as string}
+                    names={reviewerTask.names}
                     basedOn={reviewerTask.basedOn}
                     draftDate={reviewerTask.draftDate}
                     title={reviewerTask.title}
-                    writtenBy={reviewerTask.writtenBy.join(" ")}
+                    writtenBy={reviewerTask.writtenBy}
                   />
                 }
                 fileName={reviewerTask.title}

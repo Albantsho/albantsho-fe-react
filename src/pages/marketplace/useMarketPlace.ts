@@ -1,35 +1,23 @@
 import useScriptsApi from "apis/Scripts.api";
-import { IScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import routes from "routes/routes";
 
 const useMarketPlace = () => {
-  const [scripts, setScripts] = useState<Array<IScript>>([]);
-  const [loading, setLoading] = useState(false);
   const { getAllScripts } = useScriptsApi();
   const { query, push } = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageCount, setPageCount] = useState(1);
   const [activeTab, setActiveTab] = useState(0);
 
-  useEffect(() => {
-    async function getScriptsFunc() {
-      try {
-        setLoading(true);
-        const res = await getAllScripts(queryString.stringify(query));
-        setScripts(res.data.scripts);
-        setPageCount(res.data.pagesCount);
-        setCurrentPage(res.data.currentPage);
-        setLoading(false);
-      } catch (error) {
-        ("");
-      }
+  const { data: scriptsData, isLoading: loadingGetScripts } = useQuery(
+    "script",
+    () => getAllScripts(queryString.stringify(query)),
+    {
+      onSuccess: (data) => setCurrentPage(data.currentPage),
     }
-    getScriptsFunc();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  );
 
   useEffect(() => {
     if (query.rate) setActiveTab(1);
@@ -45,9 +33,10 @@ const useMarketPlace = () => {
   };
 
   const handleActivePage = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
+    setCurrentPage(page);
     !query.rate && !query.featured && !query.trending
       ? push(routes.marketplaceTabs.url("", `?page=${page}`), undefined, {
           shallow: true,
@@ -73,10 +62,9 @@ const useMarketPlace = () => {
   };
 
   return {
-    scripts,
-    loading,
+    scriptsData,
+    loadingGetScripts,
     currentPage,
-    pageCount,
     handleActivePage,
     activeTab,
     pushActiveRoute,

@@ -1,28 +1,13 @@
 import { Box, Card, Skeleton, Typography } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
 import useScriptsApi from "apis/Scripts.api";
-import { IScript } from "interfaces/script";
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 
 const TrendingStories = () => {
   const { getAllScripts } = useScriptsApi();
-  const [trendingScripts, setTrendingScripts] = useState<Array<IScript>>([]);
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function getTrendingScriptsFunc() {
-      try {
-        setLoading(true);
-        const res = await getAllScripts("trending=true");
-        setTrendingScripts(res.data.scripts);
-        setLoading(false);
-      } catch (error) {
-        ("");
-      }
-    }
-    getTrendingScriptsFunc();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { data: trendingScriptsData, isLoading: loadingGetTrendingScripts } =
+    useQuery("script", () => getAllScripts("trending=true"));
 
   return (
     <section
@@ -56,8 +41,17 @@ const TrendingStories = () => {
           lg: "repeat(auto-fill, minmax(330px, auto))",
         }}
       >
-        {loading
-          ? Array.from(new Array(6)).map((_, i) => (
+        {!loadingGetTrendingScripts && trendingScriptsData
+          ? trendingScriptsData.scripts
+              .slice(0, 6)
+              .map((script) => (
+                <ScriptCard
+                  data-aos="fade-up"
+                  key={script._id}
+                  script={script}
+                />
+              ))
+          : Array.from(new Array(6)).map((_, i) => (
               <Card
                 key={i}
                 className="rounded-lg"
@@ -119,16 +113,7 @@ const TrendingStories = () => {
                   />
                 </div>
               </Card>
-            ))
-          : trendingScripts
-              .slice(0, 6)
-              .map((script) => (
-                <ScriptCard
-                  data-aos="fade-up"
-                  key={script._id}
-                  script={script}
-                />
-              ))}
+            ))}
       </Box>
     </section>
   );

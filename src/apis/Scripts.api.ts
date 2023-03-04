@@ -1,7 +1,17 @@
 import useAxios from "hooks/useAxios";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
+import { IBidInMarketplace } from "interfaces/bid";
+import { ICollaboratorList } from "interfaces/collaborator";
 import { IResData } from "interfaces/response";
-import { IFullInformationScript, IWriterScript } from "interfaces/script";
+import {
+  IBidScript,
+  IClosedScript,
+  IFullInformationScript,
+  IScript,
+  IUnCompletedScript,
+  IUnlistedScript,
+  IWriterScript,
+} from "interfaces/script";
 import { useCallback } from "react";
 
 export interface ICreateNewScriptPayload {
@@ -41,13 +51,6 @@ interface IUpdateScriptPayload {
   totalPages?: number;
 }
 
-interface IUpdateScriptImagePayload {
-  image: File;
-}
-interface IUpdateAdaptionPermissionPayload {
-  adaptionPermission: File;
-}
-
 interface IGiveRateToScriptPayload {
   scriptId: string;
   rate: string;
@@ -61,6 +64,45 @@ interface IData_getWriterScript {
   scripts: IWriterScript[];
   currentPage: number;
   pagesCount: number;
+}
+
+interface IData_getAllScript {
+  scripts: IScript[];
+  currentPage: number;
+  pagesCount: number;
+}
+
+interface IData_getAllPublishedScript {
+  scripts: IBidScript[];
+  currentPage: number;
+  pagesCount: number;
+}
+
+interface IData_getAllUnPublishedScript {
+  scripts: IUnlistedScript[];
+  currentPage: number;
+  pagesCount: number;
+}
+
+interface IData_getAllUnCompletedScript {
+  scripts: IUnCompletedScript[];
+  currentPage: number;
+  pagesCount: number;
+}
+
+interface IData_getAllSoldScript {
+  scripts: IClosedScript[];
+  currentPage: number;
+  pagesCount: number;
+}
+
+interface IData_getAllCollaboratorScript {
+  script: ICollaboratorList;
+}
+
+interface IData_getOneScript {
+  script: IFullInformationScript;
+  bid: IBidInMarketplace;
 }
 
 const useScriptsApi = (controller?: AbortController) => {
@@ -79,8 +121,8 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
+
+    [axiosPrivate, controller?.signal]
   );
 
   const getWriterAllScripts = useCallback(
@@ -94,8 +136,145 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
+
+    [axiosPrivate, controller?.signal]
+  );
+
+  const getScript = useCallback(
+    async (scriptId: string) => {
+      const res = await axios.get<IResData<IData_getOneScript>>(
+        `/script/${scriptId}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [axios, controller?.signal]
+  );
+
+  const getAllScripts = useCallback(
+    async (query: string) => {
+      const res = await axios.get<IResData<IData_getAllScript>>(
+        `/script/all?limit=10&${query}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [axios, controller?.signal]
+  );
+
+  const getProducerAllScripts = useCallback(
+    async (search: string) => {
+      const res = await axiosPrivate.get<IResData<IData_getAllScript>>(
+        `/script/producer/all?search=${search}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const getWriterAllPublishedScripts = useCallback(
+    async (searchQuery: string) => {
+      const res = await axiosPrivate.get<IResData<IData_getAllPublishedScript>>(
+        `/script/writer/published/all?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const getWriterAllUnPublishedScripts = useCallback(
+    async (searchQuery: string) => {
+      const res = await axiosPrivate.get<
+        IResData<IData_getAllUnPublishedScript>
+      >(`/script/writer/unpublished/all?search=${searchQuery}`, {
+        signal: controller?.signal,
+      });
+
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const getWriterAllInCompletedScripts = useCallback(
+    async (searchQuery: string) => {
+      const res = await axiosPrivate.get<
+        IResData<IData_getAllUnCompletedScript>
+      >(`/script/writer/incomplete/all?search=${searchQuery}`, {
+        signal: controller?.signal,
+      });
+
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const getWriterAllSoldScripts = useCallback(
+    async (searchQuery: string) => {
+      const res = await axiosPrivate.get<IResData<IData_getAllSoldScript>>(
+        `/script/writer/sold/all?search=${searchQuery}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const searchScripts = useCallback(
+    async (search: string) => {
+      const res = await axiosPrivate.get<IResData<{ scripts: IScript[] }>>(
+        `/script/search?search=${search}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const listAllCollaborators = useCallback(
+    async (scriptId: string) => {
+      const res = await axiosPrivate.get<
+        IResData<IData_getAllCollaboratorScript>
+      >(`/script/collaborators/${scriptId}`, {
+        signal: controller?.signal,
+      });
+
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const getCoverPageInformation = useCallback(
+    async (scriptId: string) => {
+      const res = await axiosPrivate.get<IResData<object>>(
+        `/script/coverpage/${scriptId}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
   );
 
   const deleteScript = useCallback(
@@ -104,22 +283,91 @@ const useScriptsApi = (controller?: AbortController) => {
         signal: controller?.signal,
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const updateWriterArchiveScript = useCallback(
     async (payload: { archive: boolean }, scriptId: string) => {
-      const res = await axiosPrivate.patch(
+      const res = await axiosPrivate.patch<IResData<object>>(
         `/script/update/archive/${scriptId}`,
         payload,
         {
           signal: controller?.signal,
         }
       );
+      return res.data;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
+  );
+
+  const updateCoverPageScript = useCallback(
+    async (payload: IUpdateCoverPageScriptPayload, scriptId: string) => {
+      const res = await axiosPrivate.patch<IResData<object>>(
+        `/script/update/coverpage/${scriptId}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+      return res.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const verifyScript = useCallback(
+    async (scriptId: string) => {
+      const res = await axiosPrivate.patch<IResData<object>>(
+        `/script/verify/${scriptId}`,
+        {},
+        {
+          signal: controller?.signal,
+        }
+      );
+      return res.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const updateScript = useCallback(
+    async (payload: IUpdateScriptPayload, id: string, query?: string) => {
+      const res = await axiosPrivate.patch<IResData<object>>(
+        `/script/update/${id}?${query}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+      return res.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const updatePublishedScript = useCallback(
+    async (payload: { published: boolean }, scriptId: string) => {
+      const res = await axiosPrivate.patch<IResData<object>>(
+        `/script/update/publish/${scriptId}`,
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+      return res.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
+  const giveRateToScript = useCallback(
+    async (payload: IGiveRateToScriptPayload) => {
+      const res = await axiosPrivate.post<IResData<object>>(
+        "/script/rate",
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+      return res.data;
+    },
+    [axiosPrivate, controller?.signal]
   );
 
   return {
@@ -127,200 +375,21 @@ const useScriptsApi = (controller?: AbortController) => {
     getWriterAllScripts,
     deleteScript,
     updateWriterArchiveScript,
-    async updateScript(
-      payload: IUpdateScriptPayload,
-      id: string,
-      query?: string
-    ) {
-      const res = await axiosPrivate.patch(
-        `/script/update/${id}?${query}`,
-        payload,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-    // async updateScriptImage(id: string, payload: IUpdateScriptImagePayload) {
-    //   const res = await axiosPrivate.post(`/script/image/${id}`, payload, {
-    //     signal: controller?.signal,
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   });
-
-    //   return res.data;
-    // },
-    async updateAdaptionPermission(
-      id: string,
-      payload: IUpdateAdaptionPermissionPayload
-    ) {
-      const res = await axiosPrivate.post(
-        `/script/adaptionPermission/${id}`,
-        payload,
-        {
-          signal: controller?.signal,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      return res.data;
-    },
-    async updateCoverPageScript(
-      payload: IUpdateCoverPageScriptPayload,
-      id: string
-    ) {
-      const res = await axiosPrivate.patch(
-        `/script/update/coverpage/${id}`,
-        payload,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    async verifyScript(id: string) {
-      const res = await axiosPrivate.patch(
-        `/script/verify/${id}`,
-        {},
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    async getAllScripts(query: string) {
-      const res = await axios.get(`/script/all?limit=10&${query}`, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
-    async getProducerAllScripts(search: string) {
-      const res = await axiosPrivate.get(
-        `/script/producer/all?search=${search}`,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    async getScript(id: string) {
-      const res = await axiosPrivate.get(`/script/${id}`, {
-        signal: controller?.signal,
-      });
-      return res.data;
-    },
-
-    async searchScripts(search: string) {
-      const res = await axios.get(`/script/search?search=${search}`, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
-    async giveRateToScript(payload: IGiveRateToScriptPayload) {
-      const res = await axiosPrivate.post("/script/rate", payload, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
-    async getWriterAllPublishedScripts(searchQuery: string) {
-      const res = await axiosPrivate.get(
-        `/script/writer/published/all?search=${searchQuery}`,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    async getWriterAllUnPublishedScripts(searchQuery: string) {
-      const res = await axiosPrivate.get(
-        `/script/writer/unpublished/all?search=${searchQuery}`,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    async getWriterAllInCompletedScripts(searchQuery: string) {
-      const res = await axiosPrivate.get(
-        `/script/writer/incomplete/all?search=${searchQuery}`,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    async getWriterAllSoldScripts(searchQuery: string) {
-      const res = await axiosPrivate.get(
-        `/script/writer/sold/all?search=${searchQuery}`,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    // async updateWriterArchiveScript(payload: { archive: boolean }, id: string) {
-    //   const res = await axiosPrivate.patch(
-    //     `/script/update/archive/${id}`,
-    //     payload,
-    //     {
-    //       signal: controller?.signal,
-    //     }
-    //   );
-
-    //   return res.data;
-    // },
-
-    async updatePublishedScript(payload: { published: boolean }, id: string) {
-      const res = await axiosPrivate.patch(
-        `/script/update/publish/${id}`,
-        payload,
-        {
-          signal: controller?.signal,
-        }
-      );
-
-      return res.data;
-    },
-
-    async listAllCollaborators(scriptId: string) {
-      const res = await axiosPrivate.get(`/script/collaborators/${scriptId}`, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
-    async getCoverPageInformation(scriptId: string) {
-      const res = await axiosPrivate.get(`/script/coverpage/${scriptId}`, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
+    getScript,
+    updateCoverPageScript,
+    verifyScript,
+    getAllScripts,
+    getProducerAllScripts,
+    searchScripts,
+    giveRateToScript,
+    getWriterAllPublishedScripts,
+    getWriterAllUnPublishedScripts,
+    getWriterAllInCompletedScripts,
+    getWriterAllSoldScripts,
+    listAllCollaborators,
+    getCoverPageInformation,
+    updatePublishedScript,
+    updateScript,
   };
 };
 

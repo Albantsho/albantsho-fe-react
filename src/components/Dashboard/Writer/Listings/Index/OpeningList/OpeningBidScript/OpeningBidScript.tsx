@@ -23,15 +23,9 @@ interface IProps {
   script: IBidScript;
   scripts: IBidScript[];
   index: number;
-  setListedScript: React.Dispatch<React.SetStateAction<IBidScript[]>>;
 }
 
-const OpeningBidScript = ({
-  script,
-  index,
-  scripts,
-  setListedScript,
-}: IProps) => {
+const OpeningBidScript = ({ script, index, scripts }: IProps) => {
   const [openUnListingItem, setOpenUnListingItem] = useState<boolean>(false);
   const [openMenuItem, setOpenMenuItem] = useState<null | HTMLElement>(null);
   const openMenu = Boolean(openMenuItem);
@@ -160,7 +154,6 @@ const OpeningBidScript = ({
         {openUnListingItem ? (
           <UnListingItemModal
             id={script._id}
-            setListedScript={setListedScript}
             openUnListingItem={openUnListingItem}
             setOpenUnListingItem={setOpenUnListingItem}
           />

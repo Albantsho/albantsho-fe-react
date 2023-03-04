@@ -1,8 +1,8 @@
-import useUserStore from "store/user.store";
+import Loader from "@shared/Loader/Loader";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { DotLoader } from "react-spinners";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
 
 const Authorization = ({ children }: React.PropsWithChildren) => {
   const { pathname, replace } = useRouter();
@@ -70,17 +70,7 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [urlRoutes]);
 
-  return (
-    <>
-      {loading ? (
-        <div className="min-h-screen flex items-center">
-          <DotLoader color="#7953B5" className="mx-auto mt-10" />
-        </div>
-      ) : (
-        children
-      )}
-    </>
-  );
+  return <>{loading ? <Loader /> : children}</>;
 };
 
 export default Authorization;

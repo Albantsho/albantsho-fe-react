@@ -3,14 +3,14 @@ import { IconButton, Modal, Typography, Zoom } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScriptsApi from "apis/Scripts.api";
+import { IResData } from "interfaces/response";
 import { IWriterScript } from "interfaces/script";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import { QueryClient, useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
-import querystring from "query-string";
-import { useRouter } from "next/router";
-
+import successHandler from "utils/success-handler";
 interface IProps {
   openPublishScript: boolean;
   setOpenPublishScript: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,7 +32,7 @@ const PublishScriptModal = ({
 
   const { mutate: publishScriptMutate, isLoading: isLoadingArchiveScript } =
     useMutation<
-      void,
+      IResData<object>,
       Error,
       { payload: { published: boolean }; scriptId: string }
     >(
@@ -42,19 +42,15 @@ const PublishScriptModal = ({
           data.scriptId
         ),
       {
-        onError: (error) => {
-          errorHandler(error);
-        },
-        onSuccess: () => {
+        onError: (error) => errorHandler(error),
+        onSuccess: (data) => {
+          successHandler(data.message);
           if (listScripts.length <= 1) {
-            push(`?archive=true&page=${+String(query.page) - 1}`, undefined, {
+            push(`?archive=false&page=${+String(query.page) - 1}`, undefined, {
               shallow: true,
             });
           }
-          queryClient.invalidateQueries(["script"], {
-            exact: true,
-            stale: true,
-          });
+          queryClient.invalidateQueries(["script"]);
         },
       }
     );

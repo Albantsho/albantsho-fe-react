@@ -1,8 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useScriptsApi, { ICreateNewScriptPayload } from "apis/Scripts.api";
 import { IFullInformationScript } from "interfaces/script";
-import { useRouter } from "next/router";
-import querystring from "query-string";
 import { useForm } from "react-hook-form";
 import { QueryClient, useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
@@ -28,7 +26,6 @@ const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {
   } = useForm<ICreateScript>({
     resolver: yupResolver(createScriptSchema),
   });
-  const { query } = useRouter();
   const { mutate, isLoading } = useMutation<
     { script: IFullInformationScript },
     Error,
@@ -38,13 +35,10 @@ const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {
       errorHandler(error);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(
-        ["script", querystring.stringify(query), ""],
-        {
-          exact: true,
-          stale: true,
-        }
-      );
+      queryClient.invalidateQueries(["script"], {
+        exact: true,
+        stale: true,
+      });
       resetField("title");
       resetField("tagline");
       setOpenCreateScript(false);

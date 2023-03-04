@@ -6,6 +6,7 @@ import { ethers } from "ethers";
 import { INft } from "interfaces/nft";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import successHandler from "utils/success-handler";
 import NFT from "../../../config/albantsho-abi.json";
 
 const nftContractAddress = "0x3DcF9933A9584B9f3c6aB499aD942482bff80CFD";
@@ -137,12 +138,12 @@ const useMintNft = () => {
       const foundNft = nftListCopy[foundNftIndex];
       foundNft.transaction = res.transactionHash;
       setNftList(nftListCopy);
-      await mintNfts({
+      const resMint = await mintNfts({
         nftId,
         tokenId: `${parseInt(res.logs[0].topics[3], 16)}`,
         transaction: res.transactionHash,
       });
-      toast.success("Successfully minted !");
+      successHandler(resMint.message);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(error.reason ? error.reason : "something went wrong");
@@ -176,7 +177,7 @@ const useMintNft = () => {
     getCurrentWalletAddressConnected();
     async function getNftsFunc() {
       const res = await getAllUserNfts();
-      setNftList(res.data.nfts);
+      setNftList(res.nfts);
     }
     getNftsFunc();
     // eslint-disable-next-line react-hooks/exhaustive-deps

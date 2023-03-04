@@ -1,20 +1,23 @@
+import BookMarkIcon from "@assets/icons/book-mark.svg";
 import { ButtonGroup, IconButton, SvgIcon, Tooltip } from "@mui/material";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import useDraftApi from "apis/Draft.api";
 import useScriptsApi from "apis/Scripts.api";
+import { IResData } from "interfaces/response";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlineSetting } from "react-icons/ai";
 import { RiFileUserLine, RiSave3Fill } from "react-icons/ri";
+import { QueryClient, useMutation } from "react-query";
 import { useResizeDetector } from "react-resize-detector";
-import { toast } from "react-toastify";
 import routes from "routes/routes";
 import { Socket } from "socket.io-client";
 import useScriptValueStore from "store/scriptValue.store";
 import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
+import errorHandler from "utils/error-handler";
 import { serializeWithoutDiv } from "utils/serialize-slate";
-import BookMarkIcon from "@assets/icons/book-mark.svg";
+import successHandler from "utils/success-handler";
 import TextEditor from "./TextEditor";
 import TextEditorSettingModal from "./TextEditorSettingModal/TextEditorSettingModal";
 
@@ -22,6 +25,8 @@ interface IProps {
   htmlInitialValue: string;
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
+
+const queryClient = new QueryClient();
 
 const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   const { ref, width } = useResizeDetector();
@@ -36,6 +41,19 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
     theme: "icons",
   });
   const scriptValue = useScriptValueStore((state) => state.scriptValue);
+
+  const { mutate: saveDraftMutation, isLoading } = useMutation<
+    IResData<object>,
+    Error,
+    { scriptId: string; payload: { content: string } }
+  >((data) => saveFileDraft(data.scriptId, { content: data.payload.content }), {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries("draft");
+      successHandler(data.message);
+    },
+    onError: (error) => errorHandler(error),
+  });
+
   setTimeout(() => {
     setRender(true);
   }, 2000);
@@ -58,10 +76,12 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
       { scriptPart: valueForConvertPdf?.slice(0, 3500) },
       query.id as string
     );
-    const res = await saveFileDraft(query.id as string, {
-      content: scriptValue,
+    saveDraftMutation({
+      scriptId: query.id as string,
+      payload: {
+        content: scriptValue,
+      },
     });
-    toast.success(res.message);
   };
 
   const openSettingModalFunc = () => setOpenSettingModal(true);
@@ -130,6 +150,7 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
           >
             <IconButton
               onClick={saveDraftFile}
+              disabled={isLoading}
               disableRipple
               className="bg-white text-primary-700 rounded-none w-12 h-12"
             >

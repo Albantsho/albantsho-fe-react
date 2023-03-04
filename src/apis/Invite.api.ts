@@ -15,20 +15,16 @@ export interface IData_getInvites {
 const useInvite = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
-  const allInvite = useCallback(
-    async () => {
-      const res = await axiosPrivate.get<IResData<IData_getInvites>>(
-        "/invite/all",
-        {
-          signal: controller?.signal,
-        }
-      );
+  const allInvite = useCallback(async () => {
+    const res = await axiosPrivate.get<IResData<IData_getInvites>>(
+      "/invite/all",
+      {
+        signal: controller?.signal,
+      }
+    );
 
-      return res.data.data;
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
-  );
+    return res.data.data;
+  }, [axiosPrivate, controller?.signal]);
 
   const rejectInvite = useCallback(
     async (inviteId: string) => {
@@ -41,8 +37,7 @@ const useInvite = (controller?: AbortController) => {
       );
       return res.data;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const acceptInvite = useCallback(
@@ -56,8 +51,7 @@ const useInvite = (controller?: AbortController) => {
       );
       return res.data;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const createNewInvite = useCallback(
@@ -71,8 +65,7 @@ const useInvite = (controller?: AbortController) => {
       );
       return res.data;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   return {

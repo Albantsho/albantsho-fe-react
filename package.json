@@ -48,6 +48,7 @@
     "react-countdown-circle-timer": "^3.0.9",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.35.0",
+    "react-hot-toast": "^2.4.0",
     "react-icons": "^4.4.0",
     "react-pdf-html": "^1.1.17",
     "react-query": "^3.39.2",
