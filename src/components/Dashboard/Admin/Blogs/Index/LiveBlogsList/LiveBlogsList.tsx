@@ -5,15 +5,21 @@ import LiveBlog from "./LiveBlog/LiveBlog";
 
 interface IProps {
   blogList: IWeblog[];
+  refetch: any;
 }
 
-const LiveBlogsList = ({ blogList }: IProps) => {
+const LiveBlogsList = ({ blogList, refetch }: IProps) => {
   return (
     <div className="mt-4 pb-8 flex flex-col gap-4 overflow-hidden">
       {blogList.length > 0 ? (
         <>
           {blogList.map((blog) => (
-            <LiveBlog blogList={blogList} blog={blog} key={blog._id} />
+            <LiveBlog
+              refetch={refetch}
+              blogList={blogList}
+              blog={blog}
+              key={blog._id}
+            />
           ))}
         </>
       ) : (

@@ -17,6 +17,7 @@ interface IProps {
   >;
   weblogId: string;
   blogList: IWeblog[];
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const RestoreBlogFromTrashListModal = ({
   setOpenRestoreBlogFromTrashListModal,
   weblogId,
   blogList,
+  refetch,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
   const { query, push } = useRouter();
@@ -34,17 +36,19 @@ const RestoreBlogFromTrashListModal = ({
     useMutation<void, Error, { trash: boolean; id: string }>(
       (data) => updateWeblog({ trash: data.trash }, data.id),
       {
+        mutationKey: "weblog",
         onError: (error) => {
           errorHandler(error);
         },
         onSuccess: () => {
-          queryClient.invalidateQueries("weblog");
+          refetch();
           handleCloseRestoreBlogFromTrashListModal();
           if (blogList.length <= 1) {
             push(`?trash=true&page=${+String(query.page) - 1}`, undefined, {
               shallow: true,
             });
           }
+          return queryClient.invalidateQueries("weblog");
         },
       }
     );
@@ -52,7 +56,7 @@ const RestoreBlogFromTrashListModal = ({
   const handleCloseRestoreBlogFromTrashListModal = () =>
     setOpenRestoreBlogFromTrashListModal(false);
 
-  const handleRestoreWeblogFromTrashList = async () =>
+  const handleRestoreWeblogFromTrashList = () =>
     restoreTrashBlog({ trash: false, id: weblogId });
 
   return (

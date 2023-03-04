@@ -8,9 +8,10 @@ import ContactImage from "./assets/contact-image.png";
 
 interface IProps {
   contact: IContact;
+  refetch: any;
 }
 
-const Contact = ({ contact }: IProps) => {
+const Contact = ({ contact, refetch }: IProps) => {
   const { _id, createdAt, email, message, answered } = contact;
   const [openAnswerToContactModal, setOpenAnswerToContactModal] =
     useState(false);
@@ -58,7 +59,7 @@ const Contact = ({ contact }: IProps) => {
           </div>
         </div>
         <div className="ml-auto flex md:self-start lg:self-center xl:self-start gap-3 md:gap-1">
-          {answered ? (
+          {!answered ? (
             <IconButton
               onClick={handleOpenAnswerToContactModal}
               color="primary"
@@ -83,6 +84,7 @@ const Contact = ({ contact }: IProps) => {
         </div>
       </div>
       <AnswerToContactModal
+        refetch={refetch}
         contact={contact}
         openAnswerToContactModal={openAnswerToContactModal}
         setOpenAnswerToContactModal={setOpenAnswerToContactModal}

@@ -9,6 +9,7 @@ interface IProps {
   handleActivePage: (event: React.ChangeEvent<unknown>, page: number) => void;
   currentPage: number;
   pagesCount: number;
+  refetch: any;
 }
 
 const ContactList = ({
@@ -16,6 +17,7 @@ const ContactList = ({
   currentPage,
   handleActivePage,
   pagesCount,
+  refetch,
 }: IProps) => {
   return (
     <div>
@@ -23,7 +25,7 @@ const ContactList = ({
         {contacts.length > 0 ? (
           <>
             {contacts.map((contact) => (
-              <Contact contact={contact} key={contact._id} />
+              <Contact refetch={refetch} contact={contact} key={contact._id} />
             ))}
           </>
         ) : (

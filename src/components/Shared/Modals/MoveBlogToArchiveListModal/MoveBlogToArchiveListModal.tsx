@@ -18,6 +18,7 @@ interface IProps {
   >;
   weblogId: string;
   blogList?: IWeblog[];
+  refetch?: any;
 }
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const MoveBlogToArchiveListModal = ({
   setOpenMoveBlogToArchiveListModal,
   weblogId,
   blogList,
+  refetch,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
   const { query, push } = useRouter();
@@ -35,12 +37,13 @@ const MoveBlogToArchiveListModal = ({
     useMutation<void, Error, { archive: boolean; id: string }>(
       (data) => updateWeblog({ archive: data.archive }, data.id),
       {
+        mutationKey: "weblog",
         onError: (error) => {
           errorHandler(error);
         },
         onSuccess: () => {
-          queryClient.invalidateQueries("weblog");
           setOpenMoveBlogToArchiveListModal(false);
+          refetch && refetch();
           if (query.slug) push(routes.blogsAdminDashboard.url);
           if (blogList && blogList.length <= 1) {
             query.archive
@@ -59,6 +62,7 @@ const MoveBlogToArchiveListModal = ({
                   shallow: true,
                 });
           }
+          return queryClient.invalidateQueries("weblog");
         },
       }
     );
@@ -66,7 +70,7 @@ const MoveBlogToArchiveListModal = ({
   const handleCloseMoveBlogToArchiveListModal = () =>
     setOpenMoveBlogToArchiveListModal(false);
 
-  const handleMoveBlogToArchiveList = async () =>
+  const handleMoveBlogToArchiveList = () =>
     moveBlogToArchive({ archive: true, id: weblogId });
 
   return (

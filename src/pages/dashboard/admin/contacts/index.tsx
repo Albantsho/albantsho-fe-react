@@ -17,15 +17,18 @@ const ContactsPage: NextPageWithLayout = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { query, push } = useRouter();
-  const { data: contactData, isLoading: isLoadingGetAllContact } = useQuery<
-    IData_getContacts,
-    Error
-  >(["contact", currentPage, searchQuery, query.answered], () =>
-    allContacts(
-      `${currentPage}`,
-      query.answered ? `${query.answered}` : "false",
-      searchQuery
-    )
+  const {
+    data: contactData,
+    isLoading: isLoadingGetAllContact,
+    refetch,
+  } = useQuery<IData_getContacts, Error>(
+    ["contact", currentPage, searchQuery, query.answered],
+    () =>
+      allContacts(
+        `${currentPage}`,
+        query.answered ? `${query.answered}` : "false",
+        searchQuery
+      )
   );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,6 +83,7 @@ const ContactsPage: NextPageWithLayout = () => {
       />
       {!isLoadingGetAllContact && contactData ? (
         <ContactList
+          refetch={refetch}
           contacts={contactData.contacts}
           pagesCount={contactData.pagesCount}
           currentPage={currentPage}

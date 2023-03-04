@@ -21,11 +21,13 @@ const RestoreBlogFromArchiveListModal = dynamic(
 interface IProps {
   blog: IWeblog;
   blogList: IWeblog[];
+  refetch: any;
 }
 
 const ArchiveBlog = ({
   blog: { media, description, title, _id, slug },
   blogList,
+  refetch,
 }: IProps) => {
   const [openMoveBlogToTrashListModal, setOpenMoveBlogToTrashListModal] =
     useState(false);
@@ -106,6 +108,7 @@ const ArchiveBlog = ({
       <Suspense fallback={null}>
         {openMoveBlogToTrashListModal ? (
           <MoveBlogToTrashListModal
+            refetch={refetch}
             key={_id}
             weblogId={_id}
             blogList={blogList}
@@ -117,6 +120,7 @@ const ArchiveBlog = ({
       <Suspense fallback={null}>
         {openRestoreBlogFromArchiveListModal ? (
           <RestoreBlogFromArchiveListModal
+            refetch={refetch}
             key={_id}
             blogList={blogList}
             weblogId={_id}

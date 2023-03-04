@@ -8,32 +8,30 @@ import ArchiveBlogsList from "components/Dashboard/Admin/Blogs/Index/ArchiveBlog
 import LiveBlogsList from "components/Dashboard/Admin/Blogs/Index/LiveBlogsList/LiveBlogsList";
 import TabButtons from "components/Dashboard/Admin/Blogs/Index/TabButtons/TabButtons";
 import TrashBlogsList from "components/Dashboard/Admin/Blogs/Index/TrashBlogsList/TrashBlogsList";
+import { IWeblog } from "interfaces/weblog";
 import debounce from "lodash/debounce";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import queryString from "query-string";
 import { useCallback, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { DotLoader } from "react-spinners";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
-
 const BlogsPage: NextPageWithLayout = () => {
   const { query, push } = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const { getAllWeblogsForAdmin } = useWeblogApi();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, refetch } = useQuery(
     ["weblog", queryString.stringify(query), searchQuery, currentPage],
-    () => getAllWeblogsForAdmin(queryString.stringify(query), searchQuery),
+    async () =>
+      await getAllWeblogsForAdmin(queryString.stringify(query), searchQuery),
     {
       onError: (err) => {
         errorHandler(err);
       },
-      refetchInterval: 2000,
-      staleTime: 10000,
     }
   );
 
@@ -93,16 +91,29 @@ const BlogsPage: NextPageWithLayout = () => {
         handleSearch={handleSearch}
         placeholder="Search for blog by title"
       />
-      {!isLoading && data ? (
+      {!isLoading ? (
         <>
           {!query.archive && !query.trash && (
-            <LiveBlogsList blogList={data.weblogs} />
+            <LiveBlogsList
+              refetch={refetch}
+              blogList={data?.weblogs as IWeblog[]}
+            />
           )}
-          {query.archive && <ArchiveBlogsList blogList={data.weblogs} />}
-          {query.trash && <TrashBlogsList blogList={data.weblogs} />}
-          {data.pagesCount >= 2 && (
+          {query.archive && (
+            <ArchiveBlogsList
+              refetch={refetch}
+              blogList={data?.weblogs as IWeblog[]}
+            />
+          )}
+          {query.trash && (
+            <TrashBlogsList
+              refetch={refetch}
+              blogList={data?.weblogs as IWeblog[]}
+            />
+          )}
+          {data && data.pagesCount >= 2 && (
             <CustomPaginationComponent
-              pageCount={data.pagesCount}
+              pageCount={data?.pagesCount as number}
               currentPage={currentPage}
               handleActivePage={handleActivePage}
             />

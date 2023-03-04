@@ -5,15 +5,21 @@ import ArchiveBlog from "./ArchiveBlog/ArchiveBlog";
 
 interface IProps {
   blogList: IWeblog[];
+  refetch: any;
 }
 
-const ArchiveBlogsList = ({ blogList }: IProps) => {
+const ArchiveBlogsList = ({ blogList, refetch }: IProps) => {
   return (
     <div className="mt-4 pb-14 flex flex-col gap-4 overflow-hidden">
       {blogList.length > 0 ? (
         <>
           {blogList.map((blog) => (
-            <ArchiveBlog blogList={blogList} blog={blog} key={blog._id} />
+            <ArchiveBlog
+              refetch={refetch}
+              blogList={blogList}
+              blog={blog}
+              key={blog._id}
+            />
           ))}
         </>
       ) : (

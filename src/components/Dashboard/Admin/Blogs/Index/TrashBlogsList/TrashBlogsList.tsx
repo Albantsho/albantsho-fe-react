@@ -5,15 +5,21 @@ import TrashBlog from "./TrashBlog/TrashBlog";
 
 interface IProps {
   blogList: IWeblog[];
+  refetch: any;
 }
 
-const TrashBlogsList = ({ blogList }: IProps) => {
+const TrashBlogsList = ({ blogList, refetch }: IProps) => {
   return (
     <div className="mt-4 pb-14 flex flex-col gap-4 overflow-hidden">
       {blogList.length > 0 ? (
         <>
           {blogList.map((blog) => (
-            <TrashBlog blogList={blogList} blog={blog} key={blog._id} />
+            <TrashBlog
+              refetch={refetch}
+              blogList={blogList}
+              blog={blog}
+              key={blog._id}
+            />
           ))}
         </>
       ) : (

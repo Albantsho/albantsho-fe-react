@@ -21,11 +21,13 @@ const RestoreBlogFromTrashListModal = dynamic(
 interface IProps {
   blog: IWeblog;
   blogList: IWeblog[];
+  refetch: any;
 }
 
 const TrashBlog = ({
   blog: { media, description, title, _id },
   blogList,
+  refetch,
 }: IProps) => {
   const [
     openDeleteBlogFromTrashListModal,
@@ -102,7 +104,7 @@ const TrashBlog = ({
       <Suspense fallback={null}>
         {openDeleteBlogFromTrashListModal ? (
           <DeleteBlogFromTrashListModal
-            key={_id}
+            refetch={refetch}
             weblogId={_id}
             blogList={blogList}
             setOpenDeleteBlogFromTrashListModal={
@@ -115,7 +117,7 @@ const TrashBlog = ({
       <Suspense fallback={null}>
         {openRestoreBlogFromTrashListModal ? (
           <RestoreBlogFromTrashListModal
-            key={_id}
+            refetch={refetch}
             weblogId={_id}
             blogList={blogList}
             setOpenRestoreBlogFromTrashListModal={

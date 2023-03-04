@@ -1,7 +1,6 @@
 import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
-import useAuthApi from "apis/Auth.api";
 import useWeblogApi from "apis/Weblog.api";
 import { IWeblog } from "interfaces/weblog";
 import Image from "next/image";
@@ -9,7 +8,6 @@ import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
-import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 import moveImage from "./assets/move-image.png";
 
@@ -20,36 +18,33 @@ interface IProps {
   >;
   weblogId: string;
   blogList?: IWeblog[];
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
+
 const RestoreBlogFromArchiveListModal = ({
   openRestoreBlogFromArchiveListModal,
   setRestoreBlogFromArchiveListModal,
   weblogId,
   blogList,
+  refetch,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
   const { query, push } = useRouter();
-  const { getNewAccessToken } = useAuthApi();
-  const { setAccessToken } = useUserStore((state) => ({
-    setAccessToken: state.setAccessToken,
-  }));
 
   const { mutate: restoreBlog, isLoading: loadingRestoreBlog } = useMutation<
     void,
     Error,
     { archive: boolean; id: string }
   >((data) => updateWeblog({ archive: data.archive }, data.id), {
+    mutationKey: "weblog",
     onError: (error) => {
       errorHandler(error);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries("weblog", {
-        fetching: true,
-        active: true,
-      });
       setRestoreBlogFromArchiveListModal(false);
+      refetch();
       if (query.id) push(routes.blogsAdminDashboard.url);
       if (blogList && blogList.length <= 1) {
         query.archive
@@ -64,22 +59,15 @@ const RestoreBlogFromArchiveListModal = ({
               shallow: true,
             });
       }
+      return queryClient.invalidateQueries("weblog");
     },
-    retry: true,
   });
 
   const handleCloseMoveBlogToArchiveListModal = () =>
     setRestoreBlogFromArchiveListModal(false);
 
-  const handleMoveBlogToArchiveList = async () => {
-    try {
-      const res = await getNewAccessToken();
-      setAccessToken(res.accessToken);
-    } catch (error) {
-      errorHandler(error);
-    }
+  const handleMoveBlogToArchiveList = () =>
     restoreBlog({ archive: false, id: weblogId });
-  };
 
   return (
     <Modal

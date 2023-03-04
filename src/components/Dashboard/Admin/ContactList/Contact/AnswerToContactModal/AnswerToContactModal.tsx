@@ -16,6 +16,7 @@ interface IProps {
   openAnswerToContactModal: boolean;
   setOpenAnswerToContactModal: React.Dispatch<React.SetStateAction<boolean>>;
   contact: IContact;
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const AnswerToContactModal = ({
   openAnswerToContactModal,
   setOpenAnswerToContactModal,
   contact,
+  refetch,
 }: IProps) => {
   const { answerToContact } = useContact();
 
@@ -35,6 +37,7 @@ const AnswerToContactModal = ({
           errorHandler(error);
         },
         onSuccess: (data) => {
+          refetch();
           successHandler(data.message);
           queryClient.invalidateQueries("contact");
           setOpenAnswerToContactModal(false);

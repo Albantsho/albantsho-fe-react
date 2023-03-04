@@ -18,7 +18,6 @@ import { Toaster } from "react-hot-toast";
 import Loader from "@shared/Loader/Loader";
 
 const clientSideEmotionCache = createEmotionCache();
-const queryClient = new QueryClient();
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
@@ -32,6 +31,8 @@ export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const getLayout = Component.getLayout ?? ((page) => page);
   const [isLoading, setIsLoading] = useState(true);
+
+  const [queryClient] = useState(() => new QueryClient());
 
   useEffect(() => {
     AOS.init();

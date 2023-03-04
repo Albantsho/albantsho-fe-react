@@ -17,6 +17,7 @@ interface IProps {
   >;
   weblogId: string;
   blogList?: IWeblog[];
+  refetch?: any;
 }
 
 const queryClient = new QueryClient();
@@ -26,21 +27,23 @@ const MoveBlogToTrashListModal = ({
   setOpenMoveBlogToTrashListModal,
   weblogId,
   blogList,
+  refetch,
 }: IProps) => {
   const { updateWeblog } = useWeblogApi();
   const { query, push } = useRouter();
 
   const { mutate: moveBlogToTrash, isLoading: loadingMoveBlogToTrash } =
     useMutation<void, Error, { trash: boolean; id: string }>(
-      (data) => updateWeblog({ trash: data.trash }, data.id),
+      async (data) => await updateWeblog({ trash: data.trash }, data.id),
       {
+        mutationKey: "weblog",
         onError: (error) => {
           errorHandler(error);
         },
 
         onSuccess: () => {
           setOpenMoveBlogToTrashListModal(false);
-          queryClient.invalidateQueries("weblog");
+          refetch && refetch();
           if (blogList && blogList.length <= 1) {
             query.archive
               ? push(
@@ -57,6 +60,8 @@ const MoveBlogToTrashListModal = ({
               : push(`?page=${+String(query.page) - 1}`, undefined, {
                   shallow: true,
                 });
+
+            return queryClient.invalidateQueries("weblog");
           }
         },
       }
@@ -65,7 +70,7 @@ const MoveBlogToTrashListModal = ({
   const handleCloseMoveBlogToTrashListModal = () =>
     setOpenMoveBlogToTrashListModal(false);
 
-  const handleMoveBlogToTrashList = async () =>
+  const handleMoveBlogToTrashList = () =>
     moveBlogToTrash({ id: weblogId, trash: true });
 
   return (
