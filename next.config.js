@@ -3,7 +3,12 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ["picsum.photos", "flagcdn.com", "server.albantsho.com", "localhost"],
+    domains: [
+      "picsum.photos",
+      "flagcdn.com",
+      "server.albantsho.com",
+      "localhost",
+    ],
   },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find(
@@ -20,22 +25,23 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/dashboard/writer',
-        destination: '/dashboard/writer/projects',
+        source: "/dashboard/writer",
+        destination: "/dashboard/writer/projects",
         permanent: false,
       },
       {
-        source: '/wallet',
-        destination: '/wallet/help',
+        source: "/wallet",
+        destination: "/wallet/help",
         permanent: false,
       },
       {
-        source: '/dashboard/admin',
-        destination: '/dashboard/admin/blogs',
+        source: "/dashboard/admin",
+        destination: "/dashboard/admin/blogs",
         permanent: false,
       },
     ];
   },
+  output: "standalone",
 };
 
 module.exports = nextConfig;
