@@ -30,13 +30,13 @@ const BidsPage: NextPageWithLayout = () => {
   const { getScript } = useScriptsApi();
   const { getBidScript } = useScripBidApi();
 
-  const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
-    "script",
-    () => getScript(query.id as string),
-    {
-      onError: (err) => errorHandler(err),
-    }
-  );
+  const {
+    data: scriptData,
+    isLoading: isLoadingGetScript,
+    refetch,
+  } = useQuery("script", () => getScript(query.id as string), {
+    onError: (err) => errorHandler(err),
+  });
 
   const { data: bidScriptData, isLoading: isLoadingGetBidScript } = useQuery(
     "script",
@@ -81,6 +81,7 @@ const BidsPage: NextPageWithLayout = () => {
           {openCreateScript ? (
             <Suspense fallback={null}>
               <CreateScriptModal
+                refetch={refetch}
                 openCreateScript={openCreateScript}
                 setOpenCreateScript={setOpenCreateScript}
               />
