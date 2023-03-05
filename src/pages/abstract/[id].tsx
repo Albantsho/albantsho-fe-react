@@ -20,8 +20,12 @@ const AbstractPage = () => {
   const { getScript } = useScriptsApi();
 
   const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
-    "script",
-    () => getScript(query.id as string),
+    ["script", query.id],
+    () => {
+      if (query.id) {
+        return getScript(query.id as string);
+      }
+    },
     {
       onError: (err) => errorHandler(err),
     }
@@ -34,13 +38,13 @@ const AbstractPage = () => {
       </Head>
       <Nav links={links} secondaryUnderLineColor={false} position="static" />
 
-      <div className="px-5 sm:px-10 py-10 md:py-20 min-h-screen bg-gray-50">
-        {!isLoadingGetScript && scriptData ? (
+      {!isLoadingGetScript && scriptData ? (
+        <div className="px-5 sm:px-10 py-10 md:py-20 min-h-screen bg-gray-50">
           <Abstract script={scriptData.script} />
-        ) : (
-          <Loader />
-        )}
-      </div>
+        </div>
+      ) : (
+        <Loader setCustomHeight="min-h-[80vh]" />
+      )}
     </>
   );
 };

@@ -7,14 +7,16 @@ import useCreateScriptModal from "./useCreateScriptModal";
 interface IProps {
   openCreateScript: boolean;
   setOpenCreateScript: React.Dispatch<React.SetStateAction<boolean>>;
+  refetch: any;
 }
 
 const CreateScriptModal = ({
   openCreateScript,
   setOpenCreateScript,
+  refetch,
 }: IProps) => {
   const { errors, handleSubmit, loading, onSubmit, register } =
-    useCreateScriptModal({ setOpenCreateScript });
+    useCreateScriptModal({ setOpenCreateScript, refetch });
 
   const handleCloseModalCreateScript = () => setOpenCreateScript(false);
 

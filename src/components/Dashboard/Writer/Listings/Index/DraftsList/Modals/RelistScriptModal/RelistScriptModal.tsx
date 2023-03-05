@@ -13,6 +13,7 @@ interface IProps {
   openRelistScript: boolean;
   setOpenRelistScript: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const RelistScriptModal = ({
   openRelistScript,
   setOpenRelistScript,
   id,
+  refetch,
 }: IProps) => {
   const { updatePublishedScript } = useScriptsApi();
 
@@ -39,6 +41,7 @@ const RelistScriptModal = ({
         onError: (error) => errorHandler(error),
         onSuccess: (data) => {
           successHandler(data.message);
+          refetch();
           queryClient.invalidateQueries("script");
           handleCloseRelistScript();
         },

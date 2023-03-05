@@ -10,11 +10,12 @@ import successHandler from "utils/success-handler";
 
 interface IProps {
   listScripts: IWriterScript[];
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
 
-const useProjectAccordion = ({ listScripts }: IProps) => {
+const useProjectAccordion = ({ listScripts, refetch }: IProps) => {
   const { updateWriterArchiveScript, deleteScript } = useScriptsApi();
   const [expanded, setExpanded] = useState(false);
   const [openPublishScript, setOpenPublishScript] = useState(false);
@@ -22,25 +23,30 @@ const useProjectAccordion = ({ listScripts }: IProps) => {
   const { query, push } = useRouter();
   const openProjectAccordionMenu = Boolean(anchorEl);
   const { mutate: deleteScriptFn, isLoading: isLoadingDeleteScript } =
-    useMutation<void, Error, string>((scriptId) => deleteScript(scriptId), {
-      onError: (error) => {
-        errorHandler(error);
-      },
-      onSuccess: () => {
-        if (listScripts.length <= 1) {
-          push(`?archive=false&page=${+String(query.page) - 1}`, undefined, {
-            shallow: true,
-          });
-        }
-        queryClient.invalidateQueries(
-          ["script", querystring.stringify(query), ""],
-          {
-            exact: true,
-            stale: true,
+    useMutation<IResData<object>, Error, string>(
+      (scriptId) => deleteScript(scriptId),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: (data) => {
+          refetch();
+          successHandler(data.message);
+          if (listScripts.length <= 1) {
+            push(`?archive=false&page=${+String(query.page) - 1}`, undefined, {
+              shallow: true,
+            });
           }
-        );
-      },
-    });
+          queryClient.invalidateQueries(
+            ["script", querystring.stringify(query), ""],
+            {
+              exact: true,
+              stale: true,
+            }
+          );
+        },
+      }
+    );
   const { mutate: archiveScript, isLoading: isLoadingArchiveScript } =
     useMutation<
       IResData<object>,
@@ -58,6 +64,7 @@ const useProjectAccordion = ({ listScripts }: IProps) => {
           errorHandler(error);
         },
         onSuccess: (data) => {
+          refetch();
           successHandler(data.message);
           if (listScripts.length <= 1) {
             push(`?archive=false&page=${+String(query.page) - 1}`, undefined, {

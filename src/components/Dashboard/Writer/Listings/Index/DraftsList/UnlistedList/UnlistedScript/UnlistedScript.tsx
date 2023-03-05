@@ -14,9 +14,10 @@ const DeleteScriptModal = dynamic(
 
 interface IProps {
   script: IUnlistedScript;
+  refetch: any;
 }
 
-const UnlistedScript = ({ script }: IProps) => {
+const UnlistedScript = ({ script, refetch }: IProps) => {
   const [openRelistScript, setOpenRelistScript] = useState<boolean>(false);
   const [openDeleteScript, setOpenDeleteScript] = useState<boolean>(false);
 
@@ -108,6 +109,7 @@ const UnlistedScript = ({ script }: IProps) => {
       <Suspense fallback={null}>
         {openRelistScript ? (
           <RelistScriptModal
+            refetch={refetch}
             id={script._id}
             openRelistScript={openRelistScript}
             setOpenRelistScript={setOpenRelistScript}
@@ -117,6 +119,7 @@ const UnlistedScript = ({ script }: IProps) => {
       <Suspense fallback={null}>
         {openDeleteScript ? (
           <DeleteScriptModal
+            refetch={refetch}
             id={script._id}
             openDeleteScript={openDeleteScript}
             setOpenDeleteScript={setOpenDeleteScript}

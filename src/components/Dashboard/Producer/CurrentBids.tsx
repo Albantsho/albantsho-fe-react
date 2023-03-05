@@ -21,11 +21,12 @@ import successHandler from "utils/success-handler";
 
 interface IProps {
   bidsList: IProducerBid[];
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
 
-const CurrentBids = ({ bidsList }: IProps) => {
+const CurrentBids = ({ bidsList, refetch }: IProps) => {
   const { deleteBid } = useScripBidApi();
 
   const { mutate: deleteBidMutate, isLoading: loadingDeleteBid } = useMutation<
@@ -36,6 +37,7 @@ const CurrentBids = ({ bidsList }: IProps) => {
     onError: (error) => errorHandler(error),
     onSuccess: (data) => {
       successHandler(data.message);
+      refetch();
       queryClient.invalidateQueries("script");
     },
   });

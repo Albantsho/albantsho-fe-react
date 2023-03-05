@@ -1,5 +1,6 @@
 import { Divider } from "@mui/material";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
+import Loader from "@shared/Loader/Loader";
 import useAuthApi from "apis/Auth.api";
 import BreadcrumbsUserInfo from "components/Dashboard/Admin/Users/UserInfo/BreadcrumbsUserInfo/BreadcrumbsUserInfo";
 import UserInformation from "components/Dashboard/Admin/Users/UserInfo/UserInformation/UserInformation";
@@ -13,15 +14,13 @@ import errorHandler from "utils/error-handler";
 const InformationUserPage: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { getUserProfileForAdmin } = useAuthApi();
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, refetch } = useQuery(
     "userInformationForAdmin",
     () => getUserProfileForAdmin(`${query.id}`),
     {
       onError: (err) => {
         errorHandler(err);
       },
-      refetchInterval: 1000,
-      refetchIntervalInBackground: true,
     }
   );
 
@@ -30,17 +29,16 @@ const InformationUserPage: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Admin User information</title>
       </Head>
-
       {!isLoading && data ? (
         <div className="bg-white shadow-primary rounded-lg pt-4 lg:pt-8 pb-10 lg:pb-24 px-5 lg:px-14 max-w-5xl">
           <BreadcrumbsUserInfo
             name={`${data.user.firstName} ${data.user.lastName}`}
           />
           <Divider className="mt-2 lg:mt-6 mb-6 lg:mb-11" />
-          <UserInformation user={data.user} />
+          <UserInformation refetch={refetch} user={data.user} />
         </div>
       ) : (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <Loader setCustomHeight="min-h-[75vh]" />
       )}
     </>
   );

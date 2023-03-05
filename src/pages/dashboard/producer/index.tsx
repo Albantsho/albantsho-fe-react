@@ -25,6 +25,7 @@ const Scripts: NextPageWithLayout = () => {
   const {
     data: producerScriptsRequestData,
     isLoading: loadingGetProducerRequestScripts,
+    refetch,
   } = useQuery("script", () => getAllBidsForProducer(searchQuery));
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,14 +53,17 @@ const Scripts: NextPageWithLayout = () => {
       producerScriptsRequestData ? (
         <>
           {(!query.tab || query.tab === "current-bids") && (
-            <CurrentBids bidsList={producerScriptsRequestData.scriptBids} />
+            <CurrentBids
+              refetch={refetch}
+              bidsList={producerScriptsRequestData.scriptBids}
+            />
           )}
           {query.tab === "my-scripts" && (
             <MyScriptsList scriptsList={producerScriptsData.scripts} />
           )}
         </>
       ) : (
-        <Loader setCustomHeight="min-h-[70vh]" />
+        <Loader setCustomHeight="min-h-[60vh]" />
       )}
     </>
   );

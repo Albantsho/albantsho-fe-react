@@ -32,11 +32,12 @@ const AcceptOfferModal = dynamic(
 interface IProps {
   bidsList: IBidForScript[];
   script: IFullInformationScript;
+  refetch?: any;
 }
 
 const queryClient = new QueryClient();
 
-const ScriptsAuction = ({ bidsList, script }: IProps) => {
+const ScriptsAuction = ({ bidsList, script, refetch }: IProps) => {
   const { push } = useRouter();
   const { rejectBid } = useScripBidApi();
   const [openAcceptOffer, setOpenAcceptOffer] = useState<boolean>(false);
@@ -46,6 +47,7 @@ const ScriptsAuction = ({ bidsList, script }: IProps) => {
       onError: (error) => errorHandler(error),
       onSuccess: (data) => {
         successHandler(data.message);
+        refetch && refetch();
         queryClient.invalidateQueries(["script", "bid"]);
       },
     });
@@ -183,6 +185,7 @@ const ScriptsAuction = ({ bidsList, script }: IProps) => {
                 <Suspense>
                   {openAcceptOffer ? (
                     <AcceptOfferModal
+                      refetch={refetch}
                       title={script.title}
                       auction={auction}
                       openAcceptOffer={openAcceptOffer}

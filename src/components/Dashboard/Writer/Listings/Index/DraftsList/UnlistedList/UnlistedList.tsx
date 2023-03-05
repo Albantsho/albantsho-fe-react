@@ -7,9 +7,10 @@ import UnlistedScript from "./UnlistedScript/UnlistedScript";
 
 interface IProps {
   unListedScripts: IUnlistedScript[];
+  refetch: any;
 }
 
-const UnlistedList = ({ unListedScripts }: IProps) => {
+const UnlistedList = ({ unListedScripts, refetch }: IProps) => {
   return unListedScripts.length ? (
     <Paper elevation={0} className="mt-4 sm:mt-6 bg-white shadow-primary">
       <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">
@@ -31,7 +32,11 @@ const UnlistedList = ({ unListedScripts }: IProps) => {
       <div className="px-5 xl:px-14 overflow-hidden">
         {unListedScripts.map((script, index) => (
           <React.Fragment key={script._id}>
-            <UnlistedScript key={script._id} script={script} />
+            <UnlistedScript
+              refetch={refetch}
+              key={script._id}
+              script={script}
+            />
             {index < unListedScripts.length - 1 && (
               <Divider className="hidden sm:flex" />
             )}

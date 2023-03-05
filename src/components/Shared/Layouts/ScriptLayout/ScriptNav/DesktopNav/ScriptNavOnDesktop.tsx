@@ -12,15 +12,18 @@ const DashboardNavOnDesktop = () => {
   const { query } = useRouter();
   const user = useUserStore((state) => state.user);
 
-  const { data: collaboratorsData, isLoading: loadingGetCollaboratorList } =
-    useQuery("collaborator", () => listAllCollaborators(query.id as string));
+  const {
+    data: collaboratorsData,
+    isLoading: loadingGetCollaboratorList,
+    refetch,
+  } = useQuery("collaborator", () => listAllCollaborators(query.id as string));
 
   return (
     <div className="lg:flex px-1 flex-1 justify-end items-center hidden">
       {collaboratorsData && !loadingGetCollaboratorList && (
         <div className="flex items-center gap-12">
           {user.email === collaboratorsData?.script.author.email && (
-            <AddCollaborator />
+            <AddCollaborator refetch={refetch} />
           )}
 
           <AvatarGroup max={3}>

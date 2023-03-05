@@ -14,6 +14,7 @@ interface IProps {
   openUnListingItem: boolean;
   setOpenUnListingItem: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const UnListingItemModal = ({
   openUnListingItem,
   setOpenUnListingItem,
   id,
+  refetch,
 }: IProps) => {
   const { updatePublishedScript } = useScriptsApi();
 
@@ -39,8 +41,9 @@ const UnListingItemModal = ({
       {
         onError: (error) => errorHandler(error),
         onSuccess: (data) => {
-          queryClient.invalidateQueries("script");
           successHandler(data.message);
+          refetch();
+          queryClient.invalidateQueries("script");
           handleClose();
         },
       }

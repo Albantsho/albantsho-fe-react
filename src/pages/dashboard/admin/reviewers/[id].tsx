@@ -52,7 +52,7 @@ const InformationReviewPage: NextPageWithLayout = () => {
           />
         </div>
       ) : (
-        <Loader setCustomHeight="min-h-[65vh]" />
+        <Loader setCustomHeight="min-h-[75vh]" />
       )}
     </>
   );

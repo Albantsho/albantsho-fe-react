@@ -1,18 +1,19 @@
 import useInvite, { IData_getInvites } from "apis/Invite.api";
 import { IResData } from "interfaces/response";
 import { QueryClient, useMutation, useQuery } from "react-query";
-import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 const queryClient = new QueryClient();
 
 const useInvites = () => {
   const { allInvite, acceptInvite, rejectInvite } = useInvite();
 
-  const { data: invitesData, isLoading: isLoadingInvites } = useQuery<
-    IData_getInvites,
-    Error
-  >("invite", () => allInvite());
+  const {
+    data: invitesData,
+    isLoading: isLoadingInvites,
+    refetch,
+  } = useQuery<IData_getInvites, Error>("invite", () => allInvite());
 
   const { mutate: acceptInviteMutate, isLoading: loadingAcceptInvite } =
     useMutation<IResData<object>, Error, string>(
@@ -27,7 +28,8 @@ const useInvites = () => {
             "invite",
             "collaborator",
           ]);
-          toast.success(data.message);
+          refetch();
+          successHandler(data.message);
         },
       }
     );
@@ -45,7 +47,8 @@ const useInvites = () => {
             "invite",
             "collaborator",
           ]);
-          toast.success(data.message);
+          refetch();
+          successHandler(data.message);
         },
       }
     );

@@ -19,6 +19,7 @@ const DraftsList = ({ searchQuery }: IProps) => {
   const {
     data: unPublishedScriptsData,
     isLoading: loadingGetUnPublishedScripts,
+    refetch,
   } = useQuery("script", () => getWriterAllUnPublishedScripts(searchQuery));
 
   const {
@@ -51,7 +52,10 @@ const DraftsList = ({ searchQuery }: IProps) => {
         </Typography>
       </div>
       <Suspense fallback={null}>
-        <UnlistedList unListedScripts={unPublishedScriptsData.scripts} />
+        <UnlistedList
+          refetch={refetch}
+          unListedScripts={unPublishedScriptsData.scripts}
+        />
       </Suspense>
     </div>
   ) : (

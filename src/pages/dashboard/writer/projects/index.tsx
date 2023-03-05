@@ -2,6 +2,7 @@ import { Fab } from "@mui/material";
 import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/DashboardSearch";
+import Loader from "@shared/Loader/Loader";
 import useScriptsApi from "apis/Scripts.api";
 import ArchiveList from "components/Dashboard/Writer/Projects/Archive/ArchiveList/ArchiveList";
 import ProjectAccordionList from "components/Dashboard/Writer/Projects/Scripts/ProjectAccordionList/ProjectAccordionList";
@@ -53,13 +54,9 @@ const Projects: NextPageWithLayout = () => {
     [searchQuery]
   );
 
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, refetch } = useQuery(
     ["script", querystring.stringify(query), searchQuery, currentPage],
-    () => getWriterAllScripts(querystring.stringify(query), searchQuery),
-    {
-      refetchInterval: 1000,
-      refetchIntervalInBackground: true,
-    }
+    () => getWriterAllScripts(querystring.stringify(query), searchQuery)
   );
 
   useEffect(() => {
@@ -79,10 +76,13 @@ const Projects: NextPageWithLayout = () => {
       {data && !isLoading ? (
         <div className="space-y-10 mb-16">
           {(!query.archive || query.archive === "false") && (
-            <ProjectAccordionList listScripts={data.scripts} />
+            <ProjectAccordionList
+              refetch={refetch}
+              listScripts={data.scripts}
+            />
           )}
           {query.archive === "true" && (
-            <ArchiveList listScripts={data.scripts} />
+            <ArchiveList refetch={refetch} listScripts={data.scripts} />
           )}
           {data.pagesCount >= 2 && (
             <CustomPaginationComponent
@@ -95,6 +95,7 @@ const Projects: NextPageWithLayout = () => {
           <Suspense fallback={null}>
             {openCreateScript ? (
               <CreateScriptModal
+                refetch={refetch}
                 openCreateScript={openCreateScript}
                 setOpenCreateScript={setOpenCreateScript}
               />
@@ -109,7 +110,7 @@ const Projects: NextPageWithLayout = () => {
           </Fab>
         </div>
       ) : (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <Loader setCustomHeight="min-h-[60vh]" />
       )}
     </>
   );

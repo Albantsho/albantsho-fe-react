@@ -27,9 +27,10 @@ import PublishScriptModal from "./PublishScriptModal/PublishScriptModal";
 interface IProps {
   script: IWriterScript;
   listScripts: IWriterScript[];
+  refetch: any;
 }
 
-const ProjectAccordion = ({ script, listScripts }: IProps) => {
+const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
   const {
     anchorEl,
     archivingScript,
@@ -44,7 +45,7 @@ const ProjectAccordion = ({ script, listScripts }: IProps) => {
     isLoadingArchiveScript,
     openPublishScript,
     setOpenPublishScript,
-  } = useProjectAccordion({ listScripts });
+  } = useProjectAccordion({ listScripts, refetch });
   const { push } = useRouter();
 
   const buttonsProjects = [

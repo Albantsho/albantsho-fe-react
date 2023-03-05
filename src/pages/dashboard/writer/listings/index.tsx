@@ -1,6 +1,7 @@
 import { Fab } from "@mui/material";
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
 import DashboardSearch from "@shared/Layouts/DashboardLayout/DashboardSearch/DashboardSearch";
+import useScriptsApi from "apis/Scripts.api";
 import ClosedList from "components/Dashboard/Writer/Listings/Index/ClosedList/ClosedList";
 import DraftsList from "components/Dashboard/Writer/Listings/Index/DraftsList/DraftsList";
 import OpeningList from "components/Dashboard/Writer/Listings/Index/OpeningList/OpeningList";
@@ -10,6 +11,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense, useCallback, useState } from "react";
+import { useQuery } from "react-query";
 import { NextPageWithLayout } from "../../../_app";
 
 const CreateScriptModal = dynamic(
@@ -20,6 +22,14 @@ const Listings: NextPageWithLayout = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState("");
   const { query } = useRouter();
+
+  const { getWriterAllPublishedScripts } = useScriptsApi();
+
+  const {
+    data: publishedScriptsData,
+    isLoading: loadingGetPublishedScripts,
+    refetch,
+  } = useQuery("script", () => getWriterAllPublishedScripts(searchQuery));
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
@@ -47,13 +57,18 @@ const Listings: NextPageWithLayout = () => {
       <Suspense fallback={null}>
         {openCreateScript ? (
           <CreateScriptModal
+            refetch={refetch}
             openCreateScript={openCreateScript}
             setOpenCreateScript={setOpenCreateScript}
           />
         ) : null}
       </Suspense>
       {(!query.tab || query.tab === "opening-list") && (
-        <OpeningList searchQuery={searchQuery} />
+        <OpeningList
+          refetch={refetch}
+          publishedScriptsData={publishedScriptsData}
+          loadingGetPublishedScripts={loadingGetPublishedScripts}
+        />
       )}
       {query.tab === "drafts" && <DraftsList searchQuery={searchQuery} />}
       {query.tab === "closed-list" && <ClosedList searchQuery={searchQuery} />}

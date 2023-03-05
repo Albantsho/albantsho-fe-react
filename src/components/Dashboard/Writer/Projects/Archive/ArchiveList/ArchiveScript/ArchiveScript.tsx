@@ -19,9 +19,10 @@ const UnArchiveModal = dynamic(
 interface IProps {
   script: IWriterScript;
   listScripts: IWriterScript[];
+  refetch: any;
 }
 
-const ArchiveScript = ({ script, listScripts }: IProps) => {
+const ArchiveScript = ({ script, listScripts, refetch }: IProps) => {
   const [openUnArchive, setOpenUnArchive] = useState<boolean>(false);
   const handleOpenUnArchive = () => setOpenUnArchive(true);
 
@@ -131,6 +132,7 @@ const ArchiveScript = ({ script, listScripts }: IProps) => {
       <Suspense fallback={null}>
         {openUnArchive ? (
           <UnArchiveModal
+            refetch={refetch}
             id={script._id}
             openUnArchive={openUnArchive}
             setOpenUnArchive={setOpenUnArchive}

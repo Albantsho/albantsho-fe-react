@@ -28,7 +28,6 @@ const Script: NextPageWithLayout = () => {
     "draft",
     () => getOneDraft(query.id as string),
     {
-      onError: (err) => errorHandler(err),
       onSuccess: (data) => {
         setHtmlInitialValue(data.draft);
       },
@@ -47,7 +46,7 @@ const Script: NextPageWithLayout = () => {
           script={scriptData.script}
         />
       ) : (
-        <Loader setCustomHeight="min-h-[85vh]" />
+        <Loader setCustomHeight="min-h-[75vh]" />
       )}
     </>
   );

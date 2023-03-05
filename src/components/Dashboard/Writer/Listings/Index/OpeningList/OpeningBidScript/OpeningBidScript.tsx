@@ -23,9 +23,10 @@ interface IProps {
   script: IBidScript;
   scripts: IBidScript[];
   index: number;
+  refetch: any;
 }
 
-const OpeningBidScript = ({ script, index, scripts }: IProps) => {
+const OpeningBidScript = ({ script, index, scripts, refetch }: IProps) => {
   const [openUnListingItem, setOpenUnListingItem] = useState<boolean>(false);
   const [openMenuItem, setOpenMenuItem] = useState<null | HTMLElement>(null);
   const openMenu = Boolean(openMenuItem);
@@ -153,6 +154,7 @@ const OpeningBidScript = ({ script, index, scripts }: IProps) => {
       <Suspense fallback={null}>
         {openUnListingItem ? (
           <UnListingItemModal
+            refetch={refetch}
             id={script._id}
             openUnListingItem={openUnListingItem}
             setOpenUnListingItem={setOpenUnListingItem}

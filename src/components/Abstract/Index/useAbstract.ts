@@ -7,9 +7,10 @@ import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 import { abstractSchema } from "./validation/abstract.validation";
 
 type IScript = IFullInformationScript;
@@ -72,13 +73,49 @@ const useAbstract = (script: IScript) => {
   const handleUploadImageCover = (e: React.ChangeEvent<HTMLInputElement>) => {
     controller = new AbortController();
     if (!e.target.files) {
-      toast.error("Image is required field");
+      toast.error("Image is required field", {
+        style: {
+          border: "1px solid #D32D2D",
+          padding: "16px",
+          color: "#D32D2D",
+          fontFamily: "Montserrat",
+        },
+        iconTheme: {
+          primary: "#D32D2D",
+          secondary: "#FFEDED",
+        },
+        position: "top-right",
+      });
       setImageCoverError("Image is required field");
     } else if (e.target.files.length <= 0) {
-      toast.error("Image is required field");
+      toast.error("Image is required field", {
+        style: {
+          border: "1px solid #D32D2D",
+          padding: "16px",
+          color: "#D32D2D",
+          fontFamily: "Montserrat",
+        },
+        iconTheme: {
+          primary: "#D32D2D",
+          secondary: "#FFEDED",
+        },
+        position: "top-right",
+      });
       setImageCoverError("Image is required field");
     } else if (e.target.files[0].size / 1024 > 5120) {
-      toast.error("The file is to large, must less than 5MB");
+      toast.error("The file is to large, must less than 5MB", {
+        style: {
+          border: "1px solid #D32D2D",
+          padding: "16px",
+          color: "#D32D2D",
+          fontFamily: "Montserrat",
+        },
+        iconTheme: {
+          primary: "#D32D2D",
+          secondary: "#FFEDED",
+        },
+        position: "top-right",
+      });
       setImageCoverError("The file is to large, must less than 5MB");
     } else {
       setImageCoverError("");
@@ -98,7 +135,7 @@ const useAbstract = (script: IScript) => {
             signal: controller.signal,
           }
         )
-        .then((res) => toast.success(res.data.message));
+        .then((res) => successHandler(res.data.message));
     }
   };
 
@@ -108,15 +145,51 @@ const useAbstract = (script: IScript) => {
     setAdaption(true);
     controllerAdaption = new AbortController();
     if (!e.target.files) {
-      toast.error("please upload file adaption permission");
+      toast.error("please upload file adaption permission", {
+        style: {
+          border: "1px solid #D32D2D",
+          padding: "16px",
+          color: "#D32D2D",
+          fontFamily: "Montserrat",
+        },
+        iconTheme: {
+          primary: "#D32D2D",
+          secondary: "#FFEDED",
+        },
+        position: "top-right",
+      });
       setAdaptionPermissionError("please upload file adaption permission");
       setAdaption(false);
     } else if (e.target.files.length <= 0) {
-      toast.error("please upload file adaption permission");
+      toast.error("please upload file adaption permission", {
+        style: {
+          border: "1px solid #D32D2D",
+          padding: "16px",
+          color: "#D32D2D",
+          fontFamily: "Montserrat",
+        },
+        iconTheme: {
+          primary: "#D32D2D",
+          secondary: "#FFEDED",
+        },
+        position: "top-right",
+      });
       setAdaptionPermissionError("please upload file adaption permission");
       setAdaption(false);
     } else if (e.target.files[0].size / 1024 > 5120) {
-      toast.error("The file is to large, must less than 5MB");
+      toast.error("The file is to large, must less than 5MB", {
+        style: {
+          border: "1px solid #D32D2D",
+          padding: "16px",
+          color: "#D32D2D",
+          fontFamily: "Montserrat",
+        },
+        iconTheme: {
+          primary: "#D32D2D",
+          secondary: "#FFEDED",
+        },
+        position: "top-right",
+      });
       setAdaptionPermissionError("The file is to large, must less than 5MB");
       setAdaption(false);
     } else {
@@ -137,14 +210,26 @@ const useAbstract = (script: IScript) => {
             signal: controller.signal,
           }
         )
-        .then((res) => toast.success(res.data.message));
+        .then((res) => successHandler(res.data.message));
     }
   };
 
   const cancelUpload = () => {
     controller.abort();
     setProgress(0);
-    toast.error("upload canceled");
+    toast.error("upload canceled", {
+      style: {
+        border: "1px solid #D32D2D",
+        padding: "16px",
+        color: "#D32D2D",
+        fontFamily: "Montserrat",
+      },
+      iconTheme: {
+        primary: "#D32D2D",
+        secondary: "#FFEDED",
+      },
+      position: "top-right",
+    });
   };
 
   const cancelUploadAdaption = () => {

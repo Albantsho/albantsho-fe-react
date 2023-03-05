@@ -13,9 +13,10 @@ import Image from "next/image";
 
 interface IProps {
   listScripts: IWriterScript[];
+  refetch: any;
 }
 
-const ArchiveList = ({ listScripts }: IProps) => {
+const ArchiveList = ({ listScripts, refetch }: IProps) => {
   return listScripts.length ? (
     <Table className="mt-4 bg-white rounded-md shadow-primary  py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>
@@ -51,6 +52,7 @@ const ArchiveList = ({ listScripts }: IProps) => {
           <ArchiveScript
             key={script._id}
             listScripts={listScripts}
+            refetch={refetch}
             script={script}
           />
         ))}

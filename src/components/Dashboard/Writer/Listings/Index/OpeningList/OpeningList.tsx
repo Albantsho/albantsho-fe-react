@@ -1,21 +1,21 @@
 import emptyBlogs from "@assets/images/empty-blogs.png";
 import { Paper, Typography } from "@mui/material";
 import Loader from "@shared/Loader/Loader";
-import useScriptsApi from "apis/Scripts.api";
+import type { IData_getAllPublishedScript } from "apis/Scripts.api";
 import Image from "next/image";
-import { useQuery } from "react-query";
 import OpeningBidScript from "./OpeningBidScript/OpeningBidScript";
 
 interface IProps {
-  searchQuery: string;
+  publishedScriptsData: IData_getAllPublishedScript | undefined;
+  loadingGetPublishedScripts: boolean;
+  refetch: any;
 }
 
-const OpeningList = ({ searchQuery }: IProps) => {
-  const { getWriterAllPublishedScripts } = useScriptsApi();
-
-  const { data: publishedScriptsData, isLoading: loadingGetPublishedScripts } =
-    useQuery("script", () => getWriterAllPublishedScripts(searchQuery));
-
+const OpeningList = ({
+  publishedScriptsData,
+  loadingGetPublishedScripts,
+  refetch,
+}: IProps) => {
   return !loadingGetPublishedScripts && publishedScriptsData ? (
     publishedScriptsData.scripts.length > 0 ? (
       <Paper elevation={0} className="mt-4 bg-white mb-16 shadow-primary">
@@ -43,6 +43,7 @@ const OpeningList = ({ searchQuery }: IProps) => {
         <div className="px-5 xl:px-14 overflow-hidden">
           {publishedScriptsData.scripts.map((script, index) => (
             <OpeningBidScript
+              refetch={refetch}
               key={script._id}
               scripts={publishedScriptsData.scripts}
               script={script}

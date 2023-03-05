@@ -2,16 +2,19 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScriptsApi from "apis/Scripts.api";
+import { IResData } from "interfaces/response";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
 import { QueryClient, useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 import pictureDeleteScript from "./assets/trash.png";
 
 interface IProps {
   openDeleteScript: boolean;
   setOpenDeleteScript: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
@@ -20,27 +23,28 @@ const DeleteScriptModal = ({
   openDeleteScript,
   setOpenDeleteScript,
   id,
+  refetch,
 }: IProps) => {
   const { deleteScript } = useScriptsApi();
 
   const { mutate: deleteScriptMutation, isLoading: isLoadingDeleteScript } =
-    useMutation<void, Error, string>((scriptId) => deleteScript(scriptId), {
-      onError: (error) => {
-        errorHandler(error);
-      },
-      onSuccess: () => {
-        // if (listScripts.length <= 1) {
-        //   push(`?archive=false&page=${+String(query.page) - 1}`, undefined, {
-        //     shallow: true,
-        //   });
-        // }
-        handleCloseDeleteScript();
-        queryClient.invalidateQueries(["script"], {
-          exact: true,
-          stale: true,
-        });
-      },
-    });
+    useMutation<IResData<object>, Error, string>(
+      (scriptId) => deleteScript(scriptId),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: (data) => {
+          successHandler(data.message);
+          refetch();
+          handleCloseDeleteScript();
+          queryClient.invalidateQueries(["script"], {
+            exact: true,
+            stale: true,
+          });
+        },
+      }
+    );
 
   const deleteScriptFunc = () => deleteScriptMutation(id);
   const handleCloseDeleteScript = () => setOpenDeleteScript(false);

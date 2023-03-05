@@ -3,7 +3,11 @@ import Btn from "@shared/Btn/Btn";
 import AddCollaboratorIcon from "./assets/add-collaborator.svg";
 import useAddCollaborator from "./useAddCollaborator";
 
-const AddCollaborator = () => {
+interface IProps {
+  refetch: any;
+}
+
+const AddCollaborator = ({ refetch }: IProps) => {
   const {
     handleCloseAddCollaborator,
     handleOpenAddCollaborator,
@@ -14,7 +18,7 @@ const AddCollaborator = () => {
     loading,
     onSubmit,
     register,
-  } = useAddCollaborator();
+  } = useAddCollaborator({ refetch });
 
   return (
     <>

@@ -90,20 +90,45 @@ const HeroSection = () => {
             )}
           </animated.div>
           {lgScreen &&
-            (!loadingGetTrendingScripts &&
-            trendingScriptsData &&
-            trendingScriptsData.scripts[0] ? (
-              <AnimatedScriptCard
-                key={trendingScriptsData.scripts[0]._id}
-                className="w-full"
-                style={cardAnim}
-                sx={{
-                  maxWidth: 395,
-                  boxShadow: "0px 35px 60px 0px #0000004D",
-                }}
-                script={trendingScriptsData.scripts[0]}
-                inHome
-              />
+            (!loadingGetTrendingScripts && trendingScriptsData ? (
+              trendingScriptsData.scripts[0] ? (
+                <AnimatedScriptCard
+                  key={trendingScriptsData.scripts[0]._id}
+                  className="w-full"
+                  style={cardAnim}
+                  sx={{
+                    maxWidth: 395,
+                    boxShadow: "0px 35px 60px 0px #0000004D",
+                  }}
+                  script={trendingScriptsData.scripts[0]}
+                  inHome
+                />
+              ) : (
+                <AnimatedScriptCard
+                  key="5"
+                  className="w-full"
+                  style={cardAnim}
+                  sx={{
+                    maxWidth: 395,
+                    boxShadow: "0px 35px 60px 0px #0000004D",
+                  }}
+                  script={{
+                    _id: "5",
+                    scriptFormat: "Feature film",
+                    basedOn: "basedOn",
+                    draftDate: "draftDate",
+                    names: "Albantsho",
+                    reviewed: true,
+                    reviewerRate: 5,
+                    price: 10000,
+                    tagline:
+                      "One platform set out to enable better stories one script at a time",
+                    writtenBy: "Albantsho",
+                    title: "Black Onion",
+                  }}
+                  inHome
+                />
+              )
             ) : (
               <Card
                 className="rounded-lg w-96"

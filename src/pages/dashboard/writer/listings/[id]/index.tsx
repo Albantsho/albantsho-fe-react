@@ -33,21 +33,21 @@ const ScriptSlug: NextPageWithLayout = () => {
   const { getScript } = useScriptsApi();
   const { query } = useRouter();
 
-  const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
-    "script",
-    () => getScript(query.id as string),
-    {
-      onError: (err) => errorHandler(err),
-    }
-  );
+  const {
+    data: scriptData,
+    isLoading: isLoadingGetScript,
+    refetch: refetchScript,
+  } = useQuery("script", () => getScript(query.id as string), {
+    onError: (err) => errorHandler(err),
+  });
 
-  const { data: scriptBidsData, isLoading: isLoadingGetScriptBids } = useQuery(
-    "script",
-    () => getAllBids(query.id as string),
-    {
-      onError: (err) => errorHandler(err),
-    }
-  );
+  const {
+    data: scriptBidsData,
+    isLoading: isLoadingGetScriptBids,
+    refetch,
+  } = useQuery("script", () => getAllBids(query.id as string), {
+    onError: (err) => errorHandler(err),
+  });
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
@@ -81,6 +81,7 @@ const ScriptSlug: NextPageWithLayout = () => {
             {openCreateScript ? (
               <Suspense fallback={null}>
                 <CreateScriptModal
+                  refetch={refetchScript}
                   openCreateScript={openCreateScript}
                   setOpenCreateScript={setOpenCreateScript}
                 />
@@ -90,6 +91,7 @@ const ScriptSlug: NextPageWithLayout = () => {
               <AuctionsScripts
                 script={scriptData.script}
                 bidsList={scriptBidsData.scriptBids}
+                refetch={refetch}
               />
             </Suspense>
           </div>

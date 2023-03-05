@@ -45,7 +45,7 @@ const ScriptCard = (props: IProps) => {
           src={
             script.image
               ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`
-              : "assets/images/julie.jpg"
+              : "/assets/images/julie.jpg"
           }
           loading="lazy"
         />

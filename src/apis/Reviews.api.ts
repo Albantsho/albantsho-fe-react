@@ -52,7 +52,8 @@ const useReviewsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+
+    [axiosPrivate, controller?.signal]
   );
 
   const getAssignedRequestedReviews = useCallback(
@@ -65,7 +66,8 @@ const useReviewsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+
+    [axiosPrivate, controller?.signal]
   );
 
   const getCompletedRequestedReviews = useCallback(
@@ -78,13 +80,31 @@ const useReviewsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+
+    [axiosPrivate, controller?.signal]
+  );
+
+  const assignReviewRequestToReviewer = useCallback(
+    async (payload: IAssignReviewRequestToReviewerPayload) => {
+      const res = await axiosPrivate.post<IResData<object>>(
+        "/review/assign",
+        payload,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data;
+    },
+
+    [axiosPrivate, controller?.signal]
   );
 
   return {
     getAllRequestedReviews,
     getAssignedRequestedReviews,
     getCompletedRequestedReviews,
+    assignReviewRequestToReviewer,
     async createNewReview(payload: { scriptId: string }) {
       const res = await axiosPrivate.post("/review/create", payload, {
         signal: controller?.signal,
@@ -155,16 +175,6 @@ const useReviewsApi = (controller?: AbortController) => {
 
     async getAllReviewerTasks(query: string) {
       const res = await axiosPrivate.get(`/review/my/tasks?${query}`, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
-    async assignReviewRequestToReviewer(
-      payload: IAssignReviewRequestToReviewerPayload
-    ) {
-      const res = await axiosPrivate.post("/review/assign", payload, {
         signal: controller?.signal,
       });
 

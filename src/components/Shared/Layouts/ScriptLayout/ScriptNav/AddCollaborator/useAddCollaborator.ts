@@ -1,21 +1,25 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
-import { addCollaboratorSchema } from "./validation/addCollaborator.validation";
-import { useForm } from "react-hook-form";
 import useInvite, { type ICreateNewInvitePayload } from "apis/Invite.api";
-import errorHandler from "utils/error-handler";
-import { useRouter } from "next/router";
 import { IResData } from "interfaces/response";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { QueryClient, useMutation } from "react-query";
-import { toast } from "react-toastify";
+import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
+import { addCollaboratorSchema } from "./validation/addCollaborator.validation";
 
 interface IAddCollaboratorFormValues {
   email: string;
 }
 
+interface IProps {
+  refetch: any;
+}
+
 const queryClient = new QueryClient();
 
-const useAddCollaborator = () => {
+const useAddCollaborator = ({ refetch }: IProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const { createNewInvite } = useInvite();
   const { query } = useRouter();
@@ -28,6 +32,7 @@ const useAddCollaborator = () => {
           errorHandler(error);
         },
         onSuccess: (data) => {
+          refetch();
           queryClient.invalidateQueries([
             "notification",
             "invite",
@@ -35,7 +40,7 @@ const useAddCollaborator = () => {
           ]);
           reset({ email: "" });
           handleCloseAddCollaborator();
-          toast.success(data.message);
+          successHandler(data.message);
         },
       }
     );

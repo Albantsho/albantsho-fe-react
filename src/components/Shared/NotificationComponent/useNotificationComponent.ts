@@ -3,8 +3,8 @@ import useNotification, { IData_getNotifications } from "apis/Notification.api";
 import { IResData } from "interfaces/response";
 import { useState } from "react";
 import { QueryClient, useMutation, useQuery } from "react-query";
-import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 const queryClient = new QueryClient();
 
@@ -15,15 +15,19 @@ const useNotificationComponent = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
 
-  const { data: notificationsData, isLoading: isLoadingNotifications } =
-    useQuery<IData_getNotifications, Error>("notification", () =>
-      getAllNotifications()
-    );
+  const {
+    data: notificationsData,
+    isLoading: isLoadingNotifications,
+    refetch: refetchNotifications,
+  } = useQuery<IData_getNotifications, Error>("notification", () =>
+    getAllNotifications()
+  );
 
-  const { data: invitesData, isLoading: isLoadingInvites } = useQuery<
-    IData_getInvites,
-    Error
-  >("invite", () => allInvite());
+  const {
+    data: invitesData,
+    isLoading: isLoadingInvites,
+    refetch: refetchInvites,
+  } = useQuery<IData_getInvites, Error>("invite", () => allInvite());
 
   const { mutate: seenNotificationMutate, isLoading: loadingSeenNotification } =
     useMutation<IResData<object>, Error, string>(
@@ -34,7 +38,8 @@ const useNotificationComponent = () => {
         },
         onSuccess: (data) => {
           queryClient.invalidateQueries(["notification", "invite"]);
-          toast.success(data.message);
+          refetchNotifications();
+          successHandler(data.message);
         },
       }
     );
@@ -50,7 +55,8 @@ const useNotificationComponent = () => {
       },
       onSuccess: (data) => {
         queryClient.invalidateQueries(["notification", "invite"]);
-        toast.success(data.message);
+        refetchNotifications();
+        successHandler(data.message);
       },
     }
   );
@@ -68,7 +74,8 @@ const useNotificationComponent = () => {
             "invite",
             "collaborator",
           ]);
-          toast.success(data.message);
+          refetchInvites();
+          successHandler(data.message);
         },
       }
     );
@@ -81,8 +88,13 @@ const useNotificationComponent = () => {
           errorHandler(error);
         },
         onSuccess: (data) => {
-          queryClient.invalidateQueries(["notification"]);
-          toast.success(data.message);
+          queryClient.invalidateQueries([
+            "notification",
+            "invite",
+            "collaborator",
+          ]);
+          refetchInvites();
+          successHandler(data.message);
         },
       }
     );

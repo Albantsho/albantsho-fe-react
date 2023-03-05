@@ -6,8 +6,8 @@ export interface IScript {
   reviewerRate: number;
   scriptFormat: string;
   reviewed: boolean;
-  image: string;
-  writtenBy: string[];
+  image?: string;
+  writtenBy: string;
   draftDate: string;
   basedOn: string;
   names: string;

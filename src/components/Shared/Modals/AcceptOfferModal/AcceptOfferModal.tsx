@@ -18,6 +18,7 @@ interface IProps {
   setOpenAcceptOffer: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
   auction: IBidForScript;
+  refetch?: any;
 }
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const AcceptOfferModal = ({
   setOpenAcceptOffer,
   auction,
   title,
+  refetch,
 }: IProps) => {
   const { acceptBid } = useScripBidApi();
   const { replace } = useRouter();
@@ -36,6 +38,7 @@ const AcceptOfferModal = ({
       onError: (error) => errorHandler(error),
       onSuccess: (data) => {
         successHandler(data.message);
+        refetch && refetch();
         queryClient.invalidateQueries(["script", "bid"]);
         replace(routes.writerDashboard.url);
       },

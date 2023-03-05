@@ -1,3 +1,4 @@
+import DefaultImage from "@assets/default-image-script.svg";
 import {
   Autocomplete,
   Avatar,
@@ -15,15 +16,17 @@ import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useReviewsApi from "apis/Reviews.api";
 import { bgArray } from "assets/colors/color-list";
+import { IResData } from "interfaces/response";
 import { IReviewer } from "interfaces/reviews";
 import { IFullInformationScript } from "interfaces/script";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import errorHandler from "utils/error-handler";
-import DefaultImage from "@assets/default-image-script.svg";
+import { useMutation } from "react-query";
 import routes from "routes/routes";
+import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 interface IProps {
   script: IFullInformationScript;
@@ -46,25 +49,31 @@ const filterOptions = createFilterOptions({
 
 const OneRequest = ({ reviewersList, script }: IProps) => {
   const { assignReviewRequestToReviewer } = useReviewsApi();
-  const [loading, setLoading] = useState(false);
   const [selectedReviewer, setSelectedReviewer] =
     useState<IReviewersListOptionType | null>(null);
   const { back, replace } = useRouter();
 
+  const {
+    mutate: assignedReviewToReviewerMutation,
+    isLoading: loadingAssignedReviewToReviewer,
+  } = useMutation<
+    IResData<object>,
+    Error,
+    { scriptId: string; userId: string }
+  >((data) => assignReviewRequestToReviewer(data), {
+    onSuccess: (data) => {
+      successHandler(data.message);
+      replace(routes.reviewersAdminDashboard.url);
+    },
+    onError: (error) => errorHandler(error),
+  });
+
   const assignedReviewToReviewer = async () => {
-    try {
-      if (selectedReviewer) {
-        setLoading(true);
-        await assignReviewRequestToReviewer({
-          scriptId: script._id,
-          userId: selectedReviewer._id,
-        });
-        replace(routes.reviewersAdminDashboard.url);
-      }
-    } catch (error) {
-      errorHandler(error);
-    } finally {
-      setLoading(false);
+    if (selectedReviewer) {
+      assignedReviewToReviewerMutation({
+        scriptId: script._id,
+        userId: selectedReviewer._id,
+      });
     }
   };
 
@@ -229,7 +238,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
       </div>
       <div className="mt-8 flex items-stretch  gap-3">
         <Btn
-          loading={loading}
+          loading={loadingAssignedReviewToReviewer}
           size="large"
           className="py-3 px-5 rounded-lg  text-white bg-primary-700"
           onClick={assignedReviewToReviewer}

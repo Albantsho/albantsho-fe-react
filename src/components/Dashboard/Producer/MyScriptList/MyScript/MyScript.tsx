@@ -105,7 +105,7 @@ const MyScript = ({ script }: IProps) => {
                 basedOn={script.basedOn}
                 draftDate={script.draftDate}
                 title={script.title}
-                writtenBy={script.writtenBy.join(" ")}
+                writtenBy={script.writtenBy}
               />
             }
             fileName={script.title}
@@ -153,7 +153,7 @@ const MyScript = ({ script }: IProps) => {
                 basedOn={script.basedOn}
                 draftDate={script.draftDate}
                 title={script.title}
-                writtenBy={script.writtenBy.join(" ")}
+                writtenBy={script.writtenBy}
               />
             }
             fileName={script.title}

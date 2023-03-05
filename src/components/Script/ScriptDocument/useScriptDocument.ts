@@ -7,9 +7,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { QueryClient, useMutation, useQuery } from "react-query";
-import { toast } from "react-toastify";
 import { Socket } from "socket.io-client";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 import { addCollaboratorSchema } from "./validation/addCollaborator.validation";
 
 interface IAddCollaboratorFormValues {
@@ -28,8 +28,11 @@ const useScriptDocument = ({ socket }: IProps) => {
   const { listAllCollaborators } = useScriptsApi();
   const { query } = useRouter();
 
-  const { data: collaboratorsData, isLoading: loadingGetCollaboratorList } =
-    useQuery("collaborator", () => listAllCollaborators(query.id as string));
+  const {
+    data: collaboratorsData,
+    isLoading: loadingGetCollaboratorList,
+    refetch,
+  } = useQuery("collaborator", () => listAllCollaborators(query.id as string));
 
   const { mutate: createInviteMutate, isLoading: loadingCreateInvite } =
     useMutation<IResData<object>, Error, ICreateNewInvitePayload>(
@@ -39,9 +42,10 @@ const useScriptDocument = ({ socket }: IProps) => {
           errorHandler(error);
         },
         onSuccess: (data) => {
-          queryClient.invalidateQueries(["notification", "invite"]);
           reset({ email: "" });
-          toast.success(data.message);
+          successHandler(data.message);
+          queryClient.invalidateQueries(["notification", "invite"]);
+          refetch();
         },
       }
     );

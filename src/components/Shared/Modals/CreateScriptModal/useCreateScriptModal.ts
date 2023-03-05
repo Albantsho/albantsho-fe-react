@@ -12,11 +12,12 @@ interface ICreateScript {
 }
 interface IProps {
   setOpenCreateScript: React.Dispatch<React.SetStateAction<boolean>>;
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
 
-const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {
+const useCreateScriptModal = ({ setOpenCreateScript, refetch }: IProps) => {
   const { createNewScript } = useScriptsApi();
   const {
     register,
@@ -35,6 +36,7 @@ const useCreateScriptModal = ({ setOpenCreateScript }: IProps) => {
       errorHandler(error);
     },
     onSuccess: () => {
+      refetch();
       queryClient.invalidateQueries(["script"], {
         exact: true,
         stale: true,

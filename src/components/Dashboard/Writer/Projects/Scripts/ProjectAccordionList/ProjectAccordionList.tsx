@@ -5,9 +5,10 @@ import ProjectAccordion from "./ProjectAccordion/ProjectAccordion";
 
 interface IProps {
   listScripts: IWriterScript[];
+  refetch: any;
 }
 
-const ProjectAccordionList = ({ listScripts }: IProps) => {
+const ProjectAccordionList = ({ listScripts, refetch }: IProps) => {
   return listScripts.length === 0 ? (
     <div className="flex mx-auto">
       <Image
@@ -22,7 +23,14 @@ const ProjectAccordionList = ({ listScripts }: IProps) => {
   ) : (
     <div className="mt-4 md:mt-6">
       {listScripts.map((script) => {
-        return <ProjectAccordion key={script._id} script={script} listScripts={listScripts} />;
+        return (
+          <ProjectAccordion
+            refetch={refetch}
+            key={script._id}
+            script={script}
+            listScripts={listScripts}
+          />
+        );
       })}
     </div>
   );

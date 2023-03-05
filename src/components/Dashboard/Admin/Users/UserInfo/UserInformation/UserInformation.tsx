@@ -2,6 +2,7 @@ import { LoadingButton } from "@mui/lab";
 import { Avatar, Button, SvgIcon, Tooltip, Typography } from "@mui/material";
 import useAuthApi from "apis/Auth.api";
 import countryList from "config/country-list.json";
+import { IResData } from "interfaces/response";
 import { IUserInformationInAdminPanel } from "interfaces/user";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -9,8 +10,8 @@ import { Suspense, useState } from "react";
 import { MdNotInterested } from "react-icons/md";
 import { SlDislike, SlLike } from "react-icons/sl";
 import { QueryClient, useMutation } from "react-query";
-import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 const BlockingUserModal = dynamic(
   () => import("../Modals/BlockingUserModal/BlockingUserModal")
@@ -21,42 +22,43 @@ const FreezingUserModal = dynamic(
 
 interface IProps {
   user: IUserInformationInAdminPanel;
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
 
-const UserInformation = ({ user }: IProps) => {
+const UserInformation = ({ user, refetch }: IProps) => {
   const { updateUserRestriction } = useAuthApi();
 
   const { mutate: unFreezeUserStatus, isLoading: loadingUnFreezeUserStatus } =
-    useMutation<
-      { message: string; data: object; status: number },
-      Error,
-      { freeze: boolean; id: string }
-    >((data) => updateUserRestriction({ freeze: data.freeze }, data.id), {
-      onError: (error) => {
-        errorHandler(error);
-      },
-      onSuccess: (data) => {
-        queryClient.invalidateQueries("userInformationForAdmin");
-        toast.success(data.message);
-      },
-    });
+    useMutation<IResData<object>, Error, { freeze: boolean; id: string }>(
+      (data) => updateUserRestriction({ freeze: data.freeze }, data.id),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: (data) => {
+          refetch();
+          queryClient.invalidateQueries("userInformationForAdmin");
+          successHandler(data.message);
+        },
+      }
+    );
 
   const { mutate: unBlockUserStatus, isLoading: loadingUnBlockUserStatus } =
-    useMutation<
-      { message: string; data: object; status: number },
-      Error,
-      { block: boolean; id: string }
-    >((data) => updateUserRestriction({ block: data.block }, data.id), {
-      onError: (error) => {
-        errorHandler(error);
-      },
-      onSuccess: (data) => {
-        queryClient.invalidateQueries("userInformationForAdmin");
-        toast.success(data.message);
-      },
-    });
+    useMutation<IResData<object>, Error, { block: boolean; id: string }>(
+      (data) => updateUserRestriction({ block: data.block }, data.id),
+      {
+        onError: (error) => {
+          errorHandler(error);
+        },
+        onSuccess: (data) => {
+          refetch();
+          queryClient.invalidateQueries("userInformationForAdmin");
+          successHandler(data.message);
+        },
+      }
+    );
 
   const [openBlockingUserModal, setOpenBlockingUserModal] = useState(false);
   const [openFreezingUserModal, setOpenFreezingUserModal] = useState(false);
@@ -72,7 +74,7 @@ const UserInformation = ({ user }: IProps) => {
     unFreezeUserStatus({ freeze: false, id: user._id });
 
   const unBlockUser = async () =>
-    await unBlockUserStatus({ block: false, id: user._id });
+    unBlockUserStatus({ block: false, id: user._id });
 
   return (
     <>
@@ -303,6 +305,7 @@ const UserInformation = ({ user }: IProps) => {
       <Suspense fallback={null}>
         {openBlockingUserModal ? (
           <BlockingUserModal
+            refetch={refetch}
             user={user}
             setOpenBlockingUserModal={setOpenBlockingUserModal}
             openBlockingUserModal={openBlockingUserModal}
@@ -312,6 +315,7 @@ const UserInformation = ({ user }: IProps) => {
       <Suspense fallback={null}>
         {openFreezingUserModal ? (
           <FreezingUserModal
+            refetch={refetch}
             user={user}
             setOpenFreezingUserModal={setOpenFreezingUserModal}
             openFreezingUserModal={openFreezingUserModal}

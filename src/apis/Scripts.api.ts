@@ -72,7 +72,7 @@ interface IData_getAllScript {
   pagesCount: number;
 }
 
-interface IData_getAllPublishedScript {
+export interface IData_getAllPublishedScript {
   scripts: IBidScript[];
   currentPage: number;
   pagesCount: number;
@@ -279,9 +279,13 @@ const useScriptsApi = (controller?: AbortController) => {
 
   const deleteScript = useCallback(
     async (scriptId: string) => {
-      await axiosPrivate.delete(`/script/delete/${scriptId}`, {
-        signal: controller?.signal,
-      });
+      const res = await axiosPrivate.delete<IResData<object>>(
+        `/script/delete/${scriptId}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+      return res.data;
     },
     [axiosPrivate, controller?.signal]
   );

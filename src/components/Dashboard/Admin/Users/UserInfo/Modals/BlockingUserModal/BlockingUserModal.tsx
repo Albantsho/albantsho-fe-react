@@ -6,14 +6,15 @@ import { IUserInformationInAdminPanel } from "interfaces/user";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
 import { QueryClient, useMutation } from "react-query";
-import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 import blockImage from "./assets/block.png";
 
 interface IProps {
   openBlockingUserModal: boolean;
   setOpenBlockingUserModal: React.Dispatch<React.SetStateAction<boolean>>;
   user: IUserInformationInAdminPanel;
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const BlockingUserModal = ({
   openBlockingUserModal,
   setOpenBlockingUserModal,
   user,
+  refetch,
 }: IProps) => {
   const { updateUserRestriction } = useAuthApi();
   const { mutate: updateUserStatus, isLoading: loadingUpdateUserStatus } =
@@ -34,8 +36,9 @@ const BlockingUserModal = ({
         errorHandler(error);
       },
       onSuccess: (data) => {
+        refetch();
         queryClient.invalidateQueries("userInformationForAdmin");
-        toast.success(data.message);
+        successHandler(data.message);
         handleCloseBlockingUserModal();
       },
     });

@@ -17,6 +17,7 @@ interface IProps {
   setOpenUnArchive: React.Dispatch<React.SetStateAction<boolean>>;
   id: string;
   listScripts: IWriterScript[];
+  refetch: any;
 }
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const UnArchiveModal = ({
   setOpenUnArchive,
   id,
   listScripts,
+  refetch,
 }: IProps) => {
   const { updateWriterArchiveScript } = useScriptsApi();
   const { push, query } = useRouter();
@@ -47,6 +49,7 @@ const UnArchiveModal = ({
           errorHandler(error);
         },
         onSuccess: (data) => {
+          refetch();
           successHandler(data.message);
           if (listScripts.length <= 1) {
             push(`?archive=true&page=${+String(query.page) - 1}`, undefined, {
