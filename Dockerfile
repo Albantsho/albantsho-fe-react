@@ -27,7 +27,7 @@ RUN npm run build
 
 FROM base AS runner
 WORKDIR /app
-
+RUN npm install pm2 -g
 ENV NODE_ENV production
 
 RUN addgroup --system --gid 1001 nodejs
@@ -45,4 +45,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["node", "server.js"]
+CMD ["pm2-runtime", "server.js"]
