@@ -27,14 +27,14 @@ const BidsPage: NextPageWithLayout = () => {
   const [openAcceptOffer, setOpenAcceptOffer] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState("");
   const { query } = useRouter();
-  const { getScript } = useScriptsApi();
+  const { getScriptUnComplete } = useScriptsApi();
   const { getBidScript } = useScripBidApi();
 
   const {
     data: scriptData,
     isLoading: isLoadingGetScript,
     refetch,
-  } = useQuery("script", () => getScript(query.id as string), {
+  } = useQuery("script", () => getScriptUnComplete(query.id as string), {
     onError: (err) => errorHandler(err),
   });
 

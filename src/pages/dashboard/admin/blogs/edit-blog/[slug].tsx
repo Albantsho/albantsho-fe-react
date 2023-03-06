@@ -1,5 +1,6 @@
 import { Divider } from "@mui/material";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
+import Loader from "@shared/Loader/Loader";
 import useWeblogApi from "apis/Weblog.api";
 import BreadcrumbsEditBlog from "components/Dashboard/Admin/Blogs/EditBlogs/BreadcrumbsEditBlog/BreadcrumbsEditBlog";
 import EditBlog from "components/Dashboard/Admin/Blogs/EditBlogs/EditBlog/EditBlog";
@@ -7,7 +8,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
 import { useQuery } from "react-query";
-import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 
 const EditBlogPage: NextPageWithLayout = () => {
@@ -37,7 +37,7 @@ const EditBlogPage: NextPageWithLayout = () => {
           <EditBlog oneWeblog={data.weblog} />
         </div>
       ) : (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <Loader setCustomHeight="min-h-[60vh]" />
       )}
     </>
   );

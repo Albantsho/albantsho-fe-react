@@ -11,11 +11,11 @@ import { NextPageWithLayout } from "../../../../_app";
 
 const SummaryPage: NextPageWithLayout = () => {
   const { query } = useRouter();
-  const { getScript } = useScriptsApi();
+  const { getScriptUnComplete } = useScriptsApi();
 
   const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
     "script",
-    () => getScript(query.id as string),
+    () => getScriptUnComplete(query.id as string),
     {
       onError: (err) => errorHandler(err),
     }

@@ -14,7 +14,7 @@ import errorHandler from "utils/error-handler";
 const InformationReviewPage: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { getAllReviewers } = useAuthApi();
-  const { getScript } = useScriptsApi();
+  const { getScriptUnComplete } = useScriptsApi();
 
   const { data: reviewersData, isLoading: isLoadingGetReviewers } = useQuery(
     "reviewers",
@@ -28,7 +28,7 @@ const InformationReviewPage: NextPageWithLayout = () => {
 
   const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
     "script",
-    () => getScript(query.id as string),
+    () => getScriptUnComplete(query.id as string),
     {
       onError: (err) => errorHandler(err),
     }

@@ -1,3 +1,4 @@
+import Loader from "@shared/Loader/Loader";
 import ProfileNav from "@shared/ProfileNav/ProfileNav";
 import useReviewsApi from "apis/Reviews.api";
 import DescriptionTypeB from "components/Dashboard/Reviewer/Preview/Description/DescriptionTypeB/DescriptionTypeB";
@@ -7,7 +8,6 @@ import { IScriptReviewer } from "interfaces/script";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 
 const PreviewTypeB = () => {
@@ -50,7 +50,7 @@ const PreviewTypeB = () => {
           </div>
         </div>
       ) : (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <Loader setCustomHeight="min-h-[65vh]" />
       )}
     </>
   );

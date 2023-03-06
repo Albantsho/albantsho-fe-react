@@ -30,14 +30,14 @@ const ScriptSlug: NextPageWithLayout = () => {
   const [openCreateScript, setOpenCreateScript] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState("");
   const { getAllBids } = useScripBidApi();
-  const { getScript } = useScriptsApi();
+  const { getScriptUnComplete } = useScriptsApi();
   const { query } = useRouter();
 
   const {
     data: scriptData,
     isLoading: isLoadingGetScript,
     refetch: refetchScript,
-  } = useQuery("script", () => getScript(query.id as string), {
+  } = useQuery("script", () => getScriptUnComplete(query.id as string), {
     onError: (err) => errorHandler(err),
   });
 

@@ -1,4 +1,5 @@
 import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
+import Loader from "@shared/Loader/Loader";
 import useReviewsApi from "apis/Reviews.api";
 import OneReview from "components/Dashboard/Writer/Reviews/OneReview/OneReview";
 import { IReviewValuesTypeB } from "interfaces/reviews";
@@ -7,7 +8,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
 import { useEffect, useState } from "react";
-import { DotLoader } from "react-spinners";
 
 export interface IReviewInformation {
   script: IScriptReviewer;
@@ -43,7 +43,7 @@ const OneReviewPage: NextPageWithLayout = () => {
         <title>Albantsho || OneReviewPage</title>
       </Head>
       {loading ? (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <Loader setCustomHeight="min-h-[55vh]" />
       ) : (
         <>
           <OneReview reviewInformation={reviewInformation} />

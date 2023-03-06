@@ -1,3 +1,4 @@
+import Loader from "@shared/Loader/Loader";
 import ProfileNav from "@shared/ProfileNav/ProfileNav";
 import useAuthApi from "apis/Auth.api";
 import BasicPersonalInformation from "components/Profile/BasicPersonalInformation/BasicPersonalInformation";
@@ -5,7 +6,6 @@ import MintNft from "components/Profile/MintNft/MintNft";
 import PersonalWithdrawalDetails from "components/Profile/PersonalWithdrawalDetails/PersonalWithdrawalDetails";
 import Head from "next/head";
 import { useQuery } from "react-query";
-import { DotLoader } from "react-spinners";
 
 const Profile = () => {
   const { getUserProfile } = useAuthApi();
@@ -26,7 +26,7 @@ const Profile = () => {
           </div>
         </div>
       ) : (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <Loader setCustomHeight="min-h-[85vh]" />
       )}
     </>
   );

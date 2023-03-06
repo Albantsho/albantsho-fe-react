@@ -17,13 +17,13 @@ const links = [
 
 const AbstractPage = () => {
   const { query } = useRouter();
-  const { getScript } = useScriptsApi();
+  const { getScriptUnComplete } = useScriptsApi();
 
   const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
     ["script", query.id],
     () => {
       if (query.id) {
-        return getScript(query.id as string);
+        return getScriptUnComplete(query.id as string);
       }
     },
     {

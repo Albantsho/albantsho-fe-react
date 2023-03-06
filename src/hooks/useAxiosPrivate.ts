@@ -40,9 +40,6 @@ const useAxiosPrivate = () => {
         ) {
           logOutUser();
         }
-        if (error.response.data.statusCode === 404) {
-          Router.push(routes.notfound.url);
-        }
         const prevRequest = error?.config;
         if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;

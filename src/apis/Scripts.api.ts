@@ -153,6 +153,20 @@ const useScriptsApi = (controller?: AbortController) => {
     },
     [axios, controller?.signal]
   );
+  ("");
+  const getScriptUnComplete = useCallback(
+    async (scriptId: string) => {
+      const res = await axios.get<IResData<IData_getOneScript>>(
+        `script/author/${scriptId}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [axios, controller?.signal]
+  );
 
   const getAllScripts = useCallback(
     async (query: string) => {
@@ -380,6 +394,7 @@ const useScriptsApi = (controller?: AbortController) => {
     deleteScript,
     updateWriterArchiveScript,
     getScript,
+    getScriptUnComplete,
     updateCoverPageScript,
     verifyScript,
     getAllScripts,

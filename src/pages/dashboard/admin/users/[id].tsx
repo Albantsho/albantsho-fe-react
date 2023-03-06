@@ -8,7 +8,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
 import { useQuery } from "react-query";
-import { DotLoader } from "react-spinners";
 import errorHandler from "utils/error-handler";
 
 const InformationUserPage: NextPageWithLayout = () => {

@@ -14,7 +14,6 @@ import { useRouter } from "next/router";
 import querystring from "query-string";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { DotLoader } from "react-spinners";
 import { NextPageWithLayout } from "../../../_app";
 
 const CreateScriptModal = dynamic(

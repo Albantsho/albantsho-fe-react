@@ -1,3 +1,4 @@
+import Loader from "@shared/Loader/Loader";
 import ProfileNav from "@shared/ProfileNav/ProfileNav";
 import useReviewsApi from "apis/Reviews.api";
 import QuestionnaireTypeA from "components/Dashboard/Reviewer/Questionnaire/QuestionnaireTypeA/QuestionnaireTypeA";
@@ -6,7 +7,6 @@ import { IScriptReviewer } from "interfaces/script";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { DotLoader } from "react-spinners";
 
 const TypeA = () => {
   const { query } = useRouter();
@@ -46,7 +46,7 @@ const TypeA = () => {
           reviewValuesTypeA={reviewValuesTypeA}
         />
       ) : (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <Loader setCustomHeight="min-h-[65vh]" />
       )}
     </>
   );
