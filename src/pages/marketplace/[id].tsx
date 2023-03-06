@@ -1,6 +1,7 @@
 import Footer from "@shared/Footer/Footer";
+import Loader from "@shared/Loader/Loader";
+import Nav from "@shared/Nav/Nav";
 import { apiPrivate } from "apis/configs/axios.config";
-import useUserStore from "store/user.store";
 import axios from "axios";
 import ScriptInfo from "components/Marketplace/MarketScript/ScriptInfo/ScriptInfo";
 import { IBidInMarketplace } from "interfaces/bid";
@@ -9,9 +10,8 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense, useEffect, useState } from "react";
-import { DotLoader } from "react-spinners";
 import routes from "routes/routes";
-import Nav from "@shared/Nav/Nav";
+import useUserStore from "store/user.store";
 
 const MarketScriptChips = dynamic(
   () =>
@@ -97,7 +97,7 @@ const ScriptInfoPage = () => {
           </Suspense>
         </>
       ) : (
-        <DotLoader color="#7953B5" className="mx-auto mt-10" />
+        <Loader setCustomHeight="min-h-[45vh]" />
       )}
     </>
   );

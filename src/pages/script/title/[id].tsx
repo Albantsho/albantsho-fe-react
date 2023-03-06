@@ -7,12 +7,12 @@ import { useQuery } from "react-query";
 import errorHandler from "utils/error-handler";
 
 const TitlePage = () => {
-  const { getScript } = useScriptsApi();
+  const { getScriptUnComplete } = useScriptsApi();
   const { query } = useRouter();
 
   const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
     "script",
-    () => getScript(query.id as string),
+    () => getScriptUnComplete(query.id as string),
     {
       onError: (err) => errorHandler(err),
     }

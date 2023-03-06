@@ -13,24 +13,26 @@ import errorHandler from "utils/error-handler";
 const Script: NextPageWithLayout = () => {
   const { query } = useRouter();
   const [htmlInitialValue, setHtmlInitialValue] = useState("");
-  const { getScript } = useScriptsApi();
+  const { getScriptUnComplete } = useScriptsApi();
   const { getOneDraft } = useDraftApi();
 
   const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
-    "script",
-    () => getScript(query.id as string),
+    ["script", query.id],
+    () => getScriptUnComplete(query.id as string),
     {
       onError: (err) => errorHandler(err),
+      refetchOnWindowFocus: false,
     }
   );
 
-  const { data: draftData, isLoading: isLoadingGetDraft } = useQuery(
-    "draft",
+  const { isLoading: isLoadingGetDraft } = useQuery(
+    ["draft", query.id],
     () => getOneDraft(query.id as string),
     {
       onSuccess: (data) => {
         setHtmlInitialValue(data.draft);
       },
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -39,7 +41,7 @@ const Script: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Script</title>
       </Head>
-      {!isLoadingGetScript && !isLoadingGetDraft && scriptData && draftData ? (
+      {!isLoadingGetScript && !isLoadingGetDraft && scriptData ? (
         <ScriptPage
           htmlInitialValue={htmlInitialValue}
           setHtmlInitialValue={setHtmlInitialValue}

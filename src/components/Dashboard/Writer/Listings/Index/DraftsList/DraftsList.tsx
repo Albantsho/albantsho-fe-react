@@ -1,9 +1,9 @@
 import { Typography } from "@mui/material";
+import Loader from "@shared/Loader/Loader";
 import useScriptsApi from "apis/Scripts.api";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { useQuery } from "react-query";
-import { DotLoader } from "react-spinners";
 import UncompletedList from "./UncompletedList/UncompletedList";
 
 const UnlistedList = dynamic(() => import("./UnlistedList/UnlistedList"));
@@ -59,7 +59,7 @@ const DraftsList = ({ searchQuery }: IProps) => {
       </Suspense>
     </div>
   ) : (
-    <DotLoader color="#7953B5" className="mx-auto mt-10" />
+    <Loader setCustomHeight="min-h-[55vh]" />
   );
 };
 

@@ -1,3 +1,4 @@
+import Loader from "@shared/Loader/Loader";
 import ProfileNav from "@shared/ProfileNav/ProfileNav";
 import useReviewsApi from "apis/Reviews.api";
 import TasksList from "components/Dashboard/Reviewer/Index/TasksList/TasksList";
@@ -6,7 +7,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import questString from "query-string";
 import { useEffect, useState } from "react";
-import { DotLoader } from "react-spinners";
 
 const Reviewer = () => {
   const [reviewerTaskList, setReviewerTaskList] = useState<
@@ -41,7 +41,7 @@ const Reviewer = () => {
       <ProfileNav color="inherit" position="static" />
       <div className="pt-10 px-5 sm:px-10 bg-[#f6f8fc] min-h-screen flex gap-6 lg:gap-10 justify-between overflow-hidden">
         {loading ? (
-          <DotLoader color="#7953B5" className="mx-auto mt-10" />
+          <Loader setCustomHeight="min-h-[65vh]" />
         ) : (
           <TasksList reviewerTaskList={reviewerTaskList} />
         )}
