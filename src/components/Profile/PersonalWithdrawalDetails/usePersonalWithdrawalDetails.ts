@@ -4,8 +4,8 @@ import { IUserProfile } from "interfaces/user";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { toast } from "react-toastify";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 import { updateWithdrawalSchema } from "./validation/updateWithdrawal.validation";
 
 interface IProps {
@@ -32,7 +32,7 @@ const usePersonalWithdrawalDetails = ({ userProfile }: IProps) => {
         errorHandler(error);
       },
       onSuccess: (data) => {
-        toast.success(data.message);
+        successHandler(data.message);
         setAvailableChangeValue(false);
       },
     }

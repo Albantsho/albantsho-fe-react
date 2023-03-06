@@ -1,9 +1,9 @@
 import useContact from "apis/Contact.api";
-import useUserStore from "store/user.store";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 interface IContactFormValues {
   message: string;
@@ -28,13 +28,13 @@ const useHelp = () => {
   const onSubmit = async (data: IContactFormValues) => {
     try {
       setLoading(true);
-      await createNewContact({
+      const res = await createNewContact({
         message: data.message,
         email: user.email,
         name: `${user.firstName} ${user.lastName}`,
       });
       reset({ message: "" });
-      toast.success("successfully send message");
+      successHandler(res.message);
     } catch (error) {
       errorHandler(error);
     } finally {

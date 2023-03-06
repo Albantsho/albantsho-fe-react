@@ -2,9 +2,9 @@ import useReviewsApi from "apis/Reviews.api";
 import { IReviewTypeA, IReviewValuesTypeA } from "interfaces/reviews";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
-import { toast } from "react-toastify";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 interface IProps {
   reviewValuesTypeA: IReviewValuesTypeA;
@@ -43,7 +43,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           { introduction: reviewTypeAValues.current.introduction },
           reviewValuesTypeA._id
         );
-        toast.success(res.message);
+        successHandler(res.message);
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -60,7 +60,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           reviewValuesTypeA._id
         );
 
-        toast.success(res.message);
+        successHandler(res.message);
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -77,7 +77,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           reviewValuesTypeA._id
         );
 
-        toast.success(res.message);
+        successHandler(res.message);
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -97,7 +97,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           reviewValuesTypeA._id
         );
 
-        toast.success(res.message);
+        successHandler(res.message);
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -114,7 +114,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           reviewValuesTypeA._id
         );
 
-        toast.success(res.message);
+        successHandler(res.message);
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -131,7 +131,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           reviewValuesTypeA._id
         );
 
-        toast.success(res.message);
+        successHandler(res.message);
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -148,7 +148,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           reviewValuesTypeA._id
         );
 
-        toast.success(res.message);
+        successHandler(res.message);
       } catch (error) {
         errorHandler(error);
       } finally {
@@ -165,7 +165,7 @@ const useUpdateReviewsTypeA = ({ reviewValuesTypeA }: IProps) => {
           reviewValuesTypeA._id
         );
 
-        toast.success(res.message);
+        successHandler(res.message);
       } catch (error) {
         errorHandler(error);
       } finally {

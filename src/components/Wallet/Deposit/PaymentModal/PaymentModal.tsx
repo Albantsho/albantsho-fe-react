@@ -2,9 +2,9 @@ import useWalletApi from "apis/Wallet.api";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
 import routes from "routes/routes";
 import useUserStore from "store/user.store";
+import customHandler from "utils/custom-handler";
 
 interface IProps {
   amount: number;
@@ -59,7 +59,7 @@ const PaymentModal = ({ amount }: IProps) => {
       handleFlutterPayment({
         callback: paymentResponse,
         onClose: () => {
-          toast.error("payment Field or canceled, please try again");
+          customHandler("payment Field or canceled, please try again");
         },
       });
     } catch (error) {

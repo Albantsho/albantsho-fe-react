@@ -5,7 +5,7 @@ import useNftApi from "apis/nft.api";
 import { ethers } from "ethers";
 import { INft } from "interfaces/nft";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import customHandler from "utils/custom-handler";
 import successHandler from "utils/success-handler";
 import NFT from "../../../config/albantsho-abi.json";
 
@@ -45,7 +45,7 @@ const useMintNft = () => {
         }
       });
     } catch (error) {
-      toast.error("Error connecting to metamask");
+      customHandler("Error connecting to metamask");
     }
   };
 
@@ -55,7 +55,7 @@ const useMintNft = () => {
       const { ethereum } = window;
 
       if (!ethereum) {
-        toast.error("Metamask not detected");
+        customHandler("Metamask not detected");
         return;
       }
       const accounts = await ethereum.request({
@@ -77,7 +77,7 @@ const useMintNft = () => {
         });
       }
     } catch (error) {
-      toast.error("Error connecting to metamask");
+      customHandler("Error connecting to metamask");
     }
   };
 
@@ -146,7 +146,7 @@ const useMintNft = () => {
       successHandler(resMint.message);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      toast.error(error.reason ? error.reason : "something went wrong");
+      customHandler(error.reason ? error.reason : "something went wrong");
     } finally {
       setLoading(false);
     }

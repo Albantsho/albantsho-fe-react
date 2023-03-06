@@ -8,16 +8,16 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Footer from "@shared/Footer/Footer";
+import Nav from "@shared/Nav/Nav";
 import usePlanApi from "apis/Plan.api";
-import useUserStore from "store/user.store";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
 import type { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense, useState } from "react";
-import { toast } from "react-toastify";
 import routes from "routes/routes";
-import Nav from "@shared/Nav/Nav";
+import useUserStore from "store/user.store";
+import customHandler from "utils/custom-handler";
 
 const plans = [
   "Synopsis",
@@ -86,7 +86,7 @@ const Subscription = () => {
       handleFlutterPayment({
         callback: paymentResponse,
         onClose: () => {
-          toast.error("payment Field or canceled, please try again");
+          customHandler("payment Field or canceled, please try again");
         },
       });
     } catch (error) {

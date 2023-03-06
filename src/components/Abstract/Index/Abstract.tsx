@@ -1,8 +1,7 @@
 import { IFullInformationScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import toast from "react-hot-toast";
-import errorHandler from "utils/error-handler";
+import customHandler from "utils/custom-handler";
 import CharacterBible from "../CharacterBible/CharacterBible";
 import GeneralScriptProfile from "../GeneralScriptProfile/GeneralScriptProfile";
 import StepsButtons from "../StepsButtons/StepsButtons";
@@ -60,25 +59,10 @@ const Abstract = ({ script }: IProps) => {
     <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto">
       <form
         onSubmit={handleSubmit(onSubmit, (e) => {
-          console.log(e);
-
           const existedErrors = Object.keys(e);
           if (existedErrors.length) {
-            toast.error(
-              `You have some errors please check your inserted fields`,
-              {
-                style: {
-                  border: "1px solid #D32D2D",
-                  padding: "16px",
-                  color: "#D32D2D",
-                  fontFamily: "Montserrat",
-                },
-                iconTheme: {
-                  primary: "#D32D2D",
-                  secondary: "#FFEDED",
-                },
-                position: "top-right",
-              }
+            customHandler(
+              `You have some errors please check your inserted fields`
             );
           }
         })}

@@ -4,9 +4,9 @@ import { IUserProfile } from "interfaces/user";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { QueryClient, useMutation } from "react-query";
-import { toast } from "react-toastify";
 import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 import { updateProfileSchema } from "./validation/updateProfile.validation";
 
 interface IProps {
@@ -46,7 +46,7 @@ const useBasicPersonalInformation = ({ userProfile }: IProps) => {
       },
       onSuccess: (data, variables) => {
         queryClient.invalidateQueries(["user"]);
-        toast.success(data.message);
+        successHandler(data.message);
 
         const reader = new FileReader();
         reader.readAsDataURL(variables.image[0]);

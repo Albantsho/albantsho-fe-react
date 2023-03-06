@@ -1,24 +1,18 @@
 import toast from "react-hot-toast";
 
-const customHandler = ({
-  icon,
-  message,
-}: {
-  message: string;
-  icon: string;
-}) => {
-  toast.success(message, {
+const customHandler = (message: string) => {
+  toast.error(message, {
     style: {
-      border: "1px solid #7953B5",
+      border: "1px solid #D32D2D",
       padding: "16px",
-      color: "#7953B5",
+      color: "#D32D2D",
+      fontFamily: "Montserrat",
     },
     iconTheme: {
-      primary: "#7953B5",
-      secondary: "#BCA9DA",
+      primary: "#D32D2D",
+      secondary: "#FFEDED",
     },
     position: "top-right",
-    icon,
   });
   return;
 };
