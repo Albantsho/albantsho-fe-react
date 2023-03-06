@@ -25,23 +25,19 @@ const Script: NextPageWithLayout = () => {
     }
   );
 
-  const { isLoading: isLoadingGetDraft } = useQuery(
-    ["draft", query.id],
-    () => getOneDraft(query.id as string),
-    {
-      onSuccess: (data) => {
-        setHtmlInitialValue(data.draft);
-      },
-      refetchOnWindowFocus: false,
-    }
-  );
+  useQuery(["draft", query.id], () => getOneDraft(query.id as string), {
+    onSuccess: (data) => {
+      setHtmlInitialValue(data.draft);
+    },
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>
       <Head>
         <title>Albantsho || Script</title>
       </Head>
-      {!isLoadingGetScript && !isLoadingGetDraft && scriptData ? (
+      {!isLoadingGetScript && scriptData ? (
         <ScriptPage
           htmlInitialValue={htmlInitialValue}
           setHtmlInitialValue={setHtmlInitialValue}

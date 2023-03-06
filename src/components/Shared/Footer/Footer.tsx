@@ -1,13 +1,48 @@
+import LoadingButton from "@mui/lab/LoadingButton";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Logo from "@shared/Logo/Logo";
-import useUserStore from "store/user.store";
+import useContact from "apis/Contact.api";
+import { IResData } from "interfaces/response";
 import Link from "next/link";
+import { useState } from "react";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import { useMutation } from "react-query";
 import routes from "routes/routes";
+import useUserStore from "store/user.store";
+import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
+import * as Yup from "yup";
+
+const emailValidation = Yup.object({
+  email: Yup.string().email().required().label("Email"),
+});
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
   const user = useUserStore((state) => state.user);
+  const { registerEmail } = useContact();
+
+  const { mutate: registerEmailMutation } = useMutation<
+    IResData<object>,
+    Error,
+    string
+  >((data) => registerEmail(data), {
+    onSuccess: (data) => successHandler(data.message),
+  });
+
+  const handleChangeValueEmail = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setEmail(e.target.value);
+
+  const registerEmailFunc = async () => {
+    try {
+      await emailValidation.validate({ email });
+      registerEmailMutation(email);
+    } catch (e) {
+      errorHandler(e);
+    }
+  };
 
   return (
     <footer className="bg-primary-main py-20 relative z-50">
@@ -27,6 +62,7 @@ const Footer = () => {
           </Typography>
           <div className="flex gap-5 flex-wrap justify-center mt-5">
             <CustomInput
+              onChange={handleChangeValueEmail}
               className="max-w-[260px] w-full"
               variant="outlined"
               placeholder="Email"
@@ -36,9 +72,14 @@ const Footer = () => {
               }}
               InputProps={{ classes: { input: "py-3.5" } }}
             />
-            <Button color="inherit" variant="outlined" size="large">
+            <LoadingButton
+              onClick={registerEmailFunc}
+              color="inherit"
+              variant="outlined"
+              size="large"
+            >
               Subscribe
-            </Button>
+            </LoadingButton>
           </div>
         </div>
         <Box

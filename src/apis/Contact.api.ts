@@ -62,10 +62,25 @@ const useContact = (controller?: AbortController) => {
     [axiosPrivate, controller?.signal]
   );
 
+  const registerEmail = useCallback(
+    async (email: string) => {
+      const res = await axios.post<IResData<object>>(
+        `/email/register`,
+        { email },
+        {
+          signal: controller?.signal,
+        }
+      );
+      return res.data;
+    },
+    [axios, controller?.signal]
+  );
+
   return {
     createNewContact,
     allContacts,
     answerToContact,
+    registerEmail,
   };
 };
 
