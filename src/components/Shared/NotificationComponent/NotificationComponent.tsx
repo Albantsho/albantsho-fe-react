@@ -85,7 +85,7 @@ const NotificationComponent = () => {
           invitesData &&
           !isLoadingInvites ? (
             notificationsData.notifications.length +
-              invitesData.invites.length >
+              invitesData.invites.filter((n) => !n.rejected).length >
             0 ? (
               <>
                 {notificationsData.notifications.map((notification) => (
@@ -213,7 +213,7 @@ const NotificationComponent = () => {
             </Link>
           )
         ) : (
-          <ClipLoader color="grey" className="mt-[180px] inline-block" />
+          <ClipLoader color="grey" className=" w-14 inline-block mx-auto" />
         )}
       </Popover>
     </>

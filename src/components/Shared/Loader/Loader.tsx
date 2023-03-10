@@ -1,5 +1,6 @@
 import LoaderLogo from "./assets/LoaderIcon.svg";
 import { SvgIcon } from "@mui/material";
+import { DotLoader } from "react-spinners";
 
 interface IProps {
   setCustomHeight?: string;
@@ -12,13 +13,14 @@ const Loader = ({ setCustomHeight }: IProps) => {
         setCustomHeight ? setCustomHeight : "min-h-screen"
       }`}
     >
-      <SvgIcon
+      {/* <SvgIcon
         color="primary"
         className="text-primary-700 rotate-loader"
         sx={{ width: 120, height: 120 }}
         component={LoaderLogo}
         inheritViewBox
-      />
+      /> */}
+      <DotLoader color="#7953B5" />
     </div>
   );
 };

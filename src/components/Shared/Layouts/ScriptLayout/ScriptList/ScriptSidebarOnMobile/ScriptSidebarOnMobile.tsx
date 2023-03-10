@@ -58,7 +58,7 @@ const ScriptSidebarOnMobile = ({ script, socket }: IProps) => {
       <BottomNavigation
         showLabels
         value={activeRoute}
-        className="bg-primary-900 xl:hidden min-h-[65px] no-scrollbar overflow-x-scroll text-white w-full"
+        className="bg-primary-900 xl:hidden min-h-[60px] no-scrollbar overflow-x-scroll text-white w-full"
         onChange={handleActiveRoute}
       >
         {routesArray.map((item) => {

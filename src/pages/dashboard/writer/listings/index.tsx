@@ -29,7 +29,9 @@ const Listings: NextPageWithLayout = () => {
     data: publishedScriptsData,
     isLoading: loadingGetPublishedScripts,
     refetch,
-  } = useQuery("script", () => getWriterAllPublishedScripts(searchQuery));
+  } = useQuery("opening-scripts", () =>
+    getWriterAllPublishedScripts(searchQuery)
+  );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(

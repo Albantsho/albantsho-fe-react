@@ -199,7 +199,7 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
                 <Image
                   width={37}
                   height={21}
-                  className="w-auto h-auto"
+                  className=""
                   src={`https://flagcdn.com/w40/${countryUser[0]}.png`}
                   alt={`${countryUser[1]} flag`}
                 />

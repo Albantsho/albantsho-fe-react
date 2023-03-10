@@ -42,7 +42,10 @@ const RelistScriptModal = ({
         onSuccess: (data) => {
           successHandler(data.message);
           refetch();
-          queryClient.invalidateQueries("script");
+          queryClient.invalidateQueries([
+            "opening-scripts",
+            "unpublished-scripts",
+          ]);
           handleCloseRelistScript();
         },
       }

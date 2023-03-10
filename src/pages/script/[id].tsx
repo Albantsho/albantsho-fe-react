@@ -3,21 +3,24 @@ import Loader from "@shared/Loader/Loader";
 import useDraftApi from "apis/Draft.api";
 import useScriptsApi from "apis/Scripts.api";
 import ScriptPage from "components/Script/index/ScriptPage/ScriptPage";
+import { IFullInformationScript } from "interfaces/script";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import errorHandler from "utils/error-handler";
 
 const Script: NextPageWithLayout = () => {
   const { query } = useRouter();
+  const [loading, setLoading] = useState(true);
   const [htmlInitialValue, setHtmlInitialValue] = useState("");
+  const [script, setScript] = useState<IFullInformationScript>();
   const { getScriptUnComplete } = useScriptsApi();
   const { getOneDraft } = useDraftApi();
 
   const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
-    ["script", query.id],
+    ["script-writing", query.id],
     () => getScriptUnComplete(query.id as string),
     {
       onError: (err) => errorHandler(err),
@@ -32,12 +35,14 @@ const Script: NextPageWithLayout = () => {
     refetchOnWindowFocus: false,
   });
 
+  // console.log({ script, htmlInitialValue });
+
   return (
     <>
       <Head>
         <title>Albantsho || Script</title>
       </Head>
-      {!isLoadingGetScript && scriptData ? (
+      {!isLoadingGetScript && scriptData && scriptData.script ? (
         <ScriptPage
           htmlInitialValue={htmlInitialValue}
           setHtmlInitialValue={setHtmlInitialValue}

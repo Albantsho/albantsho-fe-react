@@ -153,10 +153,10 @@ const useScriptsApi = (controller?: AbortController) => {
     },
     [axios, controller?.signal]
   );
-  ("");
+
   const getScriptUnComplete = useCallback(
     async (scriptId: string) => {
-      const res = await axios.get<IResData<IData_getOneScript>>(
+      const res = await axiosPrivate.get<IResData<IData_getOneScript>>(
         `script/author/${scriptId}`,
         {
           signal: controller?.signal,
@@ -165,7 +165,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [axios, controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const getAllScripts = useCallback(
@@ -252,7 +252,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
   const searchScripts = useCallback(
     async (search: string) => {
-      const res = await axiosPrivate.get<IResData<{ scripts: IScript[] }>>(
+      const res = await axios.get<IResData<{ scripts: IScript[] }>>(
         `/script/search?search=${search}`,
         {
           signal: controller?.signal,
@@ -261,7 +261,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [axiosPrivate, controller?.signal]
+    [axios, controller?.signal]
   );
 
   const listAllCollaborators = useCallback(

@@ -39,25 +39,25 @@ const CreateComment = ({
     <div
       className={`${
         positionX < 370 ? "flex-row" : "flex-row-reverse"
-      } w-[360px] flex items-start gap-5`}
+      } w-[260px] md:w-[360px] flex items-start gap-5`}
       style={{
         top: `${positionY}px`,
         left: `${positionX < 370 && positionX}px`,
         right: `${positionX > 370 && elementWidth - positionX}px`,
         position: "absolute",
-        zIndex: 9999,
+        zIndex: 9,
       }}
     >
       <div className="w-fit relative">
         <SvgIcon
           component={IconComment}
-          className="w-16 h-16"
+          className="w-10 h-10 md:w-14 md:h-14"
           fontSize="large"
           inheritViewBox
         />
         <Avatar
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
-          className="absolute top-2 left-3 w-11 h-11"
+          className="absolute top-2 left-2 md:left-3 w-5 h-5 md:w-9 md:h-9"
           alt={user.firstName}
         />
       </div>

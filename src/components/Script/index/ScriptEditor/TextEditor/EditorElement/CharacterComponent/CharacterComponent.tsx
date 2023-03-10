@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import type { RenderElementProps } from "slate-react";
 import ChangeCharacterStatus from "../../../ChangeCharacterStatus/ChangeCharacterStatus";
-import BulletComponent from "../BulletComponent/BulletComponent";
 
 interface IProps extends RenderElementProps {
-  editorSetting: { theme: string };
+  editorSetting: { icons: string };
 }
 
 const CharacterComponent = ({
@@ -45,20 +44,20 @@ const CharacterComponent = ({
             fontSize: "18px",
           }}
         >
-          {editorSetting.theme === "icon" ? (
+          {editorSetting.icons === "show" ? (
             <FaUser
               style={{
                 position: "absolute",
                 left: "0",
                 top: "1px",
                 bottom: "0",
-                width: "12px",
-                height: "12px",
+                width: "24px",
+                height: "20px",
                 color: "#DCD8E4",
               }}
             />
           ) : (
-            <BulletComponent />
+            <span></span>
           )}
 
           {children}

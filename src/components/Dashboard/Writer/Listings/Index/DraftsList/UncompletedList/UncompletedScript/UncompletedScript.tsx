@@ -35,11 +35,13 @@ const UncompletedScript = ({ script }: IProps) => {
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${script.image}`}
               />
             ) : (
-              <SvgIcon
-                inheritViewBox
-                fontSize="large"
-                component={DefaultImage}
-              />
+              <div className="w-16 h-16 items-center justify-center flex">
+                <SvgIcon
+                  inheritViewBox
+                  fontSize="large"
+                  component={DefaultImage}
+                />
+              </div>
             )}
 
             <Tooltip title="Progress">

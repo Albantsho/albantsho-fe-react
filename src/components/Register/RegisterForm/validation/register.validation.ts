@@ -21,10 +21,9 @@ export const registerSchema = Yup.object({
   country: Yup.string().required().oneOf(Object.values(countryList)),
   userType: Yup.string().required().oneOf(["producer", "writer"]),
   portfolio: Yup.string()
-    .url()
     .when("userType", {
       is: "producer",
-      then: (schema) => schema.required(),
+      then: (schema) => schema.required().url(),
       otherwise: (schema) => schema.notRequired(),
     })
     .label("Portfolio"),

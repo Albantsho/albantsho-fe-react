@@ -42,24 +42,34 @@ const ScriptPage = ({
   );
 
   useEffect(() => {
-    socket.on("connect", () => null);
+    socket.on("connect", () => {
+      console.log("connect to room");
+    });
+
     socket.on("roomData", (roomData) => {
+      console.log("hi get initial room data");
+
       getComments(roomData.comments);
     });
     socket.on("getScriptOrder", async () => {
+      console.log("hi get script order");
+
       try {
         const res = await getOneDraft(query.id as string);
+        console.log(res);
+
         setHtmlInitialValue(res.draft);
       } catch (error) {
         errorHandler(error);
       }
     });
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   useEffect(() => {
     socket.on("disconnect", () => {
+      console.log("remove  collaborated");
+
       !socket.connected && replace("/");
     });
 

@@ -16,7 +16,9 @@ const OpeningList = ({
   loadingGetPublishedScripts,
   refetch,
 }: IProps) => {
-  return !loadingGetPublishedScripts && publishedScriptsData ? (
+  return !loadingGetPublishedScripts &&
+    publishedScriptsData &&
+    publishedScriptsData.scripts ? (
     publishedScriptsData.scripts.length > 0 ? (
       <Paper elevation={0} className="mt-4 bg-white mb-16 shadow-primary">
         <div className="border-b border-tinted-100 px-5 py-5 xl:px-14 xl:py-8 flex">

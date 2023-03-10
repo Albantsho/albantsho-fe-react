@@ -21,7 +21,7 @@ const ClosedList = ({ searchQuery }: IProps) => {
   const { getWriterAllSoldScripts } = useScriptsApi();
 
   const { data: soldScriptsData, isLoading: loadingGetSoldScripts } = useQuery(
-    "script",
+    "sold-scripts",
     () => getWriterAllSoldScripts(searchQuery)
   );
 
@@ -73,7 +73,6 @@ const ClosedList = ({ searchQuery }: IProps) => {
               <TableCell className="flex flex-1 sm:flex-auto sm:min-w-[365px] sm:py-6 xl:py-10 md:min-w-[465px] lg:min-w-[365px] xl:min-w-[465px] xl:max-w-[465px] items-center flex-wrap sm:flex-nowrap gap-1 sm:gap-4 ">
                 <div className="flex gap-2 sm:gap-0">
                   <Image
-                    // layout="fixed"
                     width="64"
                     height="64"
                     className="rounded-md w-16 h-16"

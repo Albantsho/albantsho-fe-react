@@ -69,7 +69,9 @@ const ScriptSlug: NextPageWithLayout = () => {
       {!isLoadingGetScript &&
       !isLoadingGetScriptBids &&
       scriptData &&
-      scriptBidsData ? (
+      scriptBidsData &&
+      scriptData.script &&
+      scriptBidsData.scriptBids ? (
         <div className="min-h-screen">
           <TabButtons />
           <DashboardSearch

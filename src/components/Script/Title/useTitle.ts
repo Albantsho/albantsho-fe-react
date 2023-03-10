@@ -70,7 +70,7 @@ const useTitle = ({ script }: IProps) => {
   } = useForm<ITitleFormValues>({
     defaultValues: {
       title: script.title,
-      writer: script.writtenBy,
+      writer: script.writtenBy ? script.writtenBy : "",
       basedOn: script.basedOn ? script.basedOn : "",
       names: script.names ? script.names : "",
     },

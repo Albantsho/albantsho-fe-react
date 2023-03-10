@@ -7,11 +7,10 @@ import LeftParenthesesIcon from "../../assets/left-parentheses.svg";
 import PhotoIcon from "../../assets/photo.svg";
 import RightParenthesesIcon from "../../assets/right-parentheses.svg";
 import TransitionIcon from "../../assets/transition.svg";
-import BulletComponent from "./BulletComponent/BulletComponent";
 import CharacterComponent from "./CharacterComponent/CharacterComponent";
 
 interface IProps extends RenderElementProps {
-  editorSetting: { theme: string };
+  editorSetting: { icons: string };
 }
 
 const EditorElement = ({
@@ -39,7 +38,7 @@ const EditorElement = ({
             fontFamily: "Courier",
           }}
         >
-          {editorSetting.theme === "icon" ? (
+          {editorSetting.icons === "show" ? (
             <span
               style={{
                 position: "absolute",
@@ -53,7 +52,7 @@ const EditorElement = ({
               <PhotoIcon />
             </span>
           ) : (
-            <BulletComponent />
+            <span></span>
           )}
 
           {children}
@@ -73,7 +72,7 @@ const EditorElement = ({
             fontSize: "18px",
           }}
         >
-          {editorSetting.theme === "icon" ? (
+          {editorSetting.icons === "show" ? (
             <FaPlay
               style={{
                 position: "absolute",
@@ -86,7 +85,7 @@ const EditorElement = ({
               }}
             />
           ) : (
-            <BulletComponent />
+            <span></span>
           )}
 
           {children}
@@ -121,7 +120,7 @@ const EditorElement = ({
             fontSize: "18px",
           }}
         >
-          {editorSetting.theme === "icon" ? (
+          {editorSetting.icons === "show" ? (
             <BsFillChatLeftDotsFill
               style={{
                 color: "#DCD8E4",
@@ -133,7 +132,7 @@ const EditorElement = ({
               }}
             />
           ) : (
-            <BulletComponent />
+            <span></span>
           )}
 
           {children}
@@ -158,32 +157,41 @@ const EditorElement = ({
             fontSize: "18px",
           }}
         >
-          <span
-            style={{
-              position: "absolute",
-              left: "0",
-              top: "3px",
-              bottom: "0px",
-              width: "5px",
-              height: "16px",
-              fontWeight: 100,
-            }}
-          >
-            <LeftParenthesesIcon />
-          </span>
+          {editorSetting.icons === "show" ? (
+            <span
+              style={{
+                position: "absolute",
+                left: "0",
+                top: "3px",
+                bottom: "0px",
+                width: "5px",
+                height: "16px",
+                fontWeight: 100,
+              }}
+            >
+              <LeftParenthesesIcon />
+            </span>
+          ) : (
+            <span></span>
+          )}
+
           {children}
-          <span
-            style={{
-              position: "absolute",
-              right: "0",
-              bottom: "9px",
-              width: "6px",
-              height: "16px",
-              fontWeight: 100,
-            }}
-          >
-            <RightParenthesesIcon />
-          </span>
+          {editorSetting.icons === "show" ? (
+            <span
+              style={{
+                position: "absolute",
+                right: "0",
+                bottom: "9px",
+                width: "6px",
+                height: "16px",
+                fontWeight: 100,
+              }}
+            >
+              <RightParenthesesIcon />
+            </span>
+          ) : (
+            <span></span>
+          )}
         </p>
       );
     case "transition":
@@ -202,7 +210,7 @@ const EditorElement = ({
             fontSize: "18px",
           }}
         >
-          {editorSetting.theme === "icon" ? (
+          {editorSetting.icons === "show" ? (
             <span
               style={{
                 position: "absolute",
@@ -216,7 +224,7 @@ const EditorElement = ({
               <TransitionIcon />
             </span>
           ) : (
-            <BulletComponent />
+            <span></span>
           )}
           {children}
         </p>
@@ -236,7 +244,7 @@ const EditorElement = ({
             fontSize: "18px",
           }}
         >
-          {editorSetting.theme === "icon" ? (
+          {editorSetting.icons === "show" ? (
             <BsCameraVideoFill
               style={{
                 color: "#DCD8E4",
@@ -249,7 +257,7 @@ const EditorElement = ({
               }}
             />
           ) : (
-            <BulletComponent />
+            <span></span>
           )}
 
           {children}
@@ -269,7 +277,7 @@ const EditorElement = ({
             fontSize: "18px",
           }}
         >
-          {editorSetting.theme === "icon" ? (
+          {editorSetting.icons === "show" ? (
             <SiAsana
               style={{
                 color: "#DCD8E4",
@@ -282,7 +290,7 @@ const EditorElement = ({
               }}
             />
           ) : (
-            <BulletComponent />
+            <span></span>
           )}
           {children}
         </p>

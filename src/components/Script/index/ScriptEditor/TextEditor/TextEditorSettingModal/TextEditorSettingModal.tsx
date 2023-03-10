@@ -9,7 +9,7 @@ import {
 import { AiOutlineClose } from "react-icons/ai";
 
 interface IProps {
-  editorSetting: { theme: string };
+  editorSetting: { icons: string };
   closeSettingModal: () => void;
   openSettingModal: boolean;
   handleChangeSettingIcon: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -39,12 +39,17 @@ const TextEditorSettingModal = ({
           <RadioGroup
             onChange={handleChangeSettingIcon}
             className="flex flex-row gap-2"
+            defaultValue={editorSetting.icons}
           >
-            <FormControlLabel value="icon" control={<Radio />} label="Icon" />
             <FormControlLabel
-              value="bullet"
+              value="show"
               control={<Radio />}
-              label="Bullet"
+              label="Show Icons"
+            />
+            <FormControlLabel
+              value="hide"
+              control={<Radio />}
+              label="Hide Icons"
             />
           </RadioGroup>
         </div>

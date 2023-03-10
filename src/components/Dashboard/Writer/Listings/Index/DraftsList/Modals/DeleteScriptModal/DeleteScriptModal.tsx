@@ -38,10 +38,13 @@ const DeleteScriptModal = ({
           successHandler(data.message);
           refetch();
           handleCloseDeleteScript();
-          queryClient.invalidateQueries(["script"], {
-            exact: true,
-            stale: true,
-          });
+          queryClient.invalidateQueries(
+            ["opening-scripts", "unpublished-scripts"],
+            {
+              exact: true,
+              stale: true,
+            }
+          );
         },
       }
     );

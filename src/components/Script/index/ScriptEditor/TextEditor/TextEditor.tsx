@@ -20,7 +20,7 @@ interface IProps {
   htmlInitialValue: string;
   width: number | undefined;
   socket: Socket<DefaultEventsMap, DefaultEventsMap>;
-  editorSetting: { theme: string };
+  editorSetting: { icons: string };
 }
 
 const TextEditor = ({

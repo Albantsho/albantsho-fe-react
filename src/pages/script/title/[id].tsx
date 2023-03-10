@@ -21,9 +21,9 @@ const TitlePage = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || {scriptData?.script.title}</title>
+        <title>Albantsho || {scriptData?.script?.title}</title>
       </Head>
-      {!isLoadingGetScript && scriptData ? (
+      {!isLoadingGetScript && scriptData && scriptData.script ? (
         <Title script={scriptData.script} />
       ) : (
         <Loader />

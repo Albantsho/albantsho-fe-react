@@ -26,6 +26,8 @@ const Invites = () => {
     loadingRejectInvite,
   } = useInvites();
 
+  console.log(invitesData);
+
   return (
     <>
       <Head>
@@ -66,7 +68,7 @@ const Invites = () => {
                         className="text-primary-700 text-center font-medium"
                       >
                         you've been invited by
-                        {` ${invite.inviter.firstName} ${invite.inviter.lastName}.`}
+                        {` ${invite.inviter.firstName} ${invite.inviter.lastName}.`}{" "}
                         collaborate on {invite.script.title}.
                       </Typography>
                     </div>

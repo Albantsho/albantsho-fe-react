@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import Loader from "@shared/Loader/Loader";
 import useScriptsApi from "apis/Scripts.api";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import { Suspense } from "react";
 import { useQuery } from "react-query";
 import UncompletedList from "./UncompletedList/UncompletedList";
@@ -15,22 +16,29 @@ interface IProps {
 const DraftsList = ({ searchQuery }: IProps) => {
   const { getWriterAllUnPublishedScripts, getWriterAllInCompletedScripts } =
     useScriptsApi();
+  const { query } = useRouter();
 
   const {
     data: unPublishedScriptsData,
     isLoading: loadingGetUnPublishedScripts,
     refetch,
-  } = useQuery("script", () => getWriterAllUnPublishedScripts(searchQuery));
+  } = useQuery(["unpublished-scripts", searchQuery, query], () =>
+    getWriterAllUnPublishedScripts(searchQuery)
+  );
 
   const {
     data: unCompletedScriptsData,
     isLoading: loadingGetUnCompletedScripts,
-  } = useQuery("script", () => getWriterAllInCompletedScripts(searchQuery));
+  } = useQuery(["uncomplited-scripts", searchQuery, query], () =>
+    getWriterAllInCompletedScripts(searchQuery)
+  );
 
   return !loadingGetUnPublishedScripts &&
     !loadingGetUnCompletedScripts &&
     unPublishedScriptsData &&
-    unCompletedScriptsData ? (
+    unCompletedScriptsData &&
+    unPublishedScriptsData.scripts &&
+    unCompletedScriptsData.scripts ? (
     <div className="my-8">
       <div className="bg-white p-3 inline-block rounded-md shadow-primary">
         <Typography
