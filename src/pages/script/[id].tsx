@@ -35,8 +35,6 @@ const Script: NextPageWithLayout = () => {
     refetchOnWindowFocus: false,
   });
 
-  // console.log({ script, htmlInitialValue });
-
   return (
     <>
       <Head>

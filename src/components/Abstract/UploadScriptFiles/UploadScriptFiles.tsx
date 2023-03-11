@@ -2,6 +2,7 @@ import { ButtonGroup, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import { IAbstractFormValues } from "interfaces/abstract";
 import Image from "next/image";
+import type { DropzoneState } from "react-dropzone";
 import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import UploadFile from "./assets/Upload-file.png";
 
@@ -11,6 +12,8 @@ interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   step: number;
+  dropZoneUploadPdfScript: DropzoneState;
+  dropZoneUploadPdfCopyright: DropzoneState;
 }
 
 const UploadScriptFiles = ({
@@ -19,6 +22,8 @@ const UploadScriptFiles = ({
   step,
   register,
   errors,
+  dropZoneUploadPdfScript,
+  dropZoneUploadPdfCopyright,
 }: IProps) => {
   return (
     <div className={`${step === 6 && activeButton === 1 ? "block" : "hidden"}`}>
@@ -66,13 +71,17 @@ const UploadScriptFiles = ({
       </ButtonGroup>
 
       <div className="md:px-10 py-10 md:py-16 space-y-5 md:shadow-md rounded-lg">
-        <div className="max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center">
-          <div className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
-            <label
-              className="absolute cursor-pointer inset-0"
-              htmlFor="add-script"
-            ></label>
+        <div
+          className={`${
+            dropZoneUploadPdfScript.isDragActive && "bg-gray-100"
+          } max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center`}
+        >
+          <div
+            // {...dropZoneUploadPdfScript.getRootProps({ className: "dropzone" })}
+            className="relative py-14 px-4 w-full flex justify-center items-center flex-col"
+          >
             <input
+              {...dropZoneUploadPdfScript.getInputProps()}
               {...register("scriptFile")}
               accept=".pdf"
               max={1}
@@ -95,20 +104,31 @@ const UploadScriptFiles = ({
               className="text-neutral-700 text-center"
             >
               Drop your file here, or
-              <span className="text-primary-700 underline ml-1">browse</span>
+              <label
+                onClick={dropZoneUploadPdfScript.open}
+                className="text-primary-700 underline ml-1 cursor-pointer"
+              >
+                browse
+              </label>
             </Typography>
           </div>
         </div>
         {errors.scriptFile && (
           <span className="text-error-700 ">{errors.scriptFile?.message}</span>
         )}
-        <div className="max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center">
-          <div className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
-            <label
-              className="absolute cursor-pointer inset-0"
-              htmlFor="add-copyright"
-            ></label>
+        <div
+          className={`${
+            dropZoneUploadPdfCopyright.isDragActive && "bg-gray-100"
+          } max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center`}
+        >
+          <div
+            // {...dropZoneUploadPdfCopyright.getRootProps({
+            //   className: "dropzone",
+            // })}
+            className="relative py-14 px-4 w-full flex justify-center items-center flex-col"
+          >
             <input
+              {...dropZoneUploadPdfCopyright.getInputProps()}
               {...register("scriptCopyright")}
               accept=".pdf"
               max={1}
@@ -132,7 +152,12 @@ const UploadScriptFiles = ({
               className="text-neutral-700 text-center"
             >
               Drop your file here, or
-              <span className="text-primary-700 underline ml-1">browse</span>
+              <label
+                onClick={dropZoneUploadPdfCopyright.open}
+                className="text-primary-700 underline ml-1 cursor-pointer"
+              >
+                browse
+              </label>
             </Typography>
           </div>
         </div>

@@ -53,6 +53,8 @@ const Abstract = ({ script }: IProps) => {
     cancelUploadAdaption,
     handleUploadAdaptionPermission,
     progressAdaption,
+    dropZoneUploadPdfScript,
+    dropZoneUploadPdfCopyright,
   } = useAbstract(script);
 
   return (
@@ -121,6 +123,8 @@ const Abstract = ({ script }: IProps) => {
         />
 
         <UploadScriptFiles
+          dropZoneUploadPdfScript={dropZoneUploadPdfScript}
+          dropZoneUploadPdfCopyright={dropZoneUploadPdfCopyright}
           step={step}
           activeButton={activeButton}
           setActiveButton={setActiveButton}

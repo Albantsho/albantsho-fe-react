@@ -12,6 +12,7 @@ import customHandler from "utils/custom-handler";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
 import { abstractSchema } from "./validation/abstract.validation";
+import { useDropzone } from "react-dropzone";
 
 type IScript = IFullInformationScript;
 
@@ -65,6 +66,15 @@ const useAbstract = (script: IScript) => {
       motivation: script?.motivation ? script?.motivation : "",
     },
     resolver: yupResolver(abstractSchema(publish, activeButton)),
+  });
+
+  const dropZoneUploadPdfScript = useDropzone({
+    accept: { "application/pdf": [".pdf"] },
+    maxFiles: 1,
+  });
+  const dropZoneUploadPdfCopyright = useDropzone({
+    maxFiles: 1,
+    accept: { "application/pdf": [".pdf"] },
   });
 
   const publishScript = () => setPublish(true);
@@ -190,10 +200,10 @@ const useAbstract = (script: IScript) => {
           });
         } else if (activeButton === 1) {
           await uploadFileDraft(query.id as string, {
-            script: data.scriptFile[0],
+            script: dropZoneUploadPdfScript.acceptedFiles[0],
           });
           await uploadCopyright(query.id as string, {
-            copyright: data.scriptCopyright[0],
+            copyright: dropZoneUploadPdfCopyright.acceptedFiles[0],
           });
         }
         replace(routes.projectsDashboard.url);
@@ -236,14 +246,14 @@ const useAbstract = (script: IScript) => {
             });
           }
         } else if (activeButton === 1) {
-          if (data.scriptFile && data.scriptFile[0]) {
+          if (dropZoneUploadPdfScript.acceptedFiles[0]) {
             await uploadFileDraft(query.id as string, {
-              script: data.scriptFile[0],
+              script: dropZoneUploadPdfScript.acceptedFiles[0],
             });
           }
-          if (data.scriptCopyright && data.scriptCopyright[0]) {
+          if (dropZoneUploadPdfCopyright.acceptedFiles[0]) {
             await uploadCopyright(query.id as string, {
-              copyright: data.scriptCopyright[0],
+              copyright: dropZoneUploadPdfCopyright.acceptedFiles[0],
             });
           }
         }
@@ -284,6 +294,8 @@ const useAbstract = (script: IScript) => {
     adaptionPermissionError,
     progressAdaption,
     cancelUploadAdaption,
+    dropZoneUploadPdfScript,
+    dropZoneUploadPdfCopyright,
   };
 };
 

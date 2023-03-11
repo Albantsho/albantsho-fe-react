@@ -26,8 +26,6 @@ const Invites = () => {
     loadingRejectInvite,
   } = useInvites();
 
-  console.log(invitesData);
-
   return (
     <>
       <Head>

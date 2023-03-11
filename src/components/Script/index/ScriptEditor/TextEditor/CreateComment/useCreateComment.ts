@@ -49,7 +49,6 @@ const useCreateComment = ({
       const findEmail = res.script.collaborators.find(
         (s) => s.email === data.email
       );
-      console.log(res);
 
       if (findEmail || res.script.author.email === data.email) {
         const res = socket.emit("createComment", {
@@ -58,7 +57,6 @@ const useCreateComment = ({
           positionY,
           mention: data.email,
         });
-        console.log(res);
 
         setShowForm(false);
       } else {

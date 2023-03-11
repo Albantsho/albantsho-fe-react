@@ -16,7 +16,11 @@ const DashboardNavOnDesktop = () => {
     data: collaboratorsData,
     isLoading: loadingGetCollaboratorList,
     refetch,
-  } = useQuery("collaborator", () => listAllCollaborators(query.id as string));
+  } = useQuery("collaborator", () => {
+    if (query && query.id) {
+      return listAllCollaborators(query.id as string);
+    }
+  });
 
   return (
     <div className="lg:flex px-1 flex-1 justify-end items-center hidden">
@@ -31,7 +35,8 @@ const DashboardNavOnDesktop = () => {
               <Avatar
                 key={collaborator._id}
                 alt={collaborator.firstName}
-                src={collaborator.image}
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${collaborator.image}`}
+                sx={{ bgcolor: "grey.800" }}
               />
             ))}
           </AvatarGroup>

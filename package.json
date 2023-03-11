@@ -47,6 +47,7 @@
     "react-countdown": "^2.3.3",
     "react-countdown-circle-timer": "^3.0.9",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.35.0",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.4.0",
