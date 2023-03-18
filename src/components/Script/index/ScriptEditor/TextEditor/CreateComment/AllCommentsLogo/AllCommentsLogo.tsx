@@ -19,13 +19,13 @@ const AllCommentsLogo = ({ comment }: IProps) => {
     >
       <SvgIcon
         component={IconComment}
-        className="w-14 h-14"
+        className="w-12 h-12"
         fontSize="large"
         inheritViewBox
       />
       <Avatar
         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${comment.user?.image}`}
-        className="absolute top-2 left-3 w-9 h-9"
+        className="absolute top-2 left-3 w-8 h-8"
         alt={comment.user?.firstName}
       />
     </div>
