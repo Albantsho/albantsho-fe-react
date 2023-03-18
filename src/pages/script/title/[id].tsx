@@ -10,11 +10,14 @@ const TitlePage = () => {
   const { getScriptUnComplete } = useScriptsApi();
   const { query } = useRouter();
 
+  const scriptID = typeof query?.id === "string" ? query.id : "";
+
   const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
-    "script",
-    () => getScriptUnComplete(query.id as string),
+    ["script", scriptID],
+    () => getScriptUnComplete(scriptID),
     {
       onError: (err) => errorHandler(err),
+      enabled: scriptID.length > 0,
     }
   );
 

@@ -12,15 +12,19 @@ const DashboardNavOnDesktop = () => {
   const { query } = useRouter();
   const user = useUserStore((state) => state.user);
 
+  const scriptID = typeof query?.id === "string" ? query.id : "";
+
   const {
     data: collaboratorsData,
     isLoading: loadingGetCollaboratorList,
     refetch,
-  } = useQuery("collaborator", () => {
-    if (query && query.id) {
-      return listAllCollaborators(query.id as string);
+  } = useQuery(
+    ["collaborator", scriptID],
+    () => listAllCollaborators(scriptID),
+    {
+      enabled: scriptID.length > 0,
     }
-  });
+  );
 
   return (
     <div className="lg:flex px-1 flex-1 justify-end items-center hidden">

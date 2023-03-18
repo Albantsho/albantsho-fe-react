@@ -28,7 +28,10 @@ const Footer = () => {
     Error,
     string
   >((data) => registerEmail(data), {
-    onSuccess: (data) => successHandler(data.message),
+    onSuccess: (data) => {
+      successHandler(data.message);
+      setEmail("");
+    },
   });
 
   const handleChangeValueEmail = (

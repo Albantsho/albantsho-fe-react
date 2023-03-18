@@ -41,12 +41,15 @@ const ScriptSlug: NextPageWithLayout = () => {
     onError: (err) => errorHandler(err),
   });
 
+  const scriptID = typeof query?.id === "string" ? query.id : "";
+
   const {
     data: scriptBidsData,
     isLoading: isLoadingGetScriptBids,
     refetch,
-  } = useQuery("script", () => getAllBids(query.id as string), {
+  } = useQuery(["script", scriptID], () => getAllBids(scriptID), {
     onError: (err) => errorHandler(err),
+    enabled: scriptID.length > 0,
   });
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
