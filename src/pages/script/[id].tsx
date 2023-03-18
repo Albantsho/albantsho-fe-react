@@ -3,36 +3,37 @@ import Loader from "@shared/Loader/Loader";
 import useDraftApi from "apis/Draft.api";
 import useScriptsApi from "apis/Scripts.api";
 import ScriptPage from "components/Script/index/ScriptPage/ScriptPage";
-import { IFullInformationScript } from "interfaces/script";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { NextPageWithLayout } from "pages/_app";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import errorHandler from "utils/error-handler";
 
 const Script: NextPageWithLayout = () => {
   const { query } = useRouter();
-  const [loading, setLoading] = useState(true);
   const [htmlInitialValue, setHtmlInitialValue] = useState("");
-  const [script, setScript] = useState<IFullInformationScript>();
   const { getScriptUnComplete } = useScriptsApi();
   const { getOneDraft } = useDraftApi();
 
+  const scriptID = typeof query?.id === "string" ? query.id : "";
+
   const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
-    ["script-writing", query.id],
-    () => getScriptUnComplete(query.id as string),
+    ["script-writing", scriptID],
+    () => getScriptUnComplete(scriptID),
     {
       onError: (err) => errorHandler(err),
       refetchOnWindowFocus: false,
+      enabled: scriptID.length > 0,
     }
   );
 
-  useQuery(["draft", query.id], () => getOneDraft(query.id as string), {
+  useQuery(["draft", scriptID], () => getOneDraft(scriptID), {
     onSuccess: (data) => {
       setHtmlInitialValue(data.draft);
     },
     refetchOnWindowFocus: false,
+    enabled: scriptID.length > 0,
   });
 
   return (

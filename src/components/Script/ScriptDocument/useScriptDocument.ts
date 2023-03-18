@@ -28,11 +28,19 @@ const useScriptDocument = ({ socket }: IProps) => {
   const { listAllCollaborators } = useScriptsApi();
   const { query } = useRouter();
 
+  const scriptID = typeof query?.id === "string" ? query.id : "";
+
   const {
     data: collaboratorsData,
     isLoading: loadingGetCollaboratorList,
     refetch,
-  } = useQuery("collaborator", () => listAllCollaborators(query.id as string));
+  } = useQuery(
+    ["collaborator", scriptID],
+    () => listAllCollaborators(scriptID),
+    {
+      enabled: scriptID.length > 0,
+    }
+  );
 
   const { mutate: createInviteMutate, isLoading: loadingCreateInvite } =
     useMutation<IResData<object>, Error, ICreateNewInvitePayload>(

@@ -7,9 +7,11 @@ import {
   Icon,
   Rating,
   Typography,
+  useMediaQuery,
   type CardProps,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import CustomRating from "@shared/CustomRating/CustomRating";
 import { IScript } from "interfaces/script";
 import Link from "next/link";
 import routes from "routes/routes";
@@ -24,6 +26,7 @@ interface IProps extends CardProps {
 const ScriptCard = (props: IProps) => {
   const { script, sx, inHome, ...cardProps } = props;
   const user = useUserStore((state) => state.user);
+  const matches = useMediaQuery("(min-width:640px)");
 
   return (
     <Card
@@ -55,11 +58,14 @@ const ScriptCard = (props: IProps) => {
         <div className="flex flex-wrap gap-2">
           <Chip label={script.scriptFormat} sx={{ borderRadius: 1 }} />
         </div>
-        <Rating
-          readOnly
-          defaultValue={script.reviewerRate}
-          className="sm:hidden mt-4"
-        />
+        {!matches && (
+          <CustomRating
+            readOnly
+            defaultValue={script.reviewerRate}
+            className="sm:hidden mt-4"
+          />
+        )}
+
         <div className="flex justify-between mt-1 sm:mt-4 mb-2 gap-2">
           <Link
             href={routes.marketplaceOneScript.dynamicUrl(script._id)}
@@ -104,11 +110,15 @@ const ScriptCard = (props: IProps) => {
             Place Bid
           </Btn>
         )}
-        <Rating
-          readOnly
-          defaultValue={+script.reviewerRate}
-          className="hidden sm:inline-flex"
-        />
+
+        {matches && (
+          <CustomRating
+            readOnly
+            color="primary"
+            defaultValue={+script.reviewerRate}
+            className="hidden sm:inline-flex"
+          />
+        )}
       </CardActions>
     </Card>
   );

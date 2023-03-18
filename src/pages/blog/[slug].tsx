@@ -24,16 +24,19 @@ const BlogPost = () => {
   //? Getting the URL query object from next.js router
   const { query } = useRouter();
 
+  const blogSlug = typeof query?.slug === "string" ? query.slug : "";
+
   //? Using a custom hook to fetch data using React Query
   const { getWeblog } = useWeblogApi(); // Fetch API function from custom hook
 
   const { data, isLoading } = useQuery(
-    ["weblog", query.slug], //? Query key - unique identifier for the query
-    () => getWeblog(`${query.slug}`), //? Function to perform the actual fetching, it takes current slug of the blog post as an argument and returns the API call
+    ["weblog", blogSlug], //? Query key - unique identifier for the query
+    () => getWeblog(blogSlug), //? Function to perform the actual fetching, it takes current slug of the blog post as an argument and returns the API call
     {
       onError: (err) => {
         errorHandler(err); //? Global error handling function defined externally
       },
+      enabled: blogSlug.length > 0,
     }
   );
 

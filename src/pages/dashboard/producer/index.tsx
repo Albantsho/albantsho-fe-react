@@ -20,13 +20,15 @@ const Scripts: NextPageWithLayout = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const { data: producerScriptsData, isLoading: loadingGetProducerScripts } =
-    useQuery("script", () => getProducerAllScripts(searchQuery));
+    useQuery(["script", searchQuery], () => getProducerAllScripts(searchQuery));
 
   const {
     data: producerScriptsRequestData,
     isLoading: loadingGetProducerRequestScripts,
     refetch,
-  } = useQuery("script", () => getAllBidsForProducer(searchQuery));
+  } = useQuery(["script", searchQuery], () =>
+    getAllBidsForProducer(searchQuery)
+  );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(

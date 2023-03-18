@@ -30,19 +30,24 @@ const BidsPage: NextPageWithLayout = () => {
   const { getScriptUnComplete } = useScriptsApi();
   const { getBidScript } = useScripBidApi();
 
+  const scriptID = typeof query?.id === "string" ? query.id : "";
+  const bidID = typeof query?.bidId === "string" ? query.bidId : "";
+
   const {
     data: scriptData,
     isLoading: isLoadingGetScript,
     refetch,
-  } = useQuery("script", () => getScriptUnComplete(query.id as string), {
+  } = useQuery(["script", scriptID], () => getScriptUnComplete(scriptID), {
     onError: (err) => errorHandler(err),
+    enabled: scriptID.length > 0,
   });
 
   const { data: bidScriptData, isLoading: isLoadingGetBidScript } = useQuery(
-    "script",
-    () => getBidScript(query.bidId as string),
+    ["script", bidID],
+    () => getBidScript(bidID),
     {
       onError: (err) => errorHandler(err),
+      enabled: bidID.length > 0,
     }
   );
 

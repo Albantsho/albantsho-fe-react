@@ -14,13 +14,16 @@ const EditBlogPage: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { getWeblog } = useWeblogApi();
 
+  const blogSlug = typeof query?.slug === "string" ? query.slug : "";
+
   const { data, isLoading } = useQuery(
-    ["weblog", query.slug],
-    () => getWeblog(`${query.slug}`),
+    ["weblog", blogSlug],
+    () => getWeblog(blogSlug),
     {
       onError: (err) => {
         errorHandler(err);
       },
+      enabled: blogSlug.length > 0,
     }
   );
 

@@ -20,6 +20,7 @@ const OneReviewPage: NextPageWithLayout = () => {
   const [loading, setLoading] = useState(true);
   const [reviewInformation, setReviewInformation] =
     useState<IReviewInformation>({} as IReviewInformation);
+
   useEffect(() => {
     async function getReviewValues() {
       try {

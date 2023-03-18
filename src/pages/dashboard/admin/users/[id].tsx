@@ -13,13 +13,17 @@ import errorHandler from "utils/error-handler";
 const InformationUserPage: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { getUserProfileForAdmin } = useAuthApi();
+
+  const userID = typeof query?.id === "string" ? query.id : "";
+
   const { data, isLoading, refetch } = useQuery(
-    "userInformationForAdmin",
-    () => getUserProfileForAdmin(`${query.id}`),
+    ["userInformationForAdmin", userID],
+    () => getUserProfileForAdmin(userID),
     {
       onError: (err) => {
         errorHandler(err);
       },
+      enabled: userID.length > 0,
     }
   );
 
