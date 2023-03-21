@@ -1,6 +1,7 @@
 import Nav from "@shared/Nav/Nav";
 import Brands from "components/Home/Brands/Brands";
 import HeroSection from "components/Home/HeroSection/HeroSection";
+import WaitListLanding from "components/WaitListLanding";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -39,7 +40,7 @@ const Home: NextPage = () => {
       <Head>
         <title>Albantsho</title>
       </Head>
-      <animated.div style={navAnim}>
+      {/* <animated.div style={navAnim}>
         <Nav links={links} secondaryUnderLineColor={false} />
       </animated.div>
       <main>
@@ -55,7 +56,8 @@ const Home: NextPage = () => {
       </main>
       <Suspense fallback={null}>
         <Footer />
-      </Suspense>
+      </Suspense> */}
+      <WaitListLanding />
     </>
   );
 };
