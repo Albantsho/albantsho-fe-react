@@ -65,6 +65,7 @@ const Footer = () => {
           </Typography>
           <div className="flex gap-5 flex-wrap justify-center mt-5">
             <CustomInput
+              value={email}
               onChange={handleChangeValueEmail}
               className="max-w-[260px] w-full"
               variant="outlined"

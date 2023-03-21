@@ -24,7 +24,9 @@ interface IProps {
 
 const useTitle = ({ script }: IProps) => {
   const { query, back } = useRouter();
-  const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs(Date.now()));
+  const [dateValue, setDateValue] = useState<Dayjs | null>(
+    dayjs(script.draftDate || Date.now())
+  );
   const { updateCoverPageScript } = useScriptsApi();
 
   const { mutate: updateCoverPageMutation, isLoading: loadingUpdateCoverPage } =

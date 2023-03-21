@@ -289,7 +289,7 @@ const PrivacyPolicy: NextPageWithLayout = () => {
           isGreyText
           subtitle="When we process your personal data, we are guided by the following principles, which require personal data to be:"
         >
-          <div className="px-6 my-2 lg:px-12">
+          <div className="px-6 my-2">
             <Typography
               className="text-[#484848] px-3 lg:px-5 font-normal list-inside list-item list list-decimal"
               paragraph
@@ -407,181 +407,174 @@ const PrivacyPolicy: NextPageWithLayout = () => {
               platform, in which case all information will be aggregated and
               made anonymous.
             </Typography>
-            <br />
-            <TitleComponent>
-              I. Where we store/transfer your personal data
-            </TitleComponent>
-            <SubtitleComponent
-              isGreyText
-              subtitle="The data that we collect from you may be transferred to, and/or stored at, a destination outside your country of origin or residence (as applicable)."
-            >
-              <div className="px-3 lg:px-6">
-                <br />
-                <Typography variant="body1">
-                  By providing your consent to this policy, you also authorize
-                  us to transfer your Personal Data provided to us, to such
-                  other entities outside Nigeria connected with the Albantsho
-                  Limited or related third parties, with the understanding that
-                  the data shall be used for the purpose stated in our contracts
-                  or terms of engagement with you and in line with the procedure
-                  for offshore transfer of personal data processed in Nigeria as
-                  set out under the Nigeria Data Protection Regulation 2019.
-                  Your Personal Data may be transferred outside Nigeria to any
-                  country outside Nigeria where a Albantsho Limited entity is
-                  incorporated. The NDPR requires that the destinations must be
-                  explicitly mentioned (“Foreign Recipients”). We are required
-                  to inform you that the Foreign Recipients are on the White
-                  List of countries in the NDPR Implementation Framework 2019.
-                  What this means is that the NDPR considers that the Foreign
-                  Recipients have adequate data protection measures of a
-                  standard acceptable in Nigeria. By continuing to use our
-                  Services or Service Sites, you explicitly consent to the
-                  transfer of your Data to any of the Foreign Recipients
-                  mentioned above.
-                </Typography>
-                <br />
-                <Typography variant="body1">
-                  Where we have given you (or where you have chosen) a password
-                  that enables you to access certain parts of Our Service Sites,
-                  you are responsible for keeping this password confidential. We
-                  ask you not to share a password with anyone. Unfortunately,
-                  the transmission of information via the internet is not
-                  completely secure. Although we will do our best to protect
-                  your personal data, we cannot guarantee the security of your
-                  data transmitted to Our Service Sites; any transmission is at
-                  your own risk and you agree that we bear no liability
-                  connected thereto what so ever. Nonthless, once we have
-                  received your information, we will use strict procedures and
-                  security features to try to prevent unauthorized access.
-                </Typography>
-              </div>
-            </SubtitleComponent>
-            <br />
-            <TitleComponent>J. Data Security</TitleComponent>
-            <SubtitleComponent
-              isGreyText
-              subtitle="We implement and maintain appropriate safeguards to protect personal data, considering, in particular, the risks to you, presented by unauthorized or unlawful processing or accidental loss, destruction of, or damage to their personal data."
-            >
-              <div className="px-3 lg:px-6">
-                <br />
-                <Typography variant="body1">
-                  Safeguarding will include the use of encryption and
-                  pseudonymization where appropriate. It also includes
-                  protecting the confidentiality (i.e. that only those who need
-                  to know and are authorized to use personal data have access to
-                  it), integrity and availability of the personal data. We
-                  regularly evaluate and test the effectiveness of those
-                  safeguards to ensure the security of our processing of
-                  personal data.
-                </Typography>
-                <br />
-                <Typography variant="body1">
-                  You should be aware, however, that no method of transmission
-                  over the internet or method of electronic storage is
-                  completely secure. While we guarantee that we shall strive to
-                  protect the security of your information and are constantly
-                  reviewing and enhancing our information security measures on a
-                  best endeavour basis, we reasonably expect that there may be
-                  eventualities entirely out of our reasonable control and
-                  judgment. Albantsho Limited therefore, accepts no liability
-                  for any direct or consequential damage or loss, however
-                  caused, in connection with transmission over the internet or
-                  electronic storage by or through unauthorised, unlawful, and
-                  or unidentifiable persons/channels and you hereby agree to
-                  this.
-                </Typography>
-              </div>
-            </SubtitleComponent>
-            <br />
-            <TitleComponent>K. Links to third party sites</TitleComponent>
-            <SubtitleComponent
-              isGreyText
-              subtitle="Our Service Sites may contain links to other websites owned and operated by third parties.  These links are provided for your information and convenience only and are not an endorsement by Albantsho Limited of the content of such linked websites or third parties. The information that we collect from you will become available to these websites if you click the link to the websites. These linked websites are neither under our control nor our responsibility.  Albantsho Limited, therefore, makes no warranties or representations, express or implied about the safety of such linked websites, the proprietors or operators of those websites, and the suitability or quality of information contained on them.  This Privacy Policy does not apply to these websites, thus, we advise and consequently maintain that any access to these linked third-party websites and/or usage  of the information contained therein, is entirely at your own risk. Albantsho Limited accepts no liability for any damage or loss, however caused, in connection with accessing, the use of or reliance on any information, material, products or services contained on or accessed through any such linked website. We advise that you contact those websites directly for information on their privacy policy, security, data collection and distribution policies. "
-            />
-            <br />
-            <TitleComponent>L. Your Rights</TitleComponent>
-            <SubtitleComponent
-              isGreyText
-              subtitle="We will use your data for the purposes of compiling statistics relating to our user base and activity summary and any other product or service we provide and may disclose such information to any third party for such purposes, provided that such information will always be anonymous."
-            />
-            <br />
-            <TitleComponent>M. Violation of Privacy Policy</TitleComponent>
-            <SubtitleComponent
-              isGreyText
-              subtitle="We have put in place procedures to deal with any suspected personal data breach and will notify you of any personal data breach and let you know the steps we have taken to remedy the breach and the security measures we have applied to render your personal data unintelligible.<br/>All suspected breaches of personal data will be remedied promptly or within a reasonable period of time from the date of the report of the breach to our official customer care contact channels (see below), and in any event not exceeding a period of one (1) month provided that depending on the nature of the breach and the mechanisms required to be adopted for remediation, this may take longer.<br/>If you know or suspect that a personal data breach has occurred, you should immediately contact the Albantsho Limited team at (email)."
-            >
-              <div className="mt-4 px-3 lg:px-6">
-                <Typography paragraph>
-                  Albantsho Limited will not be responsible for any personal
-                  data breach which occurs as a result of:
-                </Typography>
-                <div className="px-3 lg:px-6">
-                  <Typography className="text-[#484848]" paragraph>
-                    (i). any event which is beyond the control of Albantsho
-                    Limited;
-                  </Typography>
-                  <Typography className="text-[#484848]" paragraph>
-                    (ii). any act or threats of terrorism;
-                  </Typography>
-                  <Typography className="text-[#484848]" paragraph>
-                    (iii). any act of God (including but not limited to fires,
-                    explosions, earthquakes, drought, tidal waves and floods)
-                    which compromises Albantsho Limited’s data protection
-                    measures;
-                  </Typography>
-                  <Typography className="text-[#484848]" paragraph>
-                    (iv). war, hostilities (whether war be declared or not),
-                    invasion, an act of foreign enemies,mobilization,
-                    requisition, or embargo;
-                  </Typography>
-                  <Typography className="text-[#484848]" paragraph>
-                    (v). rebellion, revolution, insurrection, or military or
-                    usurped power, or civil war which compromisesAlbantsho
-                    Limited’s data protection measures;
-                  </Typography>
-                  <Typography className="text-[#484848]" paragraph>
-                    (vi). the transfer of your personal data to a third party on
-                    your instructions;
-                  </Typography>
-                  <Typography className="text-[#484848]" paragraph>
-                    (vii). the use of your personal data by a third party
-                    designated by you.
-                  </Typography>
-                </div>
-              </div>
-            </SubtitleComponent>
-            <br />
-            <TitleComponent>N. Data Retention</TitleComponent>
-            <SubtitleComponent
-              isGreyText
-              subtitle="Albantsho Limited shall retain and use your Data only as long as is necessary to provide our services to you, or as required to comply with legal or regulatory obligations, including under tax and security laws. We may retain your Data for a minimum of 5 years (or such longer period as may be necessary) even after we have received a request for deletion from you in order to comply with our regulatory obligations. We will retain your Data if there is an outstanding obligation or duty from you."
-            >
-              <div className="px-3 lg:px-6">
-                <br />
-                <Typography variant="body1">
-                  Notwithstanding, a request for erasure will automatically be
-                  denied in whole or in part, where it would adversely affect a
-                  constitutionally guaranteed right, contradict a legal
-                  obligation, act against the public interest in the area of
-                  public health, act against the public interest in the area of
-                  scientific or historical research, or prohibit the
-                  establishment of a legal defence or exercise of other legal
-                  claims by Albantsho Limited or any legitimate third party.
-                  Where a request for erasure is denied, Albantsho Limited will
-                  provide to you the specific reason for denying the request as
-                  soon as possible but no later than one month after receiving
-                  the request for erasure.
-                </Typography>
-              </div>
-            </SubtitleComponent>
-            <br />
-            <TitleComponent>O. Changes to Privacy Policy</TitleComponent>
-            <SubtitleComponent
-              isGreyText
-              subtitle="Any changes we may make to this Policy in the future will be posted on this page and, where appropriate, necessary or required by law, you will be notified on this platform, when next you log in to this platform or one of our Service Sites. The new terms may be displayed on-screen and you may be required to read and accept them to continue your use of the platform or the Services. In any event, by continuing to use the platform or any Services after the posting of any changes, you confirm your continuing acceptance of this Policy together with such changes, and your consent to the terms set out therein."
-            />
           </div>
         </SubtitleComponent>
+        <br />
+        <TitleComponent>
+          I. Where we store/transfer your personal data
+        </TitleComponent>
+        <SubtitleComponent
+          isGreyText
+          subtitle="The data that we collect from you may be transferred to, and/or stored at, a destination outside your country of origin or residence (as applicable)."
+        >
+          <div className="px-3 lg:px-6">
+            <br />
+            <Typography variant="body1">
+              By providing your consent to this policy, you also authorize us to
+              transfer your Personal Data provided to us, to such other entities
+              outside Nigeria connected with the Albantsho Limited or related
+              third parties, with the understanding that the data shall be used
+              for the purpose stated in our contracts or terms of engagement
+              with you and in line with the procedure for offshore transfer of
+              personal data processed in Nigeria as set out under the Nigeria
+              Data Protection Regulation 2019. Your Personal Data may be
+              transferred outside Nigeria to any country outside Nigeria where a
+              Albantsho Limited entity is incorporated. The NDPR requires that
+              the destinations must be explicitly mentioned (“Foreign
+              Recipients”). We are required to inform you that the Foreign
+              Recipients are on the White List of countries in the NDPR
+              Implementation Framework 2019. What this means is that the NDPR
+              considers that the Foreign Recipients have adequate data
+              protection measures of a standard acceptable in Nigeria. By
+              continuing to use our Services or Service Sites, you explicitly
+              consent to the transfer of your Data to any of the Foreign
+              Recipients mentioned above.
+            </Typography>
+            <br />
+            <Typography variant="body1">
+              Where we have given you (or where you have chosen) a password that
+              enables you to access certain parts of Our Service Sites, you are
+              responsible for keeping this password confidential. We ask you not
+              to share a password with anyone. Unfortunately, the transmission
+              of information via the internet is not completely secure. Although
+              we will do our best to protect your personal data, we cannot
+              guarantee the security of your data transmitted to Our Service
+              Sites; any transmission is at your own risk and you agree that we
+              bear no liability connected thereto what so ever. Nonthless, once
+              we have received your information, we will use strict procedures
+              and security features to try to prevent unauthorized access.
+            </Typography>
+          </div>
+        </SubtitleComponent>
+        <br />
+        <TitleComponent>J. Data Security</TitleComponent>
+        <SubtitleComponent
+          isGreyText
+          subtitle="We implement and maintain appropriate safeguards to protect personal data, considering, in particular, the risks to you, presented by unauthorized or unlawful processing or accidental loss, destruction of, or damage to their personal data."
+        >
+          <div className="px-3 lg:px-6">
+            <br />
+            <Typography variant="body1">
+              Safeguarding will include the use of encryption and
+              pseudonymization where appropriate. It also includes protecting
+              the confidentiality (i.e. that only those who need to know and are
+              authorized to use personal data have access to it), integrity and
+              availability of the personal data. We regularly evaluate and test
+              the effectiveness of those safeguards to ensure the security of
+              our processing of personal data.
+            </Typography>
+            <br />
+            <Typography variant="body1">
+              You should be aware, however, that no method of transmission over
+              the internet or method of electronic storage is completely secure.
+              While we guarantee that we shall strive to protect the security of
+              your information and are constantly reviewing and enhancing our
+              information security measures on a best endeavour basis, we
+              reasonably expect that there may be eventualities entirely out of
+              our reasonable control and judgment. Albantsho Limited therefore,
+              accepts no liability for any direct or consequential damage or
+              loss, however caused, in connection with transmission over the
+              internet or electronic storage by or through unauthorised,
+              unlawful, and or unidentifiable persons/channels and you hereby
+              agree to this.
+            </Typography>
+          </div>
+        </SubtitleComponent>
+        <br />
+        <TitleComponent>K. Links to third party sites</TitleComponent>
+        <SubtitleComponent
+          isGreyText
+          subtitle="Our Service Sites may contain links to other websites owned and operated by third parties.  These links are provided for your information and convenience only and are not an endorsement by Albantsho Limited of the content of such linked websites or third parties. The information that we collect from you will become available to these websites if you click the link to the websites. These linked websites are neither under our control nor our responsibility.  Albantsho Limited, therefore, makes no warranties or representations, express or implied about the safety of such linked websites, the proprietors or operators of those websites, and the suitability or quality of information contained on them.  This Privacy Policy does not apply to these websites, thus, we advise and consequently maintain that any access to these linked third-party websites and/or usage  of the information contained therein, is entirely at your own risk. Albantsho Limited accepts no liability for any damage or loss, however caused, in connection with accessing, the use of or reliance on any information, material, products or services contained on or accessed through any such linked website. We advise that you contact those websites directly for information on their privacy policy, security, data collection and distribution policies. "
+        />
+        <br />
+        <TitleComponent>L. Your Rights</TitleComponent>
+        <SubtitleComponent
+          isGreyText
+          subtitle="We will use your data for the purposes of compiling statistics relating to our user base and activity summary and any other product or service we provide and may disclose such information to any third party for such purposes, provided that such information will always be anonymous."
+        />
+        <br />
+        <TitleComponent>M. Violation of Privacy Policy</TitleComponent>
+        <SubtitleComponent
+          isGreyText
+          subtitle="We have put in place procedures to deal with any suspected personal data breach and will notify you of any personal data breach and let you know the steps we have taken to remedy the breach and the security measures we have applied to render your personal data unintelligible.<br/>All suspected breaches of personal data will be remedied promptly or within a reasonable period of time from the date of the report of the breach to our official customer care contact channels (see below), and in any event not exceeding a period of one (1) month provided that depending on the nature of the breach and the mechanisms required to be adopted for remediation, this may take longer.<br/>If you know or suspect that a personal data breach has occurred, you should immediately contact the Albantsho Limited team at (email)."
+        >
+          <div className="mt-4 px-3 lg:px-6">
+            <Typography paragraph>
+              Albantsho Limited will not be responsible for any personal data
+              breach which occurs as a result of:
+            </Typography>
+            <div className="px-3 lg:px-6">
+              <Typography className="text-[#484848]" paragraph>
+                (i). any event which is beyond the control of Albantsho Limited;
+              </Typography>
+              <Typography className="text-[#484848]" paragraph>
+                (ii). any act or threats of terrorism;
+              </Typography>
+              <Typography className="text-[#484848]" paragraph>
+                (iii). any act of God (including but not limited to fires,
+                explosions, earthquakes, drought, tidal waves and floods) which
+                compromises Albantsho Limited’s data protection measures;
+              </Typography>
+              <Typography className="text-[#484848]" paragraph>
+                (iv). war, hostilities (whether war be declared or not),
+                invasion, an act of foreign enemies,mobilization, requisition,
+                or embargo;
+              </Typography>
+              <Typography className="text-[#484848]" paragraph>
+                (v). rebellion, revolution, insurrection, or military or usurped
+                power, or civil war which compromisesAlbantsho Limited’s data
+                protection measures;
+              </Typography>
+              <Typography className="text-[#484848]" paragraph>
+                (vi). the transfer of your personal data to a third party on
+                your instructions;
+              </Typography>
+              <Typography className="text-[#484848]" paragraph>
+                (vii). the use of your personal data by a third party designated
+                by you.
+              </Typography>
+            </div>
+          </div>
+        </SubtitleComponent>
+        <br />
+        <TitleComponent>N. Data Retention</TitleComponent>
+        <SubtitleComponent
+          isGreyText
+          subtitle="Albantsho Limited shall retain and use your Data only as long as is necessary to provide our services to you, or as required to comply with legal or regulatory obligations, including under tax and security laws. We may retain your Data for a minimum of 5 years (or such longer period as may be necessary) even after we have received a request for deletion from you in order to comply with our regulatory obligations. We will retain your Data if there is an outstanding obligation or duty from you."
+        >
+          <div className="px-3 lg:px-6">
+            <br />
+            <Typography variant="body1">
+              Notwithstanding, a request for erasure will automatically be
+              denied in whole or in part, where it would adversely affect a
+              constitutionally guaranteed right, contradict a legal obligation,
+              act against the public interest in the area of public health, act
+              against the public interest in the area of scientific or
+              historical research, or prohibit the establishment of a legal
+              defence or exercise of other legal claims by Albantsho Limited or
+              any legitimate third party. Where a request for erasure is denied,
+              Albantsho Limited will provide to you the specific reason for
+              denying the request as soon as possible but no later than one
+              month after receiving the request for erasure.
+            </Typography>
+          </div>
+        </SubtitleComponent>
+        <br />
+        <TitleComponent>O. Changes to Privacy Policy</TitleComponent>
+        <SubtitleComponent
+          isGreyText
+          subtitle="Any changes we may make to this Policy in the future will be posted on this page and, where appropriate, necessary or required by law, you will be notified on this platform, when next you log in to this platform or one of our Service Sites. The new terms may be displayed on-screen and you may be required to read and accept them to continue your use of the platform or the Services. In any event, by continuing to use the platform or any Services after the posting of any changes, you confirm your continuing acceptance of this Policy together with such changes, and your consent to the terms set out therein."
+        />
       </div>
     </>
   );

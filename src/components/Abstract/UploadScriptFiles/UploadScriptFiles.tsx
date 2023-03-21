@@ -77,7 +77,7 @@ const UploadScriptFiles = ({
           } max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center`}
         >
           <div
-            // {...dropZoneUploadPdfScript.getRootProps({ className: "dropzone" })}
+            {...dropZoneUploadPdfScript.getRootProps({ className: "dropzone" })}
             className="relative py-14 px-4 w-full flex justify-center items-center flex-col"
           >
             <input
@@ -122,9 +122,9 @@ const UploadScriptFiles = ({
           } max-w-[528px] mx-auto rounded-md border-2 border-dashed overflow-hidden border-primary-300 flex justify-center items-center`}
         >
           <div
-            // {...dropZoneUploadPdfCopyright.getRootProps({
-            //   className: "dropzone",
-            // })}
+            {...dropZoneUploadPdfCopyright.getRootProps({
+              className: "dropzone",
+            })}
             className="relative py-14 px-4 w-full flex justify-center items-center flex-col"
           >
             <input

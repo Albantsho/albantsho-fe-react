@@ -165,12 +165,12 @@ const ScriptsList = ({ reviewsList }: IProps) => {
       </div>
     </Paper>
   ) : (
-    <div className="flex items-center">
+    <div className="flex items-center py-14 lg:py-24">
       <Image
         width={384}
         height={384}
         loading="lazy"
-        className="w-fit h-fit mx-auto mt-14 lg:mt-24"
+        className="w-fit h-fit mx-auto"
         src={emptyBlogs}
         alt="empty blog list"
       />

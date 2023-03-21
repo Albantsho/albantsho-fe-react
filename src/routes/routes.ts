@@ -51,7 +51,11 @@ const routes = {
     mustAuthenticated: "noMatter",
     permission: [],
   },
-  blog: { url: "/blog", mustAuthenticated: "noMatter", permission: [] },
+  blog: {
+    url: "https://blog.albantsho.com/",
+    mustAuthenticated: "noMatter",
+    permission: [],
+  },
   oneBlog: {
     url: `/blog/[slug]`,
     dynamicUrl: (slug: string) => `/blog/${slug}`,

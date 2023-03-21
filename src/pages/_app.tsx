@@ -62,7 +62,7 @@ export default function MyApp(props: MyAppProps) {
                   gtag('js', new Date());
                   gtag('config', 'G-35SD81MYSZ');`}
             </Script>
-            <Script id="google-tag-manager" strategy="afterInteractive">
+            <Script id="hotjar-tracking" strategy="afterInteractive">
               {`(function(h,o,t,j,a,r){
                 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
                 h._hjSettings={hjid:3410388,hjsv:6};
