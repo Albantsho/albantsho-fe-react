@@ -101,8 +101,8 @@ const WaitListLanding = () => {
           Write better screenplays and be discovered by top producers to bring
           them to life.
         </p>
-        <div className="max-w-lg flex mx-auto gap-3 items-center mt-8 sm:mt-12 lg:mt-16 flex-wrap justify-center">
-          <div className="flex flex-col relative">
+        <div className="max-w-lg flex mx-auto gap-3 mt-16 flex-col sm:flex-row">
+          <div className="flex flex-col flex-1 relative">
             <label
               htmlFor="wait-list"
               style={{ fontFamily: "Inter" }}
@@ -114,13 +114,13 @@ const WaitListLanding = () => {
               placeholder="Enter your email"
               onChange={handleChangeValueEmail}
               value={email}
-              className="rounded-lg h-12 max-w-xs w-full inline-block px-2 border-none outline-none min-w-[250px] sm:min-w-[300px] md:min-w-[330px]"
+              className="rounded-lg h-12 max-w-xs w-full px-2 border-none outline-none min-w-full block sm:min-w-[300px] md:min-w-[330px]"
               id="wait-list"
             />
           </div>
           <button
             onClick={registerEmailFunc}
-            className="bg-[#BCA9DA] cursor-pointer text-white py-4 px-8 rounded-lg"
+            className="bg-[#573195] cursor-pointer text-white py-4 px-8 rounded-lg"
           >
             Join Waitlist
           </button>
@@ -138,7 +138,7 @@ const WaitListLanding = () => {
           >
             Features
           </span>
-          <div className="py-3 flex flex-wrap gap-10 sm:gap-14 md:gap-20 lg:gap-32 justify-between">
+          <div className="py-3 flex flex-wrap gap-10 sm:gap-14 md:gap-20 lg:gap-24 xl:gap-28 2xl:gap-32 justify-center xl:justify-between">
             <div
               style={{
                 backgroundImage:
@@ -260,7 +260,7 @@ const WaitListLanding = () => {
           >
             <span
               style={{ fontFamily: "Inter" }}
-              className="bg-white/20 w-24 font-medium rounded-full px-4 mx-auto block text-white py-2"
+              className="bg-black/20 w-24 font-medium rounded-full px-4 mx-auto block text-white py-2"
             >
               Features
             </span>
@@ -274,12 +274,12 @@ const WaitListLanding = () => {
               style={{ fontFamily: "Inter" }}
               className="text-center text-[#2E2E2E] max-w-xl mx-auto text-base sm:text-lg lg:text-xl mb-5 lg:mb-8"
             >
-              ...take your story from an idea to screenplay with iDraft - an
-              intense 8 weeks learning experience with <b>industry mentors,</b>{" "}
-              <b>masterclasses</b> and <b>practical lessons.</b>
+              Take your story from an idea to screenplay at the iDraft
+              Screenwriting Workshop- an intense 8 weeks learning experience
+              with industry mentors, masterclasses and practical lessons.
             </p>
-            <div className="flex gap-4 lg:gap-8 justify-center pb-14 lg:pb-20">
-              <button className="border-4 border-[#573195] font-bold bg-transparent text-[#573195] py-4 px-8 rounded-lg">
+            <div className="flex flex-col-reverse sm:flex-row gap-4 lg:gap-8 justify-center pb-14 lg:pb-20">
+              <button className="border-[3px] border-[#1B1F23] font-bold bg-transparent text-[#1B1F23] py-4 px-8 rounded-lg">
                 Learn More
               </button>
               <button className="bg-[#573195] font-bold text-white py-4 px-8 rounded-lg">
@@ -294,8 +294,8 @@ const WaitListLanding = () => {
             >
               Join the revolution. Join the waitlist
             </h4>
-            <div className="max-w-lg flex mx-auto gap-3 items-center mt-8 sm:mt-12 lg:mt-16 flex-wrap justify-center">
-              <div className="flex z-10 flex-col relative">
+            <div className="max-w-lg flex mx-auto gap-3 mt-16 flex-col sm:flex-row">
+              <div className="flex z-10 flex-col flex-1 relative">
                 <label
                   htmlFor="wait-list2"
                   style={{ fontFamily: "Inter" }}
@@ -307,26 +307,26 @@ const WaitListLanding = () => {
                   placeholder="Enter your email"
                   onChange={handleChangeValueEmail2}
                   value={email2}
-                  className="rounded-lg h-12 max-w-xs w-full inline-block px-2 border-none outline-none min-w-[250px] sm:min-w-[300px] md:min-w-[330px]"
+                  className="rounded-lg h-12 max-w-xs w-full px-2 border-none outline-none min-w-full block sm:min-w-[300px] md:min-w-[330px]"
                   id="wait-list2"
                 />
               </div>
               <button
                 onClick={registerEmailFunc2}
-                className="bg-[#BCA9DA] cursor-pointer z-10 text-white py-4 px-8 rounded-lg"
+                className="bg-[#573195] cursor-pointer text-white py-4 px-8 rounded-lg"
               >
                 Join Waitlist
               </button>
             </div>
           </div>
         </div>
-        <footer className="flex justify-between mt-24 items-center py-4">
+        <footer className="flex flex-col-reverse sm:flex-row gap-8 justify-between mt-24 items-center py-4">
           <div>
             <p style={{ fontFamily: "Inter" }} className="text-[#F7F5F8]">
               © Albantsho 2023
             </p>
           </div>
-          <div className="flex gap-4 sm:gap-6 lg:gap-8">
+          <div className="flex gap-4 justify-between flex-1 w-full flex-wrap sm:justify-end sm:gap-6 lg:gap-8">
             <Link
               href="https://www.instagram.com/albantsho/"
               style={{ fontFamily: "Inter" }}
