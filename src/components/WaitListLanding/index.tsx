@@ -1,16 +1,19 @@
-import Logo from "./assets/Logo.svg";
-import stars from "./assets/stars.png";
-import starsTwo from "./assets/stars 2.png";
-import radial from "./assets/purple radial.png";
-import Image from "next/image";
-import Link from "next/link";
 import useContact from "apis/Contact.api";
 import { IResData } from "interfaces/response";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
 import * as Yup from "yup";
+import Logo from "./assets/Logo.svg";
+import radial from "./assets/purple radial.png";
+import starsTwo from "./assets/stars 2.png";
+import easy from "./assets/People of Brooklyn Sitting on Floor.png";
+import stars from "./assets/stars.png";
+import community from "./assets/Open Peeps Together.png";
+import market from "./assets/Shopaholics Bust.png";
 
 const emailValidation = Yup.object({
   email: Yup.string().email().required().label("Email"),
@@ -141,8 +144,16 @@ const WaitListLanding = () => {
                 backgroundImage:
                   "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
               }}
-              className="min-h-[450px] p-5 rounded-3xl justify-end flex flex-col items-end md:px-8 lg:px-10"
+              className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-10"
             >
+              <Image
+                loading="eager"
+                src={easy}
+                width={200}
+                height={200}
+                className="mb-6 lg:mb-8"
+                alt="easy"
+              />
               <h6
                 style={{
                   backgroundImage:
@@ -151,15 +162,16 @@ const WaitListLanding = () => {
                   WebkitTextFillColor: "transparent",
                   fontFamily: "Inter",
                 }}
-                className="text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center"
+                className="text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center mx-auto"
               >
-                Breathtakingly fast
+                Easy Use
               </h6>
               <p
                 style={{ fontFamily: "Inter" }}
                 className="text-[#B4BCD0] max-w-[220px] text-center mx-auto"
               >
-                Sample copy of subtitle to drive a conversion
+                An easy interface with all the tools needed by beginner,
+                intermediate and advanced writers
               </p>
             </div>
             <div
@@ -167,8 +179,16 @@ const WaitListLanding = () => {
                 backgroundImage:
                   "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
               }}
-              className="min-h-[450px] p-5 rounded-3xl justify-end flex flex-col items-end md:px-8 lg:px-10"
+              className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-10"
             >
+              <Image
+                loading="eager"
+                src={community}
+                width={200}
+                height={200}
+                className="mb-6 lg:mb-8"
+                alt="community"
+              />
               <h6
                 style={{
                   backgroundImage:
@@ -177,15 +197,16 @@ const WaitListLanding = () => {
                   WebkitTextFillColor: "transparent",
                   fontFamily: "Inter",
                 }}
-                className="text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center"
+                className="text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center mx-auto"
               >
-                Breathtakingly fast
+                Community
               </h6>
               <p
                 style={{ fontFamily: "Inter" }}
                 className="text-[#B4BCD0] max-w-[220px] text-center mx-auto"
               >
-                Sample copy of subtitle to drive a conversion
+                Find your tribe, build relationships and writing circles Meet
+                other writers, mentors, industry experts and film enthusiasts
               </p>
             </div>
             <div
@@ -193,8 +214,16 @@ const WaitListLanding = () => {
                 backgroundImage:
                   "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
               }}
-              className="min-h-[450px] p-5 rounded-3xl justify-end flex flex-col items-end md:px-8 lg:px-10"
+              className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-10"
             >
+              <Image
+                loading="eager"
+                src={market}
+                width={200}
+                height={200}
+                className="mb-6 lg:mb-8"
+                alt="market"
+              />
               <h6
                 style={{
                   backgroundImage:
@@ -203,15 +232,16 @@ const WaitListLanding = () => {
                   WebkitTextFillColor: "transparent",
                   fontFamily: "Inter",
                 }}
-                className="text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center"
+                className="text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center mx-auto"
               >
-                Breathtakingly fast
+                Market Place
               </h6>
               <p
                 style={{ fontFamily: "Inter" }}
                 className="text-[#B4BCD0] max-w-[220px] text-center mx-auto"
               >
-                Sample copy of subtitle to drive a conversion
+                A market place to sell your story to buying producers who will
+                take it from script to the big screen
               </p>
             </div>
           </div>
@@ -244,8 +274,9 @@ const WaitListLanding = () => {
               style={{ fontFamily: "Inter" }}
               className="text-center text-[#2E2E2E] max-w-xl mx-auto text-base sm:text-lg lg:text-xl mb-5 lg:mb-8"
             >
-              Supporting copy nudging visitors to click the link below to join
-              iDraft
+              ...take your story from an idea to screenplay with iDraft - an
+              intense 8 weeks learning experience with <b>industry mentors,</b>{" "}
+              <b>masterclasses</b> and <b>practical lessons.</b>
             </p>
             <div className="flex gap-4 lg:gap-8 justify-center pb-14 lg:pb-20">
               <button className="border-4 border-[#573195] font-bold bg-transparent text-[#573195] py-4 px-8 rounded-lg">
