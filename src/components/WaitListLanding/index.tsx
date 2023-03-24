@@ -76,7 +76,7 @@ const WaitListLanding = () => {
   };
 
   return (
-    <main className="bg-[#181025]">
+    <main className="bg-[#181025] overflow-hidden">
       <div className="px-8 max-w-screen-2xl mx-auto py-10 lg:px-28 min-h-screen relative">
         <div className="w-12 h-12 mx-auto">
           <Logo />
