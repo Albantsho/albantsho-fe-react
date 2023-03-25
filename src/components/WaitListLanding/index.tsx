@@ -80,8 +80,6 @@ const WaitListLanding = () => {
     }
   );
 
-  console.log({ error2, status });
-
   const handleChangeValueEmail2 = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail2(e.target.value);
 
