@@ -8,12 +8,12 @@ import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
 import * as Yup from "yup";
 import Logo from "./assets/Logo.svg";
-import radial from "./assets/purple radial.png";
-import starsTwo from "./assets/stars 2.png";
-import easy from "./assets/People of Brooklyn Sitting on Floor.png";
+import radial from "./assets/purple-radial.png";
+import starsTwo from "./assets/stars-2.png";
+import easy from "./assets/people-of-brooklyn-sitting-on-floor.png";
 import stars from "./assets/stars.png";
-import community from "./assets/Open Peeps Together.png";
-import market from "./assets/Shopaholics Bust.png";
+import community from "./assets/open-peeps-together.png";
+import market from "./assets/shopaholics-bust.png";
 import SuccessAddWaitListModal from "./SuccessAddWaitListModal/SuccessAddWaitListModal";
 
 const emailValidation = Yup.object({
