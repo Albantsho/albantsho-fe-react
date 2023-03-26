@@ -60,12 +60,12 @@ const AnswerToContactModal = ({
 
   return (
     <Modal
-      className="px-5"
+      className="px-5 overflow-y-auto py-20"
       open={openAnswerToContactModal}
       onClose={handleCloseAnswerToContact}
     >
       <Slide direction="up" in={openAnswerToContactModal}>
-        <div className="px-6 relative bg-white w-full mt-28 max-w-screen-2xl flex flex-col  py-16 rounded-lg">
+        <div className="px-6 relative bg-white w-full max-w-screen-lg flex flex-col mx-auto py-16 rounded-lg">
           <IconButton
             onClick={handleCloseAnswerToContact}
             className="absolute top-5 right-5"

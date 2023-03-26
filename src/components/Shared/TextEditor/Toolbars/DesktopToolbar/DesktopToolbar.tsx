@@ -19,7 +19,7 @@ import TableButton from "../../Buttons/TableButton/TableButton";
 
 const DesktopToolbar = () => {
   return (
-    <div className="lg:flex gap-[3px] mb-8 hidden sticky top-0 z-50 flex-wrap">
+    <div className="lg:flex gap-[3px] mb-8 hidden bg-white sticky top-0 z-50 flex-wrap">
       <HeadingButtonList />
       <Divider orientation="vertical" />
       <MarkButton format="bold" icon={BsTypeBold} />
