@@ -5,14 +5,19 @@ import routes from "routes/routes";
 import useUserStore from "store/user.store";
 
 const Authorization = ({ children }: React.PropsWithChildren) => {
-  const { pathname, replace } = useRouter();
+  const { pathname, replace, route, push } = useRouter();
   const urlRoutes = Object.values(routes);
   const user = useUserStore((state) => state.user);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const foundRoute = urlRoutes.find((urlRoute) => urlRoute.url === pathname);
-
+    if (route !== "/") {
+      setLoading(true);
+      push("/");
+      setLoading(false);
+      return;
+    }
     if (foundRoute?.mustAuthenticated === "no") {
       if (!user) return;
       if (user.emailVerified) {
