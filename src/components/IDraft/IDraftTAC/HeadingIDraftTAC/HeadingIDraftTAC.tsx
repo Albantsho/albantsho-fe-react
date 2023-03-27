@@ -1,4 +1,6 @@
 import { Typography } from "@mui/material";
+import Link from "next/link";
+import routes from "routes/routes";
 
 const HeadingIDraftTAC = () => {
   return (
@@ -9,7 +11,10 @@ const HeadingIDraftTAC = () => {
         className="max-w-sm sm:max-w-md  leading-normal font-semibold"
       >
         TERMS AND CONDITONS FOR
-        <span className="text-purple-700 "> IDRAFT </span>
+        <Link href={routes.iDraft.url} className="text-purple-700">
+          {" "}
+          IDRAFT{" "}
+        </Link>
         <span className="md:mr-36">WORKSHOP</span> APPLICATION
       </Typography>
     </div>

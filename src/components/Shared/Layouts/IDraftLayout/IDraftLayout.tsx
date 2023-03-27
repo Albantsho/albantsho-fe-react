@@ -20,7 +20,7 @@ const links = [
 const IDraftLayout = ({ children }: IProps) => {
   return (
     <main className="flex flex-col">
-      <Nav links={links} secondaryUnderLineColor />
+      <Nav links={links} secondaryUnderLineColor position="static" />
       <ImageSection />
       {children}
       <Suspense fallback={null}>

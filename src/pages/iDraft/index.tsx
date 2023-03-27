@@ -39,7 +39,7 @@ const IDraft: NextPageWithLayout = () => {
         <DeadLineIDraft />
         <Link
           href={routes.iDraftTermsAndConditions.url}
-          className="text-gray-900"
+          className="text-gray-900 cursor-pointer z-10"
         >
           <Typography
             variant="h6"
