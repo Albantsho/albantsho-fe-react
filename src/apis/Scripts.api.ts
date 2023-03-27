@@ -361,7 +361,7 @@ const useScriptsApi = (controller?: AbortController) => {
   );
 
   const updatePublishedScript = useCallback(
-    async (payload: { published: boolean; }, scriptId: string) => {
+    async (payload: { publish: boolean; }, scriptId: string) => {
       const res = await axiosPrivate.patch<IResData<object>>(
         `/script/update/publish/${scriptId}`,
         payload,

@@ -19,7 +19,7 @@ type IScript = IFullInformationScript;
 let controller = new AbortController();
 let controllerAdaption = new AbortController();
 
-const useAbstract = (script: IScript) => {
+const useAbstract = (script: IScript, refetch: any) => {
   const [step, setStep] = useState(1);
   const [openSaveProgressModal, setOpenSaveProgressModal] = useState(false);
   const [adaption, setAdaption] = useState(false);
@@ -265,6 +265,7 @@ const useAbstract = (script: IScript) => {
         setLoadingUpdateButton(false);
       }
     }
+    refetch();
   };
 
   return {

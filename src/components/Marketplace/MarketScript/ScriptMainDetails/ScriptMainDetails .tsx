@@ -13,6 +13,11 @@ interface IProps {
 }
 
 const ScriptMainDetails = ({ script }: IProps) => {
+  console.log(
+    "🚀 ~ file: ScriptMainDetails .tsx:16 ~ ScriptMainDetails ~ script:",
+    script
+  );
+
   return (
     <div className="px-5 sm:px-10 py-10  md:max-w-3xl mx-auto max-w-screen-md">
       <Accordion
@@ -52,7 +57,7 @@ const ScriptMainDetails = ({ script }: IProps) => {
             >
               Written by {script.writtenBy}
             </Typography>
-            {parse(script.scriptPart as string)}
+            {script.scriptPart && parse(script.scriptPart)}
           </article>
         </AccordionDetails>
       </Accordion>

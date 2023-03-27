@@ -29,7 +29,7 @@ const Listings: NextPageWithLayout = () => {
     data: publishedScriptsData,
     isLoading: loadingGetPublishedScripts,
     refetch,
-  } = useQuery("opening-scripts", () =>
+  } = useQuery(["opening-scripts", query], () =>
     getWriterAllPublishedScripts(searchQuery)
   );
 

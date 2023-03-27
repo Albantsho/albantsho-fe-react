@@ -104,10 +104,7 @@ const UploadScriptFiles = ({
               className="text-neutral-700 text-center"
             >
               Drop your file here, or
-              <label
-                onClick={dropZoneUploadPdfScript.open}
-                className="text-primary-700 underline ml-1 cursor-pointer"
-              >
+              <label className="text-primary-700 underline ml-1 cursor-pointer">
                 browse
               </label>
             </Typography>
@@ -152,10 +149,7 @@ const UploadScriptFiles = ({
               className="text-neutral-700 text-center"
             >
               Drop your file here, or
-              <label
-                onClick={dropZoneUploadPdfCopyright.open}
-                className="text-primary-700 underline ml-1 cursor-pointer"
-              >
+              <label className="text-primary-700 underline ml-1 cursor-pointer">
                 browse
               </label>
             </Typography>

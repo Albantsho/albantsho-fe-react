@@ -23,9 +23,10 @@ const SaveProgressScriptModal = dynamic(
 
 interface IProps {
   script: IFullInformationScript;
+  refetch: any;
 }
 
-const Abstract = ({ script }: IProps) => {
+const Abstract = ({ script, refetch }: IProps) => {
   const {
     activeButton,
     openSaveProgressModal,
@@ -55,7 +56,7 @@ const Abstract = ({ script }: IProps) => {
     progressAdaption,
     dropZoneUploadPdfScript,
     dropZoneUploadPdfCopyright,
-  } = useAbstract(script);
+  } = useAbstract(script, refetch);
 
   return (
     <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto">
