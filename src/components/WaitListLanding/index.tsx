@@ -260,8 +260,8 @@ const WaitListLanding = () => {
               }}
               className="py-5 px-10 rounded-3xl text-center"
             >
-              <span className="bg-black/20 w-24 inter font-medium rounded-full px-4 mx-auto block text-white py-2">
-                Features
+              <span className="bg-black/20 w-28 inter text-[13px] font-medium rounded-full px-2 mx-auto block text-white py-2">
+                While You Wait
               </span>
               <h2
                 style={{ fontFamily: "Space Grotesk" }}
