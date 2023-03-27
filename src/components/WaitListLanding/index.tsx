@@ -123,8 +123,7 @@ const WaitListLanding = () => {
             <div className="flex flex-col flex-1 relative">
               <label
                 htmlFor="wait-list"
-                style={{ fontFamily: "Inter" }}
-                className="font-bold text-white left-0 -top-10 absolute"
+                className="font-bold inter text-white left-0 -top-10 absolute"
               >
                 Email
               </label>
@@ -144,25 +143,19 @@ const WaitListLanding = () => {
             </div>
             <button
               onClick={registerEmailFunc}
-              className="bg-[#573195] max-h-[50px] cursor-pointer text-white py-4 px-8 rounded-lg"
+              className="bg-[#573195] inter max-h-[50px] cursor-pointer text-white py-4 px-8 rounded-lg font-semibold"
             >
               Join Waitlist
             </button>
           </div>
-          <h2
-            className="text-white font-normal text-3xl sm:text-4xl lg:text-[40px] mt-36 sm:mt-40 lg:mt-52 text-center"
-            style={{ fontFamily: "Inter" }}
-          >
+          <h2 className="text-white font-normal text-3xl sm:text-4xl lg:text-[40px] mt-36 sm:mt-40 lg:mt-52 inter text-center">
             Reach Your Great Story
           </h2>
           <div className="py-7 sm:py-8 lg:py-10 text-sm">
-            <span
-              style={{ fontFamily: "Inter" }}
-              className="bg-white/10 font-medium rounded-full px-4 text-white py-2"
-            >
+            <span className="bg-white/10 inter font-medium rounded-full px-4 text-white py-2">
               Features
             </span>
-            <div className="py-3 flex flex-wrap gap-10 sm:gap-14 md:gap-20 lg:gap-24 xl:gap-28 2xl:gap-32 justify-center xl:justify-between">
+            <div className="py-3 flex flex-wrap gap-10 sm:gap-14 md:gap-20 lg:gap-24 xl:gap-28 justify-center xl:justify-between">
               <div
                 style={{
                   backgroundImage:
@@ -184,16 +177,12 @@ const WaitListLanding = () => {
                       "linear-gradient(139.68deg, #FFE08A 16.99%, #FFAF19 100.91%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
-                    fontFamily: "Inter",
                   }}
-                  className="text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center mx-auto"
+                  className="text-lg inter sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center mx-auto"
                 >
                   Easy Use
                 </h6>
-                <p
-                  style={{ fontFamily: "Inter" }}
-                  className="text-[#B4BCD0] max-w-[220px] text-center mx-auto"
-                >
+                <p className="text-[#B4BCD0] inter max-w-[220px] text-center mx-auto">
                   An easy interface with all the tools needed by beginner,
                   intermediate and advanced writers
                 </p>
@@ -219,16 +208,12 @@ const WaitListLanding = () => {
                       "linear-gradient(139.68deg, #FFE08A 16.99%, #FFAF19 100.91%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
-                    fontFamily: "Inter",
                   }}
-                  className="text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center mx-auto"
+                  className="text-lg inter sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center mx-auto"
                 >
                   Community
                 </h6>
-                <p
-                  style={{ fontFamily: "Inter" }}
-                  className="text-[#B4BCD0] max-w-[220px] text-center mx-auto"
-                >
+                <p className="text-[#B4BCD0] inter max-w-[220px] text-center mx-auto">
                   Find your tribe, build relationships and writing circles Meet
                   other writers, mentors, industry experts and film enthusiasts
                 </p>
@@ -260,10 +245,7 @@ const WaitListLanding = () => {
                 >
                   Market Place
                 </h6>
-                <p
-                  style={{ fontFamily: "Inter" }}
-                  className="text-[#B4BCD0] max-w-[220px] text-center mx-auto"
-                >
+                <p className="text-[#B4BCD0] inter max-w-[220px] text-center mx-auto">
                   A market place to sell your story to buying producers who will
                   take it from script to the big screen
                 </p>
@@ -282,10 +264,7 @@ const WaitListLanding = () => {
               }}
               className="py-5 px-10 rounded-3xl text-center"
             >
-              <span
-                style={{ fontFamily: "Inter" }}
-                className="bg-black/20 w-24 font-medium rounded-full px-4 mx-auto block text-white py-2"
-              >
+              <span className="bg-black/20 w-24 inter font-medium rounded-full px-4 mx-auto block text-white py-2">
                 Features
               </span>
               <h2
@@ -294,36 +273,39 @@ const WaitListLanding = () => {
               >
                 Join our free Workshop
               </h2>
-              <p
-                style={{ fontFamily: "Inter" }}
-                className="text-center text-[#2E2E2E] max-w-xl mx-auto text-base sm:text-lg lg:text-xl mb-5 lg:mb-8"
-              >
+              <p className="text-center inter text-[#2E2E2E] max-w-xl mx-auto text-base sm:text-lg lg:text-xl mb-5 lg:mb-8">
                 Take your story from an idea to screenplay at the iDraft
                 Screenwriting Workshop- an intense 8 weeks learning experience
                 with industry mentors, masterclasses and practical lessons.
               </p>
               <div className="flex flex-col-reverse sm:flex-row gap-4 lg:gap-8 justify-center pb-14 lg:pb-20">
-                <button className="border-[3px] border-[#1B1F23] font-bold bg-transparent text-[#1B1F23] py-4 px-8 rounded-lg">
+                <Link
+                  href="https://blog.albantsho.com/idraft-2023-is-here/"
+                  target="_blank"
+                  referrerPolicy="no-referrer"
+                  className="border-[3px] z-10 border-[#1B1F23] font-bold bg-transparent text-[#1B1F23] py-4 px-8 rounded-lg"
+                >
                   Learn More
-                </button>
-                <button className="bg-[#573195] font-bold text-white py-4 px-8 rounded-lg">
+                </Link>
+                <Link
+                  href="https://docs.google.com/forms/u/2/d/e/1FAIpQLSd-p3Eg4h00ok2RlKv778U6yBWirxbLLsGieN5FoRyiSZZ7Vw/viewform?usp=send_form"
+                  target="_blank"
+                  referrerPolicy="no-referrer"
+                  className="bg-[#573195] font-bold text-white py-4 px-8 rounded-lg z-10"
+                >
                   Apply to Join
-                </button>
+                </Link>
               </div>
             </div>
             <div className="text-center pt-20 sm:pt-28 lg:pt-40">
-              <h4
-                style={{ fontFamily: "Inter" }}
-                className="text-[#F7F5F8] font-medium text-base sm:text-lg lg:text-2xl"
-              >
+              <h4 className="text-[#F7F5F8] inter font-medium text-base sm:text-lg lg:text-2xl">
                 Join the revolution. Join the waitlist
               </h4>
               <div className="max-w-lg flex mx-auto gap-3 mt-16 flex-col sm:flex-row">
                 <div className="flex z-10 flex-col flex-1 relative">
                   <label
                     htmlFor="wait-list2"
-                    style={{ fontFamily: "Inter" }}
-                    className="font-bold text-white left-0 -top-10 absolute"
+                    className="font-bold text-white inter left-0 -top-10 absolute"
                   >
                     Email
                   </label>
@@ -344,7 +326,7 @@ const WaitListLanding = () => {
                 </div>
                 <button
                   onClick={registerEmailFunc2}
-                  className="bg-[#573195] z-10 max-h-[50px] cursor-pointer text-white py-4 px-8 rounded-lg"
+                  className="bg-[#573195] z-10 inter max-h-[50px] cursor-pointer text-white py-4 px-8 rounded-lg font-semibold"
                 >
                   Join Waitlist
                 </button>
@@ -353,36 +335,38 @@ const WaitListLanding = () => {
           </div>
           <footer className="flex flex-col-reverse sm:flex-row gap-8 justify-between mt-24 items-center py-4">
             <div>
-              <p style={{ fontFamily: "Inter" }} className="text-[#F7F5F8]">
-                © Albantsho 2023
-              </p>
+              <p className="text-[#F7F5F8] inter">© Albantsho 2023</p>
             </div>
             <div className="flex gap-4 justify-between flex-1 w-full flex-wrap sm:justify-end sm:gap-6 lg:gap-8">
               <Link
                 href="https://www.instagram.com/albantsho/"
-                style={{ fontFamily: "Inter" }}
-                className="cursor-pointer z-10 text-[#F7F5F8]"
+                target="_blank"
+                referrerPolicy="no-referrer"
+                className="cursor-pointer inter z-10 text-[#F7F5F8]"
               >
                 Instagram
               </Link>
               <Link
                 href="https://www.twitter.com/albantsho"
-                style={{ fontFamily: "Inter" }}
-                className="cursor-pointer z-10 text-[#F7F5F8]"
+                target="_blank"
+                referrerPolicy="no-referrer"
+                className="cursor-pointer inter z-10 text-[#F7F5F8]"
               >
                 Twitter
               </Link>
               <Link
                 href="https://www.facebook.com/albantsho"
-                style={{ fontFamily: "Inter" }}
-                className="cursor-pointer z-10 text-[#F7F5F8]"
+                target="_blank"
+                referrerPolicy="no-referrer"
+                className="cursor-pointer z-10 inter text-[#F7F5F8]"
               >
                 Facebook
               </Link>
               <Link
-                href={"#"}
-                style={{ fontFamily: "Inter" }}
-                className="cursor-pointer z-10 text-[#F7F5F8]"
+                href="https://www.linkedin.com/company/albantsho/"
+                target="_blank"
+                referrerPolicy="no-referrer"
+                className="cursor-pointer z-10 inter text-[#F7F5F8]"
               >
                 LinkedIn
               </Link>
