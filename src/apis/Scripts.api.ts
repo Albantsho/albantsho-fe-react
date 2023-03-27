@@ -252,7 +252,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
   const searchScripts = useCallback(
     async (search: string) => {
-      const res = await axios.get<IResData<{ scripts: IScript[] }>>(
+      const res = await axios.get<IResData<{ scripts: IScript[]; }>>(
         `/script/search?search=${search}`,
         {
           signal: controller?.signal,
@@ -305,7 +305,7 @@ const useScriptsApi = (controller?: AbortController) => {
   );
 
   const updateWriterArchiveScript = useCallback(
-    async (payload: { archive: boolean }, scriptId: string) => {
+    async (payload: { archive: boolean; }, scriptId: string) => {
       const res = await axiosPrivate.patch<IResData<object>>(
         `/script/update/archive/${scriptId}`,
         payload,
@@ -361,7 +361,7 @@ const useScriptsApi = (controller?: AbortController) => {
   );
 
   const updatePublishedScript = useCallback(
-    async (payload: { published: boolean }, scriptId: string) => {
+    async (payload: { published: boolean; }, scriptId: string) => {
       const res = await axiosPrivate.patch<IResData<object>>(
         `/script/update/publish/${scriptId}`,
         payload,

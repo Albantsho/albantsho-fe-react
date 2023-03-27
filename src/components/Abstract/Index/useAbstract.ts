@@ -134,8 +134,8 @@ const useAbstract = (script: IScript) => {
       setAdaptionPermissionError("");
       axiosPrivate
         .post(
-          `/script/adaptionPermission/${script._id}`,
-          { adaptionPermission: e.target.files[0] },
+          `/script/adaption/${script._id}`,
+          { adaption: e.target.files[0] },
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -145,7 +145,7 @@ const useAbstract = (script: IScript) => {
               const percentage = (loaded * 100) / total;
               setProgressAdaption(percentage);
             },
-            signal: controller.signal,
+            signal: controllerAdaption.signal,
           }
         )
         .then((res) => successHandler(res.data.message));
