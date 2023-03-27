@@ -112,10 +112,7 @@ const WaitListLanding = () => {
             A looong overdue <br />
             revolution in screenwriting
           </h1>
-          <p
-            style={{ fontFamily: "Space Grotesk" }}
-            className="text-center text-white max-w-xl mx-auto text-base sm:text-lg lg:text-xl"
-          >
+          <p className="text-center text-white inter max-w-lg mx-auto text-xl font-normal">
             Write better screenplays and be discovered by top producers to bring
             them to life.
           </p>
@@ -155,20 +152,20 @@ const WaitListLanding = () => {
             <span className="bg-white/10 inter font-medium rounded-full px-4 text-white py-2">
               Features
             </span>
-            <div className="py-3 flex flex-wrap gap-10 sm:gap-14 md:gap-20 lg:gap-24 xl:gap-28 justify-center xl:justify-between">
+            <div className="py-3 flex flex-wrap gap-10 sm:gap-14 md:gap-20 lg:gap-24 justify-center xl:justify-between">
               <div
                 style={{
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-10"
+                className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-10 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
                   src={easy}
                   width={200}
                   height={200}
-                  className="mb-6 lg:mb-8"
+                  className="mx-auto"
                   alt="easy"
                 />
                 <h6
@@ -178,11 +175,11 @@ const WaitListLanding = () => {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
-                  className="text-lg inter sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center mx-auto"
+                  className="inter text-2xl my-7 font-medium text-center mx-auto"
                 >
                   Easy Use
                 </h6>
-                <p className="text-[#B4BCD0] inter max-w-[220px] text-center mx-auto">
+                <p className="text-[#B4BCD0] inter font-medium max-w-[220px] text-center mx-auto text-[15px]">
                   An easy interface with all the tools needed by beginner,
                   intermediate and advanced writers
                 </p>
@@ -192,14 +189,14 @@ const WaitListLanding = () => {
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-10"
+                className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-10 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
                   src={community}
                   width={200}
                   height={200}
-                  className="mb-6 lg:mb-8"
+                  className="mx-auto"
                   alt="community"
                 />
                 <h6
@@ -209,11 +206,11 @@ const WaitListLanding = () => {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
-                  className="text-lg inter sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center mx-auto"
+                  className="inter text-2xl my-7 font-medium text-center mx-auto"
                 >
                   Community
                 </h6>
-                <p className="text-[#B4BCD0] inter max-w-[220px] text-center mx-auto">
+                <p className="text-[#B4BCD0] inter font-medium max-w-[220px] text-center mx-auto text-[15px]">
                   Find your tribe, build relationships and writing circles Meet
                   other writers, mentors, industry experts and film enthusiasts
                 </p>
@@ -223,14 +220,14 @@ const WaitListLanding = () => {
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-10"
+                className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-10 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
                   src={market}
                   width={200}
                   height={200}
-                  className="mb-6 lg:mb-8"
+                  className="mx-auto"
                   alt="market"
                 />
                 <h6
@@ -239,13 +236,12 @@ const WaitListLanding = () => {
                       "linear-gradient(139.68deg, #FFE08A 16.99%, #FFAF19 100.91%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
-                    fontFamily: "Inter",
                   }}
-                  className="text-lg sm:text-xl lg:text-2xl mb-1 sm:mb-2 lg:mb-3 text-center mx-auto"
+                  className="inter text-2xl my-7 font-medium text-center mx-auto"
                 >
                   Market Place
                 </h6>
-                <p className="text-[#B4BCD0] inter max-w-[220px] text-center mx-auto">
+                <p className="text-[#B4BCD0] inter font-medium max-w-[220px] text-center mx-auto text-[15px]">
                   A market place to sell your story to buying producers who will
                   take it from script to the big screen
                 </p>
@@ -283,7 +279,7 @@ const WaitListLanding = () => {
                   href="https://blog.albantsho.com/idraft-2023-is-here/"
                   target="_blank"
                   referrerPolicy="no-referrer"
-                  className="border-[3px] z-10 border-[#1B1F23] font-bold bg-transparent text-[#1B1F23] py-4 px-8 rounded-lg"
+                  className="border-[3px] z-10 border-[#1B1F23] font-bold bg-transparent text-[#1B1F23] grotesque-pro py-4 px-8 rounded-lg"
                 >
                   Learn More
                 </Link>
@@ -291,7 +287,7 @@ const WaitListLanding = () => {
                   href="https://docs.google.com/forms/u/2/d/e/1FAIpQLSd-p3Eg4h00ok2RlKv778U6yBWirxbLLsGieN5FoRyiSZZ7Vw/viewform?usp=send_form"
                   target="_blank"
                   referrerPolicy="no-referrer"
-                  className="bg-[#573195] font-bold text-white py-4 px-8 rounded-lg z-10"
+                  className="bg-[#573195] font-bold grotesque-pro text-white py-4 px-8 rounded-lg z-10"
                 >
                   Apply to Join
                 </Link>
