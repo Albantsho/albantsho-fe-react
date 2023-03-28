@@ -196,7 +196,7 @@ const WaitListLanding = () => {
                   src={community}
                   width={200}
                   height={200}
-                  className="mx-auto"
+                  className="mx-auto min-h-[200px]"
                   alt="community"
                 />
                 <h6
