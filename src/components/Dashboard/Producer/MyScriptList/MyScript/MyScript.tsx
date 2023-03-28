@@ -23,6 +23,8 @@ const MyScript = ({ script }: IProps) => {
     async function getDraftFunc() {
       try {
         const res = await getOneDraft(script._id as string);
+        console.log("🚀 ~ file: MyScript.tsx:26 ~ getDraftFunc ~ res:", res);
+
         setResDraft(res);
       } catch (error) {
         ("");
@@ -42,7 +44,10 @@ const MyScript = ({ script }: IProps) => {
   }
 
   const seeScript = async () => {
+    console.log("see Script");
+
     const res = await getOneDraftAsPdf(script._id as string);
+    console.log("🚀 ~ file: MyScript.tsx:50 ~ seeScript ~ res:", res);
     const blobUrl = window.URL.createObjectURL(new Blob([res]));
     const aTag = document.createElement("a");
     aTag.href = blobUrl;
@@ -96,7 +101,7 @@ const MyScript = ({ script }: IProps) => {
             {script.tagline}
           </Typography>
         </div>
-        {resDraft && resDraft.data ? (
+        {resDraft && !resDraft.data ? (
           <PDFDownloadLink
             document={
               <PDFFile
@@ -144,7 +149,7 @@ const MyScript = ({ script }: IProps) => {
         className="hidden sm:flex items-center sm:py-6 xl:py-10 justify-end"
       >
         {" "}
-        {resDraft.data ? (
+        {resDraft && resDraft.data ? (
           <PDFDownloadLink
             document={
               <PDFFile

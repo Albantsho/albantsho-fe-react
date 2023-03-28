@@ -25,6 +25,8 @@ const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
   const { rejectBid } = useScripBidApi();
   const [ethPrice, setEthPrice] = useState<number | false | null>(null);
 
+  console.log({ bid, script });
+
   const { mutate: rejectBidMutation, isLoading: loadingRejectBid } =
     useMutation<IResData<object>, Error, string>((data) => rejectBid(data), {
       onError: (error) => errorHandler(error),

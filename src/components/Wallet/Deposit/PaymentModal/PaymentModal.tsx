@@ -16,7 +16,7 @@ interface IProps {
 const PaymentModal = ({ amount }: IProps) => {
   const { increaseWalletBalance } = useWalletApi();
   const user = useUserStore((state) => state.user);
-  const { replace } = useRouter();
+  const { replace, reload } = useRouter();
 
   const config: FlutterwaveConfig = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY as string,
@@ -62,6 +62,7 @@ const PaymentModal = ({ amount }: IProps) => {
       handleFlutterPayment({
         callback: paymentResponse,
         onClose: () => {
+          reload();
           customHandler("payment Field or canceled, please try again");
         },
       });

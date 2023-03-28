@@ -34,6 +34,7 @@ const useDeposit = () => {
     handleSubmit,
     errors,
     amount,
+    setAmount
   };
 };
 

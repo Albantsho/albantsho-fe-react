@@ -43,7 +43,7 @@ const BidsPage: NextPageWithLayout = () => {
   });
 
   const { data: bidScriptData, isLoading: isLoadingGetBidScript } = useQuery(
-    ["script", bidID],
+    ["script one bid request", bidID],
     () => getBidScript(bidID),
     {
       onError: (err) => errorHandler(err),
@@ -76,7 +76,9 @@ const BidsPage: NextPageWithLayout = () => {
       {!isLoadingGetScript &&
       !isLoadingGetBidScript &&
       bidScriptData &&
-      scriptData ? (
+      bidScriptData.scriptBid &&
+      scriptData &&
+      scriptData.script ? (
         <>
           <Bids
             script={scriptData.script}
