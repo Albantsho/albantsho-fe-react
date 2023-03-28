@@ -16,12 +16,11 @@ import community from "./assets/community.png";
 import market from "./assets/shopaholics-bust.png";
 import SuccessAddWaitListModal from "./SuccessAddWaitListModal/SuccessAddWaitListModal";
 
-const emailValidation = Yup.object({
-  email: Yup.string().email().required().label("Email"),
-});
-const emailValidation2 = Yup.object({
-  email2: Yup.string().email().required().label("Email"),
-});
+const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+function isEmailAddress(str: string) {
+  return str.match(regex);
+}
 
 const WaitListLanding = () => {
   const [email, setEmail] = useState("");
@@ -55,48 +54,33 @@ const WaitListLanding = () => {
     setEmail(e.target.value);
 
   const registerEmailFunc = async () => {
-    try {
-      await emailValidation.validate({ email });
-      registerEmailMutation(email);
-    } catch (e) {
-      errorHandler(e);
-    }
+    registerEmailMutation(email);
   };
 
-  const {
-    mutate: registerEmailMutation2,
-    error: error2,
-    status,
-  } = useMutation<IResData<object>, Error, string>(
-    (data) => registerEmail(data),
-    {
-      onSuccess: (_data) => {
-        successHandler(
-          "you’ve been successfully added to Albantsho’s waitlist"
-        );
-        setSuccessAddWaitList2(true);
-      },
-      onError: (error) => errorHandler(error),
-    }
-  );
+  const { mutate: registerEmailMutation2, error: error2 } = useMutation<
+    IResData<object>,
+    Error,
+    string
+  >((data) => registerEmail(data), {
+    onSuccess: (_data) => {
+      successHandler("you’ve been successfully added to Albantsho’s waitlist");
+      setSuccessAddWaitList2(true);
+    },
+    onError: (error) => errorHandler(error),
+  });
 
   const handleChangeValueEmail2 = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail2(e.target.value);
 
   const registerEmailFunc2 = async () => {
-    try {
-      await emailValidation2.validate({ email2 });
-      registerEmailMutation2(email2);
-    } catch (e) {
-      errorHandler(e);
-    }
+    registerEmailMutation2(email2);
   };
 
   return (
     <>
       <main className="bg-[#181025] overflow-hidden">
         <div className="px-8 max-w-screen-2xl mx-auto py-10 lg:px-28 min-h-screen relative">
-          <div className="w-12 h-12 mx-auto">
+          <div className="w-12 h-12 mx-auto mb-16">
             <Logo />
           </div>
           <div className="max-w-[800px] w-full absolute top-[412px] lg:top-[490px] text-center mx-auto">
@@ -107,12 +91,12 @@ const WaitListLanding = () => {
           </div>
           <h1
             style={{ fontFamily: "Space Grotesk" }}
-            className="text-center mt-8 sm:mt-12 font-bold lg:mt-16 text-3xl sm:text-4xl  lg:text-6xl text-white mb-3 sm:mb-5 lg;mb-8"
+            className="text-center mt-8 sm:mt-12 font-bold leading-[45px] sm:leading-[60px] lg:mt-16 text-[38px] z-10 sm:text-[52px] lg:text-6xl text-white mb-6 lg:mb-8"
           >
-            A looong overdue <br />
+            A looong overdue <br className="hidden md:block" />
             revolution in screenwriting
           </h1>
-          <p className="text-center text-white inter max-w-lg mx-auto text-xl font-normal">
+          <p className="text-center z-10 text-white inter max-w-lg mx-auto text-xl font-normal">
             Write better screenplays and be discovered by top producers to bring
             them to life.
           </p>
@@ -128,24 +112,38 @@ const WaitListLanding = () => {
                 placeholder="Enter your email"
                 onChange={handleChangeValueEmail}
                 value={email}
-                className="rounded-lg h-12 max-w-xs w-full px-2 border-none outline-none min-w-full block sm:min-w-[300px] md:min-w-[330px]"
+                className="rounded-lg z-10 h-12 max-w-xs w-full px-2 border-none outline-none min-w-full block sm:min-w-[300px] md:min-w-[330px]"
                 id="wait-list"
               />
               {error &&
                 error.message === "Request failed with status code 409" && (
-                  <span className="mr-auto mt-2 text-success-300">
+                  <span className="mr-auto mt-2 text-[13px] text-success-300">
                     You’re already on the waitlist!
+                  </span>
+                )}
+              {error &&
+                error.message === "Request failed with status code 400" && (
+                  <span className="mr-auto mt-2 text-[13px] text-[#D32D2D]">
+                    {!email ? (
+                      "The field cannot be empty. Please input your email."
+                    ) : (
+                      <>
+                        {isEmailAddress(email)
+                          ? ""
+                          : "The email is invalid. Please enter validEmail."}
+                      </>
+                    )}
                   </span>
                 )}
             </div>
             <button
               onClick={registerEmailFunc}
-              className="bg-[#573195] inter max-h-[50px] cursor-pointer text-white py-4 px-8 rounded-lg font-semibold"
+              className="bg-[#573195] inter max-h-[50px] cursor-pointer text-white py-4 px-8 z-10 rounded-lg font-semibold"
             >
               Join Waitlist
             </button>
           </div>
-          <h2 className="text-white font-normal text-3xl sm:text-4xl lg:text-[40px] mt-36 sm:mt-40 lg:mt-52 inter text-center">
+          <h2 className="text-white font-normal text-3xl sm:text-4xl lg:text-[40px] mt-36 sm:mt-40 z-10 lg:mt-52 inter mb-8 text-center">
             Reach Your Great Story
           </h2>
           <div className="py-7 sm:py-8 lg:py-10 text-sm">
@@ -258,18 +256,18 @@ const WaitListLanding = () => {
                   "linear-gradient(139.68deg, #FFE08A 16.99%, #FFAF19 100.91%)",
                 boxShadow: "0px 0px 400px 81px rgba(255,175,25,0.26)",
               }}
-              className="py-5 px-10 rounded-3xl text-center"
+              className="py-5 -mx-3 px-10 rounded-3xl text-center"
             >
               <span className="bg-black/20 w-28 inter text-[13px] font-medium rounded-full px-2 mx-auto block text-white py-2">
                 While You Wait
               </span>
               <h2
                 style={{ fontFamily: "Space Grotesk" }}
-                className="text-center mt-8 sm:mt-12 font-bold lg:mt-16 text-3xl sm:text-4xl  lg:text-6xl #1B1F23 mb-3 sm:mb-5 lg;mb-8"
+                className="text-center mt-8 sm:mt-12 font-bold lg:mt-16 text-4xl sm:text-5xl lg:text-6xl #1B1F23 mb-5 lg:mb-8"
               >
                 Join our free Workshop
               </h2>
-              <p className="text-center inter text-[#2E2E2E] max-w-xl mx-auto text-base sm:text-lg lg:text-xl mb-5 lg:mb-8">
+              <p className="text-center inter text-[#2E2E2E] max-w-xl mx-auto font-normal text-xl mb-5 lg:mb-8">
                 Take your story from an idea to screenplay at the iDraft
                 Screenwriting Workshop- an intense 8 weeks learning experience
                 with industry mentors, masterclasses and practical lessons.
@@ -294,8 +292,9 @@ const WaitListLanding = () => {
               </div>
             </div>
             <div className="text-center pt-20 sm:pt-28 lg:pt-40">
-              <h4 className="text-[#F7F5F8] inter font-medium text-base sm:text-lg lg:text-2xl">
-                Join the revolution. Join the waitlist
+              <h4 className="text-[#F7F5F8] sm:max-w-full inter font-medium text-2xl">
+                Join the revolution.
+                <br className="sm:hidden" /> Join the waitlist
               </h4>
               <div className="max-w-lg flex mx-auto gap-3 mt-16 flex-col sm:flex-row">
                 <div className="flex z-10 flex-col flex-1 relative">
@@ -315,8 +314,23 @@ const WaitListLanding = () => {
                   {error2 &&
                     error2.message ===
                       "Request failed with status code 409" && (
-                      <span className="mr-auto mt-2 text-success-300">
+                      <span className="mr-auto mt-2 text-[13px] text-success-300">
                         You’re already on the waitlist!
+                      </span>
+                    )}
+                  {error2 &&
+                    error2.message ===
+                      "Request failed with status code 400" && (
+                      <span className="mr-auto mt-2 text-[13px] text-[#D32D2D]">
+                        {!email2 ? (
+                          "The field cannot be empty. Please input your email."
+                        ) : (
+                          <>
+                            {isEmailAddress(email2)
+                              ? ""
+                              : "The email is invalid. Please enter validEmail."}
+                          </>
+                        )}
                       </span>
                     )}
                 </div>
@@ -329,7 +343,7 @@ const WaitListLanding = () => {
               </div>
             </div>
           </div>
-          <footer className="flex flex-col-reverse sm:flex-row gap-8 justify-between mt-24 items-center py-4">
+          <footer className="flex flex-col-reverse sm:flex-row gap-10 justify-between mt-16 lg:mt-24 items-center py-4 pb-8">
             <div>
               <p className="text-[#F7F5F8] inter">© Albantsho 2023</p>
             </div>
