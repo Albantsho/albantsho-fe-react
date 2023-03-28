@@ -9,7 +9,7 @@ interface IProps {
 const Loader = ({ setCustomHeight }: IProps) => {
   return (
     <div
-      className={`flex items-center justify-center text-primary-700 ${
+      className={`flex bg-[#181025] items-center justify-center text-primary-700 ${
         setCustomHeight ? setCustomHeight : "min-h-screen"
       }`}
     >
