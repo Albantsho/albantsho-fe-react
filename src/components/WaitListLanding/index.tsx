@@ -290,7 +290,7 @@ const WaitListLanding = () => {
                   href="https://docs.google.com/forms/u/2/d/e/1FAIpQLSd-p3Eg4h00ok2RlKv778U6yBWirxbLLsGieN5FoRyiSZZ7Vw/viewform?usp=send_form"
                   target="_blank"
                   referrerPolicy="no-referrer"
-                  className="bg-[#573195] text-[17px] font-bold inter text-white py-4 sm:min-w-[170px] px-8 rounded-lg -tracking-[0.41px]  leading-[22px] z-10"
+                  className="bg-[#573195] text-[17px] font-bold inter text-white py-4 sm:min-w-[170px] px-8 rounded-lg -tracking-[0.41px] leading-[22px] z-10"
                 >
                   Apply to Join
                 </Link>
