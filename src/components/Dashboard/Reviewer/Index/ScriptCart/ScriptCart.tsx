@@ -51,9 +51,9 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   let valueForConvertPdf = "";
-  if (resDraft && resDraft.data) {
+  if (resDraft) {
     const htmlContent = new DOMParser().parseFromString(
-      resDraft.data.draft,
+      resDraft.draft,
       "text/html"
     );
     const value = deserializeScriptWithOutDiv(htmlContent.body);
@@ -101,7 +101,7 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
             ? "Type B"
             : ""}
         </Button>
-        {resDraft && resDraft.data ? (
+        {resDraft ? (
           <PDFDownloadLink
             document={
               <PDFFile

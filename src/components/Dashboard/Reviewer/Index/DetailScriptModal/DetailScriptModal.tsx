@@ -47,6 +47,7 @@ const DetailScriptModal = ({
     async function getDraftFunc() {
       try {
         const res = await getOneDraft(reviewerTask._id as string);
+        console.log(res);
         setResDraft(res);
       } catch (error) {
         ("");
@@ -56,9 +57,9 @@ const DetailScriptModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   let valueForConvertPdf = "";
-  if (resDraft && resDraft.data) {
+  if (resDraft) {
     const htmlContent = new DOMParser().parseFromString(
-      resDraft.data.draft,
+      resDraft.draft,
       "text/html"
     );
     const value = deserializeScriptWithOutDiv(htmlContent.body);
@@ -108,7 +109,7 @@ const DetailScriptModal = ({
                 ? "Type B"
                 : ""}
             </Button>
-            {resDraft && resDraft.data ? (
+            {resDraft ? (
               <PDFDownloadLink
                 document={
                   <PDFFile

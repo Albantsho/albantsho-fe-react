@@ -24,10 +24,9 @@ export const withdrawSchema = Yup.object({
   bankAccountNumber: Yup.string()
     .when("method", {
       is: "bank",
-      then: (schema) => schema.required(),
+      then: (schema) => schema.required().matches(/^[0-9]+$/gi, "Please enter current account number"),
       otherwise: (schema) => schema.notRequired(),
     })
-    .matches(/^[0-9]+$/gi, "Please enter current account number")
     .label("Account number"),
   network: Yup.string()
     .when("method", {

@@ -72,6 +72,8 @@ const useTextEditor = ({ width, editor, socket }: IProps) => {
 
   useEffect(() => {
     socket.on("writeScript", (ops) => {
+      console.log(ops);
+
       remote.current = true;
       Editor.withoutNormalizing(editor, () => {
         JSON.parse(ops).forEach((op: BaseOperation) => {
@@ -94,9 +96,9 @@ const useTextEditor = ({ width, editor, socket }: IProps) => {
     setContextMenu(
       contextMenu === null
         ? {
-            mouseX: event.clientX + 2,
-            mouseY: event.clientY - 6,
-          }
+          mouseX: event.clientX + 2,
+          mouseY: event.clientY - 6,
+        }
         : null
     );
   };
@@ -138,9 +140,9 @@ const useTextEditor = ({ width, editor, socket }: IProps) => {
       setContextMenu(
         contextMenu === null
           ? {
-              mouseX: window.innerWidth - width!,
-              mouseY: 400,
-            }
+            mouseX: window.innerWidth - width!,
+            mouseY: 400,
+          }
           : null
       );
     }

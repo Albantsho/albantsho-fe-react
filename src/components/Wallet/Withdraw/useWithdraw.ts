@@ -39,10 +39,17 @@ const useWithdraw = () => {
   const onSubmit = async (data: IWithdrawFormValues) => {
     try {
       setLoading(true);
-      const res = await withdrawWallet(data);
-      replace(
-        routes.withdrawSuccessfulWallet.dynamicUrl(res.data.transaction._id)
-      );
+      if (data.method === "bank") {
+        const res = await withdrawWallet({ amount: data.amount, method: data.method, bankName: data.bankName, bankAccountName: data.bankAccountName, bankAccountNumber: data.bankAccountNumber });
+        replace(
+          routes.withdrawSuccessfulWallet.dynamicUrl(res.data.transaction._id)
+        );
+      } else {
+        const res = await withdrawWallet({ amount: data.amount, method: data.method, network: data.network, usdtTrc20Address: data.usdtTrc20Address });
+        replace(
+          routes.withdrawSuccessfulWallet.dynamicUrl(res.data.transaction._id)
+        );
+      }
     } catch (error) {
       errorHandler(error);
     } finally {

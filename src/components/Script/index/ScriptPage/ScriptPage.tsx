@@ -17,12 +17,14 @@ interface IProps {
   script: IFullInformationScript;
   setHtmlInitialValue: React.Dispatch<React.SetStateAction<string>>;
   htmlInitialValue: string;
+  id: string | string[];
 }
 
 const ScriptPage = ({
   script,
   htmlInitialValue,
   setHtmlInitialValue,
+  id,
 }: IProps) => {
   const { query, replace } = useRouter();
   const { getOneDraft } = useDraftApi();
@@ -34,7 +36,7 @@ const ScriptPage = ({
     () =>
       io(process.env.NEXT_PUBLIC_API_BASE_URL, {
         auth: { accessToken: `Bearer ${accessToken}` },
-        query: { scriptId: query.id as string },
+        query: { scriptId: id as string },
       }),
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,15 +45,23 @@ const ScriptPage = ({
 
   useEffect(() => {
     socket.on("connect", () => {
+      console.log("connected");
+
       ("");
     });
 
     socket.on("roomData", (roomData) => {
+      console.log(
+        "🚀 ~ file: ScriptPage.tsx:57 ~ socket.on ~ roomData:",
+        roomData
+      );
+
       getComments(roomData.comments);
     });
+
     socket.on("getScriptOrder", async () => {
       try {
-        const res = await getOneDraft(query.id as string);
+        const res = await getOneDraft(id as string);
 
         setHtmlInitialValue(res.draft);
       } catch (error) {
@@ -59,7 +69,7 @@ const ScriptPage = ({
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, []);
 
   useEffect(() => {
     socket.on("disconnect", () => {
