@@ -92,7 +92,7 @@ const WaitListLanding = () => {
           </div>
           <h1
             style={{ fontFamily: "Space Grotesk" }}
-            className="text-center  font-bold leading-[45px] sm:leading-[60px] text-[38px] z-10 sm:text-[52px] lg:text-6xl text-white -tracking-[0.64px] mb-10 lg:mb-4"
+            className="text-center font-bold text-[clamp(36px,13vw,60px)]  lading-[45px] sm:leading-[60px] z-10 text-white -tracking-[0.64px] mb-10 lg:mb-4"
           >
             A looong overdue <br className="hidden md:block" />
             revolution in screenwriting
