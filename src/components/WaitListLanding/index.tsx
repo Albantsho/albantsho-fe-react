@@ -75,13 +75,13 @@ const WaitListLanding = () => {
     <>
       <main className="bg-[#181025] overflow-hidden">
         <div className="px-4 max-w-screen-2xl mx-auto py-20 lg:py-10 lg:px-10 xl:px-14 2xl:px-[119px] min-h-screen relative">
-          <div className="w-12 h-12 mx-auto mb-20">
+          <div className="w-12 h-12 mx-auto mb-16">
             <Logo />
           </div>
-          <div className="max-w-[800px] w-full absolute top-[612px] md:top-[340px] lg:top-[270px] text-center mx-auto right-0 -left-24">
+          <div className="max-w-[800px] w-full absolute top-[672px] md:top-[340px] lg:top-[270px] text-center mx-auto right-0 -left-24">
             <Image src={stars} width={800} height={500} alt="stars" />
           </div>
-          <div className="max-w-[800px] z-0 text-center mx-auto w-full right-0 left-0 absolute top-[662px] md:top-[520px] lg:top-[420px]">
+          <div className="max-w-[800px] z-0 text-center mx-auto w-full right-0 left-0 absolute top-[712px] md:top-[520px] lg:top-[420px]">
             <Image
               className="z-0 opacity-80"
               src={radial}
@@ -92,7 +92,7 @@ const WaitListLanding = () => {
           </div>
           <h1
             style={{ fontFamily: "Space Grotesk" }}
-            className="text-center font-bold text-[clamp(36px,13vw,60px)]  lading-[45px] sm:leading-[60px] z-10 text-white -tracking-[0.64px] mb-10 lg:mb-4"
+            className="text-center font-bold text-[clamp(36px,13vw,60px)]   leading-[clamp(45px,15vw,70px)] md:leading-[60px] z-10 text-white -tracking-[0.64px] mb-6 lg:mb-4"
           >
             A looong overdue <br className="hidden md:block" />
             revolution in screenwriting
@@ -101,11 +101,11 @@ const WaitListLanding = () => {
             Write better screenplays and be discovered by top producers to bring
             them to life.
           </p>
-          <div className="max-w-[530px] flex mx-auto gap-2 px-4 mt-14 flex-col sm:flex-row">
-            <div className="flex flex-col flex-1 relative">
+          <div className="max-w-[530px] flex mx-auto gap-[10px] sm:gap-2 px-4 mt-9 flex-col sm:flex-row sm:items-end">
+            <div className="flex flex-col flex-1 gap-2">
               <label
                 htmlFor="wait-list"
-                className="font-medium inter text-[17px] text-white left-0 -top-6 absolute"
+                className="font-medium leading-[22px] inter text-[17px] text-white"
               >
                 Email
               </label>
@@ -146,12 +146,12 @@ const WaitListLanding = () => {
           </div>
           <h3
             style={{ zIndex: 99999999 }}
-            className="text-white text-opacity-100 bg-opacity-100 opacity-100 font- text-[32px] sm:text-4xl lg:text-[40px] mt-36 sm:mt-40 lg:mt-52 inter mb-8 text-center"
+            className="text-white text-opacity-100 bg-opacity-100 opacity-100 font- text-[32px] sm:text-4xl lg:text-[40px] mt-[136px] sm:mt-40 lg:mt-52 inter mb-8 text-center"
           >
             Reach Your Great Story
           </h3>
           <div className="py-7 mx-auto sm:py-8 lg:py-10 text-sm">
-            <span className="bg-white/10 inter font-medium ml-10 xl:ml-0 rounded-full px-4 text-white py-[9px] text-[13px]">
+            <span className="bg-white/10 inter font-medium ml-10 xl:ml-0 rounded-full px-[14px] text-white py-[7px] leading-[28px] text-[13px]">
               Features
             </span>
             <div className="py-3 flex flex-wrap gap-10 sm:gap-14 md:gap-20 2xl:gap-24 justify-center xl:justify-between">
@@ -160,7 +160,7 @@ const WaitListLanding = () => {
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start z-10 flex flex-col items-end md:px-8 lg:px-10 max-w-[320px] w-full"
+                className="min-h-[440px] sm:min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start z-10 flex flex-col items-end md:px-8 lg:px-10 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
@@ -191,7 +191,7 @@ const WaitListLanding = () => {
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start z-10 flex flex-col items-end md:px-8 lg:px-10 max-w-[320px] w-full"
+                className="min-h-[440px] sm:min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start z-10 flex flex-col items-end md:px-8 lg:px-10 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
@@ -222,7 +222,7 @@ const WaitListLanding = () => {
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-9 max-w-[320px] w-full"
+                className="min-h-[440px] sm:min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-9 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
@@ -243,9 +243,9 @@ const WaitListLanding = () => {
                 >
                   Market Place
                 </h6>
-                <p className="text-[#B4BCD0] inter font-medium max-w-[240px] text-center mx-auto text-[15px]">
-                  A market place to sell your story to buying producers who will
-                  take it from script to the big screen
+                <p className="text-[#B4BCD0] inter font-medium max-w-[225px] text-center mx-auto text-[15px]">
+                  A marketplace to sell your story to film producers who will
+                  take it from page to screen
                 </p>
               </div>
             </div>
@@ -258,11 +258,11 @@ const WaitListLanding = () => {
               style={{
                 backgroundImage:
                   "linear-gradient(139.68deg, #FFE08A 16.99%, #FFAF19 100.91%)",
-                boxShadow: "0px 50px 400px 81px rgba(255,175,25,0.2)",
+                boxShadow: "0px 10px 400px 81px rgba(255,175,25,0.2)",
               }}
               className="py-5 mx-auto px-5 sm:px-10 rounded-3xl text-center"
             >
-              <span className="bg-black/20 w-28 inter text-[13px] font-medium rounded-full px-2 mx-auto block text-white py-2">
+              <span className="bg-black/20 w-28 inter text-[13px] font-medium rounded-full px-2 mx-auto block text-white py-1">
                 While You Wait
               </span>
               <h2
@@ -271,18 +271,18 @@ const WaitListLanding = () => {
               >
                 Join our free Workshop
               </h2>
-              <p className="text-center inter text-[#2E2E2E] max-w-[670px] mx-auto font-normal text-xl mb-5 -tracking-[0.2px] lg:mb-8">
+              <p className="text-center inter text-[#2E2E2E] max-w-[670px] mx-auto font-normal text-xl  -tracking-[0.2px] mb-8">
                 Take your story from an idea to screenplay at the{" "}
                 <br className="hidden xl:block" /> iDraft Screenwriting
                 Workshop- an intense 8 weeks learning experience with industry
                 mentors, masterclasses and practical lessons.
               </p>
-              <div className="flex flex-col-reverse sm:flex-row gap-4 lg:gap-8 justify-center pb-14 lg:pb-20">
+              <div className="flex flex-col-reverse sm:flex-row gap-5 lg:gap-8 justify-center pb-14 lg:pb-20">
                 <Link
                   href="https://blog.albantsho.com/idraft-2023-is-here/"
                   target="_blank"
                   referrerPolicy="no-referrer"
-                  className="border-[3px] z-10 border-[#1B1F23] font-bold bg-transparent text-[#1B1F23] text-[17px] grotesque-pro py-4 sm:min-w-[170px] leading-[22px] -tracking-[0.41px] px-8 rounded-lg"
+                  className="border-[3px] z-10 border-[#1B1F23] font-bold bg-transparent text-[#1B1F23] text-[17px] inter py-4 sm:min-w-[170px] leading-[22px] -tracking-[0.41px] px-8 rounded-lg"
                 >
                   Learn More
                 </Link>
@@ -290,22 +290,22 @@ const WaitListLanding = () => {
                   href="https://docs.google.com/forms/u/2/d/e/1FAIpQLSd-p3Eg4h00ok2RlKv778U6yBWirxbLLsGieN5FoRyiSZZ7Vw/viewform?usp=send_form"
                   target="_blank"
                   referrerPolicy="no-referrer"
-                  className="bg-[#573195] text-[17px] font-bold grotesque-pro text-white py-4 sm:min-w-[170px] px-8 rounded-lg -tracking-[0.41px]  leading-[22px] z-10"
+                  className="bg-[#573195] text-[17px] font-bold inter text-white py-4 sm:min-w-[170px] px-8 rounded-lg -tracking-[0.41px]  leading-[22px] z-10"
                 >
                   Apply to Join
                 </Link>
               </div>
             </div>
             <div className="text-center pt-40">
-              <h4 className="text-[#F7F5F8] sm:max-w-full inter font-medium text-2xl">
+              <h4 className="text-[#F7F5F8] tracking-[0.2px] sm:max-w-full inter font-medium text-2xl">
                 Join the revolution.
                 <br className="sm:hidden" /> Join the waitlist
               </h4>
-              <div className="max-w-[530px] px-4 sm:px-3 flex mx-auto gap-2 mt-14 flex-col sm:flex-row">
-                <div className="flex z-10 flex-col flex-1 relative">
+              <div className="max-w-[530px] px-4 sm:px-3 flex mx-auto gap-[10px] sm:gap-2 mt-14 flex-col sm:flex-row sm:items-end">
+                <div className="flex z-10 flex-col flex-1 gap-2">
                   <label
                     htmlFor="wait-list2"
-                    className="font-medium text-[17px] text-white inter left-0 -top-7 absolute"
+                    className="font-medium text-[17px] text-start leading-[22px] text-white inter"
                   >
                     Email
                   </label>
@@ -348,11 +348,11 @@ const WaitListLanding = () => {
               </div>
             </div>
           </div>
-          <footer className="flex flex-col-reverse sm:flex-row gap-10 justify-between items-center lg:mb-6">
+          <footer className="flex flex-col-reverse sm:flex-row gap-10 justify-between  items-center lg:mb-6">
             <div>
               <p className="text-[#F7F5F8] inter">© Albantsho 2023</p>
             </div>
-            <div className="flex gap-4 justify-between flex-1 w-full flex-wrap sm:justify-end sm:gap-6 lg:gap-8">
+            <div className="flex gap-4 justify-between text-center items-center px-3 flex-1 w-full flex-wrap sm:justify-end sm:gap-6 lg:gap-8">
               <Link
                 href="https://www.instagram.com/albantsho/"
                 target="_blank"
@@ -381,7 +381,7 @@ const WaitListLanding = () => {
                 href="https://www.linkedin.com/company/albantsho/"
                 target="_blank"
                 referrerPolicy="no-referrer"
-                className="cursor-pointer z-10 mx-auto sm:mx-0 inter text-[#F7F5F8]"
+                className="cursor-pointer z-10 inter text-[#F7F5F8]"
               >
                 LinkedIn
               </Link>
