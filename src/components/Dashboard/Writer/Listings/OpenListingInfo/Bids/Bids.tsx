@@ -108,7 +108,7 @@ const Bids = ({ setOpenAcceptOffer, bid, script }: IProps) => {
           <div className="lg:pt-6 md:flex ">
             <div className="mb-4 md:mb-0  space-y-6 lg:space-y-8 xl:space-y-10 2xl:space-y-12">
               <Typography variant="h6" className="text-neutral-700 font-normal">
-                <span className="font-semibold text-primary-700">{`${bid.producer[0].firstName} ${bid.producer[0].lastName}`}</span>{" "}
+                <span className="font-semibold text-primary-700">{`${bid.producer.firstName} ${bid.producer.lastName}`}</span>{" "}
                 has placed a bid for your script
               </Typography>
               <Typography

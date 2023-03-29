@@ -34,14 +34,16 @@ const MyScript = ({ script }: IProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   let valueForConvertPdf = "";
-  if (resDraft && resDraft.data) {
+  if (resDraft) {
     const htmlContent = new DOMParser().parseFromString(
-      resDraft.data.draft,
+      resDraft.draft,
       "text/html"
     );
     const value = deserializeScriptWithOutDiv(htmlContent.body);
     valueForConvertPdf = serializeWithoutDiv({ children: value }) as string;
   }
+
+  console.log(valueForConvertPdf);
 
   const seeScript = async () => {
     console.log("see Script");
@@ -101,7 +103,7 @@ const MyScript = ({ script }: IProps) => {
             {script.tagline}
           </Typography>
         </div>
-        {resDraft && !resDraft.data ? (
+        {resDraft ? (
           <PDFDownloadLink
             document={
               <PDFFile
@@ -149,7 +151,7 @@ const MyScript = ({ script }: IProps) => {
         className="hidden sm:flex items-center sm:py-6 xl:py-10 justify-end"
       >
         {" "}
-        {resDraft && resDraft.data ? (
+        {resDraft ? (
           <PDFDownloadLink
             document={
               <PDFFile
