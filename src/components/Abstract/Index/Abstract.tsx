@@ -134,6 +134,7 @@ const Abstract = ({ script, refetch }: IProps) => {
         />
 
         <UploadImage
+          script={script}
           progress={progress}
           step={step}
           handleUploadImageCover={handleUploadImageCover}

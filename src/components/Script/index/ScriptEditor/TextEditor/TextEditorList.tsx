@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import useDraftApi from "apis/Draft.api";
-import useScriptsApi from "apis/Scripts.api";
 import { IResData } from "interfaces/response";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -38,7 +37,6 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   const { ref, width } = useResizeDetector();
   const { query } = useRouter();
   const { saveFileDraft } = useDraftApi();
-  const { updateScript } = useScriptsApi();
   const [render, setRender] = useState(false);
   const [openSettingModal, setOpenSettingModal] = useState(false);
   const [editorSetting, setEditorSetting] = useState<{
@@ -51,14 +49,21 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   const { mutate: saveDraftMutation, isLoading } = useMutation<
     IResData<object>,
     Error,
-    { scriptId: string; payload: { content: string } }
-  >((data) => saveFileDraft(data.scriptId, { content: data.payload.content }), {
-    onSuccess: (data) => {
-      queryClient.invalidateQueries("draft");
-      successHandler(data.message);
-    },
-    onError: (error) => errorHandler(error),
-  });
+    { scriptId: string; payload: { content: string; scriptSnippet: string } }
+  >(
+    (data) =>
+      saveFileDraft(data.scriptId, {
+        content: data.payload.content,
+        scriptSnippet: data.payload.scriptSnippet,
+      }),
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("draft");
+        successHandler(data.message);
+      },
+      onError: (error) => errorHandler(error),
+    }
+  );
 
   setTimeout(() => {
     setRender(true);
@@ -78,14 +83,11 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
     );
     const value = deserializeScriptWithOutDiv(htmlContent.body);
     const valueForConvertPdf = serializeWithoutDiv({ children: value });
-    await updateScript(
-      { scriptPart: valueForConvertPdf?.slice(0, 3500) },
-      query.id as string
-    );
     saveDraftMutation({
       scriptId: query.id as string,
       payload: {
         content: scriptValue,
+        scriptSnippet: valueForConvertPdf?.slice(0, 3500) as string,
       },
     });
   };

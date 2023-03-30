@@ -129,8 +129,7 @@ const ScriptsAuction = ({ bidsList, script, refetch }: IProps) => {
                       variant="h6"
                       className="font-normal text-neutral-700"
                     >
-                      {auction.producer[0].firstName}{" "}
-                      {auction.producer[0].lastName}
+                      {auction.producer.firstName} {auction.producer.lastName}
                     </Typography>
                   </TableCell>
                   <TableCell align="center" className="w-20">

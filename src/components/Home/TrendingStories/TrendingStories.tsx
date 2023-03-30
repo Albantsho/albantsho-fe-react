@@ -34,13 +34,7 @@ const TrendingStories = () => {
           </Typography>
         </div>
       </div> */}
-      <Box
-        className="grid gap-3 md:gap-12"
-        gridTemplateColumns={{
-          sm: "repeat(auto-fill, minmax(280px, auto))",
-          lg: "repeat(auto-fill, minmax(330px, auto))",
-        }}
-      >
+      <Box className="grid gap-3 md:gap-12 sm:grid-cols-2 lg:grid-cols-3">
         {!loadingGetTrendingScripts && trendingScriptsData
           ? trendingScriptsData.scripts
               .slice(0, 6)

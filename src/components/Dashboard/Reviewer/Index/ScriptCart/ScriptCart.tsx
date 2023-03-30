@@ -90,7 +90,7 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
     <Card
       data-aos="fade-left"
       elevation={0}
-      className={` h-fit hidden lg:block shadow-primary pt-7 pb-3 flex-[0.7]  xl:flex-[0.55] max-w-2xl`}
+      className="h-fit hidden lg:block shadow-primary pt-7 pb-3 flex-[0.7]  xl:flex-[0.55] max-w-2xl"
       style={{ opacity: selectedScript ? "100%" : "0" }}
     >
       <CardActions className="px-5 py-0 space-x-3 lg:space-x-6">
@@ -187,8 +187,12 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
           <CustomRating
             name="half-rating"
             readOnly
-            defaultValue={selectedScript?.review[0]?.rate || 0}
-            precision={0.5}
+            value={
+              selectedScript?.review[0]?.rate
+                ? selectedScript?.review[0]?.rate
+                : 0
+            }
+            precision={1}
           />
         </div>
         {selectedScript?.review.length === 0 ? (

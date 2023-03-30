@@ -35,6 +35,7 @@ const ScriptCard = (props: IProps) => {
         boxShadow: "0px 2px 7px rgba(117, 88, 162, 0.15)",
         ...sx,
       }}
+      className="w-full"
       {...cardProps}
     >
       <Link
@@ -44,7 +45,7 @@ const ScriptCard = (props: IProps) => {
       >
         <CardMedia
           component="img"
-          className="object-cover object-left w-full h-[250px] cursor-pointer"
+          className="object-cover w-full object-center h-[250px] cursor-pointer"
           src={
             script.image
               ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`
@@ -54,7 +55,7 @@ const ScriptCard = (props: IProps) => {
         />
       </Link>
 
-      <CardContent className="py-6">
+      <CardContent className="py-6 flex flex-col">
         <div className="flex flex-wrap gap-2">
           <Chip label={script.scriptFormat} sx={{ borderRadius: 1 }} />
         </div>
@@ -85,41 +86,46 @@ const ScriptCard = (props: IProps) => {
             </Icon>
           )}
         </div>
-        <Typography>{script.tagline}</Typography>
-        {!inHome && (
-          <Chip
-            className="rounded mt-6"
-            label={
-              <>
-                <span className="text-neutral-300">Price:</span>
-                <span className="text-primary-main text-lg font-semibold">
-                  ${script.price}
-                </span>
-              </>
-            }
-          />
-        )}
-      </CardContent>
-      <CardActions className="px-4 justify-between pb-6 pt-0 gap-3">
-        {(!user.emailVerified || user.userType === "producer") && !inHome && (
-          <Btn
-            href={routes.marketplaceOneScript.dynamicUrl(script._id)}
-            size="large"
-            className="rounded-md"
-          >
-            Place Bid
-          </Btn>
-        )}
+        <Typography className="flex-1 sm:min-h-[72px] ">
+          {script.tagline}
+        </Typography>
+        <div className="">
+          {!inHome && (
+            <Chip
+              className="rounded mt-6"
+              label={
+                <>
+                  <span className="text-neutral-300">Price:</span>
+                  <span className="text-primary-main text-lg font-semibold">
+                    ${script.price}
+                  </span>
+                </>
+              }
+            />
+          )}
+          <CardActions className="justify-between px-0 pt-6 gap-3">
+            {(!user.emailVerified || user.userType === "producer") &&
+              !inHome && (
+                <Btn
+                  href={routes.marketplaceOneScript.dynamicUrl(script._id)}
+                  size="large"
+                  className="rounded-md"
+                >
+                  Place Bid
+                </Btn>
+              )}
 
-        {matches && (
-          <CustomRating
-            readOnly
-            color="primary"
-            defaultValue={+script.reviewerRate}
-            className="hidden sm:inline-flex"
-          />
-        )}
-      </CardActions>
+            {matches && (
+              <CustomRating
+                readOnly
+                color="primary"
+                defaultValue={+script.reviewerRate}
+                className="hidden sm:inline-flex"
+              />
+            )}
+          </CardActions>
+        </div>
+      </CardContent>
     </Card>
   );
 };

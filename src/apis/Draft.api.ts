@@ -7,6 +7,7 @@ interface IUploadFileDraftPayload {
 }
 interface ISaveDraftPayload {
   content: string;
+  scriptSnippet?: string;
 }
 
 interface ISelectOtherDraftPayload {

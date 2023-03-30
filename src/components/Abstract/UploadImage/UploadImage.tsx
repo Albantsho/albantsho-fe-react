@@ -1,4 +1,5 @@
 import { IconButton, LinearProgress, Typography } from "@mui/material";
+import { IFullInformationScript } from "interfaces/script";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdOutlineDone } from "react-icons/md";
@@ -10,6 +11,7 @@ interface IProps {
   handleUploadImageCover: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cancelUpload: () => void;
   imageCoverError: string;
+  script: IFullInformationScript;
 }
 
 const UploadImage = ({
@@ -18,6 +20,7 @@ const UploadImage = ({
   handleUploadImageCover,
   imageCoverError,
   cancelUpload,
+  script,
 }: IProps) => {
   return (
     <div className={`${step === 7 ? "block" : "hidden"}`}>
@@ -50,7 +53,17 @@ const UploadImage = ({
               onChange={handleUploadImageCover}
             />
             <div className="mx-auto flex justify-center items-center mb-5 md:mb-7">
-              <Image src={uploadImage} alt="upload image" />
+              {script.image ? (
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
+                  alt="upload image"
+                  width={77}
+                  height={61}
+                  unoptimized
+                />
+              ) : (
+                <Image src={uploadImage} alt="upload image" />
+              )}
             </div>
             <Typography
               variant="h6"

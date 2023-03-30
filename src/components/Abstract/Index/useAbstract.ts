@@ -109,7 +109,10 @@ const useAbstract = (script: IScript, refetch: any) => {
             signal: controller.signal,
           }
         )
-        .then((res) => successHandler(res.data.message));
+        .then((res) => {
+          successHandler(res.data.message);
+          refetch();
+        });
     }
   };
 
