@@ -4,15 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useMutation } from "react-query";
-import errorHandler from "utils/error-handler";
-import successHandler from "utils/success-handler";
-import Logo from "./assets/Logo.svg";
-import radial from "./assets/purple-radial.png";
-import starsTwo from "./assets/stars-2.png";
-import easy from "./assets/people-of-brooklyn-sitting-on-floor.png";
-import stars from "./assets/stars.png";
 import community from "./assets/community.png";
+import Logo from "./assets/Logo.svg";
+import easy from "./assets/people-of-brooklyn-sitting-on-floor.png";
+import radial from "./assets/purple-radial.png";
 import market from "./assets/shopaholics-bust.png";
+import starsTwo from "./assets/stars-2.png";
+import stars from "./assets/stars.png";
 import SuccessAddWaitListModal from "./SuccessAddWaitListModal/SuccessAddWaitListModal";
 
 const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
@@ -75,7 +73,7 @@ const WaitListLanding = () => {
     <>
       <main className="bg-[#181025] overflow-hidden">
         <div className="px-4 max-w-screen-2xl mx-auto py-20 lg:py-10 lg:px-10 xl:px-14 2xl:px-[119px] min-h-screen relative">
-          <div className="w-12 h-12 mx-auto mb-16">
+          <div className="w-[46px] h-[50px] mx-auto mb-20 lg:mb-[72px]">
             <Logo />
           </div>
           <div className="max-w-[800px] w-full absolute top-[672px] md:top-[340px] lg:top-[270px] text-center mx-auto right-0 -left-24">
@@ -92,7 +90,7 @@ const WaitListLanding = () => {
           </div>
           <h1
             style={{ fontFamily: "Space Grotesk" }}
-            className="text-center font-bold text-[clamp(36px,13vw,60px)]   leading-[clamp(45px,15vw,70px)] md:leading-[60px] z-10 text-white -tracking-[0.64px] mb-6 lg:mb-4"
+            className="text-center font-bold text-[clamp(36px,13vw,60px)] leading-smallHead sm:leading-largeHead -mt-[12px] z-10 text-white -tracking-[0.64px] mb-6 lg:mb-4"
           >
             A looong overdue <br className="hidden md:block" />
             revolution in screenwriting
@@ -160,7 +158,7 @@ const WaitListLanding = () => {
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[440px] sm:min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start z-10 flex flex-col items-end md:px-8 lg:px-10 max-w-[320px] w-full"
+                className="min-h-[440px] sm:min-h-[450px] rounded-3xl justify-start z-10 flex flex-col items-end p-10 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
@@ -177,7 +175,7 @@ const WaitListLanding = () => {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
-                  className="inter text-2xl my-7 font-medium text-center mx-auto"
+                  className="inter text-2xl leading-8 my-7 font-medium text-center mx-auto"
                 >
                   Easy Use
                 </h6>
@@ -191,7 +189,7 @@ const WaitListLanding = () => {
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[440px] sm:min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start z-10 flex flex-col items-end md:px-8 lg:px-10 max-w-[320px] w-full"
+                className="min-h-[440px] sm:min-h-[450px] rounded-3xl justify-start z-10 flex flex-col items-end p-10 pb-8 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
@@ -208,7 +206,7 @@ const WaitListLanding = () => {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
-                  className="inter text-2xl my-7 font-medium text-center mx-auto"
+                  className="inter text-2xl leading-8 my-7 font-medium text-center mx-auto"
                 >
                   Community
                 </h6>
@@ -222,7 +220,7 @@ const WaitListLanding = () => {
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[440px] sm:min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-9 max-w-[320px] w-full"
+                className="min-h-[440px] sm:min-h-[450px] rounded-3xl justify-start flex flex-col items-end p-10 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
@@ -239,7 +237,7 @@ const WaitListLanding = () => {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
-                  className="inter text-2xl my-7 font-medium text-center mx-auto"
+                  className="inter text-2xl leading-8 my-7 font-medium text-center mx-auto"
                 >
                   Market Place
                 </h6>
@@ -262,7 +260,7 @@ const WaitListLanding = () => {
               }}
               className="py-5 mx-auto px-5 sm:px-10 rounded-3xl text-center"
             >
-              <span className="bg-black/20 w-28 inter text-[13px] font-medium rounded-full px-2 mx-auto block text-white py-1">
+              <span className="bg-black/20 w-28 inter text-[13px] font-medium rounded-full px-2 leading-[28px] mx-auto block text-white">
                 While You Wait
               </span>
               <h2
