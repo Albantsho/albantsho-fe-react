@@ -40,7 +40,6 @@ const DashboardNavOnDesktop = () => {
                 key={collaborator._id}
                 alt={collaborator.firstName}
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${collaborator.image}`}
-                sx={{ bgcolor: "grey.800" }}
               />
             ))}
           </AvatarGroup>

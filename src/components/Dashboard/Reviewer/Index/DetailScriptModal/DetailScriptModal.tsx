@@ -68,6 +68,8 @@ const DetailScriptModal = ({
 
   const seeScript = async () => {
     const res = await getOneDraftAsPdf(reviewerTask._id as string);
+    console.log(res);
+
     const blobUrl = window.URL.createObjectURL(new Blob([res]));
     const aTag = document.createElement("a");
     aTag.href = blobUrl;

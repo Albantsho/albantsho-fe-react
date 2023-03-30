@@ -51,13 +51,13 @@ const CreateComment = ({
       <div className="w-fit relative">
         <SvgIcon
           component={IconComment}
-          className="w-8 h-8 md:w-12 md:h-12"
+          className="w-12 h-12"
           fontSize="large"
           inheritViewBox
         />
         <Avatar
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
-          className="absolute top-2 left-2 md:left-3 w-4 h-4 md:w-8 md:h-8"
+          className="absolute top-2  left-[9px] w-8 h-8"
           alt={user.firstName}
         />
       </div>
