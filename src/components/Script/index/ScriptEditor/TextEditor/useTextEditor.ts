@@ -72,7 +72,6 @@ const useTextEditor = ({ width, editor, socket }: IProps) => {
 
   useEffect(() => {
     socket.on("writeScript", (ops) => {
-      console.log(ops);
 
       remote.current = true;
       Editor.withoutNormalizing(editor, () => {

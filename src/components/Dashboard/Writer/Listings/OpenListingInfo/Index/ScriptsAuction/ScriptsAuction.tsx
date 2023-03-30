@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import useScripBidApi from "apis/ScripBid.api";
-import { IBidForScript } from "interfaces/bid";
+import { IBid, IBidForScript } from "interfaces/bid";
 import { IResData } from "interfaces/response";
 import { IFullInformationScript } from "interfaces/script";
 import dynamic from "next/dynamic";
@@ -30,7 +30,7 @@ const AcceptOfferModal = dynamic(
 );
 
 interface IProps {
-  bidsList: IBidForScript[];
+  bidsList: IBid[];
   script: IFullInformationScript;
   refetch?: any;
 }
@@ -129,7 +129,7 @@ const ScriptsAuction = ({ bidsList, script, refetch }: IProps) => {
                       variant="h6"
                       className="font-normal text-neutral-700"
                     >
-                      {auction.producer.firstName} {auction.producer.lastName}
+                      {`${auction.producer[0].firstName} ${auction.producer[0].lastName}`}
                     </Typography>
                   </TableCell>
                   <TableCell align="center" className="w-20">
@@ -186,7 +186,8 @@ const ScriptsAuction = ({ bidsList, script, refetch }: IProps) => {
                     <AcceptOfferModal
                       refetch={refetch}
                       title={script.title}
-                      auction={auction}
+                      id={auction._id}
+                      amount={auction.amount}
                       openAcceptOffer={openAcceptOffer}
                       setOpenAcceptOffer={setOpenAcceptOffer}
                     />
