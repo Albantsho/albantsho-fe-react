@@ -68,7 +68,7 @@ const ScriptCard = (props: IProps) => {
           />
         )}
 
-        <div className="flex justify-between mt-1 sm:mt-4 mb-2 gap-2">
+        <div className="flex justify-between  mt-1 sm:mt-4 mb-2 gap-2">
           <Link
             href={routes.marketplaceOneScript.dynamicUrl(script._id)}
             passHref
