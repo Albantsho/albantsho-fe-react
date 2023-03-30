@@ -2,10 +2,8 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Chip,
   Icon,
-  Rating,
   Typography,
   useMediaQuery,
   type CardProps,
@@ -13,6 +11,7 @@ import {
 import Btn from "@shared/Btn/Btn";
 import CustomRating from "@shared/CustomRating/CustomRating";
 import { IScript } from "interfaces/script";
+import Image from "next/image";
 import Link from "next/link";
 import routes from "routes/routes";
 import useUserStore from "store/user.store";
@@ -43,8 +42,9 @@ const ScriptCard = (props: IProps) => {
         href={routes.marketplaceOneScript.dynamicUrl(script._id)}
         passHref
       >
-        <CardMedia
-          component="img"
+        <Image
+          width={500}
+          height={250}
           className="object-cover w-full object-center h-[250px] cursor-pointer"
           src={
             script.image
@@ -52,6 +52,7 @@ const ScriptCard = (props: IProps) => {
               : "/assets/images/julie.jpg"
           }
           loading="lazy"
+          alt={script.title}
         />
       </Link>
 
