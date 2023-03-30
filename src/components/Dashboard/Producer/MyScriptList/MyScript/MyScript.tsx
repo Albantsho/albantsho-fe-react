@@ -23,7 +23,6 @@ const MyScript = ({ script }: IProps) => {
     async function getDraftFunc() {
       try {
         const res = await getOneDraft(script._id as string);
-        console.log("🚀 ~ file: MyScript.tsx:26 ~ getDraftFunc ~ res:", res);
 
         setResDraft(res);
       } catch (error) {
@@ -43,13 +42,8 @@ const MyScript = ({ script }: IProps) => {
     valueForConvertPdf = serializeWithoutDiv({ children: value }) as string;
   }
 
-  console.log(valueForConvertPdf);
-
   const seeScript = async () => {
-    console.log("see Script");
-
     const res = await getOneDraftAsPdf(script._id as string);
-    console.log("🚀 ~ file: MyScript.tsx:50 ~ seeScript ~ res:", res);
     const blobUrl = window.URL.createObjectURL(new Blob([res]));
     const aTag = document.createElement("a");
     aTag.href = blobUrl;

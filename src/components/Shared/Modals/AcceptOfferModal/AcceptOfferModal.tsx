@@ -2,7 +2,6 @@ import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useScripBidApi from "apis/ScripBid.api";
-import { IBidForScript } from "interfaces/bid";
 import { IResData } from "interfaces/response";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -17,7 +16,8 @@ interface IProps {
   openAcceptOffer: boolean;
   setOpenAcceptOffer: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
-  auction: IBidForScript;
+  amount: number;
+  id: string;
   refetch?: any;
 }
 
@@ -26,7 +26,8 @@ const queryClient = new QueryClient();
 const AcceptOfferModal = ({
   openAcceptOffer,
   setOpenAcceptOffer,
-  auction,
+  amount,
+  id: bidId,
   title,
   refetch,
 }: IProps) => {
@@ -85,12 +86,12 @@ const AcceptOfferModal = ({
             color="primary.700"
             variant="h4"
           >
-            @${auction.amount}
+            @${amount}
           </Typography>
           <div className="flex w-full justify-center gap-3 sm:gap-6 mt-10 lg:mt-8">
             <Btn
               loading={loadingAcceptBid}
-              onClick={acceptOfferFunc(auction._id)}
+              onClick={acceptOfferFunc(bidId)}
               size="large"
               className="py-3 px-5 text-white self-stretch bg-primary-700 rounded-lg"
             >

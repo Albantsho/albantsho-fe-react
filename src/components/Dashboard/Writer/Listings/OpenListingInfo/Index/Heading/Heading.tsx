@@ -23,13 +23,13 @@ const Heading = ({ script }: IProps) => {
   }, []);
 
   return (
-    <div className="flex flex-col  md:flex-row lg:flex-col xl:flex-row gap-10 lg:gap-6 xl:gap-10">
+    <div className="flex flex-col  md:flex-row lg:flex-col xl:flex-row gap-6 xl:gap-8">
       <div className="self-center w-[0.7] md:w-1/2 lg:w-10/12 xl:w-1/2 2xl:w-2/5 md:self-start lg:self-center xl:self-start">
         <Image
           width={1000}
-          height={1000}
+          height={460}
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
-          className="rounded-xl"
+          className="rounded-xl max-h-[460px] object-cover"
           alt={script.title}
         />
       </div>

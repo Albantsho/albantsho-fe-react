@@ -82,12 +82,17 @@ const ScriptInfoPage = () => {
       <Head>
         <title>Albantsho || {script?.title}</title>
       </Head>
-      <Nav secondaryUnderLineColor={false} links={links} position="static" />
+      <Nav
+        className="bg-white shadow-primary"
+        secondaryUnderLineColor={false}
+        links={links}
+        position="static"
+      />
       {!loading && script ? (
         <>
           <ScriptInfo bid={bid} script={script} />
           <Suspense fallback={null}>
-            <div className="flex flex-col md:flex-row mt-7 mb-4 py-6 gap-10 lg:gap-7 mx-auto px-5 sm:px-10 max-w-screen-2xl">
+            <div className="flex flex-col md:flex-row mb-4 py-6 gap-10 lg:gap-7 mx-auto px-5 sm:px-10 max-w-screen-2xl">
               <MarketScriptChips script={script} />
               <MarketScriptAccordion script={script} />
             </div>

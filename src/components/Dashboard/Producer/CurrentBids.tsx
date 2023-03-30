@@ -44,8 +44,6 @@ const CurrentBids = ({ bidsList, refetch }: IProps) => {
 
   const withdrawOnScript = (bidId: string) => () => deleteBidMutate(bidId);
 
-  console.log(bidsList);
-
   return bidsList.filter((b) => !b.rejected).length > 0 ? (
     <Table className="mt-4 sm:mt-6 bg-white rounded-md shadow-primary py-5 xl:py-8 flex flex-col mb-16">
       <TableHead>

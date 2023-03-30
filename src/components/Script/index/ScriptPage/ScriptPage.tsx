@@ -45,17 +45,10 @@ const ScriptPage = ({
 
   useEffect(() => {
     socket.on("connect", () => {
-      console.log("connected");
-
       ("");
     });
 
     socket.on("roomData", (roomData) => {
-      console.log(
-        "🚀 ~ file: ScriptPage.tsx:57 ~ socket.on ~ roomData:",
-        roomData
-      );
-
       getComments(roomData.comments);
     });
 

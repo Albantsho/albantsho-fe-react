@@ -7,6 +7,15 @@ export interface IBidForScript {
   producer: { firstName: string; lastName: string; image: null | string; };
 }
 
+export interface IBid {
+  _id: string;
+  scriptId: string;
+  amount: number;
+  accepted: boolean;
+  rejected: boolean;
+  producer: { firstName: string; lastName: string; image: null | string; }[];
+}
+
 export interface IProducerBid {
   _id: string;
   amount: number;

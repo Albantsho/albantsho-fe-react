@@ -98,7 +98,8 @@ const BidsPage: NextPageWithLayout = () => {
             <Suspense fallback={null}>
               <AcceptOfferModal
                 title={scriptData.script.title}
-                auction={bidScriptData.scriptBid}
+                id={bidScriptData.scriptBid._id}
+                amount={bidScriptData.scriptBid.amount}
                 openAcceptOffer={openAcceptOffer}
                 setOpenAcceptOffer={setOpenAcceptOffer}
               />

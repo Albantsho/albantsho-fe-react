@@ -12,6 +12,7 @@ import Btn from "@shared/Btn/Btn";
 import PDFFile from "@shared/PdfFile/PdfFile";
 import useDraftApi from "apis/Draft.api";
 import useReviewsApi from "apis/Reviews.api";
+import axios from "axios";
 import { IReviewerTask } from "interfaces/reviews";
 import Link from "next/link";
 import { useRouter } from "next/router";
