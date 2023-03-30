@@ -43,21 +43,7 @@ const useDraftApi = (controller?: AbortController) => {
   const getOneDraftAsPdf = useCallback(
     async (scriptId: string) => {
       const res = await axiosPrivate.get(`/draft/${scriptId}`, {
-        signal: controller?.signal,
-        headers: {
-          "Content-Type": "application/pdf",
-        },
-      });
-
-      return res.data;
-    },
-
-    [axiosPrivate, controller?.signal]
-  );
-
-  const getDraftPdf = useCallback(
-    async (scriptId: string) => {
-      const res = await axiosPrivate.get(`/draft/pdf/${scriptId}`, {
+        responseType: "blob",
         signal: controller?.signal,
         headers: {
           "Content-Type": "application/pdf",
@@ -156,7 +142,6 @@ const useDraftApi = (controller?: AbortController) => {
     getAllDraft,
     getOneDraft,
     getOneDraftAsPdf,
-    getDraftPdf,
     uploadFileDraft,
     selectedDraft,
     uploadCopyright,

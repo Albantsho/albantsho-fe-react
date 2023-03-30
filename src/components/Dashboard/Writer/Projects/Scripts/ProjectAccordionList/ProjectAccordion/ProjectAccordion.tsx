@@ -109,7 +109,9 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
                   style={{ width: "72px", height: "72px" }}
                   width={72}
                   height={72}
-                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
+                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${
+                    script.image
+                  }?${Math.random()}`}
                   alt={script.title}
                 />
               ) : (

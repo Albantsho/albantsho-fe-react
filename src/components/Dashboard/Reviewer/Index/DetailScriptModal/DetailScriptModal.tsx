@@ -47,7 +47,6 @@ const DetailScriptModal = ({
     async function getDraftFunc() {
       try {
         const res = await getOneDraft(reviewerTask._id as string);
-        console.log(res);
         setResDraft(res);
       } catch (error) {
         ("");
@@ -68,7 +67,6 @@ const DetailScriptModal = ({
 
   const seeScript = async () => {
     const res = await getOneDraftAsPdf(reviewerTask._id as string);
-    console.log(res);
 
     const blobUrl = window.URL.createObjectURL(new Blob([res]));
     const aTag = document.createElement("a");

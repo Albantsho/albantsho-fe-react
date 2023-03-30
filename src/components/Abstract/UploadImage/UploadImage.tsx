@@ -55,7 +55,9 @@ const UploadImage = ({
             <div className="mx-auto flex justify-center items-center mb-5 md:mb-7">
               {script.image ? (
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
+                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${
+                    script.image
+                  }?${Math.random()}`}
                   alt="upload image"
                   width={77}
                   height={61}
