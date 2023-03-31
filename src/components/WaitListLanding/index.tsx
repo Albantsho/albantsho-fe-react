@@ -100,7 +100,7 @@ const WaitListLanding = () => {
             them to life.
           </p>
           <div
-            className={`max-w-[530px] flex mx-auto gap-[10px] sm:gap-2 px-4 mt-9 flex-col sm:flex-row sm:items-end`}
+            className={`max-w-[533px] flex mx-auto gap-[10px] px-4 mt-9 flex-col sm:flex-row sm:items-end`}
           >
             <div className="flex flex-col relative flex-1 gap-2">
               <label
