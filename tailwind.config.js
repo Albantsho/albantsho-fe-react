@@ -82,10 +82,14 @@ module.exports = {
         primary: "1px 2px 15px 1px rgba(0, 0, 0, 0.05)",
         secondary: "3px 2px 15px 2px rgba(0, 0, 0, 0.07)",
       },
+      lineHeight: {
+        smallHead: "1.149230769230769",
+        largeHead: "1.030508474576271",
+      },
     },
   },
   plugins: [
-    require('@tailwindcss/typography'),
+    require("@tailwindcss/typography"),
     plugin(function ({ addUtilities }) {
       addUtilities({
         ".no-scrollbar::-webkit-scrollbar": {

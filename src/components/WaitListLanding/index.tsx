@@ -4,15 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useMutation } from "react-query";
-import errorHandler from "utils/error-handler";
-import successHandler from "utils/success-handler";
-import Logo from "./assets/Logo.svg";
-import radial from "./assets/purple-radial.png";
-import starsTwo from "./assets/stars-2.png";
-import easy from "./assets/people-of-brooklyn-sitting-on-floor.png";
-import stars from "./assets/stars.png";
 import community from "./assets/community.png";
+import Logo from "./assets/Logo.svg";
+import easy from "./assets/people-of-brooklyn-sitting-on-floor.png";
+import radial from "./assets/purple-radial.png";
 import market from "./assets/shopaholics-bust.png";
+import starsTwo from "./assets/stars-2.png";
+import stars from "./assets/stars.png";
 import SuccessAddWaitListModal from "./SuccessAddWaitListModal/SuccessAddWaitListModal";
 
 const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
@@ -75,7 +73,7 @@ const WaitListLanding = () => {
     <>
       <main className="bg-[#181025] overflow-hidden">
         <div className="px-4 max-w-screen-2xl mx-auto py-20 lg:py-10 lg:px-10 xl:px-14 2xl:px-[119px] min-h-screen relative">
-          <div className="w-12 h-12 mx-auto mb-16">
+          <div className="w-[46px] h-[50px] mx-auto mb-20 lg:mb-[72px]">
             <Logo />
           </div>
           <div className="max-w-[800px] w-full absolute top-[672px] md:top-[340px] lg:top-[270px] text-center mx-auto right-0 -left-24">
@@ -92,7 +90,7 @@ const WaitListLanding = () => {
           </div>
           <h1
             style={{ fontFamily: "Space Grotesk" }}
-            className="text-center font-bold text-[clamp(36px,13vw,60px)]   leading-[clamp(45px,15vw,70px)] md:leading-[60px] z-10 text-white -tracking-[0.64px] mb-6 lg:mb-4"
+            className="text-center font-bold text-[clamp(36px,13vw,60px)] leading-smallHead sm:leading-largeHead -mt-[12px] z-10 text-white -tracking-[0.64px] mb-6 lg:mb-4"
           >
             A looong overdue <br className="hidden md:block" />
             revolution in screenwriting
@@ -101,8 +99,10 @@ const WaitListLanding = () => {
             Write better screenplays and be discovered by top producers to bring
             them to life.
           </p>
-          <div className="max-w-[530px] flex mx-auto gap-[10px] sm:gap-2 px-4 mt-9 flex-col sm:flex-row sm:items-end">
-            <div className="flex flex-col flex-1 gap-2">
+          <div
+            className={`max-w-[530px] flex mx-auto gap-[10px] sm:gap-2 px-4 mt-9 flex-col sm:flex-row sm:items-end`}
+          >
+            <div className="flex flex-col relative flex-1 gap-2">
               <label
                 htmlFor="wait-list"
                 className="font-medium leading-[22px] inter text-[17px] text-white"
@@ -113,18 +113,18 @@ const WaitListLanding = () => {
                 placeholder="Enter your email"
                 onChange={handleChangeValueEmail}
                 value={email}
-                className="rounded-lg z-10 h-12 max-w-xs w-full px-2 border-none outline-none placeholder:font-normal placeholder:text-[#B7B7B7] placeholder:inter inter min-w-full block sm:min-w-[300px] md:min-w-[330px]"
+                className="rounded-lg z-10 h-12 max-w-xs w-full px-2 border-none outline-none placeholder:font-normal placeholder:text-[#B7B7B7] placeholder:inter inter min-w-full block sm:min-w-[330px]"
                 id="wait-list"
               />
               {error &&
                 error.message === "Request failed with status code 409" && (
-                  <span className="mr-auto mt-2 text-[13px] text-success-300">
+                  <span className="mr-auto sm:mt-2 text-[13px] sm:absolute sm:-bottom-6 text-success-300">
                     You’re already on the waitlist!
                   </span>
                 )}
               {error &&
                 error.message === "Request failed with status code 400" && (
-                  <span className="mr-auto mt-2 text-[13px] text-[#D32D2D]">
+                  <span className="mr-auto sm:mt-2 text-[13px] sm:absolute sm:-bottom-6 text-[#D32D2D]">
                     {!email ? (
                       "The field cannot be empty. Please input your email."
                     ) : (
@@ -160,7 +160,7 @@ const WaitListLanding = () => {
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[440px] sm:min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start z-10 flex flex-col items-end md:px-8 lg:px-10 max-w-[320px] w-full"
+                className="min-h-[440px] sm:min-h-[450px] rounded-3xl justify-start z-10 flex flex-col items-end p-10 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
@@ -177,7 +177,7 @@ const WaitListLanding = () => {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
-                  className="inter text-2xl my-7 font-medium text-center mx-auto"
+                  className="inter text-2xl leading-8 my-7 font-medium text-center mx-auto"
                 >
                   Easy Use
                 </h6>
@@ -191,7 +191,7 @@ const WaitListLanding = () => {
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[440px] sm:min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start z-10 flex flex-col items-end md:px-8 lg:px-10 max-w-[320px] w-full"
+                className="min-h-[440px] sm:min-h-[450px] rounded-3xl justify-start z-10 flex flex-col items-end p-10 pb-8 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
@@ -208,7 +208,7 @@ const WaitListLanding = () => {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
-                  className="inter text-2xl my-7 font-medium text-center mx-auto"
+                  className="inter text-2xl leading-8 my-7 font-medium text-center mx-auto"
                 >
                   Community
                 </h6>
@@ -222,7 +222,7 @@ const WaitListLanding = () => {
                   backgroundImage:
                     "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
                 }}
-                className="min-h-[440px] sm:min-h-[450px] p-5 rounded-3xl pt-8 sm:pt-10 lg:pt-12 justify-start flex flex-col items-end md:px-8 lg:px-9 max-w-[320px] w-full"
+                className="min-h-[440px] sm:min-h-[450px] rounded-3xl justify-start flex flex-col items-end p-10 max-w-[320px] w-full"
               >
                 <Image
                   loading="eager"
@@ -239,7 +239,7 @@ const WaitListLanding = () => {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
-                  className="inter text-2xl my-7 font-medium text-center mx-auto"
+                  className="inter text-2xl leading-8 my-7 font-medium text-center mx-auto"
                 >
                   Market Place
                 </h6>
@@ -262,7 +262,7 @@ const WaitListLanding = () => {
               }}
               className="py-5 mx-auto px-5 sm:px-10 rounded-3xl text-center"
             >
-              <span className="bg-black/20 w-28 inter text-[13px] font-medium rounded-full px-2 mx-auto block text-white py-1">
+              <span className="bg-black/20 w-28 inter text-[13px] font-medium rounded-full px-2 leading-[28px] mx-auto block text-white">
                 While You Wait
               </span>
               <h2
@@ -302,7 +302,7 @@ const WaitListLanding = () => {
                 <br className="sm:hidden" /> Join the waitlist
               </h4>
               <div className="max-w-[530px] px-4 sm:px-3 flex mx-auto gap-[10px] sm:gap-2 mt-14 flex-col sm:flex-row sm:items-end">
-                <div className="flex z-10 flex-col flex-1 gap-2">
+                <div className="flex z-10 relative flex-col flex-1 gap-2">
                   <label
                     htmlFor="wait-list2"
                     className="font-medium text-[17px] text-start leading-[22px] text-white inter"
@@ -313,20 +313,20 @@ const WaitListLanding = () => {
                     placeholder="Enter your email"
                     onChange={handleChangeValueEmail2}
                     value={email2}
-                    className="rounded-lg h-12 placeholder:font-normal placeholder:text-[#B7B7B7] placeholder:inter inter max-w-xs w-full px-2 border-none outline-none min-w-full block sm:min-w-[300px] md:min-w-[330px]"
+                    className="rounded-lg h-12 placeholder:font-normal placeholder:text-[#B7B7B7] placeholder:inter inter max-w-xs w-full px-2 border-none outline-none min-w-full block sm:min-w-[330px]"
                     id="wait-list2"
                   />
                   {error2 &&
                     error2.message ===
                       "Request failed with status code 409" && (
-                      <span className="mr-auto mt-2 text-[13px] text-success-300">
+                      <span className="mr-auto sm:absolute sm:-bottom-6 sm:mt-2 text-[13px] text-success-300">
                         You’re already on the waitlist!
                       </span>
                     )}
                   {error2 &&
                     error2.message ===
                       "Request failed with status code 400" && (
-                      <span className="mr-auto text-start mt-2 text-[13px] text-[#D32D2D]">
+                      <span className="mr-auto sm:absolute sm:-bottom-6 text-start sm:mt-2 text-[13px] text-[#D32D2D]">
                         {!email2 ? (
                           "The field cannot be empty. Please input your email."
                         ) : (
