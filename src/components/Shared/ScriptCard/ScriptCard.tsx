@@ -2,6 +2,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  CardMedia,
   Chip,
   Icon,
   Typography,
@@ -42,9 +43,8 @@ const ScriptCard = (props: IProps) => {
         href={routes.marketplaceOneScript.dynamicUrl(script._id)}
         passHref
       >
-        <Image
-          width={500}
-          height={250}
+        <CardMedia
+          component="img"
           className="object-cover w-full object-center h-[250px] cursor-pointer"
           src={
             script.image
