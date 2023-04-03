@@ -4,6 +4,7 @@ import { IBidInMarketplace } from "interfaces/bid";
 import { ICollaboratorList } from "interfaces/collaborator";
 import { IResData } from "interfaces/response";
 import {
+  IAllScriptCollaboratorOn,
   IBidScript,
   IClosedScript,
   IFullInformationScript,
@@ -47,7 +48,7 @@ interface IUpdateScriptPayload {
   inspiration?: string;
   motivation?: string;
   progress?: number;
-  scriptPart?: string;
+  scriptSnippet?: string;
   totalPages?: number;
 }
 
@@ -388,6 +389,19 @@ const useScriptsApi = (controller?: AbortController) => {
     [axiosPrivate, controller?.signal]
   );
 
+  const getAllCollaboratorScripts = useCallback(
+    async () => {
+      const res = await axiosPrivate.get<IResData<{ scripts: Array<IAllScriptCollaboratorOn>; }>>(
+        "/script/collaborators/all",
+        {
+          signal: controller?.signal,
+        }
+      );
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
   return {
     createNewScript,
     getWriterAllScripts,
@@ -409,6 +423,7 @@ const useScriptsApi = (controller?: AbortController) => {
     getCoverPageInformation,
     updatePublishedScript,
     updateScript,
+    getAllCollaboratorScripts
   };
 };
 

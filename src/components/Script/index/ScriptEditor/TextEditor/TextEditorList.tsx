@@ -76,6 +76,20 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
     }
   }, []);
 
+  useEffect(() => {
+    const handleTabClose = async (event: BeforeUnloadEvent) => {
+      console.log("before save");
+      await saveDraftFile();
+      console.log("after save");
+    };
+
+    window.addEventListener("beforeunload", handleTabClose);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleTabClose);
+    };
+  }, []);
+
   const saveDraftFile = async () => {
     const htmlContent = new DOMParser().parseFromString(
       scriptValue,

@@ -52,7 +52,7 @@ const ScriptMainDetails = ({ script }: IProps) => {
             >
               Written by {script.writtenBy}
             </Typography>
-            {script.scriptPart && parse(script.scriptPart)}
+            {script.scriptSnippet && parse(script.scriptSnippet)}
           </article>
         </AccordionDetails>
       </Accordion>

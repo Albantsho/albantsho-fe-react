@@ -24,6 +24,7 @@ const Invites = () => {
     isLoadingInvites,
     loadingAcceptInvite,
     loadingRejectInvite,
+    collaboratorsData,
   } = useInvites();
 
   return (
@@ -43,9 +44,10 @@ const Invites = () => {
             xs: "repeat(auto-fill, minmax(250px, auto))",
           }}
         >
-          {invitesData && !isLoadingInvites
-            ? invitesData.invites
-                .filter((invite) => !invite.rejected)
+          {invitesData && collaboratorsData && !isLoadingInvites ? (
+            <>
+              {invitesData.invites
+                .filter((invite) => !invite.rejected && !invite.accepted)
                 .map((invite) => (
                   <div
                     key={invite._id}
@@ -104,43 +106,86 @@ const Invites = () => {
                       )}
                     </div>
                   </div>
-                ))
-            : Array.from(new Array(3)).map((_, index) => (
-                <Card
-                  key={index}
-                  className="py-8 rounded-3xl shadow-primary shadow-secondary-300"
-                  sx={{
-                    boxShadow: "0px 2px 7px rgba(117, 88, 162, 0.15)",
-                    maxWidth: 280,
-                  }}
+                ))}
+              {collaboratorsData.scripts.map((script) => (
+                <div
+                  key={script._id}
+                  className="flex flex-col gap-6 border-4 border-t-secondary-700 border-l-secondary-700 border-r-primary-700 border-b-primary-700 rounded-3xl justify-between items-center px-6 py-8  max-w-[280px] shadow-primary shadow-secondary-300"
                 >
-                  <Skeleton
-                    sx={{ height: 128, width: 128 }}
-                    animation="pulse"
-                    variant="circular"
-                    className="mx-auto mb-6"
-                  />
-                  <Skeleton
-                    className="mx-5"
-                    animation="pulse"
-                    height={20}
-                    style={{ marginBottom: 2, marginTop: 6 }}
-                  />
-                  <Skeleton
-                    className="mx-5"
-                    animation="pulse"
-                    height={20}
-                    style={{ marginBottom: 6, marginTop: 2 }}
-                  />
-                  <Skeleton
-                    className="mx-auto mb-auto mt-16 rounded-sm"
-                    variant="rectangular"
-                    animation="pulse"
-                    height={40}
-                    width={130}
-                  />
-                </Card>
+                  <div className="w-32 h-32 bg-secondary-50 flex justify-center items-center mx-auto rounded-full">
+                    <div className="w-20 h-20">
+                      <Image
+                        src={nftLogo}
+                        className="rotate-90"
+                        alt="nft Logo"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <Typography
+                      variant="body1"
+                      className="text-primary-700 text-center font-medium"
+                    >
+                      you've been invited by
+                      {` ${script.author.firstName} ${script.author.lastName}.`}{" "}
+                      collaborate on {script.title}.
+                    </Typography>
+                  </div>
+                  <div className="space-x-2">
+                    <Link
+                      passHref
+                      legacyBehavior
+                      href={routes.script.dynamicUrl(script._id)}
+                    >
+                      <Button
+                        variant="outlined"
+                        className="py-3 px-4 font-semibold"
+                      >
+                        go to script Page
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
               ))}
+            </>
+          ) : (
+            Array.from(new Array(3)).map((_, index) => (
+              <Card
+                key={index}
+                className="py-8 rounded-3xl shadow-primary shadow-secondary-300"
+                sx={{
+                  boxShadow: "0px 2px 7px rgba(117, 88, 162, 0.15)",
+                  maxWidth: 280,
+                }}
+              >
+                <Skeleton
+                  sx={{ height: 128, width: 128 }}
+                  animation="pulse"
+                  variant="circular"
+                  className="mx-auto mb-6"
+                />
+                <Skeleton
+                  className="mx-5"
+                  animation="pulse"
+                  height={20}
+                  style={{ marginBottom: 2, marginTop: 6 }}
+                />
+                <Skeleton
+                  className="mx-5"
+                  animation="pulse"
+                  height={20}
+                  style={{ marginBottom: 6, marginTop: 2 }}
+                />
+                <Skeleton
+                  className="mx-auto mb-auto mt-16 rounded-sm"
+                  variant="rectangular"
+                  animation="pulse"
+                  height={40}
+                  width={130}
+                />
+              </Card>
+            ))
+          )}
         </Box>
       </div>
     </>

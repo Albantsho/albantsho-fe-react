@@ -35,6 +35,7 @@ const NotificationComponent = () => {
     loadingAcceptInvite,
     loadingRejectInvite,
     rejectInviteFunc,
+    collaboratorsData,
   } = useNotificationComponent();
   const xlScreen = useMediaQuery("(min-width: 1024px)");
 
@@ -83,6 +84,7 @@ const NotificationComponent = () => {
           {notificationsData &&
           !isLoadingNotifications &&
           invitesData &&
+          collaboratorsData &&
           !isLoadingInvites ? (
             notificationsData.notifications.length +
               invitesData.invites.filter((n) => !n.rejected).length >
@@ -193,6 +195,41 @@ const NotificationComponent = () => {
                       </div>
                     </ListItem>
                   ))}
+
+                {collaboratorsData.scripts.map((script) => (
+                  <ListItem
+                    className="gap-1 items-start flex-col relative"
+                    divider
+                    key={script._id}
+                  >
+                    <ListItemText
+                      primary={
+                        <Typography
+                          component="h6"
+                          variant="body1"
+                          className="futura text-primary-700 font-semibold"
+                        >
+                          Collaboration Invite
+                        </Typography>
+                      }
+                      secondary={`Hello, you've been invited by ${script.author.firstName} ${script.author.lastName} to collaborate on ${script.title}.`}
+                      secondaryTypographyProps={{
+                        className: "futura max-w-[250px]",
+                      }}
+                    />
+                    <div className="flex gap-1 justify-between">
+                      <Link
+                        passHref
+                        legacyBehavior
+                        href={routes.script.dynamicUrl(script._id)}
+                      >
+                        <Button variant="outlined" color="success">
+                          go to script Page
+                        </Button>
+                      </Link>
+                    </div>
+                  </ListItem>
+                ))}
               </>
             ) : (
               <div className="flex min-h-full items-center justify-center py-6 pt-24 px-10">

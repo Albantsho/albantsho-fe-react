@@ -121,6 +121,7 @@ const Abstract = ({ script, refetch }: IProps) => {
           setActiveButton={setActiveButton}
           register={register}
           errors={errors}
+          script={script}
         />
 
         <UploadScriptFiles

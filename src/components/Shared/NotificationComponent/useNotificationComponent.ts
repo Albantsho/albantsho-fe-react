@@ -1,5 +1,6 @@
 import useInvite, { IData_getInvites } from "apis/Invite.api";
 import useNotification, { IData_getNotifications } from "apis/Notification.api";
+import useScriptsApi from "apis/Scripts.api";
 import { IResData } from "interfaces/response";
 import { useState } from "react";
 import { QueryClient, useMutation, useQuery } from "react-query";
@@ -11,6 +12,7 @@ const queryClient = new QueryClient();
 const useNotificationComponent = () => {
   const { getAllNotifications, seenNotification, deleteNotification } =
     useNotification();
+  const { getAllCollaboratorScripts } = useScriptsApi();
   const { allInvite, acceptInvite, rejectInvite } = useInvite();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
@@ -28,6 +30,11 @@ const useNotificationComponent = () => {
     isLoading: isLoadingInvites,
     refetch: refetchInvites,
   } = useQuery<IData_getInvites, Error>("invite", () => allInvite());
+
+  const {
+    data: collaboratorsData,
+    refetch: refetchCollaboratorsData,
+  } = useQuery("collaborators on", () => getAllCollaboratorScripts());
 
   const { mutate: seenNotificationMutate, isLoading: loadingSeenNotification } =
     useMutation<IResData<object>, Error, string>(
@@ -75,6 +82,7 @@ const useNotificationComponent = () => {
             "collaborator",
           ]);
           refetchInvites();
+          refetchCollaboratorsData();
           successHandler(data.message);
         },
       }
@@ -94,6 +102,7 @@ const useNotificationComponent = () => {
             "collaborator",
           ]);
           refetchInvites();
+          refetchCollaboratorsData();
           successHandler(data.message);
         },
       }
@@ -134,6 +143,7 @@ const useNotificationComponent = () => {
     rejectInviteFunc,
     loadingAcceptInvite,
     loadingRejectInvite,
+    collaboratorsData
   };
 };
 

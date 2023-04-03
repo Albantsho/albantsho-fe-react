@@ -50,6 +50,7 @@ const useTextEditor = ({ width, editor, socket }: IProps) => {
   }));
   const remote = useRef(false);
   const socketChange = useRef(false);
+
   const createCommentFunc = () => {
     setAddComment({
       key: Date.now(),
