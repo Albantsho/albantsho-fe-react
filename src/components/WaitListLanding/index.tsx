@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import community from "./assets/community.png";
 import Logo from "./assets/Logo.svg";
+import Arrow from "./assets/Arrows.svg";
+import Chair from "./assets/Chair.svg";
 import easy from "./assets/people-of-brooklyn-sitting-on-floor.png";
 import radial from "./assets/purple-radial.png";
 import market from "./assets/shopaholics-bust.png";
@@ -72,7 +74,36 @@ const WaitListLanding = () => {
   return (
     <>
       <main className="bg-[#181025] overflow-hidden">
-        <div className="px-4 max-w-screen-2xl mx-auto py-20 lg:py-10 lg:px-10 xl:px-14 2xl:px-[119px] min-h-screen relative">
+        <section
+          style={{
+            background:
+              "linear-gradient(139.68deg, #FFE08A 16.99%, #FFAF19 100.91%)",
+          }}
+          className="h-[122px] items-end sm:max-h-[64px] md:h-full flex justify-center md:items-center"
+        >
+          <div className="max-w-[calc(100%-2rem)] sm:max-w-[690px] py-4 lg:py-[22px] w-full mx-auto flex sm:justify-between justify-center px-3 sm:px-7 items-center">
+            <div className="flex sm:gap-[10px] items-center gap-[6px] md:gap-[18px]">
+              <div className="h-[18px] min-w-[16px] w-4">
+                <Chair />
+              </div>
+              <p className="text-[clamp(8px,12vw,16px)] inter max-w-[240px] sm:max-w-full text-[#1B1F23] font-normal leading-5">
+                Apply to join our free 8 weeks screenwriting workshop.
+              </p>
+            </div>
+            <Link
+              href="https://docs.google.com/forms/u/2/d/e/1FAIpQLSd-p3Eg4h00ok2RlKv778U6yBWirxbLLsGieN5FoRyiSZZ7Vw/viewform?usp=send_form"
+              target="_blank"
+              referrerPolicy="no-referrer"
+              className="inter min-w-[114.1px] border border-[#CFCFCF] rounded-[4px] flex gap-1 bg-white font-medium text-sm py-2 px-[10px] leading-4 text-black"
+            >
+              Apply Now
+              <span className="inline-block w-4 h-4">
+                <Arrow />
+              </span>
+            </Link>
+          </div>
+        </section>
+        <div className="px-4 max-w-screen-2xl mx-auto pt-12 lg:pt-10 pb-20 lg:pb-10 lg:px-10 xl:px-14 2xl:px-[119px] min-h-screen relative">
           <div className="w-[46px] h-[50px] mx-auto mb-20 lg:mb-[72px]">
             <Logo />
           </div>
