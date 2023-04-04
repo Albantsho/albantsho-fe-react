@@ -120,16 +120,6 @@ const useTextEditor = ({ width, editor, socket }: IProps) => {
     const value = serializeWithDiv(node);
     if (value !== undefined) {
       setScriptValue(value);
-      socket.on("saveScriptOrder", async () => {
-        try {
-          await saveFileDraft(query.id as string, {
-            content: value,
-          });
-          socket.emit("scriptSaved");
-        } catch (error) {
-          errorHandler(error);
-        }
-      });
     }
   };
 

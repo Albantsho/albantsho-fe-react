@@ -78,6 +78,7 @@ const useScriptDocument = ({ socket }: IProps) => {
     if (collaboratorsData) {
       queryClient.invalidateQueries("collaborator");
     }
+    refetch();
   };
 
   useEffect(() => {

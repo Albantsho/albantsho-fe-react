@@ -36,6 +36,7 @@ const NotificationComponent = () => {
     loadingRejectInvite,
     rejectInviteFunc,
     collaboratorsData,
+    user,
   } = useNotificationComponent();
   const xlScreen = useMediaQuery("(min-width: 1024px)");
 
@@ -84,10 +85,9 @@ const NotificationComponent = () => {
           {notificationsData &&
           !isLoadingNotifications &&
           invitesData &&
-          collaboratorsData &&
           !isLoadingInvites ? (
             notificationsData.notifications.length +
-              invitesData.invites.filter((n) => !n.rejected).length >
+              invitesData.invites.filter((i) => !i.rejected).length >
             0 ? (
               <>
                 {notificationsData.notifications.map((notification) => (
@@ -139,6 +139,7 @@ const NotificationComponent = () => {
                 ))}
                 {invitesData.invites
                   .filter((i) => !i.rejected)
+                  .filter((i) => !i.accepted)
                   .map((invite) => (
                     <ListItem
                       className="gap-1 items-start flex-col relative"
@@ -196,7 +197,7 @@ const NotificationComponent = () => {
                     </ListItem>
                   ))}
 
-                {collaboratorsData.scripts.map((script) => (
+                {collaboratorsData?.scripts.map((script) => (
                   <ListItem
                     className="gap-1 items-start flex-col relative"
                     divider
@@ -240,18 +241,26 @@ const NotificationComponent = () => {
             <ClipLoader color="grey" className="mt-[180px] inline-block" />
           )}
         </List>
-        {!isLoadingInvites && invitesData ? (
-          invitesData.invites.filter((n) => !n.rejected).length > 0 && (
-            <Link passHref legacyBehavior href={routes.invites.url}>
-              <Button variant="text" className="text-center w-full py-4">
-                See your Invites :
-                {invitesData.invites.filter((n) => !n.rejected).length}
-              </Button>
-            </Link>
-          )
-        ) : (
-          <ClipLoader color="grey" className=" w-14 inline-block mx-auto" />
-        )}
+        {user.userType === "writer" &&
+        !isLoadingInvites &&
+        invitesData &&
+        collaboratorsData
+          ? invitesData.invites
+              .filter((i) => !i.rejected)
+              .filter((i) => !i.accepted).length +
+              collaboratorsData.scripts.length >
+              0 && (
+              <Link passHref legacyBehavior href={routes.invites.url}>
+                <Button variant="text" className="text-center w-full py-4">
+                  See your Invites :
+                  {invitesData.invites
+                    .filter((i) => !i.rejected)
+                    .filter((i) => !i.accepted).length +
+                    collaboratorsData.scripts.length}
+                </Button>
+              </Link>
+            )
+          : ""}
       </Popover>
     </>
   );

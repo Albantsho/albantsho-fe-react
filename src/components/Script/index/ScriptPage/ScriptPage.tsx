@@ -47,15 +47,21 @@ const ScriptPage = ({
     socket.on("connect", () => {
       ("");
     });
-
     socket.on("roomData", (roomData) => {
       getComments(roomData.comments);
+    });
+    socket.on("saveScriptOrder", async () => {
+      try {
+        document.getElementById("save-script-button")?.click();
+        socket.emit("scriptSaved");
+      } catch (error) {
+        errorHandler(error);
+      }
     });
 
     socket.on("getScriptOrder", async () => {
       try {
         const res = await getOneDraft(id as string);
-
         setHtmlInitialValue(res.draft);
       } catch (error) {
         errorHandler(error);

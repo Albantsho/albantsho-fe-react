@@ -1,9 +1,9 @@
 import * as Yup from "yup";
 
 export const depositSchema = Yup.object({
-  amount: Yup.string()
+  amount: Yup.number().typeError("Please enter current amount for deposit.")
     .required()
-    .min(1)
-    .matches(/^[0-9]+$/gi, "Please enter current amount")
+    .min(50, "Min is $50 per deposit.")
+    .max(1000, "Max is $1000 per deposit.")
     .label("Amount"),
 });

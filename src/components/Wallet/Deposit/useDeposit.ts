@@ -5,7 +5,7 @@ import errorHandler from "utils/error-handler";
 import { depositSchema } from "./validation/deposit.validation";
 
 interface IDepositFormValues {
-  amount: string;
+  amount: number;
 }
 
 const useDeposit = () => {
@@ -21,6 +21,8 @@ const useDeposit = () => {
   });
 
   const onSubmit = (data: IDepositFormValues) => {
+    console.log(data);
+
     try {
       setAmount(+data.amount);
     } catch (error) {

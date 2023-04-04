@@ -392,7 +392,7 @@ const useScriptsApi = (controller?: AbortController) => {
   const getAllCollaboratorScripts = useCallback(
     async () => {
       const res = await axiosPrivate.get<IResData<{ scripts: Array<IAllScriptCollaboratorOn>; }>>(
-        "/script/collaborators/all",
+        "/script/collaborate/all",
         {
           signal: controller?.signal,
         }

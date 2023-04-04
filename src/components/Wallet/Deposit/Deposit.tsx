@@ -37,6 +37,7 @@ const Deposit = () => {
           error={Boolean(errors.amount) || false}
           {...register("amount")}
           fullWidth
+          type="number"
           sx={{
             "& .MuiOutlinedInput-input": { py: 2 },
             maxWidth: "628px",

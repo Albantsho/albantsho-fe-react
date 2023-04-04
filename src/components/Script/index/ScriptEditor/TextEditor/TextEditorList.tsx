@@ -12,6 +12,7 @@ import { IResData } from "interfaces/response";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { AiOutlineSetting } from "react-icons/ai";
 import { RiFileUserLine, RiSave3Fill } from "react-icons/ri";
 import { QueryClient, useMutation } from "react-query";
@@ -77,10 +78,8 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   }, []);
 
   useEffect(() => {
-    const handleTabClose = async (event: BeforeUnloadEvent) => {
-      console.log("before save");
-      await saveDraftFile();
-      console.log("after save");
+    const handleTabClose = async (_event: BeforeUnloadEvent) => {
+      document.getElementById("save-script-button")?.click();
     };
 
     window.addEventListener("beforeunload", handleTabClose);
@@ -97,13 +96,18 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
     );
     const value = deserializeScriptWithOutDiv(htmlContent.body);
     const valueForConvertPdf = serializeWithoutDiv({ children: value });
-    saveDraftMutation({
-      scriptId: query.id as string,
-      payload: {
-        content: scriptValue,
-        scriptSnippet: valueForConvertPdf?.slice(0, 3500) as string,
-      },
-    });
+
+    if (scriptValue) {
+      saveDraftMutation({
+        scriptId: query.id as string,
+        payload: {
+          content: scriptValue,
+          scriptSnippet: valueForConvertPdf?.slice(0, 3500) as string,
+        },
+      });
+    } else {
+      ("");
+    }
   };
 
   const openSettingModalFunc = () => setOpenSettingModal(true);
@@ -174,6 +178,7 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
               <IconButton
                 onClick={saveDraftFile}
                 disabled={isLoading}
+                id="save-script-button"
                 disableRipple
                 className="bg-white text-primary-700 rounded-none w-12 h-12"
               >

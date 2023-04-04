@@ -47,7 +47,8 @@ const Invites = () => {
           {invitesData && collaboratorsData && !isLoadingInvites ? (
             <>
               {invitesData.invites
-                .filter((invite) => !invite.rejected && !invite.accepted)
+                .filter((invite) => !invite.rejected)
+                .filter((invite) => !invite.accepted)
                 .map((invite) => (
                   <div
                     key={invite._id}

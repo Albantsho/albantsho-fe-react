@@ -4,6 +4,7 @@ import useScriptsApi from "apis/Scripts.api";
 import { IResData } from "interfaces/response";
 import { useState } from "react";
 import { QueryClient, useMutation, useQuery } from "react-query";
+import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
 
@@ -16,6 +17,7 @@ const useNotificationComponent = () => {
   const { allInvite, acceptInvite, rejectInvite } = useInvite();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
+  const user = useUserStore((state => state.user));
 
   const {
     data: notificationsData,
@@ -34,7 +36,9 @@ const useNotificationComponent = () => {
   const {
     data: collaboratorsData,
     refetch: refetchCollaboratorsData,
-  } = useQuery("collaborators on", () => getAllCollaboratorScripts());
+  } = useQuery("collaborators on", () => getAllCollaboratorScripts(), {
+    enabled: user.userType === "writer"
+  });
 
   const { mutate: seenNotificationMutate, isLoading: loadingSeenNotification } =
     useMutation<IResData<object>, Error, string>(
@@ -143,7 +147,8 @@ const useNotificationComponent = () => {
     rejectInviteFunc,
     loadingAcceptInvite,
     loadingRejectInvite,
-    collaboratorsData
+    collaboratorsData,
+    user
   };
 };
 
