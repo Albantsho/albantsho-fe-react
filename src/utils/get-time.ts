@@ -4,7 +4,7 @@ export const timeSince = (date: number) => {
   let interval = seconds / 31536000;
 
   if (interval > 1) {
-    return Math.floor(interval) + "year ago";
+    return Math.floor(interval) + " year ago";
   }
   interval = seconds / 2592000;
   if (interval > 1) {
@@ -12,7 +12,7 @@ export const timeSince = (date: number) => {
   }
   interval = seconds / 86400;
   if (interval > 1) {
-    return Math.floor(interval) + "day ago";
+    return Math.floor(interval) + " day ago";
   }
   interval = seconds / 3600;
   if (interval > 1) {
@@ -20,7 +20,7 @@ export const timeSince = (date: number) => {
   }
   interval = seconds / 60;
   if (interval > 1) {
-    return Math.floor(interval) + "minute ago";
+    return Math.floor(interval) + " minute ago";
   }
-  return Math.floor(seconds > 0 ? seconds : 1) + "second ago";
+  return Math.floor(seconds > 0 ? seconds : 1) + " second ago";
 };

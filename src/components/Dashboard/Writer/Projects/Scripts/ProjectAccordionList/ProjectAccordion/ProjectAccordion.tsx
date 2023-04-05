@@ -111,7 +111,7 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
           <div className="flex flex-col  sm:flex-row flex-1    gap-x-4 gap-y-3 sm:gap-y-0 xl:pr-20">
             <div className="flex justify-center w-[72px] h-[72px] items-center self-start  bg-tinted-100/60 rounded-md overflow-hidden">
               {script.image ? (
-                <img
+                <Image
                   style={{ width: "72px", height: "72px" }}
                   width={72}
                   height={72}

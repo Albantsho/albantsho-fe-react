@@ -63,12 +63,12 @@ const CommentComponent = ({ comment, comments, socket }: IProps) => {
           <Typography
             variant="h6"
             color="primary.main"
-            className="font-normal futura leading-normal"
+            className="font-normal futura leading-none"
           >
             {`${comment.user?.firstName} ${comment.user?.lastName}`}
           </Typography>
 
-          <Typography variant="body2" className="text-gray-400">
+          <Typography variant="body2" className="text-gray-400 leading-none">
             {time}
           </Typography>
         </div>
