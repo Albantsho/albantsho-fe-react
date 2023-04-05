@@ -81,12 +81,12 @@ const WaitListLanding = () => {
           }}
           className="h-[122px] items-end sm:max-h-[64px] md:h-full flex justify-center md:items-center"
         >
-          <div className="max-[400px]:max-w-[calc(100%-4px)] max-w-[calc(100%-24px)] sm:max-w-[690px] py-4 lg:py-[22px] w-full mx-auto flex sm:justify-between max-[407px]:gap-1 gap-[9px] flex-row justify-center px-3 sm:px-7 items-center">
-            <div className="flex items-center max-[400px]:gap-[6px] gap-[10px] md:gap-[18px]">
+          <div className="max-w-[calc(100%-6vw)] sm:max-w-[690px] py-4 lg:py-[22px] w-full mx-auto flex sm:justify-between gap-[9px] flex-row justify-center px-3 sm:px-7 items-center">
+            <div className="flex items-center gap-[10px] md:gap-[18px]">
               <div className="h-[18px] min-w-[16px] w-4">
                 <Chair />
               </div>
-              <p className="text-[clamp(8px,12vw,14px)] max-w-[240px] sm:max-w-full text-[#1B1F23] font-normal leading-5">
+              <p className="text-[clamp(8px,12vw,14px)] text-[#1B1F23] font-normal leading-5">
                 Apply to join our free 8 weeks screenwriting workshop.
               </p>
             </div>
