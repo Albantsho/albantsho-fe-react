@@ -8,6 +8,7 @@ const nextConfig = {
       "flagcdn.com",
       "server.albantsho.com",
       "localhost",
+      "fastly.picsum.photos",
     ],
   },
   webpack(config) {
