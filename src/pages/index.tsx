@@ -49,7 +49,7 @@ const Home: NextPage = () => {
           <WhyAlbantsho />
           <Monitors />
           <Testimonials />
-          <FAQs />
+          {/* <FAQs /> */}
           <TrendingStories />
         </Suspense>
       </main>

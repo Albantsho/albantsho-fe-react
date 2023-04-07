@@ -25,7 +25,7 @@ const Nav = ({ links, secondaryUnderLineColor, ...props }: IProps) => {
       {...props}
     >
       <Toolbar
-        className="py-4 px-5 sm:px-10 max-w-screen-2xl w-full mx-auto justify-between"
+        className="py-4 px-5 sm:px-10 max-w-screen-xl w-full mx-auto justify-between"
         component="nav"
       >
         <Logo className="mr-12 text-primary-700" />

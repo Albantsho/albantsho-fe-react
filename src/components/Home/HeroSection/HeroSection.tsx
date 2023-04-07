@@ -37,7 +37,7 @@ const HeroSection = () => {
 
   return (
     <Box
-      className="bg-cover bg-left"
+      className="bg-cover bg-left lg:pt-[72px]"
       component="section"
       id="hero-section"
       sx={{
@@ -47,7 +47,7 @@ const HeroSection = () => {
         },
       }}
     >
-      <div className="grid max-w-screen-2xl mx-auto w-full px-5 sm:px-10">
+      <div className="grid max-w-screen-xl mx-auto w-full px-5 sm:px-10">
         <div className="flex items-center max-w-screen-xl w-full justify-between gap-20">
           <animated.div style={titleAnim} className="text-white max-w-[450px]">
             <Typography
@@ -89,108 +89,111 @@ const HeroSection = () => {
               </Link>
             )}
           </animated.div>
-          {lgScreen &&
-            (!loadingGetTrendingScripts && trendingScriptsData ? (
-              trendingScriptsData.scripts[0] ? (
-                <AnimatedScriptCard
-                  key={trendingScriptsData.scripts[0]._id}
-                  className="w-full"
-                  style={cardAnim}
-                  sx={{
-                    maxWidth: 395,
-                    boxShadow: "0px 35px 60px 0px #0000004D",
-                  }}
-                  script={trendingScriptsData.scripts[0]}
-                  inHome
-                />
+          {lgScreen && (
+            <div className="xl:mr-20 self-center">
+              {!loadingGetTrendingScripts && trendingScriptsData ? (
+                trendingScriptsData.scripts[0] ? (
+                  <AnimatedScriptCard
+                    key={trendingScriptsData.scripts[0]._id}
+                    className="w-full"
+                    style={cardAnim}
+                    sx={{
+                      maxWidth: 395,
+                      boxShadow: "0px 35px 60px 0px #0000004D",
+                    }}
+                    script={trendingScriptsData.scripts[0]}
+                    inHome
+                  />
+                ) : (
+                  <AnimatedScriptCard
+                    key="5"
+                    className="w-full"
+                    style={cardAnim}
+                    sx={{
+                      maxWidth: 395,
+                      boxShadow: "0px 35px 60px 0px #0000004D",
+                    }}
+                    script={{
+                      _id: "5",
+                      scriptFormat: "Feature film",
+                      basedOn: "basedOn",
+                      draftDate: "draftDate",
+                      names: "Albantsho",
+                      reviewed: true,
+                      reviewerRate: 5,
+                      price: 10000,
+                      tagline:
+                        "One platform set out to enable better stories one script at a time",
+                      writtenBy: "Albantsho",
+                      title: "Black Onion",
+                    }}
+                    inHome
+                  />
+                )
               ) : (
-                <AnimatedScriptCard
-                  key="5"
-                  className="w-full"
-                  style={cardAnim}
-                  sx={{
-                    maxWidth: 395,
-                    boxShadow: "0px 35px 60px 0px #0000004D",
-                  }}
-                  script={{
-                    _id: "5",
-                    scriptFormat: "Feature film",
-                    basedOn: "basedOn",
-                    draftDate: "draftDate",
-                    names: "Albantsho",
-                    reviewed: true,
-                    reviewerRate: 5,
-                    price: 10000,
-                    tagline:
-                      "One platform set out to enable better stories one script at a time",
-                    writtenBy: "Albantsho",
-                    title: "Black Onion",
-                  }}
-                  inHome
-                />
-              )
-            ) : (
-              <Card
-                className="rounded-lg w-96"
-                sx={{ boxShadow: " 0px 2px 7px rgba(117, 88, 162, 0.15)" }}
-              >
-                <Skeleton
-                  sx={{ height: 240 }}
-                  animation="wave"
-                  variant="rectangular"
-                />
-                <div className="flex justify-between items-center">
+                <Card
+                  className="rounded-lg w-96"
+                  sx={{ boxShadow: " 0px 2px 7px rgba(117, 88, 162, 0.15)" }}
+                >
+                  <Skeleton
+                    sx={{ height: 240 }}
+                    animation="wave"
+                    variant="rectangular"
+                  />
+                  <div className="flex justify-between items-center">
+                    <Skeleton
+                      className="mx-5"
+                      animation="wave"
+                      height={40}
+                      width="20%"
+                      style={{ marginBottom: 3, marginTop: 3 }}
+                    />
+                    <Skeleton
+                      className="mx-5"
+                      variant="circular"
+                      width={20}
+                      height={20}
+                      style={{ marginBottom: 3, marginTop: 3 }}
+                    />
+                  </div>
                   <Skeleton
                     className="mx-5"
                     animation="wave"
-                    height={40}
-                    width="20%"
+                    height={10}
+                    width="50%"
                     style={{ marginBottom: 3, marginTop: 3 }}
                   />
-                  <Skeleton
-                    className="mx-5"
-                    variant="circular"
-                    width={20}
-                    height={20}
-                    style={{ marginBottom: 3, marginTop: 3 }}
-                  />
-                </div>
-                <Skeleton
-                  className="mx-5"
-                  animation="wave"
-                  height={10}
-                  width="50%"
-                  style={{ marginBottom: 3, marginTop: 3 }}
-                />
-                <Skeleton className="mx-5" animation="wave" height={5} />
-                <Skeleton className="mx-5" animation="wave" height={5} />
-                <Skeleton className="mx-5" animation="wave" height={5} />
-                <Skeleton className="mx-5 mb-3" animation="wave" height={5} />
-                <Skeleton
-                  className="mx-5"
-                  animation="wave"
-                  height={30}
-                  width="30%"
-                  style={{ marginBottom: 3, marginTop: 3 }}
-                />
-                <div className="flex justify-between">
+                  <Skeleton className="mx-5" animation="wave" height={5} />
+                  <Skeleton className="mx-5" animation="wave" height={5} />
+                  <Skeleton className="mx-5" animation="wave" height={5} />
+                  <Skeleton className="mx-5 mb-3" animation="wave" height={5} />
                   <Skeleton
                     className="mx-5"
                     animation="wave"
                     height={30}
-                    width="20%"
+                    width="30%"
                     style={{ marginBottom: 3, marginTop: 3 }}
                   />
-                  <Skeleton
-                    className="mx-5"
-                    animation="wave"
-                    height={30}
-                    width="20%"
-                    style={{ marginBottom: 3, marginTop: 3 }}
-                  />
-                </div>
-              </Card>
-            ))}
+                  <div className="flex justify-between">
+                    <Skeleton
+                      className="mx-5"
+                      animation="wave"
+                      height={30}
+                      width="20%"
+                      style={{ marginBottom: 3, marginTop: 3 }}
+                    />
+                    <Skeleton
+                      className="mx-5"
+                      animation="wave"
+                      height={30}
+                      width="20%"
+                      style={{ marginBottom: 3, marginTop: 3 }}
+                    />
+                  </div>
+                </Card>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </Box>

@@ -45,11 +45,11 @@ const ScriptCard = (props: IProps) => {
       >
         <Image
           width={500}
-          height={250}
-          className="object-cover w-full object-center h-[250px] cursor-pointer"
+          height={300}
+          className="object-cover w-full object-center h-[300px] cursor-pointer"
           src={
             script.image
-              ? `https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U`
+              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`
               : "/assets/images/julie.jpg"
           }
           loading="lazy"

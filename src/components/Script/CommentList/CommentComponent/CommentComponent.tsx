@@ -9,6 +9,7 @@ import {
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { bgArray } from "assets/colors/color-list";
 import { IComment } from "interfaces/comment";
+import Link from "next/link";
 import React, { useMemo } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { Socket } from "socket.io-client";
@@ -29,6 +30,15 @@ const CommentComponent = ({ comment, comments, socket }: IProps) => {
   return (
     <Accordion sx={{ "&:before": { display: "none" } }} className="shadow-none">
       <AccordionSummary
+        onClick={() => {
+          document
+            .getElementById(comment._id)
+            ?.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+              inline: "center",
+            });
+        }}
         sx={{
           "&.MuiAccordionSummary-root": {
             marginBottom: "-8px",
@@ -67,7 +77,6 @@ const CommentComponent = ({ comment, comments, socket }: IProps) => {
           >
             {`${comment.user?.firstName} ${comment.user?.lastName}`}
           </Typography>
-
           <Typography variant="body2" className="text-gray-400 leading-none">
             {time}
           </Typography>

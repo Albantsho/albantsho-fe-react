@@ -9,6 +9,7 @@ interface IProps {
 const AllCommentsLogo = ({ comment }: IProps) => {
   return (
     <div
+      id={comment._id}
       style={{
         top: `${comment.positionY}px`,
         left: `${comment.positionX}px`,

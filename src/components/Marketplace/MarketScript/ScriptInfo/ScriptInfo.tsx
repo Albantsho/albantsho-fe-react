@@ -33,7 +33,7 @@ const ScriptInfo = ({ script, bid }: IProps) => {
   }, []);
 
   return (
-    <div className="flex flex-col px-6 pt-6 sm:px-11 lg:pt-16 gap-10 md:flex-row max-w-screen-2xl mx-auto">
+    <div className="flex flex-col px-6 pt-6 sm:px-10 lg:pt-16 gap-10 md:flex-row max-w-screen-xl mx-auto">
       <div className="md:w-1/2 lg:w-2/5 max-h-[530px] flex-shrink-0">
         <Image
           width={1000}
