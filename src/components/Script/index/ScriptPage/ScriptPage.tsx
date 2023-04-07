@@ -12,6 +12,7 @@ import React, { useEffect, useMemo } from "react";
 import { io } from "socket.io-client";
 import errorHandler from "utils/error-handler";
 import ScriptEditor from "../ScriptEditor/ScriptEditor";
+import { QueryClient } from "react-query";
 
 interface IProps {
   script: IFullInformationScript;
@@ -19,6 +20,8 @@ interface IProps {
   htmlInitialValue: string;
   id: string | string[];
 }
+
+const queryClient = new QueryClient();
 
 const ScriptPage = ({
   script,
@@ -70,6 +73,7 @@ const ScriptPage = ({
     });
     socket.on("newComment", (comment) => {
       addNewComment(comment);
+      queryClient.invalidateQueries("notification");
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

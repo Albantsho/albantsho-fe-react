@@ -1,6 +1,7 @@
 import { IconButton, LinearProgress, Typography } from "@mui/material";
 import { IFullInformationScript } from "interfaces/script";
 import Image from "next/image";
+import type { DropzoneState } from "react-dropzone";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdOutlineDone } from "react-icons/md";
 import uploadImage from "./assets/upload-image.png";
@@ -8,19 +9,17 @@ import uploadImage from "./assets/upload-image.png";
 interface IProps {
   step: number;
   progress: number;
-  handleUploadImageCover: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cancelUpload: () => void;
-  imageCoverError: string;
   script: IFullInformationScript;
+  dropZoneUploadImage: DropzoneState;
 }
 
 const UploadImage = ({
   step,
   progress,
-  handleUploadImageCover,
-  imageCoverError,
   cancelUpload,
   script,
+  dropZoneUploadImage,
 }: IProps) => {
   return (
     <div className={`${step === 7 ? "block" : "hidden"}`}>
@@ -37,20 +36,25 @@ const UploadImage = ({
       </Typography>
 
       <div className="md:px-10 md:py-16 space-y-5 md:shadow-md rounded-lg">
-        <div className="max-w-[528px] mx-auto rounded-md border-2 border-dashed mb-5 overflow-hidden border-primary-300 flex justify-center items-center">
+        <div
+          {...dropZoneUploadImage.getRootProps({
+            className: "dropzone",
+          })}
+          className={`${
+            dropZoneUploadImage.isDragActive && "bg-gray-100"
+          } max-w-[528px] mx-auto rounded-md border-2 border-dashed mb-5 overflow-hidden border-primary-300 flex justify-center items-center`}
+        >
           <div className="relative py-14 px-4 w-full flex justify-center items-center flex-col">
-            <label
-              className="absolute cursor-pointer inset-0"
-              htmlFor="add-image"
-            ></label>
+            <label className="absolute cursor-pointer inset-0"></label>
             <input
+              {...dropZoneUploadImage.getInputProps()}
               name="image"
               accept="image/*"
               max={1}
               type="file"
               id="add-image"
               hidden
-              onChange={handleUploadImageCover}
+              // onChange={handleUploadImageCover}
             />
             <div className="mx-auto flex justify-center items-center mb-5 md:mb-7">
               {script.image ? (
@@ -88,9 +92,6 @@ const UploadImage = ({
             </Typography>
           </div>
         </div>
-        {imageCoverError.length > 0 && (
-          <span className="text-error-700 ">{imageCoverError}</span>
-        )}
         {progress < 100 ? (
           <div className="max-w-[528px] relative py-6 mx-auto rounded-md border-2 border-dashed mb-5 px-8 overflow-hidden border-tinted-300  bg-tinted-50/50">
             <div className="mb-2 pr-5">

@@ -29,26 +29,6 @@ export const abstractSchema = (publish: boolean, activeButton: number) => {
       inspiration: Yup.string().required().label("Inspiration"),
       motivation: Yup.string().required().label("Motivation"),
       draft: activeButton === 0 ? Yup.string().label("Draft") : Yup.string(),
-      // scriptFile:
-      //   activeButton === 1
-      //     ? Yup.mixed().test(
-      //         "required",
-      //         "Script file is a required field",
-      //         (value) => {
-      //           return value && value.length;
-      //         }
-      //       )
-      //     : Yup.mixed(),
-      // scriptCopyright:
-      //   activeButton === 1
-      //     ? Yup.mixed().test(
-      //         "required",
-      //         "Script copyright is a required field",
-      //         (value) => {
-      //           return value && value.length;
-      //         }
-      //       )
-      //     : Yup.mixed(),
     });
   } else {
     return Yup.object({

@@ -80,6 +80,7 @@ const CommentComponent = ({ comment, comments, socket }: IProps) => {
           </Typography>
         </div>
         <SvgIcon
+          color="primary"
           className="ml-auto"
           fontSize="small"
           component={TickIcon}

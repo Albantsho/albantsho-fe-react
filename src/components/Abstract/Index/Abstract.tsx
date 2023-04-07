@@ -47,8 +47,6 @@ const Abstract = ({ script, refetch }: IProps) => {
     getValues,
     progress,
     publish,
-    handleUploadImageCover,
-    imageCoverError,
     cancelUpload,
     adaptionPermissionError,
     cancelUploadAdaption,
@@ -56,6 +54,9 @@ const Abstract = ({ script, refetch }: IProps) => {
     progressAdaption,
     dropZoneUploadPdfScript,
     dropZoneUploadPdfCopyright,
+    progressCopyright,
+    progressScript,
+    dropZoneUploadImage,
   } = useAbstract(script, refetch);
 
   return (
@@ -130,17 +131,16 @@ const Abstract = ({ script, refetch }: IProps) => {
           step={step}
           activeButton={activeButton}
           setActiveButton={setActiveButton}
-          register={register}
-          errors={errors}
+          progressCopyright={progressCopyright}
+          progressScript={progressScript}
         />
 
         <UploadImage
           script={script}
           progress={progress}
           step={step}
-          handleUploadImageCover={handleUploadImageCover}
-          imageCoverError={imageCoverError}
           cancelUpload={cancelUpload}
+          dropZoneUploadImage={dropZoneUploadImage}
         />
         <StepsButtons
           loadingPublishButton={loadingPublishButton}

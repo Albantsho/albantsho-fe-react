@@ -1,4 +1,4 @@
-import { ButtonGroup, Typography } from "@mui/material";
+import { ButtonGroup, LinearProgress, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import { IAbstractFormValues } from "interfaces/abstract";
 import Image from "next/image";
@@ -9,21 +9,21 @@ import UploadFile from "./assets/Upload-file.png";
 interface IProps {
   activeButton: number;
   setActiveButton: React.Dispatch<React.SetStateAction<number>>;
-  register: UseFormRegister<IAbstractFormValues>;
-  errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
   step: number;
   dropZoneUploadPdfScript: DropzoneState;
   dropZoneUploadPdfCopyright: DropzoneState;
+  progressCopyright: number;
+  progressScript: number;
 }
 
 const UploadScriptFiles = ({
   activeButton,
   setActiveButton,
   step,
-  register,
-  errors,
   dropZoneUploadPdfScript,
   dropZoneUploadPdfCopyright,
+  progressCopyright,
+  progressScript,
 }: IProps) => {
   return (
     <div className={`${step === 6 && activeButton === 1 ? "block" : "hidden"}`}>
@@ -82,7 +82,6 @@ const UploadScriptFiles = ({
           >
             <input
               {...dropZoneUploadPdfScript.getInputProps()}
-              {...register("scriptFile")}
               accept=".pdf"
               max={1}
               type="file"
@@ -101,18 +100,25 @@ const UploadScriptFiles = ({
             </Typography>
             <Typography
               variant="body1"
-              className="text-neutral-700 text-center"
+              className="text-neutral-700 mb-8 text-center"
             >
               Drop your file here, or
               <label className="text-primary-700 underline ml-1 cursor-pointer">
                 browse
               </label>
             </Typography>
+            <LinearProgress
+              className="w-full"
+              sx={{
+                "&.MuiLinearProgress-root": {
+                  borderRadius: "8px",
+                },
+              }}
+              value={progressScript}
+              variant="determinate"
+            />
           </div>
         </div>
-        {errors.scriptFile && (
-          <span className="text-error-700 ">{errors.scriptFile?.message}</span>
-        )}
         <div
           className={`${
             dropZoneUploadPdfCopyright.isDragActive && "bg-gray-100"
@@ -126,7 +132,6 @@ const UploadScriptFiles = ({
           >
             <input
               {...dropZoneUploadPdfCopyright.getInputProps()}
-              {...register("scriptCopyright")}
               accept=".pdf"
               max={1}
               type="file"
@@ -146,20 +151,25 @@ const UploadScriptFiles = ({
             </Typography>
             <Typography
               variant="body1"
-              className="text-neutral-700 text-center"
+              className="text-neutral-700 mb-8 text-center"
             >
               Drop your file here, or
               <label className="text-primary-700 underline ml-1 cursor-pointer">
                 browse
               </label>
             </Typography>
+            <LinearProgress
+              className="w-full"
+              sx={{
+                "&.MuiLinearProgress-root": {
+                  borderRadius: "8px",
+                },
+              }}
+              value={progressCopyright}
+              variant="determinate"
+            />
           </div>
         </div>
-        {errors.scriptCopyright && (
-          <span className="text-error-700 ">
-            {errors.scriptCopyright?.message}
-          </span>
-        )}
       </div>
     </div>
   );
