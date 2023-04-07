@@ -13,10 +13,15 @@ const CommentList = ({ socket }: IProps) => {
   const { comments } = useCommentStore((state) => ({
     comments: state.comments,
   }));
+
   return (
     <>
       {comments
         .filter((comment) => !comment.parentId)
+        .sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
         .map((comment) => (
           <React.Fragment key={comment._id}>
             <CommentComponent

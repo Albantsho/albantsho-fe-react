@@ -45,7 +45,7 @@ const CreateComment = ({
         left: `${positionX < 370 && positionX}px`,
         right: `${positionX > 370 && elementWidth - positionX}px`,
         position: "absolute",
-        zIndex: 9,
+        zIndex: 10,
       }}
     >
       <div className="w-fit relative">

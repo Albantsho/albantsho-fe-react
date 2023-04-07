@@ -68,7 +68,7 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
 
   setTimeout(() => {
     setRender(true);
-  }, 5000);
+  }, 2000);
 
   useEffect(() => {
     const setting = JSON.parse(localStorage.getItem("EditorSetting") as string);
@@ -125,10 +125,7 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
     <>
       <div ref={ref} className="relative text-start">
         {render ? (
-          <ButtonGroup
-            className="absolute flex-row ml-auto  w-min xl:flex-col 
-      -top-[10px] left-0 xl:-right-16 xl:top-10"
-          >
+          <ButtonGroup className="absolute flex-row ml-auto w-min xl:flex-col -top-[10px] left-0 xl:-right-16 xl:top-10">
             <Tooltip
               classes={{
                 tooltip: "bg-black",

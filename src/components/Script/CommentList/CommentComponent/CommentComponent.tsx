@@ -25,19 +25,17 @@ interface IProps {
 }
 
 const CommentComponent = ({ comment, comments, socket }: IProps) => {
-  const time = timeSince(new Date(comment.updatedAt).getTime());
+  const time = timeSince(new Date(comment.createdAt).getTime());
 
   return (
     <Accordion sx={{ "&:before": { display: "none" } }} className="shadow-none">
       <AccordionSummary
         onClick={() => {
-          document
-            .getElementById(comment._id)
-            ?.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-              inline: "center",
-            });
+          document.getElementById(comment._id)?.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "center",
+          });
         }}
         sx={{
           "&.MuiAccordionSummary-root": {

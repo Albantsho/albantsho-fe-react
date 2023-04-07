@@ -26,10 +26,11 @@ const ScriptPage = ({
   setHtmlInitialValue,
   id,
 }: IProps) => {
-  const { query, replace } = useRouter();
+  const { query, replace, beforePopState, events, locale, route } = useRouter();
   const { getOneDraft } = useDraftApi();
-  const { getComments } = useCommentStore((state) => ({
+  const { getComments, addNewComment } = useCommentStore((state) => ({
     getComments: state.getComments,
+    addNewComment: state.addNewComment,
   }));
   const accessToken = useUserStore((state) => state.accessToken);
   const socket = useMemo(
@@ -67,6 +68,9 @@ const ScriptPage = ({
         errorHandler(error);
       }
     });
+    socket.on("newComment", (comment) => {
+      addNewComment(comment);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -74,7 +78,6 @@ const ScriptPage = ({
     socket.on("disconnect", () => {
       !socket.connected && replace("/");
     });
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 

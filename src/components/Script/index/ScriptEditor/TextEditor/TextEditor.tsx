@@ -58,6 +58,7 @@ const TextEditor = ({
     mouse,
     cancelComment,
     addComment,
+    elementInform,
   } = useTextEditor({
     width,
     editor,
@@ -75,7 +76,7 @@ const TextEditor = ({
       {addComment?.showComponent && (
         <CreateComment
           key={addComment.key}
-          elementWidth={mouse.elementWidth!}
+          elementWidth={elementInform.elementWidth}
           positionX={addComment.positionX}
           positionY={addComment.positionY}
           socket={socket}
@@ -96,7 +97,6 @@ const TextEditor = ({
           translate="yes"
           className="isolation-auto -z-0 break-words"
           spellCheck
-          autoFocus
           renderElement={(props) => (
             <EditorElement editorSetting={editorSetting} {...props} />
           )}

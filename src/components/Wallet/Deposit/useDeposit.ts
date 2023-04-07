@@ -21,7 +21,6 @@ const useDeposit = () => {
   });
 
   const onSubmit = (data: IDepositFormValues) => {
-    console.log(data);
 
     try {
       setAmount(+data.amount);
