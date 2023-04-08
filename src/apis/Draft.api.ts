@@ -28,7 +28,7 @@ const useDraftApi = (controller?: AbortController) => {
   const getOneDraft = useCallback(
     async (scriptId: string) => {
       const res = await axiosPrivate.get<IResData<IData_getDraft>>(
-        `/draft/${scriptId}`,
+        `/draft/file/${scriptId}`,
         {
           signal: controller?.signal,
         }
@@ -42,7 +42,7 @@ const useDraftApi = (controller?: AbortController) => {
 
   const getOneDraftAsPdf = useCallback(
     async (scriptId: string) => {
-      const res = await axiosPrivate.get(`/draft/${scriptId}`, {
+      const res = await axiosPrivate.get(`/draft/file/${scriptId}`, {
         responseType: "blob",
         signal: controller?.signal,
         headers: {
