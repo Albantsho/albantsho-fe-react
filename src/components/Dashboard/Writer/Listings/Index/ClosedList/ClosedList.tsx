@@ -79,6 +79,7 @@ const ClosedList = ({ searchQuery }: IProps) => {
                     loading="lazy"
                     src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
                     alt={script.title}
+                    unoptimized
                   />
                   <div className="flex flex-col gap-2">
                     <Chip

@@ -31,6 +31,7 @@ const Heading = ({ script }: IProps) => {
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
           className="rounded-xl max-h-[460px] object-cover"
           alt={script.title}
+          unoptimized
         />
       </div>
       <div className="flex-shrink lg:flex-grow-0  mx-auto md:mx-0 lg:mx-auto xl:mx-0">

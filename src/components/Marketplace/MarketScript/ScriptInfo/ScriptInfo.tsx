@@ -41,6 +41,7 @@ const ScriptInfo = ({ script, bid }: IProps) => {
           className="rounded-xl w-full max-h-[530px] object-cover"
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
           alt={script.title}
+          unoptimized
         />
       </div>
       <div className="flex-shrink w-full">

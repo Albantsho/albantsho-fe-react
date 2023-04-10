@@ -98,6 +98,7 @@ const CurrentBids = ({ bidsList, refetch }: IProps) => {
                     loading="lazy"
                     src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${bid.script.image}`}
                     alt={bid.script.title}
+                    unoptimized
                   />
                   <Chip
                     className="bg-success-50 font-xs font-semibold sm:hidden text-success-500"

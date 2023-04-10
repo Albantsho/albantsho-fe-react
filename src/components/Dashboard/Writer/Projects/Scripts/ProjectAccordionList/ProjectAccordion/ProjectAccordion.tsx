@@ -115,8 +115,9 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
                   style={{ width: "72px", height: "72px" }}
                   width={72}
                   height={72}
-                  src={`https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U`}
+                  src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
                   alt={script.title}
+                  unoptimized
                 />
               ) : (
                 <SvgIcon

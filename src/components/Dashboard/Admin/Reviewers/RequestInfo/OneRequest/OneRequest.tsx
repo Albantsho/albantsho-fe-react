@@ -92,6 +92,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
             className="rounded-lg"
             alt={script.title}
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
+            unoptimized
           />
         ) : (
           <div className="flex justify-center w-[64px] h-[64px] items-center self-start  bg-tinted-100/60 rounded-md">

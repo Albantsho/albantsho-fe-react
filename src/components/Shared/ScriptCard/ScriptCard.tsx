@@ -54,6 +54,7 @@ const ScriptCard = (props: IProps) => {
           }
           loading="lazy"
           alt={script.title}
+          unoptimized
         />
       </Link>
 

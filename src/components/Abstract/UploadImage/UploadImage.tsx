@@ -65,6 +65,7 @@ const UploadImage = ({
                   alt="upload image"
                   width={77}
                   height={61}
+                  unoptimized
                 />
               ) : (
                 <Image src={uploadImage} alt="upload image" />

@@ -41,6 +41,7 @@ const UnlistedScript = ({ script, refetch }: IProps) => {
               className="rounded-md flex-shrink-0 w-16 h-16"
               loading="lazy"
               src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
+              unoptimized
             />
           ) : (
             <div className="w-16 h-16 items-center justify-center flex">

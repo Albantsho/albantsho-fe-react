@@ -52,6 +52,7 @@ const OpeningBidScript = ({ script, index, scripts, refetch }: IProps) => {
                 alt={script.title}
                 className="rounded-md w-16 h-16"
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
+                unoptimized
               />
             </div>
             <Tooltip title="Bids">
