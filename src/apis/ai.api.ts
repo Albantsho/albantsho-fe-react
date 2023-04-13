@@ -25,6 +25,11 @@ interface IPayloadConvertStoryToScript {
 }
 
 
+interface IPayloadQuestionFromAi {
+  question: string;
+}
+
+
 
 const useAiApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
@@ -92,12 +97,25 @@ const useAiApi = (controller?: AbortController) => {
     [axiosPrivate, controller?.signal]
   );
 
+  const questionFromAi = useCallback(
+    async (payload: IPayloadQuestionFromAi) => {
+      const res = await axiosPrivate.post(`/ai/question`, payload, {
+        signal: controller?.signal,
+      });
+
+      return res.data.data;
+    },
+
+    [axiosPrivate, controller?.signal]
+  );
+
   return {
     completeScript,
     selectTitleForScript,
     completeStory,
     addDetailToStory,
-    convertStoryToScript
+    convertStoryToScript,
+    questionFromAi
   };
 };
 

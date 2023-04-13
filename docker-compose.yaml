@@ -6,6 +6,7 @@ services:
       - proxy
     environment:
       - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${VIRTUAL_HOST}
 networks:
   proxy:
     external: true

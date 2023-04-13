@@ -1,4 +1,4 @@
-import { Skeleton, Typography } from "@mui/material";
+import { ListItemText, MenuItem, Skeleton, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import useAiApi from "apis/ai.api";
@@ -14,12 +14,15 @@ const controller = new AbortController();
 const AiWriteStory = () => {
   const [story, setStory] = useState("");
   const [paragraph, setParagraph] = useState("10");
+  const [count, setCount] = useState("1");
   const [titleStory, setTitleStory] = useState("");
+  const [suggestCharacters, setSuggestCharacters] = useState("");
   const {
     selectTitleForScript,
     addDetailToStory,
     completeStory,
     convertStoryToScript,
+    questionFromAi,
   } = useAiApi(controller);
 
   const { mutate: mutateCompleteStory, isLoading: loadingCompleteStory } =
@@ -44,6 +47,22 @@ const AiWriteStory = () => {
       errorHandler(error);
     },
   });
+
+  const { mutate: mutateQuestionFromAi, isLoading: loadingQuestionFromAi } =
+    useMutation(
+      () =>
+        questionFromAi({
+          question: `Please Suggest ${count} characters for this story : ${story}`,
+        }),
+      {
+        onSuccess(data) {
+          setSuggestCharacters(data.response);
+        },
+        onError(error) {
+          errorHandler(error);
+        },
+      }
+    );
 
   const { mutate: mutateAddDetailToStory, isLoading: loadingAddDetailToStory } =
     useMutation(
@@ -72,6 +91,12 @@ const AiWriteStory = () => {
 
   const handleChangeValue = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setStory(e.target.value);
+
+  const handleChangeCountCharacter = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setCount(event.target.value);
+  };
 
   const setTitleHandler = () => {
     if (story.length < 5) {
@@ -126,6 +151,64 @@ const AiWriteStory = () => {
         <Editor handleChangeValue={handleChangeValue} value={story} />
       )}
 
+      <div className="flex items-end gap-2">
+        <div className="max-w-[215px]">
+          <label
+            className="futura font-medium text-primary-700 text-sm"
+            htmlFor="cast-script-primary"
+          >
+            Number of suggest character for story
+          </label>
+          <CustomInput
+            select
+            fullWidth
+            SelectProps={{ MenuProps: { className: "max-h-[250px]" } }}
+            size="small"
+            sx={{
+              "& .MuiOutlinedInput-input": {
+                py: 1.5,
+                minWidth: "135px",
+              },
+              "& .MuiSvgIcon-root": { color: "#7953B5" },
+              "& .MuiFormHelperText-root": {
+                mt: "8px",
+                mx: 0,
+                color: "red",
+                fontSize: "16px",
+                maxWidth: "240px",
+              },
+            }}
+            className=""
+            onChange={handleChangeCountCharacter}
+            variant="outlined"
+            value={count}
+            id="cast-script-primary"
+          >
+            {Array.from(new Array(10)).map((_, i) => (
+              <MenuItem key={i} value={i + 1}>
+                <ListItemText className="text-primary-700">
+                  {i + 1}
+                </ListItemText>
+              </MenuItem>
+            ))}
+          </CustomInput>
+        </div>
+        <Btn
+          loading={loadingQuestionFromAi}
+          onClick={() => mutateQuestionFromAi()}
+          className="px-3 py-4"
+        >
+          suggest {count} character
+        </Btn>
+      </div>
+      {suggestCharacters && (
+        <textarea
+          contentEditable={false}
+          rows={1}
+          value={suggestCharacters}
+          className="resize-none cursor-default text-primary-main h-full courier outline-none w-full block min-w-full p-5 min-h-[43vh] lg:min-h-[51.5vh]"
+        />
+      )}
       <div className="flex gap-3 items-center">
         <CustomInput
           autoComplete="one-time-code"
