@@ -25,7 +25,7 @@ const useNotificationComponent = () => {
     refetch: refetchNotifications,
   } = useQuery<IData_getNotifications, Error>("notification", () =>
     getAllNotifications(), {
-    refetchInterval: 60
+    refetchInterval: 60000
   }
   );
 

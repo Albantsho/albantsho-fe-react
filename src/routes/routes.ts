@@ -373,6 +373,16 @@ const routes = {
     mustAuthenticated: "noMatter",
     permission: [],
   },
+  aiWritingScript: {
+    url: "/ai/script",
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
+  aiWritingStory: {
+    url: "/ai/story",
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
 };
 
 export default routes;
