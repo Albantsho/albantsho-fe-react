@@ -5,6 +5,7 @@ import useAiApi from "apis/ai.api";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import customHandler from "utils/custom-handler";
+import errorHandler from "utils/error-handler";
 import Editor from "../Editor/Editor";
 import Title from "../Title/Title";
 
