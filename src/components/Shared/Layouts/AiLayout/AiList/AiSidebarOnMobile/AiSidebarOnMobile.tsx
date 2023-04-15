@@ -6,7 +6,7 @@ import {
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { GiSecretBook } from "react-icons/gi";
-import { MdDescription } from "react-icons/md";
+import { MdDescription, MdHelp } from "react-icons/md";
 import routes from "routes/routes";
 
 const routesArray = [
@@ -19,6 +19,11 @@ const routesArray = [
     route: routes.aiWritingStory.url,
     title: "Write story",
     icon: GiSecretBook,
+  },
+  {
+    route: routes.aiAssistant.url,
+    title: "Assistant",
+    icon: MdHelp,
   },
 ];
 

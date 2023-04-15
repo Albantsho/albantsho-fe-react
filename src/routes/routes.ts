@@ -383,6 +383,11 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
+  aiAssistant: {
+    url: "/ai/assistant",
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
 };
 
 export default routes;

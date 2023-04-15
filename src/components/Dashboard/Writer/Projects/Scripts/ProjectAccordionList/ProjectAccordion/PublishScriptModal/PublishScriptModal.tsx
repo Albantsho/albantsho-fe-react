@@ -47,6 +47,7 @@ const PublishScriptModal = ({
               shallow: true,
             });
           }
+          handleClosePublishScript();
           queryClient.invalidateQueries(["script"]);
         },
       }
