@@ -1,5 +1,5 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { Tab, Tabs, Typography } from "@mui/material";
+import { Tab } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import useAiApi from "apis/ai.api";
 import { useState } from "react";
@@ -7,13 +7,13 @@ import { useMutation } from "react-query";
 import { SyncLoader } from "react-spinners";
 import Editor from "../Editor/Editor";
 
-// const controller = new AbortController();
+const controller = new AbortController();
 
 const AiAssistant = () => {
   const [question, setQuestion] = useState("");
   const [suggestResponse, setSuggestResponse] = useState("");
   const [value, setValue] = useState("1");
-  const { questionFromAi } = useAiApi();
+  const { questionFromAi } = useAiApi(controller);
 
   const { isLoading, mutate } = useMutation(
     () => questionFromAi({ question }),
