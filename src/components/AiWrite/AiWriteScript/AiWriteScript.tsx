@@ -26,7 +26,7 @@ const AiWriteScript = () => {
     useMutation(
       () =>
         questionFromAi({
-          question: `Complete script in ${paragraph} paragraph : ${script}`,
+          question: `Complete this script in ${paragraph} paragraph : ${script}`,
         }),
       {
         onSuccess: (data) => {
@@ -262,7 +262,7 @@ const AiWriteScript = () => {
           contentEditable={false}
           rows={1}
           value={titleScript}
-          className="resize-none mb-8 cursor-default text-primary-main h-full courier outline-none w-full block min-w-full p-5 min-h-[10vh]"
+          className="resize-none mb-8 cursor-default text-primary-main h-full courier outline-none w-full block min-w-full p-5 min-h-[15vh]"
         />
         <textarea
           contentEditable={false}

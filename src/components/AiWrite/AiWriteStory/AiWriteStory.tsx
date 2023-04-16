@@ -303,7 +303,9 @@ const AiWriteStory = () => {
                   className="futura leading-3 font-medium text-primary-700 text-sm"
                   htmlFor="cast-story-primary"
                 >
-                  select the desired number of titles in the input blow.
+                  select the desired number of{" "}
+                  {question === "SuggestTitle" ? "titles" : "characters"} in the
+                  input blow.
                 </label>
                 <CustomInput
                   select
@@ -362,14 +364,14 @@ const AiWriteStory = () => {
             contentEditable={false}
             rows={1}
             value={titleStory}
-            className="resize-none mb-8 cursor-default text-primary-main h-full courier outline-none w-full block min-w-full p-5 min-h-[10vh]"
+            className="resize-none mb-8 cursor-default text-primary-main h-full courier outline-none w-full block min-w-full p-5 min-h-[15vh]"
           />
           <label>characters</label>
           <textarea
             contentEditable={false}
             rows={1}
             value={characterStory}
-            className="resize-none mb-8 cursor-default text-primary-main h-full courier outline-none w-full block min-w-full p-5 min-h-[10vh]"
+            className="resize-none mb-8 cursor-default text-primary-main h-full courier outline-none w-full block min-w-full p-5 min-h-[15vh]"
           />
           <textarea
             contentEditable={false}
@@ -379,140 +381,6 @@ const AiWriteStory = () => {
           />
         </TabPanel>
       </TabContext>
-
-      {/* <Title title={titleStory} />
-      {loadingSetTitleForStory ||
-      loadingCompleteStory ||
-      loadingAddDetailToStory ||
-      loadingConvertStoryToScript ? (
-        <Skeleton
-          variant="rectangular"
-          className="min-h-[50vh] lg:min-h-[51.5vh]"
-        />
-      ) : (
-        <Editor handleChangeValue={handleChangeValue} value={story} />
-      )}
-
-      <div className="flex items-end gap-2">
-        <div className="max-w-[215px]">
-          <label
-            className="futura font-medium text-primary-700 text-sm"
-            htmlFor="cast-story-primary"
-          >
-            Number of suggest character for story
-          </label>
-          <CustomInput
-            select
-            fullWidth
-            SelectProps={{ MenuProps: { className: "max-h-[250px]" } }}
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-input": {
-                py: 1.5,
-                minWidth: "135px",
-              },
-              "& .MuiSvgIcon-root": { color: "#7953B5" },
-              "& .MuiFormHelperText-root": {
-                mt: "8px",
-                mx: 0,
-                color: "red",
-                fontSize: "16px",
-                maxWidth: "240px",
-              },
-            }}
-            className=""
-            onChange={handleChangeCountCharacter}
-            variant="outlined"
-            value={count}
-            id="cast-story-primary"
-          >
-            {Array.from(new Array(10)).map((_, i) => (
-              <MenuItem key={i} value={i + 1}>
-                <ListItemText className="text-primary-700">
-                  {i + 1}
-                </ListItemText>
-              </MenuItem>
-            ))}
-          </CustomInput>
-        </div>
-        <Btn
-          loading={loadingQuestionFromAi}
-          onClick={() => mutateQuestionFromAi()}
-          className="px-3 py-4"
-        >
-          suggest {count} character
-        </Btn>
-      </div>
-      {suggestCharacters && (
-        <textarea
-          contentEditable={false}
-          rows={1}
-          value={suggestCharacters}
-          className="resize-none cursor-default text-primary-main h-full courier outline-none w-full block min-w-full p-5 min-h-[43vh] lg:min-h-[51.5vh]"
-        />
-      )}
-      <div className="flex gap-3 items-center">
-        <CustomInput
-          autoComplete="one-time-code"
-          value={paragraph}
-          variant="outlined"
-          type="tel"
-          onChange={(event) => {
-            const result = event.target.value.replace(/\D/g, "");
-            setParagraph(result);
-          }}
-          sx={{
-            input: {
-              width: { xs: 58 },
-              height: { xs: 58 },
-              boxSizing: "border-box",
-              textAlign: "center",
-            },
-            minWidth: { xs: 58 },
-          }}
-          inputProps={{
-            min: 0,
-            maxLength: 3,
-          }}
-        />
-        <Typography className="max-w-xs" variant="body2">
-          You can selecting the desired number of paragraphs in the input
-          opposite.
-        </Typography>
-      </div>
-
-      <div className="flex gap-3">
-        <Btn
-          loading={loadingCompleteStory}
-          onClick={completeScriptHandler}
-          className="px-4 min-w-[151px] py-2 lg:px-6 lg:py-3"
-        >
-          Complete Story
-        </Btn>
-        <Btn
-          loading={loadingSetTitleForStory}
-          onClick={setTitleHandler}
-          className="px-4 min-w-[106px] py-2 lg:px-6 lg:py-3"
-        >
-          Set Title
-        </Btn>
-      </div>
-      <div className="flex gap-3">
-        <Btn
-          loading={loadingConvertStoryToScript}
-          onClick={convertStoryToScriptHandler}
-          className="px-4 py-2 lg:px-6 lg:py-3"
-        >
-          Convert To Script
-        </Btn>
-        <Btn
-          loading={loadingAddDetailToStory}
-          onClick={addDetailToStoryHandler}
-          className="px-4 py-2 lg:px-6 lg:py-3"
-        >
-          Add Detail
-        </Btn>
-      </div> */}
     </>
   );
 };
