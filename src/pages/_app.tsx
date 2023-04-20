@@ -56,13 +56,13 @@ export default function MyApp(props: MyAppProps) {
               src="https://www.googletagmanager.com/gtag/js?id=G-35SD81MYSZ"
               strategy="afterInteractive"
             />
-            <Script id="google-tag-manager" strategy="afterInteractive">
+            {/* <Script id="google-tag-manager" strategy="afterInteractive">
               {`window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                   gtag('config', 'G-35SD81MYSZ');`}
-            </Script>
-            <Script id="hotjar-tracking" strategy="afterInteractive">
+            </Script> */}
+            {/* <Script id="hotjar-tracking" strategy="afterInteractive">
               {`(function(h,o,t,j,a,r){
                 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
                 h._hjSettings={hjid:3410388,hjsv:6};
@@ -71,7 +71,7 @@ export default function MyApp(props: MyAppProps) {
                 r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
                 a.appendChild(r);
                 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
-            </Script>
+            </Script> */}
 
             {isLoading ? <Loader /> : getLayout(<Component {...pageProps} />)}
           </Authorization>
