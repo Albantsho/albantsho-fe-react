@@ -52,10 +52,10 @@ export default function MyApp(props: MyAppProps) {
             options={{ showSpinner: false }}
           />
           <Authorization>
-            <Script
+            {/* <Script
               src="https://www.googletagmanager.com/gtag/js?id=G-35SD81MYSZ"
               strategy="afterInteractive"
-            />
+            /> */}
             {/* <Script id="google-tag-manager" strategy="afterInteractive">
               {`window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
