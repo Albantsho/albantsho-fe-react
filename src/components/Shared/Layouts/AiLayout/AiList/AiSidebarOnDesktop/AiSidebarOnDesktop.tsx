@@ -13,25 +13,20 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
-import { GiSecretBook } from "react-icons/gi";
-import { MdDescription,MdHelp } from "react-icons/md";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import { SiOpenai } from "react-icons/si";
 import routes from "routes/routes";
 
 const routesArray = [
   {
-    route: routes.aiWritingScript.url,
-    title: "Write script",
-    icon: MdDescription,
-  },
-  {
-    route: routes.aiWritingStory.url,
-    title: "Write story",
-    icon: GiSecretBook,
+    route: routes.aiEditor.url,
+    title: "Ai Editor",
+    icon: SiOpenai,
   },
   {
     route: routes.aiAssistant.url,
     title: "Assistant",
-    icon: MdHelp,
+    icon: AiOutlineInfoCircle,
   },
 ];
 

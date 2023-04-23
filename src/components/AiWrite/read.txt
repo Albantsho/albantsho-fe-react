@@ -1,9 +1,0 @@
-complete story : `Complete this story in ${data.paragraph} paragraph${data.paragraph <= 1 ? "" : "s"} "${data.story}"`
-
-complete script : `"${data.script}". Add details to this script.`
-
-add details to story : `Add details to story in ${data.paragraph} paragraph${data.paragraph <= 1 ? "" : "s"} "${data.story}"`
-
-convert story to script : `Convert this story to script "${data.story}"`
-
-suggest title for script : `Suggest title for this script "${data.script}"`

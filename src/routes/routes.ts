@@ -379,13 +379,8 @@ const routes = {
     mustAuthenticated: "noMatter",
     permission: [],
   },
-  aiWritingScript: {
-    url: "/ai/script",
-    mustAuthenticated: "yes",
-    permission: ["writer"],
-  },
-  aiWritingStory: {
-    url: "/ai/story",
+  aiEditor: {
+    url: "/ai",
     mustAuthenticated: "yes",
     permission: ["writer"],
   },

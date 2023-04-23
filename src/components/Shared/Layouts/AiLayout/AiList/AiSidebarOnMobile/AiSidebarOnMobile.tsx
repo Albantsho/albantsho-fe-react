@@ -5,25 +5,19 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { GiSecretBook } from "react-icons/gi";
-import { MdDescription, MdHelp } from "react-icons/md";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import { SiOpenai } from "react-icons/si";
 import routes from "routes/routes";
-
 const routesArray = [
   {
-    route: routes.aiWritingScript.url,
-    title: "Write script",
-    icon: MdDescription,
-  },
-  {
-    route: routes.aiWritingStory.url,
-    title: "Write story",
-    icon: GiSecretBook,
+    route: routes.aiEditor.url,
+    title: "Ai Editor",
+    icon: SiOpenai,
   },
   {
     route: routes.aiAssistant.url,
     title: "Assistant",
-    icon: MdHelp,
+    icon: AiOutlineInfoCircle,
   },
 ];
 
