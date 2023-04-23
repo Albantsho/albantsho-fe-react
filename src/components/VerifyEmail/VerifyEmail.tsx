@@ -1,3 +1,4 @@
+import bell from "@assets/images/bell.png";
 import { Button, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
@@ -7,7 +8,6 @@ import { useMemo } from "react";
 import Countdown, { zeroPad } from "react-countdown";
 import routes from "routes/routes";
 import useUserStore from "store/user.store";
-import bell from "./assets/bell.png";
 import useVerifyEmail from "./useVerifyEmail";
 
 interface ITimeProps {

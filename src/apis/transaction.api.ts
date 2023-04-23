@@ -16,7 +16,7 @@ const useTransactionApi = (controller?: AbortController) => {
 
   const getAllWithdraws = useCallback(async () => {
     const res = await axiosPrivate.get<IResData<IData_getWithdraws>>(
-      "/transaction/withdraws",
+      "/transaction/innerWallet",
       {
         signal: controller?.signal,
       }

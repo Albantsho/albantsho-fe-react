@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useWalletApi from "apis/Wallet.api";
+import useWithdrawApi from "apis/withdraw.api";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -19,7 +20,7 @@ interface IWithdrawFormValues {
 
 const useWithdraw = () => {
   const [loading, setLoading] = useState(false);
-  const { withdrawWallet } = useWalletApi();
+  const { withdrawRequest } = useWithdrawApi();
   const { replace } = useRouter();
 
   const {
@@ -40,14 +41,18 @@ const useWithdraw = () => {
     try {
       setLoading(true);
       if (data.method === "bank") {
-        const res = await withdrawWallet({ amount: data.amount, method: data.method, bankName: data.bankName, bankAccountName: data.bankAccountName, bankAccountNumber: data.bankAccountNumber });
+        const res = await withdrawRequest({ amount: data.amount, method: data.method, bankName: data.bankName, bankAccountName: data.bankAccountName, bankAccountNumber: data.bankAccountNumber });
         replace(
-          routes.withdrawSuccessfulWallet.dynamicUrl(res.data.transaction._id)
+          routes.withdrawVerifyWallet.dynamicUrl(res.withdraw._id)
         );
       } else {
-        const res = await withdrawWallet({ amount: data.amount, method: data.method, network: data.network, usdtTrc20Address: data.usdtTrc20Address });
+        const res = await withdrawRequest({
+          amount: data.amount, method: data.method,
+          //  network: data.network,
+          usdtTrc20Address: data.usdtTrc20Address
+        });
         replace(
-          routes.withdrawSuccessfulWallet.dynamicUrl(res.data.transaction._id)
+          routes.withdrawVerifyWallet.dynamicUrl(res.withdraw._id)
         );
       }
     } catch (error) {

@@ -50,11 +50,11 @@ const WalletCard = () => {
             {user.firstName + " " + user.lastName}
           </Typography>
           <Chip
-            title={`$${data?.balance}`}
+            title={`$${data ? data.balance : ""}`}
             sx={{ "& .MuiChip-icon": { color: "#7953B5" } }}
             className="py-6 flex text-primary-700 futura font-medium text-lg px-2 md:px-4 rounded-md bg-primary-50/50"
             icon={<SvgIcon color="primary" component={wallet} inheritViewBox />}
-            label={`Balance:$${data?.balance}`}
+            label={`Balance:$${data ? data.balance : ""}`}
           />
         </div>
         <Divider className="mt-6 mb-4 hidden md:block" />

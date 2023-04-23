@@ -335,6 +335,12 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer", "producer"],
   },
+  withdrawVerifyWallet: {
+    url: "/wallet/withdraw/verify-otp/[withdraw_id]",
+    dynamicUrl: (withdrawId: string) => `/wallet/withdraw/verify-otp/${withdrawId}`,
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
   withdrawSuccessfulWallet: {
     url: "/wallet/withdraw/[transaction_id]",
     dynamicUrl: (transactionId: string) => `/wallet/withdraw/${transactionId}`,

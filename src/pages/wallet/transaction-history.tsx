@@ -1,13 +1,18 @@
 import WalletLayout from "@shared/Layouts/WalletLayout/WalletLayout";
 import useTransactionApi from "apis/transaction.api";
+import useWalletApi from "apis/Wallet.api";
+import useWithdrawApi from "apis/withdraw.api";
 import TransactionHistory from "components/Wallet/TransactionHistory/TransactionHistory";
 import Head from "next/head";
 import { useQuery } from "react-query";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../_app";
 
+const controller = new AbortController();
+
 const TransactionHistoryPage: NextPageWithLayout = () => {
-  const { getAllPayments, getAllWithdraws } = useTransactionApi();
+  const { getAllPayments } = useTransactionApi(controller);
+  const { getAllWithdraws } = useWithdrawApi(controller);
 
   const { data: paymentsData, isLoading: loadingGetPayments } = useQuery(
     ["wallet", "payments"],

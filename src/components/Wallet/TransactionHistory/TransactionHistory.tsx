@@ -9,9 +9,10 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { IPayment, IWithdraw } from "interfaces/transaction";
+import { IPayment } from "interfaces/transaction";
 import Image from "next/image";
 import emptyTransactions from "@assets/images/empty-blogs.png";
+import { IWithdraw } from "interfaces/withdraw";
 
 interface IProps {
   withdrawList: IWithdraw[];
@@ -65,34 +66,36 @@ const TransactionHistory = ({ paymentsList, withdrawList }: IProps) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {withdrawList.map((transaction) => (
-                  <TableRow key={transaction._id}>
-                    <TableCell className="w-full  pr-10 lg:py-8 xl:py-16">
-                      <Typography
-                        variant="h6"
-                        className="text-primary-700 futura font-medium"
-                      >
-                        {transaction.transactionId}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography
-                        variant="h6"
-                        className="font-semibold text-primary-700"
-                      >
-                        $ {transaction.amount}
-                      </Typography>
-                    </TableCell>
-                    <TableCell className="pl-10">
-                      <Typography
-                        variant="h6"
-                        className="font-medium text-primary-700"
-                      >
-                        {new Date(transaction.createdAt).toLocaleDateString()}
-                      </Typography>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {withdrawList
+                  .filter((withdraw) => withdraw.status === "done")
+                  .map((transaction) => (
+                    <TableRow key={transaction._id}>
+                      <TableCell className="w-full  pr-10 lg:py-8 xl:py-16">
+                        <Typography
+                          variant="h6"
+                          className="text-primary-700 futura font-medium"
+                        >
+                          {transaction.transactionId}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography
+                          variant="h6"
+                          className="font-semibold text-primary-700"
+                        >
+                          $ {transaction.amount}
+                        </Typography>
+                      </TableCell>
+                      <TableCell className="pl-10">
+                        <Typography
+                          variant="h6"
+                          className="font-medium text-primary-700"
+                        >
+                          {new Date(transaction.createdAt).toLocaleDateString()}
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 {paymentsList.map((transaction) => (
                   <TableRow key={transaction._id}>
                     <TableCell className="w-full  pr-10 lg:py-8 xl:py-16">
