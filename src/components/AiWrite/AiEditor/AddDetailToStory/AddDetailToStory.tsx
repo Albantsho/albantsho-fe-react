@@ -30,7 +30,7 @@ const AddDetailToStory = ({
     useMutation(
       () =>
         questionFromAi({
-          question: `Add this details : ${detail} to this story : ${suggestResponse}`,
+          question: `Add details to this story : ${suggestResponse}`,
         }),
       {
         onSuccess: (data) => {
@@ -47,12 +47,12 @@ const AddDetailToStory = ({
     setDetail(e.target.value);
 
   const handleSendQuestionToAi = () => {
-    if (detail.length < 5) {
-      customHandler("please type more than about you want.");
-      return;
-    } else {
-      mutateAddDetailToStory();
-    }
+    // if (detail.length < 5) {
+    // customHandler("please type more than about you want.");
+    // return;
+    // } else {
+    mutateAddDetailToStory();
+    // }
   };
 
   return (
@@ -106,7 +106,7 @@ const AddDetailToStory = ({
         />
       )}
 
-      {loadingAddDetailToStory ? (
+      {/* {loadingAddDetailToStory ? (
         <div className="min-h-[43vh] bg-white lg:min-h-[51.5vh] flex justify-center items-center">
           <SyncLoader color="#7953B5" />
         </div>
@@ -116,7 +116,7 @@ const AddDetailToStory = ({
           handleChangeValue={handleChangeValue}
           value={detail}
         />
-      )}
+      )} */}
 
       <Btn
         loading={loadingAddDetailToStory}
