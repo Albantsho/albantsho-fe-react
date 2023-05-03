@@ -330,10 +330,15 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer", "producer"],
   },
-  transactionHistoryWallet: {
-    url: "/wallet/transaction-history",
+  paymentHistoryWallet: {
+    url: "/wallet/payment-history",
     mustAuthenticated: "yes",
     permission: ["writer", "producer"],
+  },
+  withdrawHistoryWallet: {
+    url: "/wallet/withdraw-history",
+    mustAuthenticated: "yes",
+    permission: ["writer"],
   },
   withdrawVerifyWallet: {
     url: "/wallet/withdraw/verify-otp/[withdraw_id]",

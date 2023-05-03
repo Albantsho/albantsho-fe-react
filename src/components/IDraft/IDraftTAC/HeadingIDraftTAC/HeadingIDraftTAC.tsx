@@ -4,7 +4,7 @@ import routes from "routes/routes";
 
 const HeadingIDraftTAC = () => {
   return (
-    <div className="px-5 sm:px-10 md:flex  lg:min-w-[1024px] lg:mx-auto pt-16">
+    <div className="px-5 sm:px-10 md:flex  lg:min-w-[1280px] lg:mx-auto pt-16">
       <Typography
         variant="h5"
         color="grey.900"

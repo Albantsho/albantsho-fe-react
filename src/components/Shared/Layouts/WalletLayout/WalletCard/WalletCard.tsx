@@ -16,6 +16,7 @@ import {
 import useWalletApi from "apis/Wallet.api";
 import { useRouter } from "next/router";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { GiReceiveMoney } from "react-icons/gi";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
 import { useQuery } from "react-query";
@@ -112,8 +113,8 @@ const WalletCard = () => {
           <ListItemButton
             TouchRippleProps={{ className: "text-primary-main" }}
             className="hover:bg-primary-50/25"
-            selected={route === routes.transactionHistoryWallet.url}
-            onClick={() => push(routes.transactionHistoryWallet.url)}
+            selected={route === routes.paymentHistoryWallet.url}
+            onClick={() => push(routes.paymentHistoryWallet.url)}
           >
             <ListItemIcon
               sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
@@ -129,9 +130,34 @@ const WalletCard = () => {
               sx={{ "& .MuiTypography-root": { fontFamily: "futura" } }}
               className="text-primary-700"
             >
-              Transaction History
+              Payment History
             </ListItemText>
           </ListItemButton>
+          {user.userType === "writer" && (
+            <ListItemButton
+              TouchRippleProps={{ className: "text-primary-main" }}
+              className="hover:bg-primary-50/25"
+              selected={route === routes.withdrawHistoryWallet.url}
+              onClick={() => push(routes.withdrawHistoryWallet.url)}
+            >
+              <ListItemIcon
+                sx={{ "&.MuiListItemIcon-root": { minWidth: "40px" } }}
+              >
+                <SvgIcon
+                  fontSize="small"
+                  className="text-primary-700"
+                  component={GiReceiveMoney}
+                  inheritViewBox
+                />
+              </ListItemIcon>
+              <ListItemText
+                sx={{ "& .MuiTypography-root": { fontFamily: "futura" } }}
+                className="text-primary-700"
+              >
+                Withdraw History
+              </ListItemText>
+            </ListItemButton>
+          )}
           <ListItemButton
             TouchRippleProps={{ className: "text-primary-main" }}
             className="hover:bg-primary-50/25"

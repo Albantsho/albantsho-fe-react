@@ -23,6 +23,7 @@ import {
   AiOutlineQuestionCircle,
 } from "react-icons/ai";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
+import { GiReceiveMoney } from "react-icons/gi";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
 import routes from "routes/routes";
@@ -37,17 +38,22 @@ interface IProps {
 const walletLinksForWriter = [
   { title: "Withdraw", href: routes.withdrawWallet.url, icon: RiDownloadLine },
   {
-    title: "Transaction History",
-    href: routes.transactionHistoryWallet.url,
+    title: "Payment History",
+    href: routes.paymentHistoryWallet.url,
     icon: TbArrowsSort,
+  },
+  {
+    title: "Withdraw History",
+    href: routes.withdrawHistoryWallet.url,
+    icon: GiReceiveMoney,
   },
   { title: "Help", href: routes.helpWallet.url, icon: AiOutlineQuestionCircle },
 ];
 const walletLinksForProducer = [
   { title: "Deposit", href: routes.depositWallet.url, icon: deposit },
   {
-    title: "Transaction History",
-    href: routes.transactionHistoryWallet.url,
+    title: "Payment History",
+    href: routes.paymentHistoryWallet.url,
     icon: TbArrowsSort,
   },
   { title: "Help", href: routes.helpWallet.url, icon: AiOutlineQuestionCircle },
@@ -132,10 +138,10 @@ const WalletNavOnMobile = ({ isTransparent }: IProps) => {
                   className="px-2 rounded-md hover:bg-primary-50/25"
                   onClick={() => push(walletLink.href)}
                 >
-                  <ListItemIcon className="min-w-0 mr-3">
+                  <ListItemIcon color="primary" className="min-w-0 mr-3">
                     <SvgIcon
+                      color="primary"
                       fontSize="small"
-                      className="text-primary-700"
                       inheritViewBox
                       component={walletLink.icon}
                     />

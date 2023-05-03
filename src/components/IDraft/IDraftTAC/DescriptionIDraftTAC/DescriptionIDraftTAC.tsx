@@ -5,7 +5,7 @@ import React from "react";
 
 const IDraftTAC = () => {
   return (
-    <div className="pt-8 lg:pt-14 pb-20 px-5 sm:px-10  max-w-screen-lg mx-auto">
+    <div className="pt-8 lg:pt-14 pb-20 px-5 sm:px-10  max-w-screen-xl mx-auto">
       <Typography variant="body2" color="grey.500" paragraph>
         By applying to this workshop (i.e. The idraft Workshop), you as an
         applicant writer agree and confirm that:

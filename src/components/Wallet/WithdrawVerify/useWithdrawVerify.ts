@@ -8,6 +8,7 @@ import { QueryClient, useMutation } from "react-query";
 import routes from "routes/routes";
 import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
+import successHandler from "utils/success-handler";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +21,7 @@ const useWithdrawVerify = () => {
   }));
   const { replace, query } = useRouter();
   const { resendCode } = useAuthApi();
-  const { withdrawVerify } = useWithdrawApi();
+  const { withdrawVerify, resendOtp } = useWithdrawApi();
   const inputs = useRef<HTMLInputElement[]>([]);
   const [formValues, setFormValues] = useState<{ [key: number]: string; }>({
     0: "",
@@ -31,7 +32,7 @@ const useWithdrawVerify = () => {
   });
 
   const { mutate: verifyWithdraw, isLoading: loadingVerifyWithdraw } = useMutation<
-    IData_AuthorizationUser,
+    { message: string; },
     Error,
     IPayloadWithdrawVerify
   >((withdraw) => withdrawVerify(withdraw), {
@@ -39,20 +40,21 @@ const useWithdrawVerify = () => {
       errorHandler(error);
     },
     onSuccess: (data) => {
+      successHandler(data.message);
       //TODO => redirect to success withdraw
       "";
     },
   });
 
   const { mutate: resendCodeFn, isLoading: loadingResendCode } = useMutation<
-    void,
-    Error,
-    { email: string; }
-  >((user) => resendCode(user), {
+    { message: string; },
+    Error
+  >(() => resendOtp(query["withdraw_id"] as string), {
     onError: (error) => {
       errorHandler(error);
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      successHandler(data.message);
       setCountDownKey((prevState) => prevState + 1);
     },
   });
@@ -84,7 +86,7 @@ const useWithdrawVerify = () => {
     });
   };
 
-  const handleResendCode = async () => resendCodeFn({ email: user.email });
+  const handleResendCode = () => resendCodeFn();
 
   return {
     handleChange,

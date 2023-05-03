@@ -12,6 +12,7 @@ import useWalletApi from "apis/Wallet.api";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { GiReceiveMoney } from "react-icons/gi";
 import { IoIosMore } from "react-icons/io";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
@@ -129,7 +130,7 @@ const WalletMenu = () => {
         )}
         <MenuItem
           className="px-6 py-3"
-          onClick={() => push(routes.transactionHistoryWallet.url)}
+          onClick={() => push(routes.paymentHistoryWallet.url)}
         >
           <ListItemIcon>
             <SvgIcon
@@ -144,9 +145,31 @@ const WalletMenu = () => {
               className: "text-primary-700 futura font-normal leading-normal",
             }}
           >
-            Transaction History
+            Payment History
           </ListItemText>
         </MenuItem>
+        {user.userType === "writer" && (
+          <MenuItem
+            className="px-6 py-3"
+            onClick={() => push(routes.withdrawHistoryWallet.url)}
+          >
+            <ListItemIcon>
+              <SvgIcon
+                fontSize="inherit"
+                className="text-primary-700"
+                inheritViewBox
+                component={GiReceiveMoney}
+              />
+            </ListItemIcon>
+            <ListItemText
+              primaryTypographyProps={{
+                className: "text-primary-700 futura font-normal leading-normal",
+              }}
+            >
+              Withdraw History
+            </ListItemText>
+          </MenuItem>
+        )}
         <MenuItem
           className="px-6 py-3"
           onClick={() => push(routes.helpWallet.url)}

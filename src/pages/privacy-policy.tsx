@@ -11,7 +11,7 @@ const PrivacyPolicy: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Privacy Policy</title>
       </Head>
-      <div className="max-w-screen-lg px-5 sm:px-10 mx-auto py-14 relative">
+      <div className="max-w-screen-xl px-5 sm:px-10 mx-auto py-14 relative">
         <Typography paragraph>
           Albantsho (“The platform”) is a screenwriting platform by Albantsho
           Limited that enhances powerful storytelling and connects emerging

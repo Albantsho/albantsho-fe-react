@@ -41,8 +41,19 @@ const useWithdrawApi = (controller?: AbortController) => {
 
   const withdrawVerify = useCallback(async (payload: IPayloadWithdrawVerify) => {
     const res = await axiosPrivate.post(
-      "/withdraw/verify",
+      "/withdraw/otp/verify",
       payload, {
+      signal: controller?.signal,
+    }
+    );
+
+    return res.data;
+  }, [axiosPrivate, controller?.signal]);
+
+  const resendOtp = useCallback(async (withdrawId: string) => {
+    const res = await axiosPrivate.post(
+      `/withdraw/otp/resent/${withdrawId}`,
+      {}, {
       signal: controller?.signal,
     }
     );
@@ -80,7 +91,6 @@ const useWithdrawApi = (controller?: AbortController) => {
         signal: controller?.signal,
       }
     );
-
     return res.data;
   }, [axiosPrivate, controller?.signal]);
 
@@ -89,7 +99,8 @@ const useWithdrawApi = (controller?: AbortController) => {
     withdrawVerify,
     withdrawDelete,
     getAllWithdraws,
-    getAllWithdrawsForAdmin
+    getAllWithdrawsForAdmin,
+    resendOtp
   };
 };
 

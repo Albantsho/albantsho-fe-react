@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import GeneralLayout from "@shared/Layouts/GeneralLayout/GeneralLayout";
 import DescriptionComponent from "@shared/Text/DescriptionComponent/DescriptionComponent";
 import ListComponent from "@shared/Text/ListComponent/ListComponent";
@@ -13,7 +12,7 @@ const TermsAndConditions: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Terms and Conditions</title>
       </Head>
-      <div className="max-w-screen-lg px-5 sm:px-10 mx-auto py-14 relative">
+      <div className="max-w-screen-xl px-5 sm:px-10 mx-auto py-14 relative">
         <TitleComponent>1. Our Relationship is Contractual</TitleComponent>
         <SubtitleComponent
           subtitle="           These terms and conditions of use (“Terms”) govern the access or use
@@ -422,32 +421,31 @@ const TermsAndConditions: NextPageWithLayout = () => {
             fitness for a particular purpose, and non-infringement. Additionally
             Albanthso Limited and its affiliates, partners, suppliers, and
             licensors make no warranty that
-            <div className="px-2 lg:px-6 pt-2">
-              <DescriptionComponent>
-                (i) the Services and/or third-party content and services will
-                meet your requirements;
-              </DescriptionComponent>
-              <DescriptionComponent>
-                (ii) the Services and/ or third-party content and services will
-                be uninterrupted, accurate, reliable, timely, secure or
-                error-free;
-              </DescriptionComponent>
-              <DescriptionComponent>
-                (iii) the quality of any products, services, information or
-                other material accessed or obtained by you through the Services
-                will be as represented or meet your expectations;
-              </DescriptionComponent>
-              <DescriptionComponent>
-                (iv) any errors in the Services or third party content and
-                services will be corrected. No advice or information, whether
-                oral or written, obtained by you from Albanthso Limited or from
-                the platform shall create any representation, warranty, or
-                guaranty. Furthermore, you acknowledge that Albanthso Limited
-                has no obligation to correct any errors or otherwise support or
-                maintain the platform and/or Service.
-              </DescriptionComponent>
-            </div>
           </DescriptionComponent>
+          <div className="px-4 lg:px-8">
+            <DescriptionComponent>
+              (i) the Services and/or third-party content and services will meet
+              your requirements;
+            </DescriptionComponent>
+            <DescriptionComponent>
+              (ii) the Services and/ or third-party content and services will be
+              uninterrupted, accurate, reliable, timely, secure or error-free;
+            </DescriptionComponent>
+            <DescriptionComponent>
+              (iii) the quality of any products, services, information or other
+              material accessed or obtained by you through the Services will be
+              as represented or meet your expectations;
+            </DescriptionComponent>
+            <DescriptionComponent>
+              (iv) any errors in the Services or third party content and
+              services will be corrected. No advice or information, whether oral
+              or written, obtained by you from Albanthso Limited or from the
+              platform shall create any representation, warranty, or guaranty.
+              Furthermore, you acknowledge that Albanthso Limited has no
+              obligation to correct any errors or otherwise support or maintain
+              the platform and/or Service.
+            </DescriptionComponent>
+          </div>
         </div>
         <br />
         <TitleComponent>11. Limitation of Liability.</TitleComponent>
@@ -480,31 +478,31 @@ const TermsAndConditions: NextPageWithLayout = () => {
             damage, fine, penalty, interest, and expense (including, without
             limitation, fees for attorneys and other professional advisors)
             arising out of or in connection with the following:
-            <div className="px-2 lg:px-6 pt-2">
-              <DescriptionComponent>
-                (i) your access to or use of the Services or third-party content
-                and services;
-              </DescriptionComponent>
-              <DescriptionComponent>
-                (ii) your breach of this Terms;
-              </DescriptionComponent>
-              <DescriptionComponent>
-                (iii) your violation of law in connection with your use of the
-                Services;
-              </DescriptionComponent>
-              <DescriptionComponent>
-                (iv) your negligence or willful misconduct in connection with
-                your use of the Services;
-              </DescriptionComponent>
-              <DescriptionComponent>
-                (v) your violation of the rights of a third party, including the
-                infringement by you of any intellectual property or
-                misappropriation of any proprietary right or trade secret of any
-                person or entity. These obligations will survive any termination
-                of this Terms.
-              </DescriptionComponent>
-            </div>
           </DescriptionComponent>
+          <div className="px-4 lg:px-8">
+            <DescriptionComponent>
+              (i) your access to or use of the Services or third-party content
+              and services;
+            </DescriptionComponent>
+            <DescriptionComponent>
+              (ii) your breach of this Terms;
+            </DescriptionComponent>
+            <DescriptionComponent>
+              (iii) your violation of law in connection with your use of the
+              Services;
+            </DescriptionComponent>
+            <DescriptionComponent>
+              (iv) your negligence or willful misconduct in connection with your
+              use of the Services;
+            </DescriptionComponent>
+            <DescriptionComponent>
+              (v) your violation of the rights of a third party, including the
+              infringement by you of any intellectual property or
+              misappropriation of any proprietary right or trade secret of any
+              person or entity. These obligations will survive any termination
+              of this Terms.
+            </DescriptionComponent>
+          </div>
         </div>
         <br />
         <TitleComponent>13. Compatibility</TitleComponent>
@@ -531,20 +529,20 @@ const TermsAndConditions: NextPageWithLayout = () => {
             aware. Furthermore, you release Albanthso Limited from any liability
             resulting from your use of the Services including, without
             limitation, the following:
-            <div className="px-2 lg:px-6 pt-2">
-              <DescriptionComponent>
-                (i) any product liability claims;
-              </DescriptionComponent>
-              <DescriptionComponent>
-                (ii) any claim that the Application fails to conform to any
-                applicable legal or regulatory requirement;
-              </DescriptionComponent>
-              <DescriptionComponent>
-                (iii) any claim arising under consumer protection or similar
-                legislation.
-              </DescriptionComponent>
-            </div>
           </DescriptionComponent>
+          <div className="px-4 lg:px-8">
+            <DescriptionComponent>
+              (i) any product liability claims;
+            </DescriptionComponent>
+            <DescriptionComponent>
+              (ii) any claim that the Application fails to conform to any
+              applicable legal or regulatory requirement;
+            </DescriptionComponent>
+            <DescriptionComponent>
+              (iii) any claim arising under consumer protection or similar
+              legislation.
+            </DescriptionComponent>
+          </div>
         </div>
         <br />
         <TitleComponent>15. Miscellaneous</TitleComponent>
