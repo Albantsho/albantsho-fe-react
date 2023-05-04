@@ -1,6 +1,7 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IResData } from "interfaces/response";
-import { IPayment, IWithdraw } from "interfaces/transaction";
+import { IPayment } from "interfaces/transaction";
+import { IWithdraw } from "interfaces/withdraw";
 import { useCallback } from "react";
 
 interface IData_getWithdraws {

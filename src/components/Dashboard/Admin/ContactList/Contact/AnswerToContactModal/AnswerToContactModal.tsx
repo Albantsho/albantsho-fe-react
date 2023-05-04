@@ -1,4 +1,4 @@
-import { IconButton, Modal, Slide } from "@mui/material";
+import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import TextEditor from "@shared/TextEditor/TextEditor";
@@ -73,10 +73,15 @@ const AnswerToContactModal = ({
           >
             <AiOutlineClose />
           </IconButton>
-          <TextEditor
-            initialValue={initialValue}
-            textEditorValue={textEditorValue}
-          />
+          <Typography variant="h5" color="primary">
+            Answer To Contact
+          </Typography>
+          <div className="max-h-96 overflow-y-auto shadow-md shadow-[#f9f9f9]">
+            <TextEditor
+              initialValue={initialValue}
+              textEditorValue={textEditorValue}
+            />
+          </div>
           <div className="flex w-full justify-start gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
               loading={loadingAnswerToContact}

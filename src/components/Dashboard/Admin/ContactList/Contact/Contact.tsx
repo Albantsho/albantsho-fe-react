@@ -1,10 +1,15 @@
 import { IconButton, SvgIcon, Typography } from "@mui/material";
 import { IContact } from "interfaces/contact";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { AiOutlineEdit, AiOutlineFileDone } from "react-icons/ai";
-import AnswerToContactModal from "./AnswerToContactModal/AnswerToContactModal";
+import AdminAnswerModal from "./AdminAnswerModal/AdminAnswerModal";
 import ContactImage from "./assets/contact-image.png";
+
+const AnswerToContactModal = dynamic(
+  () => import("./AnswerToContactModal/AnswerToContactModal")
+);
 
 interface IProps {
   contact: IContact;
@@ -12,12 +17,18 @@ interface IProps {
 }
 
 const Contact = ({ contact, refetch }: IProps) => {
-  const { _id, createdAt, email, message, answered } = contact;
+  const { _id, createdAt, email, message, answered, answer } = contact;
   const [openAnswerToContactModal, setOpenAnswerToContactModal] =
+    useState(false);
+  const [openAdminAnswerToContactModal, setOpenAdminAnswerToContactModal] =
     useState(false);
 
   const handleOpenAnswerToContactModal = () =>
     setOpenAnswerToContactModal(true);
+  const handleOpenAdminAnswerToContactModal = () =>
+    setOpenAdminAnswerToContactModal(true);
+  const handleCloseAdminAnswerToContactModal = () =>
+    setOpenAdminAnswerToContactModal(false);
 
   return (
     <>
@@ -72,7 +83,10 @@ const Contact = ({ contact, refetch }: IProps) => {
               />
             </IconButton>
           ) : (
-            <IconButton color="primary">
+            <IconButton
+              onClick={handleOpenAdminAnswerToContactModal}
+              color="primary"
+            >
               <SvgIcon
                 inheritViewBox
                 fontSize="medium"
@@ -83,12 +97,27 @@ const Contact = ({ contact, refetch }: IProps) => {
           )}
         </div>
       </div>
-      <AnswerToContactModal
-        refetch={refetch}
-        contact={contact}
-        openAnswerToContactModal={openAnswerToContactModal}
-        setOpenAnswerToContactModal={setOpenAnswerToContactModal}
-      />
+      <Suspense fallback={null}>
+        {openAnswerToContactModal ? (
+          <AnswerToContactModal
+            refetch={refetch}
+            contact={contact}
+            openAnswerToContactModal={openAnswerToContactModal}
+            setOpenAnswerToContactModal={setOpenAnswerToContactModal}
+          />
+        ) : null}
+      </Suspense>
+      <Suspense fallback={null}>
+        {openAdminAnswerToContactModal ? (
+          <AdminAnswerModal
+            openAdminAnswerToContactModal={openAdminAnswerToContactModal}
+            handleCloseAdminAnswerToContactModal={
+              handleCloseAdminAnswerToContactModal
+            }
+            adminAnswer={answer}
+          />
+        ) : null}
+      </Suspense>
     </>
   );
 };
