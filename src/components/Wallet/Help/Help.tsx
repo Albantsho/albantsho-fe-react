@@ -2,7 +2,6 @@ import { Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import FAQAccordion from "components/FAQs/FAQAccordion/FAQAccordion";
-import Questions from "components/FAQs/Questions/Questions";
 import Link from "next/link";
 import routes from "routes/routes";
 import useHelp from "./useHelp";

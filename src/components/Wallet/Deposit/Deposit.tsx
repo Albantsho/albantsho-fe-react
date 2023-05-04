@@ -5,8 +5,7 @@ import PaymentModal from "./PaymentModal/PaymentModal";
 import useDeposit from "./useDeposit";
 
 const Deposit = () => {
-  const { errors, handleSubmit, amount, onSubmit, register, setAmount } =
-    useDeposit();
+  const { errors, handleSubmit, amount, onSubmit, register } = useDeposit();
 
   return (
     <form

@@ -1,9 +1,7 @@
 import { ButtonGroup, LinearProgress, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import { IAbstractFormValues } from "interfaces/abstract";
 import Image from "next/image";
 import type { DropzoneState } from "react-dropzone";
-import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import UploadFile from "./assets/Upload-file.png";
 
 interface IProps {

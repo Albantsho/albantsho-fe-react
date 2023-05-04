@@ -1,11 +1,8 @@
 import { Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import useAiApi from "apis/ai.api";
-import Editor from "components/AiWrite/Editor/Editor";
-import { useState } from "react";
 import { useMutation } from "react-query";
 import { SyncLoader } from "react-spinners";
-import customHandler from "utils/custom-handler";
 import errorHandler from "utils/error-handler";
 
 interface IProps {
@@ -23,7 +20,6 @@ const AddDetailToStory = ({
   character,
   setSuggestResponse,
 }: IProps) => {
-  const [detail, setDetail] = useState("");
   const { questionFromAi } = useAiApi();
 
   const { isLoading: loadingAddDetailToStory, mutate: mutateAddDetailToStory } =
@@ -43,16 +39,8 @@ const AddDetailToStory = ({
       }
     );
 
-  const handleChangeValue = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setDetail(e.target.value);
-
   const handleSendQuestionToAi = () => {
-    // if (detail.length < 5) {
-    // customHandler("please type more than about you want.");
-    // return;
-    // } else {
     mutateAddDetailToStory();
-    // }
   };
 
   return (
@@ -105,18 +93,6 @@ const AddDetailToStory = ({
           className="resize-none mb-4 cursor-default text-primary-main h-full courier outline-none w-full block min-w-full p-5 min-h-[43vh] lg:min-h-[51.5vh]"
         />
       )}
-
-      {/* {loadingAddDetailToStory ? (
-        <div className="min-h-[43vh] bg-white lg:min-h-[51.5vh] flex justify-center items-center">
-          <SyncLoader color="#7953B5" />
-        </div>
-      ) : (
-        <Editor
-          placeholder="Write the details you want to add to your story here"
-          handleChangeValue={handleChangeValue}
-          value={detail}
-        />
-      )} */}
 
       <Btn
         loading={loadingAddDetailToStory}

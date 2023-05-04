@@ -1,7 +1,5 @@
 import ScriptSidebarOnMobile from "@shared/Layouts/ScriptLayout/ScriptList/ScriptSidebarOnMobile/ScriptSidebarOnMobile";
 import useDraftApi from "apis/Draft.api";
-import useCommentStore from "store/comments.store";
-import useUserStore from "store/user.store";
 import CommentList from "components/Script/CommentList/CommentList";
 import ExportFile from "components/Script/ExportFile/ExportFile";
 import ScenesList from "components/Script/ScenesList/ScenesList";
@@ -9,10 +7,12 @@ import ScriptDocument from "components/Script/ScriptDocument/ScriptDocument";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo } from "react";
+import { QueryClient } from "react-query";
 import { io } from "socket.io-client";
+import useCommentStore from "store/comments.store";
+import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 import ScriptEditor from "../ScriptEditor/ScriptEditor";
-import { QueryClient } from "react-query";
 
 interface IProps {
   script: IFullInformationScript;
@@ -29,7 +29,7 @@ const ScriptPage = ({
   setHtmlInitialValue,
   id,
 }: IProps) => {
-  const { query, replace, beforePopState, events, locale, route } = useRouter();
+  const { query, replace } = useRouter();
   const { getOneDraft } = useDraftApi();
   const { getComments, addNewComment } = useCommentStore((state) => ({
     getComments: state.getComments,

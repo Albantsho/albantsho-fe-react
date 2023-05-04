@@ -1,11 +1,8 @@
 import { Divider, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import useAiApi from "apis/ai.api";
-import Editor from "components/AiWrite/Editor/Editor";
-import { useState } from "react";
 import { useMutation } from "react-query";
 import { SyncLoader } from "react-spinners";
-import customHandler from "utils/custom-handler";
 import errorHandler from "utils/error-handler";
 
 interface IProps {

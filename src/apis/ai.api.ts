@@ -1,5 +1,4 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
-import { IResData } from "interfaces/response";
 import { useCallback } from "react";
 
 interface IPayloadCompleteScript {

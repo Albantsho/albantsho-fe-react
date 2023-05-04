@@ -1,5 +1,3 @@
-import LoaderLogo from "./assets/LoaderIcon.svg";
-import { SvgIcon } from "@mui/material";
 import { DotLoader } from "react-spinners";
 
 interface IProps {

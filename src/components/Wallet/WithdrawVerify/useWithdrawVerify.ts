@@ -1,26 +1,13 @@
-import useAuthApi, {
-  type IData_AuthorizationUser
-} from "apis/Auth.api";
 import useWithdrawApi, { type IPayloadWithdrawVerify } from "apis/withdraw.api";
 import { useRouter } from "next/router";
 import React, { FormEvent, useRef, useState } from "react";
-import { QueryClient, useMutation } from "react-query";
-import routes from "routes/routes";
-import useUserStore from "store/user.store";
+import { useMutation } from "react-query";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
 
-const queryClient = new QueryClient();
-
 const useWithdrawVerify = () => {
-  const { user } = useUserStore.getState();
   const [countDownKey, setCountDownKey] = useState(1);
-  const { setAccessToken, authenticationUser } = useUserStore((state) => ({
-    setAccessToken: state.setAccessToken,
-    authenticationUser: state.authenticationUser,
-  }));
-  const { replace, query } = useRouter();
-  const { resendCode } = useAuthApi();
+  const { query } = useRouter();
   const { withdrawVerify, resendOtp } = useWithdrawApi();
   const inputs = useRef<HTMLInputElement[]>([]);
   const [formValues, setFormValues] = useState<{ [key: number]: string; }>({

@@ -9,7 +9,6 @@ import {
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { bgArray } from "assets/colors/color-list";
 import { IComment } from "interfaces/comment";
-import Link from "next/link";
 import React, { useMemo } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { Socket } from "socket.io-client";

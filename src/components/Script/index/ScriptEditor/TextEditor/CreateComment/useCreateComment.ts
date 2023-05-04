@@ -51,7 +51,7 @@ const useCreateComment = ({
       );
 
       if (findEmail || res.script.author.email === data.email) {
-        const res = socket.emit("createComment", {
+        socket.emit("createComment", {
           message: data.comment,
           positionX,
           positionY,

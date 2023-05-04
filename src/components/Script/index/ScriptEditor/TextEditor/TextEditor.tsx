@@ -55,7 +55,6 @@ const TextEditor = ({
     contextMenu,
     createCommentFunc,
     ref,
-    mouse,
     cancelComment,
     addComment,
     elementInform,

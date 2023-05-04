@@ -19,7 +19,7 @@ const TrendingStories = dynamic(
   () => import("components/Home/TrendingStories/TrendingStories")
 );
 const Footer = dynamic(() => import("@shared/Footer/Footer"));
-const FAQs = dynamic(() => import("components/Home/FAQs/FAQs"));
+// const FAQs = dynamic(() => import("components/Home/FAQs/FAQs"));
 
 const links = [
   { title: "Home", href: routes.home.url },

@@ -1,6 +1,7 @@
 import { CacheProvider, type EmotionCache } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
+import Loader from "@shared/Loader/Loader";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Authorization from "components/Authorization/Authorization";
@@ -9,14 +10,12 @@ import NextProgress from "next-progress";
 import { AppProps } from "next/app";
 import "normalize.css";
 import { useEffect, useState } from "react";
-import { QueryClientProvider, QueryClient } from "react-query";
+import { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import "styles/globals.css";
 import theme from "styles/themes/theme";
 import createEmotionCache from "utils/create-emotion-cache";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { Toaster } from "react-hot-toast";
-import Loader from "@shared/Loader/Loader";
-import Script from "next/script";
 
 const clientSideEmotionCache = createEmotionCache();
 

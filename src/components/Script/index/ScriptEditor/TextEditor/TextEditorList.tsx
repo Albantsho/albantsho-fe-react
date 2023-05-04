@@ -12,7 +12,6 @@ import { IResData } from "interfaces/response";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { AiOutlineSetting } from "react-icons/ai";
 import { RiFileUserLine, RiSave3Fill } from "react-icons/ri";
 import { QueryClient, useMutation } from "react-query";

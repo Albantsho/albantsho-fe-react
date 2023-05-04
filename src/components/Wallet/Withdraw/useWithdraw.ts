@@ -1,5 +1,4 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import useWalletApi from "apis/Wallet.api";
 import useWithdrawApi from "apis/withdraw.api";
 import { useRouter } from "next/router";
 import { useState } from "react";

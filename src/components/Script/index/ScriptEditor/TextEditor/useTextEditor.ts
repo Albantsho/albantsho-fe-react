@@ -5,7 +5,6 @@ import { IEditor } from "interfaces/slate";
 import { useEffect, useRef, useState } from "react";
 import { Editor, Transforms, type BaseOperation, type Descendant } from "slate";
 import { Socket } from "socket.io-client";
-import useCommentStore from "store/comments.store";
 import useScriptValueStore from "store/scriptValue.store";
 import { serializeWithDiv } from "utils/serialize-slate";
 import useBlockButton from "./hooks/useBlockbutton";

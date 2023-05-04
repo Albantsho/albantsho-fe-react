@@ -1,10 +1,8 @@
 import GreenArrowIcon from "@assets/icons/green-arrow.svg";
 import PurpleArrowIcon from "@assets/icons/purple-arrow.svg";
 import YellowArrowIcon from "@assets/icons/yellow-arrow.svg";
-import { Box, SvgIcon } from "@mui/material";
+import { SvgIcon } from "@mui/material";
 import Image from "next/image";
-import LeftMonitorImg from "./assets/left-monitor.png";
-import RightMonitorImg from "./assets/right-monitor.png";
 import PlatformImg from "./assets/platform.png";
 
 const Monitors = () => {

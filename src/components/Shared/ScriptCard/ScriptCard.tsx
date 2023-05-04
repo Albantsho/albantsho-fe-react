@@ -2,7 +2,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Chip,
   Icon,
   Typography,

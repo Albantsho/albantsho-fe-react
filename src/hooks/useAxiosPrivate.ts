@@ -1,8 +1,6 @@
 import { apiPrivate } from "apis/configs/axios.config";
-import useUserStore from "store/user.store";
 import { useEffect } from "react";
-import Router from "next/router";
-import routes from "routes/routes";
+import useUserStore from "store/user.store";
 
 const useAxiosPrivate = () => {
   const { setAccessToken, accessToken, logOutUser } = useUserStore((state) => ({

@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import useScripBidApi from "apis/ScripBid.api";
-import { IBid, IBidForScript } from "interfaces/bid";
+import { IBid } from "interfaces/bid";
 import { IResData } from "interfaces/response";
 import { IFullInformationScript } from "interfaces/script";
 import dynamic from "next/dynamic";
