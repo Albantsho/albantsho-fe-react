@@ -299,6 +299,16 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["admin"],
   },
+  withdrawsAdminDashboard: {
+    url: `/dashboard/admin/withdraws`,
+    mustAuthenticated: "yes",
+    permission: ["admin"],
+  },
+  withdrawsAdminDashboardTabs: {
+    url: (query: string) => `/dashboard/admin/withdraws${query}`,
+    mustAuthenticated: "yes",
+    permission: ["admin"],
+  },
   reviewersAdminDashboard: {
     url: `/dashboard/admin/reviewers`,
     mustAuthenticated: "yes",

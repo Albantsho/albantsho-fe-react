@@ -2,12 +2,13 @@ import useWithdrawApi, { type IPayloadWithdrawVerify } from "apis/withdraw.api";
 import { useRouter } from "next/router";
 import React, { FormEvent, useRef, useState } from "react";
 import { useMutation } from "react-query";
+import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
 
 const useWithdrawVerify = () => {
   const [countDownKey, setCountDownKey] = useState(1);
-  const { query } = useRouter();
+  const { query, replace } = useRouter();
   const { withdrawVerify, resendOtp } = useWithdrawApi();
   const inputs = useRef<HTMLInputElement[]>([]);
   const [formValues, setFormValues] = useState<{ [key: number]: string; }>({
@@ -28,8 +29,7 @@ const useWithdrawVerify = () => {
     },
     onSuccess: (data) => {
       successHandler(data.message);
-      //TODO => redirect to success withdraw
-      "";
+      replace(routes.wallet.url);
     },
   });
 

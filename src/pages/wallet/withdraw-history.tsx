@@ -23,7 +23,7 @@ const PaymentHistoryPage: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Payment History</title>
+        <title>Albantsho || Withdraw History</title>
       </Head>
       {!loadingGetWithdraws && withdrawsData ? (
         <WithdrawHistory

@@ -16,6 +16,7 @@ import StarIcon from "../assets/star-icon.svg";
 import UserIcon from "../assets/user-icon.svg";
 import NFTIcon from "@assets/icons/mini-logo.svg";
 import { MdOutlineContactSupport } from "react-icons/md";
+import { GiReceiveMoney } from "react-icons/gi";
 
 const listRoutes = [
   { route: routes.blogsAdminDashboard.url, title: "Blogs", icon: BlogIcon },
@@ -34,6 +35,11 @@ const listRoutes = [
     route: routes.contactsAdminDashboard.url,
     title: "Contacts",
     icon: MdOutlineContactSupport,
+  },
+  {
+    route: routes.withdrawsAdminDashboard.url,
+    title: "Withdraws",
+    icon: GiReceiveMoney,
   },
 ];
 

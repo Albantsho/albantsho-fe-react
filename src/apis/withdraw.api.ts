@@ -18,12 +18,22 @@ export interface IPayloadWithdrawVerify {
   withdrawId: string;
 }
 
-interface IData_allWeblogs {
+interface IData_allWithdraws {
   withdraws: IWithdraw[];
   currentPage: number;
   pagesCount: number;
 }
 
+interface IPayloadUpdateStatusWithdraw {
+  status: "done" | "rejected" | "onchecking";
+}
+
+interface IFilterWithdrawsQueryValues {
+  status: string;
+  page: number;
+  limit: number;
+  search: string;
+}
 
 const useWithdrawApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
@@ -73,7 +83,7 @@ const useWithdrawApi = (controller?: AbortController) => {
   }, [axiosPrivate, controller?.signal]);
 
   const getAllWithdraws = useCallback(async () => {
-    const res = await axiosPrivate.get<IResData<IData_allWeblogs>>(
+    const res = await axiosPrivate.get<IResData<IData_allWithdraws>>(
       `/withdraw/user/all`
       ,
       {
@@ -84,12 +94,24 @@ const useWithdrawApi = (controller?: AbortController) => {
     return res.data.data;
   }, [axiosPrivate, controller?.signal]);
 
-  const getAllWithdrawsForAdmin = useCallback(async () => {
-    const res = await axiosPrivate.get<IResData<IData_allWeblogs>>(
-      `/withdraw/all`,
+  const getAllWithdrawsForAdmin = useCallback(async ({ limit, page, status, search }: IFilterWithdrawsQueryValues) => {
+    const res = await axiosPrivate.get<IResData<IData_allWithdraws>>(
+      `/withdraw/all?limit=${limit}&page=${page}&status=${status}&search=${search}`,
       {
         signal: controller?.signal,
       }
+    );
+    return res.data.data;
+  }, [axiosPrivate, controller?.signal]);
+
+  const updateStatusWithdraw = useCallback(async (withdrawId: string, { status }: IPayloadUpdateStatusWithdraw) => {
+    const res = await axiosPrivate.patch(
+      `/withdraw/update/status/${withdrawId}`,
+      {
+        status
+      }, {
+      signal: controller?.signal,
+    }
     );
     return res.data;
   }, [axiosPrivate, controller?.signal]);
@@ -100,7 +122,8 @@ const useWithdrawApi = (controller?: AbortController) => {
     withdrawDelete,
     getAllWithdraws,
     getAllWithdrawsForAdmin,
-    resendOtp
+    resendOtp,
+    updateStatusWithdraw
   };
 };
 
