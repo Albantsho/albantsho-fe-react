@@ -46,9 +46,7 @@ const OneReviewPage: NextPageWithLayout = () => {
       {loading ? (
         <Loader setCustomHeight="min-h-[55vh]" />
       ) : (
-        <>
-          <OneReview reviewInformation={reviewInformation} />
-        </>
+        <OneReview reviewInformation={reviewInformation} />
       )}
     </>
   );

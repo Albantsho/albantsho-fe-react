@@ -1,14 +1,14 @@
+import success from "@assets/images/success.png";
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Footer from "@shared/Footer/Footer";
-import Head from "next/head";
-import Link from "next/link";
-import success from "@assets/images/success.png";
-import Image from "next/image";
-import routes from "routes/routes";
-import { Suspense } from "react";
-import { useRouter } from "next/router";
 import Nav from "@shared/Nav/Nav";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Suspense } from "react";
+import routes from "routes/routes";
 
 const links = [
   { title: "Home", href: routes.home.url },

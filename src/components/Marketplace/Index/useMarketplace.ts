@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import routes from "routes/routes";
 
-const useMarketPlace = () => {
+const useMarketplace = () => {
   const { getAllScripts } = useScriptsApi();
   const { query, push } = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
@@ -71,4 +71,4 @@ const useMarketPlace = () => {
   };
 };
 
-export default useMarketPlace;
+export default useMarketplace;

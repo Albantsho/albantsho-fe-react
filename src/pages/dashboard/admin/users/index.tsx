@@ -79,7 +79,7 @@ const UsersPage: NextPageWithLayout = () => {
             )}
           </>
         ) : (
-          <div className="w-fit  mx-auto text-center min-h-[60vh] flex items-center">
+          <div className="w-fit mx-auto text-center min-h-[60vh] flex items-center">
             <Image
               width={384}
               height={384}

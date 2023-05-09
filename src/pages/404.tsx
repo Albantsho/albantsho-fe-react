@@ -22,7 +22,12 @@ const NotfoundPage = () => {
       </Head>
       <main className="min-h-screen w-full">
         {/* Rendering navigation component with passed props */}
-        <Nav position="static" links={links} secondaryUnderLineColor={false} />
+        <Nav
+          className="shadow-primary"
+          position="static"
+          links={links}
+          secondaryUnderLineColor={false}
+        />
         <div className="w-full h-full flex items-center justify-center">
           {/* Next.js optimized image component */}
           <Image

@@ -1,7 +1,6 @@
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
 import Loader from "@shared/Loader/Loader";
-import useContact from "apis/Contact.api";
 import useWithdrawApi from "apis/withdraw.api";
 import TabButtons from "components/Dashboard/Admin/Withdraws/TabButtons/TabButtons";
 import Withdraws from "components/Dashboard/Admin/Withdraws/Withdraws";
@@ -10,7 +9,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
-import routes from "routes/routes";
 import { NextPageWithLayout } from "../../../_app";
 
 const controller = new AbortController();

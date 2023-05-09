@@ -1,9 +1,8 @@
-import Head from "next/head";
-
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
-import ResetPasswordConfirmation from "components/ResetPasswordConfirmation/ResetPasswordConfirmation";
-import { NextPageWithLayout } from "./_app";
 import AuthenticationNavbar from "@shared/Layouts/AuthenticationLayout/AuthenticationNavbar/AuthenticationNavbar";
+import ResetPasswordConfirmation from "components/ResetPasswordConfirmation/ResetPasswordConfirmation";
+import Head from "next/head";
+import { NextPageWithLayout } from "./_app";
 
 const ResetPasswordConfirmationPage: NextPageWithLayout = () => {
   return (

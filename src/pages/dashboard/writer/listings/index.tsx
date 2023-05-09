@@ -50,7 +50,6 @@ const Listings: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Listings</title>
       </Head>
-
       <TabButtons />
       <DashboardSearch
         handleSearch={handleSearch}

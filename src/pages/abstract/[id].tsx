@@ -15,9 +15,13 @@ const links = [
   { title: "FAQ", href: routes.FAQs.url },
 ];
 
+const controller = new AbortController();
+
 const AbstractPage = () => {
   const { query } = useRouter();
-  const { getScriptUnComplete } = useScriptsApi();
+
+  // Use custom hook useScriptsApi to retrieve a script data
+  const { getScriptUnComplete } = useScriptsApi(controller);
 
   const scriptID = typeof query?.id === "string" ? query.id : "";
 

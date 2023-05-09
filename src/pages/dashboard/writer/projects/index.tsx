@@ -83,7 +83,7 @@ const Projects: NextPageWithLayout = () => {
           {query.archive === "true" && (
             <ArchiveList refetch={refetch} listScripts={data.scripts} />
           )}
-          {data.pagesCount >= 2 && (
+          {data.pagesCount > 1 && (
             <CustomPaginationComponent
               key={Math.random()}
               pageCount={data.pagesCount}

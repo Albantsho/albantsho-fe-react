@@ -1,8 +1,8 @@
-import Head from "next/head";
-import CheckEmail from "components/CheckEmail/CheckEmail";
 import AuthenticationLayout from "@shared/Layouts/AuthenticationLayout/AuthenticationLayout";
-import { NextPageWithLayout } from "./_app";
 import AuthenticationNavbar from "@shared/Layouts/AuthenticationLayout/AuthenticationNavbar/AuthenticationNavbar";
+import CheckEmail from "components/CheckEmail/CheckEmail";
+import Head from "next/head";
+import { NextPageWithLayout } from "./_app";
 
 const CheckEmailPage: NextPageWithLayout = () => {
   return (

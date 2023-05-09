@@ -18,6 +18,7 @@ import { useQuery } from "react-query";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
+
 const BlogsPage: NextPageWithLayout = () => {
   const { query, push } = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
