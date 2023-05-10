@@ -3,15 +3,6 @@ import { styled } from "@mui/system";
 import { forwardRef } from "react";
 import LoadingButton, { type LoadingButtonProps } from "@mui/lab/LoadingButton";
 
-/**
- * My Awesome Component
- *
- * @example
- * <Btn />
- *
- * @prop {string} text - The text to display
- */
-
 const ButtonRoot = forwardRef<HTMLButtonElement, LoadingButtonProps>(
   ({ children, ...props }, ref) => (
     <LoadingButton
