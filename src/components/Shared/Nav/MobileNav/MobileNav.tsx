@@ -10,10 +10,10 @@ import {
   SvgIcon,
 } from "@mui/material";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
-import useUserStore from "store/user.store";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
-import routes from "routes/routes";
+import useUserStore from "store/user.store";
+import routes from "utils/routes";
 import useMobileNav from "./useMobileNav";
 
 interface IProps {

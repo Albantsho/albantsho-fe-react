@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Suspense, useState } from "react";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import DescriptionComponent from "../DescriptionTypeA/DescriptionComponent/DescriptionComponent";
 
 const SuccessReviewModal = dynamic(

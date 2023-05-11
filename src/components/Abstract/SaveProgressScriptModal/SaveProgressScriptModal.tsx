@@ -4,7 +4,7 @@ import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 interface IProps {
   openSaveProgressModal: boolean;

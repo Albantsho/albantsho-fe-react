@@ -4,14 +4,14 @@ import {
   ListItemText,
   MenuItem,
   Select,
-  type SelectChangeEvent,
   SvgIcon,
+  type SelectChangeEvent,
 } from "@mui/material";
 import { useRouter } from "next/router";
-
 import { useEffect, useState } from "react";
 import { MdDone } from "react-icons/md";
-import routes from "routes/routes";
+import routes from "utils/routes";
+
 const menuItems = [
   { query: "", value: "AllScript", name: "All scripts" },
   { query: "?reviewed=false", value: "InReview", name: "In review" },

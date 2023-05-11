@@ -13,7 +13,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { ClipLoader } from "react-spinners";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import EmptyNotification from "./assets/empty-notification.svg";
 import useNotificationComponent from "./useNotificationComponent";
 

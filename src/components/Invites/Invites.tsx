@@ -10,7 +10,7 @@ import {
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdOutlineDone } from "react-icons/md";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import useInvites from "./useInvites";
 import Image from "next/image";
 

@@ -2,7 +2,7 @@ import { IconButton, Modal } from "@mui/material";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import ExportFile from "../ExportFile";
 
 interface IProps {

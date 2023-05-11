@@ -5,7 +5,7 @@ import {
   FlutterWaveResponse,
 } from "flutterwave-react-v3/dist/types";
 import { useRouter } from "next/router";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import useUserStore from "store/user.store";
 import customHandler from "utils/custom-handler";
 

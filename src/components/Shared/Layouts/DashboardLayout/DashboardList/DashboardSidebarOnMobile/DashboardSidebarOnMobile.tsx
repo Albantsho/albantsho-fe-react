@@ -3,7 +3,7 @@ import useUserStore from "store/user.store";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import listings from "../assets/listings.png";
 import projects from "../assets/projects.png";
 import reviews from "../assets/reviews.png";

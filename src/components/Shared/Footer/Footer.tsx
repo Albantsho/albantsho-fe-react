@@ -8,9 +8,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import { useMutation } from "react-query";
-import routes from "routes/routes";
 import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 import successHandler from "utils/success-handler";
 import * as Yup from "yup";
 

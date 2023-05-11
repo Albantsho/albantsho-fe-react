@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import useHeroSection from "./useHeroSection";
 
 interface IProps {

@@ -1,8 +1,8 @@
 import Loader from "@shared/Loader/Loader";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import routes from "routes/routes";
 import useUserStore from "store/user.store";
+import routes from "utils/routes";
 
 const Authorization = ({ children }: React.PropsWithChildren) => {
   const { pathname, replace } = useRouter();

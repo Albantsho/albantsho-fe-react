@@ -25,7 +25,7 @@ import type {
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { AiOutlineSearch } from "react-icons/ai";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 interface IDraft {
   _id: string;

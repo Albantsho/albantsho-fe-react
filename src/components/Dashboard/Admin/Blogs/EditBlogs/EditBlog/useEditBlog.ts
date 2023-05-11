@@ -6,10 +6,10 @@ import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { QueryClient, useMutation } from "react-query";
-import routes from "routes/routes";
 import { convertToSlug } from "utils/convert-to-slug";
 import { deserializeBlogContent } from "utils/deserialize-blog-content";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 import { editBlogSchema } from "./validation/editBlog.validate";
 
 interface IEditWeblogFormValues {
@@ -47,7 +47,7 @@ const useEditBlog = ({
   const { mutate: editBlog, isLoading: loadingCreateWeblog } = useMutation<
     void,
     Error,
-    { weblog: IUpdateWeblogPayload; id: string }
+    { weblog: IUpdateWeblogPayload; id: string; }
   >((data) => updateWeblog(data.weblog, data.id), {
     onError: (error) => {
       errorHandler(error);

@@ -2,7 +2,7 @@
 import Nav from "@shared/Nav/Nav"; //? Navigation bar component
 import Head from "next/head"; //? Page head element component for metadata & title
 import Image from "next/image"; //? Next.js optimized image component
-import routes from "routes/routes"; //? Collection of routes
+import routes from "utils/routes"; //? Collection of routes
 
 //? Array of links to be shown on the nav bar component
 const links = [

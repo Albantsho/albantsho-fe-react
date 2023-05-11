@@ -5,7 +5,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import BlogIcon from "../assets/blog-icon.svg";
 import StarIcon from "../assets/star-icon.svg";
 import UserIcon from "../assets/user-icon.svg";

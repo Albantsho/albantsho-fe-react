@@ -5,7 +5,7 @@ import { SvgIcon } from "@mui/material";
 import Nav from "@shared/Nav/Nav";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import HeroSection from "./HeroSection/HeroSection";
 
 const links = [

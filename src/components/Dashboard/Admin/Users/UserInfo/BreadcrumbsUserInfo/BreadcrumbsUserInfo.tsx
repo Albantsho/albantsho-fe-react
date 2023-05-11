@@ -1,6 +1,6 @@
 import { Breadcrumbs, Link, SvgIcon, Typography } from "@mui/material";
 import PathIcon from "@assets/icons/path-icon.svg";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 interface IProps {
   name: string;

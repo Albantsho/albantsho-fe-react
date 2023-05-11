@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { QueryClient, useMutation } from "react-query";
-import routes from "routes/routes";
 import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 import { loginSchema } from "./validation/login.validation";
 interface IAuthLogin {
   email: string;
@@ -45,10 +45,10 @@ const useLoginForm = () => {
         data.user.userType === "writer"
           ? replace(routes.writerDashboard.url)
           : data.user.userType === "producer"
-          ? replace(routes.producerDashboard.url)
-          : data.user.userType === "admin"
-          ? replace(routes.adminDashboard.url)
-          : replace(routes.reviewerDashboard.url);
+            ? replace(routes.producerDashboard.url)
+            : data.user.userType === "admin"
+              ? replace(routes.adminDashboard.url)
+              : replace(routes.reviewerDashboard.url);
       }
     },
   });

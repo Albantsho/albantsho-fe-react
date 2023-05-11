@@ -1,11 +1,11 @@
 import { IconButton, Modal } from "@mui/material";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
-import routes from "routes/routes";
-import ScriptDocument from "../ScriptDocument";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { Socket } from "socket.io-client";
+import routes from "utils/routes";
+import ScriptDocument from "../ScriptDocument";
 
 interface IProps {
   openDocumentModal: boolean;

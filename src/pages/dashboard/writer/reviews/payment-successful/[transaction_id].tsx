@@ -6,7 +6,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import { NextPageWithLayout } from "../../../../_app";
 
 const PaymentSuccessful: NextPageWithLayout = () => {

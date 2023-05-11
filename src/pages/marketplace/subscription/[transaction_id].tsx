@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const links = [
   { title: "Home", href: routes.home.url },

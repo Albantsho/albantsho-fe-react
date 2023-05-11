@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const useMarketplace = () => {
   const { getAllScripts } = useScriptsApi();

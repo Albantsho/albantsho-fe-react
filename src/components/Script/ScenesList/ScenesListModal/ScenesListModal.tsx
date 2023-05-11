@@ -1,7 +1,7 @@
 import { Divider, IconButton, Modal, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import ScenesList from "../ScenesList";
 
 interface IProps {

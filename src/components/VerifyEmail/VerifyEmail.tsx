@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
 import Countdown, { zeroPad } from "react-countdown";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import useUserStore from "store/user.store";
 import useVerifyEmail from "./useVerifyEmail";
 

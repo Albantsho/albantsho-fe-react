@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import Link from "next/link";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const HeadingIDraftTAC = () => {
   return (

@@ -24,7 +24,7 @@ import {
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import ProfileMenu from "../../../../ProfileMenu/ProfileMenu";
 import useMobileNavDashboard from "./useMobileNavDashboard";
 import { GiReceiveMoney } from "react-icons/gi";

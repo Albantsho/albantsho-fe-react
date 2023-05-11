@@ -5,8 +5,8 @@ import EmailIcon from "@assets/icons/email.svg";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import Image from "next/image";
-import routes from "routes/routes";
 import useForgetPassword from "./useForgetPassword";
+import routes from "utils/routes";
 
 const ForgetPassword = () => {
   const { register, handleSubmit, onSubmit, errors, loading } =
@@ -95,7 +95,7 @@ const ForgetPassword = () => {
           <Typography className="text-grey-400 mb-1 futura">
             Already have an account?
             <Link
-              href={`${routes.signin.url}`}
+              href={routes.signin.url}
               className="text-success-500 ml-2"
             >
               Sign in

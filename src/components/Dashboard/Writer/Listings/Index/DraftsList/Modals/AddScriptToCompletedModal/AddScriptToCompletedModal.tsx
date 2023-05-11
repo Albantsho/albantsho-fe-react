@@ -5,7 +5,7 @@ import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 interface IProps {
   openAddToScript: boolean;

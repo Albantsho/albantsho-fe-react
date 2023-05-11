@@ -18,9 +18,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
-import routes from "routes/routes";
 import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 import { serializeWithoutDiv } from "utils/serialize-slate";
 
 interface IProps {

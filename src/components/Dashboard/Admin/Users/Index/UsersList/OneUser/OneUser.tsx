@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FaUserAlt } from "react-icons/fa";
 import { MdNotInterested } from "react-icons/md";
 import { SlDislike } from "react-icons/sl";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 interface IProps {
   user: IUserInformation;

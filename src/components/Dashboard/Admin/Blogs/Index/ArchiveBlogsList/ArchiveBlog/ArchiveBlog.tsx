@@ -5,7 +5,7 @@ import { Suspense, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsCursor } from "react-icons/bs";
 import { TfiTrash } from "react-icons/tfi";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const MoveBlogToTrashListModal = dynamic(
   () =>

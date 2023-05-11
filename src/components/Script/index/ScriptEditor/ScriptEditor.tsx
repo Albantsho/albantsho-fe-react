@@ -3,8 +3,8 @@ import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IFullInformationScript } from "interfaces/script";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import routes from "routes/routes";
 import { Socket } from "socket.io-client";
+import routes from "utils/routes";
 import TextEditorList from "./TextEditor/TextEditorList";
 
 interface IProps {

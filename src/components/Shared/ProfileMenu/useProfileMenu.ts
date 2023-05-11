@@ -1,9 +1,9 @@
 import useAuthApi from "apis/Auth.api";
-import useUserStore from "store/user.store";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import routes from "routes/routes";
+import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 
 const useProfileMenu = () => {
   const [openProfileMenu, setOpenProfileMenu] = useState<null | HTMLElement>(

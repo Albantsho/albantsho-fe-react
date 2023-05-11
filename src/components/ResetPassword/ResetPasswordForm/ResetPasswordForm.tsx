@@ -5,7 +5,7 @@ import ShowIcon from "@assets/icons/show-password.svg";
 import NotShowIcon from "@assets/icons/not-show-password.svg";
 import Btn from "@shared/Btn/Btn";
 import Link from "next/link";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import useResetPasswordForm from "./useResetPasswordForm";
 import ResetPasswordFormTitle from "../ResetPasswordFormTitle/ResetPasswordFormTitle";
 
@@ -138,10 +138,7 @@ const ResetPassword = () => {
         <div className="text-center mt-7 lg:hidden">
           <Typography className="text-grey-400 mb-1 futura">
             Don’t have an account yet?
-            <Link
-              href={`${routes.register.url}`}
-              className="text-success-500 ml-2"
-            >
+            <Link href={routes.register.url} className="text-success-500 ml-2">
               Sign up
             </Link>
           </Typography>

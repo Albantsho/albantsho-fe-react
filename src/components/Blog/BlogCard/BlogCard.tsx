@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { IWeblog } from "interfaces/weblog";
 import Link from "next/link";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 interface IProps {
   post: IWeblog;

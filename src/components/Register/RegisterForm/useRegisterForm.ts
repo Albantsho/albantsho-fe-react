@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { QueryClient, useMutation } from "react-query";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 import { registerSchema } from "./validation/register.validation";

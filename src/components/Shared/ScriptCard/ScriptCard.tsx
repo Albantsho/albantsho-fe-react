@@ -13,7 +13,7 @@ import CustomRating from "@shared/CustomRating/CustomRating";
 import { IScript } from "interfaces/script";
 import Image from "next/image";
 import Link from "next/link";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import useUserStore from "store/user.store";
 import ReviewedIcon from "./assets/reviewed.svg";
 

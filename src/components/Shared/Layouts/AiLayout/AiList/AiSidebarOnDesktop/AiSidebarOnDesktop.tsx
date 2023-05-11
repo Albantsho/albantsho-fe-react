@@ -15,7 +15,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { SiOpenai } from "react-icons/si";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const routesArray = [
   {

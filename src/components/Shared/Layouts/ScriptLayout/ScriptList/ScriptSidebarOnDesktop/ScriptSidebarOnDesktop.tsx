@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import Comment from "../assets/comment.svg";
 import Document from "../assets/document.svg";
 import Export from "../assets/export.svg";

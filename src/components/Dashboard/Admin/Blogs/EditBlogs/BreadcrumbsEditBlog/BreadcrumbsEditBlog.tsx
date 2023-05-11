@@ -11,7 +11,7 @@ import dynamic from "next/dynamic";
 import { Suspense, useState } from "react";
 import { MdOutlineFolder } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const MoveBlogToArchiveListModal = dynamic(
   () =>

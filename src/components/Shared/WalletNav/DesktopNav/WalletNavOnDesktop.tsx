@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import NotificationComponent from "@shared/NotificationComponent/NotificationComponent";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
 import Link from "next/link";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import ProfileLogo from "../assets/profile-logo.svg";
 
 const WalletNavOnDesktop = () => {
