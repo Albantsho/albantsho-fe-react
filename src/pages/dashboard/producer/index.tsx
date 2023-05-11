@@ -20,7 +20,9 @@ const Scripts: NextPageWithLayout = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const { data: producerScriptsData, isLoading: loadingGetProducerScripts } =
-    useQuery(["script", searchQuery], () => getProducerAllScripts(searchQuery));
+    useQuery(["my scripts", searchQuery], () =>
+      getProducerAllScripts(searchQuery)
+    );
 
   const {
     data: producerScriptsRequestData,
@@ -52,7 +54,9 @@ const Scripts: NextPageWithLayout = () => {
       {!loadingGetProducerScripts &&
       !loadingGetProducerRequestScripts &&
       producerScriptsData &&
-      producerScriptsRequestData ? (
+      producerScriptsData.scripts &&
+      producerScriptsRequestData &&
+      producerScriptsRequestData.scriptBids ? (
         <>
           {(!query.tab || query.tab === "current-bids") && (
             <CurrentBids

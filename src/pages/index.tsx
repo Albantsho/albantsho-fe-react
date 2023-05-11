@@ -19,7 +19,6 @@ const TrendingStories = dynamic(
   () => import("components/Home/TrendingStories/TrendingStories")
 );
 const Footer = dynamic(() => import("@shared/Footer/Footer"));
-const FAQs = dynamic(() => import("components/Home/FAQs/FAQs"));
 
 const links = [
   { title: "Home", href: routes.home.url },
@@ -49,7 +48,6 @@ const Home: NextPage = () => {
           <WhyAlbantsho />
           <Monitors />
           <Testimonials />
-          <FAQs />
           <TrendingStories />
         </Suspense>
       </main>

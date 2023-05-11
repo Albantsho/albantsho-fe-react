@@ -23,6 +23,7 @@ import CustomButtonScripts from "./CustomButtonScripts/CustomButtonScripts";
 import useProjectAccordion from "./useProjectAccordion";
 import { useRouter } from "next/router";
 import PublishScriptModal from "./PublishScriptModal/PublishScriptModal";
+import { toast } from "react-hot-toast";
 
 interface IProps {
   script: IWriterScript;
@@ -67,6 +68,12 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
       title: "SCRIPT",
       icon: addScriptIcon,
       functionality: () => {
+        if (script.scriptFileType === "application/pdf") {
+          toast.error(
+            "You cannot write a script for a script that you have uploaded a PDF."
+          );
+          return;
+        }
         push(routes.script.dynamicUrl(script._id));
       },
     },
@@ -105,12 +112,12 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
             <div className="flex justify-center w-[72px] h-[72px] items-center self-start  bg-tinted-100/60 rounded-md overflow-hidden">
               {script.image ? (
                 <Image
-                  loading="lazy"
                   style={{ width: "72px", height: "72px" }}
                   width={72}
                   height={72}
                   src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
                   alt={script.title}
+                  unoptimized
                 />
               ) : (
                 <SvgIcon

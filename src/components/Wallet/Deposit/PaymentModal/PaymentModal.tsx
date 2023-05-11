@@ -1,6 +1,9 @@
 import useWalletApi from "apis/Wallet.api";
 import { closePaymentModal, useFlutterwave } from "flutterwave-react-v3";
-import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
+import {
+  type FlutterwaveConfig,
+  FlutterWaveResponse,
+} from "flutterwave-react-v3/dist/types";
 import { useRouter } from "next/router";
 import routes from "routes/routes";
 import useUserStore from "store/user.store";
@@ -13,9 +16,9 @@ interface IProps {
 const PaymentModal = ({ amount }: IProps) => {
   const { increaseWalletBalance } = useWalletApi();
   const user = useUserStore((state) => state.user);
-  const { replace } = useRouter();
+  const { replace, reload } = useRouter();
 
-  const config = {
+  const config: FlutterwaveConfig = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY as string,
     tx_ref: `${Date.now()}`,
     amount,
@@ -59,6 +62,7 @@ const PaymentModal = ({ amount }: IProps) => {
       handleFlutterPayment({
         callback: paymentResponse,
         onClose: () => {
+          reload();
           customHandler("payment Field or canceled, please try again");
         },
       });

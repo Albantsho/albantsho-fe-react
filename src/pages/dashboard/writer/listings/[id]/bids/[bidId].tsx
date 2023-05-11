@@ -43,7 +43,7 @@ const BidsPage: NextPageWithLayout = () => {
   });
 
   const { data: bidScriptData, isLoading: isLoadingGetBidScript } = useQuery(
-    ["script", bidID],
+    ["script one bid", bidID],
     () => getBidScript(bidID),
     {
       onError: (err) => errorHandler(err),
@@ -76,7 +76,9 @@ const BidsPage: NextPageWithLayout = () => {
       {!isLoadingGetScript &&
       !isLoadingGetBidScript &&
       bidScriptData &&
-      scriptData ? (
+      bidScriptData.scriptBid &&
+      scriptData &&
+      scriptData.script ? (
         <>
           <Bids
             script={scriptData.script}
@@ -96,7 +98,8 @@ const BidsPage: NextPageWithLayout = () => {
             <Suspense fallback={null}>
               <AcceptOfferModal
                 title={scriptData.script.title}
-                auction={bidScriptData.scriptBid}
+                id={bidScriptData.scriptBid._id}
+                amount={bidScriptData.scriptBid.amount}
                 openAcceptOffer={openAcceptOffer}
                 setOpenAcceptOffer={setOpenAcceptOffer}
               />

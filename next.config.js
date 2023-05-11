@@ -8,6 +8,7 @@ const nextConfig = {
       "flagcdn.com",
       "server.albantsho.com",
       "localhost",
+      "fastly.picsum.photos",
     ],
   },
   webpack(config) {
@@ -44,4 +45,9 @@ const nextConfig = {
   output: "standalone",
 };
 
-module.exports = nextConfig;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+module.exports = withBundleAnalyzer(nextConfig);

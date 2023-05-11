@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
+import Link from "next/link";
 import type { FieldErrorsImpl, UseFormRegister } from "react-hook-form";
 import { AiFillInfoCircle } from "react-icons/ai";
 
@@ -52,10 +53,16 @@ const StoryLine = ({ register, errors, step, script }: IProps) => {
             },
           }}
           helperText={
-            <span className="flex items-center gap-2">
-              <AiFillInfoCircle className="text-xl" />
-              What’s a tagline?
-            </span>
+            <Link
+              target="_blank"
+              className="text-[#5D5FEF]"
+              href="https://blog.albantsho.com/tagline-vs-logline/"
+            >
+              <span className="flex items-center gap-2">
+                <AiFillInfoCircle className="text-xl" />
+                What’s a tagline?
+              </span>
+            </Link>
           }
         />
         {errors.tagline?.message && (
@@ -90,10 +97,16 @@ const StoryLine = ({ register, errors, step, script }: IProps) => {
             },
           }}
           helperText={
-            <span className="flex items-center gap-2">
-              <AiFillInfoCircle className="text-xl" />
-              See sample logline that works
-            </span>
+            <Link
+              target="_blank"
+              className="text-[#5D5FEF]"
+              href="https://blog.albantsho.com/tagline-vs-logline/"
+            >
+              <span className="flex items-center gap-2">
+                <AiFillInfoCircle className="text-xl" />
+                See sample logline that works
+              </span>
+            </Link>
           }
         />
         {errors.logLine?.message && (
@@ -129,10 +142,16 @@ const StoryLine = ({ register, errors, step, script }: IProps) => {
             },
           }}
           helperText={
-            <span className="flex items-center gap-2">
-              <AiFillInfoCircle className="text-xl" />
-              Write a synopsis that slaps
-            </span>
+            <Link
+              target="_blank"
+              className="text-[#5D5FEF]"
+              href="https://blog.albantsho.com/sell-your-story-writing-a-strong-synopsis-for-your-screenplay/"
+            >
+              <span className="flex items-center gap-2">
+                <AiFillInfoCircle className="text-xl" />
+                Write a synopsis that slaps
+              </span>
+            </Link>
           }
         />
         {errors.synopsis?.message && (

@@ -7,6 +7,7 @@ import {
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
+import Link from "next/link";
 import type {
   Control,
   FieldErrorsImpl,
@@ -188,10 +189,16 @@ const GeneralScriptProfile = ({
             },
           }}
           helperText={
-            <span className="flex items-center gap-2">
-              <AiFillInfoCircle className="text-xl" />
-              note: ways to create killer titles
-            </span>
+            <Link
+              className="text-[#5D5FEF]"
+              href="https://blog.albantsho.com/the-title-game-how-to-pick-a-winning-name-for-your-screenplay/"
+              target="_blank"
+            >
+              <span className="flex items-center gap-2">
+                <AiFillInfoCircle className="text-xl" />
+                note: ways to create killer titles
+              </span>
+            </Link>
           }
         />
         {errors.title?.message && (
@@ -339,10 +346,16 @@ const GeneralScriptProfile = ({
                     },
                   }}
                   helperText={
-                    <span className="flex items-center gap-2">
-                      <AiFillInfoCircle className="text-xl" />
-                      Understanding screenplay storyTopics
-                    </span>
+                    <Link
+                      target="_blank"
+                      className="text-[#5D5FEF]"
+                      href="https://blog.albantsho.com/tagline-vs-logline/"
+                    >
+                      <span className="flex items-center gap-2">
+                        <AiFillInfoCircle className="text-xl" />
+                        Understanding screenplay storyTopics
+                      </span>
+                    </Link>
                   }
                 />
               )}

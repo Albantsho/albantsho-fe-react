@@ -66,7 +66,7 @@ const PlaceBid = ({ setOpenBidSuccessful, script, bid, ethPrice }: IProps) => {
   };
 
   return (
-    <div className="flex gap-6 mt-4 rounded-md py-6 px-5 sm:py-12 sm:px-6 lg:px-8 xl:px-12 xl:py-8 sm:mt-10 md:gap-6 flex-col bg-tinted-50/60 flex-1 w-full">
+    <div className="flex gap-6 mt-4 rounded-md py-6 px-4 sm:px-6 lg:px-8 xl:py-8 sm:mt-10 md:gap-6 flex-col bg-tinted-50/60 flex-1 w-full">
       {!script.sold ? (
         <>
           <div className="flex flex-col">

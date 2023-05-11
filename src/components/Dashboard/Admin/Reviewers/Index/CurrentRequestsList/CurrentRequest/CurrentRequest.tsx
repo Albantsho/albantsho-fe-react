@@ -46,6 +46,7 @@ const CurrentRequest = ({
                 loading="lazy"
                 src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${image}`}
                 alt={title}
+                unoptimized
               />
             ) : (
               <div className="flex justify-center w-[64px] h-[64px] items-center self-start  bg-tinted-100/60 rounded-md">

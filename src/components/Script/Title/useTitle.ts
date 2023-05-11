@@ -20,11 +20,14 @@ interface ITitleFormValues {
 
 interface IProps {
   script: IFullInformationScript;
+  refetch: any;
 }
 
-const useTitle = ({ script }: IProps) => {
+const useTitle = ({ script, refetch }: IProps) => {
   const { query, back } = useRouter();
-  const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs(Date.now()));
+  const [dateValue, setDateValue] = useState<Dayjs | null>(
+    dayjs(script.draftDate || Date.now())
+  );
   const { updateCoverPageScript } = useScriptsApi();
 
   const { mutate: updateCoverPageMutation, isLoading: loadingUpdateCoverPage } =
@@ -33,11 +36,11 @@ const useTitle = ({ script }: IProps) => {
       Error,
       {
         payload: {
-          title: string;
-          writer: string;
-          names: string;
-          basedOn: string;
-          draftDate: string;
+          title?: string;
+          writer?: string;
+          names?: string;
+          basedOn?: string;
+          draftDate?: string;
         };
         scriptId: string;
       }
@@ -57,6 +60,7 @@ const useTitle = ({ script }: IProps) => {
         onError: (error) => errorHandler(error),
         onSuccess: (data) => {
           successHandler(data.message);
+          refetch();
           back();
         },
       }
@@ -80,15 +84,15 @@ const useTitle = ({ script }: IProps) => {
   const handleChangeDateValue = (newValue: Dayjs | null) =>
     setDateValue(newValue);
 
-  const onSubmit = async (data: ITitleFormValues) =>
+  const onSubmit = async ({ writer, title, names, basedOn }: ITitleFormValues) =>
     updateCoverPageMutation({
       scriptId: query.id as string,
       payload: {
-        basedOn: data.basedOn,
+        basedOn: basedOn ? basedOn : undefined,
         draftDate: `${dateValue}`,
-        names: data.names,
-        title: data.title,
-        writer: data.writer,
+        names: names ? names : undefined,
+        title,
+        writer: writer ? writer : undefined,
       },
     });
 

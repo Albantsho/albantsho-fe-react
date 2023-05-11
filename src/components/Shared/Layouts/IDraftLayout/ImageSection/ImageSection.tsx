@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import iDraftLg from "./assets/i-draft-lg.jpg";
 import iDraftSmall from "./assets/i-draft-small.jpg";
 

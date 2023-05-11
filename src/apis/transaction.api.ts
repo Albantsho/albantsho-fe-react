@@ -1,6 +1,7 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IResData } from "interfaces/response";
-import { IPayment, IWithdraw } from "interfaces/transaction";
+import { IPayment } from "interfaces/transaction";
+import { IWithdraw } from "interfaces/withdraw";
 import { useCallback } from "react";
 
 interface IData_getWithdraws {
@@ -16,7 +17,7 @@ const useTransactionApi = (controller?: AbortController) => {
 
   const getAllWithdraws = useCallback(async () => {
     const res = await axiosPrivate.get<IResData<IData_getWithdraws>>(
-      "/transaction/withdraws",
+      "/transaction/innerWallet",
       {
         signal: controller?.signal,
       }

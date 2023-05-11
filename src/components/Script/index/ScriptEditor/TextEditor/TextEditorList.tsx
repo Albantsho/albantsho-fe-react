@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import useDraftApi from "apis/Draft.api";
-import useScriptsApi from "apis/Scripts.api";
 import { IResData } from "interfaces/response";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -38,7 +37,6 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   const { ref, width } = useResizeDetector();
   const { query } = useRouter();
   const { saveFileDraft } = useDraftApi();
-  const { updateScript } = useScriptsApi();
   const [render, setRender] = useState(false);
   const [openSettingModal, setOpenSettingModal] = useState(false);
   const [editorSetting, setEditorSetting] = useState<{
@@ -51,24 +49,43 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
   const { mutate: saveDraftMutation, isLoading } = useMutation<
     IResData<object>,
     Error,
-    { scriptId: string; payload: { content: string } }
-  >((data) => saveFileDraft(data.scriptId, { content: data.payload.content }), {
-    onSuccess: (data) => {
-      queryClient.invalidateQueries("draft");
-      successHandler(data.message);
-    },
-    onError: (error) => errorHandler(error),
-  });
+    { scriptId: string; payload: { content: string; scriptSnippet: string } }
+  >(
+    (data) =>
+      saveFileDraft(data.scriptId, {
+        content: data.payload.content,
+        scriptSnippet: data.payload.scriptSnippet,
+      }),
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("draft");
+        successHandler(data.message);
+      },
+      onError: (error) => errorHandler(error),
+    }
+  );
 
   setTimeout(() => {
     setRender(true);
-  }, 5000);
+  }, 2000);
 
   useEffect(() => {
     const setting = JSON.parse(localStorage.getItem("EditorSetting") as string);
     if (setting) {
       setEditorSetting(setting);
     }
+  }, []);
+
+  useEffect(() => {
+    const handleTabClose = async (_event: BeforeUnloadEvent) => {
+      document.getElementById("save-script-button")?.click();
+    };
+
+    window.addEventListener("beforeunload", handleTabClose);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleTabClose);
+    };
   }, []);
 
   const saveDraftFile = async () => {
@@ -78,16 +95,18 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
     );
     const value = deserializeScriptWithOutDiv(htmlContent.body);
     const valueForConvertPdf = serializeWithoutDiv({ children: value });
-    await updateScript(
-      { scriptPart: valueForConvertPdf?.slice(0, 3500) },
-      query.id as string
-    );
-    saveDraftMutation({
-      scriptId: query.id as string,
-      payload: {
-        content: scriptValue,
-      },
-    });
+
+    if (scriptValue) {
+      saveDraftMutation({
+        scriptId: query.id as string,
+        payload: {
+          content: scriptValue,
+          scriptSnippet: valueForConvertPdf?.slice(0, 3500) as string,
+        },
+      });
+    } else {
+      ("");
+    }
   };
 
   const openSettingModalFunc = () => setOpenSettingModal(true);
@@ -105,10 +124,7 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
     <>
       <div ref={ref} className="relative text-start">
         {render ? (
-          <ButtonGroup
-            className="absolute flex-row ml-auto  w-min xl:flex-col 
-      -top-[10px] left-0 xl:-right-16 xl:top-10"
-          >
+          <ButtonGroup className="absolute flex-row ml-auto w-min xl:flex-col -top-[10px] left-0 xl:-right-16 xl:top-10">
             <Tooltip
               classes={{
                 tooltip: "bg-black",
@@ -158,6 +174,7 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
               <IconButton
                 onClick={saveDraftFile}
                 disabled={isLoading}
+                id="save-script-button"
                 disableRipple
                 className="bg-white text-primary-700 rounded-none w-12 h-12"
               >

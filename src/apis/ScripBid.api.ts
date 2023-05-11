@@ -1,5 +1,5 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
-import { IBidForScript, IProducerBid } from "interfaces/bid";
+import { IBid, IBidForScript, IProducerBid } from "interfaces/bid";
 import { IResData } from "interfaces/response";
 import { useCallback } from "react";
 
@@ -9,7 +9,7 @@ interface ICreateBid {
 }
 
 interface IData_getAllBids {
-  scriptBids: IBidForScript[];
+  scriptBids: IBid[];
 }
 
 interface IData_getAllScriptProducerRequest {
@@ -39,7 +39,7 @@ const useScripBidApi = (controller?: AbortController) => {
   const getBidScript = useCallback(
     async (bidId: string) => {
       const res = await axiosPrivate.get<
-        IResData<{ scriptBid: IBidForScript }>
+        IResData<{ scriptBid: IBidForScript; }>
       >(`/bid/${bidId}`, {
         signal: controller?.signal,
       });

@@ -24,11 +24,18 @@ interface IProps {
 }
 
 const CommentComponent = ({ comment, comments, socket }: IProps) => {
-  const time = timeSince(new Date(comment.updatedAt).getTime());
+  const time = timeSince(new Date(comment.createdAt).getTime());
 
   return (
     <Accordion sx={{ "&:before": { display: "none" } }} className="shadow-none">
       <AccordionSummary
+        onClick={() => {
+          document.getElementById(comment._id)?.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "center",
+          });
+        }}
         sx={{
           "&.MuiAccordionSummary-root": {
             marginBottom: "-8px",
@@ -63,16 +70,16 @@ const CommentComponent = ({ comment, comments, socket }: IProps) => {
           <Typography
             variant="h6"
             color="primary.main"
-            className="font-normal futura leading-normal"
+            className="font-normal futura leading-none"
           >
             {`${comment.user?.firstName} ${comment.user?.lastName}`}
           </Typography>
-
-          <Typography variant="body2" className="text-gray-400">
+          <Typography variant="body2" className="text-gray-400 leading-none">
             {time}
           </Typography>
         </div>
         <SvgIcon
+          color="primary"
           className="ml-auto"
           fontSize="small"
           component={TickIcon}

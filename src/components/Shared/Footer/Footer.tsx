@@ -49,7 +49,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-primary-main py-20 relative z-50">
-      <div className="max-w-screen-2xl mx-auto text-white px-5 sm:px-10">
+      <div className="max-w-screen-xl mx-auto text-white px-5 sm:px-10">
         <div className="max-w-[400px] mx-auto">
           <Typography
             variant="h4"
@@ -65,6 +65,7 @@ const Footer = () => {
           </Typography>
           <div className="flex gap-5 flex-wrap justify-center mt-5">
             <CustomInput
+              value={email}
               onChange={handleChangeValueEmail}
               className="max-w-[260px] w-full"
               variant="outlined"

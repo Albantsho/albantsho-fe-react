@@ -4,6 +4,7 @@ import { IBidInMarketplace } from "interfaces/bid";
 import { ICollaboratorList } from "interfaces/collaborator";
 import { IResData } from "interfaces/response";
 import {
+  IAllScriptCollaboratorOn,
   IBidScript,
   IClosedScript,
   IFullInformationScript,
@@ -47,7 +48,7 @@ interface IUpdateScriptPayload {
   inspiration?: string;
   motivation?: string;
   progress?: number;
-  scriptPart?: string;
+  scriptSnippet?: string;
   totalPages?: number;
 }
 
@@ -252,7 +253,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
   const searchScripts = useCallback(
     async (search: string) => {
-      const res = await axios.get<IResData<{ scripts: IScript[] }>>(
+      const res = await axios.get<IResData<{ scripts: IScript[]; }>>(
         `/script/search?search=${search}`,
         {
           signal: controller?.signal,
@@ -305,7 +306,7 @@ const useScriptsApi = (controller?: AbortController) => {
   );
 
   const updateWriterArchiveScript = useCallback(
-    async (payload: { archive: boolean }, scriptId: string) => {
+    async (payload: { archive: boolean; }, scriptId: string) => {
       const res = await axiosPrivate.patch<IResData<object>>(
         `/script/update/archive/${scriptId}`,
         payload,
@@ -361,7 +362,7 @@ const useScriptsApi = (controller?: AbortController) => {
   );
 
   const updatePublishedScript = useCallback(
-    async (payload: { published: boolean }, scriptId: string) => {
+    async (payload: { publish: boolean; }, scriptId: string) => {
       const res = await axiosPrivate.patch<IResData<object>>(
         `/script/update/publish/${scriptId}`,
         payload,
@@ -388,6 +389,19 @@ const useScriptsApi = (controller?: AbortController) => {
     [axiosPrivate, controller?.signal]
   );
 
+  const getAllCollaboratorScripts = useCallback(
+    async () => {
+      const res = await axiosPrivate.get<IResData<{ scripts: Array<IAllScriptCollaboratorOn>; }>>(
+        "/script/collaborate/all",
+        {
+          signal: controller?.signal,
+        }
+      );
+      return res.data.data;
+    },
+    [axiosPrivate, controller?.signal]
+  );
+
   return {
     createNewScript,
     getWriterAllScripts,
@@ -409,6 +423,7 @@ const useScriptsApi = (controller?: AbortController) => {
     getCoverPageInformation,
     updatePublishedScript,
     updateScript,
+    getAllCollaboratorScripts
   };
 };
 

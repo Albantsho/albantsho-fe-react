@@ -34,7 +34,7 @@ const RelistScriptModal = ({
     >(
       (data) =>
         updatePublishedScript(
-          { published: data.payload.published },
+          { publish: data.payload.published },
           data.scriptId
         ),
       {

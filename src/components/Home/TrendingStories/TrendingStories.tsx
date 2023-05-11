@@ -12,7 +12,7 @@ const TrendingStories = () => {
   return (
     <section
       id="trending-stories"
-      className="px-5 sm:px-10 max-w-screen-2xl mx-auto mt-12 md:mt-28 mb-12 md:mb-32"
+      className="px-5 sm:px-10 max-w-screen-xl mx-auto mt-12 md:mt-28 mb-12 md:mb-32"
       data-aos="fade-up"
     >
       <Typography
@@ -34,13 +34,7 @@ const TrendingStories = () => {
           </Typography>
         </div>
       </div> */}
-      <Box
-        className="grid gap-3 md:gap-12"
-        gridTemplateColumns={{
-          sm: "repeat(auto-fill, minmax(280px, auto))",
-          lg: "repeat(auto-fill, minmax(330px, auto))",
-        }}
-      >
+      <Box className="grid gap-3 md:gap-12 sm:grid-cols-2 lg:grid-cols-3">
         {!loadingGetTrendingScripts && trendingScriptsData
           ? trendingScriptsData.scripts
               .slice(0, 6)

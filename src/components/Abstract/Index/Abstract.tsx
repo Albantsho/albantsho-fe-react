@@ -23,9 +23,10 @@ const SaveProgressScriptModal = dynamic(
 
 interface IProps {
   script: IFullInformationScript;
+  refetch: any;
 }
 
-const Abstract = ({ script }: IProps) => {
+const Abstract = ({ script, refetch }: IProps) => {
   const {
     activeButton,
     openSaveProgressModal,
@@ -46,8 +47,6 @@ const Abstract = ({ script }: IProps) => {
     getValues,
     progress,
     publish,
-    handleUploadImageCover,
-    imageCoverError,
     cancelUpload,
     adaptionPermissionError,
     cancelUploadAdaption,
@@ -55,7 +54,10 @@ const Abstract = ({ script }: IProps) => {
     progressAdaption,
     dropZoneUploadPdfScript,
     dropZoneUploadPdfCopyright,
-  } = useAbstract(script);
+    progressCopyright,
+    progressScript,
+    dropZoneUploadImage,
+  } = useAbstract(script, refetch);
 
   return (
     <div className="relative px-5 py-8 xl:py-16 sm:px-8 md:px-16 bg-white rounded-md shadow-secondary max-w-[700px] mx-auto">
@@ -120,6 +122,7 @@ const Abstract = ({ script }: IProps) => {
           setActiveButton={setActiveButton}
           register={register}
           errors={errors}
+          script={script}
         />
 
         <UploadScriptFiles
@@ -128,16 +131,16 @@ const Abstract = ({ script }: IProps) => {
           step={step}
           activeButton={activeButton}
           setActiveButton={setActiveButton}
-          register={register}
-          errors={errors}
+          progressCopyright={progressCopyright}
+          progressScript={progressScript}
         />
 
         <UploadImage
+          script={script}
           progress={progress}
           step={step}
-          handleUploadImageCover={handleUploadImageCover}
-          imageCoverError={imageCoverError}
           cancelUpload={cancelUpload}
+          dropZoneUploadImage={dropZoneUploadImage}
         />
         <StepsButtons
           loadingPublishButton={loadingPublishButton}

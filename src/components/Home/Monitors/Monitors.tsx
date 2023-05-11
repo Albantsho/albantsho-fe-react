@@ -1,10 +1,9 @@
 import GreenArrowIcon from "@assets/icons/green-arrow.svg";
 import PurpleArrowIcon from "@assets/icons/purple-arrow.svg";
 import YellowArrowIcon from "@assets/icons/yellow-arrow.svg";
-import { Box, SvgIcon } from "@mui/material";
+import { SvgIcon } from "@mui/material";
 import Image from "next/image";
-import LeftMonitorImg from "./assets/left-monitor.png";
-import RightMonitorImg from "./assets/right-monitor.png";
+import PlatformImg from "./assets/platform.png";
 
 const Monitors = () => {
   return (
@@ -28,16 +27,19 @@ const Monitors = () => {
               sx={{ fontSize: "min(10vw, 100px)" }}
             />
           </span>
-          <div className="z-50" data-aos="fade-right">
-            <Image src={LeftMonitorImg} alt="Left preview monitor" />
+          <div className="z-50" data-aos="fade-up">
+            <Image src={PlatformImg} alt="Platform preview" />
           </div>
-          <Box
+          {/* <div className="z-50" data-aos="fade-right">
+            <Image src={LeftMonitorImg} alt="Left preview monitor" />
+          </div> */}
+          {/* <Box
             sx={{ translate: "-5%" }}
             data-aos="fade-left"
             data-aos-anchor-placement="center-bottom"
           >
             <Image src={RightMonitorImg} alt="Right preview monitor" />
-          </Box>
+          </Box> */}
           <span className="self-end md:hidden" data-aos="fade-up-left">
             <SvgIcon
               inheritViewBox

@@ -3,7 +3,7 @@ import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDash
 import Loader from "@shared/Loader/Loader";
 import useContact, { type IData_getContacts } from "apis/Contact.api";
 import ContactList from "components/Dashboard/Admin/ContactList/ContactList";
-import TabButtons from "components/Dashboard/Admin/Contacts/TabButtons/TabButtons";
+import TabButtons from "components/Dashboard/Admin/ContactList/TabButtons/TabButtons";
 import { debounce } from "lodash";
 import Head from "next/head";
 import { useRouter } from "next/router";

@@ -1,7 +1,5 @@
 import ScriptSidebarOnMobile from "@shared/Layouts/ScriptLayout/ScriptList/ScriptSidebarOnMobile/ScriptSidebarOnMobile";
 import useDraftApi from "apis/Draft.api";
-import useCommentStore from "store/comments.store";
-import useUserStore from "store/user.store";
 import CommentList from "components/Script/CommentList/CommentList";
 import ExportFile from "components/Script/ExportFile/ExportFile";
 import ScenesList from "components/Script/ScenesList/ScenesList";
@@ -9,7 +7,10 @@ import ScriptDocument from "components/Script/ScriptDocument/ScriptDocument";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo } from "react";
+import { QueryClient } from "react-query";
 import { io } from "socket.io-client";
+import useCommentStore from "store/comments.store";
+import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 import ScriptEditor from "../ScriptEditor/ScriptEditor";
 
@@ -17,24 +18,29 @@ interface IProps {
   script: IFullInformationScript;
   setHtmlInitialValue: React.Dispatch<React.SetStateAction<string>>;
   htmlInitialValue: string;
+  id: string | string[];
 }
+
+const queryClient = new QueryClient();
 
 const ScriptPage = ({
   script,
   htmlInitialValue,
   setHtmlInitialValue,
+  id,
 }: IProps) => {
   const { query, replace } = useRouter();
   const { getOneDraft } = useDraftApi();
-  const { getComments } = useCommentStore((state) => ({
+  const { getComments, addNewComment } = useCommentStore((state) => ({
     getComments: state.getComments,
+    addNewComment: state.addNewComment,
   }));
   const accessToken = useUserStore((state) => state.accessToken);
   const socket = useMemo(
     () =>
       io(process.env.NEXT_PUBLIC_API_BASE_URL, {
         auth: { accessToken: `Bearer ${accessToken}` },
-        query: { scriptId: query.id as string },
+        query: { scriptId: id as string },
       }),
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,27 +51,37 @@ const ScriptPage = ({
     socket.on("connect", () => {
       ("");
     });
-
     socket.on("roomData", (roomData) => {
       getComments(roomData.comments);
     });
+    socket.on("saveScriptOrder", async () => {
+      try {
+        document.getElementById("save-script-button")?.click();
+        socket.emit("scriptSaved");
+      } catch (error) {
+        errorHandler(error);
+      }
+    });
+
     socket.on("getScriptOrder", async () => {
       try {
-        const res = await getOneDraft(query.id as string);
-
+        const res = await getOneDraft(id as string);
         setHtmlInitialValue(res.draft);
       } catch (error) {
         errorHandler(error);
       }
     });
+    socket.on("newComment", (comment) => {
+      addNewComment(comment);
+      queryClient.invalidateQueries("notification");
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, []);
 
   useEffect(() => {
     socket.on("disconnect", () => {
       !socket.connected && replace("/");
     });
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 

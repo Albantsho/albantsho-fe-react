@@ -9,6 +9,7 @@ interface IProps {
 const AllCommentsLogo = ({ comment }: IProps) => {
   return (
     <div
+      id={comment._id}
       style={{
         top: `${comment.positionY}px`,
         left: `${comment.positionX}px`,
@@ -25,7 +26,7 @@ const AllCommentsLogo = ({ comment }: IProps) => {
       />
       <Avatar
         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${comment.user?.image}`}
-        className="absolute top-2 left-3 w-8 h-8"
+        className="absolute top-2  left-[9px] w-8 h-8"
         alt={comment.user?.firstName}
       />
     </div>

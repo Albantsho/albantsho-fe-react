@@ -1,10 +1,10 @@
 import { Button } from "@mui/material";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IComment } from "interfaces/comment";
 import React, { useState } from "react";
 import { useForm, type FieldValues } from "react-hook-form";
 import { IoMdSend } from "react-icons/io";
 import { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 interface IProps {
   comments: IComment[];

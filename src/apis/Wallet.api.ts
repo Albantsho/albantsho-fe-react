@@ -21,7 +21,7 @@ const useWalletApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
   const getWalletBalance = useCallback(async () => {
-    const res = await axiosPrivate.get<IResData<{ balance: number }>>(
+    const res = await axiosPrivate.get<IResData<{ balance: number; }>>(
       "/wallet/balance",
       {
         signal: controller?.signal,
@@ -31,24 +31,32 @@ const useWalletApi = (controller?: AbortController) => {
     return res.data.data;
   }, [axiosPrivate, controller?.signal]);
 
+  const increaseWalletBalance = useCallback(async (payload: IPayloadIncreaseWalletBalance) => {
+    const res = await axiosPrivate.post(
+      "/wallet/deposit",
+      payload, {
+      signal: controller?.signal,
+    }
+    );
+
+    return res.data;
+  }, [axiosPrivate, controller?.signal]);
+
+  const withdrawWallet = useCallback(async (payload: IPayloadWithdrawWallet) => {
+    const res = await axiosPrivate.post(
+      "/withdraw",
+      payload, {
+      signal: controller?.signal,
+    }
+    );
+
+    return res.data;
+  }, [axiosPrivate, controller?.signal]);
+
   return {
     getWalletBalance,
-
-    async increaseWalletBalance(payload: IPayloadIncreaseWalletBalance) {
-      const res = await axiosPrivate.post("/wallet/deposit", payload, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
-
-    async withdrawWallet(payload: IPayloadWithdrawWallet) {
-      const res = await axiosPrivate.post("/wallet/withdraw", payload, {
-        signal: controller?.signal,
-      });
-
-      return res.data;
-    },
+    increaseWalletBalance,
+    withdrawWallet
   };
 };
 

@@ -1,4 +1,5 @@
 import useInvite, { IData_getInvites } from "apis/Invite.api";
+import useScriptsApi from "apis/Scripts.api";
 import { IResData } from "interfaces/response";
 import { QueryClient, useMutation, useQuery } from "react-query";
 import errorHandler from "utils/error-handler";
@@ -8,12 +9,18 @@ const queryClient = new QueryClient();
 
 const useInvites = () => {
   const { allInvite, acceptInvite, rejectInvite } = useInvite();
+  const { getAllCollaboratorScripts } = useScriptsApi();
 
   const {
     data: invitesData,
     isLoading: isLoadingInvites,
     refetch,
   } = useQuery<IData_getInvites, Error>("invite", () => allInvite());
+
+  const {
+    data: collaboratorsData,
+    refetch: refetchCollaboratorsData,
+  } = useQuery("collaborators on", () => getAllCollaboratorScripts());
 
   const { mutate: acceptInviteMutate, isLoading: loadingAcceptInvite } =
     useMutation<IResData<object>, Error, string>(
@@ -29,6 +36,7 @@ const useInvites = () => {
             "collaborator",
           ]);
           refetch();
+          refetchCollaboratorsData();
           successHandler(data.message);
         },
       }
@@ -48,6 +56,7 @@ const useInvites = () => {
             "collaborator",
           ]);
           refetch();
+          refetchCollaboratorsData();
           successHandler(data.message);
         },
       }
@@ -66,6 +75,7 @@ const useInvites = () => {
     invitesData,
     loadingAcceptInvite,
     loadingRejectInvite,
+    collaboratorsData
   };
 };
 

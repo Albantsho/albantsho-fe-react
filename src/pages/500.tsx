@@ -17,7 +17,12 @@ const ServerErrorPage = () => {
         <title>Albantsho || 500</title>
       </Head>
       <main className="min-h-screen w-full">
-        <Nav position="static" links={links} secondaryUnderLineColor={false} />
+        <Nav
+          className="shadow-primary"
+          position="static"
+          links={links}
+          secondaryUnderLineColor={false}
+        />
         <div className="w-full h-full flex items-center justify-center">
           <Image
             src="/assets/images/500.webp"

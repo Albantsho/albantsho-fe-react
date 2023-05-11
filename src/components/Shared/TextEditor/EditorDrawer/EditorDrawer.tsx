@@ -36,7 +36,7 @@ const EditorDrawer = () => {
       >
         <SvgIcon component={AiOutlinePlus} inheritViewBox />
       </Button>
-      <Drawer open={openDrawer} onClose={handleCloseOpenDrawer} anchor="bottom">
+      <Drawer open={openDrawer} className="z-[9999999]" onClose={handleCloseOpenDrawer} anchor="bottom">
         <TabsList />
       </Drawer>
     </div>

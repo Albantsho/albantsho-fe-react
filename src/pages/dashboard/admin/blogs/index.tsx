@@ -18,6 +18,7 @@ import { useQuery } from "react-query";
 import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
 import { NextPageWithLayout } from "../../../_app";
+
 const BlogsPage: NextPageWithLayout = () => {
   const { query, push } = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
@@ -91,29 +92,29 @@ const BlogsPage: NextPageWithLayout = () => {
         handleSearch={handleSearch}
         placeholder="Search for blog by title"
       />
-      {!isLoading ? (
+      {!isLoading && data ? (
         <>
           {!query.archive && !query.trash && (
             <LiveBlogsList
               refetch={refetch}
-              blogList={data?.weblogs as IWeblog[]}
+              blogList={data.weblogs as IWeblog[]}
             />
           )}
           {query.archive && (
             <ArchiveBlogsList
               refetch={refetch}
-              blogList={data?.weblogs as IWeblog[]}
+              blogList={data.weblogs as IWeblog[]}
             />
           )}
           {query.trash && (
             <TrashBlogsList
               refetch={refetch}
-              blogList={data?.weblogs as IWeblog[]}
+              blogList={data.weblogs as IWeblog[]}
             />
           )}
           {data && data.pagesCount >= 2 && (
             <CustomPaginationComponent
-              pageCount={data?.pagesCount as number}
+              pageCount={data.pagesCount as number}
               currentPage={currentPage}
               handleActivePage={handleActivePage}
             />

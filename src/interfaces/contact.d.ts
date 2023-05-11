@@ -6,4 +6,5 @@ export interface IContact {
   createdAt: string;
   updatedAt: string;
   answered: boolean;
+  answer: string;
 }

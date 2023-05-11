@@ -67,6 +67,7 @@ const BlogPost = () => {
             width={1920}
             height={500}
             className="object-cover object-center max-h-[500px]"
+            unoptimized
           />
           <div className="py-6 md:py-14 max-w-screen-lg mx-auto px-5 sm:px-10">
             <Typography

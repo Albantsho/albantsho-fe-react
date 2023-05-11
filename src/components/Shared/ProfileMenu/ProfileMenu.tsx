@@ -4,6 +4,7 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import useUserStore from "store/user.store";
@@ -99,14 +100,16 @@ const ProfileMenu = ({ inHome, isMobile }: IProps) => {
             >
               {user.firstName + " " + user.lastName}
             </Typography>
-            <Typography
-              variant="caption"
-              className="text-neutral-800 truncate text-ellipsis"
-            >
-              {user.email.length < 23
-                ? user.email
-                : `${user.email.slice(0, 20)}...`}
-            </Typography>
+            <Tooltip title={user.email}>
+              <Typography
+                variant="caption"
+                className="text-neutral-800 truncate text-ellipsis"
+              >
+                {user.email.length < 23
+                  ? user.email
+                  : `${user.email.slice(0, 20)}...`}
+              </Typography>
+            </Tooltip>
           </ListItemText>
         </MenuItem>
 

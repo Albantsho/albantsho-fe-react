@@ -14,6 +14,7 @@ import {
 import Btn from "@shared/Btn/Btn";
 import useDraftApi from "apis/Draft.api";
 import { IAbstractFormValues } from "interfaces/abstract";
+import { IFullInformationScript } from "interfaces/script";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -42,6 +43,7 @@ interface IProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   control: Control<IAbstractFormValues, any>;
   step: number;
+  script: IFullInformationScript;
 }
 
 interface ResultsOptionType {
@@ -61,6 +63,7 @@ const UploadScript = ({
   step,
   control,
   errors,
+  script,
 }: IProps) => {
   const { getAllDraft } = useDraftApi();
   const { query } = useRouter();
@@ -200,15 +203,29 @@ const UploadScript = ({
             {errors.draft.message}
           </span>
         )}
-        <Link
-          href={routes.script.dynamicUrl(query.id as string)}
-          passHref
-          legacyBehavior
-        >
-          <Button className="max-w-[520px] w-full  text-primary-700 text-center py-3 mt-8 block mx-auto rounded-lg border-2 border-dashed mb-5 px-8  border-primary-700 ">
-            Write new script
-          </Button>
-        </Link>
+        {!script.scriptFileType ? (
+          <Link
+            href={routes.script.dynamicUrl(query.id as string)}
+            passHref
+            legacyBehavior
+          >
+            <Button className="max-w-[520px] w-full  text-primary-700 text-center py-3 mt-8 block mx-auto rounded-lg border-2 border-dashed mb-5 px-8  border-primary-700 ">
+              Write new script
+            </Button>
+          </Link>
+        ) : script.scriptFileType === "text/plain" ? (
+          <Link
+            href={routes.script.dynamicUrl(query.id as string)}
+            passHref
+            legacyBehavior
+          >
+            <Button className="max-w-[520px] w-full  text-primary-700 text-center py-3 mt-8 block mx-auto rounded-lg border-2 border-dashed mb-5 px-8  border-primary-700 ">
+              Continue writing
+            </Button>
+          </Link>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

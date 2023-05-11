@@ -1,10 +1,11 @@
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import Link from "next/link";
 import React from "react";
 
 const IDraftTAC = () => {
   return (
-    <div className="pt-8 lg:pt-14 pb-20 px-5 sm:px-10  max-w-screen-lg mx-auto">
+    <div className="pt-8 lg:pt-14 pb-20 px-5 sm:px-10  max-w-screen-xl mx-auto">
       <Typography variant="body2" color="grey.500" paragraph>
         By applying to this workshop (i.e. The idraft Workshop), you as an
         applicant writer agree and confirm that:
@@ -77,8 +78,16 @@ const IDraftTAC = () => {
         continue to apply.
       </Typography>
 
-      <div className="flex justify-center mt-16 lg:mt-14 sm:justify-start" >
-        <Btn className="lg:py-6 lg:px-8 py-3 px-6" size="large" >I agree</Btn>
+      <div className="flex justify-center mt-16 lg:mt-14 sm:justify-start">
+        <Link
+          href="https://docs.google.com/forms/u/2/d/e/1FAIpQLSd-p3Eg4h00ok2RlKv778U6yBWirxbLLsGieN5FoRyiSZZ7Vw/viewform?usp=send_form"
+          target="_blank"
+          referrerPolicy="no-referrer"
+        >
+          <Btn className="lg:py-6 lg:px-8 py-3 px-6" size="large">
+            I agree
+          </Btn>
+        </Link>
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ const ExportFile = ({ script }: IProps) => {
 
   const handleExportPdfFile = async () => {
     await updateScript(
-      { scriptPart: valueForConvertPdf?.slice(0, 3500) },
+      { scriptSnippet: valueForConvertPdf?.slice(0, 3500) },
       query.id as string
     );
   };

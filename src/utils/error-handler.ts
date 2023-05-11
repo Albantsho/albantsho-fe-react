@@ -7,8 +7,8 @@ const errorHandler = (error: unknown) => {
     const responseData = error.response?.data as IResponseError;
     toast.error(
       responseData?.data?.email ||
-        responseData?.message ||
-        "Something went wrong, Please try again",
+      responseData?.message ||
+      "Something went wrong, Please try again",
       {
         style: {
           border: "1px solid #D32D2D",

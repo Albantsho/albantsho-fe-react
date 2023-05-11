@@ -9,9 +9,10 @@ import useTitle from "./useTitle";
 
 interface IProps {
   script: IFullInformationScript;
+  refetch: any;
 }
 
-const Title = ({ script }: IProps) => {
+const Title = ({ script, refetch }: IProps) => {
   const {
     errors,
     handleSubmit,
@@ -20,7 +21,7 @@ const Title = ({ script }: IProps) => {
     register,
     dateValue,
     handleChangeDateValue,
-  } = useTitle({ script });
+  } = useTitle({ script, refetch });
 
   const [isHiddenTitlePlaceholder, setIsHiddenTitlePlaceholder] =
     useState(false);

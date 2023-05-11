@@ -41,11 +41,12 @@ const Script: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Script</title>
       </Head>
-      {!isLoadingGetScript && scriptData && scriptData.script ? (
+      {!isLoadingGetScript && scriptData && scriptData.script && query.id ? (
         <ScriptPage
           htmlInitialValue={htmlInitialValue}
           setHtmlInitialValue={setHtmlInitialValue}
           script={scriptData.script}
+          id={query.id}
         />
       ) : (
         <Loader setCustomHeight="min-h-[75vh]" />

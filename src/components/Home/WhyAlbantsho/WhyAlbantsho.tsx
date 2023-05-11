@@ -42,10 +42,10 @@ const WhyAlbantsho = () => {
   return (
     <section
       id="why-albantsho"
-      className="mt-24 px-5 sm:px-10"
+      className="mt-24 max-w-screen-xl mx-auto px-5 sm:px-10"
       data-aos="fade-up"
     >
-      <div className="max-w-screen-2xl mx-auto">
+      <div className="mx-auto">
         <Typography
           variant="h4"
           color="primary.main"

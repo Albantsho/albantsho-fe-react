@@ -12,6 +12,7 @@ import Btn from "@shared/Btn/Btn";
 import PDFFile from "@shared/PdfFile/PdfFile";
 import useDraftApi from "apis/Draft.api";
 import useReviewsApi from "apis/Reviews.api";
+import axios from "axios";
 import { IReviewerTask } from "interfaces/reviews";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -56,9 +57,9 @@ const DetailScriptModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   let valueForConvertPdf = "";
-  if (resDraft && resDraft.data) {
+  if (resDraft) {
     const htmlContent = new DOMParser().parseFromString(
-      resDraft.data.draft,
+      resDraft.draft,
       "text/html"
     );
     const value = deserializeScriptWithOutDiv(htmlContent.body);
@@ -67,6 +68,7 @@ const DetailScriptModal = ({
 
   const seeScript = async () => {
     const res = await getOneDraftAsPdf(reviewerTask._id as string);
+
     const blobUrl = window.URL.createObjectURL(new Blob([res]));
     const aTag = document.createElement("a");
     aTag.href = blobUrl;
@@ -108,7 +110,7 @@ const DetailScriptModal = ({
                 ? "Type B"
                 : ""}
             </Button>
-            {resDraft && resDraft.data ? (
+            {resDraft ? (
               <PDFDownloadLink
                 document={
                   <PDFFile

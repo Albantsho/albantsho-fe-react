@@ -27,6 +27,7 @@ import { TbArrowsSort } from "react-icons/tb";
 import routes from "routes/routes";
 import ProfileMenu from "../../../../ProfileMenu/ProfileMenu";
 import useMobileNavDashboard from "./useMobileNavDashboard";
+import { GiReceiveMoney } from "react-icons/gi";
 
 interface IProps {
   isTransparent: boolean;
@@ -35,9 +36,14 @@ interface IProps {
 const walletLinksForWriter = [
   { title: "Withdraw", href: routes.withdrawWallet.url, icon: RiDownloadLine },
   {
-    title: "Transaction History",
-    href: routes.transactionHistoryWallet.url,
+    title: "Payment History",
+    href: routes.paymentHistoryWallet.url,
     icon: TbArrowsSort,
+  },
+  {
+    title: "Withdraw History",
+    href: routes.withdrawHistoryWallet.url,
+    icon: GiReceiveMoney,
   },
   { title: "Help", href: routes.helpWallet.url, icon: AiOutlineQuestionCircle },
 ];
@@ -45,8 +51,8 @@ const walletLinksForWriter = [
 const walletLinksForProducer = [
   { title: "Deposit", href: routes.depositWallet.url, icon: Deposit },
   {
-    title: "Transaction History",
-    href: routes.transactionHistoryWallet.url,
+    title: "Payment History",
+    href: routes.paymentHistoryWallet.url,
     icon: TbArrowsSort,
   },
   { title: "Help", href: routes.helpWallet.url, icon: AiOutlineQuestionCircle },

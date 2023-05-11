@@ -32,22 +32,26 @@ const ScriptSlug: NextPageWithLayout = () => {
   const { getAllBids } = useScripBidApi();
   const { getScriptUnComplete } = useScriptsApi();
   const { query } = useRouter();
+  const scriptID = typeof query?.id === "string" ? query.id : "";
 
   const {
     data: scriptData,
     isLoading: isLoadingGetScript,
     refetch: refetchScript,
-  } = useQuery("script", () => getScriptUnComplete(query.id as string), {
-    onError: (err) => errorHandler(err),
-  });
-
-  const scriptID = typeof query?.id === "string" ? query.id : "";
+  } = useQuery(
+    ["script", scriptID],
+    () => getScriptUnComplete(query.id as string),
+    {
+      onError: (err) => errorHandler(err),
+      enabled: scriptID.length > 0,
+    }
+  );
 
   const {
     data: scriptBidsData,
     isLoading: isLoadingGetScriptBids,
     refetch,
-  } = useQuery(["script", scriptID], () => getAllBids(scriptID), {
+  } = useQuery(["script bid requests", scriptID], () => getAllBids(scriptID), {
     onError: (err) => errorHandler(err),
     enabled: scriptID.length > 0,
   });
@@ -67,7 +71,9 @@ const ScriptSlug: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Albantsho || Script {scriptData?.script.title}</title>
+        <title>
+          Albantsho || Script {scriptData && scriptData.script.title}
+        </title>
       </Head>
       {!isLoadingGetScript &&
       !isLoadingGetScriptBids &&
@@ -83,15 +89,6 @@ const ScriptSlug: NextPageWithLayout = () => {
           />
           <div className="py-8 md:py-12 xl:py-20  px-5 sm:px-10 xl:px-20  my-4 md:my-6 bg-white shadow-primary rounded-md">
             <Heading script={scriptData.script} />
-            {openCreateScript ? (
-              <Suspense fallback={null}>
-                <CreateScriptModal
-                  refetch={refetchScript}
-                  openCreateScript={openCreateScript}
-                  setOpenCreateScript={setOpenCreateScript}
-                />
-              </Suspense>
-            ) : null}
             <Suspense fallback={null}>
               <AuctionsScripts
                 script={scriptData.script}
@@ -100,6 +97,15 @@ const ScriptSlug: NextPageWithLayout = () => {
               />
             </Suspense>
           </div>
+          {openCreateScript ? (
+            <Suspense fallback={null}>
+              <CreateScriptModal
+                refetch={refetchScript}
+                openCreateScript={openCreateScript}
+                setOpenCreateScript={setOpenCreateScript}
+              />
+            </Suspense>
+          ) : null}
           <Fab
             onClick={() => setOpenCreateScript(true)}
             color="primary"

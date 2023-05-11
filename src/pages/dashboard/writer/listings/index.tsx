@@ -29,7 +29,7 @@ const Listings: NextPageWithLayout = () => {
     data: publishedScriptsData,
     isLoading: loadingGetPublishedScripts,
     refetch,
-  } = useQuery("opening-scripts", () =>
+  } = useQuery(["opening-scripts", query], () =>
     getWriterAllPublishedScripts(searchQuery)
   );
 
@@ -50,7 +50,6 @@ const Listings: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Listings</title>
       </Head>
-
       <TabButtons />
       <DashboardSearch
         handleSearch={handleSearch}

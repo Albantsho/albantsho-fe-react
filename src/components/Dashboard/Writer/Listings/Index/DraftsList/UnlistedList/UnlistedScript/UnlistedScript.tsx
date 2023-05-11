@@ -1,8 +1,9 @@
-import { Button, Chip, Typography } from "@mui/material";
+import { Button, Chip, SvgIcon, Typography } from "@mui/material";
 import { IUnlistedScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Suspense, useState } from "react";
+import DefaultImage from "@assets/default-image-script.svg";
 
 const RelistScriptModal = dynamic(
   () => import("../../Modals/RelistScriptModal/RelistScriptModal")
@@ -32,23 +33,37 @@ const UnlistedScript = ({ script, refetch }: IProps) => {
         className="flex py-6 items-center sm:justify-between xl:justify-start"
       >
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 md:w-fit xl:mr-6 lg:max-w-[445px] ">
-          <Image
-            width={64}
-            height={64}
-            alt={script.title}
-            className="rounded-md flex-shrink-0 w-16 h-16"
-            loading="lazy"
-            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
-          />
+          {script.image ? (
+            <Image
+              width={64}
+              height={64}
+              alt={script.title}
+              className="rounded-md flex-shrink-0 w-16 h-16"
+              loading="lazy"
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
+              unoptimized
+            />
+          ) : (
+            <div className="w-16 h-16 items-center justify-center flex">
+              <SvgIcon
+                inheritViewBox
+                fontSize="large"
+                component={DefaultImage}
+              />
+            </div>
+          )}
 
-          <div className="flex-grow sm:max-w-[271px] min-w-[170px] ">
+          <div className="flex-grow sm:w-[261px] min-w-[170px] ">
             <Typography
               variant="body1"
               className="futura font-semibold text-primary-700"
             >
               {script.title}
             </Typography>
-            <Typography variant="caption" className="text-stone-800">
+            <Typography
+              variant="caption"
+              className="text-stone-800 sm::min-w-[270px]"
+            >
               {script.tagline}
             </Typography>
           </div>

@@ -387,6 +387,7 @@ const RegisterForm = () => {
                 <Typography variant="body1" className="text-grey-600  futura">
                   I accept the
                   <Link
+                    target="_blank"
                     href={routes.termsAndCondition.url}
                     className="text-warning-500 ml-1"
                   >

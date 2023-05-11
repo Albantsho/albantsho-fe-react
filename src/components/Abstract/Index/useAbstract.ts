@@ -19,7 +19,7 @@ type IScript = IFullInformationScript;
 let controller = new AbortController();
 let controllerAdaption = new AbortController();
 
-const useAbstract = (script: IScript) => {
+const useAbstract = (script: IScript, refetch: any) => {
   const [step, setStep] = useState(1);
   const [openSaveProgressModal, setOpenSaveProgressModal] = useState(false);
   const [adaption, setAdaption] = useState(false);
@@ -31,10 +31,11 @@ const useAbstract = (script: IScript) => {
   const { query, replace } = useRouter();
   const { updateScript } = useScriptsApi();
   const axiosPrivate = useAxiosPrivate();
-  const [imageCoverError, setImageCoverError] = useState("");
   const [adaptionPermissionError, setAdaptionPermissionError] = useState("");
   const [progressAdaption, setProgressAdaption] = useState(0);
-  const { uploadFileDraft, uploadCopyright, selectedDraft } = useDraftApi();
+  const [progressCopyright, setProgressCopyright] = useState(0);
+  const [progressScript, setProgressScript] = useState(0);
+  const { selectedDraft } = useDraftApi();
   const {
     register,
     handleSubmit,
@@ -71,32 +72,75 @@ const useAbstract = (script: IScript) => {
   const dropZoneUploadPdfScript = useDropzone({
     accept: { "application/pdf": [".pdf"] },
     maxFiles: 1,
+    onDropAccepted: async (files, _event) => {
+      try {
+        setProgressScript(0);
+        const res = await axiosPrivate
+          .post(
+            `/draft/upload/${script._id}`,
+            { script: files[0] },
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+              onUploadProgress: (progressEvent) => {
+                const { loaded, total } = progressEvent;
+                const percentage = (loaded * 100) / total;
+                setProgressScript(percentage);
+              },
+            }
+          );
+        successHandler(res.data.message);
+      } catch (error) {
+        errorHandler(error);
+      }
+
+    },
   });
+
   const dropZoneUploadPdfCopyright = useDropzone({
     maxFiles: 1,
     accept: { "application/pdf": [".pdf"] },
+    onDropAccepted: async (files, _event) => {
+      try {
+        setProgressCopyright(0);
+        const res = await axiosPrivate
+          .post(
+            `/draft/copyright/${script._id}`,
+            { copyright: files[0] },
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+              onUploadProgress: (progressEvent) => {
+                const { loaded, total } = progressEvent;
+                const percentage = (loaded * 100) / total;
+                setProgressCopyright(percentage);
+              }
+            }
+          );
+        successHandler(res.data.message);
+      } catch (error) {
+        errorHandler(error);
+      }
+
+    },
   });
 
-  const publishScript = () => setPublish(true);
-  const updateScriptFunc = () => setPublish(false);
-
-  const handleUploadImageCover = (e: React.ChangeEvent<HTMLInputElement>) => {
-    controller = new AbortController();
-    if (!e.target.files) {
-      customHandler("Image is required field");
-      setImageCoverError("Image is required field");
-    } else if (e.target.files.length <= 0) {
-      customHandler("Image is required field");
-      setImageCoverError("Image is required field");
-    } else if (e.target.files[0].size / 1024 > 5120) {
-      customHandler("The file is to large, must less than 5MB");
-      setImageCoverError("The file is to large, must less than 5MB");
-    } else {
-      setImageCoverError("");
+  const dropZoneUploadImage = useDropzone({
+    maxFiles: 1,
+    accept: { 'image/*': [] },
+    onDropAccepted: async (files, _event) => {
+      controller = new AbortController();
+      setProgress(0);
+      if (files[0].size / 1024 > 5120) {
+        customHandler("The file is to large, must less than 5MB");
+        return;
+      }
       axiosPrivate
         .post(
           `/script/image/${script._id}`,
-          { image: e.target.files[0] },
+          { image: files[0] },
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -108,10 +152,21 @@ const useAbstract = (script: IScript) => {
             },
             signal: controller.signal,
           }
-        )
-        .then((res) => successHandler(res.data.message));
-    }
-  };
+        ).then(res => {
+          refetch();
+          successHandler(res.data.message);
+        }).catch((error: any) => {
+          if (error.message === "canceled") {
+            customHandler("upload canceled");
+          } else {
+            errorHandler(error);
+          }
+        });
+    },
+  });
+
+  const publishScript = () => setPublish(true);
+  const updateScriptFunc = () => setPublish(false);
 
   const handleUploadAdaptionPermission = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -134,8 +189,8 @@ const useAbstract = (script: IScript) => {
       setAdaptionPermissionError("");
       axiosPrivate
         .post(
-          `/script/adaptionPermission/${script._id}`,
-          { adaptionPermission: e.target.files[0] },
+          `/script/adaption/${script._id}`,
+          { adaption: e.target.files[0] },
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -145,7 +200,7 @@ const useAbstract = (script: IScript) => {
               const percentage = (loaded * 100) / total;
               setProgressAdaption(percentage);
             },
-            signal: controller.signal,
+            signal: controllerAdaption.signal,
           }
         )
         .then((res) => successHandler(res.data.message));
@@ -155,7 +210,6 @@ const useAbstract = (script: IScript) => {
   const cancelUpload = () => {
     controller.abort();
     setProgress(0);
-    customHandler("upload canceled");
   };
 
   const cancelUploadAdaption = () => {
@@ -198,13 +252,6 @@ const useAbstract = (script: IScript) => {
           await selectedDraft(data.draft, {
             draftScriptId: data.draft,
           });
-        } else if (activeButton === 1) {
-          await uploadFileDraft(query.id as string, {
-            script: dropZoneUploadPdfScript.acceptedFiles[0],
-          });
-          await uploadCopyright(query.id as string, {
-            copyright: dropZoneUploadPdfCopyright.acceptedFiles[0],
-          });
         }
         replace(routes.projectsDashboard.url);
       } catch (error) {
@@ -245,19 +292,7 @@ const useAbstract = (script: IScript) => {
               draftScriptId: data.draft,
             });
           }
-        } else if (activeButton === 1) {
-          if (dropZoneUploadPdfScript.acceptedFiles[0]) {
-            await uploadFileDraft(query.id as string, {
-              script: dropZoneUploadPdfScript.acceptedFiles[0],
-            });
-          }
-          if (dropZoneUploadPdfCopyright.acceptedFiles[0]) {
-            await uploadCopyright(query.id as string, {
-              copyright: dropZoneUploadPdfCopyright.acceptedFiles[0],
-            });
-          }
         }
-
         setOpenSaveProgressModal(true);
       } catch (error) {
         errorHandler(error);
@@ -265,6 +300,7 @@ const useAbstract = (script: IScript) => {
         setLoadingUpdateButton(false);
       }
     }
+    refetch();
   };
 
   return {
@@ -287,8 +323,6 @@ const useAbstract = (script: IScript) => {
     getValues,
     progress,
     publish,
-    handleUploadImageCover,
-    imageCoverError,
     cancelUpload,
     handleUploadAdaptionPermission,
     adaptionPermissionError,
@@ -296,6 +330,9 @@ const useAbstract = (script: IScript) => {
     cancelUploadAdaption,
     dropZoneUploadPdfScript,
     dropZoneUploadPdfCopyright,
+    dropZoneUploadImage,
+    progressCopyright,
+    progressScript,
   };
 };
 

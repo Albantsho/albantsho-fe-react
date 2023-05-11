@@ -1,8 +1,6 @@
 import { apiPrivate } from "apis/configs/axios.config";
-import useUserStore from "store/user.store";
 import { useEffect } from "react";
-import Router from "next/router";
-import routes from "routes/routes";
+import useUserStore from "store/user.store";
 
 const useAxiosPrivate = () => {
   const { setAccessToken, accessToken, logOutUser } = useUserStore((state) => ({
@@ -33,10 +31,10 @@ const useAxiosPrivate = () => {
           error.request &&
           error.request.responseURL &&
           error.request.responseURL ===
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/refresh` &&
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/refresh` &&
           error.response.data.statusCode === 400 &&
           error.response.data.message ===
-            "Refresh token not found, please login again."
+          "Refresh token not found, please login again"
         ) {
           logOutUser();
         }

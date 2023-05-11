@@ -1,13 +1,13 @@
-import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
-import Head from "next/head";
-import { NextPageWithLayout } from "../../../../_app";
 import success from "@assets/images/success.png";
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
+import DashboardLayout from "@shared/Layouts/DashboardLayout/DashboardLayout";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import routes from "routes/routes";
 import { useRouter } from "next/router";
+import routes from "routes/routes";
+import { NextPageWithLayout } from "../../../../_app";
 
 const PaymentSuccessful: NextPageWithLayout = () => {
   const { query } = useRouter();

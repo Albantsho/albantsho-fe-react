@@ -45,6 +45,7 @@ export interface IWriterScript {
   image: string | null;
   scriptFormat: string | null;
   archive: boolean;
+  scriptFileType: "application/pdf" | "text/plain" | null;
 }
 
 export interface IBidScript {
@@ -100,8 +101,9 @@ export interface IFullInformationScript {
   soldDate: string | null;
   soldPrice: number | null;
   writtenBy: string;
-  scriptPart: string | null;
+  scriptSnippet: string | null;
   subScriptions: string[];
+  scriptFileType: "application/pdf" | "text/plain" | null;
   names: string;
 }
 
@@ -115,4 +117,16 @@ export interface IScriptReviewer {
   title: string;
   totalPages: string;
   _id: string;
+}
+
+export interface IAllScriptCollaboratorOn {
+  "_id": string,
+  "title": string,
+  "author": {
+    "_id": string,
+    "firstName": string,
+    "lastName": string,
+    "image": string,
+    "email": string;
+  };
 }

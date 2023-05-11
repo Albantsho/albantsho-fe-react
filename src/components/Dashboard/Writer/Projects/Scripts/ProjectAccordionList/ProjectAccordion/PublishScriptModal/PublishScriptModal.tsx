@@ -34,13 +34,10 @@ const PublishScriptModal = ({
     useMutation<
       IResData<object>,
       Error,
-      { payload: { published: boolean }; scriptId: string }
+      { payload: { publish: boolean }; scriptId: string }
     >(
       (data) =>
-        updatePublishedScript(
-          { published: data.payload.published },
-          data.scriptId
-        ),
+        updatePublishedScript({ publish: data.payload.publish }, data.scriptId),
       {
         onError: (error) => errorHandler(error),
         onSuccess: (data) => {
@@ -50,13 +47,14 @@ const PublishScriptModal = ({
               shallow: true,
             });
           }
+          handleClosePublishScript();
           queryClient.invalidateQueries(["script"]);
         },
       }
     );
 
   const publishScriptFunc = async () => {
-    publishScriptMutate({ payload: { published: true }, scriptId: id });
+    publishScriptMutate({ payload: { publish: true }, scriptId: id });
   };
 
   return (

@@ -1,13 +1,13 @@
+import { Typography } from "@mui/material";
+import IDraftLayout from "@shared/Layouts/IDraftLayout/IDraftLayout";
+import DescriptionIDraft from "components/IDraft/Index/DescriptionIDraft/DescriptionIDraft";
+import HeadingIDraft from "components/IDraft/Index/HeadingIDraft/HeadingIDraft";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { NextPageWithLayout } from "../_app";
-import { Typography } from "@mui/material";
-import HeadingIDraft from "components/IDraft/Index/HeadingIDraft/HeadingIDraft";
-import DescriptionIDraft from "components/IDraft/Index/DescriptionIDraft/DescriptionIDraft";
-import routes from "routes/routes";
-import IDraftLayout from "@shared/Layouts/IDraftLayout/IDraftLayout";
 import { Suspense } from "react";
+import routes from "routes/routes";
+import { NextPageWithLayout } from "../_app";
 
 const BenefitsIDraft = dynamic(
   () => import("components/IDraft/Index/BenefitsIDraft/BenefitsIDraft")
@@ -38,8 +38,9 @@ const IDraft: NextPageWithLayout = () => {
         <EligibilityIDraft />
         <DeadLineIDraft />
         <Link
+          target="_blank"
           href={routes.iDraftTermsAndConditions.url}
-          className="text-gray-900"
+          className="text-gray-900 cursor-pointer z-10"
         >
           <Typography
             variant="h6"

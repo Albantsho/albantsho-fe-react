@@ -1,5 +1,3 @@
-import LoaderLogo from "./assets/LoaderIcon.svg";
-import { SvgIcon } from "@mui/material";
 import { DotLoader } from "react-spinners";
 
 interface IProps {
@@ -9,7 +7,7 @@ interface IProps {
 const Loader = ({ setCustomHeight }: IProps) => {
   return (
     <div
-      className={`flex items-center justify-center text-primary-700 ${
+      className={`flex items-center justify-center w-full text-primary-700 ${
         setCustomHeight ? setCustomHeight : "min-h-screen"
       }`}
     >

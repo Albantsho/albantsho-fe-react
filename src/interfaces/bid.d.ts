@@ -4,7 +4,16 @@ export interface IBidForScript {
   amount: number;
   accepted: boolean;
   rejected: boolean;
-  producer: { firstName: string; lastName: string }[];
+  producer: { firstName: string; lastName: string; image: null | string; };
+}
+
+export interface IBid {
+  _id: string;
+  scriptId: string;
+  amount: number;
+  accepted: boolean;
+  rejected: boolean;
+  producer: { firstName: string; lastName: string; image: null | string; }[];
 }
 
 export interface IProducerBid {
@@ -17,8 +26,9 @@ export interface IProducerBid {
     firstName: string;
     lastName: string;
     email: string;
+    image: null | string;
   }[];
-  script: { title: string; tagline: string; image: string; _id: string };
+  script: { title: string; tagline: string; image: string; _id: string; };
 }
 
 export interface IBidInMarketplace {

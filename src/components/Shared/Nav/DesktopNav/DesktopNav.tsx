@@ -34,7 +34,7 @@ const DesktopNav = ({ links, secondaryUnderLineColor }: IProps) => {
                     ? "bg-primary-700 "
                     : "bg-secondary-700"
                 }`
-              } absolute -bottom-[23px] w-full h-1`}
+              } absolute -bottom-[22.7px] w-full h-1`}
             ></div>
           </Link>
         ))}

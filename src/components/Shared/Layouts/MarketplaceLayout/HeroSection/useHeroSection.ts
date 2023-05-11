@@ -7,7 +7,7 @@ const useHeroSection = () => {
   const { searchScripts } = useScriptsApi();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { data: searchScriptData } = useQuery("script search", () =>
+  const { data: searchScriptData } = useQuery(["script search", searchQuery], () =>
     searchScripts(searchQuery)
   );
 

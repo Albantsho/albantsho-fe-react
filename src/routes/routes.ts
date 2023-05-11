@@ -51,7 +51,11 @@ const routes = {
     mustAuthenticated: "noMatter",
     permission: [],
   },
-  blog: { url: "/blog", mustAuthenticated: "noMatter", permission: [] },
+  blog: {
+    url: "https://blog.albantsho.com/",
+    mustAuthenticated: "noMatter",
+    permission: [],
+  },
   oneBlog: {
     url: `/blog/[slug]`,
     dynamicUrl: (slug: string) => `/blog/${slug}`,
@@ -295,6 +299,16 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["admin"],
   },
+  withdrawsAdminDashboard: {
+    url: `/dashboard/admin/withdraws`,
+    mustAuthenticated: "yes",
+    permission: ["admin"],
+  },
+  withdrawsAdminDashboardTabs: {
+    url: (query: string) => `/dashboard/admin/withdraws${query}`,
+    mustAuthenticated: "yes",
+    permission: ["admin"],
+  },
   reviewersAdminDashboard: {
     url: `/dashboard/admin/reviewers`,
     mustAuthenticated: "yes",
@@ -326,10 +340,21 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer", "producer"],
   },
-  transactionHistoryWallet: {
-    url: "/wallet/transaction-history",
+  paymentHistoryWallet: {
+    url: "/wallet/payment-history",
     mustAuthenticated: "yes",
     permission: ["writer", "producer"],
+  },
+  withdrawHistoryWallet: {
+    url: "/wallet/withdraw-history",
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
+  withdrawVerifyWallet: {
+    url: "/wallet/withdraw/verify-otp/[withdraw_id]",
+    dynamicUrl: (withdrawId: string) => `/wallet/withdraw/verify-otp/${withdrawId}`,
+    mustAuthenticated: "yes",
+    permission: ["writer"],
   },
   withdrawSuccessfulWallet: {
     url: "/wallet/withdraw/[transaction_id]",
@@ -368,6 +393,16 @@ const routes = {
     url: "/404",
     mustAuthenticated: "noMatter",
     permission: [],
+  },
+  aiEditor: {
+    url: "/ai",
+    mustAuthenticated: "yes",
+    permission: ["writer"],
+  },
+  aiAssistant: {
+    url: "/ai/assistant",
+    mustAuthenticated: "yes",
+    permission: ["writer"],
   },
 };
 

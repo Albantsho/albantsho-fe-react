@@ -2,6 +2,7 @@ import { Grow, IconButton, Modal } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import CustomInput from "@shared/CustomInput/CustomInput";
+import Link from "next/link";
 import { AiFillInfoCircle, AiOutlineClose } from "react-icons/ai";
 import useCreateScriptModal from "./useCreateScriptModal";
 interface IProps {
@@ -57,10 +58,16 @@ const CreateScriptModal = ({
                 },
               }}
               helperText={
-                <span className="flex items-center gap-2">
-                  <AiFillInfoCircle className="text-xl" />
-                  note: ways to create killer titles
-                </span>
+                <Link
+                  className="text-[#5D5FEF]"
+                  href="https://blog.albantsho.com/the-title-game-how-to-pick-a-winning-name-for-your-screenplay/"
+                  target="_blank"
+                >
+                  <span className="flex items-center gap-2">
+                    <AiFillInfoCircle className="text-xl" />
+                    note: ways to create killer titles
+                  </span>
+                </Link>
               }
             />
             {errors.title?.message && (
@@ -89,10 +96,16 @@ const CreateScriptModal = ({
                 },
               }}
               helperText={
-                <span className="flex items-center gap-2">
-                  <AiFillInfoCircle className="text-xl" />
-                  What’s a tagline?
-                </span>
+                <Link
+                  className="text-[#5D5FEF]"
+                  href="https://blog.albantsho.com/tagline-vs-logline/"
+                  target="_blank"
+                >
+                  <span className="flex items-center gap-2">
+                    <AiFillInfoCircle className="text-xl" />
+                    What’s a tagline?
+                  </span>
+                </Link>
               }
             />
             {errors.tagline?.message && (

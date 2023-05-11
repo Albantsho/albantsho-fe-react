@@ -27,7 +27,7 @@ const MarketplaceTabs = ({ activeTab, pushToActiveRoute }: IProps) => {
             opacity: 0.3,
           },
         }}
-        className="-mb-[1px] md:ml-7 max-w-screen-2xl 2xl:mx-auto "
+        className="-mb-[1px] md:ml-7 max-w-screen-xl al:mx-auto "
       >
         {routesList.map((route) => (
           <Tab

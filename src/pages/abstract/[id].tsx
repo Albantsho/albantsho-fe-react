@@ -15,13 +15,21 @@ const links = [
   { title: "FAQ", href: routes.FAQs.url },
 ];
 
+const controller = new AbortController();
+
 const AbstractPage = () => {
   const { query } = useRouter();
-  const { getScriptUnComplete } = useScriptsApi();
+
+  // Use custom hook useScriptsApi to retrieve a script data
+  const { getScriptUnComplete } = useScriptsApi(controller);
 
   const scriptID = typeof query?.id === "string" ? query.id : "";
 
-  const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
+  const {
+    data: scriptData,
+    isLoading: isLoadingGetScript,
+    refetch,
+  } = useQuery(
     ["script", scriptID],
     () => getScriptUnComplete(scriptID),
 
@@ -40,7 +48,7 @@ const AbstractPage = () => {
 
       {!isLoadingGetScript && scriptData ? (
         <div className="px-5 sm:px-10 py-10 md:py-20 min-h-screen bg-gray-50">
-          <Abstract script={scriptData.script} />
+          <Abstract refetch={refetch} script={scriptData.script} />
         </div>
       ) : (
         <Loader setCustomHeight="min-h-[80vh]" />

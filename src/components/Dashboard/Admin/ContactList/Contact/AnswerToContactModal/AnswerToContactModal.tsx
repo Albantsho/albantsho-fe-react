@@ -1,4 +1,4 @@
-import { IconButton, Modal, Slide } from "@mui/material";
+import { IconButton, Modal, Slide, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import TextEditor from "@shared/TextEditor/TextEditor";
@@ -60,12 +60,12 @@ const AnswerToContactModal = ({
 
   return (
     <Modal
-      className="px-5"
+      className="px-5 overflow-y-auto py-20"
       open={openAnswerToContactModal}
       onClose={handleCloseAnswerToContact}
     >
       <Slide direction="up" in={openAnswerToContactModal}>
-        <div className="px-6 relative bg-white w-full mt-28 max-w-screen-2xl flex flex-col  py-16 rounded-lg">
+        <div className="px-6 relative bg-white w-full max-w-screen-lg flex flex-col mx-auto py-16 rounded-lg">
           <IconButton
             onClick={handleCloseAnswerToContact}
             className="absolute top-5 right-5"
@@ -73,10 +73,15 @@ const AnswerToContactModal = ({
           >
             <AiOutlineClose />
           </IconButton>
-          <TextEditor
-            initialValue={initialValue}
-            textEditorValue={textEditorValue}
-          />
+          <Typography variant="h5" color="primary">
+            Answer To Contact
+          </Typography>
+          <div className="max-h-96 overflow-y-auto shadow-md shadow-[#f9f9f9]">
+            <TextEditor
+              initialValue={initialValue}
+              textEditorValue={textEditorValue}
+            />
+          </div>
           <div className="flex w-full justify-start gap-3 sm:gap-6 mt-4 lg:mt-7">
             <Btn
               loading={loadingAnswerToContact}

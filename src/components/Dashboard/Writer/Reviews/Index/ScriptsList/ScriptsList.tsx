@@ -56,6 +56,7 @@ const ScriptsList = ({ reviewsList }: IProps) => {
                         loading="lazy"
                         src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${script.image}`}
                         alt={script.title}
+                        unoptimized
                       />
                     ) : (
                       <SvgIcon
@@ -165,12 +166,12 @@ const ScriptsList = ({ reviewsList }: IProps) => {
       </div>
     </Paper>
   ) : (
-    <div className="flex items-center">
+    <div className="flex items-center py-14 lg:py-24">
       <Image
         width={384}
         height={384}
         loading="lazy"
-        className="w-fit h-fit mx-auto mt-14 lg:mt-24"
+        className="w-fit h-fit mx-auto"
         src={emptyBlogs}
         alt="empty blog list"
       />

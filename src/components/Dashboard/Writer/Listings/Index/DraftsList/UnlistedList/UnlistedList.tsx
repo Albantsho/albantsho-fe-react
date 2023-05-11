@@ -23,7 +23,7 @@ const UnlistedList = ({ unListedScripts, refetch }: IProps) => {
 
         <Typography
           variant="h6"
-          className="futura hidden  md:block lg:hidden xl:block self-start md:self-center md:mx-auto xl:mr-auto xl:ml-0  sm:mr-3 md:text-center  font-medium text-primary-700"
+          className="futura hidden md:block lg:hidden xl:block self-start md:self-center md:mx-auto xl:mr-auto xl:ml-0  sm:mr-3 md:text-center  font-medium text-primary-700"
         >
           Script Type
         </Typography>

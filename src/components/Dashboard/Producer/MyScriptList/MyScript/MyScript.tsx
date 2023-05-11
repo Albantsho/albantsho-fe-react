@@ -23,6 +23,7 @@ const MyScript = ({ script }: IProps) => {
     async function getDraftFunc() {
       try {
         const res = await getOneDraft(script._id as string);
+
         setResDraft(res);
       } catch (error) {
         ("");
@@ -32,9 +33,9 @@ const MyScript = ({ script }: IProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   let valueForConvertPdf = "";
-  if (resDraft && resDraft.data) {
+  if (resDraft) {
     const htmlContent = new DOMParser().parseFromString(
-      resDraft.data.draft,
+      resDraft.draft,
       "text/html"
     );
     const value = deserializeScriptWithOutDiv(htmlContent.body);
@@ -78,6 +79,7 @@ const MyScript = ({ script }: IProps) => {
           loading="lazy"
           src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${script.image}`}
           alt={script.title}
+          unoptimized
         />
         <div className="flex-grow sm:flex-1 sm:max-w-[271px] min-w-[170px] sm:ml-2">
           <Link
@@ -96,7 +98,7 @@ const MyScript = ({ script }: IProps) => {
             {script.tagline}
           </Typography>
         </div>
-        {resDraft && resDraft.data ? (
+        {resDraft ? (
           <PDFDownloadLink
             document={
               <PDFFile
@@ -144,7 +146,7 @@ const MyScript = ({ script }: IProps) => {
         className="hidden sm:flex items-center sm:py-6 xl:py-10 justify-end"
       >
         {" "}
-        {resDraft.data ? (
+        {resDraft ? (
           <PDFDownloadLink
             document={
               <PDFFile

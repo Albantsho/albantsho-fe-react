@@ -36,7 +36,6 @@ const ReviewersPage: NextPageWithLayout = () => {
         placeholder="Search for script"
         handleSearch={handleSearch}
       />
-
       {(!query.tab || query.tab === "current-requests") && (
         <CurrentRequestsList searchQuery={searchQuery} />
       )}

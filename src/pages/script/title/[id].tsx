@@ -12,14 +12,14 @@ const TitlePage = () => {
 
   const scriptID = typeof query?.id === "string" ? query.id : "";
 
-  const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
-    ["script", scriptID],
-    () => getScriptUnComplete(scriptID),
-    {
-      onError: (err) => errorHandler(err),
-      enabled: scriptID.length > 0,
-    }
-  );
+  const {
+    data: scriptData,
+    isLoading: isLoadingGetScript,
+    refetch,
+  } = useQuery(["script", scriptID], () => getScriptUnComplete(scriptID), {
+    onError: (err) => errorHandler(err),
+    enabled: scriptID.length > 0,
+  });
 
   return (
     <>
@@ -27,7 +27,7 @@ const TitlePage = () => {
         <title>Albantsho || {scriptData?.script?.title}</title>
       </Head>
       {!isLoadingGetScript && scriptData && scriptData.script ? (
-        <Title script={scriptData.script} />
+        <Title script={scriptData.script} refetch={refetch} />
       ) : (
         <Loader />
       )}

@@ -46,7 +46,7 @@ const SaveProgressScriptModal = ({
                 size="large"
                 className="sm:py-3 sm:px-5 text-white bg-primary-700"
               >
-                Back to dash board
+                Back to dashboard
               </Btn>
             </Link>
             <Button
