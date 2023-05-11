@@ -7,7 +7,7 @@ import { INft } from "interfaces/nft";
 import { useEffect, useState } from "react";
 import customHandler from "utils/custom-handler";
 import successHandler from "utils/success-handler";
-import NFT from "../../../config/albantsho-abi.json";
+import NFT from "../../../json/albantsho-abi.json";
 
 const nftContractAddress = "0x3DcF9933A9584B9f3c6aB499aD942482bff80CFD";
 

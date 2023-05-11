@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import countryList from "config/country-list.json";
+import countryList from "json/country-list.json";
 
 export const registerSchema = Yup.object({
   fullname: Yup.string()

@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import countryList from "config/country-list.json";
+import countryList from "json/country-list.json";
 import Image from "next/image";
 import Link from "next/link";
 import { Controller } from "react-hook-form";
