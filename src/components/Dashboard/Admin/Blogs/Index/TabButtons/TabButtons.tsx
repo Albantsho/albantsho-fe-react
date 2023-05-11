@@ -1,7 +1,7 @@
 import { Tab, Tabs } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const routesArray = [
   { route: "", label: "Live Blogs" },

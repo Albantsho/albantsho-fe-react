@@ -14,8 +14,7 @@ import { IDraft } from "interfaces/draft";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import routes from "routes/routes";
-
+import routes from "utils/routes";
 interface ScriptsOptionType {
   inputValue?: string;
   title: string;

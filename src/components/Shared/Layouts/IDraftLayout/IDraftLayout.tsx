@@ -1,7 +1,7 @@
 import Nav from "@shared/Nav/Nav";
 import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import ImageSection from "./ImageSection/ImageSection";
 
 const Footer = dynamic(() => import("@shared/Footer/Footer"));

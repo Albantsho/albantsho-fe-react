@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
 import { Suspense } from "react";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import { NextPageWithLayout } from "../_app";
 
 const BenefitsIDraft = dynamic(

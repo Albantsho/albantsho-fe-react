@@ -10,7 +10,7 @@ import {
 import Logo from "@shared/Logo/Logo";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import BlogIcon from "../assets/blog-icon.svg";
 import StarIcon from "../assets/star-icon.svg";
 import UserIcon from "../assets/user-icon.svg";

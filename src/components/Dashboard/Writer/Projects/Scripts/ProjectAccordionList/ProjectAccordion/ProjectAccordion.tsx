@@ -14,7 +14,6 @@ import { IWriterScript } from "interfaces/script";
 import Image from "next/image";
 import { BiChevronDown } from "react-icons/bi";
 import { IoIosMore } from "react-icons/io";
-import routes from "routes/routes";
 import addAbstractIcon from "./assets/Abstract.svg";
 import addScriptIcon from "./assets/Script.svg";
 import publishScriptIcon from "./assets/publish.svg";
@@ -24,6 +23,7 @@ import useProjectAccordion from "./useProjectAccordion";
 import { useRouter } from "next/router";
 import PublishScriptModal from "./PublishScriptModal/PublishScriptModal";
 import { toast } from "react-hot-toast";
+import routes from "utils/routes";
 
 interface IProps {
   script: IWriterScript;

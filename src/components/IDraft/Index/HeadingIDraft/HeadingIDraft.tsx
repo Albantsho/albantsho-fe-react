@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import commentImage from "./assets/comment-image.png";
 
 const HeadingIDraft = () => {

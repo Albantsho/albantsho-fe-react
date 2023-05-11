@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { Suspense } from "react";
 import { animated, useSpring } from "react-spring";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const WhyAlbantsho = dynamic(
   () => import("components/Home/WhyAlbantsho/WhyAlbantsho")

@@ -20,7 +20,7 @@ import { GiReceiveMoney } from "react-icons/gi";
 import { RiDownloadLine } from "react-icons/ri";
 import { TbArrowsSort } from "react-icons/tb";
 import { useQuery } from "react-query";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 

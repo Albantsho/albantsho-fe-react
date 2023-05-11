@@ -1,6 +1,6 @@
 import PathIcon from "@assets/icons/path-icon.svg";
 import { Breadcrumbs, Link, SvgIcon, Typography } from "@mui/material";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const BreadcrumbsAddBlogEntry = () => {
   const breadcrumbs = [

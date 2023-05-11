@@ -14,7 +14,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import listings from "../assets/listings.png";
 import projects from "../assets/projects.png";
 import reviews from "../assets/reviews.png";

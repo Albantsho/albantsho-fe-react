@@ -21,8 +21,8 @@ import React, { Suspense, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import { QueryClient, useMutation } from "react-query";
-import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 import successHandler from "utils/success-handler";
 
 const AcceptOfferModal = dynamic(

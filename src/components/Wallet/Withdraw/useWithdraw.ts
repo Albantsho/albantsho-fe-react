@@ -3,7 +3,7 @@ import useWithdrawApi from "apis/withdraw.api";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import errorHandler from "utils/error-handler";
 import { withdrawSchema } from "./validation/withdraw.validation";
 

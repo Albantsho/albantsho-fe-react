@@ -6,8 +6,8 @@ import { IScript } from "interfaces/script";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import routes from "routes/routes";
 import { deserializeScriptWithOutDiv } from "utils/deserialize-script-with-div";
+import routes from "utils/routes";
 import { serializeWithoutDiv } from "utils/serialize-slate";
 
 interface IProps {

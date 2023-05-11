@@ -12,7 +12,7 @@ import { IFullInformationScript } from "interfaces/script";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { SyntheticEvent, useState } from "react";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import { Socket } from "socket.io-client";
 import Comment from "../assets/comment.svg";
 import Document from "../assets/document.svg";

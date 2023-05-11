@@ -5,7 +5,7 @@ import useAuthApi, {
 import { useRouter } from "next/router";
 import React, { FormEvent, useRef, useState } from "react";
 import { QueryClient, useMutation } from "react-query";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 
@@ -21,7 +21,7 @@ const useVerifyEmail = () => {
   const { replace } = useRouter();
   const { emailVerify, resendCode } = useAuthApi();
   const inputs = useRef<HTMLInputElement[]>([]);
-  const [formValues, setFormValues] = useState<{ [key: number]: string }>({
+  const [formValues, setFormValues] = useState<{ [key: number]: string; }>({
     0: "",
     1: "",
     2: "",
@@ -44,17 +44,17 @@ const useVerifyEmail = () => {
       data.user.userType === "writer"
         ? replace(routes.writerDashboard.url)
         : data.user.userType === "producer"
-        ? replace(routes.producerDashboard.url)
-        : data.user.userType === "admin"
-        ? replace(routes.adminDashboard.url)
-        : replace(routes.reviewerDashboard.url);
+          ? replace(routes.producerDashboard.url)
+          : data.user.userType === "admin"
+            ? replace(routes.adminDashboard.url)
+            : replace(routes.reviewerDashboard.url);
     },
   });
 
   const { mutate: resendCodeFn, isLoading: loadingResendCode } = useMutation<
     void,
     Error,
-    { email: string }
+    { email: string; }
   >((user) => resendCode(user), {
     onError: (error) => {
       errorHandler(error);

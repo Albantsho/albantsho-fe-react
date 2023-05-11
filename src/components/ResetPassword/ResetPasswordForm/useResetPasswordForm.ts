@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { QueryClient, useMutation } from "react-query";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import errorHandler from "utils/error-handler";
 import { resetPasswordSchema } from "./validation/resetPassword.validation";
 

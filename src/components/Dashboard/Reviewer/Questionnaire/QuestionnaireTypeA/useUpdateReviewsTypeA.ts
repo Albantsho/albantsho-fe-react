@@ -2,8 +2,8 @@ import useReviewsApi from "apis/Reviews.api";
 import { IReviewTypeA, IReviewValuesTypeA } from "interfaces/reviews";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
-import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 import successHandler from "utils/success-handler";
 
 interface IProps {

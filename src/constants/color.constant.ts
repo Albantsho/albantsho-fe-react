@@ -1,4 +1,4 @@
-export const bgArray = [
+export const COLORS = [
   "#ef4444",
   "#fb923c",
   "#84cc16",

@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
-import countryList from "config/country-list.json";
+import countryList from "json/country-list.json";
 import { IUserProfile } from "interfaces/user";
 import Image from "next/image";
 import pencil from "../assets/pencil.svg";
@@ -174,7 +174,7 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
               </Typography>
             </label>
             <div
-              id="country"
+              id="email"
               className="min-w-[180px] p-3 border border-gray-300 rounded-lg flex gap-3"
             >
               <Typography className="leading-normal text-primary-500">
@@ -183,7 +183,7 @@ const BasicPersonalInformation = ({ userProfile }: IProps) => {
             </div>
           </div>
           <div>
-            <label className="mb-1 inline-block" htmlFor="country">
+            <label className="mb-1 inline-block" htmlFor="email">
               <Typography
                 variant="h6"
                 className="futura font-medium text-neutral-800"

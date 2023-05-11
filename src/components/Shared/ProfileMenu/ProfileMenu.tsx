@@ -7,10 +7,10 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import useUserStore from "store/user.store";
 import { useRouter } from "next/router";
 import { AiFillCaretDown } from "react-icons/ai";
-import routes from "routes/routes";
+import useUserStore from "store/user.store";
+import routes from "utils/routes";
 
 import useProfileMenu from "./useProfileMenu";
 

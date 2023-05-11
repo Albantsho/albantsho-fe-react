@@ -3,7 +3,7 @@ import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { useRouter } from "next/router";
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import { Socket } from "socket.io-client";
 import CommentList from "../CommentList";
 

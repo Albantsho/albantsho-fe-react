@@ -1,7 +1,7 @@
 import Btn from "@shared/Btn/Btn";
 import { useRouter } from "next/router";
 import { RiSearch2Line } from "react-icons/ri";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 interface IProps {
   placeholder: string;

@@ -1,7 +1,7 @@
 import { LoadingButton } from "@mui/lab";
 import { Avatar, Button, SvgIcon, Tooltip, Typography } from "@mui/material";
 import useAuthApi from "apis/Auth.api";
-import countryList from "config/country-list.json";
+import countryList from "json/country-list.json";
 import { IResData } from "interfaces/response";
 import { IUserInformationInAdminPanel } from "interfaces/user";
 import dynamic from "next/dynamic";

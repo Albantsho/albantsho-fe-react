@@ -7,7 +7,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { SiOpenai } from "react-icons/si";
-import routes from "routes/routes";
+import routes from "utils/routes";
+
 const routesArray = [
   {
     route: routes.aiEditor.url,

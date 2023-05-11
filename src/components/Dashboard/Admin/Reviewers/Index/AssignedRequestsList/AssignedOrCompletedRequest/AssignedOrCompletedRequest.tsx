@@ -7,11 +7,11 @@ import {
   Typography,
   SvgIcon,
 } from "@mui/material";
-import { bgArray } from "assets/colors/color-list";
 import { IAssignedOrCompletedRequest } from "interfaces/reviews";
 import Image from "next/image";
 import { useMemo } from "react";
 import DefaultImage from "@assets/default-image-script.svg";
+import { COLORS } from "constants/color.constant";
 
 interface IProps {
   script: IAssignedOrCompletedRequest;
@@ -133,7 +133,7 @@ const AssignedOrCompletedRequest = ({ script }: IProps) => {
           <Avatar
             style={{
               backgroundColor: useMemo(
-                () => bgArray[Math.floor(Math.random() * 14)],
+                () => COLORS[Math.floor(Math.random() * 14)],
                 []
               ),
             }}

@@ -1,16 +1,16 @@
+import ReviewedIcon from "@assets/icons/reviewed.svg";
 import {
   Card,
   CardActions,
   CardContent,
+  Divider,
   Icon,
   Typography,
-  Divider,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import ReviewedIcon from "@assets/icons/reviewed.svg";
 import Link from "next/link";
-import routes from "routes/routes";
 import { useRouter } from "next/router";
+import routes from "utils/routes";
 
 const list1 = [
   "Plot",

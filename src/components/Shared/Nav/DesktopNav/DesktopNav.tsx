@@ -3,7 +3,7 @@ import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
 import useUserStore from "store/user.store";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 interface IProps {
   links: { title: string; href: string }[];

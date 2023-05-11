@@ -3,7 +3,7 @@ import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
 import success from "@assets/images/success.png";
 import Link from "next/link";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const ResetPasswordConfirmation = () => {
   return (

@@ -6,11 +6,11 @@ import type { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import routes from "routes/routes";
 import useUserStore from "store/user.store";
 import customHandler from "utils/custom-handler";
 import errorHandler from "utils/error-handler";
 import { priceConverter } from "utils/price-convert";
+import routes from "utils/routes";
 
 interface IProps {
   script: IFullInformationScript;

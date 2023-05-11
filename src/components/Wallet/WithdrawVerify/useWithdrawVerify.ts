@@ -2,7 +2,7 @@ import useWithdrawApi, { type IPayloadWithdrawVerify } from "apis/withdraw.api";
 import { useRouter } from "next/router";
 import React, { FormEvent, useRef, useState } from "react";
 import { useMutation } from "react-query";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
 

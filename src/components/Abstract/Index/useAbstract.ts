@@ -6,13 +6,13 @@ import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
-import routes from "routes/routes";
 import customHandler from "utils/custom-handler";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 import successHandler from "utils/success-handler";
 import { abstractSchema } from "./validation/abstract.validation";
-import { useDropzone } from "react-dropzone";
 
 type IScript = IFullInformationScript;
 

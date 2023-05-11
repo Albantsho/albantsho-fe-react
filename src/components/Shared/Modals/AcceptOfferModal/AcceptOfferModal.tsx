@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { AiOutlineClose } from "react-icons/ai";
 import { QueryClient, useMutation } from "react-query";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import errorHandler from "utils/error-handler";
 import successHandler from "utils/success-handler";
 import acceptOffer from "./assets/accept-offer.png";

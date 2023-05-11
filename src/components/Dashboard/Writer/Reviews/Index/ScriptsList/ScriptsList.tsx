@@ -1,4 +1,5 @@
 import DefaultImage from "@assets/default-image-script.svg";
+import emptyBlogs from "@assets/images/empty-blogs.png";
 import {
   Button,
   Chip,
@@ -11,8 +12,7 @@ import { IWriterReview } from "interfaces/reviews";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import routes from "routes/routes";
-import emptyBlogs from "@assets/images/empty-blogs.png";
+import routes from "utils/routes";
 
 interface IProps {
   reviewsList: IWriterReview[];

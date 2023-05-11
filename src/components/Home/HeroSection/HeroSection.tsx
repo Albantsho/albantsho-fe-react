@@ -11,8 +11,8 @@ import useScriptsApi from "apis/Scripts.api";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import { animated, useSpring } from "react-spring";
-import routes from "routes/routes";
 import useUserStore from "store/user.store";
+import routes from "utils/routes";
 import Bg from "./assets/bg.webp";
 
 const AnimatedScriptCard = animated(ScriptCard);

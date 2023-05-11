@@ -14,7 +14,7 @@ import EmailIcon from "@assets/icons/email.svg";
 import PasswordIcon from "@assets/icons/password.svg";
 import ShowIcon from "@assets/icons/show-password.svg";
 import NotShowIcon from "@assets/icons/not-show-password.svg";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import useLoginForm from "./useLoginForm";
 
 const LoginForm = () => {

@@ -5,8 +5,8 @@ import Abstract from "components/Abstract/Index/Abstract";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
-import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 
 const links = [
   { title: "Home", href: routes.home.url },

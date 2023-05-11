@@ -15,7 +15,7 @@ import {
 import Btn from "@shared/Btn/Btn";
 import CancelBtn from "@shared/CancelBtn/CancelBtn";
 import useReviewsApi from "apis/Reviews.api";
-import { bgArray } from "assets/colors/color-list";
+import { COLORS } from "constants/color.constant";
 import { IResData } from "interfaces/response";
 import { IReviewer } from "interfaces/reviews";
 import { IFullInformationScript } from "interfaces/script";
@@ -24,8 +24,8 @@ import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useMutation } from "react-query";
-import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 import successHandler from "utils/success-handler";
 
 interface IProps {
@@ -78,7 +78,7 @@ const OneRequest = ({ reviewersList, script }: IProps) => {
   };
 
   const backgroundColor = useMemo(
-    () => bgArray[Math.floor(Math.random() * 14)],
+    () => COLORS[Math.floor(Math.random() * 14)],
     []
   );
 

@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-import { bgArray } from "assets/colors/color-list";
+import { COLORS } from "constants/color.constant";
 import { IComment } from "interfaces/comment";
 import React, { useMemo } from "react";
 import { BiChevronDown } from "react-icons/bi";
@@ -59,9 +59,9 @@ const CommentComponent = ({ comment, comments, socket }: IProps) => {
             className="w-9 h-9"
             style={{
               backgroundColor: useMemo(
-                () => bgArray[Math.floor(Math.random() * 14)],
+                () => COLORS[Math.floor(Math.random() * 14)],
                 // eslint-disable-next-line react-hooks/exhaustive-deps
-                [bgArray]
+                []
               ),
             }}
             src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${comment.user?.image}`}

@@ -13,7 +13,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { Suspense, useState } from "react";
 import { IoIosMore } from "react-icons/io";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const UnListingItemModal = dynamic(
   () => import("../Modals/UnListingItemModal/UnListingItemModal")

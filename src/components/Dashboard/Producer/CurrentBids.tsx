@@ -15,8 +15,8 @@ import { IResData } from "interfaces/response";
 import Image from "next/image";
 import Link from "next/link";
 import { QueryClient, useMutation } from "react-query";
-import routes from "routes/routes";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 import successHandler from "utils/success-handler";
 
 interface IProps {

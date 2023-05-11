@@ -5,9 +5,9 @@ import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { QueryClient, useMutation } from "react-query";
-import routes from "routes/routes";
 import { convertToSlug } from "utils/convert-to-slug";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 import { addBlogSchema } from "./validation/addBlog.validate";
 
 interface IAddWeblogFormValues {

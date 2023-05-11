@@ -3,7 +3,7 @@ import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import FAQAccordion from "components/FAQs/FAQAccordion/FAQAccordion";
 import Link from "next/link";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import useHelp from "./useHelp";
 
 const Help = () => {

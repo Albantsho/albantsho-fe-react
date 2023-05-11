@@ -4,7 +4,7 @@ import Btn from "@shared/Btn/Btn";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import routes from "routes/routes";
+import routes from "utils/routes";
 
 const WithdrawSuccessful = () => {
   const { query } = useRouter();

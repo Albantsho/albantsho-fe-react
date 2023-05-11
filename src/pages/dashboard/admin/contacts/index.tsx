@@ -9,7 +9,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
-import routes from "routes/routes";
+import routes from "utils/routes";
 import { NextPageWithLayout } from "../../../_app";
 
 const ContactsPage: NextPageWithLayout = () => {

@@ -1,9 +1,9 @@
+import DefaultImage from "@assets/default-image-script.svg";
 import { Chip, SvgIcon, TableCell, TableRow, Typography } from "@mui/material";
 import { ICurrentRequest } from "interfaces/reviews";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import routes from "routes/routes";
-import DefaultImage from "@assets/default-image-script.svg";
+import routes from "utils/routes";
 
 interface IProps {
   request: ICurrentRequest;
