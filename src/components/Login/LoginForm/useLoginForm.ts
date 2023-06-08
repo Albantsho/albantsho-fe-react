@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import useAuthApi, { type ILoginPayload } from "apis/Auth.api";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { QueryClient, useMutation } from "react-query";
@@ -8,6 +8,7 @@ import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 import routes from "utils/routes";
 import { loginSchema } from "./validation/login.validation";
+
 interface IAuthLogin {
   email: string;
   password: string;
@@ -20,7 +21,7 @@ const useLoginForm = () => {
   const [typePasswordInput, setTypePasswordInput] = useState(true);
   const [rememberMe, setRememberMe] = useState(true);
   const { signin } = useAuthApi();
-  const { replace } = useRouter();
+  const router = useRouter();
   const { authenticationUser, setAccessToken } = useUserStore((state) => ({
     authenticationUser: state.authenticationUser,
     setAccessToken: state.setAccessToken,
@@ -37,18 +38,20 @@ const useLoginForm = () => {
     onSuccess: (data, variables: ILoginPayload) => {
       queryClient.invalidateQueries(["user"]);
       authenticationUser(data.user);
-      !data.user && replace(routes.verifyEmail.url);
+      !data.user && router.replace(routes.verifyEmail.url);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       !data.user && authenticationUser({ email: variables.email } as any);
       setAccessToken(data.accessToken);
       if (data.user && data.user.userType) {
-        data.user.userType === "writer"
-          ? replace(routes.writerDashboard.url)
-          : data.user.userType === "producer"
-            ? replace(routes.producerDashboard.url)
+        if (data.user.userType === "producer") {
+          Router.router?.components["/marketplace/[id]"] ? router.back() : router.replace(routes.marketplace.url);
+        } else {
+          data.user.userType === "writer"
+            ? router.replace(routes.writerDashboard.url)
             : data.user.userType === "admin"
-              ? replace(routes.adminDashboard.url)
-              : replace(routes.reviewerDashboard.url);
+              ? router.replace(routes.adminDashboard.url)
+              : router.replace(routes.reviewerDashboard.url);
+        }
       }
     },
   });
