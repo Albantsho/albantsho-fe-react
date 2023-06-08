@@ -1,13 +1,13 @@
 import useAuthApi, {
   type IData_AuthorizationUser,
-  type IEmailVerifyOtp,
+  type IEmailVerifyOtp
 } from "apis/Auth.api";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import React, { FormEvent, useRef, useState } from "react";
 import { QueryClient, useMutation } from "react-query";
-import routes from "utils/routes";
 import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
+import routes from "utils/routes";
 
 const queryClient = new QueryClient();
 
@@ -18,7 +18,7 @@ const useVerifyEmail = () => {
     setAccessToken: state.setAccessToken,
     authenticationUser: state.authenticationUser,
   }));
-  const { replace } = useRouter();
+  const router = useRouter();
   const { emailVerify, resendCode } = useAuthApi();
   const inputs = useRef<HTMLInputElement[]>([]);
   const [formValues, setFormValues] = useState<{ [key: number]: string; }>({
@@ -41,13 +41,16 @@ const useVerifyEmail = () => {
       queryClient.invalidateQueries(["user"]);
       setAccessToken(data.accessToken);
       authenticationUser(data.user);
-      data.user.userType === "writer"
-        ? replace(routes.writerDashboard.url)
-        : data.user.userType === "producer"
-          ? replace(routes.producerDashboard.url)
+
+      if (data.user.userType === "producer") {
+        Router.router?.components["/marketplace/[id]"] ? router.back() : router.replace(routes.marketplace.url);
+      } else {
+        data.user.userType === "writer"
+          ? router.replace(routes.writerDashboard.url)
           : data.user.userType === "admin"
-            ? replace(routes.adminDashboard.url)
-            : replace(routes.reviewerDashboard.url);
+            ? router.replace(routes.adminDashboard.url)
+            : router.replace(routes.reviewerDashboard.url);
+      }
     },
   });
 

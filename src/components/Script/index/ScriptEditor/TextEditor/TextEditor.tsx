@@ -90,7 +90,7 @@ const TextEditor = ({
         ))}
       <Slate onChange={handleChangeEditor} editor={editor} value={initialValue}>
         <Editable
-          onDoubleClick={createCommentFunc}
+          // onDoubleClick={createCommentFunc}
           onPaste={(e) => e.preventDefault()}
           onKeyDown={handleKeyDown}
           translate="yes"

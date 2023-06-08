@@ -5,7 +5,7 @@ import useUserStore from "store/user.store";
 import routes from "utils/routes";
 
 const Authorization = ({ children }: React.PropsWithChildren) => {
-  const { pathname, replace } = useRouter();
+  const { pathname, push } = useRouter();
   const urlRoutes = Object.values(routes);
   const user = useUserStore((state) => state.user);
   const [loading, setLoading] = useState(true);
@@ -17,12 +17,12 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
       if (!user) return;
       if (user.emailVerified) {
         user.userType === "writer"
-          ? replace(routes.writerDashboard.url)
+          ? push(routes.writerDashboard.url)
           : user.userType === "producer"
-          ? replace(routes.producerDashboard.url)
+          ? push(routes.marketplace.url)
           : user.userType === "admin"
-          ? replace(routes.adminDashboard.url)
-          : replace(routes.reviewerDashboard.url);
+          ? push(routes.adminDashboard.url)
+          : push(routes.reviewerDashboard.url);
 
         foundRoute.url !== pathname && setLoading(false);
       } else {
@@ -31,7 +31,7 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
       }
     } else if (foundRoute?.mustAuthenticated === "yes") {
       if (!user.emailVerified) {
-        replace(routes.signin.url);
+        push(routes.signin.url);
         foundRoute.url !== pathname && setLoading(false);
       } else {
         const matchedRule = foundRoute.permission.find(
@@ -40,12 +40,12 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
         if (pathname === "/dashboard") {
           if (user.emailVerified) {
             user.userType === "writer"
-              ? replace(routes.writerDashboard.url)
+              ? push(routes.writerDashboard.url)
               : user.userType === "producer"
-              ? replace(routes.producerDashboard.url)
+              ? push(routes.producerDashboard.url)
               : user.userType === "admin"
-              ? replace(routes.adminDashboard.url)
-              : replace(routes.reviewerDashboard.url);
+              ? push(routes.adminDashboard.url)
+              : push(routes.reviewerDashboard.url);
             foundRoute.url !== pathname && setLoading(false);
           } else {
             setLoading(false);
@@ -53,7 +53,7 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
           }
         }
         if (!matchedRule) {
-          replace(routes.home.url);
+          push(routes.home.url);
           foundRoute.url !== pathname && setLoading(false);
           return;
         }
