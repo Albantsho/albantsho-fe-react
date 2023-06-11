@@ -16,7 +16,7 @@ const DesktopNav = ({ links, secondaryUnderLineColor }: IProps) => {
 
   return (
     <>
-      <div className="flex gap-20 mx-10 flex-1 justify-center relative">
+      <div className="flex min-[1080px]:gap-20 gap-16 mx-10 flex-1 justify-center relative">
         {links.map(({ title, href }, i) => (
           <Link className="relative" href={href} key={i}>
             <Typography
