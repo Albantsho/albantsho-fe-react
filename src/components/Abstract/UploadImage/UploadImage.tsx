@@ -76,7 +76,7 @@ const UploadImage = ({
               color="primary.700"
               className="futura font-semibold text-center leading-normal mb-1 md:mb-2"
             >
-              Upload Script
+              Upload Image
             </Typography>
             <Typography
               variant="body1"

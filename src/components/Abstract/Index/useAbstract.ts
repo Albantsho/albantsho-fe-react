@@ -5,7 +5,7 @@ import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useForm } from "react-hook-form";
 import customHandler from "utils/custom-handler";
@@ -68,6 +68,39 @@ const useAbstract = (script: IScript, refetch: any) => {
     },
     resolver: yupResolver(abstractSchema(publish, activeButton)),
   });
+
+  useEffect(() => {
+
+    async function updateData() {
+      const data = getValues();
+      await updateScript(
+        {
+          primaryGenre: data.primaryGenre,
+          secondaryGenre: data.secondaryGenre,
+          title: data.title,
+          scriptFormat: data.scriptFormat,
+          storyFormat: data.storyFormat,
+          primaryCast: data.primaryCast,
+          secondaryCast: data.secondaryCast,
+          estimatedBudget: data.estimatedBudget,
+          tagline: data.tagline,
+          synopsis: data.synopsis,
+          storyWorld: data.storyWorld,
+          actStructure: data.actStructure,
+          characterBible: data.characterBible,
+          inspiration: data.inspiration,
+          motivation: data.motivation,
+          storyTopics: data.storyTopics,
+          logLine: data.logLine,
+          adaption,
+        },
+        query.id as string
+      );
+    }
+    updateData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
 
   const dropZoneUploadPdfScript = useDropzone({
     accept: { "application/pdf": [".pdf"] },
