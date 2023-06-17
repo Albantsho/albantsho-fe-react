@@ -39,7 +39,7 @@ const ScriptCard = (props: IProps) => {
     >
       <Link
         legacyBehavior
-        href={routes.marketplaceOneScript.dynamicUrl(script._id)}
+        href={routes.marketplaceOneScript.url(script._id)}
         passHref
       >
         <Image
@@ -71,7 +71,7 @@ const ScriptCard = (props: IProps) => {
 
         <div className="flex justify-between  mt-1 sm:mt-4 mb-2 gap-2">
           <Link
-            href={routes.marketplaceOneScript.dynamicUrl(script._id)}
+            href={routes.marketplaceOneScript.url(script._id)}
             passHref
           >
             <Typography
@@ -109,7 +109,7 @@ const ScriptCard = (props: IProps) => {
             {(!user.emailVerified || user.userType === "producer") &&
               !inHome && (
                 <Btn
-                  href={routes.marketplaceOneScript.dynamicUrl(script._id)}
+                  href={routes.marketplaceOneScript.url(script._id)}
                   size="large"
                   className="rounded-md"
                 >

@@ -18,7 +18,7 @@ const ScriptEditor = ({ script, htmlInitialValue, socket }: IProps) => {
 
   return (
     <div className="w-full flex gap-3 flex-col justify-start text-center mx-auto max-w-[800px] px-3 xl:px-10">
-      <Link href={routes.titleScript.dynamicUrl(query.id as string)}>
+      <Link href={routes.titleScript.url(query.id as string)}>
         <div className="bg-white w-full mx-auto py-14">
           <Typography
             variant="h6"

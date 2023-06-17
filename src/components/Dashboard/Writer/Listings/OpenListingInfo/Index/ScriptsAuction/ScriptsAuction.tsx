@@ -105,7 +105,7 @@ const ScriptsAuction = ({ bidsList, script, refetch }: IProps) => {
                 <TableRow
                   onClick={() => {
                     push(
-                      routes.listingsBidScript.dynamicUrl(
+                      routes.listingsBidScript.url(
                         auction.scriptId,
                         auction._id
                       )

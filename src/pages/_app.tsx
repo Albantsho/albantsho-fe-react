@@ -4,7 +4,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import Loader from "@shared/Loader/Loader";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Authorization from "components/Authorization/Authorization";
 import type { NextPage } from "next";
 import NextProgress from "next-progress";
 import { AppProps } from "next/app";
@@ -50,7 +49,6 @@ export default function MyApp(props: MyAppProps) {
             height="3px"
             options={{ showSpinner: false }}
           />
-          <Authorization>
             {/* <Script
               src="https://www.googletagmanager.com/gtag/js?id=G-35SD81MYSZ"
               strategy="afterInteractive"
@@ -72,8 +70,7 @@ export default function MyApp(props: MyAppProps) {
                 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
             </Script> */}
 
-            {isLoading ? <Loader /> : getLayout(<Component {...pageProps} />)}
-          </Authorization>
+            {isLoading ? <main></main> : getLayout(<Component {...pageProps} />)}
           <Toaster />
         </ThemeProvider>
       </CacheProvider>

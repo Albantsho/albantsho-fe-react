@@ -108,7 +108,7 @@ const CurrentBids = ({ bidsList, refetch }: IProps) => {
                 <div className="flex-grow sm:flex-1 sm:max-w-[271px] min-w-[170px] sm:-ml-4 lg:ml-0">
                   <Link
                     passHref
-                    href={routes.marketplaceOneScript.dynamicUrl(
+                    href={routes.marketplaceOneScript.url(
                       bid.script._id
                     )}
                   >

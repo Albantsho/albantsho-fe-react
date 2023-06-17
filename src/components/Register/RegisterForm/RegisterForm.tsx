@@ -12,7 +12,7 @@ import {
   Radio,
   RadioGroup,
   SvgIcon,
-  Typography,
+  Typography
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
@@ -20,6 +20,7 @@ import countryList from "json/country-list.json";
 import Image from "next/image";
 import Link from "next/link";
 import { Controller } from "react-hook-form";
+import { FcGoogle } from "react-icons/fc";
 import routes from "utils/routes";
 import UserIcon from "./assets/user.svg";
 import useRegisterForm from "./useRegisterForm";
@@ -368,7 +369,12 @@ const RegisterForm = () => {
             </div>
           </>
         )}
-
+        {/* <Link
+          className="py-2 mt-2 w-full flex items-center text-black gap-1 justify-center h-14 border rounded-xl"
+          href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/auth/google`}
+        >
+          <FcGoogle /> Continue with Google
+        </Link> */}
         <div className="w-full mt-3 lg:mt-7 flex items-center md:items-start">
           <FormGroup>
             <FormControlLabel

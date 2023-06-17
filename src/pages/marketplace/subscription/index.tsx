@@ -68,7 +68,7 @@ const Subscription = () => {
           transactionId: `${response.transaction_id}`,
         });
         replace(
-          routes.marketPlaceSubscriptionSuccessful.dynamicUrl(
+          routes.marketPlaceSubscriptionSuccessful.url(
             `${response.transaction_id}`
           )
         );

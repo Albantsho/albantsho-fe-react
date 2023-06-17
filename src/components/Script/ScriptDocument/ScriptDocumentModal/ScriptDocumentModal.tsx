@@ -24,7 +24,7 @@ const ScriptDocumentModal = ({
 
   const handleCloseExportFile = () => {
     setOpenDocumentModal(false);
-    push(routes.script.dynamicUrl(query.id as string), undefined, {
+    push(routes.script.url(query.id as string), undefined, {
       shallow: true,
     });
   };
