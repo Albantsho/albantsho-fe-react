@@ -54,14 +54,14 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
       title: "ABSTRACT",
       icon: addAbstractIcon,
       functionality: () => {
-        push(routes.abstract.dynamicUrl(script._id));
+        push(routes.abstract.url(script._id));
       },
     },
     {
       title: "TITLE",
       icon: addTitleIcon,
       functionality: () => {
-        push(routes.titleScript.dynamicUrl(script._id));
+        push(routes.titleScript.url(script._id));
       },
     },
     {
@@ -74,7 +74,7 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
           );
           return;
         }
-        push(routes.script.dynamicUrl(script._id));
+        push(routes.script.url(script._id));
       },
     },
     {

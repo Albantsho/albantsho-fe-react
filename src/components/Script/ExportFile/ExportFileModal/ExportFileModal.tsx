@@ -19,7 +19,7 @@ const ExportFileModal = ({
   const { push, query } = useRouter();
 
   const handleCloseExportFile = () => {
-    push(routes.script.dynamicUrl(query.id as string), undefined, {
+    push(routes.script.url(query.id as string), undefined, {
       shallow: true,
     });
     setOpenExportModal(false);

@@ -175,7 +175,7 @@ const NotificationComponent = () => {
                           <Link
                             passHref
                             legacyBehavior
-                            href={routes.script.dynamicUrl(invite.script._id)}
+                            href={routes.script.url(invite.script._id)}
                           >
                             <Button variant="outlined" color="success">
                               go to script Page
@@ -222,7 +222,7 @@ const NotificationComponent = () => {
                       <Link
                         passHref
                         legacyBehavior
-                        href={routes.script.dynamicUrl(script._id)}
+                        href={routes.script.url(script._id)}
                       >
                         <Button variant="outlined" color="success">
                           go to script Page

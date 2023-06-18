@@ -1,20 +1,14 @@
 import { apiPrivate } from "apis/configs/axios.config";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
-import useUserStore from "store/user.store";
+import routes from "utils/routes";
 
 const useAxiosPrivate = () => {
-  const { setAccessToken, accessToken, logOutUser } = useUserStore((state) => ({
-    setAccessToken: state.setAccessToken,
-    accessToken: state.accessToken,
-    logOutUser: state.logOutUser,
-  }));
-
+  const { replace } = useRouter();
+  
   useEffect(() => {
     const requestIntercept = apiPrivate.interceptors.request.use(
       (config) => {
-        if (config.headers !== undefined && !config.headers["Authorization"]) {
-          config.headers["Authorization"] = `Bearer ${accessToken}`;
-        }
         return config;
       },
       (error) => {
@@ -28,24 +22,16 @@ const useAxiosPrivate = () => {
       },
       async (error) => {
         if (
-          error.request &&
-          error.request.responseURL &&
-          error.request.responseURL ===
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/refresh` &&
           error.response.data.statusCode === 400 &&
           error.response.data.message ===
           "Refresh token not found, please login again"
         ) {
-          logOutUser();
+          replace(routes.home.url);
         }
         const prevRequest = error?.config;
         if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;
-          const response = await apiPrivate.post("/user/refresh", {});
-          setAccessToken(response.data.data.accessToken);
-          prevRequest.headers[
-            "Authorization"
-          ] = `Bearer ${response.data.data.accessToken}`;
+          await apiPrivate.post("/user/refresh", {});
           return apiPrivate(prevRequest);
         }
 
@@ -57,8 +43,8 @@ const useAxiosPrivate = () => {
       apiPrivate.interceptors.request.eject(requestIntercept);
       apiPrivate.interceptors.response.eject(responseIntercept);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+  }, [replace]);
 
   return apiPrivate;
 };

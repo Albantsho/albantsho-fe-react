@@ -1,8 +1,8 @@
 import {
   AppBar,
-  type AppBarProps,
   Toolbar,
   useMediaQuery,
+  type AppBarProps,
 } from "@mui/material";
 import Logo from "@shared/Logo/Logo";
 import DesktopNav from "./DesktopNav/DesktopNav";

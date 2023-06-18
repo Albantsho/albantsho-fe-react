@@ -90,7 +90,7 @@ const ScriptsList = ({ reviewsList }: IProps) => {
                 {script.reviewed && (
                   <Link
                     passHref
-                    href={routes.oneReviewInformation.dynamicUrl(script._id)}
+                    href={routes.oneReviewInformation.url(script._id)}
                   >
                     <Button
                       variant="text"
@@ -120,7 +120,7 @@ const ScriptsList = ({ reviewsList }: IProps) => {
                 {script.reviewed && (
                   <Link
                     passHref
-                    href={routes.oneReviewInformation.dynamicUrl(script._id)}
+                    href={routes.oneReviewInformation.url(script._id)}
                   >
                     <Button
                       className="md:hidden lg:block xl:hidden"
@@ -141,7 +141,7 @@ const ScriptsList = ({ reviewsList }: IProps) => {
                 {script.reviewed && (
                   <Link
                     passHref
-                    href={routes.oneReviewInformation.dynamicUrl(script._id)}
+                    href={routes.oneReviewInformation.url(script._id)}
                   >
                     <Button
                       variant="text"

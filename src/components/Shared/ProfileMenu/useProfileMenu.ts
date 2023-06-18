@@ -1,7 +1,7 @@
 import useAuthApi from "apis/Auth.api";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import useUserStore from "store/user.store";
+import { useQuery } from "react-query";
 import errorHandler from "utils/error-handler";
 import routes from "utils/routes";
 
@@ -12,7 +12,15 @@ const useProfileMenu = () => {
   const openProfile = Boolean(openProfileMenu);
   const { logoutUser } = useAuthApi();
   const { replace } = useRouter();
-  const logOutUser = useUserStore((state) => state.logOutUser);
+  const { getUserProfile } = useAuthApi();
+  const { data: userData, isLoading: loadingGetUser } = useQuery(
+    ["user_profile"],
+    () => getUserProfile(),
+    {
+      retry: 2,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setOpenProfileMenu(event.currentTarget);
@@ -25,11 +33,7 @@ const useProfileMenu = () => {
   const logOutUserFunc = async () => {
     try {
       await logoutUser();
-      logOutUser();
-      useUserStore.persist.clearStorage();
-      setTimeout(() => {
-        replace(routes.home.url);
-      }, 1);
+      replace(routes.home.url)
     } catch (error) {
       errorHandler(error);
     }
@@ -40,7 +44,8 @@ const useProfileMenu = () => {
     openProfile,
     handleOpenMenu,
     handleCloseProfileMenu,
-    logOutUserFunc,
+    logOutUserFunc, 
+    profileData:userData?.profile
   };
 };
 

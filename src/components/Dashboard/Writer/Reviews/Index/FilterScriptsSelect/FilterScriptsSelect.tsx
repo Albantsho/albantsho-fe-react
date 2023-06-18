@@ -29,7 +29,7 @@ const FilterScriptsSelect = () => {
   };
 
   const filterScripts = (selectedQuery: string) => () => {
-    push(routes.reviewsFilterScripts.dynamicUrl(selectedQuery));
+    push(routes.reviewsFilterScripts.url(selectedQuery));
   };
 
   useEffect(() => {

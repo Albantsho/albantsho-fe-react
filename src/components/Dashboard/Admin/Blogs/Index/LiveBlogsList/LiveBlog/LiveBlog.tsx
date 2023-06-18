@@ -73,7 +73,7 @@ const LiveBlog = ({
         </div>
         <div className="ml-auto flex md:self-start lg:self-center xl:self-start gap-3 md:gap-1">
           <IconButton
-            href={routes.editBlogAdminDashboard.dynamicUrl(slug)}
+            href={routes.editBlogAdminDashboard.url(slug)}
             color="primary"
           >
             <SvgIcon

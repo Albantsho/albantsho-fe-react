@@ -1,8 +1,8 @@
-import useAxios from "hooks/useAxios";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IResData } from "interfaces/response";
 import { IWeblog } from "interfaces/weblog";
 import { useCallback } from "react";
+import api from "./configs/axios.config";
 
 export interface ICreateNewWeblogPayload {
   title: string;
@@ -30,7 +30,6 @@ interface IData_allWeblogs {
 
 const useWeblogApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
-  const axios = useAxios();
 
   const getAllWeblogsForAdmin = useCallback(
     async (query?: string, search?: string) => {
@@ -48,7 +47,7 @@ const useWeblogApi = (controller?: AbortController) => {
 
   const getAllWeblogs = useCallback(
     async (page: number) => {
-      const res = await axios.get<IResData<IData_allWeblogs>>(
+      const res = await api.get<IResData<IData_allWeblogs>>(
         `/weblog/all?limit=10&page=${page}`,
         {
           signal: controller?.signal,
@@ -57,12 +56,12 @@ const useWeblogApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [axios, controller?.signal]
+    [ controller?.signal]
   );
 
   const getWeblog = useCallback(
     async (slug: string) => {
-      const res = await axios.get<IResData<{ weblog: IWeblog }>>(
+      const res = await api.get<IResData<{ weblog: IWeblog; }>>(
         `/weblog/${slug}`,
         {
           signal: controller?.signal,
@@ -71,7 +70,7 @@ const useWeblogApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [axios, controller?.signal]
+    [ controller?.signal]
   );
 
   const createNewWeblog = useCallback(

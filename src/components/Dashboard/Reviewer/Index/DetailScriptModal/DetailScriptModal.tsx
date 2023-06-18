@@ -83,10 +83,10 @@ const DetailScriptModal = ({
       await createNewReview({ scriptId });
       reviewerTask.reviewPlan === "A"
         ? replace(
-            routes.reviewerDashboardQuestionnaireTypeA.dynamicUrl(scriptId)
+            routes.reviewerDashboardQuestionnaireTypeA.url(scriptId)
           )
         : replace(
-            routes.reviewerDashboardQuestionnaireTypeB.dynamicUrl(scriptId)
+            routes.reviewerDashboardQuestionnaireTypeB.url(scriptId)
           );
     } catch (error) {
       errorHandler(error);
@@ -208,10 +208,10 @@ const DetailScriptModal = ({
               <Link
                 href={
                   reviewerTask.reviewPlan === "A"
-                    ? routes.reviewerDashboardPreviewTypeA.dynamicUrl(
+                    ? routes.reviewerDashboardPreviewTypeA.url(
                         reviewerTask._id
                       )
-                    : routes.reviewerDashboardPreviewTypeA.dynamicUrl(
+                    : routes.reviewerDashboardPreviewTypeA.url(
                         reviewerTask._id
                       )
                 }
@@ -230,10 +230,10 @@ const DetailScriptModal = ({
               <Link
                 href={
                   reviewerTask.reviewPlan === "A"
-                    ? routes.reviewerDashboardQuestionnaireTypeA.dynamicUrl(
+                    ? routes.reviewerDashboardQuestionnaireTypeA.url(
                         reviewerTask._id
                       )
-                    : routes.reviewerDashboardQuestionnaireTypeB.dynamicUrl(
+                    : routes.reviewerDashboardQuestionnaireTypeB.url(
                         reviewerTask._id
                       )
                 }

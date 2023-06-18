@@ -103,7 +103,11 @@ const useAbstract = (script: IScript, refetch: any) => {
   }, [step]);
 
   const dropZoneUploadPdfScript = useDropzone({
-    accept: { "application/pdf": [".pdf"] },
+    accept: {
+      "application/pdf": [".pdf"],
+      "text/txt": [".txt"],
+      "application/fdx": [".fdx"]
+    },
     maxFiles: 1,
     onDropAccepted: async (files, _event) => {
       try {
@@ -133,7 +137,11 @@ const useAbstract = (script: IScript, refetch: any) => {
 
   const dropZoneUploadPdfCopyright = useDropzone({
     maxFiles: 1,
-    accept: { "application/pdf": [".pdf"] },
+    accept: {
+      "application/pdf": [".pdf"],
+      "text/txt": [".txt"],
+      "application/fdx": [".fdx"]
+    },
     onDropAccepted: async (files, _event) => {
       try {
         setProgressCopyright(0);

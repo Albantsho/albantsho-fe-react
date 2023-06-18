@@ -80,7 +80,7 @@ const Invites = () => {
                     <Link
                       passHref
                       legacyBehavior
-                      href={routes.script.dynamicUrl(invite.script._id)}
+                      href={routes.script.url(invite.script._id)}
                     >
                       <Button
                         variant="outlined"
@@ -117,7 +117,7 @@ const Invites = () => {
                 <Link
                   passHref
                   legacyBehavior
-                  href={routes.script.dynamicUrl(script._id)}
+                  href={routes.script.url(script._id)}
                 >
                   <Button
                     variant="outlined"

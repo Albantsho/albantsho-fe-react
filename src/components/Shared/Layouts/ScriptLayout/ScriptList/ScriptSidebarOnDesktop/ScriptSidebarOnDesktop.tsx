@@ -45,7 +45,7 @@ const ScriptSidebarOnDesktop = () => {
     }
     if (query.tab === route.split("=")[1]) {
       setOpenCompleteDrawer((prevState) => !prevState);
-      push(routes.script.dynamicUrl(query.id as string));
+      push(routes.script.url(query.id as string));
       return;
     }
   };

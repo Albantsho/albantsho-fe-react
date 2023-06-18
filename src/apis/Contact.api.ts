@@ -1,8 +1,9 @@
-import useAxios from "hooks/useAxios";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IContact } from "interfaces/contact";
 import { IResData } from "interfaces/response";
 import { useCallback } from "react";
+import api from "./configs/axios.config";
+
 interface ICreateNewContactPayload {
   email: string;
   name: string;
@@ -17,11 +18,10 @@ export interface IData_getContacts {
 
 const useContact = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
-  const axios = useAxios();
 
   const createNewContact = useCallback(
     async (payload: ICreateNewContactPayload) => {
-      const res = await axios.post<IResData<object>>(
+      const res = await api.post<IResData<object>>(
         "/contact/create",
         payload,
         {
@@ -31,12 +31,12 @@ const useContact = (controller?: AbortController) => {
       return res.data;
     },
 
-    [axios, controller?.signal]
+    [controller?.signal]
   );
 
   const answerToContact = useCallback(
-    async (contactId: string, payload: { answer: string }) => {
-      const res = await axios.post<IResData<object>>(
+    async (contactId: string, payload: { answer: string; }) => {
+      const res = await axiosPrivate.post<IResData<object>>(
         `/contact/answer/${contactId}`,
         payload,
         {
@@ -46,7 +46,7 @@ const useContact = (controller?: AbortController) => {
       return res.data;
     },
 
-    [axios, controller?.signal]
+    [axiosPrivate, controller?.signal]
   );
 
   const allContacts = useCallback(
@@ -64,7 +64,7 @@ const useContact = (controller?: AbortController) => {
 
   const registerEmail = useCallback(
     async (email: string) => {
-      const res = await axios.post<IResData<object>>(
+      const res = await api.post<IResData<object>>(
         `/email/register`,
         { email },
         {
@@ -73,7 +73,7 @@ const useContact = (controller?: AbortController) => {
       );
       return res.data;
     },
-    [axios, controller?.signal]
+    [controller?.signal]
   );
 
   return {

@@ -1,6 +1,5 @@
 import { Chip } from "@mui/material";
 import Typography from "@mui/material/Typography";
-
 import { IFullInformationScript } from "interfaces/script";
 import AccordionCustom from "./AccordionCustom/AccordionCustom";
 import NotAccessInformation from "./NotAccessInformation/NotAccessInformation";
@@ -13,43 +12,43 @@ export default function MarketScriptAccordion({ script }: IProps) {
   return (
     <div className=" flex-1">
       <AccordionCustom title="LOGLINE">
-        {script.logLine ? (
+        {/* {script.logLine ? ( */}
           <Typography variant="body2" className="text-[#484848]">
             {script.logLine}
           </Typography>
-        ) : (
+        {/* ) : (
           <NotAccessInformation />
-        )}
+        )} */}
       </AccordionCustom>
       <AccordionCustom title="SYNOPSIS">
-        {script.synopsis ? (
+        {/* {script.synopsis ? ( */}
           <Typography variant="body2" className="text-[#484848]">
             {script.synopsis}
           </Typography>
-        ) : (
+        {/* ) : (
           <NotAccessInformation />
-        )}
+        )} */}
       </AccordionCustom>
       <AccordionCustom title="STORY WORLD">
-        {script.storyWorld ? (
+        {/* {script.storyWorld ? ( */}
           <Typography variant="body2" className="text-[#484848]">
             {script.storyWorld}
           </Typography>
-        ) : (
+        {/* ) : (
           <NotAccessInformation />
-        )}
+        )} */}
       </AccordionCustom>
       <AccordionCustom title="MOTIVATION & PERSONAL NOTE">
-        {script.motivation ? (
+        {/* {script.motivation ? ( */}
           <Typography variant="body2" className="text-[#484848]">
             {script.motivation}
           </Typography>
-        ) : (
-          <NotAccessInformation />
-        )}
+        {/* ) : (
+        <NotAccessInformation />
+        )} */}
       </AccordionCustom>
       <AccordionCustom title="STORY TOPICS">
-        {script.storyTopics.length ? (
+        {/* {script.storyTopics.length ? ( */}
           <div className="flex gap-3 flex-wrap">
             {script.storyTopics.map((oneTheme) => (
               <Chip
@@ -60,27 +59,27 @@ export default function MarketScriptAccordion({ script }: IProps) {
               />
             ))}
           </div>
-        ) : (
+        {/* ) : (
           <NotAccessInformation />
-        )}
+        )} */}
       </AccordionCustom>
       <AccordionCustom title="ACT STRUCTURE">
-        {script.actStructure ? (
+        {/* {script.actStructure ? ( */}
           <Typography variant="body2" className="text-[#484848]">
             {script.actStructure}
           </Typography>
-        ) : (
+        {/* ) : (
           <NotAccessInformation />
-        )}
+        )} */}
       </AccordionCustom>
       <AccordionCustom title="INSPIRATION">
-        {script.inspiration ? (
+        {/* {script.inspiration ? ( */}
           <Typography variant="body2" className="text-[#484848]">
             {script.inspiration}
           </Typography>
-        ) : (
+        {/* ) : (
           <NotAccessInformation />
-        )}
+        )} */}
       </AccordionCustom>
     </div>
   );

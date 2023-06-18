@@ -1,4 +1,3 @@
-import useAxios from "hooks/useAxios";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IResData } from "interfaces/response";
 import { IReviewer } from "interfaces/reviews";
@@ -6,10 +5,10 @@ import {
   IUser,
   IUserInformation,
   IUserInformationInAdminPanel,
-  IUserProfile,
+  IUserProfile
 } from "interfaces/user";
 import { useCallback } from "react";
-import { apiPrivate } from "./configs/axios.config";
+import api, { apiPrivate } from "./configs/axios.config";
 
 export interface IData_signupUser {
   user: IUser;
@@ -74,11 +73,11 @@ interface IUserRestrictionPayload {
 
 const useAuthApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
-  const axios = useAxios();
+
 
   const signup = useCallback(
     async (payload: IRegisterPayload) => {
-      const res = await axios.post<IResData<IData_signupUser>>(
+      const res = await api.post<IResData<IData_signupUser>>(
         "/user/signup",
         payload,
         {
@@ -88,12 +87,12 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [axios, controller?.signal]
+    [controller?.signal]
   );
 
   const emailVerify = useCallback(
     async (payload: IEmailVerifyOtp) => {
-      const res = await axios.post<IResData<IData_AuthorizationUser>>(
+      const res = await api.post<IResData<IData_AuthorizationUser>>(
         "/user/verify-otp",
         payload,
         {
@@ -104,16 +103,16 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [axios, controller?.signal]
+    [controller?.signal]
   );
 
   const resendCode = useCallback(
-    async (payload: { email: string }) => {
-      await axios.post("/user/resend-otp", payload, {
+    async (payload: { email: string; }) => {
+      await api.post("/user/resend-otp", payload, {
         signal: controller?.signal,
       });
     },
-    [axios, controller?.signal]
+    [controller?.signal]
   );
 
   const logoutUser = useCallback(async () => {
@@ -128,16 +127,16 @@ const useAuthApi = (controller?: AbortController) => {
 
   const resetPassword = useCallback(
     async (payload: IResetpasswordPayload) => {
-      await axios.post("/user/reset-password", payload, {
+      await api.post("/user/reset-password", payload, {
         signal: controller?.signal,
       });
     },
-    [axios, controller?.signal]
+    [controller?.signal]
   );
 
   const resetPasswordEmail = useCallback(
     async (email: string) => {
-      await axios.post<IResData<IData_AuthorizationUser>>(
+      await api.post<IResData<IData_AuthorizationUser>>(
         "/user/reset-password-email",
         { email },
         {
@@ -145,11 +144,11 @@ const useAuthApi = (controller?: AbortController) => {
         }
       );
     },
-    [axios, controller?.signal]
+    [controller?.signal]
   );
 
   const getNewAccessToken = useCallback(async () => {
-    const res = await apiPrivate.post<IResData<{ accessToken: string }>>(
+    const res = await apiPrivate.post<IResData<{ accessToken: string; }>>(
       "/user/refresh",
       {}
     );
@@ -159,7 +158,7 @@ const useAuthApi = (controller?: AbortController) => {
 
   const signin = useCallback(
     async (payload: ILoginPayload) => {
-      const res = await axios.post<IResData<IData_signupUser>>(
+      const res = await api.post<IResData<IData_signupUser>>(
         "/user/signin",
         payload,
         {
@@ -170,7 +169,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [axios, controller?.signal]
+    [controller?.signal]
   );
 
   const updateUserInformation = useCallback(
@@ -203,7 +202,7 @@ const useAuthApi = (controller?: AbortController) => {
   );
 
   const getUserProfile = useCallback(async () => {
-    const res = await axiosPrivate.get<IResData<{ profile: IUserProfile }>>(
+    const res = await axiosPrivate.get<IResData<{ profile: IUserProfile; }>>(
       "/user/me/profile",
       {
         signal: controller?.signal,
@@ -246,7 +245,7 @@ const useAuthApi = (controller?: AbortController) => {
   const getUserProfileForAdmin = useCallback(
     async (id: string) => {
       const res = await axiosPrivate.get<
-        IResData<{ user: IUserInformationInAdminPanel }>
+        IResData<{ user: IUserInformationInAdminPanel; }>
       >(`/user/profile/${id}`, {
         signal: controller?.signal,
       });
@@ -257,7 +256,7 @@ const useAuthApi = (controller?: AbortController) => {
   );
 
   const getAllReviewers = useCallback(async () => {
-    const res = await axiosPrivate.get<IResData<{ reviewers: IReviewer[] }>>(
+    const res = await axiosPrivate.get<IResData<{ reviewers: IReviewer[]; }>>(
       "/user/all/reviewers",
       {
         signal: controller?.signal,

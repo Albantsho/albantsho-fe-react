@@ -5,7 +5,9 @@ import useScripBidApi from "apis/ScripBid.api";
 import { IBidInMarketplace } from "interfaces/bid";
 import { IResData } from "interfaces/response";
 import { IFullInformationScript } from "interfaces/script";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { QueryClient, useMutation } from "react-query";
 import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
@@ -24,6 +26,7 @@ const PlaceBid = ({ setOpenBidSuccessful, script, bid, ethPrice }: IProps) => {
   const [bidValue, setBidValue] = useState("");
   const { createBid, deleteBid } = useScripBidApi();
   const user = useUserStore((state) => state.user);
+  const { reload } = useRouter();
 
   const { mutate: createBidMutate, isLoading: loadingCreateBid } = useMutation<
     IResData<object>,
@@ -46,8 +49,8 @@ const PlaceBid = ({ setOpenBidSuccessful, script, bid, ethPrice }: IProps) => {
     onError: (error) => errorHandler(error),
     onSuccess: (data) => {
       successHandler(data.message);
+      reload();
       queryClient.invalidateQueries("script");
-      setOpenBidSuccessful(true);
     },
   });
 
@@ -56,8 +59,14 @@ const PlaceBid = ({ setOpenBidSuccessful, script, bid, ethPrice }: IProps) => {
     setBidValue(result);
   };
 
-  const handleOpenBidSuccessful = async () =>
+  const handleOpenBidSuccessful = async () => {
+    if (+bidValue < 700) {
+      return toast.error("you not be able to bid lower than the 700 $.");
+    } else if (+bidValue < +script.price) {
+      return toast.error("You cannot bid less than the lowest bid amount");
+    }
     createBidMutate({ amount: +bidValue, scriptId: script._id });
+  };
 
   const handleCloseBidSuccessful = async () => {
     if (bid) {

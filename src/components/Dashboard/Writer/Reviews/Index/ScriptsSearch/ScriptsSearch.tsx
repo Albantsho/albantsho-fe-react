@@ -127,7 +127,7 @@ const ScriptsSearch = ({ showSearchScript, openSearchScript }: IProps) => {
       <div className="flex justify-center sm:justify-start">
         <Link
           legacyBehavior
-          href={routes.reviewsPlans.dynamicUrl(selectedScript?._id as string)}
+          href={routes.reviewsPlans.url(selectedScript?._id as string)}
         >
           <Btn disabled={!selectedScript} size="large">
             Next
