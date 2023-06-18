@@ -25,7 +25,7 @@ const StepsLines = ({
   return (
     <div className="overflow-scroll no-scrollbar max-w-full">
       <div className="mt-4 min-w-[570px] gap-2  md:justify-center mb-10 lg:mb-16 flex space-x-4">
-        {Array.from(new Array(7)).map((_, i) => (
+        {Array.from(new Array(6)).map((_, i) => (
           <div
             key={i}
             onClick={() => {

@@ -135,13 +135,13 @@ const Abstract = ({ script, refetch }: IProps) => {
           progressScript={progressScript}
         />
 
-        <UploadImage
+        {/* <UploadImage
           script={script}
           progress={progress}
           step={step}
           cancelUpload={cancelUpload}
           dropZoneUploadImage={dropZoneUploadImage}
-        />
+        /> */}
         <StepsButtons
           loadingPublishButton={loadingPublishButton}
           loadingUpdateButton={loadingUpdateButton}

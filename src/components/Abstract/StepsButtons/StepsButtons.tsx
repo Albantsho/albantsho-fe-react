@@ -41,11 +41,11 @@ const StepsButtons = ({
         >
           Save & complete later
         </LoadingButton>
-        {step !== 7 && (
+        {step !== 6 && (
           <Button
-            disabled={step === 7}
+            disabled={step === 6}
             onClick={() => {
-              if (step !== 7) setStep((prevCount: number) => prevCount + 1);
+              if (step !== 6) setStep((prevCount: number) => prevCount + 1);
             }}
             className="rounded-md px-8 py-3 hidden min-w-[116px] text-center md:block"
             variant="contained"
@@ -58,7 +58,7 @@ const StepsButtons = ({
           type="submit"
           onClick={publishScript}
           className={`${
-            step !== 7 ? "hidden" : "flex"
+            step !== 6 ? "hidden" : "flex"
           } rounded-md px-[82.5px] md:px-8 py-3 min-w-[178px]  mx-auto md:mx-0 md:min-w-fit`}
           variant="contained"
         >
@@ -80,14 +80,14 @@ const StepsButtons = ({
         <div className="flex gap-2 text-primary-700 font-semibold justify-center items-center">
           <span>{step}</span>
           <span>/</span>
-          <span>7</span>
+          <span>6</span>
         </div>
 
         <IconButton
           color="primary"
-          disabled={step === 7}
+          disabled={step === 6}
           onClick={() => {
-            if (step !== 7) setStep((prevCount: number) => prevCount + 1);
+            if (step !== 6) setStep((prevCount: number) => prevCount + 1);
           }}
         >
           <BsArrowRightShort className="text-3xl" />
