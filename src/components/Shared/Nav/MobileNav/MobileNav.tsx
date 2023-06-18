@@ -22,6 +22,7 @@ interface IProps {
 
 const MobileNav = ({ links }: IProps) => {
   const { handleToggleDrawer, open ,userData} = useMobileNav();
+console.log(userData);
 
   return (
     <>

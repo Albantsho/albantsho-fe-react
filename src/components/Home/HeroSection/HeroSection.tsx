@@ -7,6 +7,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
+import useAuthApi from "apis/Auth.api";
 import useScriptsApi from "apis/Scripts.api";
 import Link from "next/link";
 import { useQuery } from "react-query";
@@ -19,7 +20,16 @@ const AnimatedScriptCard = animated(ScriptCard);
 
 const HeroSection = () => {
   const lgScreen = useMediaQuery("(min-width: 1024px)");
-  const user = useUserStore((state) => state.user);
+  const { getUserProfile } = useAuthApi();
+  const { data: userData, isLoading: loadingGetUser } = useQuery(
+    ["home_mobile_nav"],
+    () => getUserProfile(),
+    {
+      retry: 2,
+      refetchOnWindowFocus: false
+    }
+  );
+
   const { getAllScripts } = useScriptsApi();
 
   const titleAnim = useSpring({
@@ -62,7 +72,7 @@ const HeroSection = () => {
               Write better screenplays and be discovered by top producers to
               bring them to life.
             </Typography>
-            {!user.emailVerified && (
+            {!userData && (
               <Link legacyBehavior passHref href={routes.register.url}>
                 <Button
                   size="large"
