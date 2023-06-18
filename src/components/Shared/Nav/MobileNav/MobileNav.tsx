@@ -21,8 +21,7 @@ interface IProps {
 }
 
 const MobileNav = ({ links }: IProps) => {
-  const { handleToggleDrawer, open } = useMobileNav();
-  const user = useUserStore((state) => state.user);
+  const { handleToggleDrawer, open ,userData} = useMobileNav();
 
   return (
     <>
@@ -52,7 +51,7 @@ const MobileNav = ({ links }: IProps) => {
             <AiOutlineClose />
           </IconButton>
           <List className="px-4 flex gap-1 flex-col justify-start items-start">
-            {user.emailVerified && (
+            {userData && (
               <li className="px-5 mt-1">
                 <ProfileMenu isMobile />
               </li>
@@ -74,7 +73,7 @@ const MobileNav = ({ links }: IProps) => {
                 </Link>
               </ListItem>
             ))}
-            {!user.emailVerified && (
+            {!userData && (
               <div className="px-5 py-2">
                 <Link legacyBehavior href={routes.signin.url} passHref>
                   <Button

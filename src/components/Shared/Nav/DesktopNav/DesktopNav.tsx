@@ -1,8 +1,9 @@
 import { Button, Typography } from "@mui/material";
 import ProfileMenu from "@shared/ProfileMenu/ProfileMenu";
-import useUserStore from "store/user.store";
+import useAuthApi from "apis/Auth.api";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useQuery } from "react-query";
 import routes from "utils/routes";
 
 interface IProps {
@@ -11,8 +12,16 @@ interface IProps {
 }
 
 const DesktopNav = ({ links, secondaryUnderLineColor }: IProps) => {
-  const user = useUserStore((state) => state.user);
   const { route } = useRouter();
+  const { getUserProfile } = useAuthApi();
+  const { data: userData, isLoading: loadingGetUser } = useQuery(
+    ["home_nav"],
+    () => getUserProfile(),
+    {
+      retry: 2,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <>
@@ -39,8 +48,9 @@ const DesktopNav = ({ links, secondaryUnderLineColor }: IProps) => {
           </Link>
         ))}
       </div>
-      {user.emailVerified && <ProfileMenu inHome />}
-      {!user.emailVerified && (
+      {userData ? (
+        <ProfileMenu  inHome />
+      ) : (
         <Link legacyBehavior href={routes.signin.url} passHref>
           <Button
             variant="outlined"
