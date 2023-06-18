@@ -1,12 +1,17 @@
-import jwt from "jsonwebtoken";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import routes from "utils/routes";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const refreshToken = request.cookies.get("refreshToken");
-  const tokenPayload: any = jwt.decode(refreshToken?.value || "");
 
+  const { data } = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/me/profile`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Cookie: `${request.cookies.get("accessToken")?.name}=${request.cookies.get("accessToken")?.value}; ${request.cookies.get("refreshToken")?.name}=${request.cookies.get("refreshToken")?.value}`
+    }
+  }).then(res=>res.json());
 
   //* registration routes
   if (request.nextUrl.pathname.startsWith(routes.register.url)) {
@@ -45,7 +50,7 @@ export function middleware(request: NextRequest) {
     if (!refreshToken) {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
     }
-    if (tokenPayload && tokenPayload.userType !== "writer") {
+    if (data && data.profile.userType !== "writer") {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
     }
   }
@@ -53,7 +58,7 @@ export function middleware(request: NextRequest) {
     if (!refreshToken) {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
     }
-    if (tokenPayload && tokenPayload.userType !== "writer") {
+    if (data && data.profile.userType !== "writer") {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
     }
   }
@@ -61,7 +66,7 @@ export function middleware(request: NextRequest) {
     if (!refreshToken) {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
     }
-    if (tokenPayload && tokenPayload.userType !== "writer") {
+    if (data && data.profile.userType !== "writer") {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
     }
   }
@@ -72,7 +77,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
 
     }
-    if (tokenPayload && tokenPayload.userType !== "producer") {
+    if (data && data.profile.userType !== "producer") {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
     }
   }
@@ -83,7 +88,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
 
     }
-    if (tokenPayload && tokenPayload.userType !== "reviewer") {
+    if (data && data.profile.userType !== "reviewer") {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
     }
   }
@@ -94,7 +99,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
 
     }
-    if (tokenPayload && tokenPayload.userType !== "admin") {
+    if (data && data.profile.userType !== "admin") {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
     }
   }
