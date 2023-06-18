@@ -5,10 +5,7 @@ import routes from "utils/routes";
 
 export function middleware(request: NextRequest) {
   const refreshToken = request.cookies.get("refreshToken");
-  const accessToken = request.cookies.get("accessToken");
   const tokenPayload: any = jwt.decode(refreshToken?.value || "");
-
-  console.log(request.nextUrl.pathname);
 
 
   //* registration routes
@@ -109,19 +106,29 @@ export function middleware(request: NextRequest) {
 
     }
   }
+
   if (request.nextUrl.pathname.includes(routes.invites.url)) {
     if (!refreshToken) {
       return NextResponse.rewrite(new URL(routes.signin.url, request.url));
 
     }
   }
+
   if (request.nextUrl.pathname.includes(routes.aiEditor.url)) {
     if (!refreshToken) {
       return NextResponse.rewrite(new URL(routes.signin.url, request.url));
 
     }
   }
+
   if (request.nextUrl.pathname.includes(routes.marketplaceOneScript.pathname)) {
+    if (!refreshToken) {
+      return NextResponse.rewrite(new URL(routes.signin.url, request.url));
+
+    }
+  }
+
+  if (request.nextUrl.pathname.includes(routes.profile.url)) {
     if (!refreshToken) {
       return NextResponse.rewrite(new URL(routes.signin.url, request.url));
 

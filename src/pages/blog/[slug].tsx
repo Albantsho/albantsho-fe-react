@@ -15,6 +15,7 @@ import routes from "utils/routes";
 // Defining the links to be used in the navigation bar
 const links = [
   { title: "Home", href: routes.home.url },
+  { title: "Story Base", href: routes.marketplace.url },
   { title: "About Us", href: routes.aboutUs.url },
   { title: "Blog", href: routes.blog.url },
   { title: "FAQ", href: routes.FAQs.url },

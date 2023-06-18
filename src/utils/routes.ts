@@ -22,6 +22,7 @@ const routes = {
   marketPlaceSubscription: { url: "/marketplace/subscription" },
   marketPlaceSubscriptionSuccessful: { url: (transaction_id: string) => `/marketplace/subscription/${transaction_id}`, },
   abstract: { url: (id: string) => `/abstract/${id}`,pathname:`/abstract/` },
+  scriptPreview: { url: (id: string) => `/abstract/preview/${id}` },
   profile: { url: "/profile" },
   welcome: { url: "/welcome" },
   scriptWriting: { url: "/script-writing" },

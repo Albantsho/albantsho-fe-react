@@ -1,6 +1,9 @@
 import { LoadingButton } from "@mui/lab";
 import { Button, IconButton } from "@mui/material";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
+import routes from "utils/routes";
 
 interface IProps {
   step: number;
@@ -19,6 +22,8 @@ const StepsButtons = ({
   loadingPublishButton,
   loadingUpdateButton,
 }: IProps) => {
+  const { query } = useRouter();
+
   return (
     <>
       <div className="flex justify-between mt-20 flex-wrap md:flex-nowrap gap-2 md:gap-y-0">
@@ -53,17 +58,17 @@ const StepsButtons = ({
             Next
           </Button>
         )}
-        <LoadingButton
-          loading={loadingPublishButton}
-          type="submit"
-          onClick={publishScript}
-          className={`${
-            step !== 6 ? "hidden" : "flex"
-          } rounded-md px-[82.5px] md:px-8 py-3 min-w-[178px]  mx-auto md:mx-0 md:min-w-fit`}
-          variant="contained"
-        >
-          publish
-        </LoadingButton>
+        <Link href={routes.scriptPreview.url(query.id as string)}>
+          <LoadingButton
+            type="button"
+            className={`${
+              step !== 6 ? "hidden" : "flex"
+            } rounded-md px-[82.5px] md:px-8 py-3 min-w-[178px]  mx-auto md:mx-0 md:min-w-fit`}
+            variant="contained"
+          >
+            preview
+          </LoadingButton>
+        </Link>
       </div>
 
       <div className="flex md:hidden justify-center mt-4 gap-4 items-center">
