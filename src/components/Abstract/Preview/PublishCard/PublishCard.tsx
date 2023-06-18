@@ -32,7 +32,7 @@ const PublishCard = () => {
         <Typography
           color="white"
           variant="h4"
-          className="text-center futura leading-normal font-semibold"
+          className="text-center futura font-semibold"
         >
           Everything Great?
         </Typography>

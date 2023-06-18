@@ -29,9 +29,12 @@ const MainDetailsMarketScript = dynamic(
       "components/Marketplace/MarketScript/ScriptMainDetails/ScriptMainDetails "
     )
 );
-const RateToScript = dynamic(
-  () => import("components/Marketplace/MarketScript/RateToScript/RateToScript")
+const BidRequestCard = dynamic(
+  () => import("components/Marketplace/MarketScript/BidRequestCard/BidRequestCard")
 );
+// const RateToScript = dynamic(
+//   () => import("components/Marketplace/MarketScript/RateToScript/RateToScript")
+// );
 
 const links = [
   { title: "Home", href: routes.home.url },
@@ -83,7 +86,8 @@ const ScriptInfoPage = () => {
               <MarketScriptAccordion script={script} />
             </div>
             <MainDetailsMarketScript script={script} />
-            <RateToScript id={script._id} rate={script.rate} />
+            <BidRequestCard/>
+            {/* <RateToScript id={script._id} rate={script.rate} /> */}
             <Footer />
           </Suspense>
         </>
