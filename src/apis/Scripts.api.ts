@@ -1,4 +1,3 @@
-import useAxios from "hooks/useAxios";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IBidInMarketplace } from "interfaces/bid";
 import { ICollaboratorList } from "interfaces/collaborator";
@@ -14,6 +13,7 @@ import {
   IWriterScript,
 } from "interfaces/script";
 import { useCallback } from "react";
+import api from "./configs/axios.config";
 
 export interface ICreateNewScriptPayload {
   title: string;
@@ -108,7 +108,6 @@ interface IData_getOneScript {
 
 const useScriptsApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
-  const axios = useAxios();
 
   const createNewScript = useCallback(
     async (payload: ICreateNewScriptPayload) => {
@@ -143,7 +142,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
   const getScript = useCallback(
     async (scriptId: string) => {
-      const res = await axios.get<IResData<IData_getOneScript>>(
+      const res = await api.get<IResData<IData_getOneScript>>(
         `/script/${scriptId}`,
         {
           signal: controller?.signal,
@@ -152,7 +151,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [axios, controller?.signal]
+    [ controller?.signal]
   );
 
   const getScriptUnComplete = useCallback(
@@ -171,7 +170,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
   const getAllScripts = useCallback(
     async (query: string) => {
-      const res = await axios.get<IResData<IData_getAllScript>>(
+      const res = await api.get<IResData<IData_getAllScript>>(
         `/script/all?limit=10&${query}`,
         {
           signal: controller?.signal,
@@ -180,7 +179,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [axios, controller?.signal]
+    [ controller?.signal]
   );
 
   const getProducerAllScripts = useCallback(
@@ -253,7 +252,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
   const searchScripts = useCallback(
     async (search: string) => {
-      const res = await axios.get<IResData<{ scripts: IScript[]; }>>(
+      const res = await api.get<IResData<{ scripts: IScript[]; }>>(
         `/script/search?search=${search}`,
         {
           signal: controller?.signal,
@@ -262,7 +261,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [axios, controller?.signal]
+    [ controller?.signal]
   );
 
   const listAllCollaborators = useCallback(
