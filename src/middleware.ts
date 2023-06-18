@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get("accessToken");
   const tokenPayload: any = jwt.decode(refreshToken?.value || "");
 
-  console.log(tokenPayload && tokenPayload);
+  console.log(request.nextUrl.pathname);
 
 
   //* registration routes
@@ -47,7 +47,22 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.includes(routes.writerDashboard.url)) {
     if (!refreshToken) {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
-
+    }
+    if (tokenPayload && tokenPayload.userType !== "writer") {
+      return NextResponse.rewrite(new URL(routes.home.url, request.url));
+    }
+  }
+  if (request.nextUrl.pathname.includes(routes.abstract.pathname)) {
+    if (!refreshToken) {
+      return NextResponse.rewrite(new URL(routes.home.url, request.url));
+    }
+    if (tokenPayload && tokenPayload.userType !== "writer") {
+      return NextResponse.rewrite(new URL(routes.home.url, request.url));
+    }
+  }
+  if (request.nextUrl.pathname.includes(routes.script.pathname)) {
+    if (!refreshToken) {
+      return NextResponse.rewrite(new URL(routes.home.url, request.url));
     }
     if (tokenPayload && tokenPayload.userType !== "writer") {
       return NextResponse.rewrite(new URL(routes.home.url, request.url));
@@ -87,12 +102,31 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  //* authorized routes
+  if (request.nextUrl.pathname.includes(routes.wallet.url)) {
+    if (!refreshToken) {
+      return NextResponse.rewrite(new URL(routes.signin.url, request.url));
 
+    }
+  }
+  if (request.nextUrl.pathname.includes(routes.invites.url)) {
+    if (!refreshToken) {
+      return NextResponse.rewrite(new URL(routes.signin.url, request.url));
 
+    }
+  }
+  if (request.nextUrl.pathname.includes(routes.aiEditor.url)) {
+    if (!refreshToken) {
+      return NextResponse.rewrite(new URL(routes.signin.url, request.url));
 
+    }
+  }
+  if (request.nextUrl.pathname.includes(routes.marketplaceOneScript.pathname)) {
+    if (!refreshToken) {
+      return NextResponse.rewrite(new URL(routes.signin.url, request.url));
 
-
-  // return NextResponse.rewrite(new URL('/dashboard/user', request.url));
+    }
+  }
 
   return NextResponse.next();
 }

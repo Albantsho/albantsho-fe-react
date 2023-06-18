@@ -1,9 +1,8 @@
 import Footer from "@shared/Footer/Footer";
 import Loader from "@shared/Loader/Loader";
 import Nav from "@shared/Nav/Nav";
-import { apiPrivate } from "apis/configs/axios.config";
-import axios from "axios";
 import ScriptInfo from "components/Marketplace/MarketScript/ScriptInfo/ScriptInfo";
+import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IBidInMarketplace } from "interfaces/bid";
 import { IFullInformationScript } from "interfaces/script";
 import dynamic from "next/dynamic";
@@ -11,7 +10,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense, useEffect, useState } from "react";
 import routes from "utils/routes";
-import useUserStore from "store/user.store";
 
 const MarketScriptChips = dynamic(
   () =>
@@ -46,25 +44,13 @@ const ScriptInfoPage = () => {
   const [bid, setBid] = useState<null | IBidInMarketplace>(null);
   const [loading, setLoading] = useState(true);
   const { query } = useRouter();
-  const setAccessToken = useUserStore((state) => state.setAccessToken);
+  const privateAxios = useAxiosPrivate();
 
   useEffect(() => {
     async function getScriptsDate() {
       try {
         if (typeof query.id === "string") {
-          const response = await apiPrivate.post("/user/refresh", {});
-          const res = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/script/${
-              query.id as string
-            }`,
-            {
-              withCredentials: true,
-              headers: {
-                Authorization: `Bearer ${response.data.data.accessToken}`,
-              },
-            }
-          );
-          setAccessToken(response.data.data.accessToken);
+          const res = await privateAxios.get(`/script/${query.id as string}`);
           setScript(res.data.data.script);
           setBid(res.data.data.bid);
           setLoading(false);
