@@ -32,10 +32,10 @@ const BidRequestCard = () => {
           >
             Make an offer
           </Button>
-          <Link className="w-full max-w-[260px]" href={routes.marketplace.url}>
+          <Link className="w-full" href={routes.marketplace.url}>
             <Button
               variant="outlined"
-              className="bg-white max-w-[260px] w-full hover:bg-white py-2"
+              className="bg-white w-full hover:bg-white py-2"
             >
               I’ll Pass
             </Button>

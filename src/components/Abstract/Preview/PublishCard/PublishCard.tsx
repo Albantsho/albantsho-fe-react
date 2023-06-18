@@ -47,12 +47,12 @@ const PublishCard = () => {
             List on Marketplace
           </LoadingButton>
           <Link
-            className="w-full max-w-[260px]"
+            className="w-full"
             href={routes.abstract.url(query.id as string)}
           >
             <Button
               variant="outlined"
-              className="bg-white max-w-[260px] w-full hover:bg-white py-2"
+              className="bg-white w-full hover:bg-white py-2"
             >
               Go back to Edit
             </Button>
