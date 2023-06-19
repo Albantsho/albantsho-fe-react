@@ -36,8 +36,6 @@ const useLoginForm = () => {
     },
     onSuccess: (data, variables: ILoginPayload) => {
       queryClient.invalidateQueries(["user"]);
-      console.log(data);
-      
       authenticationUser(data.user);
       !data.user && router.replace(routes.verifyEmail.url);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
