@@ -84,7 +84,7 @@ const MyScript = ({ script }: IProps) => {
         <div className="flex-grow sm:flex-1 sm:max-w-[271px] min-w-[170px] sm:ml-2">
           <Link
             passHref
-            href={routes.marketplaceOneScript.url(script._id)}
+            href={routes.marketplaceOneScript.dynamicUrl(script._id)}
           >
             <Typography
               variant="body1"

@@ -120,7 +120,7 @@ const OpeningBidScript = ({ script, index, scripts, refetch }: IProps) => {
           >
             <Link
               legacyBehavior
-              href={routes.listingsOneScript.url(script._id)}
+              href={routes.listingsOneScript.dynamicUrl(script._id)}
             >
               <MenuItem
                 TouchRippleProps={{ className: "text-primary-main" }}

@@ -40,7 +40,7 @@ const BlogCard = ({ post }: IProps) => {
       </CardContent>
       <CardActions className="px-4 pb-4">
         <Link
-          href={routes.oneBlog.url(post.slug)}
+          href={routes.oneBlog.dynamicUrl(post.slug)}
           className="underline text-primary-700"
         >
           Read more

@@ -76,10 +76,10 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
       await createNewReview({ scriptId });
       selectedScript?.reviewPlan === "A"
         ? replace(
-            routes.reviewerDashboardQuestionnaireTypeA.url(scriptId)
+            routes.reviewerDashboardQuestionnaireTypeA.dynamicUrl(scriptId)
           )
         : replace(
-            routes.reviewerDashboardQuestionnaireTypeB.url(scriptId)
+            routes.reviewerDashboardQuestionnaireTypeB.dynamicUrl(scriptId)
           );
     } catch (error) {
       errorHandler(error);
@@ -206,10 +206,10 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
           <Link
             href={
               selectedScript?.reviewPlan === "A"
-                ? routes.reviewerDashboardPreviewTypeA.url(
+                ? routes.reviewerDashboardPreviewTypeA.dynamicUrl(
                     selectedScript?._id as string
                   )
-                : routes.reviewerDashboardPreviewTypeB.url(
+                : routes.reviewerDashboardPreviewTypeB.dynamicUrl(
                     selectedScript?._id as string
                   )
             }
@@ -228,10 +228,10 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
           <Link
             href={
               selectedScript?.reviewPlan === "A"
-                ? routes.reviewerDashboardQuestionnaireTypeA.url(
+                ? routes.reviewerDashboardQuestionnaireTypeA.dynamicUrl(
                     selectedScript?._id as string
                   )
-                : routes.reviewerDashboardQuestionnaireTypeB.url(
+                : routes.reviewerDashboardQuestionnaireTypeB.dynamicUrl(
                     selectedScript?._id as string
                   )
             }

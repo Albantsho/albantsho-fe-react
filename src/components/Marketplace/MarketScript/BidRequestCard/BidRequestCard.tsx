@@ -7,7 +7,7 @@ const BidRequestCard = () => {
   const { push, query } = useRouter();
 
   const bidRequest = () => {
-    push(routes.marketplaceOneScript.url(query.id as string), undefined, {
+    push(routes.marketplaceOneScript.dynamicUrl(query.id as string), undefined, {
       scroll: true,
       shallow:true
     });

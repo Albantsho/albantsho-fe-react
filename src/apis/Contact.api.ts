@@ -1,8 +1,8 @@
+import useAxios from "hooks/useAxios";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IContact } from "interfaces/contact";
 import { IResData } from "interfaces/response";
 import { useCallback } from "react";
-import api from "./configs/axios.config";
 
 interface ICreateNewContactPayload {
   email: string;
@@ -18,6 +18,7 @@ export interface IData_getContacts {
 
 const useContact = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
+  const api = useAxios();
 
   const createNewContact = useCallback(
     async (payload: ICreateNewContactPayload) => {
@@ -31,7 +32,7 @@ const useContact = (controller?: AbortController) => {
       return res.data;
     },
 
-    [controller?.signal]
+    [api, controller?.signal]
   );
 
   const answerToContact = useCallback(
@@ -73,7 +74,7 @@ const useContact = (controller?: AbortController) => {
       );
       return res.data;
     },
-    [controller?.signal]
+    [api, controller?.signal]
   );
 
   return {

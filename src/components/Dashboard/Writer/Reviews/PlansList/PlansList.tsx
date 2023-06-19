@@ -92,7 +92,7 @@ const PlansList = () => {
             <Link
               passHref
               legacyBehavior
-              href={routes.reviewsSummary.url(
+              href={routes.reviewsSummary.dynamicUrl(
                 query.id as string,
                 "?reviewPlan=typeA"
               )}
@@ -153,7 +153,7 @@ const PlansList = () => {
             <Link
               passHref
               legacyBehavior
-              href={routes.reviewsSummary.url(
+              href={routes.reviewsSummary.dynamicUrl(
                 query.id as string,
                 "?reviewPlan=typeB"
               )}

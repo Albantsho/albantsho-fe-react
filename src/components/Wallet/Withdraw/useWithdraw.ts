@@ -42,7 +42,7 @@ const useWithdraw = () => {
       if (data.method === "bank") {
         const res = await withdrawRequest({ amount: data.amount, method: data.method, bankName: data.bankName, bankAccountName: data.bankAccountName, bankAccountNumber: data.bankAccountNumber });
         replace(
-          routes.withdrawVerifyWallet.url(res.withdraw._id)
+          routes.withdrawVerifyWallet.dynamicUrl(res.withdraw._id)
         );
       } else {
         const res = await withdrawRequest({
@@ -51,7 +51,7 @@ const useWithdraw = () => {
           usdtTrc20Address: data.usdtTrc20Address
         });
         replace(
-          routes.withdrawVerifyWallet.url(res.withdraw._id)
+          routes.withdrawVerifyWallet.dynamicUrl(res.withdraw._id)
         );
       }
     } catch (error) {

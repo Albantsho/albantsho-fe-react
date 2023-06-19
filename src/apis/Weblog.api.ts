@@ -1,3 +1,4 @@
+import useAxios from "hooks/useAxios";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IResData } from "interfaces/response";
 import { IWeblog } from "interfaces/weblog";
@@ -30,6 +31,7 @@ interface IData_allWeblogs {
 
 const useWeblogApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
+  const api = useAxios()
 
   const getAllWeblogsForAdmin = useCallback(
     async (query?: string, search?: string) => {
@@ -56,7 +58,7 @@ const useWeblogApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [ controller?.signal]
+    [api, controller?.signal]
   );
 
   const getWeblog = useCallback(
@@ -70,7 +72,7 @@ const useWeblogApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [ controller?.signal]
+    [api, controller?.signal]
   );
 
   const createNewWeblog = useCallback(

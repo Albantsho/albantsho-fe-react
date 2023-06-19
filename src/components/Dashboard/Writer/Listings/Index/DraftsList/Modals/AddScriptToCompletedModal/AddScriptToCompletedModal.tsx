@@ -42,7 +42,7 @@ const AddScriptToCompletedModal = ({
             Proceed to complete listing
           </Typography>
           <div className="flex gap-3 sm:gap-6">
-            <Link passHref legacyBehavior href={routes.abstract.url(id)}>
+            <Link passHref legacyBehavior href={routes.abstract.dynamicUrl(id)}>
               <Btn size="large" className="py-3 px-5 text-white bg-primary-700">
                 Proceed
               </Btn>

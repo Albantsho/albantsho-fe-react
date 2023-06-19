@@ -22,9 +22,8 @@ const useLoginForm = () => {
   const [rememberMe, setRememberMe] = useState(true);
   const { signin } = useAuthApi();
   const router = useRouter();
-  const { authenticationUser, setAccessToken } = useUserStore((state) => ({
+  const { authenticationUser } = useUserStore((state) => ({
     authenticationUser: state.authenticationUser,
-    setAccessToken: state.setAccessToken,
   }));
 
   const { mutate: signinUser, isLoading: loadingSigninUser } = useMutation<
@@ -37,11 +36,13 @@ const useLoginForm = () => {
     },
     onSuccess: (data, variables: ILoginPayload) => {
       queryClient.invalidateQueries(["user"]);
+      console.log(data);
+      
       authenticationUser(data.user);
       !data.user && router.replace(routes.verifyEmail.url);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       !data.user && authenticationUser({ email: variables.email } as any);
-      setAccessToken(data.accessToken);
+
       if (data.user && data.user.userType) {
         if (data.user.userType === "producer") {
           Router.router?.components["/marketplace/[id]"] ? router.back() : router.replace(routes.marketplace.url);

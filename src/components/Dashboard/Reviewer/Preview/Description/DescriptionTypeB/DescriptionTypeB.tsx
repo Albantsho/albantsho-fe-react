@@ -118,7 +118,7 @@ const DescriptionTypeB = ({ reviewValuesTypeB }: IProps) => {
           <Link
             passHref
             legacyBehavior
-            href={routes.reviewerDashboardQuestionnaireTypeB.url(
+            href={routes.reviewerDashboardQuestionnaireTypeB.dynamicUrl(
               query.id as string
             )}
           >

@@ -48,7 +48,7 @@ const PublishCard = () => {
           </LoadingButton>
           <Link
             className="w-full"
-            href={routes.abstract.url(query.id as string)}
+            href={routes.abstract.dynamicUrl(query.id as string)}
           >
             <Button
               variant="outlined"

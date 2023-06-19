@@ -88,14 +88,14 @@ const DescriptionTypeA = ({ reviewValuesTypeA }: IProps) => {
         <div className="mt-16 mb-16  flex flex-wrap justify-start w-full gap-y-3 gap-x-8 ">
           <Btn
             onClick={() => setOpenSendReview(true)}
-            className="py-3 px-3  min-w-[170px] flex-1 "
+            className="py-3 px-3  min-w-[170px] flex-1"
           >
             SEND Review AS EMAIL
           </Btn>
           <Link
             passHref
             legacyBehavior
-            href={routes.reviewerDashboardQuestionnaireTypeA.url(
+            href={routes.reviewerDashboardQuestionnaireTypeA.dynamicUrl(
               query.id as string
             )}
           >

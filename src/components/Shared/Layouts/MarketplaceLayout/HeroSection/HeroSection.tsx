@@ -51,7 +51,7 @@ const HeroSection = ({ description }: IProps) => {
               <Link
                 key={script._id}
                 passHref
-                href={routes.marketplaceOneScript.url(script._id)}
+                href={routes.marketplaceOneScript.dynamicUrl(script._id)}
               >
                 <Typography
                   variant="body1"

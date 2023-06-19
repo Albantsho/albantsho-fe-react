@@ -8,7 +8,8 @@ import {
   IUserProfile
 } from "interfaces/user";
 import { useCallback } from "react";
-import api, { apiPrivate } from "./configs/axios.config";
+import useAxios from "../hooks/useAxios";
+import { apiPrivate } from "./configs/axios.config";
 
 export interface IData_signupUser {
   user: IUser;
@@ -16,7 +17,6 @@ export interface IData_signupUser {
 
 export interface IData_AuthorizationUser {
   user: IUser;
-  accessToken: string;
 }
 
 export interface IData_allUser {
@@ -73,7 +73,7 @@ interface IUserRestrictionPayload {
 
 const useAuthApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
-
+  const api = useAxios();
 
   const signup = useCallback(
     async (payload: IRegisterPayload) => {
@@ -87,7 +87,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+    [api, controller?.signal]
   );
 
   const emailVerify = useCallback(
@@ -103,7 +103,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+    [api, controller?.signal]
   );
 
   const resendCode = useCallback(
@@ -112,7 +112,7 @@ const useAuthApi = (controller?: AbortController) => {
         signal: controller?.signal,
       });
     },
-    [controller?.signal]
+    [api, controller?.signal]
   );
 
   const logoutUser = useCallback(async () => {
@@ -131,7 +131,7 @@ const useAuthApi = (controller?: AbortController) => {
         signal: controller?.signal,
       });
     },
-    [controller?.signal]
+    [api, controller?.signal]
   );
 
   const resetPasswordEmail = useCallback(
@@ -144,7 +144,7 @@ const useAuthApi = (controller?: AbortController) => {
         }
       );
     },
-    [controller?.signal]
+    [api, controller?.signal]
   );
 
   const getNewAccessToken = useCallback(async () => {
@@ -169,7 +169,7 @@ const useAuthApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [controller?.signal]
+    [api, controller?.signal]
   );
 
   const updateUserInformation = useCallback(

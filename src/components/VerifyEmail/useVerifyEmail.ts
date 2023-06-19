@@ -14,8 +14,7 @@ const queryClient = new QueryClient();
 const useVerifyEmail = () => {
   const { user } = useUserStore.getState();
   const [countDownKey, setCountDownKey] = useState(1);
-  const { setAccessToken, authenticationUser } = useUserStore((state) => ({
-    setAccessToken: state.setAccessToken,
+  const { authenticationUser } = useUserStore((state) => ({
     authenticationUser: state.authenticationUser,
   }));
   const router = useRouter();
@@ -39,7 +38,6 @@ const useVerifyEmail = () => {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries(["user"]);
-      setAccessToken(data.accessToken);
       authenticationUser(data.user);
 
       if (data.user.userType === "producer") {

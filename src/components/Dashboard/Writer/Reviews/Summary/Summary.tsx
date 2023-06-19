@@ -60,7 +60,7 @@ const Summary = ({ script }: IProps) => {
         });
 
         replace(
-          routes.reviewsPaymentSuccessful.url(
+          routes.reviewsPaymentSuccessful.dynamicUrl(
             `${response.transaction_id}`
           )
         );

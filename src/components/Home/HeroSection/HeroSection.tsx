@@ -20,17 +20,8 @@ const AnimatedScriptCard = animated(ScriptCard);
 
 const HeroSection = () => {
   const lgScreen = useMediaQuery("(min-width: 1024px)");
-  const { getUserProfile } = useAuthApi();
-  const { data: userData, isLoading: loadingGetUser } = useQuery(
-    ["home_mobile_nav"],
-    () => getUserProfile(),
-    {
-      retry: 2,
-      refetchOnWindowFocus: false
-    }
-  );
-
   const { getAllScripts } = useScriptsApi();
+ const user = useUserStore(state=>state.user)
 
   const titleAnim = useSpring({
     from: { x: -100, opacity: 0 },
@@ -72,7 +63,7 @@ const HeroSection = () => {
               Write better screenplays and be discovered by top producers to
               bring them to life.
             </Typography>
-            {!userData && (
+            {!user.emailVerified && (
               <Link legacyBehavior passHref href={routes.register.url}>
                 <Button
                   size="large"

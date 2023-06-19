@@ -205,7 +205,7 @@ const UploadScript = ({
         )}
         {!script.scriptFileType ? (
           <Link
-            href={routes.script.url(query.id as string)}
+            href={routes.script.dynamicUrl(query.id as string)}
             passHref
             legacyBehavior
           >
@@ -215,7 +215,7 @@ const UploadScript = ({
           </Link>
         ) : script.scriptFileType === "text/plain" ? (
           <Link
-            href={routes.script.url(query.id as string)}
+            href={routes.script.dynamicUrl(query.id as string)}
             passHref
             legacyBehavior
           >

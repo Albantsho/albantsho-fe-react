@@ -6,8 +6,6 @@ interface IUserState {
   user: IUser;
   authenticationUser: (user: IUser) => void;
   logOutUser: () => void;
-  accessToken: string;
-  setAccessToken: (accessToken: string) => void;
   updateUserProfile: (
     firstName: string,
     lastName: string,
@@ -32,7 +30,6 @@ const useUserStore = create<IUserState>()(
         productionCompanyName: null,
         subscriptionPlan: null,
       },
-      accessToken: "",
       authenticationUser: (user: IUser) => set((state) => ({ ...state, user })),
       logOutUser: () =>
         set((state) => ({
@@ -51,10 +48,7 @@ const useUserStore = create<IUserState>()(
             image: null,
             subscriptionPlan: null,
           },
-          accessToken: "",
         })),
-      setAccessToken: (accessToken: string) =>
-        set((state) => ({ ...state, accessToken })),
       updateUserProfile: (firstName: string, lastName: string, image: string) =>
         set((state) => ({
           ...state,
@@ -64,12 +58,6 @@ const useUserStore = create<IUserState>()(
     {
       name: "user",
       getStorage: () => localStorage,
-      partialize: (state) =>
-        Object.fromEntries(
-          Object.entries(state).filter(
-            ([key]) => !["accessToken"].includes(key)
-          )
-        ),
     }
   )
 );

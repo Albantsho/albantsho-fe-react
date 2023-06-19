@@ -144,7 +144,7 @@ const TextEditorList = ({ htmlInitialValue, socket }: IProps) => {
             <Link
               passHref
               legacyBehavior
-              href={routes.abstract.url(query.id as string)}
+              href={routes.abstract.dynamicUrl(query.id as string)}
             >
               <Tooltip
                 classes={{

@@ -1,3 +1,4 @@
+import useAxios from "hooks/useAxios";
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IBidInMarketplace } from "interfaces/bid";
 import { ICollaboratorList } from "interfaces/collaborator";
@@ -108,6 +109,7 @@ interface IData_getOneScript {
 
 const useScriptsApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
+  const api = useAxios();
 
   const createNewScript = useCallback(
     async (payload: ICreateNewScriptPayload) => {
@@ -151,7 +153,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [ controller?.signal]
+    [api, controller?.signal]
   );
 
   const getScriptUnComplete = useCallback(
@@ -179,7 +181,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [ controller?.signal]
+    [api, controller?.signal]
   );
 
   const getProducerAllScripts = useCallback(
@@ -261,7 +263,7 @@ const useScriptsApi = (controller?: AbortController) => {
 
       return res.data.data;
     },
-    [ controller?.signal]
+    [api, controller?.signal]
   );
 
   const listAllCollaborators = useCallback(

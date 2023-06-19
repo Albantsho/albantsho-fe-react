@@ -10,7 +10,6 @@ import React, { useEffect, useMemo } from "react";
 import { QueryClient } from "react-query";
 import { io } from "socket.io-client";
 import useCommentStore from "store/comments.store";
-import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 import ScriptEditor from "../ScriptEditor/ScriptEditor";
 
@@ -35,12 +34,11 @@ const ScriptPage = ({
     getComments: state.getComments,
     addNewComment: state.addNewComment,
   }));
-  const accessToken = useUserStore((state) => state.accessToken);
   const socket = useMemo(
     () =>
       io(process.env.NEXT_PUBLIC_API_BASE_URL, {
-        auth: { accessToken: `Bearer ${accessToken}` },
         query: { scriptId: id as string },
+        withCredentials:true
       }),
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

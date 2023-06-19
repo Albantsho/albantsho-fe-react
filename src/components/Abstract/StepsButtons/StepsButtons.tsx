@@ -58,12 +58,15 @@ const StepsButtons = ({
             Next
           </Button>
         )}
-        <Link className="min-w-[178px] mx-auto md:mx-0 md:min-w-fit" href={routes.scriptPreview.url(query.id as string)}>
+        <Link
+          className={`${
+            step !== 6 ? "hidden" : "flex"
+          } min-w-[178px] mx-auto md:mx-0 md:min-w-fit`}
+          href={routes.scriptPreview.dynamicUrl(query.id as string)}
+        >
           <LoadingButton
             type="button"
-            className={`${
-              step !== 6 ? "hidden" : "flex"
-            } rounded-md px-[82.5px] md:px-8 py-3`}
+            className={`rounded-md px-[82.5px] md:px-8 py-3`}
             variant="contained"
           >
             preview
