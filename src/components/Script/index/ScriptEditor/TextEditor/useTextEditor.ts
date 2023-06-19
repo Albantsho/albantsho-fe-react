@@ -1,10 +1,6 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import useMouse from "@react-hook/mouse-position";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IEditor } from "interfaces/slate";
-import { useEffect, useRef, useState } from "react";
-import { Editor, Transforms, type BaseOperation, type Descendant } from "slate";
-import { Socket } from "socket.io-client";
+import { useRef, useState } from "react";
+import { Transforms, type Descendant } from "slate";
 import useScriptValueStore from "store/scriptValue.store";
 import { serializeWithDiv } from "utils/serialize-slate";
 import useBlockButton from "./hooks/useBlockbutton";
@@ -12,79 +8,17 @@ import useBlockButton from "./hooks/useBlockbutton";
 interface IProps {
   width: number | undefined;
   editor: IEditor;
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-interface IAddComment {
-  positionX: number;
-  positionY: number;
-  setShowFormStatus: boolean;
-  showComponent: boolean;
-  key: number;
-}
-
-const useTextEditor = ({ width, editor, socket }: IProps) => {
+const useTextEditor = ({ width, editor }: IProps) => {
   const [contextMenu, setContextMenu] = useState<{
     mouseX: number;
     mouseY: number;
   } | null>(null);
   const { isBlockActive } = useBlockButton();
-  const ref = useRef(null);
-  const mouse = useMouse(ref, {
-    enterDelay: 300,
-    leaveDelay: 300,
-  });
-  const [elementInform, setElementInform] = useState<{
-    elementWidth: number;
-    elementHeight: number;
-  }>({ elementWidth: mouse.elementWidth || 0, elementHeight: mouse.elementHeight || 0 });
-  const [addComment, setAddComment] = useState<IAddComment>();
   const { setScriptValue } = useScriptValueStore((state) => ({
     setScriptValue: state.setScriptValue,
   }));
-  const remote = useRef(false);
-  const socketChange = useRef(false);
-
-  const createCommentFunc = () => {
-    if (mouse.y && mouse.x && mouse.elementWidth && mouse.elementHeight) {
-      setElementInform({ elementWidth: mouse.elementWidth, elementHeight: mouse.elementHeight });
-      setAddComment({
-        key: Date.now(),
-        positionX: mouse.x!,
-        positionY: mouse.y!,
-        setShowFormStatus: true,
-        showComponent: true,
-      });
-
-    }
-  };
-
-  const cancelComment = () => {
-    if (mouse.x && mouse.y) {
-      setAddComment({
-        key: Date.now(),
-        positionX: mouse.x!,
-        positionY: mouse.y!,
-        setShowFormStatus: true,
-        showComponent: false,
-      });
-    }
-  };
-
-  useEffect(() => {
-    socket.on("writeScript", (ops) => {
-      remote.current = true;
-      Editor.withoutNormalizing(editor, () => {
-        JSON.parse(ops).forEach((op: BaseOperation) => {
-          editor.apply(op);
-        });
-      });
-      remote.current = false;
-      socketChange.current = true;
-    });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -101,16 +35,6 @@ const useTextEditor = ({ width, editor, socket }: IProps) => {
   const handleCloseContextMenu = () => setContextMenu(null);
 
   const handleChangeEditor = (element: Descendant[]) => {
-    const ops = editor.operations.filter((o) => {
-      if (o) {
-        return o.type !== "set_selection" && o.type !== "split_node";
-      }
-      return false;
-    });
-    if (ops.length && !remote.current && !socketChange.current) {
-      socket.emit("writeTextInScript", JSON.stringify(ops));
-    }
-    socketChange.current = false;
     const node = { children: element };
     const value = serializeWithDiv(node);
     if (value !== undefined) {
@@ -206,13 +130,7 @@ const useTextEditor = ({ width, editor, socket }: IProps) => {
     handleCloseContextMenu,
     handleContextMenu,
     handleKeyDown,
-    contextMenu,
-    createCommentFunc,
-    ref,
-    mouse,
-    cancelComment,
-    addComment,
-    elementInform
+    contextMenu
   };
 };
 

@@ -21,29 +21,25 @@ import Scenes from "../assets/scenes.svg";
 
 const routesArray = [
   { route: "?tab=scenes", title: "Scenes", icon: Scenes, value: 1 },
-  { route: "?tab=comment", title: "Comment", icon: Comment, value: 2 },
-  { route: "?tab=export", title: "Export", icon: Export, value: 3 },
-  { route: "?tab=document", title: "Document", icon: Document, value: 4 },
+  { route: "?tab=export", title: "Export", icon: Export, value: 2 },
+  { route: "?tab=document", title: "Document", icon: Document, value: 3 },
 ];
 
 interface IProps {
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   script: IFullInformationScript;
 }
 
-const ScriptSidebarOnMobile = ({ script, socket }: IProps) => {
+const ScriptSidebarOnMobile = ({ script }: IProps) => {
   const [activeRoute, setActiveRoute] = useState(0);
   const [openExportModal, setOpenExportModal] = useState(false);
   const [openScenesModal, setOpenScenesModal] = useState(false);
-  const [openCommentsModal, setOpenCommentsModal] = useState(false);
   const [openDocumentModal, setOpenDocumentModal] = useState(false);
   const { query } = useRouter();
 
   const handleShowModal = (value: number) => () => {
     value === 1 && setOpenScenesModal(true);
-    value === 2 && setOpenCommentsModal(true);
-    value === 3 && setOpenExportModal(true);
-    value === 4 && setOpenDocumentModal(true);
+    value === 2 && setOpenExportModal(true);
+    value === 3 && setOpenDocumentModal(true);
   };
 
   const handleActiveRoute = (
@@ -113,13 +109,7 @@ const ScriptSidebarOnMobile = ({ script, socket }: IProps) => {
         openScenesModal={openScenesModal}
         setOpenScenesModal={setOpenScenesModal}
       />
-      <CommentModal
-        socket={socket}
-        openCommentsModal={openCommentsModal}
-        setOpenCommentsModal={setOpenCommentsModal}
-      />
       <ScriptDocumentModal
-        socket={socket}
         script={script}
         openDocumentModal={openDocumentModal}
         setOpenDocumentModal={setOpenDocumentModal}

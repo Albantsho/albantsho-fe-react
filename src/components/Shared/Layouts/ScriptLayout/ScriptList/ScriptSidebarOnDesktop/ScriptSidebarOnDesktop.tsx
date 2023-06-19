@@ -24,11 +24,10 @@ import Scenes from "../assets/scenes.svg";
 
 const listRoutes1 = [
   { route: "?tab=scenes", title: "Scenes", icon: Scenes, value: 1 },
-  { route: "?tab=comment", title: "Comment", icon: Comment, value: 2 },
 ];
 const listRoutes2 = [
-  { route: "?tab=export", title: "Export", icon: Export, value: 3 },
-  { route: "?tab=document", title: "Document", icon: Document, value: 4 },
+  { route: "?tab=export", title: "Export", icon: Export, value: 2 },
+  { route: "?tab=document", title: "Document", icon: Document, value: 3 },
 ];
 
 const drawerWidth = 340;

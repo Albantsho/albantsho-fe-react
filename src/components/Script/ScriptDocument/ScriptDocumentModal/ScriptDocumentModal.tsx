@@ -11,14 +11,12 @@ interface IProps {
   openDocumentModal: boolean;
   setOpenDocumentModal: React.Dispatch<React.SetStateAction<boolean>>;
   script: IFullInformationScript;
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
 const ScriptDocumentModal = ({
   openDocumentModal,
   setOpenDocumentModal,
-  script,
-  socket,
+  script
 }: IProps) => {
   const { push, query } = useRouter();
 
@@ -43,7 +41,7 @@ const ScriptDocumentModal = ({
         >
           <AiOutlineClose />
         </IconButton>
-        <ScriptDocument socket={socket} script={script} />
+        <ScriptDocument script={script} />
       </div>
     </Modal>
   );

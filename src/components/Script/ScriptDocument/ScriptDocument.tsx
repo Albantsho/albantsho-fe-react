@@ -17,24 +17,16 @@ import useScriptDocument from "./useScriptDocument";
 
 interface IProps {
   script: IFullInformationScript;
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
-const ScriptDocument = ({ script, socket }: IProps) => {
+const ScriptDocument = ({ script }: IProps) => {
   const {
     activeButton,
-    errors,
-    handleSubmit,
-    loading,
-    onSubmit,
     openInfoCollaborator,
     openListCollaborator,
-    register,
     collaboratorsList,
-    removeCollaborator,
     loadingGetCollaboratorList,
-  } = useScriptDocument({ socket });
-  const user = useUserStore((state) => state.user);
+  } = useScriptDocument();
 
   return (
     <>
@@ -70,7 +62,7 @@ const ScriptDocument = ({ script, socket }: IProps) => {
             activeButton === 0 && "text-gray-400"
           } w-1/2 py-2   border-none  font-medium futura text-base`}
         >
-          Collaborators
+          Owner
         </Btn>
       </ButtonGroup>
       {activeButton === 0 && (
@@ -106,68 +98,6 @@ const ScriptDocument = ({ script, socket }: IProps) => {
                   owner
                 </Typography>
               </div>
-              {collaboratorsList.script.collaborators.map((collaborator) => (
-                <div
-                  key={collaborator._id}
-                  className="border border-gray-400 rounded-lg py-[10px] px-4 flex justify-between items-center mb-2"
-                >
-                  <div className="flex items-center gap-3">
-                    <Avatar
-                      className="w-8 h-8"
-                      src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${collaborator.image}`}
-                      alt={collaborator.firstName}
-                    />
-                    <Typography className="futura font-medium">
-                      {`${collaborator.firstName} ${collaborator.lastName}`}
-                    </Typography>
-                  </div>
-                  {user.email === collaboratorsList.script.author.email && (
-                    <IconButton
-                      onClick={removeCollaborator(collaborator._id)}
-                      className="text-error-500 hover:bg-error-50 bg-error-50"
-                    >
-                      <AiOutlineClose />
-                    </IconButton>
-                  )}
-                </div>
-              ))}
-              {user.email === collaboratorsList.script.author.email && (
-                <>
-                  <Divider className="my-8" />
-                  <Typography className="futura font-medium mb-1 text-primary-700">
-                    Add Collaborator
-                  </Typography>
-                  <form onSubmit={handleSubmit(onSubmit)}>
-                    <CustomInput
-                      {...register("email")}
-                      error={Boolean(errors.email) || false}
-                      sx={{
-                        "& .MuiOutlinedInput-input": {
-                          py: 1.5,
-                          minWidth: "50px",
-                        },
-                        "& .MuiFormHelperText-root": {
-                          mt: "8px",
-                          mx: 0,
-                          color: "red",
-                          fontSize: "16px",
-                        },
-                      }}
-                      variant="outlined"
-                      fullWidth
-                      placeholder="Email Address"
-                      helperText={errors.email?.message}
-                    />
-                    <Btn
-                      loading={loading}
-                      type="submit"
-                      className="mt-4 py-3 px-6"
-                    >
-                      Invite
-                    </Btn>
-                  </form>
-                </>
-              )}
             </>
           ) : (
             <ClipLoader color="grey" className="mt-[180px] inline-block" />

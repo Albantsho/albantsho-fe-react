@@ -30,6 +30,8 @@ const Script: NextPageWithLayout = () => {
 
   useQuery(["draft", scriptID], () => getOneDraft(scriptID), {
     onSuccess: (data) => {
+      console.log(data);
+      
       setHtmlInitialValue(data.draft);
     },
     refetchOnWindowFocus: false,

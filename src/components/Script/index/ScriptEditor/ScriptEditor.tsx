@@ -9,11 +9,10 @@ import TextEditorList from "./TextEditor/TextEditorList";
 
 interface IProps {
   script: IFullInformationScript;
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>;
   htmlInitialValue: string;
 }
 
-const ScriptEditor = ({ script, htmlInitialValue, socket }: IProps) => {
+const ScriptEditor = ({ script, htmlInitialValue }: IProps) => {
   const { query } = useRouter();
 
   return (
@@ -29,7 +28,7 @@ const ScriptEditor = ({ script, htmlInitialValue, socket }: IProps) => {
           </Typography>
         </div>
       </Link>
-      <TextEditorList socket={socket} htmlInitialValue={htmlInitialValue} />
+      <TextEditorList htmlInitialValue={htmlInitialValue} />
     </div>
   );
 };
