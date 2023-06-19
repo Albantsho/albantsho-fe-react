@@ -9,9 +9,10 @@ export async function middleware(request: NextRequest) {
     method: "GET",
     credentials: "include",
     headers: {
-      Cookie: `${request.cookies.get("accessToken")?.name}=${request.cookies.get("accessToken")?.value}; ${request.cookies.get("refreshToken")?.name}=${request.cookies.get("refreshToken")?.value}`
+      Cookie: ` ${request.cookies.get("refreshToken")?.name}=${request.cookies.get("refreshToken")?.value}: ${request.cookies.get("accessToken")?.name}=${request.cookies.get("accessToken")?.value}`
     }
-  }).then(res=>res.json());
+  }).then(res => res.json()).catch(err => console.log(err)
+  );
 
   //* registration routes
   if (request.nextUrl.pathname.startsWith(routes.register.url)) {
