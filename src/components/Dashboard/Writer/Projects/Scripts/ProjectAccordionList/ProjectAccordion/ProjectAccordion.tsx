@@ -12,18 +12,19 @@ import {
 } from "@mui/material";
 import { IWriterScript } from "interfaces/script";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 import { BiChevronDown } from "react-icons/bi";
 import { IoIosMore } from "react-icons/io";
+import routes from "utils/routes";
 import addAbstractIcon from "./assets/Abstract.svg";
-import addScriptIcon from "./assets/Script.svg";
+import previewIcon from "./assets/Preview.svg";
 import publishScriptIcon from "./assets/publish.svg";
+import addScriptIcon from "./assets/Script.svg";
 import addTitleIcon from "./assets/Title.svg";
 import CustomButtonScripts from "./CustomButtonScripts/CustomButtonScripts";
-import useProjectAccordion from "./useProjectAccordion";
-import { useRouter } from "next/router";
 import PublishScriptModal from "./PublishScriptModal/PublishScriptModal";
-import { toast } from "react-hot-toast";
-import routes from "utils/routes";
+import useProjectAccordion from "./useProjectAccordion";
 
 interface IProps {
   script: IWriterScript;
@@ -75,6 +76,13 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
           return;
         }
         push(routes.script.dynamicUrl(script._id));
+      },
+    },
+    {
+      title: "PREVIEW",
+      icon: previewIcon,
+      functionality: () => {
+        push(routes.scriptPreview.dynamicUrl(script._id));
       },
     },
     {
