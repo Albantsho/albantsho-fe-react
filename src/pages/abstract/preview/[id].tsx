@@ -39,8 +39,7 @@ const PreviewPage = () => {
       enabled: scriptID.length > 0,
     }
   );
-
-  return (
+  return(
     <>
       <Head>
         <title>Albantsho || {scriptPreviewData?.script.title}</title>
@@ -53,17 +52,18 @@ const PreviewPage = () => {
       />
       {!isLoadingGetScript && scriptPreviewData ? (
         <>
-          <ScriptInfo
-            script={scriptPreviewData.script}
-          />
+          <ScriptInfo script={scriptPreviewData.script} />
           <Suspense fallback={null}>
             <div className="flex flex-col md:flex-row mb-4 py-6 gap-10 lg:gap-7 mx-auto px-5 sm:px-10 max-w-screen-xl">
               <MarketScriptChips script={scriptPreviewData.script} />
-            <div className="lg:-mt-40 flex-1" >
-              <MarketScriptAccordion script={scriptPreviewData.script} />
+              <div className="lg:-mt-40 flex-1">
+                <MarketScriptAccordion script={scriptPreviewData.script} />
+              </div>
             </div>
-            </div>
-            <ScriptMainDetails script={scriptPreviewData.script} />
+            <ScriptMainDetails
+              writer={scriptPreviewData.writer}
+              script={scriptPreviewData.script}
+            />
             <PublishCard />
             <Footer />
           </Suspense>

@@ -6,6 +6,7 @@ import { IFullInformationScript } from "interfaces/script";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Suspense, useEffect, useState } from "react";
+import useUserStore from "store/user.store";
 import { priceConverter } from "utils/price-convert";
 import PlaceBid from "./PlaceBid/PlaceBid";
 
@@ -21,6 +22,7 @@ interface IProps {
 const ScriptInfo = ({ script, bid }: IProps) => {
   const [openBidSuccessful, setOpenBidSuccessful] = useState(false);
   const [ethPrice, setEthPrice] = useState<number | false | null>(null);
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     async function getETHPrice() {
@@ -51,6 +53,7 @@ const ScriptInfo = ({ script, bid }: IProps) => {
             className="bg-tinted-50/60 text-neutral-800 py-5"
             sx={{ borderRadius: 1 }}
           />
+          
           <CustomRating defaultValue={script.reviewerRate as number} readOnly />
         </div>
         <div className="flex gap-8 items-center">
@@ -68,20 +71,24 @@ const ScriptInfo = ({ script, bid }: IProps) => {
         <Typography variant="body1" color="dark.400">
           {script.tagline}
         </Typography>
-        <PlaceBid
-          ethPrice={ethPrice}
-          bid={bid}
-          script={script}
-          setOpenBidSuccessful={setOpenBidSuccessful}
-        />
-        <Suspense fallback={null}>
-          {openBidSuccessful ? (
-            <BidSuccessfulModal
-              openBidSuccessful={openBidSuccessful}
+        {user.userType === "producer" && (
+          <>
+            <PlaceBid
+              ethPrice={ethPrice}
+              bid={bid}
+              script={script}
               setOpenBidSuccessful={setOpenBidSuccessful}
             />
-          ) : null}
-        </Suspense>
+            <Suspense fallback={null}>
+              {openBidSuccessful ? (
+                <BidSuccessfulModal
+                  openBidSuccessful={openBidSuccessful}
+                  setOpenBidSuccessful={setOpenBidSuccessful}
+                />
+              ) : null}
+            </Suspense>
+          </>
+        )}
       </div>
     </div>
   );

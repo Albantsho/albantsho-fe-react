@@ -8,7 +8,7 @@ import {
   Menu,
   MenuItem,
   SvgIcon,
-  Typography,
+  Typography
 } from "@mui/material";
 import { IWriterScript } from "interfaces/script";
 import Image from "next/image";
@@ -53,6 +53,7 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
   const buttonsProjects = [
     {
       title: "ABSTRACT",
+
       icon: addAbstractIcon,
       functionality: () => {
         push(routes.abstract.dynamicUrl(script._id));
@@ -69,9 +70,12 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
       title: "SCRIPT",
       icon: addScriptIcon,
       functionality: () => {
-        if (script.scriptFileType === "application/pdf") {
+        if (
+          script.scriptFileType === "application/pdf" ||
+          script.scriptFileType === "text/plain"
+        ) {
           toast.error(
-            "You cannot write a script for a script that you have uploaded a PDF."
+            "You cannot write a script for a script that you have uploaded a file."
           );
           return;
         }
@@ -201,6 +205,7 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
             {buttonsProjects.map((button) => {
               return (
                 <CustomButtonScripts
+                  script={script}
                   key={button.title}
                   title={button.title}
                   Icon={button.icon}

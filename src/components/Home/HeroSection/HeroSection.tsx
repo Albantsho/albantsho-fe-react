@@ -7,7 +7,6 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
-import useAuthApi from "apis/Auth.api";
 import useScriptsApi from "apis/Scripts.api";
 import Link from "next/link";
 import { useQuery } from "react-query";
@@ -20,8 +19,8 @@ const AnimatedScriptCard = animated(ScriptCard);
 
 const HeroSection = () => {
   const lgScreen = useMediaQuery("(min-width: 1024px)");
-  const { getAllScripts } = useScriptsApi();
- const user = useUserStore(state=>state.user)
+  const { randomScript } = useScriptsApi();
+  const user = useUserStore((state) => state.user);
 
   const titleAnim = useSpring({
     from: { x: -100, opacity: 0 },
@@ -33,8 +32,8 @@ const HeroSection = () => {
     to: { x: 0, opacity: 1 },
   });
 
-  const { data: trendingScriptsData, isLoading: loadingGetTrendingScripts } =
-    useQuery("script", () => getAllScripts("rate=true"));
+  const { data: randomScriptData, isLoading: loadingGetRandomScript } =
+    useQuery("random_string", () => randomScript());
 
   return (
     <Box
@@ -92,17 +91,17 @@ const HeroSection = () => {
           </animated.div>
           {lgScreen && (
             <div className="xl:mr-20 self-center">
-              {!loadingGetTrendingScripts && trendingScriptsData ? (
-                trendingScriptsData.scripts[0] ? (
+              {!loadingGetRandomScript && randomScriptData ? (
+                randomScriptData.script ? (
                   <AnimatedScriptCard
-                    key={trendingScriptsData.scripts[0]._id}
+                    key={randomScriptData.script._id}
                     className="w-full"
                     style={cardAnim}
                     sx={{
                       maxWidth: 395,
                       boxShadow: "0px 35px 60px 0px #0000004D",
                     }}
-                    script={trendingScriptsData.scripts[0]}
+                    script={randomScriptData.script}
                     inHome
                   />
                 ) : (

@@ -2,7 +2,7 @@ import {
   Autocomplete,
   ListItemText,
   MenuItem,
-  Typography,
+  Typography
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IAbstractFormValues } from "interfaces/abstract";
@@ -11,11 +11,12 @@ import Link from "next/link";
 import type {
   Control,
   FieldErrorsImpl,
-  UseFormRegister,
+  UseFormRegister
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { genreList, storyTopics } from "./fieldInputs";
+import useAutocomplete from '@mui/base/useAutocomplete';
 
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
@@ -33,6 +34,8 @@ const GeneralScriptProfile = ({
   step,
   script,
 }: IProps) => {
+  useAutocomplete
+
   return (
     <div className={`${step === 1 ? "block" : "hidden"}`}>
       <Typography
@@ -334,6 +337,8 @@ const GeneralScriptProfile = ({
                 onChange(data);
                 return data;
               }}
+              defaultValue={script.storyTopics as any}
+              limitTags={3}
               renderInput={(params) => (
                 <CustomInput
                   {...params}

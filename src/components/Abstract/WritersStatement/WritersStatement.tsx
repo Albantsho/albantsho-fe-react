@@ -1,10 +1,9 @@
 import {
   Accordion,
   AccordionDetails,
-  AccordionSummary,
-  LinearProgress,
+  AccordionSummary, LinearProgress,
   SvgIcon,
-  Typography,
+  Typography
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
@@ -14,9 +13,10 @@ import React from "react";
 import type {
   FieldErrorsImpl,
   UseFormGetValues,
-  UseFormRegister,
+  UseFormRegister
 } from "react-hook-form";
 import { RiUploadLine } from "react-icons/ri";
+
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
   errors: Partial<FieldErrorsImpl<IAbstractFormValues>>;
@@ -26,6 +26,7 @@ interface IProps {
   getValues: UseFormGetValues<IAbstractFormValues>;
   adaptionPermissionError: string;
   cancelUploadAdaption: () => void;
+  handlerUploadAdaption: () => void;
   handleUploadAdaptionPermission: (
     e: React.ChangeEvent<HTMLInputElement>
   ) => void;
@@ -41,6 +42,7 @@ const WritersStatement = ({
   adaptionPermissionError,
   cancelUploadAdaption,
   handleUploadAdaptionPermission,
+  handlerUploadAdaption,
   progressAdaption,
 }: IProps) => {
   return (
@@ -80,6 +82,7 @@ const WritersStatement = ({
             </Typography>
             <div className="flex gap-4">
               <Btn
+                onClick={handlerUploadAdaption}
                 sx={
                   adaption
                     ? { "&.MuiButtonBase-root": { border: "none" } }
@@ -93,18 +96,6 @@ const WritersStatement = ({
                     : "rounded-full bg-white text-primary-700 px-6 py-3 md:px-8 md:py-4"
                 }`}
               >
-                <label
-                  className="absolute cursor-pointer inset-0"
-                  htmlFor="add-adaption-file"
-                ></label>
-                <input
-                  accept=".pdf,image/jpeg"
-                  max={1}
-                  type="file"
-                  id="add-adaption-file"
-                  hidden
-                  onChange={handleUploadAdaptionPermission}
-                />
                 Yes
               </Btn>
               <Btn
@@ -129,29 +120,50 @@ const WritersStatement = ({
         </AccordionSummary>
         <AccordionDetails className="rounded-md pt-3 md:pt-5 bg-primary-dark/95 py-6">
           <div className="flex flex-col md:flex-row md:px-7 items-center md:gap-6 relative">
-            <div className="flex gap-2 mb-8 mt-6 items-end flex-1">
-              <SvgIcon className="text-white" component={RiUploadLine} />
-              <Typography variant="body2" className="text-white">
-                Upload permission to adapt
-              </Typography>
-            </div>
-            <LinearProgress
-              className="w-full md:flex-1"
-              sx={{
-                "&.MuiLinearProgress-root": {
-                  borderRadius: "8px",
-                },
-                "&.MuiLinearProgress-colorPrimary": {
-                  backgroundColor: "inherit",
-                  border: "1px solid #fff",
-                },
-                "& .MuiLinearProgress-barColorPrimary": {
-                  backgroundColor: "#fff",
-                },
-              }}
-              value={progressAdaption}
-              variant="determinate"
-            />
+            {progressAdaption === 0 ? (
+              <Btn className="relative rounded-full text-white px-6 py-3 md:px-8 md:py-4 mx-auto mt-3">
+                <label
+                  className="absolute cursor-pointer inset-0"
+                  htmlFor="add-adaption-file"
+                ></label>
+                <input
+                  accept=".pdf,image/jpeg"
+                  max={1}
+                  type="file"
+                  id="add-adaption-file"
+                  hidden
+                  onChange={handleUploadAdaptionPermission}
+                />
+                upload file
+              </Btn>
+            ) : (
+              <>
+                {" "}
+                <div className="flex gap-2 mb-8 mt-6 items-end flex-1">
+                  <SvgIcon className="text-white" component={RiUploadLine} />
+                  <Typography variant="body2" className="text-white">
+                    Upload permission to adapt
+                  </Typography>
+                </div>
+                <LinearProgress
+                  className="w-full md:flex-1"
+                  sx={{
+                    "&.MuiLinearProgress-root": {
+                      borderRadius: "8px",
+                    },
+                    "&.MuiLinearProgress-colorPrimary": {
+                      backgroundColor: "inherit",
+                      border: "1px solid #fff",
+                    },
+                    "& .MuiLinearProgress-barColorPrimary": {
+                      backgroundColor: "#fff",
+                    },
+                  }}
+                  value={progressAdaption}
+                  variant="determinate"
+                />
+              </>
+            )}
           </div>
         </AccordionDetails>
       </Accordion>

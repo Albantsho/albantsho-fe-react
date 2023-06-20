@@ -7,7 +7,8 @@ const TrendingStories = () => {
   const { getAllScripts } = useScriptsApi();
 
   const { data: trendingScriptsData, isLoading: loadingGetTrendingScripts } =
-    useQuery("script", () => getAllScripts("trending=true"));
+    useQuery("script_trending", () => getAllScripts("trending=true"));
+console.log(    trendingScriptsData);
 
   return (
     <section

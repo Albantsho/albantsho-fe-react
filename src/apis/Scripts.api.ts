@@ -11,10 +11,9 @@ import {
   IScript,
   IUnCompletedScript,
   IUnlistedScript,
-  IWriterScript,
+  IWriterScript
 } from "interfaces/script";
 import { useCallback } from "react";
-import api from "./configs/axios.config";
 
 export interface ICreateNewScriptPayload {
   title: string;
@@ -105,6 +104,11 @@ interface IData_getAllCollaboratorScript {
 interface IData_getOneScript {
   script: IFullInformationScript;
   bid: IBidInMarketplace;
+  writer: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  };
 }
 
 const useScriptsApi = (controller?: AbortController) => {
@@ -256,6 +260,19 @@ const useScriptsApi = (controller?: AbortController) => {
     async (search: string) => {
       const res = await api.get<IResData<{ scripts: IScript[]; }>>(
         `/script/search?search=${search}`,
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data.data;
+    },
+    [api, controller?.signal]
+  );
+  const randomScript = useCallback(
+    async () => {
+      const res = await api.get<IResData<{ script: IScript; }>>(
+        `/script/random`,
         {
           signal: controller?.signal,
         }
@@ -424,7 +441,8 @@ const useScriptsApi = (controller?: AbortController) => {
     getCoverPageInformation,
     updatePublishedScript,
     updateScript,
-    getAllCollaboratorScripts
+    getAllCollaboratorScripts,
+    randomScript,
   };
 };
 

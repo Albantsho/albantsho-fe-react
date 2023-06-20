@@ -2,7 +2,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Typography,
+  Typography
 } from "@mui/material";
 import parse from "html-react-parser";
 import { IFullInformationScript } from "interfaces/script";
@@ -10,9 +10,14 @@ import { BiChevronDown } from "react-icons/bi";
 
 interface IProps {
   script: IFullInformationScript;
+  writer: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  } | null;
 }
 
-const ScriptMainDetails = ({ script }: IProps) => {
+const ScriptMainDetails = ({ script, writer }: IProps) => {
   return (
     <div className="px-5 sm:px-10 py-10  md:max-w-3xl mx-auto max-w-screen-md">
       <Accordion
@@ -50,7 +55,10 @@ const ScriptMainDetails = ({ script }: IProps) => {
               variant="h6"
               className="px-10 font-normal text-primary-700 leading-normal"
             >
-              Written by {script.writtenBy}
+              Written by{" "}
+              {writer
+                ? `${writer.firstName} ${writer.lastName}`
+                : script.writtenBy}
             </Typography>
             {script.scriptSnippet && parse(script.scriptSnippet)}
           </article>

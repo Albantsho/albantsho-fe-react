@@ -57,6 +57,7 @@ const Abstract = ({ script, refetch }: IProps) => {
     progressCopyright,
     progressScript,
     dropZoneUploadImage,
+    handlerUploadAdaption
   } = useAbstract(script, refetch);
 
   return (
@@ -111,6 +112,7 @@ const Abstract = ({ script, refetch }: IProps) => {
           errors={errors}
           adaptionPermissionError={adaptionPermissionError}
           cancelUploadAdaption={cancelUploadAdaption}
+          handlerUploadAdaption={handlerUploadAdaption}
           handleUploadAdaptionPermission={handleUploadAdaptionPermission}
           progressAdaption={progressAdaption}
         />

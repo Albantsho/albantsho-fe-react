@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense, useEffect, useState } from "react";
+import useUserStore from "store/user.store";
 import routes from "utils/routes";
 
 const MarketScriptChips = dynamic(
@@ -30,11 +31,15 @@ const MainDetailsMarketScript = dynamic(
     )
 );
 const BidRequestCard = dynamic(
-  () => import("components/Marketplace/MarketScript/BidRequestCard/BidRequestCard")
+  () =>
+    import("components/Marketplace/MarketScript/BidRequestCard/BidRequestCard")
 );
-// const RateToScript = dynamic(
-//   () => import("components/Marketplace/MarketScript/RateToScript/RateToScript")
-// );
+
+interface IWriter {
+  _id: string;
+  firstName: string;
+  lastName: string;
+}
 
 const links = [
   { title: "Home", href: routes.home.url },
@@ -45,9 +50,11 @@ const links = [
 const ScriptInfoPage = () => {
   const [script, setScript] = useState<IFullInformationScript>();
   const [bid, setBid] = useState<null | IBidInMarketplace>(null);
+  const [writer, setWriter] = useState<IWriter | null>(null);
   const [loading, setLoading] = useState(true);
   const { query } = useRouter();
   const privateAxios = useAxiosPrivate();
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     async function getScriptsDate() {
@@ -56,6 +63,7 @@ const ScriptInfoPage = () => {
           const res = await privateAxios.get(`/script/${query.id as string}`);
           setScript(res.data.data.script);
           setBid(res.data.data.bid);
+          setWriter(res.data.data.writer);
           setLoading(false);
         }
       } catch (error) {
@@ -65,6 +73,8 @@ const ScriptInfoPage = () => {
     getScriptsDate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query.id]);
+
+  console.log(script);
 
   return (
     <>
@@ -85,9 +95,8 @@ const ScriptInfoPage = () => {
               <MarketScriptChips script={script} />
               <MarketScriptAccordion script={script} />
             </div>
-            <MainDetailsMarketScript script={script} />
-            <BidRequestCard/>
-            {/* <RateToScript id={script._id} rate={script.rate} /> */}
+            <MainDetailsMarketScript writer={writer} script={script} />
+            {user.userType === "producer" && <BidRequestCard />}
             <Footer />
           </Suspense>
         </>

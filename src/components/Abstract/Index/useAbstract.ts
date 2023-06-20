@@ -212,7 +212,6 @@ const useAbstract = (script: IScript, refetch: any) => {
   const handleUploadAdaptionPermission = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setAdaption(true);
     controllerAdaption = new AbortController();
     if (!e.target.files) {
       customHandler("please upload file adaption permission");
@@ -258,6 +257,9 @@ const useAbstract = (script: IScript, refetch: any) => {
     controllerAdaption.abort();
     setProgressAdaption(0);
     customHandler("upload canceled");
+  };
+  const handlerUploadAdaption = () => {
+    setAdaption(true);
   };
 
   const onSubmit = async (data: IAbstractFormValues) => {
@@ -374,6 +376,7 @@ const useAbstract = (script: IScript, refetch: any) => {
     dropZoneUploadImage,
     progressCopyright,
     progressScript,
+    handlerUploadAdaption
   };
 };
 
