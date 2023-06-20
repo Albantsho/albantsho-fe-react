@@ -16,7 +16,6 @@ import type {
 import { Controller } from "react-hook-form";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { genreList, storyTopics } from "./fieldInputs";
-import useAutocomplete from '@mui/base/useAutocomplete';
 
 interface IProps {
   register: UseFormRegister<IAbstractFormValues>;
@@ -34,7 +33,6 @@ const GeneralScriptProfile = ({
   step,
   script,
 }: IProps) => {
-  useAutocomplete
 
   return (
     <div className={`${step === 1 ? "block" : "hidden"}`}>
@@ -337,8 +335,6 @@ const GeneralScriptProfile = ({
                 onChange(data);
                 return data;
               }}
-              defaultValue={script.storyTopics as any}
-              limitTags={3}
               renderInput={(params) => (
                 <CustomInput
                   {...params}
