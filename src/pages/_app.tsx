@@ -15,6 +15,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import "styles/globals.css";
 import theme from "styles/themes/theme";
 import createEmotionCache from "utils/create-emotion-cache";
+import Script from "next/script";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -49,18 +50,18 @@ export default function MyApp(props: MyAppProps) {
             height="3px"
             options={{ showSpinner: false }}
           />
-          {/* <Script
-              src="https://www.googletagmanager.com/gtag/js?id=G-35SD81MYSZ"
-              strategy="afterInteractive"
-            /> */}
-          {/* <Script id="google-tag-manager" strategy="afterInteractive">
-              {`window.dataLayer = window.dataLayer || [];
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-35SD81MYSZ"
+            strategy="afterInteractive"
+          />
+          <Script id="google-tag-manager" strategy="afterInteractive">
+            {`window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                   gtag('config', 'G-35SD81MYSZ');`}
-            </Script> */}
-          {/* <Script id="hotjar-tracking" strategy="afterInteractive">
-              {`(function(h,o,t,j,a,r){
+          </Script>
+          <Script id="hotjar-tracking" strategy="afterInteractive">
+            {`(function(h,o,t,j,a,r){
                 h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
                 h._hjSettings={hjid:3410388,hjsv:6};
                 a=o.getElementsByTagName('head')[0];
@@ -68,7 +69,7 @@ export default function MyApp(props: MyAppProps) {
                 r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
                 a.appendChild(r);
                 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
-            </Script> */}
+          </Script>
           <Authorization>
             {isLoading ? (
               <main></main>
