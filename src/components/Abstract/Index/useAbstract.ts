@@ -68,6 +68,7 @@ const useAbstract = (script: IScript, refetch: any) => {
     },
     resolver: yupResolver(abstractSchema(publish, activeButton)),
   });
+  const data = getValues();
 
   useEffect(() => {
 
@@ -100,7 +101,7 @@ const useAbstract = (script: IScript, refetch: any) => {
     updateData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step]);
+  }, [step, data.motivation]);
 
   const dropZoneUploadPdfScript = useDropzone({
     accept: {

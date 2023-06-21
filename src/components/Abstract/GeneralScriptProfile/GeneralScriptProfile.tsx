@@ -1,19 +1,23 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-ignore
 import {
   Autocomplete,
   ListItemText,
   MenuItem,
-  Typography
+  Typography,
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IAbstractFormValues } from "interfaces/abstract";
 import { IFullInformationScript } from "interfaces/script";
 import Link from "next/link";
+import { useState } from "react";
 import type {
   Control,
   FieldErrorsImpl,
-  UseFormRegister
+  UseFormRegister,
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { genreList, storyTopics } from "./fieldInputs";
 
@@ -33,6 +37,9 @@ const GeneralScriptProfile = ({
   step,
   script,
 }: IProps) => {
+  const [selectedOptions, setSelectedOptions] = useState<Array<any>>(
+    script.storyTopics
+  );
 
   return (
     <div className={`${step === 1 ? "block" : "hidden"}`}>
@@ -332,9 +339,17 @@ const GeneralScriptProfile = ({
               options={storyTopics}
               getOptionLabel={(option) => option}
               onChange={(_, data) => {
+                if (selectedOptions.length >= 3) {
+                  toast.error("you can't select more than 3 story topics.");
+                  setSelectedOptions(data.slice(0, 3));
+                  onChange(data.slice(0, 3));
+                  return data;
+                }
+                setSelectedOptions(data);
                 onChange(data);
                 return data;
               }}
+              value={selectedOptions}
               renderInput={(params) => (
                 <CustomInput
                   {...params}
