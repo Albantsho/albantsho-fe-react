@@ -8,7 +8,7 @@ import {
   Menu,
   MenuItem,
   SvgIcon,
-  Typography
+  Typography,
 } from "@mui/material";
 import { IWriterScript } from "interfaces/script";
 import Image from "next/image";
@@ -72,7 +72,8 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
       functionality: () => {
         if (
           script.scriptFileType === "application/pdf" ||
-          script.scriptFileType === "text/plain"
+          script.scriptFileType === "text/plain" ||
+          script.scriptFileType === "application/octet-stream"
         ) {
           toast.error(
             "You cannot write a script for a script that you have uploaded a file."
