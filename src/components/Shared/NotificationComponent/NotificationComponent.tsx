@@ -11,9 +11,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
 import { ClipLoader } from "react-spinners";
-import routes from "utils/routes";
 import EmptyNotification from "./assets/empty-notification.svg";
 import useNotificationComponent from "./useNotificationComponent";
 
@@ -25,18 +23,10 @@ const NotificationComponent = () => {
     open,
     readNotification,
     deleteNotificationFunc,
-    isLoadingInvites,
     isLoadingNotifications,
-    invitesData,
     notificationsData,
     loadingDeleteNotification,
     loadingSeenNotification,
-    acceptInviteFunc,
-    loadingAcceptInvite,
-    loadingRejectInvite,
-    rejectInviteFunc,
-    collaboratorsData,
-    user,
   } = useNotificationComponent();
   const xlScreen = useMediaQuery("(min-width: 1024px)");
 
@@ -49,13 +39,7 @@ const NotificationComponent = () => {
         <Badge
           badgeContent={
             Number(
-              Number(
-                notificationsData?.notifications.filter((n) => !n.read).length
-              ) +
-                Number(
-                  invitesData?.invites.filter((i) => !i.rejected && !i.accepted)
-                    .length
-                )
+              notificationsData?.notifications.filter((n) => !n.read).length
             ) || null
           }
           color="error"
@@ -82,13 +66,8 @@ const NotificationComponent = () => {
         }}
       >
         <List className="gap-2 min-w-[250px] min-h-[400px] w-full max-w-md text-center">
-          {notificationsData &&
-          !isLoadingNotifications &&
-          invitesData &&
-          !isLoadingInvites ? (
-            notificationsData.notifications.length +
-              invitesData.invites.filter((i) => !i.rejected).length >
-            0 ? (
+          {notificationsData && !isLoadingNotifications ? (
+            notificationsData.notifications.length > 0 ? (
               <>
                 {notificationsData.notifications.map((notification) => (
                   <ListItem
@@ -137,100 +116,6 @@ const NotificationComponent = () => {
                     </div>
                   </ListItem>
                 ))}
-                {invitesData.invites
-                  .filter((i) => !i.rejected)
-                  .filter((i) => !i.accepted)
-                  .map((invite) => (
-                    <ListItem
-                      className="gap-1 items-start flex-col relative"
-                      divider
-                      key={invite._id}
-                    >
-                      <ListItemText
-                        primary={
-                          <Typography
-                            component="h6"
-                            variant="body1"
-                            className="futura text-primary-700 font-semibold"
-                          >
-                            Collaboration Invite
-                          </Typography>
-                        }
-                        secondary={`Hello, you've been invited by ${invite.inviter.firstName} ${invite.inviter.lastName} to collaborate on ${invite.script.title}.`}
-                        secondaryTypographyProps={{
-                          className: "futura max-w-[250px]",
-                        }}
-                      />
-                      <div className="flex gap-1 justify-between">
-                        {!invite.accepted ? (
-                          <Button
-                            onClick={acceptInviteFunc(invite._id)}
-                            variant="outlined"
-                            color="success"
-                            disabled={loadingAcceptInvite}
-                          >
-                            Accept invite
-                          </Button>
-                        ) : (
-                          <Link
-                            passHref
-                            legacyBehavior
-                            href={routes.script.dynamicUrl(invite.script._id)}
-                          >
-                            <Button variant="outlined" color="success">
-                              go to script Page
-                            </Button>
-                          </Link>
-                        )}
-
-                        {!invite.rejected && !invite.accepted && (
-                          <Button
-                            onClick={rejectInviteFunc(invite._id)}
-                            variant="outlined"
-                            color="error"
-                            disabled={loadingRejectInvite}
-                          >
-                            Reject invite
-                          </Button>
-                        )}
-                      </div>
-                    </ListItem>
-                  ))}
-
-                {collaboratorsData?.scripts.map((script) => (
-                  <ListItem
-                    className="gap-1 items-start flex-col relative"
-                    divider
-                    key={script._id}
-                  >
-                    <ListItemText
-                      primary={
-                        <Typography
-                          component="h6"
-                          variant="body1"
-                          className="futura text-primary-700 font-semibold"
-                        >
-                          Collaboration Invite
-                        </Typography>
-                      }
-                      secondary={`Hello, you've been invited by ${script.author.firstName} ${script.author.lastName} to collaborate on ${script.title}.`}
-                      secondaryTypographyProps={{
-                        className: "futura max-w-[250px]",
-                      }}
-                    />
-                    <div className="flex gap-1 justify-between">
-                      <Link
-                        passHref
-                        legacyBehavior
-                        href={routes.script.dynamicUrl(script._id)}
-                      >
-                        <Button variant="outlined" color="success">
-                          go to script Page
-                        </Button>
-                      </Link>
-                    </div>
-                  </ListItem>
-                ))}
               </>
             ) : (
               <div className="flex min-h-full items-center justify-center py-6 pt-24 px-10">
@@ -241,26 +126,6 @@ const NotificationComponent = () => {
             <ClipLoader color="grey" className="mt-[180px] inline-block" />
           )}
         </List>
-        {user.userType === "writer" &&
-        !isLoadingInvites &&
-        invitesData &&
-        collaboratorsData
-          ? invitesData.invites
-              .filter((i) => !i.rejected)
-              .filter((i) => !i.accepted).length +
-              collaboratorsData.scripts.length >
-              0 && (
-              <Link passHref legacyBehavior href={routes.invites.url}>
-                <Button variant="text" className="text-center w-full py-4">
-                  See your Invites :
-                  {invitesData.invites
-                    .filter((i) => !i.rejected)
-                    .filter((i) => !i.accepted).length +
-                    collaboratorsData.scripts.length}
-                </Button>
-              </Link>
-            )
-          : ""}
       </Popover>
     </>
   );

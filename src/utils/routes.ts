@@ -384,11 +384,6 @@ const routes = {
     mustAuthenticated: "yes",
     permission: ["writer"],
   },
-  invites: {
-    url: "/invites",
-    mustAuthenticated: "yes",
-    permission: ["writer"],
-  },
   notfound: {
     url: "/404",
     mustAuthenticated: "noMatter",

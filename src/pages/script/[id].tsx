@@ -15,7 +15,6 @@ const Script: NextPageWithLayout = () => {
   const [htmlInitialValue, setHtmlInitialValue] = useState("");
   const { getScriptUnComplete } = useScriptsApi();
   const { getOneDraft } = useDraftApi();
-
   const scriptID = typeof query?.id === "string" ? query.id : "";
 
   const { data: scriptData, isLoading: isLoadingGetScript } = useQuery(
@@ -28,27 +27,27 @@ const Script: NextPageWithLayout = () => {
     }
   );
 
-  useQuery(["draft", scriptID], () => getOneDraft(scriptID), {
-    onSuccess: (data) => {
-      console.log(data);
-      
-      setHtmlInitialValue(data.draft);
-    },
-    refetchOnWindowFocus: false,
-    enabled: scriptID.length > 0,
-  });
+  const { isFetched: dataFetched } = useQuery(
+    ["draft", scriptID],
+    () => getOneDraft(scriptID),
+    {
+      onSuccess: (data) => {
+        setHtmlInitialValue(data);
+      },
+      refetchOnWindowFocus: false,
+      enabled: scriptID.length > 0,
+    }
+  );
 
   return (
     <>
       <Head>
         <title>Albantsho || Script</title>
       </Head>
-      {!isLoadingGetScript && scriptData && scriptData.script && query.id ? (
+      {!isLoadingGetScript && scriptData && scriptData.script && dataFetched ? (
         <ScriptPage
           htmlInitialValue={htmlInitialValue}
-          setHtmlInitialValue={setHtmlInitialValue}
           script={scriptData.script}
-          id={query.id}
         />
       ) : (
         <Loader setCustomHeight="min-h-[75vh]" />

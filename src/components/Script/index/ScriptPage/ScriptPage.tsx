@@ -4,25 +4,14 @@ import ScenesList from "components/Script/ScenesList/ScenesList";
 import ScriptDocument from "components/Script/ScriptDocument/ScriptDocument";
 import { IFullInformationScript } from "interfaces/script";
 import { useRouter } from "next/router";
-import React from "react";
-import { QueryClient } from "react-query";
 import ScriptEditor from "../ScriptEditor/ScriptEditor";
 
 interface IProps {
   script: IFullInformationScript;
-  setHtmlInitialValue: React.Dispatch<React.SetStateAction<string>>;
   htmlInitialValue: string;
-  id: string | string[];
 }
 
-const queryClient = new QueryClient();
-
-const ScriptPage = ({
-  script,
-  htmlInitialValue,
-  setHtmlInitialValue,
-  id,
-}: IProps) => {
+const ScriptPage = ({ script, htmlInitialValue }: IProps) => {
   const { query } = useRouter();
 
   return (

@@ -1,6 +1,7 @@
 import useAuthApi from "apis/Auth.api";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import useUserStore from "store/user.store";
 import errorHandler from "utils/error-handler";
 import routes from "utils/routes";
 
@@ -22,8 +23,10 @@ const useProfileMenu = () => {
 
   const logOutUserFunc = async () => {
     try {
+      const { logOutUser } = useUserStore.getState();
       await logoutUser();
-      replace(routes.home.url)
+      logOutUser();
+      replace(routes.home.url);
     } catch (error) {
       errorHandler(error);
     }
@@ -34,7 +37,7 @@ const useProfileMenu = () => {
     openProfile,
     handleOpenMenu,
     handleCloseProfileMenu,
-    logOutUserFunc, 
+    logOutUserFunc,
   };
 };
 

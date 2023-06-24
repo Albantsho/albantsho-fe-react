@@ -8,7 +8,6 @@ const TrendingStories = () => {
 
   const { data: trendingScriptsData, isLoading: loadingGetTrendingScripts } =
     useQuery("script_trending", () => getAllScripts("trending=true"));
-console.log(    trendingScriptsData);
 
   return (
     <section

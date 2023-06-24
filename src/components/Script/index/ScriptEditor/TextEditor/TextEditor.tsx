@@ -55,7 +55,6 @@ const TextEditor = ({ width, htmlInitialValue, editorSetting }: IProps) => {
     >
       <Slate onChange={handleChangeEditor} editor={editor} value={initialValue}>
         <Editable
-          onPaste={(e) => e.preventDefault()}
           onKeyDown={handleKeyDown}
           translate="yes"
           className="isolation-auto -z-0 break-words"

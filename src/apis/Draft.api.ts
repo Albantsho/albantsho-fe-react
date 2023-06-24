@@ -18,23 +18,19 @@ interface IUploadCopyrightPayload {
   copyright: File;
 }
 
-interface IData_getDraft {
-  draft: string;
-}
-
 const useDraftApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
 
   const getOneDraft = useCallback(
     async (scriptId: string) => {
-      const res = await axiosPrivate.get<IResData<IData_getDraft>>(
+      const res = await axiosPrivate.get(
         `/draft/file/${scriptId}`,
         {
           signal: controller?.signal,
         }
       );
 
-      return res.data.data;
+      return res.data;
     },
 
     [axiosPrivate, controller?.signal]

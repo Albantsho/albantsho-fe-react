@@ -1,9 +1,10 @@
 import {
   Accordion,
   AccordionDetails,
-  AccordionSummary, LinearProgress,
+  AccordionSummary,
+  LinearProgress,
   SvgIcon,
-  Typography
+  Typography,
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
@@ -13,7 +14,7 @@ import React from "react";
 import type {
   FieldErrorsImpl,
   UseFormGetValues,
-  UseFormRegister
+  UseFormRegister,
 } from "react-hook-form";
 import { RiUploadLine } from "react-icons/ri";
 
@@ -134,7 +135,7 @@ const WritersStatement = ({
                   hidden
                   onChange={handleUploadAdaptionPermission}
                 />
-                upload file
+                Upload permit for adaption here
               </Btn>
             ) : (
               <>

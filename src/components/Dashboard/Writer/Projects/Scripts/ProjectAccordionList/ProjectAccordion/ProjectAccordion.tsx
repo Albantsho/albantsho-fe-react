@@ -8,12 +8,11 @@ import {
   Menu,
   MenuItem,
   SvgIcon,
-  Typography,
+  Typography
 } from "@mui/material";
 import { IWriterScript } from "interfaces/script";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { toast } from "react-hot-toast";
 import { BiChevronDown } from "react-icons/bi";
 import { IoIosMore } from "react-icons/io";
 import routes from "utils/routes";
@@ -70,16 +69,6 @@ const ProjectAccordion = ({ script, listScripts, refetch }: IProps) => {
       title: "SCRIPT",
       icon: addScriptIcon,
       functionality: () => {
-        if (
-          script.scriptFileType === "application/pdf" ||
-          script.scriptFileType === "text/plain" ||
-          script.scriptFileType === "application/octet-stream"
-        ) {
-          toast.error(
-            "You cannot write a script for a script that you have uploaded a file."
-          );
-          return;
-        }
         push(routes.script.dynamicUrl(script._id));
       },
     },

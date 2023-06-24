@@ -74,8 +74,6 @@ const ScriptInfoPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query.id]);
 
-  console.log(script);
-
   return (
     <>
       <Head>
