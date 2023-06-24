@@ -1,17 +1,6 @@
-import {
-  Avatar,
-  ButtonGroup,
-  Divider,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import { Avatar, ButtonGroup, Typography } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
-import CustomInput from "@shared/CustomInput/CustomInput";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
-import { IFullInformationScript } from "interfaces/script";
-import { AiOutlineClose } from "react-icons/ai";
-import { ClipLoader } from "react-spinners";
-import { Socket } from "socket.io-client";
+import type { IFullInformationScript } from "interfaces/script";
 import useUserStore from "store/user.store";
 import useScriptDocument from "./useScriptDocument";
 
@@ -20,13 +9,9 @@ interface IProps {
 }
 
 const ScriptDocument = ({ script }: IProps) => {
-  const {
-    activeButton,
-    openInfoCollaborator,
-    openListCollaborator,
-    collaboratorsList,
-    loadingGetCollaboratorList,
-  } = useScriptDocument();
+  const { activeButton, openInfoCollaborator, openListCollaborator } =
+    useScriptDocument();
+  const user = useUserStore((state) => state.user);
 
   return (
     <>
@@ -81,27 +66,21 @@ const ScriptDocument = ({ script }: IProps) => {
       )}
       {activeButton === 1 && (
         <>
-          {collaboratorsList && !loadingGetCollaboratorList ? (
-            <>
-              <div className="border border-gray-400 rounded-lg py-[10px] px-4 flex justify-between items-center mb-2">
-                <div className="flex items-center gap-3">
-                  <Avatar
-                    className="w-8 h-8"
-                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${collaboratorsList.script.author.image}`}
-                    alt={collaboratorsList.script.author.firstName}
-                  />
-                  <Typography className="futura font-medium">
-                    {`${collaboratorsList.script.author.firstName} ${collaboratorsList.script.author.lastName}`}
-                  </Typography>
-                </div>
-                <Typography className="futura text-[#5D5FEF] font-medium">
-                  owner
-                </Typography>
-              </div>
-            </>
-          ) : (
-            <ClipLoader color="grey" className="mt-[180px] inline-block" />
-          )}
+          <div className="border border-gray-400 rounded-lg py-[10px] px-4 flex justify-between items-center mb-2">
+            <div className="flex items-center gap-3">
+              <Avatar
+                className="w-8 h-8"
+                src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${user.image}`}
+                alt={user.firstName}
+              />
+              <Typography className="futura font-medium">
+                {`${user.firstName} ${user.lastName}`}
+              </Typography>
+            </div>
+            <Typography className="futura text-[#5D5FEF] font-medium">
+              owner
+            </Typography>
+          </div>
         </>
       )}
     </>
