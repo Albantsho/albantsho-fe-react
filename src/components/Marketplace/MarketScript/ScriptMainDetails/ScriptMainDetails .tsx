@@ -29,11 +29,10 @@ const ScriptMainDetails = ({ script, writer }: IProps) => {
     ["draft", scriptID],
     () => getOneDraft(scriptID),
     {
-      enabled: script.scriptFileType === "application/octet-stream",
       refetchOnWindowFocus: false,
     }
   );
-  console.log(draftFile);
+
   return (
     <div className="px-5 sm:px-10 py-10  md:max-w-3xl mx-auto max-w-screen-md">
       <Accordion
@@ -79,7 +78,18 @@ const ScriptMainDetails = ({ script, writer }: IProps) => {
             {script.scriptSnippet && parse(script.scriptSnippet)}
             {script.scriptFileType === "application/octet-stream" &&
               draftFile && (
-                <div className="px-10 py-3" dangerouslySetInnerHTML={{ __html: draftFile.slice(0,3500) }} />
+                <div
+                  className="px-10 py-3"
+                  dangerouslySetInnerHTML={{ __html: draftFile.slice(0, 3500) }}
+                />
+              )}
+            {script.scriptFileType === "text/plain" &&
+              !script.scriptSnippet &&
+              draftFile && (
+                <div
+                  className="px-10 py-3 leading-8"
+                  dangerouslySetInnerHTML={{ __html: draftFile.slice(0, 2500)}}
+                />
               )}
           </article>
         </AccordionDetails>
