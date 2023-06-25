@@ -1,11 +1,9 @@
-import api, { apiPrivate } from "apis/configs/axios.config";
-import useUserStore from "store/user.store";
+import api from "apis/configs/axios.config";
 import { useEffect } from "react";
+import useUserStore from "store/user.store";
 
 const useAxios = () => {
-  const { logOutUser } = useUserStore((state) => ({
-    logOutUser: state.logOutUser,
-  }));
+  const [logOutUser, user] = useUserStore((state) => ([state.logOutUser, state.user]));
 
   useEffect(() => {
     const requestIntercept = api.interceptors.request.use(
@@ -21,17 +19,10 @@ const useAxios = () => {
       async (response) => {
         try {
           if (
-            response.request.responseURL !==
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/signin` &&
-            response.request.responseURL !==
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/resend-otp` &&
-            response.request.responseURL !==
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/signup` &&
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/resend-otp` &&
-            response.request.responseURL !==
-            `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/verify-otp`
+            response.request.responseURL ===
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/script/random` && user.email
           ) {
-            await apiPrivate.post("/user/refresh", {});
+            await api.post("/user/refresh", {}, { withCredentials: true });
           }
         } catch (error: any) {
           if (
@@ -42,6 +33,7 @@ const useAxios = () => {
             "Refresh token not found, please login again"
           ) {
             logOutUser();
+
           }
         }
         return response;

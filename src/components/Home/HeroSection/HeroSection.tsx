@@ -4,7 +4,7 @@ import {
   Card,
   Skeleton,
   Typography,
-  useMediaQuery,
+  useMediaQuery
 } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
 import useScriptsApi from "apis/Scripts.api";
@@ -33,7 +33,9 @@ const HeroSection = () => {
   });
 
   const { data: randomScriptData, isLoading: loadingGetRandomScript } =
-    useQuery("random_string", () => randomScript());
+    useQuery("random_string", () => randomScript(), {
+      refetchOnWindowFocus: false,
+    });
 
   return (
     <Box

@@ -32,10 +32,13 @@ const Script: NextPageWithLayout = () => {
     () => getOneDraft(scriptID),
     {
       onSuccess: (data) => {
-        setHtmlInitialValue(data);
+        console.log(data);
+        if (scriptData?.script.scriptFileType === "text/plain") {
+          setHtmlInitialValue(data);
+        }
       },
       refetchOnWindowFocus: false,
-      enabled: scriptID.length > 0,
+      enabled: scriptID.length > 0 && !!scriptData,
     }
   );
 

@@ -103,7 +103,7 @@ export interface IFullInformationScript {
   writtenBy: string;
   scriptSnippet: string | null;
   subScriptions: string[];
-  scriptFileType: "application/pdf" | "text/plain" | null;
+  scriptFileType: "application/pdf" | "text/plain" | "application/octet-stream" | null;
   names: string;
 }
 

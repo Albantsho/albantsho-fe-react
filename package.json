@@ -60,6 +60,7 @@
     "slate-react": "^0.83.1",
     "socket.io-client": "^4.5.4",
     "swiper": "^8.3.2",
+    "xml2js": "^0.6.0",
     "yup": "^0.32.11",
     "zustand": "4.1.1"
   },
@@ -75,6 +76,7 @@
     "@types/react": "18.0.17",
     "@types/react-color": "^3.0.6",
     "@types/react-dom": "18.0.6",
+    "@types/xml2js": "^0.4.11",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "autoprefixer": "^10.4.8",

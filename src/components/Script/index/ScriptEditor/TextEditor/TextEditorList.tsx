@@ -1,9 +1,5 @@
 import BookMarkIcon from "@assets/icons/book-mark.svg";
-import {
-  ButtonGroup,
-  IconButton, SvgIcon,
-  Tooltip
-} from "@mui/material";
+import { ButtonGroup, IconButton, SvgIcon, Tooltip } from "@mui/material";
 import useDraftApi from "apis/Draft.api";
 import { IResData } from "interfaces/response";
 import Link from "next/link";
@@ -22,11 +18,11 @@ import successHandler from "utils/success-handler";
 import TextEditor from "./TextEditor";
 import TextEditorSettingModal from "./TextEditorSettingModal/TextEditorSettingModal";
 
+const queryClient = new QueryClient();
+
 interface IProps {
   htmlInitialValue: string;
 }
-
-const queryClient = new QueryClient();
 
 const TextEditorList = ({ htmlInitialValue }: IProps) => {
   const { ref, width } = useResizeDetector();
@@ -66,17 +62,17 @@ const TextEditorList = ({ htmlInitialValue }: IProps) => {
     }
   }, []);
 
-  useEffect(() => {
-    const handleTabClose = async (_event: BeforeUnloadEvent) => {
-      document.getElementById("save-script-button")?.click();
-    };
+  // useEffect(() => {
+  //   const handleTabClose = async (_event: BeforeUnloadEvent) => {
+  //     document.getElementById("save-script-button")?.click();
+  //   };
 
-    window.addEventListener("beforeunload", handleTabClose);
+  //   window.addEventListener("beforeunload", handleTabClose);
 
-    return () => {
-      window.removeEventListener("beforeunload", handleTabClose);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleTabClose);
+  //   };
+  // }, []);
 
   const saveDraftFile = async () => {
     const htmlContent = new DOMParser().parseFromString(

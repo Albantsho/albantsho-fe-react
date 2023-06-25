@@ -2,11 +2,14 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Typography
+  Typography,
 } from "@mui/material";
+import useDraftApi from "apis/Draft.api";
 import parse from "html-react-parser";
 import { IFullInformationScript } from "interfaces/script";
+import { useRouter } from "next/router";
 import { BiChevronDown } from "react-icons/bi";
+import { useQuery } from "react-query";
 
 interface IProps {
   script: IFullInformationScript;
@@ -18,6 +21,19 @@ interface IProps {
 }
 
 const ScriptMainDetails = ({ script, writer }: IProps) => {
+  const { getOneDraft } = useDraftApi();
+  const { query } = useRouter();
+  const scriptID = typeof query?.id === "string" ? query.id : "";
+
+  const { data: draftFile } = useQuery(
+    ["draft", scriptID],
+    () => getOneDraft(scriptID),
+    {
+      enabled: script.scriptFileType === "application/octet-stream",
+      refetchOnWindowFocus: false,
+    }
+  );
+  console.log(draftFile);
   return (
     <div className="px-5 sm:px-10 py-10  md:max-w-3xl mx-auto max-w-screen-md">
       <Accordion
@@ -61,6 +77,10 @@ const ScriptMainDetails = ({ script, writer }: IProps) => {
                 : script.writtenBy}
             </Typography>
             {script.scriptSnippet && parse(script.scriptSnippet)}
+            {script.scriptFileType === "application/octet-stream" &&
+              draftFile && (
+                <div className="px-10 py-3" dangerouslySetInnerHTML={{ __html: draftFile.slice(0,3500) }} />
+              )}
           </article>
         </AccordionDetails>
       </Accordion>
