@@ -13,6 +13,7 @@ import errorHandler from "utils/error-handler";
 const Script: NextPageWithLayout = () => {
   const { query } = useRouter();
   const [htmlInitialValue, setHtmlInitialValue] = useState("");
+  const [loading, setLoading] = useState(true);
   const { getScriptUnComplete } = useScriptsApi();
   const { getOneDraft } = useDraftApi();
   const scriptID = typeof query?.id === "string" ? query.id : "";
@@ -24,21 +25,22 @@ const Script: NextPageWithLayout = () => {
       onError: (err) => errorHandler(err),
       refetchOnWindowFocus: false,
       enabled: scriptID.length > 0,
-    }
-  );
-
-  const { isFetched: dataFetched } = useQuery(
-    ["draft", scriptID],
-    () => getOneDraft(scriptID),
-    {
-      onSuccess: (data) => {
-        console.log(data);
-        if (scriptData?.script.scriptFileType === "text/plain") {
-          setHtmlInitialValue(data);
+      async onSuccess(data) {
+        try {
+          setLoading(true);
+          const res = await getOneDraft(data.script._id);
+          if (
+            data.script.scriptFileType === "text/plain" &&
+            !data.script.scriptIsUploaded
+          ) {
+            setHtmlInitialValue(res);
+          }
+        } catch (error) {
+          ("");
+        } finally {
+          setLoading(false);
         }
       },
-      refetchOnWindowFocus: false,
-      enabled: scriptID.length > 0 && !!scriptData,
     }
   );
 
@@ -47,7 +49,7 @@ const Script: NextPageWithLayout = () => {
       <Head>
         <title>Albantsho || Script</title>
       </Head>
-      {!isLoadingGetScript && scriptData && scriptData.script && dataFetched ? (
+      {!isLoadingGetScript && scriptData && scriptData.script && !loading ? (
         <ScriptPage
           htmlInitialValue={htmlInitialValue}
           script={scriptData.script}
