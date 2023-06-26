@@ -4,7 +4,7 @@ import {
   Card,
   Skeleton,
   Typography,
-  useMediaQuery,
+  useMediaQuery
 } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
 import useScriptsApi from "apis/Scripts.api";
