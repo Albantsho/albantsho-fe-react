@@ -4,7 +4,7 @@ import {
   Card,
   Skeleton,
   Typography,
-  useMediaQuery
+  useMediaQuery,
 } from "@mui/material";
 import ScriptCard from "@shared/ScriptCard/ScriptCard";
 import useScriptsApi from "apis/Scripts.api";
@@ -128,6 +128,8 @@ const HeroSection = () => {
                         "One platform set out to enable better stories one script at a time",
                       writtenBy: "Albantsho",
                       title: "Black Onion",
+                      scriptIsUploaded: false,
+                      scriptFileType: "application/pdf",
                     }}
                     inHome
                   />
