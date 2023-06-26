@@ -1,6 +1,8 @@
 import { Button, TableCell, TableRow, Typography } from "@mui/material";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import PDFFile from "@shared/PdfFile/PdfFile";
+// import { PDFDownloadLink } from "@react-pdf/renderer";
+// import PDFFile from "@shared/PdfFile/PdfFile";
 import useDraftApi from "apis/Draft.api";
 import { IScript } from "interfaces/script";
 import Image from "next/image";
@@ -32,12 +34,10 @@ const MyScript = ({ script }: IProps) => {
     getDraftFunc();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   let valueForConvertPdf = "";
   if (resDraft) {
-    const htmlContent = new DOMParser().parseFromString(
-      resDraft.draft,
-      "text/html"
-    );
+    const htmlContent = new DOMParser().parseFromString(resDraft, "text/html");
     const value = deserializeScriptWithOutDiv(htmlContent.body);
     valueForConvertPdf = serializeWithoutDiv({ children: value }) as string;
   }
@@ -47,7 +47,16 @@ const MyScript = ({ script }: IProps) => {
     const blobUrl = window.URL.createObjectURL(new Blob([res]));
     const aTag = document.createElement("a");
     aTag.href = blobUrl;
-    aTag.setAttribute("download", `${script.title}.pdf`);
+    aTag.setAttribute(
+      "download",
+      `${script.title}.${
+        script.scriptFileType === "application/pdf"
+          ? "pdf"
+          : script.scriptFileType === "application/octet-stream"
+          ? "fdx"
+          : "txt"
+      }`
+    );
     document.body.appendChild(aTag);
     aTag.click();
     aTag.remove();
@@ -98,7 +107,7 @@ const MyScript = ({ script }: IProps) => {
             {script.tagline}
           </Typography>
         </div>
-        {resDraft ? (
+        {script.scriptFileType === "text/plain" && !script.scriptIsUploaded ? (
           <PDFDownloadLink
             document={
               <PDFFile
@@ -146,7 +155,7 @@ const MyScript = ({ script }: IProps) => {
         className="hidden sm:flex items-center sm:py-6 xl:py-10 justify-end"
       >
         {" "}
-        {resDraft ? (
+        {script.scriptFileType === "text/plain" && !script.scriptIsUploaded ? (
           <PDFDownloadLink
             document={
               <PDFFile

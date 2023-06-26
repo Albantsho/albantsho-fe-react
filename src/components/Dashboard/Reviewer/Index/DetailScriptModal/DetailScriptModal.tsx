@@ -12,7 +12,6 @@ import Btn from "@shared/Btn/Btn";
 import PDFFile from "@shared/PdfFile/PdfFile";
 import useDraftApi from "apis/Draft.api";
 import useReviewsApi from "apis/Reviews.api";
-import axios from "axios";
 import { IReviewerTask } from "interfaces/reviews";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -58,10 +57,7 @@ const DetailScriptModal = ({
   }, []);
   let valueForConvertPdf = "";
   if (resDraft) {
-    const htmlContent = new DOMParser().parseFromString(
-      resDraft.draft,
-      "text/html"
-    );
+    const htmlContent = new DOMParser().parseFromString(resDraft, "text/html");
     const value = deserializeScriptWithOutDiv(htmlContent.body);
     valueForConvertPdf = serializeWithoutDiv({ children: value }) as string;
   }
@@ -72,7 +68,16 @@ const DetailScriptModal = ({
     const blobUrl = window.URL.createObjectURL(new Blob([res]));
     const aTag = document.createElement("a");
     aTag.href = blobUrl;
-    aTag.setAttribute("download", `${reviewerTask.title}.pdf`);
+    aTag.setAttribute(
+      "download",
+      `${reviewerTask.title}.${
+        reviewerTask.scriptFileType === "application/pdf"
+          ? "pdf"
+          : reviewerTask.scriptFileType === "application/octet-stream"
+          ? "fdx"
+          : "txt"
+      }`
+    );
     document.body.appendChild(aTag);
     aTag.click();
     aTag.remove();
@@ -110,7 +115,8 @@ const DetailScriptModal = ({
                 ? "Type B"
                 : ""}
             </Button>
-            {resDraft ? (
+            {reviewerTask?.scriptFileType === "text/plain" &&
+            !reviewerTask.scriptIsUploaded ? (
               <PDFDownloadLink
                 document={
                   <PDFFile

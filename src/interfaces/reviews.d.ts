@@ -23,8 +23,10 @@ export interface IReviewerTask {
   primaryGenre: string;
   rate: number;
   createdAt: string;
-  review: [{ completed: boolean; rate: number }] | [];
+  review: [{ completed: boolean; rate: number; }] | [];
   names: string;
+  scriptFileType: "application/pdf" | "text/plain" | "application/octet-stream" | null;
+  scriptIsUploaded: boolean;
 }
 export interface IWriterReview {
   _id: string;

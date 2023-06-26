@@ -73,7 +73,7 @@ const ScriptMainDetails = ({ script, writer }: IProps) => {
                 />
               )}
             {script.scriptFileType === "text/plain" &&
-              !script.scriptIsUploaded &&
+              script.scriptIsUploaded &&
               script.scriptSnippet && (
                 <div
                   className="px-10 py-3 leading-8"

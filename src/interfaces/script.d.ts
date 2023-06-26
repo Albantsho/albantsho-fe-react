@@ -11,6 +11,8 @@ export interface IScript {
   draftDate: string;
   basedOn: string;
   names: string;
+  scriptFileType: "application/pdf" | "text/plain" | "application/octet-stream" | null;
+  scriptIsUploaded:boolean
 }
 
 export interface IUnlistedScript {

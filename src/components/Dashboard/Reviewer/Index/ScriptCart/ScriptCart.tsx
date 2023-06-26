@@ -5,7 +5,7 @@ import {
   CardContent,
   Chip,
   Divider,
-  Typography,
+  Typography
 } from "@mui/material";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import Btn from "@shared/Btn/Btn";
@@ -52,10 +52,7 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
   }, []);
   let valueForConvertPdf = "";
   if (resDraft) {
-    const htmlContent = new DOMParser().parseFromString(
-      resDraft.draft,
-      "text/html"
-    );
+    const htmlContent = new DOMParser().parseFromString(resDraft, "text/html");
     const value = deserializeScriptWithOutDiv(htmlContent.body);
     valueForConvertPdf = serializeWithoutDiv({ children: value }) as string;
   }
@@ -65,7 +62,16 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
     const blobUrl = window.URL.createObjectURL(new Blob([res]));
     const aTag = document.createElement("a");
     aTag.href = blobUrl;
-    aTag.setAttribute("download", `${selectedScript?.title}.pdf`);
+    aTag.setAttribute(
+      "download",
+      `${selectedScript?.title}.${
+        selectedScript?.scriptFileType === "application/pdf"
+          ? "pdf"
+          : selectedScript?.scriptFileType === "application/octet-stream"
+          ? "fdx"
+          : "txt"
+      }`
+    );
     document.body.appendChild(aTag);
     aTag.click();
     aTag.remove();
@@ -101,7 +107,8 @@ const ScriptCart = ({ selectedScriptId, reviewerTaskList }: IProps) => {
             ? "Type B"
             : ""}
         </Button>
-        {resDraft ? (
+        {selectedScript?.scriptFileType === "text/plain" &&
+        !selectedScript.scriptIsUploaded ? (
           <PDFDownloadLink
             document={
               <PDFFile
