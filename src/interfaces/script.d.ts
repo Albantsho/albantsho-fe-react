@@ -60,6 +60,11 @@ export interface IBidScript {
 export interface IFullInformationScript {
   _id: string;
   authorId: string;
+  adaptionFileId:string
+  copyrightFileId:string
+  producerId:string
+  scriptFileId:string
+  scriptIsUploaded:boolean
   title: string;
   tagline: string;
   archive: boolean;

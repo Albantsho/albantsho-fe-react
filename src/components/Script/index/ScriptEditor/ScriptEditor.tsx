@@ -1,9 +1,7 @@
 import { Typography } from "@mui/material";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IFullInformationScript } from "interfaces/script";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Socket } from "socket.io-client";
 import routes from "utils/routes";
 import TextEditorList from "./TextEditor/TextEditorList";
 

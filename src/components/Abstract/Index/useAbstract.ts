@@ -111,8 +111,11 @@ const useAbstract = (script: IScript, refetch: any) => {
     },
     maxFiles: 1,
     onDropAccepted: async (files, _event) => {
+
       try {
         setProgressScript(0);
+        const snippet = await files[0].text();
+        updateScript({ scriptSnippet: snippet.slice(0, (files[0].type === "text/plain" || files[0].type === "application/pdf") ? 1500 : 3000) }, query.id as string);
         const res = await axiosPrivate
           .post(
             `/draft/upload/${script._id}`,
