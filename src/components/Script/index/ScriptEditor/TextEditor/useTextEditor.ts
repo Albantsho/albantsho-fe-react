@@ -1,5 +1,5 @@
 import { IEditor } from "interfaces/slate";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Transforms, type Descendant } from "slate";
 import useScriptValueStore from "store/scriptValue.store";
 import { serializeWithDiv } from "utils/serialize-slate";

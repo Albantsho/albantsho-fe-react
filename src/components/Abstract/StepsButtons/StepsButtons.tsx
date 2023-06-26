@@ -17,9 +17,7 @@ interface IProps {
 const StepsButtons = ({
   step,
   setStep,
-  publishScript,
   updateScript,
-  loadingPublishButton,
   loadingUpdateButton,
 }: IProps) => {
   const { query } = useRouter();

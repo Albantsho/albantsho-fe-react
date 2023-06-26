@@ -1,14 +1,13 @@
 import {
-  TableContainer,
   Paper,
   Table,
+  TableBody,
+  TableCell,
+  TableContainer,
   TableHead,
   TableRow,
-  TableCell,
   Typography,
-  TableBody,
 } from "@mui/material";
-import TableRowWithdraw from "components/Wallet/WithdrawHistory/TableRowWithdraw/TableRowWithdraw";
 import type { IWithdraw } from "interfaces/withdraw";
 import Withdraw from "./Withdraw/Withdraw";
 

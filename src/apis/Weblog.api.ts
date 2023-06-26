@@ -3,7 +3,6 @@ import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IResData } from "interfaces/response";
 import { IWeblog } from "interfaces/weblog";
 import { useCallback } from "react";
-import api from "./configs/axios.config";
 
 export interface ICreateNewWeblogPayload {
   title: string;
@@ -31,7 +30,7 @@ interface IData_allWeblogs {
 
 const useWeblogApi = (controller?: AbortController) => {
   const axiosPrivate = useAxiosPrivate();
-  const api = useAxios()
+  const api = useAxios();
 
   const getAllWeblogsForAdmin = useCallback(
     async (query?: string, search?: string) => {

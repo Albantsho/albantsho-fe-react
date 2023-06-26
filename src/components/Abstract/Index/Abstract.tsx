@@ -45,9 +45,7 @@ const Abstract = ({ script, refetch }: IProps) => {
     loadingUpdateButton,
     adaption,
     getValues,
-    progress,
     publish,
-    cancelUpload,
     adaptionPermissionError,
     cancelUploadAdaption,
     handleUploadAdaptionPermission,
@@ -56,7 +54,6 @@ const Abstract = ({ script, refetch }: IProps) => {
     dropZoneUploadPdfCopyright,
     progressCopyright,
     progressScript,
-    dropZoneUploadImage,
     handlerUploadAdaption
   } = useAbstract(script, refetch);
 

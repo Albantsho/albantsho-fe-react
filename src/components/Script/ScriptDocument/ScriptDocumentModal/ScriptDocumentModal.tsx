@@ -16,7 +16,7 @@ interface IProps {
 const ScriptDocumentModal = ({
   openDocumentModal,
   setOpenDocumentModal,
-  script
+  script,
 }: IProps) => {
   const { push, query } = useRouter();
 

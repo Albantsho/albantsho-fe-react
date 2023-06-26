@@ -1,10 +1,8 @@
 import {
   BottomNavigation,
   BottomNavigationAction,
-  SvgIcon,
+  SvgIcon
 } from "@mui/material";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
-import CommentModal from "components/Script/CommentList/CommentModal/CommentModal";
 import ExportFileModal from "components/Script/ExportFile/ExportFileModal/ExportFileModal";
 import ScenesListModal from "components/Script/ScenesList/ScenesListModal/ScenesListModal";
 import ScriptDocumentModal from "components/Script/ScriptDocument/ScriptDocumentModal/ScriptDocumentModal";
@@ -13,8 +11,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { SyntheticEvent, useState } from "react";
 import routes from "utils/routes";
-import { Socket } from "socket.io-client";
-import Comment from "../assets/comment.svg";
 import Document from "../assets/document.svg";
 import Export from "../assets/export.svg";
 import Scenes from "../assets/scenes.svg";
