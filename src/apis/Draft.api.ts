@@ -134,6 +134,22 @@ const useDraftApi = (controller?: AbortController) => {
     [axiosPrivate, controller?.signal]
   );
 
+  const convertPdfToText = useCallback(
+    async (scriptId: string) => {
+      const res = await axiosPrivate.get<string>(
+        `/draft/file/pdf-to-text/${scriptId}`,
+
+        {
+          signal: controller?.signal,
+        }
+      );
+
+      return res.data;
+    },
+
+    [axiosPrivate, controller?.signal]
+  );
+
   return {
     getAllDraft,
     getOneDraft,
@@ -142,6 +158,7 @@ const useDraftApi = (controller?: AbortController) => {
     selectedDraft,
     uploadCopyright,
     saveFileDraft,
+    convertPdfToText
   };
 };
 

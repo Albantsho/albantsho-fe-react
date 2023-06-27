@@ -35,7 +35,7 @@ const useAbstract = (script: IScript, refetch: any) => {
   const [progressAdaption, setProgressAdaption] = useState(0);
   const [progressCopyright, setProgressCopyright] = useState(0);
   const [progressScript, setProgressScript] = useState(0);
-  const { selectedDraft } = useDraftApi();
+  const { selectedDraft, convertPdfToText } = useDraftApi();
   const {
     register,
     handleSubmit,
@@ -117,11 +117,14 @@ const useAbstract = (script: IScript, refetch: any) => {
     },
     maxFiles: 1,
     onDropAccepted: async (files, _event) => {
+console.log( files[0].type);
 
       try {
         setProgressScript(0);
         const snippet = await files[0].text();
-        updateScript({ scriptSnippet: snippet.slice(0, (files[0].type === "text/plain" || files[0].type === "application/pdf") ? 1500 : 3000) }, query.id as string);
+        if (files[0].type !== "application/pdf") {
+          updateScript({ scriptSnippet: snippet.slice(0, (files[0].type === "text/plain") ? 1500 : 3000) }, query.id as string);
+        }
         const res = await axiosPrivate
           .post(
             `/draft/upload/${script._id}`,
@@ -137,7 +140,12 @@ const useAbstract = (script: IScript, refetch: any) => {
               },
             }
           );
+        if (files[0].type === "application/pdf") {
+          const textPdf = await convertPdfToText(query.id as string);
+          updateScript({ scriptSnippet: textPdf.slice(0, 1000) }, query.id as string);
+        }
         successHandler(res.data.message);
+
       } catch (error) {
         errorHandler(error);
       }
