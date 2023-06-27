@@ -68,11 +68,9 @@ const useAbstract = (script: IScript, refetch: any) => {
     },
     resolver: yupResolver(abstractSchema(publish, activeButton)),
   });
-  const data = getValues();
 
-  useEffect(() => {
-
-    async function updateData() {
+  async function updateData() {
+    try {
       const data = getValues();
       await updateScript(
         {
@@ -97,11 +95,19 @@ const useAbstract = (script: IScript, refetch: any) => {
         },
         query.id as string
       );
+    } catch (error) {
+      "";
     }
-    updateData();
+  }
 
+  useEffect(() => {
+    updateData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step, data.motivation]);
+  }, [step]);
+
+  const updateDataAfterBlurInput = async () => {
+    updateData();
+  };
 
   const dropZoneUploadPdfScript = useDropzone({
     accept: {
@@ -380,7 +386,8 @@ const useAbstract = (script: IScript, refetch: any) => {
     dropZoneUploadImage,
     progressCopyright,
     progressScript,
-    handlerUploadAdaption
+    handlerUploadAdaption,
+    updateDataAfterBlurInput
   };
 };
 

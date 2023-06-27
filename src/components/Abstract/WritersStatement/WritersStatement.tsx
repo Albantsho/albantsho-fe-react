@@ -4,7 +4,7 @@ import {
   AccordionSummary,
   LinearProgress,
   SvgIcon,
-  Typography,
+  Typography
 } from "@mui/material";
 import Btn from "@shared/Btn/Btn";
 import CustomInput from "@shared/CustomInput/CustomInput";
@@ -14,7 +14,7 @@ import React from "react";
 import type {
   FieldErrorsImpl,
   UseFormGetValues,
-  UseFormRegister,
+  UseFormRegister
 } from "react-hook-form";
 import { RiUploadLine } from "react-icons/ri";
 
@@ -32,6 +32,7 @@ interface IProps {
     e: React.ChangeEvent<HTMLInputElement>
   ) => void;
   progressAdaption: number;
+  updateDataAfterBlurInput: () => Promise<void>;
 }
 
 const WritersStatement = ({
@@ -45,6 +46,7 @@ const WritersStatement = ({
   handleUploadAdaptionPermission,
   handlerUploadAdaption,
   progressAdaption,
+  updateDataAfterBlurInput,
 }: IProps) => {
   return (
     <div className={`${step === 5 ? "block" : "hidden"}`}>
@@ -186,6 +188,7 @@ const WritersStatement = ({
           defaultValue={script.inspiration}
           {...register("inspiration")}
           error={Boolean(errors.inspiration) || false}
+          onBlur={updateDataAfterBlurInput}
           sx={{
             "& ::placeholder": { color: "#B7B7B7 !important" },
             "& .MuiOutlinedInput-input": { py: 2 },
@@ -221,6 +224,7 @@ const WritersStatement = ({
           {...register("motivation")}
           defaultValue={script.motivation}
           error={Boolean(errors.motivation) || false}
+          onBlur={updateDataAfterBlurInput}
           sx={{
             "& ::placeholder": { color: "#B7B7B7 !important" },
             "& .MuiOutlinedInput-input": { py: 2 },

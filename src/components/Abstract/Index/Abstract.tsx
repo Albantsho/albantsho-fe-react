@@ -54,7 +54,8 @@ const Abstract = ({ script, refetch }: IProps) => {
     dropZoneUploadPdfCopyright,
     progressCopyright,
     progressScript,
-    handlerUploadAdaption
+    handlerUploadAdaption,
+    updateDataAfterBlurInput
   } = useAbstract(script, refetch);
 
   return (
@@ -112,6 +113,7 @@ const Abstract = ({ script, refetch }: IProps) => {
           handlerUploadAdaption={handlerUploadAdaption}
           handleUploadAdaptionPermission={handleUploadAdaptionPermission}
           progressAdaption={progressAdaption}
+          updateDataAfterBlurInput={updateDataAfterBlurInput}
         />
 
         <UploadScript
