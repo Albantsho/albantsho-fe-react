@@ -4,7 +4,7 @@ import {
   Autocomplete,
   ListItemText,
   MenuItem,
-  Typography,
+  Typography
 } from "@mui/material";
 import CustomInput from "@shared/CustomInput/CustomInput";
 import { IAbstractFormValues } from "interfaces/abstract";
@@ -14,7 +14,7 @@ import { useState } from "react";
 import type {
   Control,
   FieldErrorsImpl,
-  UseFormRegister,
+  UseFormRegister
 } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -422,7 +422,7 @@ const GeneralScriptProfile = ({
                 id="cast-script-primary"
               >
                 {Array.from(new Array(300)).map((_, i) => (
-                  <MenuItem key={i} value={i + 1}>
+                  <MenuItem key={i} value={String(i + 1)}>
                     <ListItemText className="text-primary-700">
                       {i + 1}
                     </ListItemText>
@@ -470,7 +470,7 @@ const GeneralScriptProfile = ({
                 }
               >
                 {Array.from(new Array(300)).map((_, i) => (
-                  <MenuItem key={i} value={i + 1}>
+                  <MenuItem key={i} value={String(i + 1)}>
                     <ListItemText className="text-primary-700">
                       {i + 1}
                     </ListItemText>
