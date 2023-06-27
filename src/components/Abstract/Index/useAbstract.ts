@@ -117,7 +117,6 @@ const useAbstract = (script: IScript, refetch: any) => {
     },
     maxFiles: 1,
     onDropAccepted: async (files, _event) => {
-console.log( files[0].type);
 
       try {
         setProgressScript(0);
