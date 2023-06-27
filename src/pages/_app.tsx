@@ -50,7 +50,7 @@ export default function MyApp(props: MyAppProps) {
             height="3px"
             options={{ showSpinner: false }}
           />
-          <Script
+          {/* <Script
             src="https://www.googletagmanager.com/gtag/js?id=G-35SD81MYSZ"
             strategy="afterInteractive"
           />
@@ -69,7 +69,7 @@ export default function MyApp(props: MyAppProps) {
                 r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
                 a.appendChild(r);
                 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
-          </Script>
+          </Script> */}
           <Authorization>
             {isLoading ? (
               <main></main>
