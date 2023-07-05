@@ -1,6 +1,6 @@
 import useAxiosPrivate from "hooks/useAxiosPrivate";
 import { IResData } from "interfaces/response";
-import { IWithdraw } from "interfaces/withdraw";
+import { IWithdraw, IWithdrawForAdmin } from "interfaces/withdraw";
 import { useCallback } from "react";
 
 interface IPayloadWithdrawRequest {
@@ -20,6 +20,11 @@ export interface IPayloadWithdrawVerify {
 
 interface IData_allWithdraws {
   withdraws: IWithdraw[];
+  currentPage: number;
+  pagesCount: number;
+}
+interface IData_allWithdrawsForAdmin {
+  withdraws: IWithdrawForAdmin[];
   currentPage: number;
   pagesCount: number;
 }
@@ -95,7 +100,7 @@ const useWithdrawApi = (controller?: AbortController) => {
   }, [axiosPrivate, controller?.signal]);
 
   const getAllWithdrawsForAdmin = useCallback(async ({ limit, page, status, search }: IFilterWithdrawsQueryValues) => {
-    const res = await axiosPrivate.get<IResData<IData_allWithdraws>>(
+    const res = await axiosPrivate.get<IResData<IData_allWithdrawsForAdmin>>(
       `/withdraw/all?limit=${limit}&page=${page}&status=${status}&search=${search}`,
       {
         signal: controller?.signal,

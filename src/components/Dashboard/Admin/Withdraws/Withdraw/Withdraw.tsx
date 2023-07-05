@@ -1,20 +1,34 @@
 import { IconButton, TableCell, TableRow, Typography } from "@mui/material";
-import { IWithdraw } from "interfaces/withdraw";
-import { useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import { MdDone, MdOutlineDoNotDisturb } from "react-icons/md";
+import { IWithdrawForAdmin } from "interfaces/withdraw";
+import dynamic from "next/dynamic";
+import { Suspense, useState } from "react";
+import { MdDone, MdOutlineClose } from "react-icons/md";
+import RejectWithdrawModal from "./RejectWithdrawModal/RejectWithdrawModal";
+
+const ConfirmWithdrawModal = dynamic(
+  () => import("./ConfirmWithdrawModal/ConfirmWithdrawModal")
+);
 
 interface IProps {
-  withdraw: IWithdraw;
+  withdraw: IWithdrawForAdmin;
+  refetch: any;
 }
 
-const TableRowWithdraw = ({ withdraw }: IProps) => {
-  const [openCancelWithdrawModal, setOpenCancelWithdrawModal] = useState(false);
+const TableRowWithdraw = ({ withdraw, refetch }: IProps) => {
+  const [openConfirmWithdrawModal, setOpenConfirmWithdrawModal] =
+    useState(false);
+  const [openRejectWithdrawModal, setOpenRejectWithdrawModal] = useState(false);
 
-  const handleCloseCancelWithdrawModal = () =>
-    setOpenCancelWithdrawModal(false);
+  const handleCloseConfirmWithdrawModal = () =>
+    setOpenConfirmWithdrawModal(false);
 
-  const handleOpenCancelWithdrawModal = () => setOpenCancelWithdrawModal(true);
+  const handleOpenConfirmWithdrawModal = () =>
+    setOpenConfirmWithdrawModal(true);
+
+  const handleCloseRejectWithdrawModal = () =>
+    setOpenRejectWithdrawModal(false);
+
+  const handleOpenRejectWithdrawModal = () => setOpenRejectWithdrawModal(true);
 
   return (
     <>
@@ -31,34 +45,50 @@ const TableRowWithdraw = ({ withdraw }: IProps) => {
         </TableCell>
         <TableCell className="pl-10">
           <Typography variant="h6" className="font-medium text-primary-700">
-            {new Date(withdraw.createdAt).toLocaleDateString()}
+            {withdraw.method}
           </Typography>
         </TableCell>
         <TableCell className="pl-10">
-          {withdraw.status === "onchecking" ? (
+          {withdraw.status === "onchecking" && (
             <IconButton
-              onClick={handleOpenCancelWithdrawModal}
+              onClick={handleOpenConfirmWithdrawModal}
               className="w-10 h-10 lg:w-12 lg:h-12 text-error-500 hover:bg-error-50"
             >
-              <AiOutlineClose className="w-8 h-8 lg:w-10 lg:h-10" />
+              <MdDone className="w-8 h-8 lg:w-10 lg:h-10 text-success-500" />
             </IconButton>
-          ) : withdraw.status === "done" ? (
-            <MdDone className="w-8 h-8 lg:w-10 lg:h-10 text-success-500" />
-          ) : (
-            <MdOutlineDoNotDisturb className="w-8 h-8 lg:w-10 lg:h-10 text-error-500" />
+          )}
+        </TableCell>
+        <TableCell className="pl-10">
+          {withdraw.status === "onchecking" && (
+            <IconButton
+              onClick={handleOpenRejectWithdrawModal}
+              className="w-10 h-10 lg:w-12 lg:h-12 text-error-500 hover:bg-error-50"
+            >
+              <MdOutlineClose className="w-8 h-8 lg:w-10 lg:h-10 text-error-500" />
+            </IconButton>
           )}
         </TableCell>
       </TableRow>
-      {/* <Suspense>
-        {openCancelWithdrawModal ? (
-          <CancelWithdrawModal
+      <Suspense>
+        {openConfirmWithdrawModal ? (
+          <ConfirmWithdrawModal
             refetch={refetch}
-            id={withdraw._id}
-            handleCloseCancelWithdrawModal={handleCloseCancelWithdrawModal}
-            openCancelWithdrawModal={openCancelWithdrawModal}
+            withdrawId={withdraw._id}
+            handleCloseConfirmWithdrawModal={handleCloseConfirmWithdrawModal}
+            openConfirmWithdrawModal={openConfirmWithdrawModal}
           />
         ) : undefined}
-      </Suspense> */}
+      </Suspense>
+      <Suspense>
+        {openRejectWithdrawModal ? (
+          <RejectWithdrawModal
+            refetch={refetch}
+            withdrawId={withdraw._id}
+            handleCloseRejectWithdrawModal={handleCloseRejectWithdrawModal}
+            openRejectWithdrawModal={openRejectWithdrawModal}
+          />
+        ) : undefined}
+      </Suspense>
     </>
   );
 };

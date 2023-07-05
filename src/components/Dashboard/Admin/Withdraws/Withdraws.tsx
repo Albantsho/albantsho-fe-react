@@ -6,16 +6,17 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
+  Typography
 } from "@mui/material";
-import type { IWithdraw } from "interfaces/withdraw";
+import type { IWithdrawForAdmin } from "interfaces/withdraw";
 import Withdraw from "./Withdraw/Withdraw";
 
 interface IProps {
-  withdraws: IWithdraw[];
+  withdraws: IWithdrawForAdmin[];
+  refetch:any
 }
 
-const Withdraws = ({ withdraws }: IProps) => {
+const Withdraws = ({ withdraws, refetch}: IProps) => {
   return (
     <TableContainer className="shadow-none no-scrollbar" component={Paper}>
       <Table className="no-scrollbar">
@@ -37,14 +38,19 @@ const Withdraws = ({ withdraws }: IProps) => {
                 Status
               </Typography>
             </TableCell>
-            npm i react-styleguidist@2.0.0
             <TableCell className="pl-10">
               <Typography
                 variant="h6"
                 className="futura font-medium text-neutral-800"
               >
-                Date
+                Method
               </Typography>
+            </TableCell>
+            <TableCell className="pl-10">
+              <Typography
+                variant="h6"
+                className="futura font-medium text-neutral-800"
+              ></Typography>
             </TableCell>
             <TableCell className="pl-10">
               <Typography
@@ -56,7 +62,7 @@ const Withdraws = ({ withdraws }: IProps) => {
         </TableHead>
         <TableBody>
           {withdraws.map((withdraw) => (
-            <Withdraw key={withdraw._id} withdraw={withdraw} />
+            <Withdraw refetch={refetch} key={withdraw._id} withdraw={withdraw} />
           ))}
         </TableBody>
       </Table>

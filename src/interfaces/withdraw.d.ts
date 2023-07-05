@@ -13,3 +13,20 @@ export interface IWithdraw {
   "createdAt": Date;
   "updatedAt": Date;
 }
+
+export interface IWithdrawForAdmin {
+  "_id": string;
+  "transactionId": null | string;
+  "amount": 30,
+  "verified": true,
+  "status": "onchecking" | "done" | "rejected";
+  "method": string;
+  "bankName": string;
+  "bankAccountName": string;
+  "bankAccountNumber": string;
+  "usdtTrc20Address": null | string;
+  "user": {
+    "_id": string;
+    "email": string;
+  };
+}

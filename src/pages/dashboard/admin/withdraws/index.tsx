@@ -1,3 +1,4 @@
+import CustomPaginationComponent from "@shared/CustomPaginationComponent/CustomPaginationComponent";
 import AdminDashboardLayout from "@shared/Layouts/AdminDashboardLayout/AdminDashboardLayout";
 import AdminDashboardSearch from "@shared/Layouts/AdminDashboardLayout/AdminDashboardSearch/AminDashboardSearch";
 import Loader from "@shared/Loader/Loader";
@@ -16,11 +17,11 @@ const controller = new AbortController();
 const WithdrawsPage: NextPageWithLayout = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const { query, push } = useRouter();
+  const { query } = useRouter();
 
   const { getAllWithdrawsForAdmin } = useWithdrawApi(controller);
-  const { data: withdrawsData, isLoading: isLoadingGetAllWithdraw } = useQuery(
-    ["withdraws"],
+  const { data: withdrawsData, isLoading: isLoadingGetAllWithdraw, refetch} = useQuery(
+    ["withdraws", query.status, currentPage, searchQuery],
     () =>
       getAllWithdrawsForAdmin({
         limit: 15,
@@ -29,7 +30,6 @@ const WithdrawsPage: NextPageWithLayout = () => {
         search: searchQuery,
       })
   );
-  console.log(withdrawsData);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
@@ -62,7 +62,16 @@ const WithdrawsPage: NextPageWithLayout = () => {
         handleSearch={handleSearch}
       />
       {!isLoadingGetAllWithdraw && withdrawsData ? (
-        <Withdraws withdraws={withdrawsData.withdraws} />
+        <>
+        <Withdraws withdraws={withdrawsData.withdraws} refetch={refetch} />
+        {withdrawsData.pagesCount > 1 && (
+              <CustomPaginationComponent
+                pageCount={withdrawsData.pagesCount}
+                handleActivePage={handleActivePage}
+                currentPage={currentPage}
+              />
+            )}
+        </>
       ) : (
         <Loader setCustomHeight="min-h-[62vh]" />
       )}
