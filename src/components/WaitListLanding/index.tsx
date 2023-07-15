@@ -4,15 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useMutation } from "react-query";
+import Arrow from "./assets/Arrows.svg";
 import community from "./assets/community.png";
 import Logo from "./assets/Logo.svg";
-import Arrow from "./assets/Arrows.svg";
-import Chair from "./assets/Chair.svg";
 import easy from "./assets/people-of-brooklyn-sitting-on-floor.png";
 import radial from "./assets/purple-radial.png";
 import market from "./assets/shopaholics-bust.png";
 import starsTwo from "./assets/stars-2.png";
 import stars from "./assets/stars.png";
+import Tool from "./assets/Tools.svg";
 import SuccessAddWaitListModal from "./SuccessAddWaitListModal/SuccessAddWaitListModal";
 
 const regex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
@@ -74,29 +74,26 @@ const WaitListLanding = () => {
   return (
     <>
       <main className="bg-[#181025] overflow-hidden">
-        <section
-          style={{
-            background:
-              "linear-gradient(139.68deg, #FFE08A 16.99%, #FFAF19 100.91%)",
-          }}
-          className="h-[122px] items-end sm:max-h-[64px] md:h-full flex justify-center md:items-center"
-        >
-          <div className="max-w-[calc(100%-6vw)] sm:max-w-[690px] py-4 lg:py-[22px] w-full mx-auto flex sm:justify-between gap-[9px] flex-row justify-center px-3 sm:px-7 items-center">
+        <section className="items-end sm:max-h-[64px] md:h-full flex justify-center md:items-center bg-white">
+          <div className="max-w-[calc(100%-6vw)] sm:max-w-[1000px] py-4 lg:py-[22px] w-full mx-auto flex sm:justify-between gap-[9px] flex-row justify-center px-3 sm:px-7 items-center">
             <div className="flex items-center gap-[10px] md:gap-[18px]">
               <div className="h-[18px] min-w-[16px] w-4">
-                <Chair />
+                <Tool />
               </div>
-              <p className="text-[clamp(8px,12vw,14px)] text-[#1B1F23] font-normal leading-5">
-                Apply to join our free 8 weeks screenwriting workshop.
+              <p className="text-[14px] text-[#1B1F23] font-normal leading-5">
+                Join our{" "}
+                <span className="font-semibold">
+                  expert-led conversations on storytelling and its intersection
+                  with technology
+                </span>{" "}
+                on July 28th!
               </p>
             </div>
             <Link
-              href="https://docs.google.com/forms/u/2/d/e/1FAIpQLSd-p3Eg4h00ok2RlKv778U6yBWirxbLLsGieN5FoRyiSZZ7Vw/viewform?usp=send_form"
-              target="_blank"
-              referrerPolicy="no-referrer"
-              className="inter min-w-[114.1px] border border-[#CFCFCF] rounded-[4px] flex gap-1 bg-white font-medium text-sm py-2 px-[10px] leading-4 text-black"
+              href="#"
+              className="inter min-w-[114.1px] border border-tinted-500 rounded-[4px] flex gap-1 bg-primary-900 font-medium text-sm py-2 px-[10px] leading-4 text-white"
             >
-              Apply Now
+              RSVP Now
               <span className="inline-block w-4 h-4">
                 <Arrow />
               </span>
@@ -281,11 +278,8 @@ const WaitListLanding = () => {
               </div>
             </div>
           </div>
-          <div className="py-28 pb-20 lg:pb-28 relative">
-            <div className="w-full absolute bottom-0 md:-bottom-16 lg:-bottom-40 right-32 sm:bottom-0  left-0 sm:right-0 text-center min-w-[800px] mx-auto">
-              <Image src={starsTwo} alt="stars" />
-            </div>
-            <div
+          <div className="py-28 pb-20 lg:pb-28">
+            {/* <div
               style={{
                 backgroundImage:
                   "linear-gradient(139.68deg, #FFE08A 16.99%, #FFAF19 100.91%)",
@@ -326,8 +320,8 @@ const WaitListLanding = () => {
                   Apply to Join
                 </Link>
               </div>
-            </div>
-            <div className="text-center pt-40">
+            </div> */}
+            <div className="text-center pt-8 sm:pb-20">
               <h4 className="text-[#F7F5F8] tracking-[0.2px] sm:max-w-full inter font-medium text-2xl">
                 Join the revolution.
                 <br className="sm:hidden" /> Join the waitlist
@@ -379,7 +373,10 @@ const WaitListLanding = () => {
               </div>
             </div>
           </div>
-          <footer className="flex flex-col-reverse sm:flex-row gap-10 justify-between  items-center lg:mb-6">
+          <footer className="flex flex-col-reverse sm:flex-row gap-10 justify-between  items-center lg:mb-6 relative">
+          <div className="absolute w-full -bottom-56 sm:-bottom-96 right-0  left-0 text-center max-w-[580px] mx-auto">
+              <Image src={starsTwo} alt="stars" />
+            </div>
             <div>
               <p className="text-[#F7F5F8] inter">© Albantsho 2023</p>
             </div>
