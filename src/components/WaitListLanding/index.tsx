@@ -90,7 +90,9 @@ const WaitListLanding = () => {
               </p>
             </div>
             <Link
-              href="#"
+              href="https://www.eventbrite.com/e/idraft-griot-panel-2023-tickets-675024816397"
+              target="_blank"
+              referrerPolicy="no-referrer"
               className="inter min-w-[114.1px] border border-tinted-500 rounded-[4px] flex gap-1 bg-primary-900 font-medium text-sm py-2 px-[10px] leading-4 text-white"
             >
               RSVP Now
@@ -374,7 +376,7 @@ const WaitListLanding = () => {
             </div>
           </div>
           <footer className="flex flex-col-reverse sm:flex-row gap-10 justify-between  items-center lg:mb-6 relative">
-          <div className="absolute w-full -bottom-56 sm:-bottom-96 right-0  left-0 text-center max-w-[580px] mx-auto">
+            <div className="absolute w-full -bottom-56 sm:-bottom-96 right-0  left-0 text-center max-w-[580px] mx-auto">
               <Image src={starsTwo} alt="stars" />
             </div>
             <div>
