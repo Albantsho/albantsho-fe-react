@@ -13,6 +13,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "ultra-hero-section": "url('/assets/images/ultra-wide-bg.jpg')",
+        "large-hero-section": "url('/assets/images/large-bg.jpg')",
+        "medium-hero-section": "url('/assets/images/medium-bg.jpg')",
+        "small-hero-section": "url('/assets/images/small-bg.jpg')",
+      },
       colors: {
         neutral: {
           50: "#E8E7E9",
@@ -90,6 +96,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/typography"),
+    require("daisyui"),
     plugin(function ({ addUtilities }) {
       addUtilities({
         ".no-scrollbar::-webkit-scrollbar": {

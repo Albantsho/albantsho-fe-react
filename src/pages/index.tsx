@@ -1,13 +1,10 @@
-import Nav from "@shared/Nav/Nav";
-import Brands from "components/Home/Brands/Brands";
-import HeroSection from "components/Home/HeroSection/HeroSection";
-import WaitListLanding from "components/WaitListLanding";
+import { NewLanding } from "components/NewLanding/NewLanding";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import { Suspense } from "react";
-import { animated, useSpring } from "react-spring";
+import { useSpring } from "react-spring";
 import routes from "routes/routes";
+
 
 const WhyAlbantsho = dynamic(
   () => import("components/Home/WhyAlbantsho/WhyAlbantsho")
@@ -57,7 +54,8 @@ const Home: NextPage = () => {
       <Suspense fallback={null}>
         <Footer />
       </Suspense> */}
-      <WaitListLanding />
+      {/* <WaitListLanding /> */}
+      <NewLanding />
     </>
   );
 };

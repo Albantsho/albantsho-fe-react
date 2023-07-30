@@ -37,7 +37,7 @@ const WaitListLanding = () => {
     setSuccessAddWaitList2(false);
   };
 
-  const { mutate: registerEmailMutation, error } = useMutation<
+  const { mutate: registerEmailMutation, error,mutateAsync } = useMutation<
     IResData<object>,
     Error,
     string
