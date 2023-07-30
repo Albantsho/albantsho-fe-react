@@ -66,7 +66,7 @@ export default function HeroSection() {
         <div className=" text-center">
           {!showInput ? (
             <>
-              <div className="fancy">
+              <div className="fancy min-w-[240px] min-[400px]:min-w-[290px] w-full">
                 <Button
                   className="bg-transparent absolute hover:bg-transparent inset-0 z-10"
                   onClick={onClick}
