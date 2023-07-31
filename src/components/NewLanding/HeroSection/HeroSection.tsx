@@ -1,17 +1,17 @@
-import { useMutation } from "react-query";
-import { useState } from "react";
 import useContact from "apis/Contact.api";
+import { useState } from "react";
+import { useMutation } from "react-query";
+import Button from "../Button/Button";
+import Input from "../Input/Input";
 import Logo from "../Logo/Logo";
 import NameLogo from "../NameLogo/NameLogo";
-import Input from "../Input/Input";
-import Button from "../Button/Button";
-
 
 export default function HeroSection() {
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const { registerEmail } = useContact();
-  const { mutateAsync, error, isSuccess, isError, isLoading } = useMutation(
+  const { mutateAsync, isSuccess, isLoading } = useMutation(
     () => registerEmail(inputValue),
     {}
   );
@@ -27,8 +27,10 @@ export default function HeroSection() {
   async function onMutate() {
     try {
       await mutateAsync();
-    } catch (error) {
-      ""
+    } catch (error: any) {
+      if (error && error.message) {
+        setErrorMessage(error.message);
+      }
     }
   }
 
@@ -49,12 +51,15 @@ export default function HeroSection() {
           <Input
             onChange={onChange}
             value={inputValue}
-            isError={isError}
+            isError={!!errorMessage.length}
             isSuccess={isSuccess}
             helperText={
               isSuccess
                 ? "We’ve added your mail for early access"
-                : isError
+                : errorMessage.length &&
+                  errorMessage === "Request failed with status code 409"
+                ? "Your email has already been saved for early access."
+                : errorMessage.length
                 ? "That doesn't look right. Try again. "
                 : ""
             }

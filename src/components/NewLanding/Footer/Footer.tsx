@@ -32,8 +32,9 @@ const largeExternalLinks = [
 export default function Footer() {
   const [readOnly, setReadOnly] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const { registerEmail } = useContact();
-  const { mutateAsync, error, isSuccess, isError, isLoading } = useMutation(
+  const { mutateAsync, isSuccess, isLoading } = useMutation(
     () => registerEmail(inputValue),
     {}
   );
@@ -45,8 +46,10 @@ export default function Footer() {
   async function onMutate() {
     try {
       await mutateAsync();
-    } catch (error) {
-      ("");
+    } catch (error: any) {
+      if (error && error.message) {
+        setErrorMessage(error.message);
+      }
     }
   }
 
@@ -63,8 +66,8 @@ export default function Footer() {
         <div className="lg:flex lg:gap-[30px] space-y-10 lg:space-y-0 lg:my-10">
           <div className="lg:space-y-3">
             <div className="flex gap-2 justify-center items-center lg:justify-start lg:px-3">
-              <Logo className="max-w-[32px] h-full sm:max-w-[32px]" />
-              <NameLogo className="max-w-[200px] sm:max-w-[200px]" />
+              <Logo className="!max-w-[32px] h-full sm:!max-w-[32px] sm:h-[32px] lg:!max-w-[32px]" />
+              <NameLogo className="!max-w-[210px] !sm:max-w-[210px] !lg:sm:max-w-[210px]" />
             </div>
             <p className="text-base text-white sm:text-lg font-medium mt-1 text-center">
               Created by storytellers for storytellers.
@@ -78,7 +81,7 @@ export default function Footer() {
                 onChange={onChange}
                 readOnly={readOnly}
                 className={`${
-                  isError
+                  errorMessage.length
                     ? "text-[#B72F4F]"
                     : isSuccess
                     ? "text-[#70CD32]"
@@ -88,7 +91,7 @@ export default function Footer() {
               />
               <p
                 className={`font-medium sm:text-start min-h-[40px] py-1 sm:text-lg ${
-                  isError
+                  errorMessage.length
                     ? "text-[#B72F4F]"
                     : isSuccess
                     ? "text-[#70CD32]"
@@ -97,7 +100,10 @@ export default function Footer() {
               >
                 {isSuccess
                   ? "We’ve added your mail for early access"
-                  : isError
+                  : errorMessage.length &&
+                    errorMessage === "Request failed with status code 409"
+                  ? "Your email has already been saved for early access."
+                  : errorMessage.length
                   ? "That doesn't look like an email address. Try again."
                   : ""}
               </p>
@@ -108,7 +114,7 @@ export default function Footer() {
             <Button
               disabled={isLoading}
               onClick={onMutate}
-              className="sm:max-w-[190px]"
+              className="sm:max-w-[190px] sm:min-w-[190px]"
             >
               {isLoading ? (
                 <span className="loading loading-dots loading-md text-white"></span>
