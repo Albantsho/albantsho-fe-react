@@ -43,7 +43,7 @@ const useLoginForm = () => {
 
       if (data.user && data.user.userType) {
         if (data.user.userType === "producer") {
-          Router.router?.components["/marketplace/[id]"] ? router.back() : router.replace(routes.marketplace.url);
+          Router.router?.components["/marketplace/[id]"] ? router.back() : router.push(routes.marketplace.url);
         } else {
           data.user.userType === "writer"
             ? router.replace(routes.writerDashboard.url)

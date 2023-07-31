@@ -31,6 +31,13 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
       }
     } else if (foundRoute?.mustAuthenticated === "yes") {
       if (!user.emailVerified) {
+        if (pathname === "/marketplace/[id") {
+          if (!user.emailVerified) {
+            push(routes.signin.url);
+          }
+          setLoading(false);
+          return;
+        }
         push(routes.signin.url);
         foundRoute.url !== pathname && setLoading(false);
       } else {
@@ -42,7 +49,7 @@ const Authorization = ({ children }: React.PropsWithChildren) => {
             user.userType === "writer"
               ? push(routes.writerDashboard.url)
               : user.userType === "producer"
-              ? push(routes.producerDashboard.url)
+              ? push(routes.marketplace.url)
               : user.userType === "admin"
               ? push(routes.adminDashboard.url)
               : push(routes.reviewerDashboard.url);

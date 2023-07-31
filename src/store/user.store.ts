@@ -25,7 +25,7 @@ const useUserStore = create<IUserState>()(
         lastName: "",
         image: null,
         gender: "male",
-        userType: "writer",
+        userType: "producer",
         portfolio: null,
         productionCompanyName: null,
         subscriptionPlan: null,
