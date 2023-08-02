@@ -34,7 +34,7 @@ export default function Footer() {
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { registerEmail } = useContact();
-  const { mutateAsync, isSuccess, isLoading } = useMutation(
+  const { mutateAsync, isSuccess, isLoading, isError } = useMutation(
     () => registerEmail(inputValue),
     {}
   );
@@ -45,10 +45,16 @@ export default function Footer() {
 
   async function onMutate() {
     try {
+      setErrorMessage("");
       await mutateAsync();
+      setErrorMessage("");
     } catch (error: any) {
       if (error && error.message) {
-        setErrorMessage(error.message);
+        if (error.message !== "Request failed with status code 409") {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage("409");
+        }
       }
     }
   }
@@ -62,65 +68,69 @@ export default function Footer() {
 
   return (
     <footer className="bg-black py-[60px] sm:py-12 lg:py-[60px] px-3 sm:px-4 md:px-5">
-      <div className="rounded-2xl px-4 py-12 sm:px-12 lg:px8 max-w-[1168px] mx-auto bg-[#111111]">
-        <div className="lg:flex lg:gap-[30px] space-y-10 lg:space-y-0 lg:my-10">
+      <div className="rounded-2xl px-4 py-12 sm:px-12 lg:px-8 max-w-[1168px] mx-auto bg-[#111111]">
+        <div className="lg:flex lg:gap-[30px] space-y-8 lg:space-y-0 lg:my-10">
           <div className="lg:space-y-3">
             <div className="flex gap-2 justify-center items-center lg:justify-start lg:px-3">
               <Logo className="!max-w-[32px] h-full sm:!max-w-[32px] sm:h-[32px] lg:!max-w-[32px]" />
               <NameLogo className="!max-w-[210px] !sm:max-w-[210px] !lg:sm:max-w-[210px]" />
             </div>
-            <p className="text-base text-white sm:text-lg font-medium mt-1 text-center">
+            <p className="text-base min-[1100px]:w-[325px] text-white sm:text-lg font-medium mt-2 text-center">
               Created by storytellers for storytellers.
             </p>
           </div>
-          <div className="bg-[#FDFEFE] py-6 px-4 max-w-[738px] rounded-lg  sm:flex sm:justify-between sm:items-end text-center space-y-2 sm:space-y-0">
-            <div className="sm:flex-1">
+          <div className="bg-[#FDFEFE] py-6 px-4 max-w-[738px] mx-auto rounded-lg  text-center space-y-6 sm:space-y-0">
+            <div className="">
               <input
                 onFocus={onFocus}
                 onBlur={onBlur}
                 onChange={onChange}
                 readOnly={readOnly}
                 className={`${
-                  errorMessage.length
+                  errorMessage.length && errorMessage !== "409"
                     ? "text-[#B72F4F]"
-                    : isSuccess
+                    : isSuccess || (isError && errorMessage === "409")
                     ? "text-[#70CD32]"
                     : "text-[#999999]"
-                } outline-none bg-transparent w-full sm:overflow-auto truncate text-[28px] sm:text-4xl lg:text-5xl font-semibold p-0`}
+                } outline-none bg-transparent w-full sm:overflow-auto truncate text-[28px] sm:text-4xl lg:text-5xl leading-none font-semibold p-0`}
                 placeholder="Enter your email"
               />
-              <p
-                className={`font-medium sm:text-start min-h-[40px] py-1 sm:text-lg ${
-                  errorMessage.length
-                    ? "text-[#B72F4F]"
-                    : isSuccess
-                    ? "text-[#70CD32]"
-                    : "text-[#999999]"
-                }`}
-              >
-                {isSuccess
-                  ? "We’ve added your mail for early access"
-                  : errorMessage.length &&
-                    errorMessage === "Request failed with status code 409"
-                  ? "Your email has already been saved for early access."
-                  : errorMessage.length
-                  ? "That doesn't look like an email address. Try again."
-                  : ""}
-              </p>
-              <p className="text-[#333333] text-center sm:text-start text-base sm:text-lg">
-                1300+ people already joined!
-              </p>
+              <div className="sm:flex justify-between mt-3 items-end">
+                <div className="space-y-2 sm:space-y-1">
+                  <p
+                    className={`font-medium sm:text-start min-h-[28px] sm:text-lg ${
+                      errorMessage.length && errorMessage !== "409"
+                        ? "text-[#B72F4F]"
+                        : isSuccess || (isError && errorMessage === "409")
+                        ? "text-[#70CD32]"
+                        : "text-[#999999]"
+                    }`}
+                  >
+                    {isSuccess
+                      ? "We’ve added your mail for early access"
+                      : isError && errorMessage === "409"
+                      ? "This email address is already on the waitlist"
+                      : errorMessage.length
+                      ? "That doesn't look like an email address. Try again."
+                      : ""}
+                  </p>
+                  <p className="text-[#333333] text-center sm:text-start text-base font-medium sm:text-lg">
+                    1300+ people already joined!
+                  </p>
+                </div>
+                <Button
+                  onClick={onMutate}
+                  className="sm:max-w-[190px] hidden sm:block  !px-1 sm:min-w-[190px] border-none"
+                >
+                  Join Early Access
+                </Button>
+              </div>
             </div>
             <Button
-              disabled={isLoading}
               onClick={onMutate}
-              className="sm:max-w-[190px] sm:min-w-[190px]"
+              className="sm:max-w-[190px] sm:hidden !px-1 sm:min-w-[190px] border-none"
             >
-              {isLoading ? (
-                <span className="loading loading-dots loading-md text-white"></span>
-              ) : (
-                "Join Early Access"
-              )}
+              Join Early Access
             </Button>
           </div>
         </div>
@@ -133,7 +143,9 @@ export default function Footer() {
               <Link
                 key={i}
                 href={link.url}
-                className={`hover:bg-[#23005C] hover:rounded p-2 font-medium text-white`}
+                className={`${
+                  link.title === "Hire Us" ? "bg-[#23005C] rounded" : ""
+                } p-2 font-medium text-white`}
                 target="_blank"
                 referrerPolicy="no-referrer"
               >
@@ -146,7 +158,9 @@ export default function Footer() {
               <React.Fragment key={i}>
                 <Link
                   href={link.url}
-                  className={`hover:bg-[#23005C] hover:rounded p-2 font-medium text-white`}
+                  className={`${
+                    link.title === "Hire Us" ? "bg-[#23005C] rounded" : ""
+                  } p-2 font-medium text-white`}
                   target="_blank"
                   referrerPolicy="no-referrer"
                 >

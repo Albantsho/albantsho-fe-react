@@ -1,9 +1,19 @@
-import { useState } from "react";
-import ReactPlayer from "react-player/lazy";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import PlayIcon from "./assets/Play.svg";
+import ReactPlayer from "react-player/youtube";
 
 export default function VideoPlayer() {
   const [isPlay, setIsPlay] = useState(false);
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    // This code will only run on the client-side (in the browser)
+    if (typeof window !== "undefined") {
+      // Access the window object safely here
+      setWidth(window.innerWidth);
+    }
+  }, []);
 
   function onClickPreview() {
     setIsPlay(true);
@@ -18,11 +28,29 @@ export default function VideoPlayer() {
         onClickPreview={onClickPreview}
         onPause={onPause}
         playing={isPlay}
-        url="/api/video"
-        className="max-w-[1450] w-full mx-auto"
-        light={<img src="/assets/images/cover.png" alt="preview" />}
+        url="https://youtu.be/K494uB_QbXg"
+        className="max-w-[1450px] w-full mx-auto max-h-[904px]"
+        light={
+          <>
+            <img
+              src="/assets/images/cover.png"
+              className="hidden md:block"
+              alt="preview"
+            />
+            <img
+              src="/assets/images/medium-cover.png"
+              className="hidden min-[400px]:block md:hidden"
+              alt="preview"
+            />
+            <img
+              src="/assets/images/small-cover.png"
+              className="min-[400px]:hidden"
+              alt="preview"
+            />
+          </>
+        }
         width="100%"
-        height="100%"
+        height={width < 400 ? "720px" : width < 750 ? "790px" : "904px"}
         controls
         playIcon={
           <div className="absolute inset-0  flex items-center justify-center gap-4 ">
