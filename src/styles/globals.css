@@ -2,64 +2,53 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "CabinetGrotesk";
+  font-family: "GeneralSans";
   font-weight: 100;
-  src: url("../assets/fonts/CabinetGrotesk-Extralight.woff") format("opentype");
+  src: url("../assets/fonts/GeneralSans/GeneralSans-Extralight.woff")
+    format("opentype");
 }
 
 @font-face {
-  font-family: "CabinetGrotesk";
+  font-family: "GeneralSans";
   font-weight: 200;
-  src: url("../assets/fonts/CabinetGrotesk-Light.woff") format("opentype");
+  src: url("../assets/fonts/GeneralSans/GeneralSans-Light.woff")
+    format("opentype");
 }
 
 @font-face {
-  font-family: "CabinetGrotesk";
-  font-weight: 300;
-  src: url("../assets/fonts/CabinetGrotesk-Thin.woff") format("opentype");
-}
-
-@font-face {
-  font-family: "CabinetGrotesk";
+  font-family: "GeneralSans";
   font-weight: 400;
-  src: url("../assets/fonts/CabinetGrotesk-Regular.woff") format("opentype");
+  src: url("../assets/fonts/GeneralSans/GeneralSans-Regular.woff")
+    format("opentype");
 }
 
 @font-face {
-  font-family: "CabinetGrotesk";
+  font-family: "GeneralSans";
   font-weight: 500;
-  src: url("../assets/fonts/CabinetGrotesk-Medium.woff") format("opentype");
+  src: url("../assets/fonts/GeneralSans/GeneralSans-Medium.woff")
+    format("opentype");
 }
 
 @font-face {
-  font-family: "CabinetGrotesk";
+  font-family: "GeneralSans";
+  font-weight: 600;
+  src: url("../assets/fonts/GeneralSans/GeneralSans-Semibold.woff")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "GeneralSans";
   font-weight: 700;
-  src: url("../assets/fonts/CabinetGrotesk-Bold.woff") format("opentype");
+  src: url("../assets/fonts/GeneralSans/GeneralSans-Bold.woff")
+    format("opentype");
 }
-@font-face {
-  font-family: "CabinetGrotesk";
-  font-weight: 800;
-  src: url("../assets/fonts/CabinetGrotesk-Extrabold.woff") format("opentype");
-}
-
-@font-face {
-  font-family: "CabinetGrotesk";
-  font-weight: 900;
-  src: url("../assets/fonts/CabinetGrotesk-Black.woff") format("opentype");
-}
-
-
 
 body {
   padding: 0;
   margin: 0;
-  font-family: "CabinetGrotesk", "Helvetica", "Arial", "sans-serif";
+  font-family: "GeneralSans", "Arial", "sans-serif";
   overflow-x: hidden;
-  background-color:black;
-}
-
-input {
-  font-family: "Montserrat", "Helvetica", "Arial", "sans-serif";
+  background-color: black;
 }
 
 img {
@@ -102,9 +91,9 @@ ul {
   border-color: theme("borderColor.DEFAULT", currentColor);
 }
 
-
 .react-player__preview {
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .fancy {

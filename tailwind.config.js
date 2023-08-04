@@ -14,10 +14,10 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'ultra-hero-section': "url('/assets/images/ultra-wide-bg.jpg')",
-        'large-hero-section': "url('/assets/images/large-bg.jpg')",
-        'medium-hero-section': "url('/assets/images/medium-bg.jpg')",
-        'small-hero-section': "url('/assets/images/small-bg.jpg')",
+        "ultra-hero-section": "url('/assets/images/ultra-wide-bg.webp')",
+        "large-hero-section": "url('/assets/images/large-bg.webp')",
+        "medium-hero-section": "url('/assets/images/medium-bg.webp')",
+        "small-hero-section": "url('/assets/images/small-bg.webp')",
       },
       colors: {
         neutral: {
